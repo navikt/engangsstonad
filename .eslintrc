@@ -1,57 +1,58 @@
 {
-  env: {
-    browser: true
+  "env": {
+    "browser": true
   },
-  parser: "babel-eslint",
-  extends: "airbnb",
-  rules: {
-    no-unused-vars: [
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "no-unused-vars": [
       2,
       {
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_"
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
       }
     ],
-    indent: [
+    "linebreak-style": 0,
+    "indent": [
       2,
       4,
       {
-        SwitchCase: 1
+        "SwitchCase": 1
       }
     ],
-    max-len: [
+    "max-len": [
       2,
       120,
       4
     ],
-    comma-dangle: [
+    "comma-dangle": [
       2,
       "never"
     ],
-    arrow-parens: [
+    "arrow-parens": [
       2,
       "always"
     ],
-    import/no-extraneous-dependencies: [
+    "import/no-extraneous-dependencies": [
       "error",
       {
-        peerDependencies: true
+        "peerDependencies": true
       }
     ],
-    react/jsx-filename-extension: [
+    "react/jsx-filename-extension": [
       2,
       {
-        extensions: [
+        "extensions": [
           ".js",
           ".jsx"
         ]
       }
     ],
-    react/jsx-indent-props: [
+    "react/jsx-indent-props": [
       2,
       4
     ],
-    react/jsx-indent: [
+    "react/jsx-indent": [
       2,
       4
     ]
