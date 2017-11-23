@@ -1,13 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux';
-import Counter from './components/counter';
+import routes from './util/routing/routes';
 
 const root = document.getElementById('app');
 render(
     <Provider store={store}>
-        <Counter />
+        <Router>
+            <div>
+                {routes()}
+            </div>
+        </Router>
     </Provider>,
     root
 );
