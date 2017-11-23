@@ -1,6 +1,7 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
     Hovedknapp,
     Fareknapp
@@ -12,36 +13,31 @@ import {
 
 type Props = {
     count: number,
-    dispatch: Function
+    incrementCounter: Function,
+    decrementCounter: Function
 };
 
-class Counter extends Component<Props> {
-    incrementCounter() {
-        this.props.dispatch(incrementCounter());
-    }
+const Counter = (props: Props) => (
+    <div>
+        <h2>Current value: {props.count}</h2>
+        <Hovedknapp onClick={props.incrementCounter}>
+            Increment
+        </Hovedknapp>
+        <Fareknapp onClick={props.decrementCounter}>
+            Decrement
+        </Fareknapp>
+    </div>
+);
 
-    decrementCounter() {
-        this.props.dispatch(decrementCounter());
-    }
-
-    render() {
-        return (
-            <div>
-                <h2>Current value: {this.props.count}</h2>
-                <Hovedknapp onClick={() => this.incrementCounter()}>
-                    Increment
-                </Hovedknapp>
-                <Fareknapp onClick={() => this.decrementCounter()}>
-                    Decrement
-                </Fareknapp>
-            </div>
-        );
-    }
-}
-
-// eslint-disable-next-line no-class-assign
-Counter = connect((state) => ({
+const mapStateToProps = (state) => ({
     count: state.counterReducer.counter
-}))(Counter);
+});
 
-export default Counter;
+const mapDispatchToProps = (dispatch) => ({
+    ...bindActionCreators({
+        incrementCounter,
+        decrementCounter
+    }, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
