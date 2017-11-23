@@ -1,19 +1,16 @@
 import React from 'react';
-import Test from '../../components/Test';
+import Counter from '../../components/counter';
 
 const routeConfig = [
     {
         path: '/',
-        component: () => (<div>Hei</div>),
-        title: 'Home',
+        component: () => (<Counter />),
         exact: true
 
     },
     {
         path: '/test',
-        component: Test,
-        title: 'Tests',
-        exact: false
+        component: () => (<div>test</div>)
     }
 ];
 export default routeConfig;

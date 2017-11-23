@@ -1,12 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import App from './components/App';
+import { Provider } from 'react-redux';
+import store from './redux';
+import routes from './util/routing/routes';
 
 const root = document.getElementById('app');
 render(
-    <Router>
-        <App />
-    </Router>
-    , root
+    <Provider store={store}>
+        <Router>
+            <div>
+                {routes()}
+            </div>
+        </Router>
+    </Provider>,
+    root
 );
