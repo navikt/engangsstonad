@@ -3,7 +3,7 @@
 import React from 'react';
 import { Hovedknapp as Knapp } from 'nav-frontend-knapper';
 
-const App = () => (
+export const App = () => (
     <Knapp>
         Knapp
     </Knapp>
