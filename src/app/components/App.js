@@ -1,12 +1,13 @@
 // @flow
+/* eslint-disable */
 
 import React from 'react';
-import { Hovedknapp as Knapp } from 'nav-frontend-knapper';
+import { Switch } from 'react-router-dom';
+import routes from '../util/routing/routes';
 
 const App = () => (
-    <Knapp>
-        Knapp
-    </Knapp>
+    <Switch>
+        {routes()}
+    </Switch>
 );
-
 export default App;

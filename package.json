@@ -41,6 +41,7 @@
     "nav-frontend-typografi-style": "^1.0.7",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
-    "react-dom": "^16.1.1"
+    "react-dom": "^16.1.1",
+    "react-router-dom": "^4.2.2"
   }
 }
