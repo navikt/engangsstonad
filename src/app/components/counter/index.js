@@ -9,7 +9,7 @@ import {
 import {
     incrementCounter,
     decrementCounter
-} from '../../redux/ducks/Counter.ducks';
+} from '../../redux/ducks/Counter.duck';
 
 type Props = {
     count: number,
