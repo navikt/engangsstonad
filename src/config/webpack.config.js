@@ -22,27 +22,31 @@ const webpackConfig = {
             },
             {
                 test: /\.less$/,
-                use: [
-                    { loader: 'style-loader' },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoaders: 1,
-                            localIdentName: '[name]__[local]__[hash:base64:5]'
-                        }
-                    },
-                    { loader: 'postcss-loader' },
-                    {
-                        loader: 'less-loader',
-                        options: {
-                            globalVars: {
-                                coreModulePath: '\'~\'',
-                                nodeModulesPath: '\'~\''
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                                importLoaders: 1,
+                                localIdentName: '[name]__[local]__[hash:base64:5]'
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader'
+                        },
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                globalVars: {
+                                    coreModulePath: '\'~\'',
+                                    nodeModulesPath: '\'~\''
+                                }
                             }
                         }
-                    }
-                ]
+                    ]
+                })
             },
             {
                 test: /\.(png|jpg|gif|svg)$/,
@@ -56,6 +60,11 @@ const webpackConfig = {
         ]
     },
     plugins: [
+        new ExtractTextPlugin({
+            filename: 'css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]',
+            disable: false,
+            allChunks: true
+        }),
         new HtmlWebpackPlugin({
             template: './src/app/index.html'
         }),
