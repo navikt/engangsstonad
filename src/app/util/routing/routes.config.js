@@ -1,5 +1,6 @@
 import React from 'react';
 import Counter from '../../components/counter';
+import Home from './../../components/home/Home';
 
 const routeConfig = [
     {
@@ -10,7 +11,7 @@ const routeConfig = [
     },
     {
         path: '/test',
-        component: () => (<div>test</div>)
+        component: () => (<Home />)
     }
 ];
 export default routeConfig;
