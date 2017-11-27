@@ -7,10 +7,6 @@ const routeConfig = [
         component: () => (<Counter />),
         exact: true
 
-    },
-    {
-        path: '/test',
-        component: () => (<div>test</div>)
     }
 ];
 export default routeConfig;
