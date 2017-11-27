@@ -2,7 +2,6 @@ import React from 'react';
 import { Route as ReactRoute } from 'react-router-dom';
 import routeConfig from './routes.config';
 
-
 const Route = (route) => (
     <ReactRoute
         exact={route.exact}
