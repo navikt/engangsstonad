@@ -17,7 +17,7 @@ type Props = {
     decrementCounter: Function
 };
 
-const Counter = (props: Props) => (
+export const Counter = (props: Props) => (
     <div>
         <h2>Current value: {props.count}</h2>
         <Hovedknapp onClick={props.incrementCounter}>

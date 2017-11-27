@@ -7,7 +7,8 @@ const webpackConfig = {
     entry: './src/app/bootstrap.js',
     output: {
         path: path.resolve(__dirname, './../../dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -46,6 +47,15 @@ const webpackConfig = {
                         }
                     ]
                 })
+            },
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {}
+                    }
+                ]
             }
         ]
     },

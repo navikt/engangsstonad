@@ -23,6 +23,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.5.1",
+    "file-loader": "^1.1.5",
     "extract-text-webpack-plugin": "^3.0.2",
     "flow-bin": "^0.59.0",
     "flow-webpack-plugin": "^1.2.0",
@@ -46,6 +47,9 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash.throttle": "^4.1.1",
+    "nav-frontend-core": "^4.0.5",
+    "nav-frontend-grid": "^0.1.10",
+    "nav-frontend-grid-style": "^0.2.4",
     "nav-frontend-js-utils": "^0.2.10",
     "nav-frontend-knapper": "^0.2.14",
     "nav-frontend-knapper-style": "^0.3.5",
