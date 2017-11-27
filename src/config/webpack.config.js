@@ -46,7 +46,29 @@ const webpackConfig = {
                             }
                         }
                     ]
-                })
+                }),
+                include: path.resolve(__dirname, './../app')
+            },
+            {
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                        },
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                modifyVars: {
+                                    nodeModulesPath: '~',
+                                    coreModulePath: '~'
+                                }
+                            }
+                        }
+                    ]
+                }),
+                include: path.resolve(__dirname, './../../node_modules')
             },
             {
                 test: /\.(png|jpg|gif|svg)$/,
