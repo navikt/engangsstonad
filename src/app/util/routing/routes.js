@@ -1,16 +1,8 @@
 import React from 'react';
-import { Route as ReactRoute } from 'react-router-dom';
+
+import RouteWithSubRoutes from './routes.component';
 import routeConfig from './routes.config';
 
-
-const Route = (route) => (
-    <ReactRoute
-        exact={route.exact}
-        path={route.path}
-        render={route.component}
-    />
-);
-
-const routes = () => routeConfig.map((route) => (<Route {...route} key={route.path} />));
+const routes = () => routeConfig.map((route) => (<RouteWithSubRoutes {...route} key={route.path} />));
 
 export default routes;

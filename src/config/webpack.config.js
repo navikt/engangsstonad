@@ -1,12 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FlowWebpackPlugin = require('flow-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const webpackConfig = {
     entry: './src/app/bootstrap.js',
     output: {
         path: path.resolve(__dirname, './../../dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -20,15 +22,49 @@ const webpackConfig = {
             },
             {
                 test: /\.less$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                                importLoaders: 1,
+                                localIdentName: '[name]__[local]__[hash:base64:5]'
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader'
+                        },
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                globalVars: {
+                                    coreModulePath: '\'~\'',
+                                    nodeModulesPath: '\'~\''
+                                }
+                            }
+                        }
+                    ]
+                })
+            },
+            {
+                test: /\.(png|jpg|gif|svg)$/,
                 use: [
-                    'style-loader',
-                    'css-loader',
-                    'less-loader?{"globalVars":{"nodeModulesPath":"\'~\'", "coreModulePath":"\'~\'"}}'
+                    {
+                        loader: 'file-loader',
+                        options: {}
+                    }
                 ]
             }
         ]
     },
     plugins: [
+        new ExtractTextPlugin({
+            filename: 'css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]',
+            disable: false,
+            allChunks: true
+        }),
         new HtmlWebpackPlugin({
             template: './src/app/index.html'
         }),

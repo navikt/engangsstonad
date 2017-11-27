@@ -9,7 +9,7 @@ import {
 import {
     incrementCounter,
     decrementCounter
-} from '../../redux/ducks/Counter.ducks';
+} from '../../redux/ducks/Counter.duck';
 
 type Props = {
     count: number,
@@ -17,7 +17,7 @@ type Props = {
     decrementCounter: Function
 };
 
-const Counter = (props: Props) => (
+export const Counter = (props: Props) => (
     <div>
         <h2>Current value: {props.count}</h2>
         <Hovedknapp onClick={props.incrementCounter}>
