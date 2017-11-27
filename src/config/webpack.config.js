@@ -10,27 +10,33 @@ const webpackConfig = {
         publicPath: '/'
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            use: [
-                'babel-loader',
-                'eslint-loader'
-            ],
-            exclude: /node_modules/
-        }, {
-            test: /\.less$/,
-            use: [
-                'style-loader',
-                'css-loader',
-                'less-loader?{"globalVars":{"nodeModulesPath":"\'~\'", "coreModulePath":"\'~\'"}}'
-            ]
-        }, {
-            test: /\.(png|jpg|gif|svg)$/,
-            use: [{
-                loader: 'file-loader',
-                options: {}
-            }]
-        }]
+        rules: [
+            {
+                test: /\.js$/,
+                use: [
+                    'babel-loader',
+                    'eslint-loader'
+                ],
+                exclude: /node_modules/
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'less-loader?{"globalVars":{"nodeModulesPath":"\'~\'", "coreModulePath":"\'~\'"}}'
+                ]
+            },
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {}
+                    }
+                ]
+            }
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({

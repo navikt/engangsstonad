@@ -2,7 +2,7 @@
 import React from 'react';
 
 import NavLogo from './../shared/NavLogo';
-import { Route } from './../../util/routing/routes.component';
+import RouteWithSubRoutes from './../../util/routing/routes.component';
 
 type Props = {
     routes: Array<any>
@@ -11,7 +11,7 @@ type Props = {
 export const EngangsstonadIndex = (props: Props) => (
     <div>
         <NavLogo />
-        { props.routes && props.routes.map((route) => (<Route {...route} key={route.path} />)) }
+        { props.routes && props.routes.map((route) => (<RouteWithSubRoutes {...route} key={route.path} />)) }
     </div>
 );
 
