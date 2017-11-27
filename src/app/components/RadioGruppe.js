@@ -16,11 +16,11 @@ export const satsRadioData = [
 export const omsorgRadioData = [
     {
         label: 'Felles omsorg',
-        value: ''
+        value: 'Felles omsorg'
     },
     {
         label: 'Aleneomsorg',
-        value: ''
+        value: 'Aleneomsorg'
     }
 ];
 
