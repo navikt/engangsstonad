@@ -8,6 +8,8 @@ import { Container, Row, Column } from 'nav-frontend-grid';
 import store from './redux';
 import routes from './util/routing/routes';
 
+const NoDiv = ({ children }) => children;
+
 const root = document.getElementById('app');
 render(
     <Provider store={store}>
@@ -16,9 +18,9 @@ render(
                 <Column xs="4" />
                 <Column xs="4">
                     <Router>
-                        <div>
+                        <NoDiv>
                             {routes()}
-                        </div>
+                        </NoDiv>
                     </Router>
                 </Column>
                 <Column xs="4" />
