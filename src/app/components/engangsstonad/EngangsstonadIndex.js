@@ -8,11 +8,9 @@ type Props = {
     routes: Array<any>
 }
 
-export const EngangsstonadIndex = (props: Props) => (
-    <div>
-        <NavLogo />
-        { props.routes && props.routes.map((route) => (<RouteWithSubRoutes {...route} key={route.path} />)) }
-    </div>
-);
+export const EngangsstonadIndex = (props: Props) => ([
+    <NavLogo />,
+    props.routes && props.routes.map((route) => (<RouteWithSubRoutes {...route} key={route.path} />))
+]);
 
 export default EngangsstonadIndex;
