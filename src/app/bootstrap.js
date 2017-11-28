@@ -15,7 +15,7 @@ render(
     <Provider store={store}>
         <Container fluid>
             <Row>
-                <Column md="4" xs="0" />
+                <Column md="4" xs="12" />
                 <Column md="4" xs="12">
                     <Router>
                         <NoDiv>
@@ -23,7 +23,7 @@ render(
                         </NoDiv>
                     </Router>
                 </Column>
-                <Column md="4" xs="0" />
+                <Column md="4" xs="12" />
             </Row>
         </Container>
     </Provider>,

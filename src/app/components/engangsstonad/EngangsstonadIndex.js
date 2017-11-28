@@ -7,7 +7,7 @@ import RouteWithSubRoutes from './../../util/routing/routes.component';
 import styles from './engangsstonadIndex.less';
 
 type Props = {
-    routes: Array<any>
+    routes: Array<Object>
 }
 
 export const EngangsstonadIndex = (props: Props) => (
