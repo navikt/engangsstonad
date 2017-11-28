@@ -1,16 +1,16 @@
 // @flow
 import React from 'react';
 
-import NavLogo from './../shared/NavLogo';
+import Logo from './../shared/logo/Logo';
 import RouteWithSubRoutes from './../../util/routing/routes.component';
 
 type Props = {
     routes: Array<any>
 }
 
-export const EngangsstonadIndex = (props: Props) => ([
-    <NavLogo />,
-    props.routes && props.routes.map((route) => (<RouteWithSubRoutes {...route} key={route.path} />))
+const EngangsstonadIndex = (props: Props) => ([
+    <Logo />,
+    props.routes && props.routes.map((route) => (<RouteWithSubRoutes {...route} />))
 ]);
 
 export default EngangsstonadIndex;
