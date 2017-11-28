@@ -45,6 +45,7 @@
     "test": "mocha --opts ./mocha.opts ./src/app/**/*.spec.js"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-alertstriper": "^0.2.16",
