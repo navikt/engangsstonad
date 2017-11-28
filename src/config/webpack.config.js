@@ -1,4 +1,5 @@
 const path = require('path');
+const lessLoader = require('./util/less-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FlowWebpackPlugin = require('flow-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -20,8 +21,9 @@ const webpackConfig = {
                 ],
                 exclude: /node_modules/
             },
-            {
-                test: /\.less$/,
+            lessLoader(/node_modules/, true),
+            lessLoader(path.resolve(__dirname, './../app')),
+             /*   test: /\.less$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
@@ -69,7 +71,7 @@ const webpackConfig = {
                     ]
                 }),
                 include: path.resolve(__dirname, './../../node_modules')
-            },
+            },*/
             {
                 test: /\.(png|jpg|gif|svg)$/,
                 use: [
