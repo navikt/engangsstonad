@@ -15,15 +15,15 @@ render(
     <Provider store={store}>
         <Container fluid>
             <Row>
-                <Column xs="4" />
-                <Column xs="4">
+                <Column md="4" xs="0" />
+                <Column md="4" xs="12">
                     <Router>
                         <NoDiv>
                             {routes()}
                         </NoDiv>
                     </Router>
                 </Column>
-                <Column xs="4" />
+                <Column md="4" xs="0" />
             </Row>
         </Container>
     </Provider>,
