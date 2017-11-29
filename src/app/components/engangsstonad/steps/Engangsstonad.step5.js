@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Hovedknapp } from 'nav-frontend-knapper';
+
 import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
-import ElementWrapper from './../../util/ElementWrapper';
-import InformationPanel from '../shared/InformationPanel';
-import BenefitLogo from '../../images/benefit.svg';
-import styles from './step1.less';
+import ElementWrapper from '../../../util/ElementWrapper';
+import InformationPanel from '../../shared/InformationPanel';
+import BenefitLogo from '../../../assets/svg/benefit.svg';
+import styles from './engangsstonad.step.less';
 
 
 export const opplysningData = [
@@ -37,9 +36,6 @@ export const Step5 = () => (
             imgSrc={BenefitLogo}
             opplysningData={opplysningData}
         />
-        <Link to="/engangsstonad/steg-1">
-            <Hovedknapp className={styles.center} type="hoved">Fortsett med søknad...</Hovedknapp>
-        </Link>
     </ElementWrapper>
 );
 export default Step5;

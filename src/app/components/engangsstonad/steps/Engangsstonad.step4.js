@@ -1,14 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { Undertittel } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Hovedknapp } from 'nav-frontend-knapper';
 
-import CheckboxWithLine from './../shared/CheckboxWithLine';
-import ElementWrapper from './../../util/ElementWrapper';
+import CheckboxWithLine from '../../shared/CheckboxWithLine';
+import ElementWrapper from '../../../util/ElementWrapper';
 
-import styles from './step1.less';
+import styles from './engangsstonad.step.less';
 
 const checkboxData = [
     {
@@ -32,9 +30,6 @@ export const Step4 = () => (
         <Undertittel className={styles.marginTopBottom}>Gjelder søknaden dette barnet?</Undertittel>
         <CheckboxWithLine content={checkboxData} className={styles.marginTopBottom} />
         <CheckboxWithLine content={checkboxData} className={styles.marginTopBottom} />
-        <Link to="/engangsstonad/steg-5">
-            <Hovedknapp className={styles.marginTopBottom}>Søknad gjelder annet barn</Hovedknapp>
-        </Link>
     </ElementWrapper>
 );
 

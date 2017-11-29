@@ -1,15 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
+import AlertStripe from 'nav-frontend-alertstriper';
 
-import ElementWrapper from './../../util/ElementWrapper';
-import RadioGruppe from '../shared/RadioGruppe';
-import InformationPanel from '../shared/InformationPanel';
-import EmployeeLogo from '../../images/employer.svg';
+import ElementWrapper from './../../../util/ElementWrapper';
+import RadioGruppe from '../../shared/RadioGruppe';
+import InformationPanel from '../../shared/InformationPanel';
+import EmployeeLogo from '../../../assets/svg/employer.svg';
 
-import styles from './step1.less';
+import styles from './engangsstonad.step.less';
 
 export const radioData = [
     {
@@ -36,13 +34,12 @@ export const opplysningData = [
 
 export const Step2 = () => (
     <ElementWrapper>
-        <AlertStripeNavAnsatt
+        <AlertStripe
             className={styles.marginBottomLarge}
             type="nav-ansatt"
-            solid
         >
             Dersom du har /haft arbeid/likestilt inntekt så kan du ha rett på foreldrepenger.
-        </AlertStripeNavAnsatt>
+        </AlertStripe>
 
         <InformationPanel imgSrc={EmployeeLogo} title="Arbeid" opplysningData={opplysningData} />
 
@@ -51,10 +48,6 @@ export const Step2 = () => (
             name="soknadstype"
             listOfRadioData={radioData}
         />
-
-        <Link to="/engangsstonad/steg-3">
-            <Hovedknapp className={styles.center} type="hoved">Fortsett med søknad...</Hovedknapp>
-        </Link>
     </ElementWrapper>
 );
 export default Step2;

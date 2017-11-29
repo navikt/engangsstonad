@@ -1,17 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import { Hovedknapp } from 'nav-frontend-knapper';
 import { Undertittel, Element } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Radio } from 'nav-frontend-skjema';
 
-import ImageWithText from './../shared/ImageWithText';
-import EmployerUrl from './../../images/employer.svg';
-import ElementWrapper from './../../util/ElementWrapper';
-import DisplayTextWithLabel from './../shared/DisplayTextWithLabel';
+import ImageWithText from './../../shared/ImageWithText';
+import EmployerUrl from '../../../assets/svg/employer.svg';
+import ElementWrapper from './../../../util/ElementWrapper';
+import DisplayTextWithLabel from './../../shared/DisplayTextWithLabel';
 
-import styles from './step1.less';
+import styles from './engangsstonad.step.less';
 
 export const Step1 = () => (
     <ElementWrapper>
@@ -21,9 +19,6 @@ export const Step1 = () => (
         <Element className={styles.marginTopBottom}>Placeholder</Element>
         <DisplayTextWithLabel label="Placeholder" text="Placeholder" />
         <Radio className={styles.marginTopBottom} label="Placeholder" name="placeholder-gruppe" />
-        <Link to="/engangsstonad/steg-2">
-            <Hovedknapp className={styles.center}>Fortsett</Hovedknapp>
-        </Link>
     </ElementWrapper>
 );
 
