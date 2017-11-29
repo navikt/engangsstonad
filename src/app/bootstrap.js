@@ -5,10 +5,9 @@ import { Provider } from 'react-redux';
 
 import { Container, Row, Column } from 'nav-frontend-grid';
 
+import ElementWrapper from './util/ElementWrapper';
 import store from './redux';
 import routes from './util/routing/routes';
-
-const NoDiv = ({ children }) => children;
 
 const root = document.getElementById('app');
 render(
@@ -18,9 +17,9 @@ render(
                 <Column md="4" xs="12" />
                 <Column md="4" xs="12">
                     <Router>
-                        <NoDiv>
+                        <ElementWrapper>
                             {routes()}
-                        </NoDiv>
+                        </ElementWrapper>
                     </Router>
                 </Column>
                 <Column md="4" xs="12" />

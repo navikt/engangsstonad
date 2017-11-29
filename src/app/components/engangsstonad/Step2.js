@@ -8,8 +8,9 @@ import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Ingress, Undertittel, EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
 
 import RadioGruppe from '../RadioGruppe';
-import styles from './step1.less';
+import ElementWrapper from './../../util/ElementWrapper';
 
+import styles from './step1.less';
 
 export const radioData = [
     {
@@ -23,48 +24,46 @@ export const radioData = [
     }
 ];
 
-export const Step2 = () => ([
-    <Row>
-        <Column xs="12" >
-            <Ingress>
-                Engangsstønad er en skattefri engangssum du kan få for hvert barn du
-                /(føder eller) adopterer, når du ikke har tjent opp rett til foreldrepenger.
-            </Ingress>
-        </Column>
-    </Row>,
-
-    <Row>
-        <Column xs="12">
-            <AlertStripeNavAnsatt
-                className={styles.marginTopBottom}
-                type="nav-ansatt"
-            >
-        Dersom du har /haft arbeid/likestilt inntekt så kan du ha rett på foreldrepenger.
-            </AlertStripeNavAnsatt>
-        </Column>
-    </Row>,
-
-    <Undertittel className={styles.marginBottom}>Arbeid</Undertittel>,
-    <EtikettLiten className={styles.marginBottomSmall}>Arbeidsgiver</EtikettLiten>,
-    <Normaltekst className={styles.marginBottom}>Nielsen Strikkfabrikk AS</Normaltekst>,
-    <EtikettLiten className={styles.marginBottomSmall}>Stillningsprosent</EtikettLiten>,
-    <Normaltekst className={styles.marginBottomLarge}>100 prosent fast</Normaltekst>,
-
-    <SkjemaGruppe className={styles.marginBottomLarge}>
-        <RadioGruppe
-            name="soknadstype"
-            listOfRadioData={radioData}
-        />
-    </SkjemaGruppe>,
-
-    <Row>
-        <Column xs="12">
-            <Link to="/engangsstonad/steg-4">
-                <Hovedknapp type="hoved">Forsett med søknad om engangsstonad</Hovedknapp>
-            </Link>
-        </Column>
-    </Row>
-]);
+export const Step2 = () => (
+    <ElementWrapper>
+        <Row>
+            <Column xs="12" >
+                <Ingress>
+                    Engangsstønad er en skattefri engangssum du kan få for hvert barn du
+                    /(føder eller) adopterer, når du ikke har tjent opp rett til foreldrepenger.
+                </Ingress>
+            </Column>
+        </Row>
+        <Row>
+            <Column xs="12">
+                <AlertStripeNavAnsatt
+                    className={styles.marginTopBottom}
+                    type="nav-ansatt"
+                >
+                    Dersom du har /haft arbeid/likestilt inntekt så kan du ha rett på foreldrepenger.
+                </AlertStripeNavAnsatt>
+            </Column>
+        </Row>
+        <Undertittel className={styles.marginBottom}>Arbeid</Undertittel>
+        <EtikettLiten className={styles.marginBottomSmall}>Arbeidsgiver</EtikettLiten>
+        <Normaltekst className={styles.marginBottom}>Nielsen Strikkfabrikk AS</Normaltekst>
+        <EtikettLiten className={styles.marginBottomSmall}>Stillningsprosent</EtikettLiten>
+        <Normaltekst className={styles.marginBottomLarge}>100 prosent fast</Normaltekst>
+        <SkjemaGruppe className={styles.marginBottomLarge}>
+            <RadioGruppe
+                name="soknadstype"
+                listOfRadioData={radioData}
+            />
+        </SkjemaGruppe>
+        <Row>
+            <Column xs="12">
+                <Link to="/engangsstonad/steg-4">
+                    <Hovedknapp type="hoved">Forsett med søknad om engangsstonad</Hovedknapp>
+                </Link>
+            </Column>
+        </Row>
+    </ElementWrapper>
+);
 
 export default Step2;
 
