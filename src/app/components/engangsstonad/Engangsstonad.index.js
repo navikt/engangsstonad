@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Sidetittel } from 'nav-frontend-typografi';
 import StepBasedForm from './../shared/step-based-form/StepBasedForm';
 import Route from './../../util/routing/route.component';
+import NAVLogo from '../shared/logo/Logo';
 
 type Props = {
     routes: PropTypes.array
@@ -16,7 +18,13 @@ const Engangsstonad = (props: Props) => {
     };
 
     const routes = renderRoutes();
-    return (<StepBasedForm routes={routes} />);
+    return (
+        <div>
+            <Sidetittel>Søknad om engangsstønad</Sidetittel>
+            <NAVLogo />
+            <StepBasedForm routes={routes} />
+        </div>
+    );
 };
 
 

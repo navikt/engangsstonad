@@ -53,6 +53,7 @@
     "nav-frontend-js-utils": "^0.2.10",
     "nav-frontend-knapper": "^0.2.14",
     "nav-frontend-knapper-style": "^0.3.5",
+    "nav-frontend-typografi": "^1.0.12",
     "nav-frontend-typografi-style": "^1.0.7",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
