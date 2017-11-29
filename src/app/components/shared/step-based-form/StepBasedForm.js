@@ -1,13 +1,81 @@
-import React, { Component } from 'react';
-import Stepper from './../stepper/Stepper';
+import React from 'react';
 
-export default class StepBasedForm extends Component {
-    render() {
-        return (
-            <div>
-                <this.props.stepComponent />
-                <Stepper />
-            </div>
-        );
-    }
+import Stepper from './../stepper/Stepper';
+import Step from './../step/Step';
+import styles from './styles.less';
+
+type Props = {
+    routes: Array<Function>,
+    afterSubmissionRoute: string
 }
+
+const StepBasedForm = (props: Props) => {
+    const isActiveRoute = (route) => (route.props.path === window.location.pathname);
+    const findActiveRoute = () => (props.routes.find((route) => isActiveRoute(route)));
+
+    const findNextRoutePath = () => {
+        const numRoutes = props.routes.length;
+        if (numRoutes === 1) {
+            return props.afterSubmissionRoute;
+        }
+
+        const activeRouteIndex = props.routes.indexOf(findActiveRoute());
+        const nextRoute = props.routes[activeRouteIndex + 1];
+        if (nextRoute && nextRoute.props) {
+            return nextRoute.props.path;
+        }
+        return '/';
+    };
+
+    const findPreviousRoutePath = () => {
+        const activeRouteIndex = props.routes.indexOf(findActiveRoute());
+        if (activeRouteIndex > 0) {
+            return props.routes[activeRouteIndex - 1].props.path;
+        }
+        return undefined;
+    };
+
+    const renderRoutes = () => (
+        props.routes.map((route) => {
+            if (isActiveRoute(route)) {
+                return (<Step key={route.props.path}>{route}</Step>);
+            }
+            return route;
+        })
+    );
+
+    const renderStepper = () => {
+        const { routes } = props;
+        const activeRoute = findActiveRoute();
+        if (activeRoute) {
+            if (routes.length === 1) {
+                return (
+                    <Stepper showSubmission nextRoute={findNextRoutePath()} />
+                );
+            }
+            if (routes.length > 1) {
+                return (
+                    <Stepper
+                        showStepAhead={activeRoute !== routes[routes.length - 1]}
+                        showStepBack={activeRoute !== routes[0]}
+                        showSubmission={activeRoute === routes[routes.length - 1]}
+                        nextRoute={findNextRoutePath()}
+                        previousRoute={findPreviousRoutePath()}
+                    />
+                );
+            }
+        }
+        return null;
+    };
+
+    return (
+        <div className={styles.stepBasedForm}>
+            <div className={styles.stepBasedForm__header}>Header</div>
+            { renderRoutes() }
+            { renderStepper() }
+            <div className={styles.stepBasedForm__footer}>Footer</div>
+        </div>
+    );
+};
+
+export default StepBasedForm;

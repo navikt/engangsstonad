@@ -16,11 +16,12 @@ const webpackConfig = {
             {
                 test: /\.js$/,
                 use: [
-                    'babel-loader',
-                    'eslint-loader'
+                    { loader: 'babel-loader' },
+                    { loader: 'eslint-loader', options: { emitWarning: true } }
                 ],
                 exclude: /node_modules/
             },
+            // 1st arg is set as exclude
             lessLoader(/node_modules/, true),
             lessLoader(path.resolve(__dirname, './../app')),
             {
