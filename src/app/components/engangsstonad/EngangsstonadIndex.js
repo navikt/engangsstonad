@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 
 import { Sidetittel } from 'nav-frontend-typografi';
@@ -20,5 +19,4 @@ export const EngangsstonadIndex = (props: Props) => (
         { props.routes && props.routes.map((route) => (<RouteWithSubRoutes {...route} key={route.path} />)) }
     </div>
 );
-
 export default EngangsstonadIndex;

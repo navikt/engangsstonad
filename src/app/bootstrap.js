@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
 import { Container, Row, Column } from 'nav-frontend-grid';
 
 import ElementWrapper from './util/ElementWrapper';

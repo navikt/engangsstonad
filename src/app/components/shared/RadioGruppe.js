@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { Radio } from 'nav-frontend-skjema';
+import { Radio, SkjemaGruppe } from 'nav-frontend-skjema';
+import styles from './radioGruppe.less';
 
 export const satsRadioData = [
     {
@@ -26,16 +27,22 @@ export const omsorgRadioData = [
 
 type Props = {
     listOfRadioData: Object,
-    name: string
 }
 
-const RadioGruppe = (props: Props) => (
-    props.listOfRadioData.map((radioData) => (
+const RadioGruppe = (props: Props) => {
+    const radioKnapper = () => props.listOfRadioData.map((radioData) => (
         <Radio
+            className={styles.radioKnapp}
             {...radioData}
             key={radioData.value}
             name={props.name}
         />
-    ))
-);
+    ));
+
+    return (
+        <SkjemaGruppe className={styles.radioGruppe}>
+            {radioKnapper()}
+        </SkjemaGruppe>
+    );
+};
 export default RadioGruppe;
