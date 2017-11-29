@@ -5,7 +5,7 @@ const RouteWithSubRoutes = (route) => (
     <ReactRoute
         path={route.path}
         exact={route.exact}
-        render={(props) => (<route.component {...props} routes={route.routes} />)}
+        render={(props) => (<route.component {...props} routes={route.routes} key={route.path} />)}
         key={route.path}
     />
 );
