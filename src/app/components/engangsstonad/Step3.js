@@ -16,7 +16,7 @@ export const Step3 = () => (
         Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening
         </AlertStripeNavAnsatt>,
 
-        <Link to="/engangsstonad/steg-1">
+        <Link to="/engangsstonad/steg-4">
             <Hovedknapp className={styles.center} type="hoved">Fortsett med søknad...</Hovedknapp>
         </Link>
     </ElementWrapper>

@@ -1,13 +1,14 @@
 // @flow
 import React from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
+
 import DisplayTextWithLabel from '../shared/DisplayTextWithLabel';
 import ElementWrapper from './../../util/ElementWrapper';
-import styles from './opplysningPanel.less';
+import ImageWithText from './../shared/ImageWithText';
 
 type Props = {
-    imgSrc: any,
-    opplysningData: any
+    imgSrc: string,
+    opplysningData: Array<Object>,
+    title: string
 };
 
 const OpplysningPanel = (props: Props) => {
@@ -17,10 +18,7 @@ const OpplysningPanel = (props: Props) => {
 
     return (
         <ElementWrapper>
-            <div className={styles.opplysningHeader}>
-                <img className={styles.opplysningLogo} src={props.imgSrc} alt="nav ansatt" />
-                <Undertittel className={styles.opplysningTittel}>Arbeid</Undertittel>
-            </div>
+            <ImageWithText imageUrl={props.imgSrc} text={props.title} />
             {generateTextWithLabel()}
         </ElementWrapper>
     );

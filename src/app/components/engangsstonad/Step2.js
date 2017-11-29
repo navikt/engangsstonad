@@ -25,16 +25,12 @@ export const radioData = [
 
 export const opplysningData = [
     {
-        label: 'label',
-        text: 'text'
+        label: 'ARBEIDSGIVER',
+        text: 'Nielsen Strikkfabrikk AS'
     },
     {
-        label: 'label',
-        text: 'text'
-    },
-    {
-        label: 'label',
-        text: 'text'
+        label: 'STILLINGSPROSENT',
+        text: '100 prosent fast'
     }
 ];
 
@@ -48,7 +44,7 @@ export const Step2 = () => (
             Dersom du har /haft arbeid/likestilt inntekt så kan du ha rett på foreldrepenger.
         </AlertStripeNavAnsatt>
 
-        <OpplysningPanel imgSrc={EmployeeLogo} opplysningData={opplysningData} />
+        <OpplysningPanel imgSrc={EmployeeLogo} title="Arbeid" opplysningData={opplysningData} />
 
         <RadioGruppe
             className={styles.radioGruppe}
@@ -56,7 +52,7 @@ export const Step2 = () => (
             listOfRadioData={radioData}
         />
 
-        <Link to="/engangsstonad/steg-1">
+        <Link to="/engangsstonad/steg-3">
             <Hovedknapp className={styles.center} type="hoved">Fortsett med søknad...</Hovedknapp>
         </Link>
     </ElementWrapper>
