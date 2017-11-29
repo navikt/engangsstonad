@@ -32,7 +32,7 @@ export const Step4 = () => (
         <Undertittel className={styles.marginTopBottom}>Gjelder søknaden dette barnet?</Undertittel>
         <CheckboxWithLine content={checkboxData} className={styles.marginTopBottom} />
         <CheckboxWithLine content={checkboxData} className={styles.marginTopBottom} />
-        <Link to="/engangsstonad/steg-1">
+        <Link to="/engangsstonad/steg-5">
             <Hovedknapp className={styles.marginTopBottom}>Søknad gjelder annet barn</Hovedknapp>
         </Link>
     </ElementWrapper>

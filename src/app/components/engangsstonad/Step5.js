@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
 import ElementWrapper from './../../util/ElementWrapper';
-import OpplysningPanel from '../shared/OpplysningPanel';
+import InformationPanel from '../shared/InformationPanel';
 import BenefitLogo from '../../images/benefit.svg';
 import styles from './step1.less';
 
@@ -32,7 +32,7 @@ export const Step5 = () => (
             Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening
         </AlertStripeNavAnsatt>
 
-        <OpplysningPanel
+        <InformationPanel
             title="Stønad"
             imgSrc={BenefitLogo}
             opplysningData={opplysningData}
