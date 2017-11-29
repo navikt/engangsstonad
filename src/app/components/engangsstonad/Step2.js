@@ -38,7 +38,6 @@ export const Step2 = () => ([
             <AlertStripeNavAnsatt
                 className={styles.marginTopBottom}
                 type="nav-ansatt"
-                solid
             >
         Dersom du har /haft arbeid/likestilt inntekt så kan du ha rett på foreldrepenger.
             </AlertStripeNavAnsatt>
@@ -60,7 +59,7 @@ export const Step2 = () => ([
 
     <Row>
         <Column xs="12">
-            <Link to="/engangsstonad/steg-1">
+            <Link to="/engangsstonad/steg-4">
                 <Hovedknapp type="hoved">Forsett med søknad om engangsstonad</Hovedknapp>
             </Link>
         </Column>
