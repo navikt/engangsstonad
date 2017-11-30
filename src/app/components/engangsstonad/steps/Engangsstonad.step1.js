@@ -14,7 +14,7 @@ import styles from './engangsstonad.step.less';
 export const Step1 = () => (
     <ElementWrapper>
         <AlertStripe className={styles.marginTopBottom} type="nav-ansatt">Her har vi noe info</AlertStripe>
-        <ImageWithText imageUrl={EmployerUrl} text="Placeholder" />
+        <ImageWithText imageUrl={EmployerUrl} text="Placeholder" alt="Ikon for arbeidsgiver" />
         <Undertittel className={styles.marginTopBottom}>Placeholder</Undertittel>
         <Element className={styles.marginTopBottom}>Placeholder</Element>
         <DisplayTextWithLabel label="Placeholder" text="Placeholder" />

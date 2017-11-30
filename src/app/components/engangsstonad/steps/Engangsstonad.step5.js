@@ -2,12 +2,12 @@ import React from 'react';
 
 import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
 import ElementWrapper from '../../../util/ElementWrapper';
-import InformationPanel from '../../shared/InformationPanel';
+import OpplysningPanel from '../../shared/OpplysningPanel';
 import BenefitLogo from '../../../assets/svg/benefit.svg';
 import styles from './engangsstonad.step.less';
 
 
-export const opplysningData = [
+const opplysningData = [
     {
         label: 'label',
         text: 'text'
@@ -30,9 +30,10 @@ export const Step5 = () => (
         >
             Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening
         </AlertStripeNavAnsatt>
-        <InformationPanel
+        <OpplysningPanel
             title="Stønad"
             imgSrc={BenefitLogo}
+            imgAlt="Ikon for stønad"
             opplysningData={opplysningData}
         />
     </ElementWrapper>

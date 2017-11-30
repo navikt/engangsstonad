@@ -22,7 +22,7 @@ type HeaderProps = {
 
 const Header = (props: HeaderProps) => (
     <ElementWrapper>
-        <Image className={styles.center} imageUrl={NAVLogoUrl} />
+        <Image className={styles.center} imageUrl={NAVLogoUrl} alt="NAV Logo" />
         <Sidetittel className={styles.centerText}>{props.title}</Sidetittel>
     </ElementWrapper>
 );

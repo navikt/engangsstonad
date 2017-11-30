@@ -3,13 +3,13 @@ import React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 import ElementWrapper from './../../../util/ElementWrapper';
-import RadioGruppe from '../../shared/RadioGruppe';
-import InformationPanel from '../../shared/InformationPanel';
-import EmployeeLogo from '../../../assets/svg/employer.svg';
+import RadioGroup from '../../shared/RadioGroup';
+import OpplysningPanel from '../../shared/OpplysningPanel';
+import EmployerLogo from '../../../assets/svg/employer.svg';
 
 import styles from './engangsstonad.step.less';
 
-export const radioData = [
+const radioData = [
     {
         label: 'Ja, jag vil heller søke om foreldrepenger.',
         value: 'foreldrepenger'
@@ -21,7 +21,7 @@ export const radioData = [
     }
 ];
 
-export const opplysningData = [
+const opplysningData = [
     {
         label: 'ARBEIDSGIVER',
         text: 'Nielsen Strikkfabrikk AS'
@@ -40,8 +40,13 @@ export const Step2 = () => (
         >
             Dersom du har /haft arbeid/likestilt inntekt så kan du ha rett på foreldrepenger.
         </AlertStripe>
-        <InformationPanel imgSrc={EmployeeLogo} title="Arbeid" opplysningData={opplysningData} />
-        <RadioGruppe className={styles.radioGruppe} name="soknadstype" listOfRadioData={radioData} />
+        <OpplysningPanel
+            imgSrc={EmployerLogo}
+            imgAlt="Ikon for arbeidsgiver"
+            title="Arbeid"
+            opplysningData={opplysningData}
+        />
+        <RadioGroup className={styles.radioGruppe} name="soknadstype" listOfRadioData={radioData} />
     </ElementWrapper>
 );
 export default Step2;

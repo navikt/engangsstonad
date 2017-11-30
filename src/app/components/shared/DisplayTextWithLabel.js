@@ -1,8 +1,10 @@
 // @flow
 import React from 'react';
+
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
 
 import ElementWrapper from './../../util/ElementWrapper';
+
 import styles from './displayTextWithLabel.less';
 
 type Props = {

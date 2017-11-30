@@ -19,13 +19,8 @@ export const CheckboxWithLine = (props: Props) => {
     const { className } = props;
 
     return (
-        <div className={classNames('flexContainer', { className })}>
-            <div className={styles.checkbox}>
-                <Checkbox label=" " />
-            </div>
-            <div className={styles.dividerContainer}>
-                <div className={styles.divider} />
-            </div>
+        <div className={classNames('flexContainer', className)}>
+            <Checkbox label=" " />
             <div className={styles.content}>
                 {props.content.map((entry) => <DisplayTextWithLabel label={entry.label} text={entry.text} />)}
             </div>
