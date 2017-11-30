@@ -15,9 +15,9 @@ export const radioData = [
         value: 'foreldrepenger'
     },
     {
-        label: 'Nej, jag vil gå videre med denne søknaden og forstår at jag ' +
-        'mister retten til foreldrepenger hvis søknaden om engangsstønad blir invilget.',
-        value: 'engangstonad'
+        label: `Nei, jeg vil gå videre med denne søknaden og forstår at jeg 
+                mister retten til foreldrepenger hvis søknaden om engangsstønad blir innvilget.`,
+        value: 'engangsstonad'
     }
 ];
 
@@ -40,14 +40,8 @@ export const Step2 = () => (
         >
             Dersom du har /haft arbeid/likestilt inntekt så kan du ha rett på foreldrepenger.
         </AlertStripe>
-
         <InformationPanel imgSrc={EmployeeLogo} title="Arbeid" opplysningData={opplysningData} />
-
-        <RadioGruppe
-            className={styles.radioGruppe}
-            name="soknadstype"
-            listOfRadioData={radioData}
-        />
+        <RadioGruppe className={styles.radioGruppe} name="soknadstype" listOfRadioData={radioData} />
     </ElementWrapper>
 );
 export default Step2;

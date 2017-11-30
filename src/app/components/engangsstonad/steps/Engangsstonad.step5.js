@@ -30,7 +30,6 @@ export const Step5 = () => (
         >
             Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening
         </AlertStripeNavAnsatt>
-
         <InformationPanel
             title="Stønad"
             imgSrc={BenefitLogo}

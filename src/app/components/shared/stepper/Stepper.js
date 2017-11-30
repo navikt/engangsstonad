@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import PropTypes from 'prop-types';
+
+import { Hovedknapp } from 'nav-frontend-knapper';
+
 import styles from './stepper.less';
 
 const Stepper = (props) => (
@@ -38,7 +40,7 @@ Stepper.defaultProps = {
 };
 
 const StepperButton = (props) => (
-    <Link to={props.href}>
+    <Link to={props.href} className={styles.marginRight}>
         <props.component>
             {props.label}
         </props.component>
