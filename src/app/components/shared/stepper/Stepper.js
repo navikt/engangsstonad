@@ -1,18 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import PropTypes from 'prop-types';
-import styles from './styles.less';
+
+import { Hovedknapp } from 'nav-frontend-knapper';
+
+import styles from './stepper.less';
 
 const Stepper = (props) => (
     <div className={styles.stepper}>
         {
-            props.showStepAhead &&
-            <StepperButton href={props.nextRoute} label="Fortsett med søknad" />
-        }
-        {
             props.showStepBack &&
             <StepperButton href={props.previousRoute} label="Tilbake" />
+        }
+        {
+            props.showStepAhead &&
+            <StepperButton href={props.nextRoute} label="Fortsett med søknad" />
         }
         {
             props.showSubmission &&
@@ -38,7 +40,7 @@ Stepper.defaultProps = {
 };
 
 const StepperButton = (props) => (
-    <Link to={props.href}>
+    <Link to={props.href} className={styles.marginRight}>
         <props.component>
             {props.label}
         </props.component>

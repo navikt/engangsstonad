@@ -1,15 +1,33 @@
 import React from 'react';
 
+import { Sidetittel } from 'nav-frontend-typografi';
+
 import Stepper from './../stepper/Stepper';
 import Step from './../step/Step';
-import styles from './styles.less';
+import ElementWrapper from './../../../util/ElementWrapper';
+import Image from './../../shared/Image';
+import NAVLogoUrl from './../../../assets/svg/logo.svg';
 
-type Props = {
+import styles from './stepBasedForm.less';
+
+type FormProps = {
     routes: Array<Function>,
-    afterSubmissionRoute: string
+    afterSubmissionRoute: string,
+    title: string
 }
 
-const StepBasedForm = (props: Props) => {
+type HeaderProps = {
+    title: string
+}
+
+const Header = (props: HeaderProps) => (
+    <ElementWrapper>
+        <Image className={styles.center} imageUrl={NAVLogoUrl} alt="NAV Logo" />
+        <Sidetittel className={styles.centerText}>{props.title}</Sidetittel>
+    </ElementWrapper>
+);
+
+const StepBasedForm = (props: FormProps) => {
     const isActiveRoute = (route) => (route.props.path === window.location.pathname);
     const findActiveRoute = () => (props.routes.find((route) => isActiveRoute(route)));
 
@@ -70,10 +88,11 @@ const StepBasedForm = (props: Props) => {
 
     return (
         <div className={styles.stepBasedForm}>
-            <div className={styles.stepBasedForm__header}>Header</div>
-            { renderRoutes() }
-            { renderStepper() }
-            <div className={styles.stepBasedForm__footer}>Footer</div>
+            <form>
+                <Header title={props.title} />
+                {renderRoutes()}
+                {renderStepper()}
+            </form>
         </div>
     );
 };
