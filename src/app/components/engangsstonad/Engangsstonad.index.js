@@ -9,7 +9,7 @@ type Props = {
     routes: PropTypes.array
 }
 
-const Engangsstonad = (props: Props) => {
+const EngangsstonadIndex = (props: Props) => {
     const renderRoutes = () => {
         if (props.routes) {
             return (props.routes.map((route) => (<Route {...route} key={route.path} />)));
@@ -25,4 +25,4 @@ const Engangsstonad = (props: Props) => {
 };
 
 
-export default Engangsstonad;
+export default EngangsstonadIndex;

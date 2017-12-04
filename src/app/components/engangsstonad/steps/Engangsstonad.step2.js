@@ -5,7 +5,6 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import ElementWrapper from './../../../util/ElementWrapper';
 import RadioGroup from '../../shared/RadioGroup';
 import OpplysningPanel from '../../shared/OpplysningPanel';
-import EmployerLogo from '../../../assets/svg/employer.svg';
 
 import styles from './engangsstonad.step.less';
 
@@ -41,8 +40,7 @@ export const Step2 = () => (
             Dersom du har /haft arbeid/likestilt inntekt så kan du ha rett på foreldrepenger.
         </AlertStripe>
         <OpplysningPanel
-            imgSrc={EmployerLogo}
-            imgAlt="Ikon for arbeidsgiver"
+            iconKind="arbeidsgiver"
             title="Arbeid"
             opplysningData={opplysningData}
         />

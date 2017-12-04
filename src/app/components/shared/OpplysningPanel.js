@@ -3,18 +3,17 @@ import React from 'react';
 
 import DisplayTextWithLabel from '../shared/DisplayTextWithLabel';
 import ElementWrapper from './../../util/ElementWrapper';
-import ImageWithText from './../shared/ImageWithText';
+import IconWithText from './IconWithText';
 
 type Props = {
-    imgSrc: string,
+    iconKind: string,
     opplysningData: Array<Object>,
-    title: string,
-    imgAlt: string
+    title: string
 };
 
 const OpplysningPanel = (props: Props) => (
     <ElementWrapper>
-        <ImageWithText imageUrl={props.imgSrc} text={props.title} alt={props.imgAlt} />
+        <IconWithText kind={props.iconKind} text={props.title} />
         {props.opplysningData.map((opplysninger) => (
             <DisplayTextWithLabel key={opplysninger.text} {...opplysninger} />
         ))}

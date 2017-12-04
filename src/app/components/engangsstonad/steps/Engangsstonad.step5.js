@@ -3,7 +3,7 @@ import React from 'react';
 import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
 import ElementWrapper from '../../../util/ElementWrapper';
 import OpplysningPanel from '../../shared/OpplysningPanel';
-import BenefitLogo from '../../../assets/svg/benefit.svg';
+
 import styles from './engangsstonad.step.less';
 
 
@@ -32,8 +32,7 @@ export const Step5 = () => (
         </AlertStripeNavAnsatt>
         <OpplysningPanel
             title="Stønad"
-            imgSrc={BenefitLogo}
-            imgAlt="Ikon for stønad"
+            iconKind="stonad"
             opplysningData={opplysningData}
         />
     </ElementWrapper>

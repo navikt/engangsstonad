@@ -2,23 +2,22 @@
 import React from 'react';
 
 import { Undertittel } from 'nav-frontend-typografi';
+import Icon from 'nav-frontend-ikoner-assets';
 
 import ElementWrapper from './../../util/ElementWrapper';
-import Image from './Image';
 
-import styles from './imageWithText.less';
+import styles from './iconWithText.less';
 
 type Props = {
-    imageUrl: string,
-    text: string,
-    alt: string
+    kind: string,
+    text: string
 };
 
-export const ImageWithText = (props: Props) => (
+export const IconWithText = (props: Props) => (
     <ElementWrapper>
-        <Image imageUrl={props.imageUrl} alt={props.alt} />
+        <Icon kind={props.kind} className={styles.image} />
         <Undertittel className={styles.text}>{props.text}</Undertittel>
     </ElementWrapper>
 );
 
-export default ImageWithText;
+export default IconWithText;
