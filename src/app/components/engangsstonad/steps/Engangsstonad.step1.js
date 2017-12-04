@@ -7,6 +7,7 @@ import { Radio } from 'nav-frontend-skjema';
 import IconWithText from '../../shared/IconWithText';
 import ElementWrapper from './../../../util/ElementWrapper';
 import DisplayTextWithLabel from './../../shared/DisplayTextWithLabel';
+import InputField from './../../../redux/form/components/InputField';
 
 import styles from './engangsstonad.step.less';
 
@@ -18,6 +19,7 @@ export const Step1 = () => (
         <Element className={styles.marginTopBottom}>Placeholder</Element>
         <DisplayTextWithLabel label="Placeholder" text="Placeholder" />
         <Radio className={styles.marginTopBottom} label="Placeholder" name="placeholder-gruppe" />
+        <InputField name="steg1input" label="Test" />
     </ElementWrapper>
 );
 

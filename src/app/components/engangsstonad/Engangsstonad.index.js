@@ -17,10 +17,14 @@ const EngangsstonadIndex = (props: Props) => {
         return [];
     };
 
+    const handleSubmit = (values) => {
+        console.log(values);
+    };
+
     const routes = renderRoutes();
 
     return (
-        <StepBasedForm routes={routes} title="Søknad for engangsstønad" />
+        <StepBasedForm onSubmit={handleSubmit} routes={routes} title="Søknad for engangsstønad" />
     );
 };
 

@@ -7,6 +7,7 @@ import { Container, Row, Column } from 'nav-frontend-grid';
 import ElementWrapper from './util/ElementWrapper';
 import store from './redux';
 import routes from './util/routing/routes';
+import LanguageProvider from './../app/components/language/LanguageProvider';
 
 const root = document.getElementById('app');
 render(
@@ -16,9 +17,11 @@ render(
                 <Column md="4" xs="12" />
                 <Column md="4" xs="12">
                     <Router>
-                        <ElementWrapper>
-                            {routes()}
-                        </ElementWrapper>
+                        <LanguageProvider>
+                            <ElementWrapper>
+                                {routes()}
+                            </ElementWrapper>
+                        </LanguageProvider>
                     </Router>
                 </Column>
                 <Column md="4" xs="12" />

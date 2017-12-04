@@ -1,4 +1,5 @@
 import React from 'react';
+import { reduxForm } from 'redux-form';
 
 import { Sidetittel } from 'nav-frontend-typografi';
 
@@ -13,7 +14,8 @@ import styles from './stepBasedForm.less';
 type FormProps = {
     routes: Array<Function>,
     afterSubmissionRoute: string,
-    title: string
+    title: string,
+    handleSubmit: Function
 }
 
 type HeaderProps = {
@@ -88,7 +90,7 @@ const StepBasedForm = (props: FormProps) => {
 
     return (
         <div className={styles.stepBasedForm}>
-            <form>
+            <form onSubmit={props.handleSubmit}>
                 <Header title={props.title} />
                 {renderRoutes()}
                 {renderStepper()}
@@ -97,4 +99,6 @@ const StepBasedForm = (props: FormProps) => {
     );
 };
 
-export default StepBasedForm;
+export default reduxForm({
+    form: 'engangsstonad'
+})(StepBasedForm);

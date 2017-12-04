@@ -29,6 +29,7 @@
       2,
       "never"
     ],
+    "react/no-typos": 0,
     "arrow-parens": [
       2,
       "always"
