@@ -1,5 +1,4 @@
 import React from 'react';
-import { reduxForm } from 'redux-form';
 
 import { Sidetittel } from 'nav-frontend-typografi';
 
@@ -99,6 +98,4 @@ const StepBasedForm = (props: FormProps) => {
     );
 };
 
-export default reduxForm({
-    form: 'engangsstonad'
-})(StepBasedForm);
+export default StepBasedForm;

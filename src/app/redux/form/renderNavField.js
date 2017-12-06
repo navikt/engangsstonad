@@ -19,6 +19,7 @@ const renderNavField = (WrappedNavFieldComponent) => {
 
         render() {
             const {
+                // eslint-disable-next-line no-unused-vars
                 input, meta: { submitFailed, error }, intl, ...otherProps
             } = this.props;
 

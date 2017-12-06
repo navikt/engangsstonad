@@ -2,7 +2,7 @@ import React from 'react';
 import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
 
 import ElementWrapper from '../../../util/ElementWrapper';
-import RadioGroup from '../../shared/RadioGroup';
+import RadioGroup from '../../../redux/form/components/RadioGroupField';
 import DateInput from '../../shared/DateInput';
 import AttachmentButton from '../../shared/AttachmentButton';
 import AttachmentList from '../../shared/AttachmentList';
