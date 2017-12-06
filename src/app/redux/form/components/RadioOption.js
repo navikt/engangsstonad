@@ -23,9 +23,7 @@ const RadioOption = (props: Props) => {
         ...other
     } = props;
 
-    const stringifiedValue = JSON.stringify(value);
-    const actualStringifiedValue = JSON.stringify(actualValue);
-    const checked = stringifiedValue === actualStringifiedValue;
+    const checked = value === actualValue;
 
     return (
         <NavRadio

@@ -12,17 +12,35 @@ type Props = {
     listOfRadioData: Array<Object>
 }
 
+const convertBoolean = (value) => {
+    if (value === 'true') {
+        return true;
+    }
+
+    if (value === 'false') {
+        return false;
+    }
+
+    return value;
+};
+
 const renderRadioGroupField = renderNavField((props: Props) => {
-    const { children, id, ...otherProps } = props;
-    const actualValue = otherProps.value;
+    const {
+        children,
+        id,
+        title,
+        ...otherProps
+    } = props;
+
+    const actualValue = convertBoolean(otherProps.value);
 
     return (
-        <SkjemaGruppe title={props.title} >
+        <SkjemaGruppe title={title} >
             {children.map((radioOption) => (
                 React.cloneElement(radioOption, {
                     ...otherProps,
                     ...radioOption.props,
-                    actualValue: actualValue
+                    actualValue
                 })
             ))}
         </SkjemaGruppe>
