@@ -1,52 +1,47 @@
 import React from 'react';
+
 import { Normaltekst } from 'nav-frontend-typografi';
-import DialogBox from '../../../components/shared/DialogBox';
+
 import ElementWrapper from './../../../util/ElementWrapper';
 import RadioGroupField from '../../../redux/form/components/RadioGroupField';
 import RadioOption from '../../../redux/form/components/RadioOption';
-import OpplysningPanel from '../../shared/OpplysningPanel';
-
-import styles from './engangsstonad.step.less';
+import DateInput from '../../shared/DateInput';
+import AttachmentButton from '../../shared/AttachmentButton';
+import AttachmentList from '../../shared/AttachmentList';
+import NumberSelector from '../../shared/NumberSelector';
+import DialogBox from '../../../components/shared/DialogBox';
 
 const radioData = [
     {
-        label: 'Ja, jag vil heller søke om foreldrepenger.',
-        value: 'foreldrepenger'
+        label: 'Ja',
+        value: 'Ja'
     },
     {
-        label: `Nei, jeg vil gå videre med denne søknaden og forstår at jeg 
-                mister retten til foreldrepenger hvis søknaden om engangsstønad blir innvilget.`,
-        value: 'engangsstonad'
+        label: 'Nei',
+        value: 'Nei'
     }
 ];
 
-const opplysningData = [
-    {
-        label: 'ARBEIDSGIVER',
-        text: 'Nielsen Strikkfabrikk AS'
-    },
-    {
-        label: 'STILLINGSPROSENT',
-        text: '100 prosent fast'
-    }
-];
-
-export const Step2 = () => (
+const Step2 = () => (
     <ElementWrapper>
         <DialogBox type="info">
-            <Normaltekst>text</Normaltekst>
+            <Normaltekst>Vi trenger mer informasjon fra deg om barnet eller barna søknaden gjelder</Normaltekst>
         </DialogBox>
-        <OpplysningPanel
-            iconKind="arbeidsgiver"
-            title="Arbeid"
-            opplysningData={opplysningData}
-        />
-        <RadioGroupField className={styles.radioGruppe} name="soknadstype">
+        <RadioGroupField title="Har fødselen allerede skjedd?" name="soknadstype">
             {radioData.map((data) => (
                 <RadioOption label={data.label} value={data.value} />
             ))}
         </RadioGroupField>
+        <NumberSelector />
+        <DateInput label="Fødselsdato" />
+        <DialogBox type="warning">
+            <Normaltekst>
+                Siden barnet ikke er født må du legge ved terminbekreftelse fra jordmor eller lege
+            </Normaltekst>
+        </DialogBox>
+        <DateInput label="Terminbekreftelse utstedt" />
+        <AttachmentList />
+        <AttachmentButton />
     </ElementWrapper>
 );
 export default Step2;
-

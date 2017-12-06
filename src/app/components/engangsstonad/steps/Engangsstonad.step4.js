@@ -1,31 +1,20 @@
 import React from 'react';
 
-import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
+
 import DialogBox from '../../../components/shared/DialogBox';
-import CheckboxWithLine from '../../shared/CheckboxWithLine';
 import ElementWrapper from '../../../util/ElementWrapper';
-
-import styles from './engangsstonad.step.less';
-
-const checkboxData = [
-    {
-        label: 'NAVN',
-        text: 'Lise Haugdahl'
-    },
-    {
-        label: 'FØDSELSNUMMER',
-        text: '01111799999'
-    }
-];
+import DisplayTextWithLabel from './../../shared/DisplayTextWithLabel';
 
 export const Step4 = () => (
     <ElementWrapper>
         <DialogBox type="info">
-            <Normaltekst>Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening</Normaltekst>
+            <Normaltekst>
+                Les nøye gjennom oppsummeringen før du sender inn søknaden.
+                Hvis du trenger å gjøre endringer kan du gå tilbake til tidligere steg
+            </Normaltekst>
         </DialogBox>
-        <Undertittel className={styles.marginTopBottom}>Gjelder søknaden dette barnet?</Undertittel>
-        <CheckboxWithLine content={checkboxData} className={styles.marginTopBottom} />
-        <CheckboxWithLine content={checkboxData} className={styles.marginTopBottom} />
+        <DisplayTextWithLabel label="Navn" text="Lise Mari Haugland" />
     </ElementWrapper>
 );
 
