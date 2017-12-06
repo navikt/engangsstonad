@@ -11,6 +11,8 @@ import AttachmentList from '../../shared/AttachmentList';
 import NumberSelector from '../../shared/NumberSelector';
 import DialogBox from '../../../components/shared/DialogBox';
 
+import styles from './engangsstonad.step.less';
+
 const radioData = [
     {
         label: 'Ja',
@@ -27,19 +29,20 @@ const Step2 = () => (
         <DialogBox type="info">
             <Normaltekst>Vi trenger mer informasjon fra deg om barnet eller barna søknaden gjelder</Normaltekst>
         </DialogBox>
-        <RadioGroupField title="Har fødselen allerede skjedd?" name="soknadstype">
+        <RadioGroupField title="Er barnet født?" name="soknadstype">
             {radioData.map((data) => (
                 <RadioOption label={data.label} value={data.value} />
             ))}
         </RadioGroupField>
+        <Normaltekst className={styles.marginTopBottom}>Forventet antall barn</Normaltekst>
         <NumberSelector />
-        <DateInput label="Fødselsdato" />
+        <DateInput className={styles.marginTopBottom} label="Fødselsdato" />
         <DialogBox type="warning">
             <Normaltekst>
                 Siden barnet ikke er født må du legge ved terminbekreftelse fra jordmor eller lege
             </Normaltekst>
         </DialogBox>
-        <DateInput label="Terminbekreftelse utstedt" />
+        <DateInput className={styles.marginTopBottom} label="Terminbekreftelse utstedt" />
         <AttachmentList />
         <AttachmentButton />
     </ElementWrapper>
