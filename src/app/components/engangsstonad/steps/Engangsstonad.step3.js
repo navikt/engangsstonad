@@ -23,7 +23,7 @@ export const Step3 = () => (
         <IconWithText kind="arbeidsgiver" text="Adresse" />
         <Normaltekst className={styles.marginTop}>Stockholmsgata 16B</Normaltekst>
         <Normaltekst className={styles.marginTop}>0566, Oslo</Normaltekst>
-        <Normaltekst className={styles.marginTop}>Norge</Normaltekst>
+        <Normaltekst className={styles.marginTopBottom}>Norge</Normaltekst>
         <RadioGroupField name="oppholdSisteAr" title="Har du oppholdt deg i Norge de siste 12 månedene?">
             <RadioOption label="Ja" value />
             <RadioOption label="Nei" value={false} />
