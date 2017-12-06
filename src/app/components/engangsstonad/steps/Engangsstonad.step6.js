@@ -1,5 +1,6 @@
 import React from 'react';
-import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
+import { Normaltekst } from 'nav-frontend-typografi';
+import DialogBox from '../../../components/shared/DialogBox';
 
 import ElementWrapper from '../../../util/ElementWrapper';
 import RadioGroup from '../../../redux/form/components/RadioGroupField';
@@ -23,22 +24,25 @@ const radioData = [
 
 const Step6 = () => (
     <ElementWrapper>
-        <AlertStripeNavAnsatt
-            className={styles.marginTopBottom}
-            type="nav-ansatt"
-        >
-            Vi trenger å vite mer informasjon om fødselen som søknaden gjelder.
-        </AlertStripeNavAnsatt>
+        <DialogBox type="info">
+            <Normaltekst>Vi trenger å vite mer informasjon om fødselen som søknaden gjelder.</Normaltekst>
+        </DialogBox>
 
         <RadioGroup
             className={styles.radioGruppe}
-            title="Har fødselen allerede skjedd?"
+            title="Er barnet født?"
             name="soknadstype"
             listOfRadioData={radioData}
         />
 
 
         <NumberSelector />
+        <DateInput />
+
+        <DialogBox type="warning">
+            <Normaltekst>Vi trenger å vite mer informasjon om fødselen som søknaden gjelder.</Normaltekst>
+        </DialogBox>
+
         <DateInput />
 
         <AttachmentList />

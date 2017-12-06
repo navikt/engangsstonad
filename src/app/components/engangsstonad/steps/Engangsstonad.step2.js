@@ -1,7 +1,6 @@
 import React from 'react';
-
-import AlertStripe from 'nav-frontend-alertstriper';
-
+import { Normaltekst } from 'nav-frontend-typografi';
+import DialogBox from '../../../components/shared/DialogBox';
 import ElementWrapper from './../../../util/ElementWrapper';
 import RadioGroupField from '../../../redux/form/components/RadioGroupField';
 import RadioOption from '../../../redux/form/components/RadioOption';
@@ -34,12 +33,9 @@ const opplysningData = [
 
 export const Step2 = () => (
     <ElementWrapper>
-        <AlertStripe
-            className={styles.marginBottomLarge}
-            type="nav-ansatt"
-        >
-            Dersom du har /haft arbeid/likestilt inntekt så kan du ha rett på foreldrepenger.
-        </AlertStripe>
+        <DialogBox type="info">
+            <Normaltekst>text</Normaltekst>
+        </DialogBox>
         <OpplysningPanel
             iconKind="arbeidsgiver"
             title="Arbeid"

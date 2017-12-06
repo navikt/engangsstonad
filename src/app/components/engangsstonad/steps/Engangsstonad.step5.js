@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
+import { Normaltekst } from 'nav-frontend-typografi';
+import DialogBox from '../../../components/shared/DialogBox';
 import ElementWrapper from '../../../util/ElementWrapper';
 import OpplysningPanel from '../../shared/OpplysningPanel';
 
@@ -24,12 +25,9 @@ const opplysningData = [
 
 export const Step5 = () => (
     <ElementWrapper>
-        <AlertStripeNavAnsatt
-            className={styles.marginTopBottom}
-            type="nav-ansatt"
-        >
-            Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening
-        </AlertStripeNavAnsatt>
+        <DialogBox type="info">
+            <Normaltekst>Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening</Normaltekst>
+        </DialogBox>
         <OpplysningPanel
             title="Stønad"
             iconKind="stonad"

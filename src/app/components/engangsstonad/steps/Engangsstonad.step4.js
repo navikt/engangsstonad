@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { Undertittel } from 'nav-frontend-typografi';
-import AlertStripe from 'nav-frontend-alertstriper';
-
+import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import DialogBox from '../../../components/shared/DialogBox';
 import CheckboxWithLine from '../../shared/CheckboxWithLine';
 import ElementWrapper from '../../../util/ElementWrapper';
 
@@ -21,12 +20,9 @@ const checkboxData = [
 
 export const Step4 = () => (
     <ElementWrapper>
-        <AlertStripe
-            className={styles.marginTopBottom}
-            type="nav-ansatt"
-        >
-            Vi har funnet opplysninger om barn som du er forelder til
-        </AlertStripe>
+        <DialogBox type="info">
+            <Normaltekst>Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening</Normaltekst>
+        </DialogBox>
         <Undertittel className={styles.marginTopBottom}>Gjelder søknaden dette barnet?</Undertittel>
         <CheckboxWithLine content={checkboxData} className={styles.marginTopBottom} />
         <CheckboxWithLine content={checkboxData} className={styles.marginTopBottom} />

@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
+import { Normaltekst } from 'nav-frontend-typografi';
+import DialogBox from '../../../components/shared/DialogBox';
 
 import ElementWrapper from '../../../util/ElementWrapper';
 
@@ -8,12 +9,9 @@ import styles from './engangsstonad.step.less';
 
 export const Step3 = () => (
     <ElementWrapper>
-        <AlertStripeNavAnsatt
-            className={styles.marginTopBottom}
-            type="nav-ansatt"
-        >
-            Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening
-        </AlertStripeNavAnsatt>
+        <DialogBox type="info">
+            <Normaltekst>Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening</Normaltekst>
+        </DialogBox>
     </ElementWrapper>
 );
 export default Step3;

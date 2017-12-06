@@ -2,7 +2,7 @@ import React from 'react';
 import Image from '../../../app/components/shared/Image';
 
 import infoIcon from '../../assets/svg/employee_nautral.svg';
-import sadIcon from '../../assets/svg/employee_sad.svg';
+import alertIcon from '../../assets/svg/employee_sad.svg';
 import warningIcon from '../../assets/svg/employee_warning.svg';
 import successIcon from '../../assets/svg/employee_happy.svg';
 
@@ -17,7 +17,7 @@ type Props = {
 const getIcon = (type) => {
     switch (type) {
         case 'success': return successIcon;
-        case 'alert': return sadIcon;
+        case 'alert': return alertIcon;
         case 'warning': return warningIcon;
         default: return infoIcon;
     }
