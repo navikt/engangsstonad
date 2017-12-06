@@ -3,14 +3,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
 import CheckboxField from './../../../redux/form/components/CheckboxField';
 import ElementWrapper from './../../../util/ElementWrapper';
 import DialogBox from '../../../components/shared/DialogBox';
 
+import styles from './engangsstonad.step.less';
+
 export const Step1 = () => (
     <ElementWrapper>
+        <Ingress className={styles.marginBottomLarge}>
+            Engangsstønad er en skattefri engangssum du kan få for
+            hvert barn du /(føder eller) adopterer, når du ikke har tjent opp rett til foreldrepenger.
+        </Ingress>
+
         <DialogBox type="info">
             <Normaltekst>
                 Husk att du kan ha rett på foreldrepenger hvis du har hatt inntekt i minst 6 av de 10 siste månedene

@@ -9,6 +9,8 @@ import IconWithText from './../../shared/IconWithText';
 
 import ElementWrapper from '../../../util/ElementWrapper';
 
+import styles from './engangsstonad.step.less';
+
 export const Step3 = () => (
     <ElementWrapper>
         <DialogBox type="info">
@@ -17,10 +19,11 @@ export const Step3 = () => (
                 at du svarer på tre spørsmål om ditt opphold i Norge
             </Normaltekst>
         </DialogBox>
+
         <IconWithText kind="arbeidsgiver" text="Adresse" />
-        <Normaltekst>Stockholmsgata 16B</Normaltekst>
-        <Normaltekst>0566, Oslo</Normaltekst>
-        <Normaltekst>Norge</Normaltekst>
+        <Normaltekst className={styles.marginTop}>Stockholmsgata 16B</Normaltekst>
+        <Normaltekst className={styles.marginTop}>0566, Oslo</Normaltekst>
+        <Normaltekst className={styles.marginTop}>Norge</Normaltekst>
         <RadioGroupField name="oppholdSisteAr" title="Har du oppholdt deg i Norge de siste 12 månedene?">
             <RadioOption label="Ja" value />
             <RadioOption label="Nei" value={false} />
