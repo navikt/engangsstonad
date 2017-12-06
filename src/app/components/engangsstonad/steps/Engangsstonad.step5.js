@@ -1,38 +1,20 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { Normaltekst } from 'nav-frontend-typografi';
+
 import DialogBox from '../../../components/shared/DialogBox';
 import ElementWrapper from '../../../util/ElementWrapper';
-import OpplysningPanel from '../../shared/OpplysningPanel';
-
-import styles from './engangsstonad.step.less';
-
-
-const opplysningData = [
-    {
-        label: 'label',
-        text: 'text'
-    },
-    {
-        label: 'label',
-        text: 'text'
-    },
-    {
-        label: 'label',
-        text: 'text'
-    }
-];
 
 export const Step5 = () => (
     <ElementWrapper>
-        <DialogBox type="info">
-            <Normaltekst>Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening</Normaltekst>
+        <DialogBox type="success">
+            <Normaltekst>
+                Bra jobbet! Din søknad er nå sendt til NAV. Vi tar kontakt med deg hvis du trenger noe mer.
+                DU kan finne status på din søknad på
+            </Normaltekst>
+            <Link to="/">Ditt NAV.</Link>
         </DialogBox>
-        <OpplysningPanel
-            title="Stønad"
-            iconKind="stonad"
-            opplysningData={opplysningData}
-        />
     </ElementWrapper>
 );
+
 export default Step5;
