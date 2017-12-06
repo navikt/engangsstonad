@@ -3,12 +3,14 @@ import React from 'react';
 
 import { Radio as NavRadio } from 'nav-frontend-skjema';
 
+import styles from './radioOption.less';
+
 type Props = {
     name: string,
     label: string,
     value: string,
     disabled: boolean,
-    checked: boolean
+    actualValue: any
 }
 
 const RadioOption = (props: Props) => {
@@ -17,12 +19,17 @@ const RadioOption = (props: Props) => {
         label,
         value,
         disabled,
-        checked,
+        actualValue,
         ...other
     } = props;
 
+    const stringifiedValue = JSON.stringify(value);
+    const actualStringifiedValue = JSON.stringify(actualValue);
+    const checked = stringifiedValue === actualStringifiedValue;
+
     return (
         <NavRadio
+            className={styles.button}
             name={name}
             label={label}
             value={value}

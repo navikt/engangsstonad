@@ -4,6 +4,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 
 import ElementWrapper from './../../../util/ElementWrapper';
 import RadioGroupField from '../../../redux/form/components/RadioGroupField';
+import RadioOption from '../../../redux/form/components/RadioOption';
 import OpplysningPanel from '../../shared/OpplysningPanel';
 
 import styles from './engangsstonad.step.less';
@@ -44,7 +45,11 @@ export const Step2 = () => (
             title="Arbeid"
             opplysningData={opplysningData}
         />
-        <RadioGroupField className={styles.radioGruppe} name="soknadstype" listOfRadioData={radioData} />
+        <RadioGroupField className={styles.radioGruppe} name="soknadstype">
+            {radioData.map((data) => (
+                <RadioOption label={data.label} value={data.value} />
+            ))}
+        </RadioGroupField>
     </ElementWrapper>
 );
 export default Step2;
