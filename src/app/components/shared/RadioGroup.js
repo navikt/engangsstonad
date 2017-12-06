@@ -6,12 +6,13 @@ import { Radio, SkjemaGruppe } from 'nav-frontend-skjema';
 import styles from './radioGroup.less';
 
 type Props = {
+    title: string,
     listOfRadioData: Object,
-    name: string
+    name: string,
 }
 
 const RadioGroup = (props: Props) => (
-    <SkjemaGruppe>
+    <SkjemaGruppe title={props.title} >
         {props.listOfRadioData.map((radioData) => (
             <Radio
                 className={styles.radioButton}

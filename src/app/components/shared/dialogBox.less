@@ -1,0 +1,45 @@
+.dialogBox {
+    margin-bottom: 20px;
+}
+
+.dialogImage {
+    height: 96px;
+    padding-left: 20px;
+    padding-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.dialogText {
+    padding: 15px 0px 15px 0px;
+    width: 230px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.infoBox {
+    &:extend(.dialogBox);
+    border-top: 2px solid #C1B5D0;
+    border-bottom: 2px solid #C1B5D0;
+}
+
+.alertBox {
+    &:extend(.dialogBox); 
+    background: #E3B0A8;   
+}
+
+
+.warningBox {
+    &:extend(.dialogBox);
+    background:  #FFD399;    
+}
+
+.successBox{
+    &:extend(.dialogBox);
+    background: #9BD0B0;    
+}
+
+
+
+
+
