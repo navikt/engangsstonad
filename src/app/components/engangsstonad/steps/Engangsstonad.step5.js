@@ -10,7 +10,7 @@ export const Step5 = () => (
         <DialogBox type="success">
             <Normaltekst>
                 Bra jobbet! Din søknad er nå sendt til NAV. Vi tar kontakt med deg hvis du trenger noe mer.
-                DU kan finne status på din søknad på
+                Du kan finne status på din søknad på
             </Normaltekst>
             <Link to="/">Ditt NAV.</Link>
         </DialogBox>

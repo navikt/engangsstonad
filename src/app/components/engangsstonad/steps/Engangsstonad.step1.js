@@ -13,7 +13,7 @@ export const Step1 = () => (
     <ElementWrapper>
         <DialogBox type="info">
             <Normaltekst>
-                Husk att du kan ha rett på foreldrepenger hvis duhar hatt inntekt i minst 6 av de 10 siste månedene
+                Husk att du kan ha rett på foreldrepenger hvis du har hatt inntekt i minst 6 av de 10 siste månedene
             </Normaltekst>
             <Link to="/">Les mer her</Link>
         </DialogBox>
