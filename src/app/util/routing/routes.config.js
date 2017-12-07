@@ -10,10 +10,13 @@ const routeConfig = [
     {
         path: '/engangsstonad',
         component: EngangsstonadIndex,
-        routes: engangsstonadSteps.map((step) => ({
-            path: `/engangsstonad/${step.name.toLowerCase()}`,
-            component: step
-        }))
+        routes: engangsstonadSteps.map((step) => {
+            const subPath = step.WrappedComponent ? step.WrappedComponent.name : step.name;
+            return {
+                path: `/engangsstonad/${subPath.toLowerCase()}`,
+                component: step
+            };
+        })
     }
 ];
 

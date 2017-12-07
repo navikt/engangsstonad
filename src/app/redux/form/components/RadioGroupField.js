@@ -38,6 +38,7 @@ const renderRadioGroupField = renderNavField((props: Props) => {
         <SkjemaGruppe title={title} >
             {children.map((radioOption) => (
                 React.cloneElement(radioOption, {
+                    key: JSON.stringify(radioOption.props.value),
                     ...otherProps,
                     ...radioOption.props,
                     actualValue

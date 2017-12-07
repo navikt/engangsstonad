@@ -14,7 +14,8 @@ type FormProps = {
     routes: Array<Function>,
     afterSubmissionRoute: string,
     title: string,
-    handleSubmit: Function
+    handleSubmit: Function,
+    nextButtonEnabled: boolean
 }
 
 type HeaderProps = {
@@ -69,12 +70,17 @@ const StepBasedForm = (props: FormProps) => {
         if (activeRoute) {
             if (routes.length === 1) {
                 return (
-                    <Stepper showSubmission nextRoute={findNextRoutePath()} />
+                    <Stepper
+                        nextButtonEnabled={props.nextButtonEnabled}
+                        showSubmission
+                        nextRoute={findNextRoutePath()}
+                    />
                 );
             }
             if (routes.length > 1) {
                 return (
                     <Stepper
+                        nextButtonEnabled={props.nextButtonEnabled}
                         showStepAhead={activeRoute !== routes[routes.length - 1]}
                         showStepBack={activeRoute !== routes[0]}
                         showSubmission={activeRoute === routes[routes.length - 1]}

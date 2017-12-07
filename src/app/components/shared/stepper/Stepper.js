@@ -14,7 +14,7 @@ const Stepper = (props) => (
         }
         {
             props.showStepAhead &&
-            <StepperButton href={props.nextRoute} label="Fortsett med søknad" />
+            <StepperButton disabled={!props.nextButtonEnabled} href={props.nextRoute} label="Fortsett med søknad" />
         }
         {
             props.showSubmission &&
@@ -28,7 +28,8 @@ Stepper.propTypes = {
     showStepBack: PropTypes.bool,
     showSubmission: PropTypes.bool,
     nextRoute: PropTypes.string,
-    previousRoute: PropTypes.string
+    previousRoute: PropTypes.string,
+    nextButtonEnabled: PropTypes.bool
 };
 
 Stepper.defaultProps = {
@@ -36,12 +37,13 @@ Stepper.defaultProps = {
     showStepBack: false,
     showSubmission: false,
     nextRoute: undefined,
-    previousRoute: undefined
+    previousRoute: undefined,
+    nextButtonEnabled: false
 };
 
 const StepperButton = (props) => (
     <Link to={props.href} className={styles.marginRight}>
-        <props.component>
+        <props.component disabled={props.disabled}>
             {props.label}
         </props.component>
     </Link>
@@ -51,11 +53,13 @@ StepperButton.propTypes = {
     label: PropTypes.string.isRequired,
     href: PropTypes.string.isRequired,
     // eslint-disable-next-line react/no-unused-prop-types
-    component: PropTypes.func
+    component: PropTypes.func,
+    disabled: PropTypes.bool
 };
 
 StepperButton.defaultProps = {
-    component: Hovedknapp
+    component: Hovedknapp,
+    disabled: false
 };
 
 export default Stepper;

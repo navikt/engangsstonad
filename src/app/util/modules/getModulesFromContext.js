@@ -1,7 +1,13 @@
+import { withRouter } from 'react-router-dom';
+
 const getModulesFromContext = (context) => {
     const modules = [];
     context.keys().forEach((ref) => {
-        modules.push(context(ref).default);
+        const defaultExport = context(ref).default;
+        if (defaultExport.WrappedComponent) {
+            return modules.push(withRouter(defaultExport));
+        }
+        return modules.push(defaultExport);
     });
     return modules;
 };

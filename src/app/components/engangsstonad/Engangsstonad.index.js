@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
+import { connect } from 'react-redux';
 
 import StepBasedForm from './../shared/step-based-form/StepBasedForm';
 import Route from './../../util/routing/route.component';
 
 type Props = {
-    routes: PropTypes.array
+    routes: PropTypes.array,
+    egenerklaring: boolean
 }
 
 const EngangsstonadIndex = (props: Props) => {
@@ -24,10 +26,19 @@ const EngangsstonadIndex = (props: Props) => {
     const routes = renderRoutes();
 
     return (
-        <StepBasedForm onSubmit={handleSubmit} routes={routes} title="Søknad om engangsstønad" />
+        <StepBasedForm
+            nextButtonEnabled={props.egenerklaring}
+            onSubmit={handleSubmit}
+            routes={routes}
+            title="Søknad om engangsstønad"
+        />
     );
 };
 
-export default reduxForm({
+const selector = formValueSelector('engangsstonad');
+
+export default connect((state) => ({
+    egenerklaring: selector(state, 'egenerklaring')
+}))(reduxForm({
     form: 'engangsstonad'
-})(EngangsstonadIndex);
+})(EngangsstonadIndex));
