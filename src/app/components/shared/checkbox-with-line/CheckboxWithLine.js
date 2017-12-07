@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import classnames from 'classnames/bind';
 
 import { Checkbox } from 'nav-frontend-skjema';
 
@@ -8,13 +7,10 @@ import DisplayTextWithLabel from '../text-with-label/DisplayTextWithLabel';
 import './checkboxWithLine.less';
 
 type Props = {
-    content: Array<Object>,
-    className: string
+    content: Array<Object>
 };
 
 const CheckboxWithLine = (props: Props) => {
-    const { className } = props;
-
     const renderTexts = () => (
         props.content.map((entry, index) => (
             <DisplayTextWithLabel
@@ -25,7 +21,7 @@ const CheckboxWithLine = (props: Props) => {
     );
 
     return (
-        <div className={classnames('checkboxWithLine', className)}>
+        <div className="checkboxWithLine">
             <Checkbox label="" />
             <div className="checkboxWithLine__content">
                 {renderTexts()}
