@@ -1,11 +1,7 @@
 import React from 'react';
 
 import { AlertStripeNavAnsatt } from 'nav-frontend-alertstriper';
-import ElementWrapper from '../../../util/ElementWrapper';
-import OpplysningPanel from '../../shared/OpplysningPanel';
-
-import styles from './engangsstonad.step.less';
-
+import OpplysningPanel from '../../shared/opplysning-panel/OpplysningPanel';
 
 const opplysningData = [
     {
@@ -22,12 +18,9 @@ const opplysningData = [
     }
 ];
 
-export const Step5 = () => (
-    <ElementWrapper>
-        <AlertStripeNavAnsatt
-            className={styles.marginTopBottom}
-            type="nav-ansatt"
-        >
+const Step5 = () => ([
+    <div className="step5">
+        <AlertStripeNavAnsatt type="nav-ansatt">
             Du kan ha rett på foreldrepenger hvis du bla bla arbeid opptjening
         </AlertStripeNavAnsatt>
         <OpplysningPanel
@@ -35,6 +28,7 @@ export const Step5 = () => (
             iconKind="stonad"
             opplysningData={opplysningData}
         />
-    </ElementWrapper>
-);
+    </div>
+]);
+
 export default Step5;
