@@ -4,21 +4,18 @@ import { Undertittel, Element } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Radio } from 'nav-frontend-skjema';
 
-import IconWithText from '../../shared/IconWithText';
-import ElementWrapper from './../../../util/ElementWrapper';
-import DisplayTextWithLabel from './../../shared/DisplayTextWithLabel';
+import IconWithText from '../../shared/icon-with-text/IconWithText';
+import DisplayTextWithLabel from '../../shared/text-with-label/DisplayTextWithLabel';
 
-import styles from './engangsstonad.step.less';
-
-export const Step1 = () => (
-    <ElementWrapper>
-        <AlertStripe className={styles.marginTopBottom} type="nav-ansatt">Her har vi noe info</AlertStripe>
+const Step1 = () => (
+    <div className="step1">
+        <AlertStripe type="nav-ansatt">Her har vi noe info</AlertStripe>
         <IconWithText kind="arbeidsgiver" text="Placeholder" />
-        <Undertittel className={styles.marginTopBottom}>Placeholder</Undertittel>
-        <Element className={styles.marginTopBottom}>Placeholder</Element>
+        <Undertittel>Placeholder</Undertittel>
+        <Element>Placeholder</Element>
         <DisplayTextWithLabel label="Placeholder" text="Placeholder" />
-        <Radio className={styles.marginTopBottom} label="Placeholder" name="placeholder-gruppe" />
-    </ElementWrapper>
+        <Radio label="Placeholder" name="placeholder-gruppe" />
+    </div>
 );
 
 export default Step1;

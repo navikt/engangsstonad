@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Radio, SkjemaGruppe } from 'nav-frontend-skjema';
 
-import styles from './radioGroup.less';
+import './radioGroup.less';
 
 type Props = {
     listOfRadioData: Object,
@@ -11,10 +11,10 @@ type Props = {
 }
 
 const RadioGroup = (props: Props) => (
-    <SkjemaGruppe>
+    <SkjemaGruppe className="radioGroup">
         {props.listOfRadioData.map((radioData) => (
             <Radio
-                className={styles.radioButton}
+                className="radioGroup__radioButton"
                 key={radioData.value}
                 name={props.name}
                 {...radioData}

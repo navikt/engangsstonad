@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import StepBasedForm from './../shared/step-based-form/StepBasedForm';
 import Route from './../../util/routing/route.component';
 
+import './engangsstonad.less';
+
 type Props = {
     routes: PropTypes.array
 }
@@ -18,9 +20,12 @@ const EngangsstonadIndex = (props: Props) => {
     };
 
     const routes = renderRoutes();
-
     return (
-        <StepBasedForm routes={routes} title="Søknad for engangsstønad" />
+        <StepBasedForm
+            className="engangsstonad"
+            routes={routes}
+            title="Søknad for engangsstønad"
+        />
     );
 };
 

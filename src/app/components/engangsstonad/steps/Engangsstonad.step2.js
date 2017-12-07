@@ -2,11 +2,8 @@ import React from 'react';
 
 import AlertStripe from 'nav-frontend-alertstriper';
 
-import ElementWrapper from './../../../util/ElementWrapper';
-import RadioGroup from '../../shared/RadioGroup';
-import OpplysningPanel from '../../shared/OpplysningPanel';
-
-import styles from './engangsstonad.step.less';
+import RadioGroup from '../../shared/radio-group/RadioGroup';
+import OpplysningPanel from '../../shared/opplysning-panel/OpplysningPanel';
 
 const radioData = [
     {
@@ -31,12 +28,9 @@ const opplysningData = [
     }
 ];
 
-export const Step2 = () => (
-    <ElementWrapper>
-        <AlertStripe
-            className={styles.marginBottomLarge}
-            type="nav-ansatt"
-        >
+const Step2 = () => (
+    <div className="step2">
+        <AlertStripe type="nav-ansatt">
             Dersom du har /haft arbeid/likestilt inntekt så kan du ha rett på foreldrepenger.
         </AlertStripe>
         <OpplysningPanel
@@ -44,8 +38,8 @@ export const Step2 = () => (
             title="Arbeid"
             opplysningData={opplysningData}
         />
-        <RadioGroup className={styles.radioGruppe} name="soknadstype" listOfRadioData={radioData} />
-    </ElementWrapper>
+        <RadioGroup name="soknadstype" listOfRadioData={radioData} />
+    </div>
 );
-export default Step2;
 
+export default Step2;

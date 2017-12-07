@@ -4,16 +4,14 @@ import { Sidetittel } from 'nav-frontend-typografi';
 
 import Stepper from './../stepper/Stepper';
 import Step from './../step/Step';
-import ElementWrapper from './../../../util/ElementWrapper';
-import Image from './../../shared/Image';
-import NAVLogoUrl from './../../../assets/svg/logo.svg';
 
-import styles from './stepBasedForm.less';
+import './stepBasedForm.less';
 
 type FormProps = {
     routes: Array<Function>,
     afterSubmissionRoute: string,
-    title: string
+    title: string,
+    className: string
 }
 
 type HeaderProps = {
@@ -21,10 +19,9 @@ type HeaderProps = {
 }
 
 const Header = (props: HeaderProps) => (
-    <ElementWrapper>
-        <Image className={styles.center} imageUrl={NAVLogoUrl} alt="NAV Logo" />
-        <Sidetittel className={styles.centerText}>{props.title}</Sidetittel>
-    </ElementWrapper>
+    <div className="stepBasedForm__header">
+        <Sidetittel>{props.title}</Sidetittel>
+    </div>
 );
 
 const StepBasedForm = (props: FormProps) => {
@@ -87,8 +84,8 @@ const StepBasedForm = (props: FormProps) => {
     };
 
     return (
-        <div className={styles.stepBasedForm}>
-            <form>
+        <div className="stepBasedForm">
+            <form className={props.className}>
                 <Header title={props.title} />
                 {renderRoutes()}
                 {renderStepper()}
