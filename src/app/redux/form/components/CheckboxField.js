@@ -4,13 +4,10 @@ import { Field } from 'redux-form';
 
 import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 
-import styles from './checkboxField.less';
-
 import renderNavField from './../renderNavField';
 
 const renderNavCheckboxField = renderNavField(({ onChange, label, ...otherProps }) => (
     <NavCheckbox
-        className={styles.checkbox}
         onChange={(e) => onChange(e.target.checked)}
         checked={otherProps.value}
         label={label}

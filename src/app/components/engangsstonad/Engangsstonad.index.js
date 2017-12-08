@@ -8,7 +8,8 @@ import Route from './../../util/routing/route.component';
 
 type Props = {
     routes: PropTypes.array,
-    egenerklaring: boolean
+    egenerklaring: boolean,
+    bekreftOpplysninger: boolean
 }
 
 const EngangsstonadIndex = (props: Props) => {
@@ -23,11 +24,19 @@ const EngangsstonadIndex = (props: Props) => {
         console.log(values);
     };
 
+    const isNextButtonEnabled = (egenerklaring, bekreftOpplysninger) => {
+        if (egenerklaring || bekreftOpplysninger) {
+            return true;
+        }
+
+        return false;
+    };
+
     const routes = renderRoutes();
 
     return (
         <StepBasedForm
-            nextButtonEnabled={props.egenerklaring}
+            nextButtonEnabled={isNextButtonEnabled(props.egenerklaring, props.bekreftOpplysninger)}
             onSubmit={handleSubmit}
             routes={routes}
             title="Søknad om engangsstønad"
@@ -37,8 +46,11 @@ const EngangsstonadIndex = (props: Props) => {
 
 const selector = formValueSelector('engangsstonad');
 
-export default connect((state) => ({
-    egenerklaring: selector(state, 'egenerklaring')
-}))(reduxForm({
+const mapStateToProps = (state) => ({
+    egenerklaring: selector(state, 'egenerklaring'),
+    bekreftOpplysninger: selector(state, 'bekreftOpplysninger')
+});
+
+export default connect(mapStateToProps)(reduxForm({
     form: 'engangsstonad'
 })(EngangsstonadIndex));
