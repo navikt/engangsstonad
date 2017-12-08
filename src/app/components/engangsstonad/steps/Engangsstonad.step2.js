@@ -30,7 +30,7 @@ type Props = {
     childBorn: boolean
 }
 
-const Step2 = (props: Props) => (
+export const Step2 = (props: Props) => (
     <div className="engangsstonadStep2">
         <DialogBox type="info">
             <Normaltekst>Vi trenger mer informasjon fra deg om barnet eller barna søknaden gjelder</Normaltekst>
@@ -41,7 +41,7 @@ const Step2 = (props: Props) => (
             ))}
         </RadioGroupField>
         {props.childBorn === 'false' &&
-            <div>
+            <div className="step2ChildNotBornForm">
                 <Normaltekst className={styles.marginTopBottom}>Forventet antall barn</Normaltekst>
                 <NumberSelector />
                 <DateInput className={styles.marginTopBottom} label="Fødselsdato" />

@@ -12,7 +12,7 @@ type Props = {
     bekreftOpplysninger: boolean
 }
 
-const EngangsstonadIndex = (props: Props) => {
+export const EngangsstonadIndex = (props: Props) => {
     const renderRoutes = () => {
         if (props.routes) {
             return (props.routes.map((route) => (<Route {...route} key={route.path} />)));
