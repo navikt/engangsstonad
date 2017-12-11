@@ -2,7 +2,6 @@ import React from 'react';
 import { Step2 } from './Engangsstonad.step2';
 
 describe('<Step2 />', () => {
-
     it('should not display remaining form if child is born', () => {
         const wrapper = shallow(<Step2 childBorn="true" />);
         expect(wrapper.find('div')).to.have.length(1);

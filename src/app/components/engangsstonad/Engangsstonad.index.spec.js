@@ -2,7 +2,6 @@ import React from 'react';
 import { EngangsstonadIndex } from './Engangsstonad.index';
 
 describe('<EngangsstonadIndex />', () => {
-
     it('should render StepBasedForm', () => {
         const wrapper = shallow(<EngangsstonadIndex />);
         expect(wrapper.find('StepBasedForm'));
