@@ -4,7 +4,7 @@ import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 
 import DialogBox from '../../shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from '../../shared/display-text-with-label/DisplayTextWithLabel';
-import CheckboxField from './../../../redux/form/components/CheckboxField';
+import CheckboxField from '../../../redux/form/components/checkbox/CheckboxField';
 
 export const Step4 = () => (
     <div>

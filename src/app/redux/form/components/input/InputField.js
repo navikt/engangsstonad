@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 
 import { Input as NavInput } from 'nav-frontend-skjema';
 
-import renderNavField from './../renderNavField';
+import renderNavField from '../../renderNavField';
 
 const renderNavInput = renderNavField(NavInput);
 

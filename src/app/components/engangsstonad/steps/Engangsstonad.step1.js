@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
-import CheckboxFieldWithBackground from './../../../redux/form/components/CheckboxFieldWithBackground';
+import CheckboxField from '../../../redux/form/components/checkbox/CheckboxField';
 import DialogBox from '../../shared/dialog-box/DialogBox';
 
 export const Step1 = () => (
@@ -23,7 +23,7 @@ export const Step1 = () => (
         </DialogBox>
 
         <SkjemaGruppe title="Egenerklæring">
-            <CheckboxFieldWithBackground
+            <CheckboxField
                 name="egenerklaring"
                 label="Jeg er klar over at dersom
                 jeg gir uriktige opplysninger eller holder

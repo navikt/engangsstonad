@@ -5,8 +5,8 @@ import { formValueSelector } from 'redux-form';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import RadioGroupField from '../../../redux/form/components/RadioGroupField';
-import RadioOption from '../../../redux/form/components/RadioOption';
+import RadioGroupField from '../../../redux/form/components/radio/RadioGroupField';
+import RadioOption from '../../../redux/form/components/radio/RadioOption';
 import DateInput from '../../shared/date-input/DateInput';
 import AttachmentButton from '../../shared/attachment-button/AttachmentButton';
 import AttachmentList from '../../shared/attachment-list/AttachmentList';

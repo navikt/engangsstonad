@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
-import renderNavField from './../renderNavField';
+import renderNavField from '../../renderNavField';
 
 type Props = {
     title: string,

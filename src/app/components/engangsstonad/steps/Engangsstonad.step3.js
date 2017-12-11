@@ -4,8 +4,8 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import DialogBox from '../../shared/dialog-box/DialogBox';
 import IconWithText from '../../shared/icon-with-text/IconWithText';
-import RadioGroupField from '../../../redux/form/components/RadioGroupField';
-import RadioOption from '../../../redux/form/components/RadioOption';
+import RadioGroupField from '../../../redux/form/components/radio/RadioGroupField';
+import RadioOption from '../../../redux/form/components/radio/RadioOption';
 
 export const Step3 = () => (
     <div>
