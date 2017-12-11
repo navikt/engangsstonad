@@ -2,13 +2,12 @@ import React from 'react';
 
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 
-import DialogBox from '../../../components/shared/DialogBox';
-import ElementWrapper from '../../../util/ElementWrapper';
-import DisplayTextWithLabel from './../../shared/DisplayTextWithLabel';
+import DialogBox from '../../shared/dialog-box/DialogBox';
+import DisplayTextWithLabel from '../../shared/display-text-with-label/DisplayTextWithLabel';
 import CheckboxField from './../../../redux/form/components/CheckboxField';
 
 export const Step4 = () => (
-    <ElementWrapper>
+    <div>
         <DialogBox type="info">
             <Normaltekst>
                 Les nøye gjennom oppsummeringen før du sender inn søknaden.
@@ -33,7 +32,7 @@ export const Step4 = () => (
             label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger
                 som har betydning for min rett til engangsstønad."
         />
-    </ElementWrapper>
+    </div>
 );
 
 export default Step4;

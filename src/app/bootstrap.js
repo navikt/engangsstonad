@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Container, Row, Column } from 'nav-frontend-grid';
 
-import ElementWrapper from './util/ElementWrapper';
 import store from './redux';
 import routes from './util/routing/routes';
 import LanguageProvider from './../app/components/language/LanguageProvider';
@@ -18,9 +17,9 @@ render(
                 <Column md="4" xs="12">
                     <Router>
                         <LanguageProvider>
-                            <ElementWrapper>
+                            <div className="app">
                                 {routes()}
-                            </ElementWrapper>
+                            </div>
                         </LanguageProvider>
                     </Router>
                 </Column>

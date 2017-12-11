@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import StepBasedForm from './../shared/step-based-form/StepBasedForm';
 import Route from './../../util/routing/route.component';
 
+import './engangsstonad.less';
+
 type Props = {
     routes: PropTypes.array,
     egenerklaring: boolean,
@@ -33,7 +35,6 @@ export const EngangsstonadIndex = (props: Props) => {
     };
 
     const routes = renderRoutes();
-
     return (
         <StepBasedForm
             nextButtonEnabled={isNextButtonEnabled(props.egenerklaring, props.bekreftOpplysninger)}

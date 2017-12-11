@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './step.less';
+import './step.less';
 
 const Step = (props) => (
-    <div className={styles.step}>
+    <div className="step">
         { props.children }
     </div>
 );

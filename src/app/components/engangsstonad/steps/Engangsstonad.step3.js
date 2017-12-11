@@ -2,17 +2,13 @@ import React from 'react';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import DialogBox from '../../../components/shared/DialogBox';
+import DialogBox from '../../shared/dialog-box/DialogBox';
+import IconWithText from '../../shared/icon-with-text/IconWithText';
 import RadioGroupField from '../../../redux/form/components/RadioGroupField';
 import RadioOption from '../../../redux/form/components/RadioOption';
-import IconWithText from './../../shared/IconWithText';
-
-import ElementWrapper from '../../../util/ElementWrapper';
-
-import styles from './engangsstonad.step.less';
 
 export const Step3 = () => (
-    <ElementWrapper>
+    <div>
         <DialogBox type="info">
             <Normaltekst>
                 Vi fant denne informasjonen om din adresse og trenger
@@ -21,9 +17,9 @@ export const Step3 = () => (
         </DialogBox>
 
         <IconWithText kind="arbeidsgiver" text="Adresse" />
-        <Normaltekst className={styles.marginTop}>Stockholmsgata 16B</Normaltekst>
-        <Normaltekst className={styles.marginTop}>0566, Oslo</Normaltekst>
-        <Normaltekst className={styles.marginTopBottom}>Norge</Normaltekst>
+        <Normaltekst>Stockholmsgata 16B</Normaltekst>
+        <Normaltekst>0566, Oslo</Normaltekst>
+        <Normaltekst>Norge</Normaltekst>
         <RadioGroupField name="oppholdSisteAr" title="Har du oppholdt deg i Norge de siste 12 månedene?">
             <RadioOption label="Ja" value />
             <RadioOption label="Nei" value={false} />
@@ -36,6 +32,7 @@ export const Step3 = () => (
             <RadioOption label="Ja" value />
             <RadioOption label="Nei" value={false} />
         </RadioGroupField>
-    </ElementWrapper>
+    </div>
 );
+
 export default Step3;

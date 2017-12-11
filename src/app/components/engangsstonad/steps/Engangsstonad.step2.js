@@ -7,13 +7,11 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import RadioGroupField from '../../../redux/form/components/RadioGroupField';
 import RadioOption from '../../../redux/form/components/RadioOption';
-import DateInput from '../../shared/DateInput';
-import AttachmentButton from '../../shared/AttachmentButton';
-import AttachmentList from '../../shared/AttachmentList';
-import NumberSelector from '../../shared/NumberSelector';
-import DialogBox from '../../../components/shared/DialogBox';
-
-import styles from './engangsstonad.step.less';
+import DateInput from '../../shared/date-input/DateInput';
+import AttachmentButton from '../../shared/attachment-button/AttachmentButton';
+import AttachmentList from '../../shared/attachment-list/AttachmentList';
+import NumberSelector from '../../shared/number-selector/NumberSelector';
+import DialogBox from '../../shared/dialog-box/DialogBox';
 
 const radioData = [
     {
@@ -42,15 +40,15 @@ export const Step2 = (props: Props) => (
         </RadioGroupField>
         {props.childBorn === 'false' &&
             <div className="step2ChildNotBornForm">
-                <Normaltekst className={styles.marginTopBottom}>Forventet antall barn</Normaltekst>
+                <Normaltekst>Forventet antall barn</Normaltekst>
                 <NumberSelector />
-                <DateInput className={styles.marginTopBottom} label="Fødselsdato" />
+                <DateInput label="Fødselsdato" />
                 <DialogBox type="warning">
                     <Normaltekst>
                         Siden barnet ikke er født må du legge ved terminbekreftelse fra jordmor eller lege
                     </Normaltekst>
                 </DialogBox>
-                <DateInput className={styles.marginTopBottom} label="Terminbekreftelse utstedt" />
+                <DateInput label="Terminbekreftelse utstedt" />
                 <AttachmentList />
                 <AttachmentButton />
             </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import Image from './Image';
-import trashLogo from '../../assets/svg/trash.svg';
+import trashLogo from '../../../assets/svg/trash.svg';
 
 import styles from './attachmentList.less';
 
@@ -20,7 +19,7 @@ const AttachmentList = () => (
             <Normaltekst className={styles.attachmentText} >
                 {attachmentData.label}
             </Normaltekst>
-            <Image className={styles.trashIcon} imageUrl={trashLogo} alt="alt" />
+            {trashLogo}
         </div>
     ))
 );

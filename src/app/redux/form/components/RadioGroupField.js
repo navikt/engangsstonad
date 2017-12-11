@@ -27,7 +27,6 @@ const convertBoolean = (value) => {
 const renderRadioGroupField = renderNavField((props: Props) => {
     const {
         children,
-        id,
         title,
         ...otherProps
     } = props;

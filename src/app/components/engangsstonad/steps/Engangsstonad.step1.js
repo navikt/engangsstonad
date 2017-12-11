@@ -6,14 +6,11 @@ import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
 import CheckboxFieldWithBackground from './../../../redux/form/components/CheckboxFieldWithBackground';
-import ElementWrapper from './../../../util/ElementWrapper';
-import DialogBox from '../../../components/shared/DialogBox';
-
-import styles from './engangsstonad.step.less';
+import DialogBox from '../../shared/dialog-box/DialogBox';
 
 export const Step1 = () => (
-    <ElementWrapper>
-        <Ingress className={styles.marginBottomLarge}>
+    <div className="step1">
+        <Ingress>
             Engangsstønad er en skattefri engangssum du kan få for
             hvert barn du /(føder eller) adopterer, når du ikke har tjent opp rett til foreldrepenger.
         </Ingress>
@@ -36,7 +33,7 @@ export const Step1 = () => (
                 medføre straffeansvar."
             />
         </SkjemaGruppe>
-    </ElementWrapper>
+    </div>
 );
 
 export default Step1;

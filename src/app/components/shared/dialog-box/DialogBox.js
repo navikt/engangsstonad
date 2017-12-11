@@ -1,16 +1,14 @@
 import React from 'react';
-import Image from '../../../app/components/shared/Image';
 
-import infoIcon from '../../assets/svg/employee_nautral.svg';
-import alertIcon from '../../assets/svg/employee_sad.svg';
-import warningIcon from '../../assets/svg/employee_warning.svg';
-import successIcon from '../../assets/svg/employee_happy.svg';
+import infoIcon from '../../../assets/svg/employee_nautral.svg';
+import alertIcon from '../../../assets/svg/employee_sad.svg';
+import warningIcon from '../../../assets/svg/employee_warning.svg';
+import successIcon from '../../../assets/svg/employee_happy.svg';
 
 import styles from './dialogBox.less';
 
 type Props = {
     type: string,
-    alt: string,
     children: any
 }
 
@@ -33,11 +31,11 @@ const getStyle = (type) => {
 };
 
 const DialogBoxBase = (props: Props) => {
-    const { type, alt } = props;
+    const { type } = props;
 
     return (
         <div className={getStyle(type)}>
-            <Image className={styles.dialogImage} imageUrl={getIcon(type)} alt={alt} />
+            {getIcon(type)}
             <div className={styles.dialogText}>
                 {props.children}
             </div>

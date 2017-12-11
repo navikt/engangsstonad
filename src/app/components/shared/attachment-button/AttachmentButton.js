@@ -1,6 +1,6 @@
 import React from 'react';
 import { Knapp } from 'nav-frontend-knapper';
-import uploadLogo from '../../assets/svg/upload.svg';
+import uploadLogo from '../../../assets/svg/upload.svg';
 import styles from './attachmentButton.less';
 
 const AttachmentButton = () => (

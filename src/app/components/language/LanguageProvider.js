@@ -3,8 +3,6 @@ import React from 'react';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 
-import ElementWrapper from './../../util/ElementWrapper';
-
 addLocaleData(nb);
 
 type Props = {
@@ -14,9 +12,9 @@ type Props = {
 
 export const LanguageProvider = (props: Props) => (
     <IntlProvider locale="nb-NO" messages={props.nbMessages}>
-        <ElementWrapper>
+        <div>
             {props.children}
-        </ElementWrapper>
+        </div>
     </IntlProvider>
 );
 
