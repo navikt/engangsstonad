@@ -1,5 +1,5 @@
 import React from 'react';
-
+import IconFromSprite from './../icon-from-sprite/IconFromSprite';
 import infoIcon from '../../../assets/svg/employee_nautral.svg';
 import alertIcon from '../../../assets/svg/employee_sad.svg';
 import warningIcon from '../../../assets/svg/employee_warning.svg';
@@ -35,7 +35,7 @@ const DialogBoxBase = (props: Props) => {
 
     return (
         <div className={getStyle(type)}>
-            {getIcon(type)}
+            <IconFromSprite iconRef={getIcon(type)} />
             <div className={styles.dialogText}>
                 {props.children}
             </div>

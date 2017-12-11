@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FlowWebpackPlugin = require('flow-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const webpackConfig = {
     entry: './src/app/bootstrap.js',
@@ -40,8 +41,8 @@ const webpackConfig = {
                 })
             },
             {
-                test: /\.(png|jpg|gif|svg)$/,
-                use: 'file-loader'
+                test: /\.svg$/,
+                use: 'svg-sprite-loader'
             }
         ]
     },
@@ -54,7 +55,8 @@ const webpackConfig = {
         new HtmlWebpackPlugin({
             template: './src/app/index.html'
         }),
-        new FlowWebpackPlugin()
+        new FlowWebpackPlugin(),
+        new SpriteLoaderPlugin({plainSprite: true})
     ]
 };
 
