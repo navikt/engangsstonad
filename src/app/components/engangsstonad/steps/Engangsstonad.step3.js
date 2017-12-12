@@ -13,6 +13,10 @@ export const Step3 = () => (
             <Normaltekst>
                 Vi fant denne informasjonen om din adresse og trenger
                 at du svarer på tre spørsmål om ditt opphold i Norge
+                Vi fant denne informasjonen om din adresse og trenger
+                at du svarer på tre spørsmål om ditt opphold i Norge
+                Vi fant denne informasjonen om din adresse og trenger
+                at du svarer på tre spørsmål om ditt opphold i Norge
             </Normaltekst>
         </DialogBox>
 

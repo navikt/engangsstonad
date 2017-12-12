@@ -1,43 +1,34 @@
 .dialogBox {
+    align-items: center;
     display: flex;
-    margin: 10px 0;
-}
 
-.dialogImage {
-    height: 96px;
-    padding-left: 20px;
-    padding-right: 10px;
-}
+    .dialogText {
+        align-self: center;
+        margin-left: 10px;
+        margin-top: 4px;
+    }
 
-.dialogText {
-    padding: 15px;
-    align-self: center;
-
-    > p {
-        padding-bottom: 10px;
+    .dialogImage {
+        min-width: 96px;
     }
 }
 
-.infoBox {
-    &:extend(.dialogBox);
+
+.dialogBox--info {
     border-top: 2px solid #C1B5D0;
     border-bottom: 2px solid #C1B5D0;
 }
 
-.alertBox {
-    &:extend(.dialogBox); 
-    background: #E3B0A8;   
+.dialogBox--fare {
+    background: #E3B0A8;
 }
 
-
-.warningBox {
-    &:extend(.dialogBox);
-    background:  #FFD399;    
+.dialogBox--advarsel {
+    background:  #FFD399;
 }
 
-.successBox{
-    &:extend(.dialogBox);
-    background: #9BD0B0;    
+.dialogBox--suksess {
+    background: #9BD0B0;
 }
 
 

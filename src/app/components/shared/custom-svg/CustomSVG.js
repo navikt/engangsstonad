@@ -12,9 +12,10 @@ export default class CustomSVGFromSprite extends React.Component {
 
     render() {
         const svgAttrs = {
-            viewbox: this.props.iconRef.viewBox,
-            height: this.props.height,
-            width: this.props.width
+            'view-box': this.props.iconRef.viewBox,
+            height: this.props.size,
+            width: this.props.size,
+            className: this.props.className
         };
 
         return (this.renderIcon(svgAttrs));
@@ -24,11 +25,11 @@ export default class CustomSVGFromSprite extends React.Component {
 CustomSVGFromSprite.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types, react/require-default-props
     iconRef: PropTypes.object,
-    height: PropTypes.number,
-    width: PropTypes.number
+    size: PropTypes.number,
+    className: PropTypes.string
 };
 
 CustomSVGFromSprite.defaultProps = {
-    height: undefined,
-    width: undefined
+    size: undefined,
+    className: ''
 };

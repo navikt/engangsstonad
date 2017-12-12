@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Input } from 'nav-frontend-skjema';
-import styles from './dateInput.less';
+import './dateInput.less';
 
 type Props = {
     label: string,
@@ -11,7 +11,7 @@ type Props = {
 const DateInput = (props: Props) => (
     <Input
         className={props.className}
-        inputClassName={styles.dateInput}
+        inputClassName="dateInput"
         placeholder="dd.mm.yyyy"
         label={props.label}
         bredde="S"

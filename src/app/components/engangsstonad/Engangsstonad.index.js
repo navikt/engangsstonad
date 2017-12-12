@@ -17,7 +17,11 @@ type Props = {
 export const EngangsstonadIndex = (props: Props) => {
     const renderRoutes = () => {
         if (props.routes) {
-            return (props.routes.map((route) => (<Route {...route} key={route.path} />)));
+            return (props.routes.map((route) => (
+                <Route
+                    {...route}
+                    key={route.path}
+                />)));
         }
         return [];
     };
@@ -28,12 +32,11 @@ export const EngangsstonadIndex = (props: Props) => {
 
     const isNextButtonEnabled = () => (props.egenerklaring || props.bekreftOpplysninger);
 
-    const routes = renderRoutes();
     return (
         <StepBasedForm
             nextButtonEnabled={isNextButtonEnabled()}
             onSubmit={handleSubmit}
-            routes={routes}
+            routes={renderRoutes()}
             title="Søknad om engangsstønad"
         />
     );

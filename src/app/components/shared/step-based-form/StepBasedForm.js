@@ -11,7 +11,9 @@ type FormProps = {
     routes: Array<Function>,
     afterSubmissionRoute: string,
     title: string,
-    handleSubmit: Function
+    handleSubmit: Function,
+    // eslint-disable-next-line react/no-unused-prop-types
+    nextButtonEnabled: boolean
 }
 
 type HeaderProps = {
