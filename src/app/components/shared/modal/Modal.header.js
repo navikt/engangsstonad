@@ -7,9 +7,7 @@ import alertIcon from '../../../assets/svg/employee_sad.svg';
 import warningIcon from '../../../assets/svg/employee_warning.svg';
 import successIcon from '../../../assets/svg/employee_happy.svg';
 
-
 import Image from '../../shared/Image';
-
 import styles from './modal.header.less';
 
 const getIcon = (type) => {
@@ -18,15 +16,6 @@ const getIcon = (type) => {
         case 'alert': return alertIcon;
         case 'warning': return warningIcon;
         default: return infoIcon;
-    }
-};
-
-const getStyle = (type) => {
-    switch (type) {
-        case 'success': return styles.successBox;
-        case 'alert': return styles.alertBox;
-        case 'warning': return styles.warningBox;
-        default: return styles.infoBox;
     }
 };
 
