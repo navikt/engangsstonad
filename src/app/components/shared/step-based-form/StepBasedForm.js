@@ -11,7 +11,6 @@ type FormProps = {
     routes: Array<Function>,
     afterSubmissionRoute: string,
     title: string,
-    handleSubmit: Function,
     // eslint-disable-next-line react/no-unused-prop-types
     nextButtonEnabled: boolean
 }
@@ -92,7 +91,7 @@ const StepBasedForm = (props: FormProps) => {
 
     return (
         <div className="stepBasedForm">
-            <form onSubmit={props.handleSubmit}>
+            <form>
                 <Header title={props.title} />
                 {renderRoutes()}
                 {renderStepper()}

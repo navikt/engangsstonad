@@ -3,24 +3,24 @@ import React from 'react';
 
 import { Radio, SkjemaGruppe } from 'nav-frontend-skjema';
 
-import './radioGroup.less';
-
 type Props = {
     listOfRadioData: Object,
-    name: string
+    name: string,
+    title: string
 }
 
 const RadioGroup = (props: Props) => (
-    <SkjemaGruppe className="radioGroup">
-        {props.listOfRadioData.map((radioData) => (
-            <Radio
-                className="radioGroup__radioButton"
-                key={radioData.value}
-                name={props.name}
-                {...radioData}
-            />
-        ))}
-    </SkjemaGruppe>
+    <div>
+        <SkjemaGruppe title={props.title}>
+            {props.listOfRadioData.map((radioData) => (
+                <Radio
+                    key={radioData.value}
+                    name={props.name}
+                    {...radioData}
+                />
+            ))}
+        </SkjemaGruppe>
+    </div>
 );
 
 export default RadioGroup;

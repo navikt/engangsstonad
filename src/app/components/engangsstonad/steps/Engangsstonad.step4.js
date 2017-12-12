@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import { Checkbox } from 'nav-frontend-skjema';
 
 import DialogBox from '../../shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from '../../shared/display-text-with-label/DisplayTextWithLabel';
-import CheckboxField from '../../../redux/form/components/checkbox/CheckboxField';
 
 export const Step4 = () => (
     <div>
@@ -27,7 +27,7 @@ export const Step4 = () => (
         <DisplayTextWithLabel label="Oppholdt seg i Norge de siste 12 månedene" text="Ja" />
         <DisplayTextWithLabel label="Oppholder seg i Norge nå" text="Ja" />
         <DisplayTextWithLabel label="Skal oppholde seg i Norge de neste 12 månedene" text="Ja" />
-        <CheckboxField
+        <Checkbox
             name="bekreftOpplysninger"
             className="checkboxFieldWithBackground"
             label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger

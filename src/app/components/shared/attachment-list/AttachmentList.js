@@ -1,6 +1,6 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import trashLogo from '../../../assets/svg/trash.svg';
+import Icon from 'nav-frontend-ikoner-assets';
 
 import './attachmentList.less';
 
@@ -15,11 +15,11 @@ const testData = [
 
 const AttachmentList = () => (
     testData.map((attachmentData) => (
-        <div>
+        <div key={attachmentData.label}>
             <Normaltekst className="attachmentText">
                 {attachmentData.label}
             </Normaltekst>
-            {trashLogo}
+            <Icon kind="trashcan" size={24} />
         </div>
     ))
 );
