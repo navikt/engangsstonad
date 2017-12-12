@@ -14,7 +14,6 @@ type FormProps = {
     routes: Array<Function>,
     afterSubmissionRoute: string,
     title: string,
-    handleSubmit: Function,
     nextButtonEnabled: boolean
 }
 
@@ -95,7 +94,7 @@ const StepBasedForm = (props: FormProps) => {
 
     return (
         <div className={styles.stepBasedForm}>
-            <form onSubmit={props.handleSubmit}>
+            <form>
                 <Header title={props.title} />
                 {renderRoutes()}
                 {renderStepper()}

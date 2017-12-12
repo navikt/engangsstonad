@@ -59,7 +59,8 @@ StepperButton.propTypes = {
 
 StepperButton.defaultProps = {
     component: Hovedknapp,
-    disabled: false
+    disabled: false,
+    type: 'button'
 };
 
 export default Stepper;

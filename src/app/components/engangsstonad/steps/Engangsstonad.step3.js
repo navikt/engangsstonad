@@ -3,9 +3,8 @@ import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import DialogBox from '../../../components/shared/DialogBox';
-import RadioGroupField from '../../../redux/form/components/RadioGroupField';
-import RadioOption from '../../../redux/form/components/RadioOption';
 import IconWithText from './../../shared/IconWithText';
+//import RadioGroup from './../../shared/radio-group/RadioGroup';
 
 import ElementWrapper from '../../../util/ElementWrapper';
 
@@ -24,18 +23,47 @@ export const Step3 = () => (
         <Normaltekst className={styles.marginTop}>Stockholmsgata 16B</Normaltekst>
         <Normaltekst className={styles.marginTop}>0566, Oslo</Normaltekst>
         <Normaltekst className={styles.marginTopBottom}>Norge</Normaltekst>
-        <RadioGroupField name="oppholdSisteAr" title="Har du oppholdt deg i Norge de siste 12 månedene?">
-            <RadioOption label="Ja" value />
-            <RadioOption label="Nei" value={false} />
-        </RadioGroupField>
-        <RadioGroupField name="oppholdNavarende" title="Oppholder du deg i Norgen nå?">
-            <RadioOption label="Ja" value />
-            <RadioOption label="Nei" value={false} />
-        </RadioGroupField>
-        <RadioGroupField name="oppholdNesteAr" title="Skal du oppholde deg i Norge de neste 12 månedene?">
-            <RadioOption label="Ja" value />
-            <RadioOption label="Nei" value={false} />
-        </RadioGroupField>
+        {/*
+        <RadioGroup
+            name="oppholdSisteAr"
+            listOfRadioData={[
+                {
+                    label: 'Ja',
+                    value: 'ja'
+                },
+                {
+                    label: 'Nei',
+                    value: 'nei'
+                }
+            ]}
+        />
+        <RadioGroup
+            name="oppholdNavarende"
+            listOfRadioData={[
+                {
+                    label: 'Ja',
+                    value: 'ja'
+                },
+                {
+                    label: 'Nei',
+                    value: 'nei'
+                }
+            ]}
+        />
+        <RadioGroup
+            name="oppholdNesteAr"
+            listOfRadioData={[
+                {
+                    label: 'Ja',
+                    value: 'ja'
+                },
+                {
+                    label: 'Nei',
+                    value: 'nei'
+                }
+            ]}
+        />
+        */}
     </ElementWrapper>
 );
 export default Step3;

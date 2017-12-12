@@ -1,15 +1,11 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
-import { reduxForm, formValueSelector } from 'redux-form';
-import { connect } from 'react-redux';
 
-import StepBasedForm from './../shared/step-based-form/StepBasedForm';
 import Route from './../../util/routing/route.component';
+import StepBasedForm from './../shared/step-based-form/StepBasedForm';
 
 type Props = {
-    routes: PropTypes.array,
-    egenerklaring: boolean,
-    bekreftOpplysninger: boolean
+    routes: Array<Object>
 }
 
 export const EngangsstonadIndex = (props: Props) => {
@@ -20,37 +16,17 @@ export const EngangsstonadIndex = (props: Props) => {
         return [];
     };
 
-    const handleSubmit = (values) => {
-        console.log(values);
-    };
-
-    const isNextButtonEnabled = (egenerklaring, bekreftOpplysninger) => {
-        if (egenerklaring || bekreftOpplysninger) {
-            return true;
-        }
-
-        return false;
-    };
-
     const routes = renderRoutes();
 
     return (
-        <StepBasedForm
-            nextButtonEnabled={isNextButtonEnabled(props.egenerklaring, props.bekreftOpplysninger)}
-            onSubmit={handleSubmit}
-            routes={routes}
-            title="Søknad om engangsstønad"
-        />
+        <div>
+            <StepBasedForm
+                nextButtonEnabled
+                routes={routes}
+                title="Søknad om engangsstønad"
+            />
+        </div>
     );
 };
 
-const selector = formValueSelector('engangsstonad');
-
-const mapStateToProps = (state) => ({
-    egenerklaring: selector(state, 'egenerklaring'),
-    bekreftOpplysninger: selector(state, 'bekreftOpplysninger')
-});
-
-export default connect(mapStateToProps)(reduxForm({
-    form: 'engangsstonad'
-})(EngangsstonadIndex));
+export default EngangsstonadIndex;
