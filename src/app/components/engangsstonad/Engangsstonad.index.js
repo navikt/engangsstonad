@@ -33,12 +33,14 @@ export const EngangsstonadIndex = (props: Props) => {
     const isNextButtonEnabled = () => (props.egenerklaring || props.bekreftOpplysninger);
 
     return (
-        <StepBasedForm
-            nextButtonEnabled={isNextButtonEnabled()}
-            onSubmit={handleSubmit}
-            routes={renderRoutes()}
-            title="Søknad om engangsstønad"
-        />
+        <div className="engangsstonad">
+            <StepBasedForm
+                nextButtonEnabled={isNextButtonEnabled()}
+                onSubmit={handleSubmit}
+                routes={renderRoutes()}
+                title="Søknad om engangsstønad"
+            />
+        </div>
     );
 };
 

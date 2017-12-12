@@ -25,6 +25,7 @@ export const Step1 = () => (
         <SkjemaGruppe title="Egenerklæring">
             <CheckboxField
                 name="egenerklaring"
+                className="checkboxFieldWithBackground"
                 label="Jeg er klar over at dersom
                 jeg gir uriktige opplysninger eller holder
                 tilbake opplysninger som har betydning for
