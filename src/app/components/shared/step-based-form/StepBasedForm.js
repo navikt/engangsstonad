@@ -12,7 +12,8 @@ type FormProps = {
     afterSubmissionRoute: string,
     title: string,
     // eslint-disable-next-line react/no-unused-prop-types
-    nextButtonEnabled: boolean
+    nextButtonEnabled: boolean,
+    className: string
 }
 
 type HeaderProps = {
@@ -91,7 +92,7 @@ const StepBasedForm = (props: FormProps) => {
 
     return (
         <div className="stepBasedForm">
-            <form>
+            <form className={props.className}>
                 <Header title={props.title} />
                 {renderRoutes()}
                 {renderStepper()}
