@@ -11,7 +11,7 @@ const FpModal = ({
     title,
     type
 }) => (
-    <Modal className="modal" isOpen closeButton={false}>
+    <Modal contentLabel="test" className="modal" isOpen closeButton={false} onRequestClose={() => { }}>
         <ModalHeader type={type} title={title} />
         {children}
     </Modal>

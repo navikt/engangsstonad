@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { Input } from 'nav-frontend-skjema';
-import './dateInput.less';
 
 type Props = {
     label: string,
