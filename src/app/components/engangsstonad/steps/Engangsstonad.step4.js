@@ -29,6 +29,7 @@ export const Step4 = () => (
         <DisplayTextWithLabel label="Skal oppholde seg i Norge de neste 12 månedene" text="Ja" />
         <CheckboxField
             name="bekreftOpplysninger"
+            className="checkboxFieldWithBackground"
             label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger
                 som har betydning for min rett til engangsstønad."
         />
