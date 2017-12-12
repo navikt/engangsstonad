@@ -26,17 +26,12 @@ export const EngangsstonadIndex = (props: Props) => {
         return [];
     };
 
-    const handleSubmit = (values) => {
-        console.log(values);
-    };
-
     const isNextButtonEnabled = () => (props.egenerklaring || props.bekreftOpplysninger);
 
     return (
         <div className="engangsstonad">
             <StepBasedForm
                 nextButtonEnabled={isNextButtonEnabled()}
-                onSubmit={handleSubmit}
                 routes={renderRoutes()}
                 title="Søknad om engangsstønad"
             />
