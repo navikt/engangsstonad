@@ -16,7 +16,7 @@ export const Step4 = () => (
         </DialogBox>
         <Undertittel>Om deg som søker</Undertittel>
         <DisplayTextWithLabel label="Navn" text="Lise Mari Haugland" />
-        <DisplayTextWithLabel label="Fødselsnummer" text="03039256457" />
+        <DisplayTextWithLabel label="Fødselsnummer" text="00000000000" />
         <Undertittel>Opplysninger om barnet eller barna</Undertittel>
         <DisplayTextWithLabel label="Antall barn forventet" text="1" />
         <DisplayTextWithLabel label="Forventet termindato" text="01.01.2018" />

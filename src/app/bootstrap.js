@@ -6,7 +6,6 @@ import { Container, Row, Column } from 'nav-frontend-grid';
 
 import store from './redux';
 import routes from './util/routing/routes';
-import LanguageProvider from './../app/components/language/LanguageProvider';
 
 const root = document.getElementById('app');
 render(
@@ -16,11 +15,9 @@ render(
                 <Column md="4" xs="12" />
                 <Column md="4" xs="12">
                     <Router>
-                        <LanguageProvider>
-                            <div className="app">
-                                {routes()}
-                            </div>
-                        </LanguageProvider>
+                        <div className="app">
+                            {routes()}
+                        </div>
                     </Router>
                 </Column>
                 <Column md="4" xs="12" />
