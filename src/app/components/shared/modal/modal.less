@@ -4,25 +4,22 @@
 .modal {
     overflow: visible;
     border-top: @var solid #E3B0A8;
-    width: 100%;
-}
 
+    .header {
+        &__illustration {
+            height: 96px;
+            position: absolute;
+            top: -38px - @var;
+            margin: auto;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-// footer
-.modalFooter {
-    padding-top: @smallSpacing;
-}
-
-.footerTitle {
-    padding-bottom: @smallSpacing;    
-}
-
-.footerButtonGroup {
-    display: flex;
-    justify-content: center;
-}
-
-.footerButton {
-    height: 38px;
-    margin: 0 8px 0 8px;
+        &__title {
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 25px;
+            padding-bottom: 8px;
+        }
+    }
 }

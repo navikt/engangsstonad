@@ -7,9 +7,7 @@ import StepBasedForm from './../shared/step-based-form/StepBasedForm';
 import './engangsstonad.less';
 
 type Props = {
-    routes: Array<Object>,
-    egenerklaring: boolean,
-    bekreftOpplysninger: boolean
+    routes: Array<Object>
 }
 
 export const EngangsstonadIndex = (props: Props) => {

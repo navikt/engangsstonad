@@ -8,7 +8,6 @@ import warningIcon from '../../../assets/svg/employee_warning.svg';
 import successIcon from '../../../assets/svg/employee_happy.svg';
 
 import CustomSVG from '../../shared/custom-svg/CustomSVG';
-import styles from './modal.header.less';
 
 const getIcon = (type) => {
     switch (type) {
@@ -19,23 +18,21 @@ const getIcon = (type) => {
     }
 };
 
-const ModalHeader = ({ className, title, type }) => (
-    <div className={className}>
-        <CustomSVG iconRef={getIcon(type)} />
-        <Undertittel className={styles.modalTitle}>{title}</Undertittel>
+const ModalHeader = ({ title, type }) => (
+    <div className="header">
+        <CustomSVG iconRef={getIcon(type)} className="header__illustration" />
+        <Undertittel className="header__title">{title}</Undertittel>
     </div>
 );
 
 
 ModalHeader.propTypes = {
     title: PropTypes.string,
-    className: PropTypes.string,
     type: PropTypes.string
 };
 
 ModalHeader.defaultProps = {
     title: '',
-    className: undefined,
     type: 'info'
 };
 

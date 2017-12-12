@@ -4,30 +4,23 @@ import Modal from 'nav-frontend-modal';
 
 import ModalHeader from './Modal.header';
 
-import styles from './modal.less';
+import './modal.less';
 
-const TestModal = ({
+const FpModal = ({
     children,
     title,
     type
 }) => (
-    <div>
-        <Modal
-            className={styles.modal}
-            isOpen
-            closeButton={false}
-            contentLabel="Heisann."
-        >
-            <ModalHeader type={type} title={title} />
-            {children}
-        </Modal>
-    </div>
+    <Modal className="modal" isOpen closeButton={false}>
+        <ModalHeader type={type} title={title} />
+        {children}
+    </Modal>
 );
 
-TestModal.propTypes = {
+FpModal.propTypes = {
     children: PropTypes.node.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
 };
 
-export default TestModal;
+export default FpModal;

@@ -56,7 +56,7 @@ const webpackConfig = {
             template: './src/app/index.html'
         }),
         new FlowWebpackPlugin(),
-        new SpriteLoaderPlugin({plainSprite: true})
+        new SpriteLoaderPlugin({ plainSprite: true })
     ]
 };
 

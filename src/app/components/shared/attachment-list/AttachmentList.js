@@ -19,7 +19,7 @@ const AttachmentList = () => (
             <Normaltekst className="attachmentText">
                 {attachmentData.label}
             </Normaltekst>
-            <Icon kind="trashcan" size={24} />
+            <Icon kind="trashcan" size={20} />
         </div>
     ))
 );

@@ -18,10 +18,10 @@ export const Step6 = () => (
             Hvis du ikke laster opp terminbekreftelsen nå så blir søknaden
             din satt på vent etter insendning ettersom vi ikke kan behandle den.
             </Normaltekst>
-            <Element>Er du sikker på att du vill fortsette?</Element>
+            <Element>Er du sikker på att du vil fortsette?</Element>
             <div>
-                <Knapp>Nej</Knapp>
-                <Knapp>ja</Knapp>
+                <Knapp>Nei, gå tilbake</Knapp>
+                <Knapp>Ja, fortsett</Knapp>
             </div>
         </Modal>
 
