@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class IconFromSprite extends React.Component {
+export default class CustomSVGFromSprite extends React.Component {
     renderIcon(svgAttrs) {
         return (
             <svg {...svgAttrs}>
@@ -21,14 +21,14 @@ export default class IconFromSprite extends React.Component {
     }
 }
 
-IconFromSprite.propTypes = {
+CustomSVGFromSprite.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types, react/require-default-props
     iconRef: PropTypes.object,
     height: PropTypes.number,
     width: PropTypes.number
 };
 
-IconFromSprite.defaultProps = {
+CustomSVGFromSprite.defaultProps = {
     height: undefined,
     width: undefined
 };

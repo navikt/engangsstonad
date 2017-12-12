@@ -1,7 +1,6 @@
 import React from 'react';
 import { Knapp } from 'nav-frontend-knapper';
-import uploadLogo from '../../../assets/svg/upload.svg';
-import styles from './attachmentButton.less';
+import Icon from 'nav-frontend-ikoner-assets';
 
 const AttachmentButton = () => (
     <Knapp htmlType="button">
@@ -9,7 +8,7 @@ const AttachmentButton = () => (
             <input id="files" className="hidden" type="file" />
             Last opp vedlegg
         </label>
-        <img className={styles.uploadIcon} src={uploadLogo} alt="vedleggs ikon" />
+        <Icon kind="vedlegg" size="15px" />
     </Knapp>
 );
 export default AttachmentButton;

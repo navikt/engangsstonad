@@ -26,18 +26,12 @@ export const EngangsstonadIndex = (props: Props) => {
         console.log(values);
     };
 
-    const isNextButtonEnabled = (egenerklaring, bekreftOpplysninger) => {
-        if (egenerklaring || bekreftOpplysninger) {
-            return true;
-        }
-
-        return false;
-    };
+    const isNextButtonEnabled = () => (props.egenerklaring || props.bekreftOpplysninger);
 
     const routes = renderRoutes();
     return (
         <StepBasedForm
-            nextButtonEnabled={isNextButtonEnabled(props.egenerklaring, props.bekreftOpplysninger)}
+            nextButtonEnabled={isNextButtonEnabled()}
             onSubmit={handleSubmit}
             routes={routes}
             title="Søknad om engangsstønad"

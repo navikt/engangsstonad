@@ -1,8 +1,6 @@
 import React from 'react';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-import SubtractIcon from '../../../assets/svg/subtract.svg';
-import AddIcon from '../../../assets/svg/add.svg';
-import styles from './numberSelector.less';
+import Icon from 'nav-frontend-ikoner-assets';
 
 type Props = {
     title: string
@@ -10,9 +8,9 @@ type Props = {
 
 const NumberSelector = (props: Props) => (
     <SkjemaGruppe title={props.title}>
-        {SubtractIcon}
-        <input className={styles.counterBox} disabled />
-        {AddIcon}
+        <Icon kind="minus" />
+        <input className="counterBox" disabled />
+        <Icon kind="tilsette" />
     </SkjemaGruppe>
 );
 export default NumberSelector;
