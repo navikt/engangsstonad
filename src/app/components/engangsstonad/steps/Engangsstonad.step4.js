@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import { Checkbox } from 'nav-frontend-skjema';
 
 import DialogBox from '../../../components/shared/DialogBox';
 import ElementWrapper from '../../../util/ElementWrapper';
 import DisplayTextWithLabel from './../../shared/DisplayTextWithLabel';
-import CheckboxField from './../../../redux/form/components/CheckboxField';
 
 export const Step4 = () => (
     <ElementWrapper>
@@ -28,7 +28,7 @@ export const Step4 = () => (
         <DisplayTextWithLabel label="Oppholdt seg i Norge de siste 12 månedene" text="Ja" />
         <DisplayTextWithLabel label="Oppholder seg i Norge nå" text="Ja" />
         <DisplayTextWithLabel label="Skal oppholde seg i Norge de neste 12 månedene" text="Ja" />
-        <CheckboxField
+        <Checkbox
             name="bekreftOpplysninger"
             label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger
                 som har betydning for min rett til engangsstønad."
