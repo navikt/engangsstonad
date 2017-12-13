@@ -14,12 +14,8 @@ const CountryPicker = () => (
             <option value="marshalloyene">Marshalløyene</option>
         </Select>
         <div className="dateWrapper">
-            <div>
-                <DateInput label={<Element>fra den...</Element>} />
-            </div>
-            <div>
-                <DateInput label={<Element>til den...</Element>} />
-            </div>
+            <DateInput label={<Element>fra den...</Element>} />
+            <DateInput label={<Element>til den...</Element>} />
         </div>
     </div>
 );
