@@ -19,15 +19,7 @@ class Step2 extends Component {
     }
 
     toggleBirth(e) {
-        if (e.target.value === 'childNotBorn') {
-            this.setState({
-                childBorn: false
-            });
-        } else {
-            this.setState({
-                childBorn: true
-            });
-        }
+        this.setState({ childBorn: e.target.value === 'childBorn' });
     }
 
     render() {
