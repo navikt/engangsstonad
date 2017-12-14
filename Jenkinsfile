@@ -11,9 +11,6 @@ node {
     //def mvnHome = tool "maven-3.3.9"
     //def mvn = "${mvnHome}/bin/mvn"
     //def NODEJS_HOME = tool "node-6.2.1"
-    def bin = "/usr/local/bin"
-    def node = "${bin}/node"
-    def npm = "${bin}/npm"
     def appConfig = "nais.yaml"
     def dockerRepo = "docker.adeo.no:5000"
     def branch = "master"
@@ -50,9 +47,9 @@ node {
     stage("Build, test and install artifact") {
         //sh "${mvn} clean install -Djava.io.tmpdir=/tmp/${repo} -B -e"
 
-        sh "${npm} install"
-        sh "${npm} run test"
-        sh "${npm} run build"
+        sh "npm install"
+        sh "npm run test"
+        sh "npm run build"
     }
 
     stage("Release") {
