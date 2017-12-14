@@ -6,16 +6,13 @@ import './attachmentList.less';
 
 const testData = [
     {
-        label: 'vedlegg1.pdf'
-    },
-    {
-        label: 'vedlegg2.pdf'
+        label: 'terminbekreftelse.pdf'
     }
 ];
 
 const AttachmentList = () => (
     testData.map((attachmentData) => (
-        <div key={attachmentData.label}>
+        <div className="attchmentContainer" key={attachmentData.label}>
             <Normaltekst className="attachmentText">
                 {attachmentData.label}
             </Normaltekst>

@@ -1,16 +1,15 @@
 import React from 'react';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
+
 import Icon from 'nav-frontend-ikoner-assets';
 
-type Props = {
-    title: string
-};
+import './numberSelector.less';
 
-const NumberSelector = (props: Props) => (
-    <SkjemaGruppe title={props.title}>
-        <Icon kind="minus" />
+const NumberSelector = () => (
+    <div className="numberSelectorWrapper">
+        <Icon kind="minus" size={32} />
         <input className="counterBox" disabled />
-        <Icon kind="tilsette" />
-    </SkjemaGruppe>
+        <Icon kind="tilsette" size={32} />
+    </div>
 );
+
 export default NumberSelector;

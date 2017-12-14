@@ -26,9 +26,9 @@ const getIcon = (type) => {
 
 const getClassnames = (props) => classNames('dialogBox', {
     'dialogBox--info': props.type === 'info',
-    'dialogBox--fare': props.type === 'fare',
-    'dialogBox--advarsel': props.type === 'fare',
-    'dialogBox--suksess': props.type === 'suksess'
+    'dialogBox--alert': props.type === 'alert',
+    'dialogBox--warning': props.type === 'warning',
+    'dialogBox--success': props.type === 'success'
 });
 
 const DialogBoxBase = (props: Props) => {
