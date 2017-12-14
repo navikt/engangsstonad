@@ -13,7 +13,7 @@ const routeConfig = [
         routes: engangsstonadSteps.map((step) => {
             const subPath = step.name;
             return {
-                path: `/engangsstonad/${subPath.toLowerCase()}`,
+                subpath: subPath.toLowerCase(),
                 component: step
             };
         })
