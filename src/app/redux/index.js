@@ -1,7 +1,8 @@
 import { combineReducers, createStore } from 'redux';
 import counterReducer from './ducks/Counter.duck';
+import engangsstonadReducer from './ducks/Engangsstonad.duck';
 
-const reducers = combineReducers({ counterReducer });
+const reducers = combineReducers({ counterReducer, engangsstonadReducer });
 
 const store = createStore(
     reducers,

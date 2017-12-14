@@ -56,7 +56,7 @@ const StepBasedForm = (props: FormProps) => {
     const renderRoutes = () => (
         props.routes.map((route) => {
             if (isActiveRoute(route)) {
-                return (<Step key={route.props.path}>{route}</Step>);
+                return (<Step key={route.props.path}>{React.cloneElement(route, { test: 'test' })}</Step>);
             }
             return route;
         })

@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Route from './../../util/routing/route.component';
 import StepBasedForm from './../shared/step-based-form/StepBasedForm';
@@ -7,7 +8,8 @@ import StepBasedForm from './../shared/step-based-form/StepBasedForm';
 import './engangsstonad.less';
 
 type Props = {
-    routes: Array<Object>
+    routes: Array<Object>,
+    approvedConditions: boolean
 }
 
 export const EngangsstonadIndex = (props: Props) => {
@@ -15,7 +17,7 @@ export const EngangsstonadIndex = (props: Props) => {
         if (props.routes) {
             return (props.routes.map((route) => (
                 <Route
-                    {...route}
+                    component={route.component}
                     path={`${props.match.path}/${route.subpath}`}
                     key={`${props.match.path}/${route.subpath}`}
                 />)));
@@ -26,7 +28,7 @@ export const EngangsstonadIndex = (props: Props) => {
     return (
         <div className="engangsstonad">
             <StepBasedForm
-                nextButtonEnabled
+                nextButtonEnabled={props.approvedConditions}
                 routes={renderRoutes()}
                 title="Søknad om engangsstønad"
             />
@@ -34,4 +36,9 @@ export const EngangsstonadIndex = (props: Props) => {
     );
 };
 
-export default EngangsstonadIndex;
+const mapStateToProps = (state) => ({
+    approvedConditions: state.engangsstonadReducer.approvedConditions,
+    confirmedInformation: state.engangsstonadReducer.confirmedInformation
+});
+
+export default connect(mapStateToProps)(EngangsstonadIndex);

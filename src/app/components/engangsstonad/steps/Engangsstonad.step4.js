@@ -1,12 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import { Checkbox } from 'nav-frontend-skjema';
 
 import DialogBox from '../../shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from '../../shared/display-text-with-label/DisplayTextWithLabel';
+import { confirmInformation } from '../../../redux/ducks/Engangsstonad.duck';
 
-export const Step4 = () => (
+export const Step4 = (props) => (
     <div>
         <DialogBox type="info">
             <Normaltekst>
@@ -30,10 +34,31 @@ export const Step4 = () => (
         <Checkbox
             name="bekreftOpplysninger"
             className="checkboxFieldWithBackground"
+            checked={props.confirmedInformation}
+            onChange={props.confirmInformation}
             label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger
                 som har betydning for min rett til engangsstønad."
         />
     </div>
 );
 
-export default Step4;
+Step4.propTypes = {
+    confirmInformation: PropTypes.func.isRequired,
+    confirmedInformation: PropTypes.bool
+};
+
+Step4.defaultProps = {
+    confirmedInformation: false
+};
+
+const mapStateToProps = (state) => ({
+    confirmedInformation: state.engangsstonadReducer.confirmedInformation
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    ...bindActionCreators({
+        confirmInformation
+    }, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Step4);
