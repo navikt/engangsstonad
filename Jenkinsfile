@@ -10,10 +10,10 @@ node {
     def committer, committerEmail, changelog, pom, releaseVersion, nextVersion // metadata
     //def mvnHome = tool "maven-3.3.9"
     //def mvn = "${mvnHome}/bin/mvn"
-    def NODEJS_HOME = tool "node-6.2.1"
-    echo "${NODEJS_HOME}"
-    def node = "${NODEJS_HOME}/bin/node"
-    def npm = "${NODEJS_HOME}/bin/npm"
+    //def NODEJS_HOME = tool "node-6.2.1"
+    def bin = "/usr/local/bin"
+    def node = "${bin}/node"
+    def npm = "${bin}/npm"
     def appConfig = "nais.yaml"
     def dockerRepo = "docker.adeo.no:5000"
     def branch = "master"
@@ -44,16 +44,15 @@ node {
         //pom = readMavenPom file: 'pom.xml'
         //releaseVersion = pom.version.tokenize("-")[0]
         releaseVersion = "${env.major_version}.${env.BUILD_NUMBER}-${commitHash}"
-
+        echo "release version: ${releaseVersion}"
     }
 
     stage("Build, test and install artifact") {
         //sh "${mvn} clean install -Djava.io.tmpdir=/tmp/${repo} -B -e"
 
-
-        sh "npm install"
-        sh "npm run test"
-        sh "npm run build"
+        sh "${npm} install"
+        sh "${npm} run test"
+        sh "${npm} run build"
     }
 
     stage("Release") {
