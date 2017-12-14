@@ -1,4 +1,5 @@
 import React from 'react';
+import { Switch } from 'react-router-dom';
 
 import { Sidetittel } from 'nav-frontend-typografi';
 
@@ -94,7 +95,9 @@ const StepBasedForm = (props: FormProps) => {
         <div className="stepBasedForm">
             <form className={props.className}>
                 <Header title={props.title} />
-                {renderRoutes()}
+                <Switch>
+                    {renderRoutes()}
+                </Switch>
                 {renderStepper()}
             </form>
         </div>

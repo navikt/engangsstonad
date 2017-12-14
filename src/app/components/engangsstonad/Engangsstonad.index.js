@@ -16,7 +16,8 @@ export const EngangsstonadIndex = (props: Props) => {
             return (props.routes.map((route) => (
                 <Route
                     {...route}
-                    key={route.path}
+                    path={`${props.match.path}/${route.subpath}`}
+                    key={`${props.match.path}/${route.subpath}`}
                 />)));
         }
         return [];
