@@ -10,7 +10,10 @@ node {
     def committer, committerEmail, changelog, pom, releaseVersion, nextVersion // metadata
     //def mvnHome = tool "maven-3.3.9"
     //def mvn = "${mvnHome}/bin/mvn"
-    def npm = ""
+    def NODEJS_HOME = tool "node-6.2.1"
+    echo "${NODEJS_HOME}"
+    def node = "${NODEJS_HOME}/bin/node"
+    def npm = "${NODEJS_HOME}/bin/npm"
     def appConfig = "nais.yaml"
     def dockerRepo = "docker.adeo.no:5000"
     def branch = "master"
@@ -30,11 +33,11 @@ node {
         committer = sh(script: 'git log -1 --pretty=format:"%an"', returnStdout: true).trim()
         committerEmail = sh(script: 'git log -1 --pretty=format:"%ae"', returnStdout: true).trim()
         changelog = sh(script: 'git log `git describe --tags --abbrev=0`..HEAD --oneline', returnStdout: true)
-        slackSend([
-                color: 'good',
-                message: "Build <${env.BUILD_URL}|#${env.BUILD_NUMBER}> (<${commitUrl}|${commitHashShort}>) of ${project}/${repo}@master by ${committer} passed  (${changelog})"
-        ])
-        notifyGithub(project, repo, 'continuous-integration/jenkins', commitHash, 'pending', "Build #${env.BUILD_NUMBER} has started")
+        // slackSend([
+        //         color: 'good',
+        //         message: "Build <${env.BUILD_URL}|#${env.BUILD_NUMBER}> (<${commitUrl}|${commitHashShort}>) of ${project}/${repo}@master by ${committer} passed  (${changelog})"
+        // ])
+        //notifyGithub(project, repo, 'continuous-integration/jenkins', commitHash, 'pending', "Build #${env.BUILD_NUMBER} has started")
     }
 
     stage("Initialize") {
