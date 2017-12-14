@@ -17,7 +17,7 @@ export const EngangsstonadIndex = (props: Props) => {
                 <Route
                     {...route}
                     path={`${props.match.path}/${route.subpath}`}
-                    key={route.path}
+                    key={`${props.match.path}/${route.subpath}`}
                 />)));
         }
         return [];
