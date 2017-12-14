@@ -5,9 +5,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const webpackConfig = {
-    entry: './src/client/app/bootstrap.js',
+    entry: './src/app/bootstrap.js',
     output: {
-        path: path.resolve(__dirname, './../dist'),
+        path: path.resolve(__dirname, './../../dist'),
         filename: 'bundle.js',
         publicPath: '/'
     },
@@ -53,7 +53,7 @@ const webpackConfig = {
             allChunks: true
         }),
         new HtmlWebpackPlugin({
-            template: './src/client/app/index.html'
+            template: './src/app/index.html'
         }),
         new FlowWebpackPlugin(),
         new SpriteLoaderPlugin({ plainSprite: true })

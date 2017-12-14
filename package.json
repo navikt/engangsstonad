@@ -2,7 +2,7 @@
   "name": "babel-flow-webpack-setup",
   "version": "1.0.0",
   "description": "Simple template webapp setup using React and nav-frontend, build on Webpack, Babel and with flow type inference",
-  "main": "./app/bootstrap.js",
+  "main": "./src/app/bootstrap.js",
   "author": "NAV",
   "license": "MIT",
   "repository": "https://github.com/navikt/p2-selvbetjening-frontend-cookbook",
@@ -23,7 +23,6 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.5.1",
-    "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.5",
     "flow-bin": "^0.59.0",
@@ -44,11 +43,15 @@
     "webpack-dev-server": "^2.9.4"
   },
   "scripts": {
-    "build": "webpack --config ./src/client/config/webpack.production.js",
-    "clean-build": "rimraf ./src/client/dist",
-    "start-server": "npm run clean-build && npm run build && node ./src/server",
-    "start": "webpack-dev-server --config ./src/client/config/webpack.dev.js",
-    "test": "mocha --opts ./mocha.opts ./src/client/app/**/*.spec.js"
+    "build": "webpack --config ./src/config/webpack.production.js",
+    "clean-build": "rimraf ./dist",
+    "docker-build": "npm run clean-build && npm run build && docker build . -t p2-selvbetjening-frontend",
+    "docker-start": "docker run --name p2-selvbetjening-frontend -p 80:80 -d p2-selvbetjening-frontend",
+    "docker-kill": "npm run docker-stop && npm run docker-rm",
+    "docker-rm": "docker rm p2-selvbetjening-frontend",
+    "docker-stop": "docker stop p2-selvbetjening-frontend",
+    "start": "webpack-dev-server --config ./src/config/webpack.dev.js",
+    "test": "mocha --opts ./mocha.opts ./src/app/**/*.spec.js"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
