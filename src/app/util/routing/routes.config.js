@@ -1,7 +1,7 @@
 import EngangsstonadIndex from './../../components/engangsstonad/Engangsstonad.index';
 import engangsstonadSteps from './../../components/engangsstonad/steps';
 
-const routeConfig = [
+const defaultRouteConfig = [
     {
         path: '/',
         component: EngangsstonadIndex,
@@ -11,13 +11,13 @@ const routeConfig = [
         path: '/engangsstonad',
         component: EngangsstonadIndex,
         routes: engangsstonadSteps.map((step) => {
-            const subPath = step.name;
+            const subpath = step.name;
             return {
-                subpath: subPath.toLowerCase(),
+                subpath: subpath.toLowerCase(),
                 component: step
             };
         })
     }
 ];
 
-export default routeConfig;
+export default defaultRouteConfig;

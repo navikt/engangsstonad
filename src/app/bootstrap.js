@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { Container, Row, Column } from 'nav-frontend-grid';
 
 import store from './redux';
-import routes from './util/routing/routes';
+import renderTopLevelRoutes from './util/routing/index';
 
 const root = document.getElementById('app');
 render(
@@ -16,7 +16,7 @@ render(
                 <Column md="4" xs="12">
                     <Router>
                         <div className="app">
-                            {routes()}
+                            {renderTopLevelRoutes()}
                         </div>
                     </Router>
                 </Column>
