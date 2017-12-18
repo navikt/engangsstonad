@@ -13,7 +13,6 @@ type FormProps = {
     afterSubmissionRoute: string,
     title: string,
     // eslint-disable-next-line react/no-unused-prop-types
-    nextButtonEnabled: boolean,
     className: string
 }
 
@@ -56,7 +55,7 @@ const StepBasedForm = (props: FormProps) => {
     const renderRoutes = () => (
         props.routes.map((route) => {
             if (isActiveRoute(route)) {
-                return (<Step key={route.props.path}>{React.cloneElement(route, { test: 'test' })}</Step>);
+                return (<Step key={route.props.path}>{route}</Step>);
             }
             return route;
         })
@@ -69,7 +68,6 @@ const StepBasedForm = (props: FormProps) => {
             if (routes.length === 1) {
                 return (
                     <Stepper
-                        nextButtonEnabled={props.nextButtonEnabled}
                         showSubmission
                         nextRoute={findNextRoutePath()}
                     />
@@ -78,7 +76,6 @@ const StepBasedForm = (props: FormProps) => {
             if (routes.length > 1) {
                 return (
                     <Stepper
-                        nextButtonEnabled={props.nextButtonEnabled}
                         showStepAhead={activeRoute !== routes[routes.length - 1]}
                         showStepBack={activeRoute !== routes[0]}
                         showSubmission={activeRoute === routes[routes.length - 1]}

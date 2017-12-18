@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import './stepper.less';
@@ -61,4 +63,8 @@ StepperButton.defaultProps = {
     disabled: false
 };
 
-export default Stepper;
+const mapStateToProps = (state) => ({
+    nextButtonEnabled: state.engangsstonadReducer.nextButtonEnabled
+});
+
+export default connect(mapStateToProps)(Stepper);

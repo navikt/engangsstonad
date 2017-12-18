@@ -4,7 +4,8 @@ import { Input } from 'nav-frontend-skjema';
 
 type Props = {
     label: string,
-    className: string
+    className: string,
+    onChange: Function
 }
 
 const DateInput = (props: Props) => (
@@ -14,6 +15,7 @@ const DateInput = (props: Props) => (
         placeholder="dd.mm.yyyy"
         label={props.label}
         bredde="S"
+        onChange={props.onChange}
     />
 );
 export default DateInput;
