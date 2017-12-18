@@ -11,9 +11,10 @@ const defaultRouteConfig = [
         path: '/engangsstonad',
         component: EngangsstonadIndex,
         routes: engangsstonadSteps.map((step) => {
-            const subpath = step.name;
+            const subpath = step.name.toLowerCase();
             return {
-                subpath: subpath.toLowerCase(),
+                subpath,
+                path: `/engangsstonad/${subpath}`,
                 component: step
             };
         })

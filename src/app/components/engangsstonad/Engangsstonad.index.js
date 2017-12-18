@@ -10,7 +10,7 @@ type Props = {
     routes: Array<Object>
 }
 
-export const EngangsstonadIndex = (props: Props) => (
+const EngangsstonadIndex = (props: Props) => (
     <div className="engangsstonad">
         <StepBasedForm
             nextButtonEnabled

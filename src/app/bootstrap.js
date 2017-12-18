@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { Container, Row, Column } from 'nav-frontend-grid';
 
 import store from './redux';
-import renderTopLevelRoutes from './util/routing/index';
+import renderTopLevelRoutes from './util/routing';
 
 const root = document.getElementById('app');
 render(
