@@ -14,7 +14,7 @@ const EngangsstonadIndex = (props: Props) => (
     <div className="engangsstonad">
         <StepBasedForm
             nextButtonEnabled
-            routes={(props.routes && renderChildRoutes(props.routes)) || []}
+            routes={renderChildRoutes(props.routes) || []}
             title="Søknad om engangsstønad"
         />
     </div>
