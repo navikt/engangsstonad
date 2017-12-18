@@ -47,10 +47,18 @@ node {
     }
 
     stage("Release") {
-    //    sh "docker build --build-arg version=${releaseVersion} --build-arg app_name=${repo} -t ${dockerRepo}/${repo}:${releaseVersion} ."
+        sh "docker build --build-arg version=${releaseVersion} --build-arg app_name=${repo} -t ${dockerRepo}/${repo}:${releaseVersion} ."
     }
     
     stage("Publish artifact") {
-      //  sh "docker push ${dockerRepo}/${repo}:${releaseVersion}"
+        sh "docker push ${dockerRepo}/${repo}:${releaseVersion}"
+    }
+    
+    stage('Deploy to t') {
+        callback = "${env.BUILD_URL}input/Deploy/"
+        deployLib.testCmd(releaseVersion)
+        deployLib.testCmd(committer)
+        def deploy = deployLib.deployNaisApp(repo, releaseVersion, environment, zone, namespace, callback, committer).key
+        echo "Check status here:  https://jira.adeo.no/browse/${deploy}"
     }
 }
