@@ -6,6 +6,9 @@ const TOGGLE_CHILD_BORN = 'TOGGLE_CHILD_BORN';
 const TOGGLE_NO_OF_CHILDREN = 'TOGGLE_NO_OF_CHILDREN';
 const SET_TERMIN_DATO = 'SET_TERMIN_DATO';
 const SET_BEKREFTET_TERMIN_DATO = 'SET_BEKREFTET_TERMIN_DATO';
+const TOGGLE_SISTE_TOLV = 'TOGGLE_SISTE_TOLV';
+const TOGGLE_NESTE_TOLV = 'TOGGLE_NESTE_TOLV';
+const TOGGLE_OPPHOLD_NAA = 'TOGGLE_OPPHOLD_NAA';
 
 export const approveConditions = () => ({ type: APPROVE_CONDITIONS });
 export const confirmInformation = () => ({ type: CONFIRM_INFORMATION });
@@ -15,6 +18,9 @@ export const toggleChildBorn = (e) => ({ type: TOGGLE_CHILD_BORN, data: e.target
 export const toggleNoOfChildren = (e) => ({ type: TOGGLE_NO_OF_CHILDREN, data: e.target.value });
 export const setTerminDato = (e) => ({ type: SET_TERMIN_DATO, data: e.target.value });
 export const setBekreftetTermindato = (e) => ({ type: SET_BEKREFTET_TERMIN_DATO, data: e.target.value });
+export const toggleSisteTolv = (e) => ({ type: TOGGLE_SISTE_TOLV, data: e.target.value });
+export const toggleNesteTolv = (e) => ({ type: TOGGLE_NESTE_TOLV, data: e.target.value });
+export const toggleOppholdNaa = (e) => ({ type: TOGGLE_OPPHOLD_NAA, data: e.target.value });
 
 const defaultState = {
     approvedConditions: undefined,
@@ -23,7 +29,10 @@ const defaultState = {
     childBorn: undefined,
     noOfChildren: undefined,
     terminDato: undefined,
-    bekreftetTermindato: undefined
+    bekreftetTermindato: undefined,
+    oppholdSisteTolv: undefined,
+    oppholdNesteTolv: undefined,
+    oppholdNaa: undefined
 };
 
 const engangsstonadReducer = (state = defaultState, action) => {
@@ -67,6 +76,21 @@ const engangsstonadReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 bekreftetTermindato: action.data
+            };
+        case TOGGLE_SISTE_TOLV:
+            return {
+                ...state,
+                oppholdSisteTolv: action.data
+            };
+        case TOGGLE_NESTE_TOLV:
+            return {
+                ...state,
+                oppholdNesteTolv: action.data
+            };
+        case TOGGLE_OPPHOLD_NAA:
+            return {
+                ...state,
+                oppholdNaa: action.data
             };
         default:
             return state;
