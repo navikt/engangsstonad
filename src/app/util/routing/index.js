@@ -3,12 +3,11 @@ import React from 'react';
 import RouteWithSubRoutes from './route.component';
 import defaultRouteConfig from './routes.config';
 
-const renderRoutes = (routeConfig = defaultRouteConfig) =>
+export default (routeConfig = defaultRouteConfig) => (
     routeConfig.map((route) => (
         <RouteWithSubRoutes
             {...route}
-            key={`${route.path}-${route.subpath || ''}`}
+            key={route.path}
         />
-    ));
-
-export default renderRoutes;
+    ))
+);
