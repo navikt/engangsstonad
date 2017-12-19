@@ -6,6 +6,7 @@ import { Container, Row, Column } from 'nav-frontend-grid';
 
 import store from './redux';
 import renderTopLevelRoutes from './util/routing';
+import routeConfig from './util/routing/routes.config';
 
 const root = document.getElementById('app');
 render(
@@ -17,7 +18,7 @@ render(
                     <Router>
                         <div className="app">
                             <Switch>
-                                {renderTopLevelRoutes()}
+                                {renderTopLevelRoutes(routeConfig)}
                             </Switch>
                         </div>
                     </Router>

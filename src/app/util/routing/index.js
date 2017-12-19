@@ -1,9 +1,8 @@
 import React from 'react';
 
 import RouteWithSubRoutes from './route.component';
-import defaultRouteConfig from './routes.config';
 
-export default (routeConfig = defaultRouteConfig) => (
+export default (routeConfig) => (
     routeConfig.map((route) => (
         <RouteWithSubRoutes
             {...route}
