@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import './stepper.less';
 
-const Stepper = (props) => (
+export const Stepper = (props) => (
     <div className="stepper">
         {
             props.showStepBack &&
