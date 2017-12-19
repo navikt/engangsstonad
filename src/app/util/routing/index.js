@@ -7,7 +7,7 @@ export default (routeConfig = defaultRouteConfig) => (
     routeConfig.map((route) => (
         <RouteWithSubRoutes
             {...route}
-            key={route.path}
+            key={route.path || '404'}
         />
     ))
 );
