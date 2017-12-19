@@ -1,14 +1,8 @@
 import ErrorPage from './../../components/error';
 import EngangsstonadIndex from './../../components/engangsstonad/Engangsstonad.index';
-import Counter from './../../components/counter/index';
 import engangsstonadSteps from './../../components/engangsstonad/steps';
 
 const defaultRouteConfig = [
-    {
-        path: '/counter',
-        component: Counter,
-        exact: true
-    },
     {
         path: '/engangsstonad',
         component: EngangsstonadIndex,

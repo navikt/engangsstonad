@@ -14,7 +14,7 @@ export const approveConditions = () => ({ type: APPROVE_CONDITIONS });
 export const confirmInformation = () => ({ type: CONFIRM_INFORMATION });
 export const enableNextButton = () => ({ type: ENABLE_NEXT_BUTTON });
 export const disableNextButton = () => ({ type: DISABLE_NEXT_BUTTON });
-export const toggleChildBorn = (e) => ({ type: TOGGLE_CHILD_BORN, data: e.target.value });
+export const toggleChildBorn = (e) => ({ type: TOGGLE_CHILD_BORN, data: e.target.value === 'ja' });
 export const toggleNoOfChildren = (e) => ({ type: TOGGLE_NO_OF_CHILDREN, data: e.target.value });
 export const setTerminDato = (e) => ({ type: SET_TERMIN_DATO, data: e.target.value });
 export const setBekreftetTermindato = (e) => ({ type: SET_BEKREFTET_TERMIN_DATO, data: e.target.value });

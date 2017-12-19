@@ -12,16 +12,31 @@ import { approveConditions, enableNextButton, disableNextButton } from '../../..
 import DialogBox from '../../shared/dialog-box/DialogBox';
 
 export class Step1 extends Component {
+    constructor(props) {
+        super(props);
+        this.shouldNextButtonBeEnabled = this.shouldNextButtonBeEnabled.bind(this);
+
+        if (this.shouldNextButtonBeEnabled(props)) {
+            this.props.enableNextButton();
+        } else {
+            this.props.disableNextButton();
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
-        if (nextProps.approvedConditions) {
+        if (this.shouldNextButtonBeEnabled(nextProps)) {
             return this.props.enableNextButton();
         }
 
         return this.props.disableNextButton();
     }
 
-    componentWillUnmount() {
-        this.props.disableNextButton();
+    shouldNextButtonBeEnabled(props) {
+        if (props.approvedConditions) {
+            return true;
+        }
+
+        return false;
     }
 
     render() {

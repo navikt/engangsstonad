@@ -21,21 +21,36 @@ import AttchmentList from '../../shared/attachment-list/AttachmentList';
 import AttchmentButton from '../../shared/attachment-button/AttachmentButton';
 
 export class Step2 extends Component {
+    constructor(props) {
+        super(props);
+        this.shouldNextButtonBeEnabled = this.shouldNextButtonBeEnabled.bind(this);
+
+        if (this.shouldNextButtonBeEnabled(props)) {
+            this.props.enableNextButton();
+        } else {
+            this.props.disableNextButton();
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
-        if (nextProps.childBorn === 'childBorn' ||
-            (nextProps.childBorn === 'childNotBorn'
-                && nextProps.noOfChildren
-                && nextProps.terminDato
-                && nextProps.bekreftetTermindato)
-        ) {
+        if (this.shouldNextButtonBeEnabled(nextProps)) {
             return this.props.enableNextButton();
         }
 
         return this.props.disableNextButton();
     }
 
-    componentWillUnmount() {
-        this.props.disableNextButton();
+    shouldNextButtonBeEnabled(props) {
+        if (props.childBorn ||
+            (!props.childBorn
+                && props.noOfChildren
+                && props.terminDato
+                && props.bekreftetTermindato)
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     render() {
@@ -49,19 +64,19 @@ export class Step2 extends Component {
                 <Element>Søknaden gjelder en fødsel som er...</Element>
                 <ToggleGruppe onChange={this.props.toggleChildBorn} name="isChildBorn">
                     <ToggleKnapp
-                        defaultChecked={this.props.childBorn === 'childBorn'}
-                        value="childBorn"
+                        defaultChecked={this.props.childBorn}
+                        value="ja"
                     >
                         tilbake i tid
                     </ToggleKnapp>
                     <ToggleKnapp
-                        defaultChecked={this.props.childBorn === 'childNotBorn'}
-                        value="childNotBorn"
+                        defaultChecked={this.props.childBorn === false}
+                        value="nei"
                     >
                         frem i tid
                     </ToggleKnapp>
                 </ToggleGruppe>
-                {this.props.childBorn === 'childNotBorn' &&
+                {this.props.childBorn === false &&
                     <div>
                         <Element>og jeg venter...</Element>
                         <ToggleGruppe onChange={this.props.toggleNoOfChildren} name="noOfChildren">
@@ -119,7 +134,7 @@ Step2.propTypes = {
     setBekreftetTermindato: PropTypes.func.isRequired,
     setTerminDato: PropTypes.func.isRequired,
     noOfChildren: PropTypes.string,
-    childBorn: PropTypes.string,
+    childBorn: PropTypes.bool,
     terminDato: PropTypes.string,
     bekreftetTermindato: PropTypes.string
 };

@@ -19,16 +19,31 @@ import CountryPicker from '../../shared/country-picker/CountryPicker';
 import NumberSelector from '../../shared/number-selector/NumberSelector';
 
 export class Step3 extends Component {
+    constructor(props) {
+        super(props);
+        this.shouldNextButtonBeEnabled = this.shouldNextButtonBeEnabled.bind(this);
+
+        if (this.shouldNextButtonBeEnabled(props)) {
+            this.props.enableNextButton();
+        } else {
+            this.props.disableNextButton();
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
-        if (nextProps.oppholdSisteTolv && nextProps.oppholdNaa && nextProps.oppholdNesteTolv) {
+        if (this.shouldNextButtonBeEnabled(nextProps)) {
             return this.props.enableNextButton();
         }
 
         return this.props.disableNextButton();
     }
 
-    componentWillUnmount() {
-        this.props.disableNextButton();
+    shouldNextButtonBeEnabled(props) {
+        if (props.oppholdSisteTolv && props.oppholdNaa && props.oppholdNesteTolv) {
+            return true;
+        }
+
+        return false;
     }
 
     render() {

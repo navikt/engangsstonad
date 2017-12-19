@@ -11,16 +11,31 @@ import DisplayTextWithLabel from '../../shared/display-text-with-label/DisplayTe
 import { confirmInformation, enableNextButton, disableNextButton } from '../../../redux/ducks/Engangsstonad.duck';
 
 export class Step4 extends Component {
+    constructor(props) {
+        super(props);
+        this.shouldNextButtonBeEnabled = this.shouldNextButtonBeEnabled.bind(this);
+
+        if (this.shouldNextButtonBeEnabled(props)) {
+            this.props.enableNextButton();
+        } else {
+            this.props.disableNextButton();
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
-        if (nextProps.confirmedInformation) {
+        if (this.shouldNextButtonBeEnabled(nextProps)) {
             return this.props.enableNextButton();
         }
 
         return this.props.disableNextButton();
     }
 
-    componentWillUnmount() {
-        this.props.disableNextButton();
+    shouldNextButtonBeEnabled(props) {
+        if (props.confirmedInformation) {
+            return true;
+        }
+
+        return false;
     }
 
     render() {
