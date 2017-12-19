@@ -7,10 +7,13 @@ replicas:
 port: 8080 
 healthcheck: 
   liveness:
-    path: isalive
+    path: /isAlive
     initialDelay: 20
     periodSeconds: 5     
     failureThreshold: 10
+  readiness:
+    path: /isReady
+    initialDelay: 120
 prometheus: 
   enabled: false 
   path: /metrics
