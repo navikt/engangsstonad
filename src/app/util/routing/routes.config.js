@@ -1,13 +1,9 @@
+import ErrorPage from './../../components/error';
 import EngangsstonadIndex from './../../components/engangsstonad/Engangsstonad.index';
 import Counter from './../../components/counter/index';
 import engangsstonadSteps from './../../components/engangsstonad/steps';
 
-const routeConfig = [
-    {
-        path: '/',
-        component: EngangsstonadIndex,
-        exact: true
-    },
+const defaultRouteConfig = [
     {
         path: '/counter',
         component: Counter,
@@ -17,13 +13,17 @@ const routeConfig = [
         path: '/engangsstonad',
         component: EngangsstonadIndex,
         routes: engangsstonadSteps.map((step) => {
-            const subPath = step.WrappedComponent ? step.WrappedComponent.name : step.name;
+            const subpath = step.WrappedComponent
+                ? step.WrappedComponent.name.toLowerCase()
+                : step.name.toLowerCase();
             return {
-                subpath: subPath.toLowerCase(),
+                subpath,
+                path: `/engangsstonad/${subpath}`,
                 component: step
             };
         })
-    }
+    },
+    { component: ErrorPage }
 ];
 
-export default routeConfig;
+export default defaultRouteConfig;

@@ -3,7 +3,7 @@ import { EngangsstonadIndex } from './Engangsstonad.index';
 
 describe('<EngangsstonadIndex />', () => {
     it('should render StepBasedForm', () => {
-        const wrapper = shallow(<EngangsstonadIndex />);
+        const wrapper = shallow(<EngangsstonadIndex match={{path:"foo"}} />);
         expect(wrapper.find('StepBasedForm'));
     });
 
@@ -14,7 +14,7 @@ describe('<EngangsstonadIndex />', () => {
             { path: '3', component: () => (<p>testRoute2</p>) }
         ];
 
-        const wrapper = shallow(<EngangsstonadIndex routes={routeArray} />);
+        const wrapper = shallow(<EngangsstonadIndex routes={routeArray} match={{path:"foo"}} />);
         const stepBasedForm = wrapper.find('StepBasedForm');
         expect(stepBasedForm.prop('routes')).to.have.length(3);
     });
