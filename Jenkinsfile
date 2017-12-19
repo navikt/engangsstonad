@@ -65,6 +65,13 @@ node {
         deployLib.testCmd(releaseVersion)
         deployLib.testCmd(committer)
         def deploy = deployLib.deployNaisApp(repo, releaseVersion, environment, zone, namespace, callback, committer).key
-        echo "Check status here:  https://jira.adeo.no/browse/${deploy}"
+        try {
+            timeout(time: 15, unit: 'MINUTES') {
+                input id: 'deploy', message: "Check status here:  https://jira.adeo.no/browse/${deploy}"
+            }
+        } catch (Exception e) {
+            throw new Exception("Deploy feilet :( \n Se https://jira.adeo.no/browse/" + deploy + " for detaljer", e)
+
+        }
     }
 }
