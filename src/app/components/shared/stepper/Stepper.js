@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
 
 import './stepper.less';
 
-const Stepper = (props) => (
+export const Stepper = (props) => (
     <div className="stepper">
         {
             props.showStepBack &&
@@ -80,4 +81,8 @@ StepperButton.defaultProps = {
     knappType: 'hoved'
 };
 
-export default Stepper;
+const mapStateToProps = (state) => ({
+    nextButtonEnabled: state.engangsstonadReducer.nextButtonEnabled
+});
+
+export default connect(mapStateToProps)(Stepper);

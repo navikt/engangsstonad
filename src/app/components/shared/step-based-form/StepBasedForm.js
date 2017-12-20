@@ -9,7 +9,6 @@ import Step from './../step/Step';
 
 import './stepBasedForm.less';
 
-
 const Header = (props) => (
     <div className="stepBasedForm__header">
         <Sidetittel>{props.title}</Sidetittel>
@@ -66,7 +65,6 @@ const StepBasedForm = (props) => {
             if (routes.length === 1) {
                 return (
                     <Stepper
-                        nextButtonEnabled={props.nextButtonEnabled}
                         showSubmission
                         nextRoute={findNextRoutePath()}
                     />
@@ -75,7 +73,6 @@ const StepBasedForm = (props) => {
             if (routes.length > 1) {
                 return (
                     <Stepper
-                        nextButtonEnabled={props.nextButtonEnabled}
                         showStepAhead={activeRoute !== routes[routes.length - 1]}
                         showStepBack={activeRoute !== routes[0]}
                         showSubmission={activeRoute === routes[routes.length - 1]}
@@ -106,13 +103,11 @@ StepBasedForm.propTypes = {
     location: PropTypes.string.isRequired,
     afterSubmissionRoute: PropTypes.string.isRequired,
     title: PropTypes.string,
-    nextButtonEnabled: PropTypes.boolean, // eslint-disable-line react/no-unused-prop-types
     className: PropTypes.string
 
 };
 
 StepBasedForm.defaultProps = {
-    nextButtonEnabled: true,
     className: '',
     title: ''
 };

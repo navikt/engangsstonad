@@ -1,5 +1,5 @@
 import React from 'react';
-import Stepper from './Stepper';
+import { Stepper } from './Stepper';
 
 describe('<Stepper />', () => {
 
