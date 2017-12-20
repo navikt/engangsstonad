@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch } from 'react-router-dom';
 
 import { Sidetittel } from 'nav-frontend-typografi';
@@ -8,27 +9,23 @@ import Step from './../step/Step';
 
 import './stepBasedForm.less';
 
-type FormProps = {
-    routes: Array<Function>,
-    afterSubmissionRoute: string,
-    title: string,
-    // eslint-disable-next-line react/no-unused-prop-types
-    nextButtonEnabled: boolean,
-    className: string
-}
 
-type HeaderProps = {
-    title: string
-}
-
-const Header = (props: HeaderProps) => (
+const Header = (props) => (
     <div className="stepBasedForm__header">
         <Sidetittel>{props.title}</Sidetittel>
     </div>
 );
 
-const StepBasedForm = (props: FormProps) => {
-    const isActiveRoute = (route) => (route.props.path === window.location.pathname);
+Header.propTypes = {
+    title: PropTypes.string
+};
+
+Header.defaultProps = {
+    title: ''
+};
+
+const StepBasedForm = (props) => {
+    const isActiveRoute = (route) => (route.props.path === props.location.pathname.toLowerCase());
     const findActiveRoute = () => (props.routes.find((route) => isActiveRoute(route)));
 
     const findNextRoutePath = () => {
@@ -102,6 +99,22 @@ const StepBasedForm = (props: FormProps) => {
             </form>
         </div>
     );
+};
+
+StepBasedForm.propTypes = {
+    routes: PropTypes.arrayOf(PropTypes.func).isRequired,
+    location: PropTypes.string.isRequired,
+    afterSubmissionRoute: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    nextButtonEnabled: PropTypes.boolean, // eslint-disable-line react/no-unused-prop-types
+    className: PropTypes.string
+
+};
+
+StepBasedForm.defaultProps = {
+    nextButtonEnabled: true,
+    className: '',
+    title: ''
 };
 
 export default StepBasedForm;
