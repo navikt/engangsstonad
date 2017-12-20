@@ -99,17 +99,18 @@ const StepBasedForm = (props) => {
 };
 
 StepBasedForm.propTypes = {
-    routes: PropTypes.arrayOf(PropTypes.func).isRequired,
-    location: PropTypes.string.isRequired,
-    afterSubmissionRoute: PropTypes.string.isRequired,
+    routes: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+    location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    afterSubmissionRoute: PropTypes.bool,
     title: PropTypes.string,
+    nextButtonEnabled: PropTypes.bool.isRequired, // eslint-disable-line react/no-unused-prop-types
     className: PropTypes.string
-
 };
 
 StepBasedForm.defaultProps = {
     className: '',
-    title: ''
+    title: '',
+    afterSubmissionRoute: true
 };
 
 export default StepBasedForm;
