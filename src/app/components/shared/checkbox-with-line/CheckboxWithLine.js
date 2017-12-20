@@ -1,16 +1,12 @@
-// @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Checkbox } from 'nav-frontend-skjema';
 
 import DisplayTextWithLabel from '../display-text-with-label/DisplayTextWithLabel';
 import './checkboxWithLine.less';
 
-type Props = {
-    content: Array<Object>
-};
-
-const CheckboxWithLine = (props: Props) => {
+const CheckboxWithLine = (props) => {
     const renderTexts = () => (
         props.content.map((entry, index) => (
             <DisplayTextWithLabel
@@ -28,6 +24,10 @@ const CheckboxWithLine = (props: Props) => {
             </div>
         </div>
     );
+};
+
+CheckboxWithLine.propTypes = {
+    content: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 
 export default CheckboxWithLine;

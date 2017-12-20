@@ -1,16 +1,11 @@
-// @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Radio, SkjemaGruppe } from 'nav-frontend-skjema';
 
 import './radioGroup.less';
 
-type Props = {
-    listOfRadioData: Object,
-    name: string
-}
-
-const RadioGroup = (props: Props) => (
+const RadioGroup = (props) => (
     <SkjemaGruppe className="radioGroup">
         {props.listOfRadioData.map((radioData) => (
             <Radio
@@ -22,5 +17,10 @@ const RadioGroup = (props: Props) => (
         ))}
     </SkjemaGruppe>
 );
+
+RadioGroup.propTypes = {
+    name: PropTypes.string.isRequired,
+    listOfRadioData: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+};
 
 export default RadioGroup;

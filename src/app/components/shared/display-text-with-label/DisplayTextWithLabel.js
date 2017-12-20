@@ -1,5 +1,5 @@
-// @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
 
@@ -16,5 +16,10 @@ export const DisplayTextWithLabel = (props: Props) => (
         <Normaltekst className="textWithLabel__text">{props.text}</Normaltekst>
     </div>
 );
+
+DisplayTextWithLabel.propTypes = {
+    label: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired
+};
 
 export default DisplayTextWithLabel;
