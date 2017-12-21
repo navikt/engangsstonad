@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import { Checkbox } from 'nav-frontend-skjema';
 
-import DialogBox from '../../shared/dialog-box/DialogBox';
-import DisplayTextWithLabel from '../../shared/display-text-with-label/DisplayTextWithLabel';
-import { confirmInformation, enableNextButton, disableNextButton } from '../../../redux/ducks/Engangsstonad.duck';
+import DialogBox from 'shared/dialog-box/DialogBox';
+import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWithLabel';
+import { confirmInformation, enableNextButton, disableNextButton } from 'ducks/Engangsstonad.duck';
 
 export class Step4 extends Component {
     constructor(props) {

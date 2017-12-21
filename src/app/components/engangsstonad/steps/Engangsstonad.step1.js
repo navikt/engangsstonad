@@ -9,7 +9,7 @@ import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
 import { approveConditions, enableNextButton, disableNextButton } from 'ducks/Engangsstonad.duck';
 
-import DialogBox from '../../shared/dialog-box/DialogBox';
+import DialogBox from 'shared/dialog-box/DialogBox';
 
 export class Step1 extends Component {
     constructor(props) {

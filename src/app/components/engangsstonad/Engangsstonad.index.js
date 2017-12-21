@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import renderChildRoutes from './../../util/routing';
-import StepBasedForm from './../shared/step-based-form/StepBasedForm';
+import renderChildRoutes from 'util/routing';
+import StepBasedForm from 'shared/step-based-form/StepBasedForm';
 
 import './engangsstonad.less';
 
@@ -17,8 +17,8 @@ const EngangsstonadIndex = (props) => (
 );
 
 EngangsstonadIndex.propTypes = {
-    routes: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
-    location: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
+    routes: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    location: PropTypes.PropTypes.shape({}).isRequired
 };
 
 export default EngangsstonadIndex;
