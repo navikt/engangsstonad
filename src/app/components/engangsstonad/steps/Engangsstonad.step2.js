@@ -13,12 +13,12 @@ import {
     toggleNoOfChildren,
     setTerminDato,
     setBekreftetTermindato
-} from '../../../redux/ducks/Engangsstonad.duck';
+} from 'ducks/Engangsstonad.duck';
 
-import DialogBox from '../../shared/dialog-box/DialogBox';
-import DateInput from '../../shared/date-input/DateInput';
-import AttchmentList from '../../shared/attachment-list/AttachmentList';
-import AttchmentButton from '../../shared/attachment-button/AttachmentButton';
+import DialogBox from 'shared/dialog-box/DialogBox';
+import DateInput from 'shared/date-input/DateInput';
+import AttchmentList from 'shared/attachment-list/AttachmentList';
+import AttchmentButton from 'shared/attachment-button/AttachmentButton';
 
 export class Step2 extends Component {
     constructor(props) {

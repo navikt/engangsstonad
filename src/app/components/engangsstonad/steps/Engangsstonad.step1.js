@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 import { SkjemaGruppe, Checkbox } from 'nav-frontend-skjema';
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
-import { approveConditions, enableNextButton, disableNextButton } from '../../../redux/ducks/Engangsstonad.duck';
+import { approveConditions, enableNextButton, disableNextButton } from 'ducks/Engangsstonad.duck';
 
-import DialogBox from '../../shared/dialog-box/DialogBox';
+import DialogBox from 'shared/dialog-box/DialogBox';
 
 export class Step1 extends Component {
     constructor(props) {

@@ -1,6 +1,6 @@
-import ErrorPage from './../../components/error';
-import EngangsstonadIndex from './../../components/engangsstonad/Engangsstonad.index';
-import engangsstonadSteps from './../../components/engangsstonad/steps';
+import ErrorPage from 'components/error';
+import EngangsstonadIndex from 'components/engangsstonad/Engangsstonad.index';
+import engangsstonadSteps from 'components/engangsstonad/steps';
 
 const defaultRouteConfig = [
     {

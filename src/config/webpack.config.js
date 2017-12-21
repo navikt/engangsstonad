@@ -11,6 +11,16 @@ const webpackConfig = {
         filename: 'bundle.js',
         publicPath: '/'
     },
+    resolve: {
+        alias: {
+            assets: path.resolve(__dirname, './../app/assets/'),
+            components: path.resolve(__dirname, './../app/components/'),
+            shared: path.resolve(__dirname, './../app/components/shared/'),
+            ducks: path.resolve(__dirname, './../app/redux/ducks/'),
+            styles: path.resolve(__dirname, './../app/styles/'),
+            util: path.resolve(__dirname, './../app/util/')
+        }
+    },
     module: {
         rules: [
             {

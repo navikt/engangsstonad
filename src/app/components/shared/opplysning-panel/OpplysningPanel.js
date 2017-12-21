@@ -28,4 +28,5 @@ OpplysningPanel.propTypes = {
 OpplysningPanel.defaultProps = {
     title: ''
 };
+
 export default OpplysningPanel;

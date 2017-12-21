@@ -1,8 +1,8 @@
 import React from 'react';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
-import DialogBox from './../../shared/dialog-box/DialogBox';
-import Modal from './../../shared/modal/Modal';
+import DialogBox from 'shared/dialog-box/DialogBox';
+import Modal from 'shared/modal/Modal';
 
 
 export const Step6 = () => (

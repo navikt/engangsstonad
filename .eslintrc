@@ -7,6 +7,13 @@
   "globals": {
     "shallow": true
   },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./src/config/webpack.dev.js"
+      }
+    }
+  },
   "parser": "babel-eslint",
   "extends": "airbnb",
   "rules": {

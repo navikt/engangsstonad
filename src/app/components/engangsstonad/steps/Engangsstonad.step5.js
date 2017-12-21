@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import DialogBox from '../../../components/shared/dialog-box/DialogBox';
+import DialogBox from 'components/shared/dialog-box/DialogBox';
 
 export const Step5 = () => (
     <div>

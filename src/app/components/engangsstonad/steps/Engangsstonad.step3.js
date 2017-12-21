@@ -12,11 +12,11 @@ import {
     toggleOppholdNaa,
     enableNextButton,
     disableNextButton
-} from '../../../redux/ducks/Engangsstonad.duck';
+} from 'ducks/Engangsstonad.duck';
 
-import DialogBox from '../../shared/dialog-box/DialogBox';
-import CountryPicker from '../../shared/country-picker/CountryPicker';
-import NumberSelector from '../../shared/number-selector/NumberSelector';
+import DialogBox from 'shared/dialog-box/DialogBox';
+import CountryPicker from 'shared/country-picker/CountryPicker';
+import NumberSelector from 'shared/number-selector/NumberSelector';
 
 export class Step3 extends Component {
     constructor(props) {
