@@ -1,18 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
+import infoIcon from 'assets/svg/employee_nautral.svg';
+import alertIcon from 'assets/svg/employee_sad.svg';
+import warningIcon from 'assets/svg/employee_warning.svg';
+import successIcon from 'assets/svg/employee_happy.svg';
 import CustomSVG from '../custom-svg/CustomSVG';
-import infoIcon from '../../../assets/svg/employee_nautral.svg';
-import alertIcon from '../../../assets/svg/employee_sad.svg';
-import warningIcon from '../../../assets/svg/employee_warning.svg';
-import successIcon from '../../../assets/svg/employee_happy.svg';
 
 import './dialogBox.less';
-
-type Props = {
-    type: string,
-    children: any
-}
 
 const getIcon = (type) => {
     switch (type) {
@@ -31,7 +27,7 @@ const getClassnames = (props) => classNames('dialogBox', {
     'dialogBox--success': props.type === 'success'
 });
 
-const DialogBoxBase = (props: Props) => {
+const DialogBoxBase = (props) => {
     const { type } = props;
 
     return (
@@ -48,5 +44,18 @@ const DialogBoxBase = (props: Props) => {
     );
 };
 
+DialogBoxBase.propTypes = {
+    type: PropTypes.string,
+    children: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.arrayOf(PropTypes.node)
+    ]).isRequired
+};
+
+DialogBoxBase.defaultProps = {
+    type: ''
+};
+
 const DialogBox = (props) => (<DialogBoxBase {...props} />);
+
 export default DialogBox;
