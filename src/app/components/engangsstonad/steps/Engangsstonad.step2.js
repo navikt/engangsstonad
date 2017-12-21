@@ -17,8 +17,8 @@ import {
 
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DateInput from 'shared/date-input/DateInput';
-import AttchmentList from 'shared/attachment-list/AttachmentList';
-import AttchmentButton from 'shared/attachment-button/AttachmentButton';
+import AttachmentList from 'shared/attachment-list/AttachmentList';
+import AttachmentButton from 'shared/attachment-button/AttachmentButton';
 
 export class Step2 extends Component {
     constructor(props) {
@@ -111,8 +111,8 @@ export class Step2 extends Component {
                                                 terminbekreftelse fra jordmor eller lege
                                             </Normaltekst>
                                         </DialogBox>
-                                        <AttchmentList label="" />
-                                        <AttchmentButton />
+                                        <AttachmentList label="" />
+                                        <AttachmentButton />
                                         <Element>Terminbekreftelsen er datert den...</Element>
                                         <DateInput onChange={this.props.setBekreftetTermindato} label="" />
                                     </div>
