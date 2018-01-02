@@ -8,12 +8,10 @@ port: 8080
 healthcheck: 
   liveness:
     path: /isAlive
-    initialDelay: 20
-    periodSeconds: 5     
-    failureThreshold: 10
+    initialDelay: 60
   readiness:
     path: /isReady
-    initialDelay: 120
+    initialDelay: 60
 prometheus: 
   enabled: false 
   path: /metrics
