@@ -55,9 +55,11 @@
     "docker-stop": "docker stop p2-selvbetjening-frontend",
     "docker-rmi": "npm run docker-kill && docker rmi p2-selvbetjening-frontend",
     "start": "webpack-dev-server --config ./src/config/webpack.dev.js",
-    "test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts ./src/app/**/*.spec.js"
+    "test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts ./src/app/**/*.spec.js",
+    "lint": "eslint src/**"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
     "lodash.throttle": "^4.1.1",
@@ -89,6 +91,7 @@
     "react-modal": "^3.1.7",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0"
   }
 }
