@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Container, Row, Column } from 'nav-frontend-grid';
+import { IntlProvider } from 'react-intl';
 
 import renderTopLevelRoutes from 'util/routing';
 import routeConfig from 'util/routing/routes.config';
@@ -17,9 +18,11 @@ render(
                 <Column md="4" xs="12">
                     <Router>
                         <div className="app">
-                            <Switch>
-                                {renderTopLevelRoutes(routeConfig)}
-                            </Switch>
+                            <IntlProvider locale="nb">
+                                <Switch>
+                                    {renderTopLevelRoutes(routeConfig)}
+                                </Switch>
+                            </IntlProvider>
                         </div>
                     </Router>
                 </Column>

@@ -49,7 +49,6 @@ export class Step2 extends Component {
         ) {
             return true;
         }
-
         return false;
     }
 
@@ -101,8 +100,11 @@ export class Step2 extends Component {
                         </ToggleGruppe>
                         {this.props.noOfChildren &&
                             <div>
-                                <Element>med termindato den...</Element>
-                                <DateInput onChange={this.props.setTerminDato} label="" />
+                                <DateInput
+                                    input={{ value: this.props.terminDato }}
+                                    label="med termindato den..."
+                                    onChange={(e) => this.props.setTerminDato(e)}
+                                />
                                 {this.props.terminDato &&
                                     <div>
                                         <DialogBox type="warning">
@@ -113,8 +115,12 @@ export class Step2 extends Component {
                                         </DialogBox>
                                         <AttachmentList label="" />
                                         <AttachmentButton />
-                                        <Element>Terminbekreftelsen er datert den...</Element>
-                                        <DateInput onChange={this.props.setBekreftetTermindato} label="" />
+
+                                        <DateInput
+                                            input={{ value: this.props.bekreftetTermindato }}
+                                            label="Terminbekreftelsen er datert den..."
+                                            onChange={(e) => this.props.setBekreftetTermindato(e)}
+                                        />
                                     </div>
                                 }
                             </div>
