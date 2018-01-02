@@ -34,7 +34,7 @@ node {
     }
 
     stage("Initialize") {
-        releaseVersion = "${env.major_version}.${env.BUILD_NUMBER}-${commitHash}"
+        releaseVersion = "${env.major_version}.${env.BUILD_NUMBER}-${commitHashShort}"
         echo "release version: ${releaseVersion}"
     }
 
