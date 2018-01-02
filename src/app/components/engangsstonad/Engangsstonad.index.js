@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import renderChildRoutes from 'util/routing';
 import StepBasedForm from 'shared/step-based-form/StepBasedForm';
 import { connect } from 'react-redux';
-
+import { getDataRequested } from './../../redux/ducks/Engangsstonad.duck';
 import './engangsstonad.less';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class EngangsstonadIndex extends React.Component {
     componentWillMount() {
-        this.props.dispatch({ type: 'GET_DATA_REQUESTED' });
+        this.props.dispatch(getDataRequested());
     }
 
     render() {

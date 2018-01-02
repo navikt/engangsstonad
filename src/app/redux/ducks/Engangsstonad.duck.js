@@ -28,8 +28,6 @@ export const toggleSisteTolv = (e) => ({ type: TOGGLE_SISTE_TOLV, data: e.target
 export const toggleNesteTolv = (e) => ({ type: TOGGLE_NESTE_TOLV, data: e.target.value });
 export const toggleOppholdNaa = (e) => ({ type: TOGGLE_OPPHOLD_NAA, data: e.target.value });
 export const getDataRequested = () => ({ type: GET_DATA_REQUESTED });
-export const getDataSuccess = (data) => ({ type: GET_DATA_SUCCESS, data });
-export const getDataFailed = (e) => ({ type: GET_DATA_FAILED, e });
 
 
 const defaultState = {
