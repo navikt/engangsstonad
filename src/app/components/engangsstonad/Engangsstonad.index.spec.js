@@ -9,12 +9,12 @@ const routeArray = [
 
 describe('<EngangsstonadIndex />', () => {
     it('should render StepBasedForm', () => {
-        const wrapper = shallow(<EngangsstonadIndex routes={routeArray} match={{path:"foo"}} dispatch={() => {}} />);
+        const wrapper = shallow(<EngangsstonadIndex routes={routeArray} match={{ path: 'foo' }} dispatch={() => {}} />);
         expect(wrapper.find('StepBasedForm'));
     });
 
     it('should render StepBasedFrom with correct number of routes', () => {
-        const wrapper = shallow(<EngangsstonadIndex routes={routeArray} match={{path:"foo"}} dispatch={() => {}} />);
+        const wrapper = shallow(<EngangsstonadIndex routes={routeArray} match={{ path: 'foo' }} dispatch={() => {}} />);
         const stepBasedForm = wrapper.find('StepBasedForm');
         expect(stepBasedForm.prop('routes')).to.have.length(3);
     });

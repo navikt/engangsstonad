@@ -2,7 +2,6 @@ import React from 'react';
 import { Stepper } from './Stepper';
 
 describe('<Stepper />', () => {
-
     it('should render StepperButton ', () => {
         const wrapper = shallow(<Stepper />);
         expect(wrapper.find('StepperButton'));
