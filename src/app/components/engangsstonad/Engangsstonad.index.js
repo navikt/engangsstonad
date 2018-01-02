@@ -7,7 +7,7 @@ import { getDataRequested } from './../../redux/ducks/Engangsstonad.duck';
 import './engangsstonad.less';
 
 // eslint-disable-next-line react/prefer-stateless-function
-class EngangsstonadIndex extends React.Component {
+export class EngangsstonadIndex extends React.Component {
     componentWillMount() {
         this.props.dispatch(getDataRequested());
     }
