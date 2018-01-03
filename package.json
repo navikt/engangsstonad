@@ -47,15 +47,15 @@
     "webpack-dev-server": "^2.9.4"
   },
   "scripts": {
-    "build": "webpack --config ./src/config/webpack.production.js",
+    "build": "node src/build/scripts/production-build.js",
     "clean-build": "rimraf ./dist",
-    "docker-build": "npm run docker-rmi &&  npm run clean-build && npm run build && docker build . -t p2-selvbetjening-frontend",
-    "docker-start": "docker run --name p2-selvbetjening-frontend -p 80:80 -d p2-selvbetjening-frontend",
+    "docker-build": "npm run clean-build && npm run build && docker build . -t p2-selvbetjening-frontend",
+    "docker-start": "docker run --name p2-selvbetjening-frontend -p 8080:8080 -d p2-selvbetjening-frontend",
     "docker-kill": "npm run docker-stop && npm run docker-rm",
     "docker-rm": "docker rm p2-selvbetjening-frontend",
     "docker-stop": "docker stop p2-selvbetjening-frontend",
     "docker-rmi": "npm run docker-kill && docker rmi p2-selvbetjening-frontend",
-    "start": "webpack-dev-server --config ./src/config/webpack.dev.js",
+    "start": "node ./src/app/build/scripts/start-dev.js",
     "test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts ./src/app/**/*.spec.js",
     "lint": "eslint src/**"
   },
