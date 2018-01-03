@@ -1,82 +1,64 @@
 {
-  "env": {
-    "browser": true,
-    "mocha": true,
-    "jest": true
-  },
-  "globals": {
-    "shallow": true
-  },
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "./src/config/webpack.dev.js"
-      }
-    }
-  },
-  "parser": "babel-eslint",
-  "extends": "airbnb",
-  "rules": {
-    "no-unused-vars": [
-      2,
-      {
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_"
-      }
-    ],
-    "linebreak-style": 0,
-    "indent": [
-      2,
-      4,
-      {
-        "SwitchCase": 1
-      }
-    ],
-    "max-len": [
-      2,
-      120,
-      4
-    ],
-    "comma-dangle": [
-      2,
-      "never"
-    ],
-    "react/no-typos": 0,
-    "arrow-parens": [
-      2,
-      "always"
-    ],
-    "jsx-a11y/anchor-is-valid": [
-      "error",
-      {
-        "components": [ "Link" ],
-        "specialLink": [ "hrefLeft", "hrefRight", "to" ],
-        "aspects": [ "noHref", "invalidHref", "preferButton" ]
-      }
-    ],
-    "import/no-named-as-default": 0,
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "peerDependencies": true
-      }
-    ],
-    "react/jsx-filename-extension": [
-      2,
-      {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
-    ],
-    "react/jsx-indent-props": [
-      2,
-      4
-    ],
-    "react/jsx-indent": [
-      2,
-      4
-    ]
-  }
+	"env": {
+		"browser": true,
+		"mocha": true,
+		"jest": true
+	},
+	"globals": {
+		"shallow": true
+	},
+	"settings": {
+		"import/resolver": {
+			"webpack": {
+				"config": "./src/config/webpack.dev.js"
+			}
+		}
+	},
+	"parser": "babel-eslint",
+	"plugins": ["react", "prettier"],
+	"extends": ["airbnb", "prettier", "prettier/react"],
+	"rules": {
+		"no-unused-vars": [
+			2,
+			{
+				"argsIgnorePattern": "^_",
+				"varsIgnorePattern": "^_"
+			}
+		],
+		"linebreak-style": 0,
+		"indent": [
+			2,
+			4,
+			{
+				"SwitchCase": 1
+			}
+		],
+		"max-len": [2, 120, 4],
+		"comma-dangle": [2, "never"],
+		"react/no-typos": 0,
+		"arrow-parens": [2, "always"],
+		"jsx-a11y/anchor-is-valid": [
+			"error",
+			{
+				"components": ["Link"],
+				"specialLink": ["hrefLeft", "hrefRight", "to"],
+				"aspects": ["noHref", "invalidHref", "preferButton"]
+			}
+		],
+		"import/no-named-as-default": 0,
+		"import/no-extraneous-dependencies": [
+			"error",
+			{
+				"peerDependencies": true
+			}
+		],
+		"react/jsx-filename-extension": [
+			2,
+			{
+				"extensions": [".js", ".jsx"]
+			}
+		],
+		"react/jsx-indent-props": [2, 4],
+		"react/jsx-indent": [2, 4]
+	}
 }
