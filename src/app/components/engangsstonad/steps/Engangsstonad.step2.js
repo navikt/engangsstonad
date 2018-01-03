@@ -1,25 +1,48 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-skjema';
 
-import DialogBox from '../../shared/dialog-box/DialogBox';
-import DateInput from '../../shared/date-input/DateInput';
-import AttchmentList from '../../shared/attachment-list/AttachmentList';
-import AttchmentButton from '../../shared/attachment-button/AttachmentButton';
+import {
+    toggleChildBorn,
+    enableNextButton,
+    disableNextButton,
+    toggleNoOfChildren,
+    setTerminDato,
+    setBekreftetTermindato
+} from 'ducks/Engangsstonad.duck';
 
-class Step2 extends Component {
+import DialogBox from 'shared/dialog-box/DialogBox';
+import DateInput from 'shared/date-input/DateInput';
+import AttachmentList from 'shared/attachment-list/AttachmentList';
+import AttachmentButton from 'shared/attachment-button/AttachmentButton';
+
+export class Step2 extends Component {
     constructor(props) {
         super(props);
-        this.toggleBirth = this.toggleBirth.bind(this);
 
-        this.state = {
-            childBorn: undefined
-        };
+        if (this.shouldNextButtonBeEnabled(props)) {
+            this.props.enableNextButton();
+        } else {
+            this.props.disableNextButton();
+        }
     }
 
-    toggleBirth(e) {
-        this.setState({ childBorn: e.target.value === 'childBorn' });
+    componentWillReceiveProps(nextProps) {
+        if (this.shouldNextButtonBeEnabled(nextProps)) {
+            this.props.enableNextButton();
+        } else {
+            this.props.disableNextButton();
+        }
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    shouldNextButtonBeEnabled(props) {
+        return (props.childBorn ||
+            (!props.childBorn && props.noOfChildren && props.terminDato && props.bekreftetTermindato));
     }
 
     render() {
@@ -31,32 +54,102 @@ class Step2 extends Component {
                     </Normaltekst>
                 </DialogBox>
                 <Element>Søknaden gjelder en fødsel som er...</Element>
-                <ToggleGruppe onChange={this.toggleBirth} name="isChildBorn">
-                    <ToggleKnapp value="childBorn">tilbake i tid</ToggleKnapp>
-                    <ToggleKnapp value="childNotBorn">frem i tid</ToggleKnapp>
+                <ToggleGruppe onChange={this.props.toggleChildBorn} name="isChildBorn">
+                    <ToggleKnapp
+                        defaultChecked={this.props.childBorn}
+                        value="ja"
+                    >
+                        tilbake i tid
+                    </ToggleKnapp>
+                    <ToggleKnapp
+                        defaultChecked={this.props.childBorn === false}
+                        value="nei"
+                    >
+                        frem i tid
+                    </ToggleKnapp>
                 </ToggleGruppe>
-                {this.state.childBorn === false &&
+                {this.props.childBorn === false &&
+                <div>
+                    <Element>og jeg venter...</Element>
+                    <ToggleGruppe onChange={this.props.toggleNoOfChildren} name="noOfChildren">
+                        <ToggleKnapp
+                            defaultChecked={this.props.noOfChildren === '1'}
+                            value="1"
+                        >
+                            et barn
+                        </ToggleKnapp>
+                        <ToggleKnapp
+                            defaultChecked={this.props.noOfChildren === '2'}
+                            value="2"
+                        >
+                            tvillinger
+                        </ToggleKnapp>
+                        <ToggleKnapp
+                            defaultChecked={this.props.noOfChildren === '3'}
+                            value="3"
+                        >
+                            trillinger
+                        </ToggleKnapp>
+                    </ToggleGruppe>
+                    {this.props.noOfChildren &&
                     <div>
-                        <Element>og jeg venter...</Element>
-                        <ToggleGruppe onChange={() => undefined} name="noOfChildren">
-                            <ToggleKnapp value="1">et barn</ToggleKnapp>
-                            <ToggleKnapp value="2">tvillinger</ToggleKnapp>
-                            <ToggleKnapp value="3">trillinger</ToggleKnapp>
-                        </ToggleGruppe>
                         <Element>med termindato den...</Element>
-                        <DateInput label="" />
-                        <DialogBox type="warning">
-                            <Normaltekst>
-                                Siden barnet ikke er født må du legge ved terminbekreftelse fra jordmor eller lege
-                            </Normaltekst>
-                        </DialogBox>
-                        <AttchmentList label="" />
-                        <AttchmentButton />
+                        <DateInput onChange={this.props.setTerminDato} label="" />
+                        {this.props.terminDato &&
+                        <div>
+                            <DialogBox type="warning">
+                                <Normaltekst>
+                                    Siden barnet ikke er født må du legge ved
+                                    terminbekreftelse fra jordmor eller lege
+                                </Normaltekst>
+                            </DialogBox>
+                            <AttachmentList label="" />
+                            <AttachmentButton />
+                            <Element>Terminbekreftelsen er datert den...</Element>
+                            <DateInput onChange={this.props.setBekreftetTermindato} label="" />
+                        </div>
+                        }
                     </div>
+                    }
+                </div>
                 }
             </div>
         );
     }
 }
 
-export default Step2;
+Step2.propTypes = {
+    toggleChildBorn: PropTypes.func.isRequired,
+    enableNextButton: PropTypes.func.isRequired,
+    disableNextButton: PropTypes.func.isRequired,
+    toggleNoOfChildren: PropTypes.func.isRequired,
+    setBekreftetTermindato: PropTypes.func.isRequired,
+    setTerminDato: PropTypes.func.isRequired,
+    noOfChildren: PropTypes.string,
+    childBorn: PropTypes.bool,
+    terminDato: PropTypes.string
+};
+
+Step2.defaultProps = {
+    childBorn: undefined,
+    noOfChildren: undefined,
+    terminDato: undefined
+};
+
+const mapStateToProps = (state) => ({
+    childBorn: state.engangsstonadReducer.childBorn,
+    noOfChildren: state.engangsstonadReducer.noOfChildren,
+    terminDato: state.engangsstonadReducer.terminDato,
+    bekreftetTermindato: state.engangsstonadReducer.bekreftetTermindato
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    toggleChildBorn,
+    enableNextButton,
+    disableNextButton,
+    toggleNoOfChildren,
+    setTerminDato,
+    setBekreftetTermindato
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Step2);

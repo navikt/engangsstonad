@@ -1,4 +1,5 @@
 @import './../../../styles/globals';
+@import './../../../../../node_modules/nav-frontend-core/less/_variabler';
 
 .stepper {
   padding: 0.625rem 1.25rem;
@@ -7,5 +8,16 @@
 
   a:not(:first-child) {
     margin-left: @marginSmall;
+  }
+
+  .knapp--disabled {
+    &:visited {
+      color: white;
+    }
+
+    &:hover, &:active {
+      background-color: @grayIcon;
+      border-color: @grayIcon;
+    }
   }
 }

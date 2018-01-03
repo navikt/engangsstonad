@@ -1,17 +1,10 @@
-// @flow
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import DisplayTextWithLabel from '../display-text-with-label/DisplayTextWithLabel';
 import IconWithText from '../icon-with-text/IconWithText';
 import './opplysningpanel.less';
 
-type Props = {
-    iconKind: string,
-    opplysningData: Array<Object>,
-    title: string
-};
-
-const OpplysningPanel = (props: Props) => (
+const OpplysningPanel = (props) => (
     <div className="opplysningPanel">
         <IconWithText kind={props.iconKind} text={props.title} />
         {
@@ -25,5 +18,15 @@ const OpplysningPanel = (props: Props) => (
         }
     </div>
 );
+
+OpplysningPanel.propTypes = {
+    iconKind: PropTypes.string.isRequired,
+    opplysningData: PropTypes.arrayOf(PropTypes.object).isRequired,
+    title: PropTypes.string
+};
+
+OpplysningPanel.defaultProps = {
+    title: ''
+};
 
 export default OpplysningPanel;

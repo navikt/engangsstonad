@@ -4,11 +4,21 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const webpackConfig = {
-    entry: './src/app/bootstrap.js',
+    entry: ['babel-polyfill', './src/app/bootstrap.js'],
     output: {
         path: path.resolve(__dirname, './../../../dist'),
         filename: 'bundle.js',
         publicPath: '/'
+    },
+    resolve: {
+        alias: {
+            assets: path.resolve(__dirname, './../../app/assets/'),
+            components: path.resolve(__dirname, './../../app/components/'),
+            shared: path.resolve(__dirname, './../../app/components/shared/'),
+            ducks: path.resolve(__dirname, './../../app/redux/ducks/'),
+            styles: path.resolve(__dirname, './../../app/styles/'),
+            util: path.resolve(__dirname, './../../app/util/')
+        }
     },
     module: {
         rules: [

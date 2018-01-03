@@ -4,3 +4,4 @@
 --require ./src/test/helpers.js
 --require ./src/test/setup.js
 --require ./src/test/adapter.js
+--require babel-polyfill

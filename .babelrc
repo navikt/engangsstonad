@@ -1,4 +1,11 @@
 {
   "plugins": ["transform-object-rest-spread", "transform-flow-strip-types"],
-  "presets": ["env", "react"]
+  "presets": ["env", "react"],
+  "env": {
+    "test": {
+      "plugins": [
+        [ "babel-plugin-webpack-alias", { "config": "./src/config/webpack.config.js" } ]
+      ]
+    }
+  }
 }

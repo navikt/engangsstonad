@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { connect } from 'react-redux';
+import classNames from 'classnames';
 
 import './stepper.less';
 
-const Stepper = (props) => (
+export const Stepper = (props) => (
     <div className="stepper">
         {
             props.showStepBack &&
@@ -40,25 +41,48 @@ Stepper.defaultProps = {
     nextButtonEnabled: false
 };
 
-const StepperButton = (props) => (
-    <Link to={props.href}>
-        <props.component disabled={props.disabled}>
+const StepperButton = (props) => {
+    const btnClassNames = classNames('knapp', {
+        [`knapp--${props.knappType}`]: props.knappType && !props.disabled,
+        'knapp--disabled': props.disabled
+    });
+
+    const onClickListener = ($event) => {
+        if (props.disabled) {
+            $event.preventDefault();
+            $event.stopPropagation();
+        }
+    };
+
+    const tabIndex = () => (props.disabled ? -1 : 0);
+
+    return (
+        <Link
+            to={props.href}
+            className={btnClassNames}
+            onClick={onClickListener}
+            tabIndex={tabIndex()}
+            aria-disabled={props.disabled}
+        >
             {props.label}
-        </props.component>
-    </Link>
-);
+        </Link>
+    );
+};
 
 StepperButton.propTypes = {
     label: PropTypes.string.isRequired,
     href: PropTypes.string.isRequired,
-    // eslint-disable-next-line react/no-unused-prop-types
-    component: PropTypes.func,
+    knappType: PropTypes.string,
     disabled: PropTypes.bool
 };
 
 StepperButton.defaultProps = {
-    component: Hovedknapp,
-    disabled: false
+    disabled: false,
+    knappType: 'hoved'
 };
 
-export default Stepper;
+const mapStateToProps = (state) => ({
+    nextButtonEnabled: state.engangsstonadReducer.nextButtonEnabled
+});
+
+export default connect(mapStateToProps)(Stepper);

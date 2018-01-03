@@ -1,11 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Container, Row, Column } from 'nav-frontend-grid';
 
+import renderTopLevelRoutes from './util/routing';
+import routeConfig from './util/routing/routes.config';
 import store from './redux';
-import routes from './util/routing/routes';
 
 const root = document.getElementById('app');
 render(
@@ -16,7 +17,9 @@ render(
                 <Column md="4" xs="12">
                     <Router>
                         <div className="app">
-                            {routes()}
+                            <Switch>
+                                {renderTopLevelRoutes(routeConfig)}
+                            </Switch>
                         </div>
                     </Router>
                 </Column>
