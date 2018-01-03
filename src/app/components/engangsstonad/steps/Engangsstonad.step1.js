@@ -7,17 +7,14 @@ import { Link } from 'react-router-dom';
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
 import Checkbox from 'shared/checkbox/Checkbox';
-
-import { approveConditions, enableNextButton, disableNextButton } from 'ducks/Engangsstonad.duck';
-
 import DialogBox from 'shared/dialog-box/DialogBox';
+import { enableNextButton, disableNextButton, approveConditions } from 'ducks/Engangsstonad.duck';
 
 export class Step1 extends Component {
     constructor(props) {
         super(props);
-        this.shouldNextButtonBeEnabled = this.shouldNextButtonBeEnabled.bind(this);
 
-        if (this.shouldNextButtonBeEnabled(props)) {
+        if (props.approvedConditions) {
             this.props.enableNextButton();
         } else {
             this.props.disableNextButton();
@@ -25,22 +22,14 @@ export class Step1 extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.shouldNextButtonBeEnabled(nextProps)) {
+        if (nextProps.approvedConditions) {
             return this.props.enableNextButton();
         }
-
         return this.props.disableNextButton();
     }
 
-    shouldNextButtonBeEnabled(props) {
-        if (props.approvedConditions) {
-            return true;
-        }
-
-        return false;
-    }
-
     render() {
+        // eslint-disable-next-line no-shadow
         const { approveConditions, approvedConditions } = this.props;
 
         return (
@@ -73,10 +62,10 @@ export class Step1 extends Component {
 }
 
 Step1.propTypes = {
-    approveConditions: PropTypes.func.isRequired,
     enableNextButton: PropTypes.func.isRequired,
     disableNextButton: PropTypes.func.isRequired,
-    approvedConditions: PropTypes.bool
+    approvedConditions: PropTypes.bool,
+    approveConditions: PropTypes.func.isRequired
 };
 
 Step1.defaultProps = {

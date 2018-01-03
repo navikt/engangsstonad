@@ -1,3 +1,6 @@
+import { all, put, call, takeEvery } from 'redux-saga/effects';
+import Api from './../../api';
+
 const APPROVE_CONDITIONS = 'APPROVE_CONDITIONS';
 const CONFIRM_INFORMATION = 'CONFIRM_INFORMATION';
 const ENABLE_NEXT_BUTTON = 'ENABLE_NEXT_BUTTON';
@@ -9,6 +12,9 @@ const SET_BEKREFTET_TERMIN_DATO = 'SET_BEKREFTET_TERMIN_DATO';
 const TOGGLE_SISTE_TOLV = 'TOGGLE_SISTE_TOLV';
 const TOGGLE_NESTE_TOLV = 'TOGGLE_NESTE_TOLV';
 const TOGGLE_OPPHOLD_NAA = 'TOGGLE_OPPHOLD_NAA';
+const GET_DATA_REQUESTED = 'GET_DATA_REQUESTED';
+const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
+const GET_DATA_FAILED = 'GET_DATA_FAILED';
 
 export const approveConditions = () => ({ type: APPROVE_CONDITIONS });
 export const confirmInformation = () => ({ type: CONFIRM_INFORMATION });
@@ -21,6 +27,8 @@ export const setBekreftetTermindato = (e) => ({ type: SET_BEKREFTET_TERMIN_DATO,
 export const toggleSisteTolv = (e) => ({ type: TOGGLE_SISTE_TOLV, data: e.target.value });
 export const toggleNesteTolv = (e) => ({ type: TOGGLE_NESTE_TOLV, data: e.target.value });
 export const toggleOppholdNaa = (e) => ({ type: TOGGLE_OPPHOLD_NAA, data: e.target.value });
+export const getDataRequested = () => ({ type: GET_DATA_REQUESTED });
+
 
 const defaultState = {
     approvedConditions: undefined,
@@ -32,7 +40,8 @@ const defaultState = {
     bekreftetTermindato: undefined,
     oppholdSisteTolv: undefined,
     oppholdNesteTolv: undefined,
-    oppholdNaa: undefined
+    oppholdNaa: undefined,
+    data: null
 };
 
 const engangsstonadReducer = (state = defaultState, action) => {
@@ -92,9 +101,40 @@ const engangsstonadReducer = (state = defaultState, action) => {
                 ...state,
                 oppholdNaa: action.data
             };
+        case GET_DATA_SUCCESS:
+            return {
+                ...state,
+                data: action.data
+            };
+        case GET_DATA_FAILED:
+            return {
+                ...state,
+                error: action.error
+            };
         default:
             return state;
     }
 };
+
+function* getData() {
+    try {
+        const data = yield call(Api.fetchData);
+        yield put({
+            type: GET_DATA_SUCCESS,
+            data
+        });
+    } catch (error) {
+        yield put({
+            type: GET_DATA_FAILED,
+            error
+        });
+    }
+}
+
+export function* sagas() {
+    yield all([
+        takeEvery(GET_DATA_REQUESTED, getData)
+    ]);
+}
 
 export default engangsstonadReducer;

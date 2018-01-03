@@ -13,9 +13,8 @@ import { confirmInformation, enableNextButton, disableNextButton } from 'ducks/E
 export class Step4 extends Component {
     constructor(props) {
         super(props);
-        this.shouldNextButtonBeEnabled = this.shouldNextButtonBeEnabled.bind(this);
 
-        if (this.shouldNextButtonBeEnabled(props)) {
+        if (props.confirmedInformation) {
             this.props.enableNextButton();
         } else {
             this.props.disableNextButton();
@@ -23,19 +22,11 @@ export class Step4 extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.shouldNextButtonBeEnabled(nextProps)) {
+        if (nextProps.confirmedInformation) {
             return this.props.enableNextButton();
         }
 
         return this.props.disableNextButton();
-    }
-
-    shouldNextButtonBeEnabled(props) {
-        if (props.confirmedInformation) {
-            return true;
-        }
-
-        return false;
     }
 
     render() {
