@@ -4,12 +4,11 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { SkjemaGruppe, Checkbox } from 'nav-frontend-skjema';
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
-import { enableNextButton, disableNextButton, approveConditions } from 'ducks/Engangsstonad.duck';
-
+import Checkbox from 'shared/checkbox/Checkbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
+import { enableNextButton, disableNextButton, approveConditions } from 'ducks/Engangsstonad.duck';
 
 export class Step1 extends Component {
     constructor(props) {
@@ -46,20 +45,17 @@ export class Step1 extends Component {
                     </Normaltekst>
                     <Link to="/">Les mer her</Link>
                 </DialogBox>
-                <SkjemaGruppe title="Egenerklæring">
-                    <Checkbox
-                        name="egenerklaring"
-                        className="checkboxFieldWithBackground"
-                        label="Jeg er klar over at dersom
-                            jeg gir uriktige opplysninger eller holder
-                            tilbake opplysninger som har betydning for
-                            min rett til engangsstønad kan pengene holdes
-                            tilbake eller kreves tilbake, og det kan eventuelt
-                            medføre straffeansvar."
-                        onChange={approveConditions}
-                        checked={approvedConditions}
-                    />
-                </SkjemaGruppe>
+                <Checkbox
+                    name="egenerklaring"
+                    label="Jeg er klar over at dersom
+                        jeg gir uriktige opplysninger eller holder
+                        tilbake opplysninger som har betydning for
+                        min rett til engangsstønad kan pengene holdes
+                        tilbake eller kreves tilbake, og det kan eventuelt
+                        medføre straffeansvar."
+                    onChange={approveConditions}
+                    checked={approvedConditions}
+                />
             </div>
         );
     }

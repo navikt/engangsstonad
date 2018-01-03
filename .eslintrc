@@ -24,6 +24,7 @@
         "varsIgnorePattern": "^_"
       }
     ],
+    "jsx-a11y/label-has-for": 0,
     "linebreak-style": 0,
     "indent": [
       2,
