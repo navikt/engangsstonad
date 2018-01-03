@@ -1,5 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FlowWebpackPlugin = require('flow-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
@@ -7,7 +6,7 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const webpackConfig = {
     entry: './src/app/bootstrap.js',
     output: {
-        path: path.resolve(__dirname, './../../dist'),
+        path: path.resolve(__dirname, './../../../dist'),
         filename: 'bundle.js',
         publicPath: '/'
     },
@@ -51,9 +50,6 @@ const webpackConfig = {
             filename: 'css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]',
             disable: false,
             allChunks: true
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/app/index.html'
         }),
         new FlowWebpackPlugin(),
         new SpriteLoaderPlugin({ plainSprite: true })

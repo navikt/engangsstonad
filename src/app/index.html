@@ -1,8 +1,13 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <%= htmlWebpackPlugin.options.NAVScripts %>
+        <%= htmlWebpackPlugin.options.NAVMegaMenuResources %>
+        <%= htmlWebpackPlugin.options.NAVStyles %>
     </head>
     <body>
-        <div id="app" />
+        <%= htmlWebpackPlugin.options.NAVHeading %>
+        <div id="app"></div>
+        <%= htmlWebpackPlugin.options.NAVFooter %>
     </body>
 </html>

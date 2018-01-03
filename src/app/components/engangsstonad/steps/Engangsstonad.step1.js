@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { SkjemaGruppe, Checkbox } from 'nav-frontend-skjema';
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
-
 import DialogBox from '../../shared/dialog-box/DialogBox';
 
 export const Step1 = () => (
