@@ -94,7 +94,6 @@
 		"docker-rmi": "npm run docker-kill && docker rmi p2-selvbetjening-frontend",
 		"start": "webpack-dev-server --config ./src/config/webpack.dev.js",
 		"test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts ./src/app/**/*.spec.js",
-		"lint": "eslint src/**",
-		"format": "prettier-eslint ./src/**/*.js"
+		"lint": "eslint src/**"
 	}
 }

@@ -43,7 +43,7 @@ EngangsstonadIndex.defaultProps = {
 	error: null
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
 	data: state.engangsstonadReducer.data,
 	error: state.engangsstonadReducer.error
 });
