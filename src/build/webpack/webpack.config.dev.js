@@ -1,4 +1,4 @@
-const webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('./webpack.config.global.js');
 const devServerConfig = require('./devserver.config');
 
 webpackConfig.entry = [
