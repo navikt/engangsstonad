@@ -1,4 +1,5 @@
 {
+	"plugins": ["react", "prettier"],
 	"env": {
 		"browser": true,
 		"mocha": true,
@@ -15,9 +16,29 @@
 		}
 	},
 	"parser": "babel-eslint",
-	"plugins": ["react", "prettier"],
-	"extends": ["airbnb", "prettier", "prettier/react"],
 	"rules": {
+		"object-curly-spacing": 1,
+		"react/jsx-curly-spacing": 0,
+		"react/prefer-es6-class": 1,
+		"react/sort-comp": 0,
+		"react/jsx-boolean-value": 0,
+		"react/jsx-no-bind": [
+			2,
+			{
+				"allowArrowFunctions": true
+			}
+		],
+		"react/forbid-prop-types": [
+			1,
+			{
+				"forbid": ["any"]
+			}
+		],
+		"quote-props": "off",
+		"func-names": 0,
+		"no-underscore-dangle": 0,
+		"import/extensions": 0,
+		"prettier/prettier": "error",
 		"no-unused-vars": [
 			2,
 			{
@@ -25,10 +46,10 @@
 				"varsIgnorePattern": "^_"
 			}
 		],
-		"linebreak-style": 0,
+		"linebreak-style": [2, "windows"] /* "linebreak-style": 0,*/,
 		"indent": [
 			2,
-			4,
+			"tab",
 			{
 				"SwitchCase": 1
 			}
@@ -57,8 +78,7 @@
 			{
 				"extensions": [".js", ".jsx"]
 			}
-		],
-		"react/jsx-indent-props": [2, 4],
-		"react/jsx-indent": [2, 4]
-	}
+		]
+	},
+	"extends": ["airbnb", "prettier", "prettier/react"]
 }
