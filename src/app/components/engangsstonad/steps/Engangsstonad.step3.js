@@ -21,7 +21,6 @@ import NumberSelector from 'shared/number-selector/NumberSelector';
 export class Step3 extends Component {
     constructor(props) {
         super(props);
-        this.shouldNextButtonBeEnabled = this.shouldNextButtonBeEnabled.bind(this);
 
         if (this.shouldNextButtonBeEnabled(props)) {
             this.props.enableNextButton();
@@ -38,12 +37,9 @@ export class Step3 extends Component {
         return this.props.disableNextButton();
     }
 
+    // eslint-disable-next-line class-methods-use-this
     shouldNextButtonBeEnabled(props) {
-        if (props.oppholdSisteTolv && props.oppholdNaa && props.oppholdNesteTolv) {
-            return true;
-        }
-
-        return false;
+        return (props.oppholdSisteTolv && props.oppholdNaa && props.oppholdNesteTolv);
     }
 
     render() {
