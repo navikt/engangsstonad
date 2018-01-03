@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const webpackConfig = require('./webpack/webpack.config.production');
+const webpackConfig = require('../webpack/webpack.config.production');
 const configDecorator = require('./decorator');
 
 const cb = (err) => {
