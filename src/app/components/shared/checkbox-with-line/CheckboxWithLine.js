@@ -7,27 +7,25 @@ import DisplayTextWithLabel from '../display-text-with-label/DisplayTextWithLabe
 import './checkboxWithLine.less';
 
 const CheckboxWithLine = (props) => {
-    const renderTexts = () => (
-        props.content.map((entry, index) => (
-            <DisplayTextWithLabel
-                {...entry}
-                // eslint-disable-next-line react/no-array-index-key
-                key={`${entry.label}-${index}`}
-            />))
-    );
+	const renderTexts = () =>
+		props.content.map((entry, index) => (
+			<DisplayTextWithLabel
+				{...entry}
+				// eslint-disable-next-line react/no-array-index-key
+				key={`${entry.label}-${index}`}
+			/>
+		));
 
-    return (
-        <div className="checkboxWithLine">
-            <Checkbox label="" />
-            <div className="checkboxWithLine__content">
-                {renderTexts()}
-            </div>
-        </div>
-    );
+	return (
+		<div className="checkboxWithLine">
+			<Checkbox label="" />
+			<div className="checkboxWithLine__content">{renderTexts()}</div>
+		</div>
+	);
 };
 
 CheckboxWithLine.propTypes = {
-    content: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+	content: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 
 export default CheckboxWithLine;
