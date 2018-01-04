@@ -82,7 +82,7 @@ NavBar.defaultProps = {
 class DayPickerComponent extends Component {
 	componentDidMount() {
 		this.lukk = () => {
-			this.props.lukk();
+			this.props.close();
 		};
 
 		document.body.click(); // remove other datepickers
@@ -99,7 +99,7 @@ class DayPickerComponent extends Component {
 	}
 
 	getInitialMonth() {
-		return this.getDateFromValue() || this.props.tidligsteFom || new Date();
+		return this.getDateFromValue() || this.props.fromDate || new Date();
 	}
 
 	selectedDays(day) {
@@ -111,7 +111,6 @@ class DayPickerComponent extends Component {
 		return (
 			<div // eslint-disable-line jsx-a11y/no-static-element-interactions
 				className="datovelger__DayPicker"
-				// aria-controlledby={ariaControlledBy} // eslint-disable-line jsx-a11y/aria-props
 				onKeyUp={(e) => {
 					onKeyUp(e);
 				}}>
@@ -132,14 +131,14 @@ class DayPickerComponent extends Component {
 DayPickerComponent.propTypes = {
 	input: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
 	onKeyUp: PT.func.isRequired,
-	lukk: PT.func.isRequired,
+	close: PT.func.isRequired,
 	onDayClick: PT.func.isRequired,
-	tidligsteFom: PT.instanceOf(Date)
+	fromDate: PT.instanceOf(Date)
 	// intl: intlShape.isRequired
 };
 
 DayPickerComponent.defaultProps = {
-	tidligsteFom: undefined
+	fromDate: undefined
 };
 
 export default DayPickerComponent;

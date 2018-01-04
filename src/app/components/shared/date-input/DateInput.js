@@ -9,7 +9,7 @@ import {
 	isValidISODate,
 	ISODateToMaskedInput,
 	datePickerToISODate
-} from './dateUtil';
+} from '../../../util/date';
 
 import './dayPicker.less';
 
@@ -107,8 +107,8 @@ class DateInput extends Component {
 			input,
 			label,
 			disabled,
-			tidligsteFom,
-			senesteTom,
+			fromDate,
+			toDate,
 			errorMessage
 		} = this.props;
 
@@ -137,7 +137,6 @@ class DateInput extends Component {
 							mask="11.11.1111"
 							autoComplete="off"
 							placeholder="dd.mm.åååå"
-							id="id"
 							disabled={disabled}
 							className="skjemaelement__input input--m datovelger__input"
 							{...maskedInputProps}
@@ -151,7 +150,6 @@ class DateInput extends Component {
 							ref={(toggle) => {
 								this.toggleButton = toggle;
 							}}
-							id="id"
 							disabled={disabled}
 							onKeyUp={this.onKeyUp}
 							onClick={this.toggle}
@@ -164,8 +162,8 @@ class DateInput extends Component {
 						<DatePicker
 							{...this.props}
 							ariaControls="toggle-id"
-							tidligsteFom={tidligsteFom}
-							senesteTom={senesteTom}
+							fromDate={fromDate}
+							toDate={toDate}
 							onDayClick={this.onDayClick}
 							onKeyUp={this.onKeyUp}
 							lukk={this.close}
@@ -187,16 +185,16 @@ DateInput.propTypes = {
 	label: PT.oneOfType([PT.string, PT.node]).isRequired,
 	input: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
 	disabled: PT.bool,
-	tidligsteFom: PT.instanceOf(Date),
-	senesteTom: PT.instanceOf(Date),
+	fromDate: PT.instanceOf(Date),
+	toDate: PT.instanceOf(Date),
 	errorMessage: PT.oneOfType([PT.arrayOf(PT.node), PT.node]),
 	onChange: PT.func.isRequired
 };
 
 DateInput.defaultProps = {
 	disabled: false,
-	tidligsteFom: undefined,
-	senesteTom: undefined,
+	fromDate: undefined,
+	toDate: undefined,
 	errorMessage: undefined
 };
 export default DateInput;

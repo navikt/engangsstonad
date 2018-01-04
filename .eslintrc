@@ -11,7 +11,8 @@
 	"settings": {
 		"import/resolver": {
 			"webpack": {
-				"config": "./src/config/webpack.dev.js"
+				"config": "./src/build/webpack/webpack.config.global.js"
+
 			}
 		}
 	},
