@@ -5,28 +5,26 @@ import IconWithText from '../icon-with-text/IconWithText';
 import './opplysningpanel.less';
 
 const OpplysningPanel = (props) => (
-    <div className="opplysningPanel">
-        <IconWithText kind={props.iconKind} text={props.title} />
-        {
-            props.opplysningData.map((opplysninger, index) => (
-                <DisplayTextWithLabel
-                    // eslint-disable-next-line react/no-array-index-key
-                    key={opplysninger.text + index}
-                    {...opplysninger}
-                />
-            ))
-        }
-    </div>
+	<div className="opplysningPanel">
+		<IconWithText kind={props.iconKind} text={props.title} />
+		{props.opplysningData.map((opplysninger, index) => (
+			<DisplayTextWithLabel
+				// eslint-disable-next-line react/no-array-index-key
+				key={opplysninger.text + index}
+				{...opplysninger}
+			/>
+		))}
+	</div>
 );
 
 OpplysningPanel.propTypes = {
-    iconKind: PropTypes.string.isRequired,
-    opplysningData: PropTypes.arrayOf(PropTypes.object).isRequired,
-    title: PropTypes.string
+	iconKind: PropTypes.string.isRequired,
+	opplysningData: PropTypes.arrayOf(PropTypes.object).isRequired,
+	title: PropTypes.string
 };
 
 OpplysningPanel.defaultProps = {
-    title: ''
+	title: ''
 };
 
 export default OpplysningPanel;
