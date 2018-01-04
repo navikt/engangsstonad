@@ -32,6 +32,10 @@ export class Step1 extends Component {
 		return this.props.disableNextButton();
 	}
 
+	componentDidMount() {
+		document.title = 'NAV Engangsstønad - Samtykke';
+	}
+
 	render() {
 		// eslint-disable-next-line no-shadow
 		const { approveConditions, approvedConditions } = this.props;
