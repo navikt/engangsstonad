@@ -4,7 +4,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const axios = require('axios');
 
 const { JSDOM } = jsdom;
-const getDecorator = () => (axios({ method: 'get', url: process.env.DECORATOR_URL }));
+const getDecorator = () => (axios({
+    method: 'get',
+    // eslint-disable-next-line
+    url: 'https://appres-t1.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true'
+}));
 
 const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
     const html = decoratorResponse.data;
