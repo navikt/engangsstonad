@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Modal from "nav-frontend-modal";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Modal from 'nav-frontend-modal';
 
-import ModalHeader from "./Modal.header";
+import ModalHeader from './Modal.header';
 
-import "./modal.less";
+import './modal.less';
 
 const FpModal = ({ children, title, type }) => (
 	<Modal

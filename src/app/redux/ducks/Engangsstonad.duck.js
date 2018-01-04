@@ -1,20 +1,20 @@
-import { all, put, call, takeEvery } from "redux-saga/effects";
-import Api from "./../../api";
+import { all, put, call, takeEvery } from 'redux-saga/effects';
+import Api from './../../api';
 
-const APPROVE_CONDITIONS = "APPROVE_CONDITIONS";
-const CONFIRM_INFORMATION = "CONFIRM_INFORMATION";
-const ENABLE_NEXT_BUTTON = "ENABLE_NEXT_BUTTON";
-const DISABLE_NEXT_BUTTON = "DISABLE_NEXT_BUTTON";
-const TOGGLE_CHILD_BORN = "TOGGLE_CHILD_BORN";
-const TOGGLE_NO_OF_CHILDREN = "TOGGLE_NO_OF_CHILDREN";
-const SET_TERMIN_DATO = "SET_TERMIN_DATO";
-const SET_BEKREFTET_TERMIN_DATO = "SET_BEKREFTET_TERMIN_DATO";
-const TOGGLE_SISTE_TOLV = "TOGGLE_SISTE_TOLV";
-const TOGGLE_NESTE_TOLV = "TOGGLE_NESTE_TOLV";
-const TOGGLE_OPPHOLD_NAA = "TOGGLE_OPPHOLD_NAA";
-const GET_DATA_REQUESTED = "GET_DATA_REQUESTED";
-const GET_DATA_SUCCESS = "GET_DATA_SUCCESS";
-const GET_DATA_FAILED = "GET_DATA_FAILED";
+const APPROVE_CONDITIONS = 'APPROVE_CONDITIONS';
+const CONFIRM_INFORMATION = 'CONFIRM_INFORMATION';
+const ENABLE_NEXT_BUTTON = 'ENABLE_NEXT_BUTTON';
+const DISABLE_NEXT_BUTTON = 'DISABLE_NEXT_BUTTON';
+const TOGGLE_CHILD_BORN = 'TOGGLE_CHILD_BORN';
+const TOGGLE_NO_OF_CHILDREN = 'TOGGLE_NO_OF_CHILDREN';
+const SET_TERMIN_DATO = 'SET_TERMIN_DATO';
+const SET_BEKREFTET_TERMIN_DATO = 'SET_BEKREFTET_TERMIN_DATO';
+const TOGGLE_SISTE_TOLV = 'TOGGLE_SISTE_TOLV';
+const TOGGLE_NESTE_TOLV = 'TOGGLE_NESTE_TOLV';
+const TOGGLE_OPPHOLD_NAA = 'TOGGLE_OPPHOLD_NAA';
+const GET_DATA_REQUESTED = 'GET_DATA_REQUESTED';
+const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
+const GET_DATA_FAILED = 'GET_DATA_FAILED';
 
 export const approveConditions = () => ({ type: APPROVE_CONDITIONS });
 export const confirmInformation = () => ({ type: CONFIRM_INFORMATION });
@@ -22,7 +22,7 @@ export const enableNextButton = () => ({ type: ENABLE_NEXT_BUTTON });
 export const disableNextButton = () => ({ type: DISABLE_NEXT_BUTTON });
 export const toggleChildBorn = (e) => ({
 	type: TOGGLE_CHILD_BORN,
-	data: e.target.value === "ja"
+	data: e.target.value === 'ja'
 });
 export const toggleNoOfChildren = (e) => ({
 	type: TOGGLE_NO_OF_CHILDREN,

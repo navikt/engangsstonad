@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Input } from "nav-frontend-skjema";
+import { Input } from 'nav-frontend-skjema';
 
 const DateInput = (props) => (
 	<Input
@@ -21,7 +21,7 @@ DateInput.propTypes = {
 };
 
 DateInput.defaultProps = {
-	className: "",
+	className: '',
 	onChange: () => undefined
 };
 

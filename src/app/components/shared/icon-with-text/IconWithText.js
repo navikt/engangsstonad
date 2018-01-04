@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Undertittel } from "nav-frontend-typografi";
-import Icon from "nav-frontend-ikoner-assets";
-import "./iconWithText.less";
+import { Undertittel } from 'nav-frontend-typografi';
+import Icon from 'nav-frontend-ikoner-assets';
+import './iconWithText.less';
 
 const IconWithText = (props) => (
 	<div className="iconWithText">

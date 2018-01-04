@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
-import { Normaltekst, Element } from "nav-frontend-typografi";
-import { ToggleGruppe, ToggleKnapp } from "nav-frontend-skjema";
+import { Normaltekst, Element } from 'nav-frontend-typografi';
+import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-skjema';
 
 import {
 	toggleChildBorn,
@@ -13,12 +13,12 @@ import {
 	toggleNoOfChildren,
 	setTerminDato,
 	setBekreftetTermindato
-} from "ducks/Engangsstonad.duck";
+} from 'ducks/Engangsstonad.duck';
 
-import DialogBox from "shared/dialog-box/DialogBox";
-import DateInput from "shared/date-input/DateInput";
-import AttachmentList from "shared/attachment-list/AttachmentList";
-import AttachmentButton from "shared/attachment-button/AttachmentButton";
+import DialogBox from 'shared/dialog-box/DialogBox';
+import DateInput from 'shared/date-input/DateInput';
+import AttachmentList from 'shared/attachment-list/AttachmentList';
+import AttachmentButton from 'shared/attachment-button/AttachmentButton';
 
 export class Step2 extends Component {
 	constructor(props) {
@@ -77,17 +77,17 @@ export class Step2 extends Component {
 							onChange={this.props.toggleNoOfChildren}
 							name="noOfChildren">
 							<ToggleKnapp
-								defaultChecked={this.props.noOfChildren === "1"}
+								defaultChecked={this.props.noOfChildren === '1'}
 								value="1">
 								et barn
 							</ToggleKnapp>
 							<ToggleKnapp
-								defaultChecked={this.props.noOfChildren === "2"}
+								defaultChecked={this.props.noOfChildren === '2'}
 								value="2">
 								tvillinger
 							</ToggleKnapp>
 							<ToggleKnapp
-								defaultChecked={this.props.noOfChildren === "3"}
+								defaultChecked={this.props.noOfChildren === '3'}
 								value="3">
 								trillinger
 							</ToggleKnapp>

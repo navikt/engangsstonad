@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { EtikettLiten, Normaltekst } from "nav-frontend-typografi";
+import { EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
 
-import "./displayTextWithLabel.less";
+import './displayTextWithLabel.less';
 
 export const DisplayTextWithLabel = (props) => (
 	<div className="textWithLabel">

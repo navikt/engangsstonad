@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Checkbox } from "nav-frontend-skjema";
+import { Checkbox } from 'nav-frontend-skjema';
 
-import DisplayTextWithLabel from "../display-text-with-label/DisplayTextWithLabel";
-import "./checkboxWithLine.less";
+import DisplayTextWithLabel from '../display-text-with-label/DisplayTextWithLabel';
+import './checkboxWithLine.less';
 
 const CheckboxWithLine = (props) => {
 	const renderTexts = () =>

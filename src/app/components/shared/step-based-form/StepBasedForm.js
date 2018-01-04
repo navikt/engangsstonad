@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Switch } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Switch } from 'react-router-dom';
 
-import { Sidetittel } from "nav-frontend-typografi";
+import { Sidetittel } from 'nav-frontend-typografi';
 
-import Stepper from "./../stepper/Stepper";
-import Step from "./../step/Step";
+import Stepper from './../stepper/Stepper';
+import Step from './../step/Step';
 
-import "./stepBasedForm.less";
+import './stepBasedForm.less';
 
 const Header = (props) => (
 	<div className="stepBasedForm__header">
@@ -20,7 +20,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
-	title: ""
+	title: ''
 };
 
 const StepBasedForm = (props) => {
@@ -40,7 +40,7 @@ const StepBasedForm = (props) => {
 		if (nextRoute && nextRoute.props) {
 			return nextRoute.props.path;
 		}
-		return "/";
+		return '/';
 	};
 
 	const findPreviousRoutePath = () => {
@@ -102,8 +102,8 @@ StepBasedForm.propTypes = {
 };
 
 StepBasedForm.defaultProps = {
-	className: "",
-	title: "",
+	className: '',
+	title: '',
 	afterSubmissionRoute: true
 };
 

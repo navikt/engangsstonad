@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import Icon from "nav-frontend-ikoner-assets";
+import Icon from 'nav-frontend-ikoner-assets';
 
-import "./numberSelector.less";
+import './numberSelector.less';
 
 const NumberSelector = () => (
 	<div className="numberSelectorWrapper">

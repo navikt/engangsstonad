@@ -1,22 +1,22 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
-import infoIcon from "assets/svg/employee_nautral.svg";
-import alertIcon from "assets/svg/employee_sad.svg";
-import warningIcon from "assets/svg/employee_warning.svg";
-import successIcon from "assets/svg/employee_happy.svg";
-import CustomSVG from "../custom-svg/CustomSVG";
+import infoIcon from 'assets/svg/employee_nautral.svg';
+import alertIcon from 'assets/svg/employee_sad.svg';
+import warningIcon from 'assets/svg/employee_warning.svg';
+import successIcon from 'assets/svg/employee_happy.svg';
+import CustomSVG from '../custom-svg/CustomSVG';
 
-import "./dialogBox.less";
+import './dialogBox.less';
 
 const getIcon = (type) => {
 	switch (type) {
-		case "success":
+		case 'success':
 			return successIcon;
-		case "alert":
+		case 'alert':
 			return alertIcon;
-		case "warning":
+		case 'warning':
 			return warningIcon;
 		default:
 			return infoIcon;
@@ -24,11 +24,11 @@ const getIcon = (type) => {
 };
 
 const getClassnames = (props) =>
-	classNames("dialogBox", {
-		"dialogBox--info": props.type === "info",
-		"dialogBox--alert": props.type === "alert",
-		"dialogBox--warning": props.type === "warning",
-		"dialogBox--success": props.type === "success"
+	classNames('dialogBox', {
+		'dialogBox--info': props.type === 'info',
+		'dialogBox--alert': props.type === 'alert',
+		'dialogBox--warning': props.type === 'warning',
+		'dialogBox--success': props.type === 'success'
 	});
 
 const DialogBoxBase = (props) => {
@@ -51,7 +51,7 @@ DialogBoxBase.propTypes = {
 };
 
 DialogBoxBase.defaultProps = {
-	type: ""
+	type: ''
 };
 
 const DialogBox = (props) => <DialogBoxBase {...props} />;

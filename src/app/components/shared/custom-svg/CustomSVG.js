@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class CustomSVGFromSprite extends React.Component {
 	renderIcon(svgAttrs) {
@@ -12,7 +12,7 @@ export default class CustomSVGFromSprite extends React.Component {
 
 	render() {
 		const svgAttrs = {
-			"view-box": this.props.iconRef.viewBox,
+			'view-box': this.props.iconRef.viewBox,
 			height: this.props.size,
 			width: this.props.size,
 			className: this.props.className
@@ -31,5 +31,5 @@ CustomSVGFromSprite.propTypes = {
 
 CustomSVGFromSprite.defaultProps = {
 	size: undefined,
-	className: ""
+	className: ''
 };
