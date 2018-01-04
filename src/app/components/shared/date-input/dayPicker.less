@@ -71,9 +71,9 @@
     cursor: pointer;
     border: 0;
     background-color: transparent;
-    // background-image: data-uri(
-    //     '@{aktivitetsplanPath}/felles-komponenter/skjema/datovelger/pil-videre.svg'
-    // );
+    background-image: data-uri(
+        '../../../assets/svg/pil.svg'
+    );
     background-size: 1.25em 1.25em;
 
     &:focus {
@@ -83,9 +83,9 @@
 
     &:focus,
     &:hover {
-        // background-image: data-uri(
-        //     '@{aktivitetsplanPath}/felles-komponenter/skjema/datovelger/pil-videre--hover.svg'
-        // );
+        background-image: data-uri(
+            '../../../assets/svg/pil--hover.svg'
+            );
     }
 
     &--prev {
@@ -204,6 +204,10 @@
     color: @white;
 }
 
+.input-error {
+    background-color: #F1D8D4;
+}
+
 .datovelger {
     position: relative;
     width: 100%;
@@ -214,6 +218,10 @@
         &::-ms-clear {
             display: none;
         }
+    }
+
+    &__outer {
+        padding: 7px 0px 7px 7px;
     }
 
     &__inner {
@@ -270,14 +278,14 @@
             text-indent: -9999px;
             width: 2rem;
             height: 100%;
-            border: 0;
-            border-left: 1px solid @gray-icon;
+            border-radius: 0 4px 4px 0;
+            border: 1px solid @bla;
             background-color: transparent;
             padding: 0;
             position: absolute;
-            // background-image: data-uri(
-            //     '@{aktivitetsplanPath}/felles-komponenter/skjema/datovelger/kalender.svg'
-            // );
+            background-image: data-uri(
+                '../../../assets/svg/kalender.svg'
+            );
             background-repeat: no-repeat;
             background-position: center center;
             background-size: 16px 16px;
@@ -289,15 +297,15 @@
 
             &:hover:not(:disabled),
             &:focus {
-                // background-image: data-uri(
-                //     '@{aktivitetsplanPath}/felles-komponenter/skjema/datovelger/kalender--hover.svg'
-                // );
+                background-image: data-uri(
+                    '../../../assets/svg/kalender--hover.svg'
+                );
             }
 
             &:active {
-                // background-image: data-uri(
-                //     '@{aktivitetsplanPath}/felles-komponenter/skjema/datovelger/kalender--aktiv.svg'
-                // );
+                background-image: data-uri(
+                    '../../../assets/svg/kalender--aktiv.svg'
+                );
             }
         }
     }

@@ -2,34 +2,34 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import moment from 'moment';
-import { FormattedDate, injectIntl, intlShape } from 'react-intl';
+//import { FormattedDate, injectIntl, intlShape } from 'react-intl';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import MomentLocaleUtils from 'react-day-picker/moment';
+import 'moment/locale/nb';
 
 const localeUtils = {
     ...MomentLocaleUtils,
-    formatWeekdayShort: (i, locale) =>
-        MomentLocaleUtils.formatWeekdayLong(i, locale).substring(0, 3)
+    formatWeekdayShort: (i, locale) => MomentLocaleUtils.formatWeekdayLong(i, locale).substring(0, 3)
 };
 
-export const Caption = ({ date }) => (
-    <div
-        className="DayPicker-Caption"
-        role="heading"
-        aria-live="assertive"
-        aria-atomic="true"
-    >
-        <FormattedDate month="long" year="numeric" value={date} />
-    </div>
-);
+// export const Caption = ({ date }) => (
+//     <div
+//         className="DayPicker-Caption"
+//         role="heading"
+//         aria-live="assertive"
+//         aria-atomic="true"
+//     >
+//         <FormattedDate month="long" year="numeric" value={date} />
+//     </div>
+// );
 
-Caption.propTypes = {
-    date: PT.instanceOf(Date)
-};
+// Caption.propTypes = {
+//     date: PT.instanceOf(Date)
+// };
 
-Caption.defaultProps = {
-    date: undefined
-};
+// Caption.defaultProps = {
+//     date: undefined
+// };
 
 export const NavBar = ({
     onNextClick,
@@ -84,7 +84,7 @@ class DayPickerComponent extends Component {
             this.props.lukk();
         };
 
-        document.body.click(); // fjern andre datepickere
+        document.body.click(); // remove other datepickers
         document.addEventListener('click', this.lukk);
     }
 
@@ -110,6 +110,7 @@ class DayPickerComponent extends Component {
         return (
             <div // eslint-disable-line jsx-a11y/no-static-element-interactions
                 className="datovelger__DayPicker"
+                //aria-controlledby={ariaControlledBy} // eslint-disable-line jsx-a11y/aria-props
                 onKeyUp={(e) => {
                     onKeyUp(e);
                 }}
@@ -119,8 +120,7 @@ class DayPickerComponent extends Component {
                     initialMonth={this.getInitialMonth()}
                     localeUtils={localeUtils}
                     firstDayOfWeek={1}
-                    captionElement={<Caption />}
-                    navbarElement={<NavBar intl={this.props.intl} />}
+                    navbarElement={<NavBar />}
                     selectedDays={(day) => this.selectedDays(day)}
                     onDayClick={(event) => this.props.onDayClick(event)}
                 />
@@ -135,8 +135,8 @@ DayPickerComponent.propTypes = {
     lukk: PT.func.isRequired,
     ariaControlledBy: PT.string,
     onDayClick: PT.func.isRequired,
-    tidligsteFom: PT.instanceOf(Date),
-    intl: intlShape.isRequired
+    tidligsteFom: PT.instanceOf(Date)
+    //intl: intlShape.isRequired
 };
 
 DayPickerComponent.defaultProps = {
@@ -144,4 +144,4 @@ DayPickerComponent.defaultProps = {
     tidligsteFom: undefined
 };
 
-export default injectIntl(DayPickerComponent);
+export default DayPickerComponent;

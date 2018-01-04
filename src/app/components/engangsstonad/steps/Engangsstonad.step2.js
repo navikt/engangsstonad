@@ -29,7 +29,7 @@ export class Step2 extends Component {
             this.props.enableNextButton();
         } else {
             this.props.disableNextButton();
-        }
+        } 
     }
 
     componentWillReceiveProps(nextProps) {
@@ -104,6 +104,9 @@ export class Step2 extends Component {
                                     input={{ value: this.props.terminDato }}
                                     label="med termindato den..."
                                     onChange={(e) => this.props.setTerminDato(e)}
+                                    tidligsteFom={new Date()}
+                                    validate={() => console.log('validate')}
+                                    //errorMessage="Feil"
                                 />
                                 {this.props.terminDato &&
                                     <div>

@@ -5,15 +5,30 @@ import { Element } from 'nav-frontend-typografi';
 
 import DatePicker from './DatePicker';
 import {
-    autobind,
     dateToISODate,
-    erGyldigISODato,
-    ISODateToDatePicker,
-    datePickerToISODate,
-    stopEvent
+    isValidISODate,
+    ISODateToMaskedInput,
+    datePickerToISODate
 } from './dateUtil';
 
 import './dayPicker.less';
+
+const stopEvent = (event) => {
+    try {
+        event.nativeEvent.stopImmediatePropagation();
+    } catch (e) {
+        event.stopPropagation();
+    }
+};
+
+const autobind = (ctx) => {
+    Object.getOwnPropertyNames(ctx.constructor.prototype)
+        .filter((prop) => typeof ctx[prop] === 'function')
+        .forEach((method) => {
+            // eslint-disable-next-line
+            ctx[method] = ctx[method].bind(ctx);
+        });
+};
 
 class DateInput extends Component {
     constructor(props) {
@@ -35,8 +50,8 @@ class DateInput extends Component {
     onFocusOut(e) {
         const { relatedTarget } = e;
         if (relatedTarget) {
-            const targetErChildnode = this.container.contains(relatedTarget);
-            if (!targetErChildnode) {
+            const targetIsChildNode = this.container.contains(relatedTarget);
+            if (!targetIsChildNode) {
                 this.close(false);
             }
         }
@@ -58,7 +73,7 @@ class DateInput extends Component {
     onMaskedInputChange(e) {
         const inputDate = e.target.value;
         const isoDate = datePickerToISODate(inputDate);
-        if (erGyldigISODato(isoDate)) {
+        if (isValidISODate(isoDate)) {
             this.props.onChange(isoDate);
         }
     }
@@ -78,11 +93,11 @@ class DateInput extends Component {
         });
     }
 
-    close(settFokus = true) {
+    close(setFocus = true) {
         this.setState({
             isOpen: false
         });
-        if (settFokus) {
+        if (setFocus) {
             this.toggleButton.focus();
         }
     }
@@ -97,16 +112,16 @@ class DateInput extends Component {
             errorMessage
         } = this.props;
 
-        const feil = errorMessage && errorMessage;
+        const error = errorMessage && errorMessage;
         const { value } = input;
         const maskedInputProps = {
             ...input,
-            value: erGyldigISODato(value) ? ISODateToDatePicker(value) : value
+            value: isValidISODate(value) ? ISODateToMaskedInput(value) : value
         };
 
         return (
             <div
-                className="datovelger skjemaelement"
+                className={`datovelger__outer skjemaelement ${error && 'input-error'}`}
                 ref={(container) => {
                     this.container = container;
                 }}
@@ -168,7 +183,7 @@ class DateInput extends Component {
                     aria-live="assertive"
                     className="skjemaelement__feilmelding"
                 >
-                    {feil}
+                    {error}
                 </div>
 
             </div>
@@ -177,9 +192,6 @@ class DateInput extends Component {
 }
 
 DateInput.propTypes = {
-    //meta: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
-    //id: PT.string.isRequired,
-    //feltNavn: PT.string.isRequired,
     label: PT.oneOfType([PT.string, PT.node]).isRequired,
     input: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     disabled: PT.bool,
@@ -195,5 +207,4 @@ DateInput.defaultProps = {
     senesteTom: undefined,
     errorMessage: undefined
 };
-
 export default DateInput;
