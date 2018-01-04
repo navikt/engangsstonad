@@ -20,121 +20,139 @@ export const approveConditions = () => ({ type: APPROVE_CONDITIONS });
 export const confirmInformation = () => ({ type: CONFIRM_INFORMATION });
 export const enableNextButton = () => ({ type: ENABLE_NEXT_BUTTON });
 export const disableNextButton = () => ({ type: DISABLE_NEXT_BUTTON });
-export const toggleChildBorn = (e) => ({ type: TOGGLE_CHILD_BORN, data: e.target.value === 'ja' });
-export const toggleNoOfChildren = (e) => ({ type: TOGGLE_NO_OF_CHILDREN, data: e.target.value });
-export const setTerminDato = (e) => ({ type: SET_TERMIN_DATO, data: e.target.value });
-export const setBekreftetTermindato = (e) => ({ type: SET_BEKREFTET_TERMIN_DATO, data: e.target.value });
-export const toggleSisteTolv = (e) => ({ type: TOGGLE_SISTE_TOLV, data: e.target.value });
-export const toggleNesteTolv = (e) => ({ type: TOGGLE_NESTE_TOLV, data: e.target.value });
-export const toggleOppholdNaa = (e) => ({ type: TOGGLE_OPPHOLD_NAA, data: e.target.value });
+export const toggleChildBorn = (e) => ({
+	type: TOGGLE_CHILD_BORN,
+	data: e.target.value === 'ja'
+});
+export const toggleNoOfChildren = (e) => ({
+	type: TOGGLE_NO_OF_CHILDREN,
+	data: e.target.value
+});
+export const setTerminDato = (e) => ({
+	type: SET_TERMIN_DATO,
+	data: e.target.value
+});
+export const setBekreftetTermindato = (e) => ({
+	type: SET_BEKREFTET_TERMIN_DATO,
+	data: e.target.value
+});
+export const toggleSisteTolv = (e) => ({
+	type: TOGGLE_SISTE_TOLV,
+	data: e.target.value
+});
+export const toggleNesteTolv = (e) => ({
+	type: TOGGLE_NESTE_TOLV,
+	data: e.target.value
+});
+export const toggleOppholdNaa = (e) => ({
+	type: TOGGLE_OPPHOLD_NAA,
+	data: e.target.value
+});
 export const getDataRequested = () => ({ type: GET_DATA_REQUESTED });
 
-
 const defaultState = {
-    approvedConditions: undefined,
-    confirmedInformation: undefined,
-    nextButtonEnabled: false,
-    childBorn: undefined,
-    noOfChildren: undefined,
-    terminDato: undefined,
-    bekreftetTermindato: undefined,
-    oppholdSisteTolv: undefined,
-    oppholdNesteTolv: undefined,
-    oppholdNaa: undefined,
-    data: null
+	approvedConditions: undefined,
+	confirmedInformation: undefined,
+	nextButtonEnabled: false,
+	childBorn: undefined,
+	noOfChildren: undefined,
+	terminDato: undefined,
+	bekreftetTermindato: undefined,
+	oppholdSisteTolv: undefined,
+	oppholdNesteTolv: undefined,
+	oppholdNaa: undefined,
+	data: null
 };
 
 const engangsstonadReducer = (state = defaultState, action) => {
-    switch (action.type) {
-        case APPROVE_CONDITIONS:
-            return {
-                ...state,
-                approvedConditions: !state.approvedConditions
-            };
-        case CONFIRM_INFORMATION:
-            return {
-                ...state,
-                confirmedInformation: !state.confirmedInformation
-            };
-        case ENABLE_NEXT_BUTTON:
-            return {
-                ...state,
-                nextButtonEnabled: true
-            };
-        case DISABLE_NEXT_BUTTON:
-            return {
-                ...state,
-                nextButtonEnabled: false
-            };
-        case TOGGLE_CHILD_BORN:
-            return {
-                ...state,
-                childBorn: action.data
-            };
-        case TOGGLE_NO_OF_CHILDREN:
-            return {
-                ...state,
-                noOfChildren: action.data
-            };
-        case SET_TERMIN_DATO:
-            return {
-                ...state,
-                terminDato: action.data
-            };
-        case SET_BEKREFTET_TERMIN_DATO:
-            return {
-                ...state,
-                bekreftetTermindato: action.data
-            };
-        case TOGGLE_SISTE_TOLV:
-            return {
-                ...state,
-                oppholdSisteTolv: action.data
-            };
-        case TOGGLE_NESTE_TOLV:
-            return {
-                ...state,
-                oppholdNesteTolv: action.data
-            };
-        case TOGGLE_OPPHOLD_NAA:
-            return {
-                ...state,
-                oppholdNaa: action.data
-            };
-        case GET_DATA_SUCCESS:
-            return {
-                ...state,
-                data: action.data
-            };
-        case GET_DATA_FAILED:
-            return {
-                ...state,
-                error: action.error
-            };
-        default:
-            return state;
-    }
+	switch (action.type) {
+		case APPROVE_CONDITIONS:
+			return {
+				...state,
+				approvedConditions: !state.approvedConditions
+			};
+		case CONFIRM_INFORMATION:
+			return {
+				...state,
+				confirmedInformation: !state.confirmedInformation
+			};
+		case ENABLE_NEXT_BUTTON:
+			return {
+				...state,
+				nextButtonEnabled: true
+			};
+		case DISABLE_NEXT_BUTTON:
+			return {
+				...state,
+				nextButtonEnabled: false
+			};
+		case TOGGLE_CHILD_BORN:
+			return {
+				...state,
+				childBorn: action.data
+			};
+		case TOGGLE_NO_OF_CHILDREN:
+			return {
+				...state,
+				noOfChildren: action.data
+			};
+		case SET_TERMIN_DATO:
+			return {
+				...state,
+				terminDato: action.data
+			};
+		case SET_BEKREFTET_TERMIN_DATO:
+			return {
+				...state,
+				bekreftetTermindato: action.data
+			};
+		case TOGGLE_SISTE_TOLV:
+			return {
+				...state,
+				oppholdSisteTolv: action.data
+			};
+		case TOGGLE_NESTE_TOLV:
+			return {
+				...state,
+				oppholdNesteTolv: action.data
+			};
+		case TOGGLE_OPPHOLD_NAA:
+			return {
+				...state,
+				oppholdNaa: action.data
+			};
+		case GET_DATA_SUCCESS:
+			return {
+				...state,
+				data: action.data
+			};
+		case GET_DATA_FAILED:
+			return {
+				...state,
+				error: action.error
+			};
+		default:
+			return state;
+	}
 };
 
 function* getData() {
-    try {
-        const data = yield call(Api.fetchData);
-        yield put({
-            type: GET_DATA_SUCCESS,
-            data
-        });
-    } catch (error) {
-        yield put({
-            type: GET_DATA_FAILED,
-            error
-        });
-    }
+	try {
+		const data = yield call(Api.fetchData);
+		yield put({
+			type: GET_DATA_SUCCESS,
+			data
+		});
+	} catch (error) {
+		yield put({
+			type: GET_DATA_FAILED,
+			error
+		});
+	}
 }
 
 export function* sagas() {
-    yield all([
-        takeEvery(GET_DATA_REQUESTED, getData)
-    ]);
+	yield all([takeEvery(GET_DATA_REQUESTED, getData)]);
 }
 
 export default engangsstonadReducer;

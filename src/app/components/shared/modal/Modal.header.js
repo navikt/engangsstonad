@@ -9,30 +9,33 @@ import successIcon from 'assets/svg/employee_happy.svg';
 import CustomSVG from 'shared/custom-svg/CustomSVG';
 
 const getIcon = (type) => {
-    switch (type) {
-        case 'success': return successIcon;
-        case 'alert': return alertIcon;
-        case 'warning': return warningIcon;
-        default: return infoIcon;
-    }
+	switch (type) {
+		case 'success':
+			return successIcon;
+		case 'alert':
+			return alertIcon;
+		case 'warning':
+			return warningIcon;
+		default:
+			return infoIcon;
+	}
 };
 
 const ModalHeader = ({ title, type }) => (
-    <div className="header">
-        <CustomSVG iconRef={getIcon(type)} className="header__illustration" />
-        <Undertittel className="header__title">{title}</Undertittel>
-    </div>
+	<div className="header">
+		<CustomSVG iconRef={getIcon(type)} className="header__illustration" />
+		<Undertittel className="header__title">{title}</Undertittel>
+	</div>
 );
 
-
 ModalHeader.propTypes = {
-    title: PropTypes.string,
-    type: PropTypes.string
+	title: PropTypes.string,
+	type: PropTypes.string
 };
 
 ModalHeader.defaultProps = {
-    title: '',
-    type: 'info'
+	title: '',
+	type: 'info'
 };
 
 export default ModalHeader;

@@ -10,22 +10,20 @@ import store from './redux';
 
 const root = document.getElementById('app');
 render(
-    <Provider store={store}>
-        <Container fluid>
-            <Row>
-                <Column md="4" xs="12" />
-                <Column md="4" xs="12">
-                    <Router>
-                        <div className="app">
-                            <Switch>
-                                {renderTopLevelRoutes(routeConfig)}
-                            </Switch>
-                        </div>
-                    </Router>
-                </Column>
-                <Column md="4" xs="12" />
-            </Row>
-        </Container>
-    </Provider>,
-    root
+	<Provider store={store}>
+		<Container fluid>
+			<Row>
+				<Column md="4" xs="12" />
+				<Column md="4" xs="12">
+					<Router>
+						<div className="app">
+							<Switch>{renderTopLevelRoutes(routeConfig)}</Switch>
+						</div>
+					</Router>
+				</Column>
+				<Column md="4" xs="12" />
+			</Row>
+		</Container>
+	</Provider>,
+	root
 );
