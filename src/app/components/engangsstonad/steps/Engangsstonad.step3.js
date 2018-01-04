@@ -37,6 +37,10 @@ export class Step3 extends Component {
 		return this.props.disableNextButton();
 	}
 
+	componentDidMount() {
+		document.title = 'NAV Engangsstønad - Tilknytning til Norge';
+	}
+
 	// eslint-disable-next-line class-methods-use-this
 	shouldNextButtonBeEnabled(props) {
 		return props.oppholdSisteTolv && props.oppholdNaa && props.oppholdNesteTolv;
