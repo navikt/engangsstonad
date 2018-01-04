@@ -7,7 +7,8 @@ const { JSDOM } = jsdom;
 const getDecorator = () => (axios({
     method: 'get',
     // eslint-disable-next-line
-    url: 'https://appres-t1.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true'
+    url: 'http://appres-t1.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true',
+    validateStatus: (status) => (status >= 200 || status === 302)
 }));
 
 const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
