@@ -1,12 +1,10 @@
+require('dotenv').config();
 const jsdom = require('jsdom');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const axios = require('axios');
 
 const { JSDOM } = jsdom;
-
-const domain = 'appres-t1.nav.no';
-const url = `https://${domain}/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true`;
-const getDecorator = () => (axios({ method: 'get', url }));
+const getDecorator = () => (axios({ method: 'get', url: process.env.DECORATOR_URL }));
 
 const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
     const html = decoratorResponse.data;
