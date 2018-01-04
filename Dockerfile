@@ -2,9 +2,10 @@ FROM node:carbon
 
 WORKDIR /usr/src/app
 
+RUN yarn install
+
 COPY package.json ./
 COPY yarn.lock ./
-RUN yarn install
 
 COPY . .
 EXPOSE 8080
