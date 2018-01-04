@@ -55,6 +55,7 @@
     "docker-rm": "docker rm p2-selvbetjening-frontend",
     "docker-stop": "docker stop p2-selvbetjening-frontend",
     "docker-rmi": "npm run docker-kill && docker rmi p2-selvbetjening-frontend",
+    "start-express": "node ./server.js",
     "start": "node ./src/build/scripts/start-dev.js",
     "test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts ./src/app/**/*.spec.js",
     "lint": "eslint src/**"
@@ -64,6 +65,7 @@
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
     "dotenv": "^4.0.0",
+    "express": "^4.16.2",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-alertstriper": "^0.2.16",
     "nav-frontend-alertstriper-style": "^0.2.22",

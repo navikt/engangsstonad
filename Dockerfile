@@ -1,8 +1,12 @@
-FROM nginx
+FROM node:carbon
 
-RUN rm usr/share/nginx/html/*
-COPY ./dist/ /usr/share/nginx/html/
+WORKDIR /usr/src/app
 
-RUN rm -rf /etc/nginx/conf.d/
-COPY ./nginx.conf /etc/nginx/conf.d/
+COPY package.json ./
+COPY yarn.lock ./
+RUN yarn install
+
+COPY . .
 EXPOSE 8080
+
+CMD ["yarn", "start-express"]

@@ -4,7 +4,7 @@
   "env": {
     "test": {
       "plugins": [
-        [ "babel-plugin-webpack-alias", { "config": "./src/config/webpack.config.js" } ]
+        [ "babel-plugin-webpack-alias", { "config": "./src/build/webpack/webpack.config.global.js" } ]
       ]
     }
   }
