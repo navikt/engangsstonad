@@ -95,10 +95,11 @@ export class Step2 extends Component {
 						{this.props.noOfChildren && (
 							<div>
 								<DateInput
+									id="termindato"
 									input={{ value: this.props.terminDato }}
-									label="med termindato den..."
+									label=" termindato den..."
 									onChange={(e) => this.props.setTerminDato(e)}
-									// errorMessage="Feil"
+									errorMessage=""
 								/>
 								{this.props.terminDato && (
 									<div>
@@ -110,11 +111,12 @@ export class Step2 extends Component {
 										</DialogBox>
 										<AttachmentList label="" />
 										<AttachmentButton />
-										<Element>Terminbekreftelsen er datert den...</Element>
 										<DateInput
+											id="terminbekreftelse"
 											input={{ value: this.props.bekreftetTermindato }}
 											label="Terminbekreftelsen er datert den..."
 											onChange={(e) => this.props.setBekreftetTermindato(e)}
+											errorMessage="error test"
 										/>
 									</div>
 								)}

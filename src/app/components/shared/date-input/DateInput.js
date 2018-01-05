@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 import MaskedInput from 'react-maskedinput';
 import { Element } from 'nav-frontend-typografi';
+import classnames from 'classnames';
 
 import DatePicker from './DatePicker';
 import {
@@ -102,6 +103,7 @@ class DateInput extends Component {
 
 	render() {
 		const {
+			id,
 			input,
 			label,
 			disabled,
@@ -110,7 +112,6 @@ class DateInput extends Component {
 			errorMessage
 		} = this.props;
 
-		const error = errorMessage && errorMessage;
 		const { value } = input;
 		const maskedInputProps = {
 			...input,
@@ -119,12 +120,13 @@ class DateInput extends Component {
 
 		return (
 			<div
-				className={`datovelger__outer skjemaelement ${error && 'input-error'}`}
+				className={classnames('datovelger__outer skjemaelement', {
+					'input-error': errorMessage
+				})}
 				ref={(container) => {
 					this.container = container;
 				}}>
 				<Element className="skjemaelement__label">{label}</Element>
-
 				<div // eslint-disable-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
 					className="datovelger__inner"
 					tabIndex=""
@@ -135,6 +137,7 @@ class DateInput extends Component {
 							mask="11.11.1111"
 							autoComplete="off"
 							placeholder="dd.mm.åååå"
+							id={id}
 							disabled={disabled}
 							className="skjemaelement__input input--m datovelger__input"
 							{...maskedInputProps}
@@ -148,6 +151,7 @@ class DateInput extends Component {
 							ref={(toggle) => {
 								this.toggleButton = toggle;
 							}}
+							id={`toggle-${id}`}
 							disabled={disabled}
 							onKeyUp={this.onKeyUp}
 							onClick={this.toggle}
@@ -159,7 +163,7 @@ class DateInput extends Component {
 					{this.state.isOpen && (
 						<DatePicker
 							{...this.props}
-							ariaControls="toggle-id"
+							ariaControls={`toggle-${id}`}
 							fromDate={fromDate}
 							toDate={toDate}
 							onDayClick={this.onDayClick}
@@ -172,7 +176,7 @@ class DateInput extends Component {
 					role="alert"
 					aria-live="assertive"
 					className="skjemaelement__feilmelding">
-					{error}
+					{errorMessage}
 				</div>
 			</div>
 		);
@@ -180,6 +184,7 @@ class DateInput extends Component {
 }
 
 DateInput.propTypes = {
+	id: PT.string.isRequired,
 	label: PT.oneOfType([PT.string, PT.node]).isRequired,
 	input: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
 	disabled: PT.bool,
