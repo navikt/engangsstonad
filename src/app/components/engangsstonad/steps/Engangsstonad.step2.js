@@ -98,7 +98,6 @@ export class Step2 extends Component {
 									input={{ value: this.props.terminDato }}
 									label="med termindato den..."
 									onChange={(e) => this.props.setTerminDato(e)}
-									tidligsteFom={new Date()}
 									// errorMessage="Feil"
 								/>
 								{this.props.terminDato && (
