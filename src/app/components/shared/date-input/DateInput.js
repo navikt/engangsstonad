@@ -21,22 +21,20 @@ const stopEvent = (event) => {
 	}
 };
 
-const autobind = (ctx) => {
-	Object.getOwnPropertyNames(ctx.constructor.prototype)
-		.filter((prop) => typeof ctx[prop] === 'function')
-		.forEach((method) => {
-			// eslint-disable-next-line
-            ctx[method] = ctx[method].bind(ctx);
-		});
-};
-
 class DateInput extends Component {
 	constructor(props) {
 		super(props);
-		autobind(this);
 		this.state = {
 			isOpen: false
 		};
+
+		this.onFocusOut = this.onFocusOut.bind(this);
+		this.onKeyUp = this.onKeyUp.bind(this);
+		this.onDayClick = this.onDayClick.bind(this);
+		this.onMaskedInputChange = this.onMaskedInputChange.bind(this);
+		this.toggle = this.toggle.bind(this);
+		this.open = this.open.bind(this);
+		this.close = this.close.bind(this);
 	}
 
 	componentDidMount() {
@@ -166,7 +164,7 @@ class DateInput extends Component {
 							toDate={toDate}
 							onDayClick={this.onDayClick}
 							onKeyUp={this.onKeyUp}
-							lukk={this.close}
+							close={this.close}
 						/>
 					)}
 				</div>
