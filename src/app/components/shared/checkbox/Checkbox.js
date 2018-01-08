@@ -7,13 +7,14 @@ import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 import './checkbox.less';
 
 export const Checkbox = (props) => {
-	const { className, checked, ...other } = props;
+	const { className, checked, type, ...other } = props;
 
 	return (
 		<NavCheckbox
-			className={classNames('checkboxField', className, {
-				checkboxField__success: checked,
-				checkboxField__info: !checked
+			className={classNames('checkbox', className, {
+				checkbox__success: type === 'confirmation' && checked,
+				checkbox__info: type === 'confirmation' && !checked,
+				checkbox__normal: type === 'normal' && checked
 			})}
 			checked={checked}
 			{...other}
@@ -23,12 +24,14 @@ export const Checkbox = (props) => {
 
 Checkbox.propTypes = {
 	className: PropTypes.string,
-	checked: PropTypes.bool
+	checked: PropTypes.bool,
+	type: PropTypes.string
 };
 
 Checkbox.defaultProps = {
 	className: undefined,
-	checked: undefined
+	checked: undefined,
+	type: 'normal'
 };
 
 export default Checkbox;
