@@ -231,7 +231,6 @@
             display: block;
             top: 0;
             right: 0;
-            text-indent: -9999px;
             width: 2rem;
             height: 100%;
             border-radius: 0 4px 4px 0;
@@ -239,29 +238,10 @@
             background-color: transparent;
             padding: 0;
             position: absolute;
-            background-image: data-uri(
-                '../../../assets/svg/kalender.svg'
-            );
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: 16px 16px;
 
             &:focus {
                 outline: none;
                 box-shadow: 0 0 0 3px @orangeFocus;
-            }
-
-            &:hover:not(:disabled),
-            &:focus {
-                background-image: data-uri(
-                    '../../../assets/svg/kalender--hover.svg'
-                );
-            }
-
-            &:active {
-                background-image: data-uri(
-                    '../../../assets/svg/kalender--aktiv.svg'
-                );
             }
         }
     }

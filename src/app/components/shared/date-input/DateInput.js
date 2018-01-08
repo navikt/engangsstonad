@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 import MaskedInput from 'react-maskedinput';
 import { Element } from 'nav-frontend-typografi';
+import Icon from 'nav-frontend-ikoner-assets';
 import classnames from 'classnames';
 
 import DatePicker from './DatePicker';
@@ -158,8 +159,9 @@ class DateInput extends Component {
 							onKeyUp={this.onKeyUp}
 							onClick={this.toggle}
 							aria-pressed={this.erApen}
-							type="button"
-						/>
+							type="button">
+							<Icon kind="kalender" size={13} />
+						</button>
 					</div>
 
 					{this.state.isOpen && (
