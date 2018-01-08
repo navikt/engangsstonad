@@ -1,12 +1,12 @@
-import React from "react";
-import { Normaltekst } from "nav-frontend-typografi";
-import Icon from "nav-frontend-ikoner-assets";
+import React from 'react';
+import { Normaltekst } from 'nav-frontend-typografi';
+import Icon from 'nav-frontend-ikoner-assets';
 
-import "./attachmentList.less";
+import './attachmentList.less';
 
 const testData = [
 	{
-		label: "terminbekreftelse.pdf"
+		label: 'terminbekreftelse.pdf'
 	}
 ];
 

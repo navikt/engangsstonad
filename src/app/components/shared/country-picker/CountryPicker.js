@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import { Element } from "nav-frontend-typografi";
-import { Select } from "nav-frontend-skjema";
+import { Element } from 'nav-frontend-typografi';
+import { Select } from 'nav-frontend-skjema';
 
-import DateInput from "./../date-input/DateInput";
+import DateInput from './../date-input/DateInput';
 
-import "./countryPicker.less";
+import './countryPicker.less';
 
 const CountryPicker = () => (
 	<div>

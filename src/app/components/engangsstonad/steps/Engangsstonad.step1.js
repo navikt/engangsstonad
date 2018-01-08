@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import { Normaltekst, Ingress } from "nav-frontend-typografi";
+import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
-import Checkbox from "shared/checkbox/Checkbox";
-import DialogBox from "shared/dialog-box/DialogBox";
+import Checkbox from 'shared/checkbox/Checkbox';
+import DialogBox from 'shared/dialog-box/DialogBox';
 import {
 	enableNextButton,
 	disableNextButton,
 	approveConditions
-} from "ducks/Engangsstonad.duck";
+} from 'ducks/Engangsstonad.duck';
 
 export class Step1 extends Component {
 	constructor(props) {

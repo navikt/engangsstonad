@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import renderChildRoutes from "util/routing";
-import StepBasedForm from "shared/step-based-form/StepBasedForm";
-import { connect } from "react-redux";
-import { getDataRequested } from "./../../redux/ducks/Engangsstonad.duck";
-import "./engangsstonad.less";
+import React from 'react';
+import PropTypes from 'prop-types';
+import renderChildRoutes from 'util/routing';
+import StepBasedForm from 'shared/step-based-form/StepBasedForm';
+import { connect } from 'react-redux';
+import { getDataRequested } from './../../redux/ducks/Engangsstonad.duck';
+import './engangsstonad.less';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class EngangsstonadIndex extends React.Component {

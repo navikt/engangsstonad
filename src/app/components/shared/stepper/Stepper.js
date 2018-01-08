@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import classNames from "classnames";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import classNames from 'classnames';
 
-import "./stepper.less";
+import './stepper.less';
 
 export const Stepper = (props) => (
 	<div className="stepper">
@@ -43,9 +43,9 @@ Stepper.defaultProps = {
 };
 
 const StepperButton = (props) => {
-	const btnClassNames = classNames("knapp", {
+	const btnClassNames = classNames('knapp', {
 		[`knapp--${props.knappType}`]: props.knappType && !props.disabled,
-		"knapp--disabled": props.disabled
+		'knapp--disabled': props.disabled
 	});
 
 	const onClickListener = ($event) => {
@@ -78,7 +78,7 @@ StepperButton.propTypes = {
 
 StepperButton.defaultProps = {
 	disabled: false,
-	knappType: "hoved"
+	knappType: 'hoved'
 };
 
 const mapStateToProps = (state) => ({

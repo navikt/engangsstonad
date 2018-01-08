@@ -1,6 +1,6 @@
-import React from "react";
-import { Knapp } from "nav-frontend-knapper";
-import Icon from "nav-frontend-ikoner-assets";
+import React from 'react';
+import { Knapp } from 'nav-frontend-knapper';
+import Icon from 'nav-frontend-ikoner-assets';
 
 const AttachmentButton = () => (
 	<Knapp htmlType="button">

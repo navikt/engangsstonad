@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
-import { Normaltekst, Element } from "nav-frontend-typografi";
-import { ToggleGruppe, ToggleKnapp } from "nav-frontend-skjema";
+import { Normaltekst, Element } from 'nav-frontend-typografi';
+import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-skjema';
 
 import {
 	toggleSisteTolv,
@@ -12,11 +12,11 @@ import {
 	toggleOppholdNaa,
 	enableNextButton,
 	disableNextButton
-} from "ducks/Engangsstonad.duck";
+} from 'ducks/Engangsstonad.duck';
 
-import DialogBox from "shared/dialog-box/DialogBox";
-import CountryPicker from "shared/country-picker/CountryPicker";
-import NumberSelector from "shared/number-selector/NumberSelector";
+import DialogBox from 'shared/dialog-box/DialogBox';
+import CountryPicker from 'shared/country-picker/CountryPicker';
+import NumberSelector from 'shared/number-selector/NumberSelector';
 
 export class Step3 extends Component {
 	constructor(props) {
@@ -59,17 +59,17 @@ export class Step3 extends Component {
 					onChange={this.props.toggleSisteTolv}
 					name="oppholdSisteTolv">
 					<ToggleKnapp
-						defaultChecked={this.props.oppholdSisteTolv === "ja"}
+						defaultChecked={this.props.oppholdSisteTolv === 'ja'}
 						value="ja">
 						oppholdt meg i Norge
 					</ToggleKnapp>
 					<ToggleKnapp
-						defaultChecked={this.props.oppholdSisteTolv === "nei"}
+						defaultChecked={this.props.oppholdSisteTolv === 'nei'}
 						value="nei">
 						ikke oppholdt meg i Norge
 					</ToggleKnapp>
 				</ToggleGruppe>
-				{this.props.oppholdSisteTolv === "nei" && (
+				{this.props.oppholdSisteTolv === 'nei' && (
 					<div>
 						<Element>ettersom jeg var i utlandet...</Element>
 						<NumberSelector />
@@ -84,17 +84,17 @@ export class Step3 extends Component {
 							onChange={this.props.toggleOppholdNaa}
 							name="toggleOppholdNaa">
 							<ToggleKnapp
-								defaultChecked={this.props.oppholdNaa === "ja"}
+								defaultChecked={this.props.oppholdNaa === 'ja'}
 								value="ja">
 								i Norge nå
 							</ToggleKnapp>
 							<ToggleKnapp
-								defaultChecked={this.props.oppholdNaa === "nei"}
+								defaultChecked={this.props.oppholdNaa === 'nei'}
 								value="nei">
 								ikke i Norge nå
 							</ToggleKnapp>
 						</ToggleGruppe>
-						{this.props.oppholdNaa === "nei" && (
+						{this.props.oppholdNaa === 'nei' && (
 							<div>
 								<Element>ettersom jeg var i utlandet...</Element>
 								<NumberSelector />
@@ -111,17 +111,17 @@ export class Step3 extends Component {
 									onChange={this.props.toggleNesteTolv}
 									name="oppholdNesteTolv">
 									<ToggleKnapp
-										defaultChecked={this.props.oppholdNesteTolv === "ja"}
+										defaultChecked={this.props.oppholdNesteTolv === 'ja'}
 										value="ja">
 										oppholde meg i Norge
 									</ToggleKnapp>
 									<ToggleKnapp
-										defaultChecked={this.props.oppholdNesteTolv === "nei"}
+										defaultChecked={this.props.oppholdNesteTolv === 'nei'}
 										value="nei">
 										ikke oppholde meg i Norge
 									</ToggleKnapp>
 								</ToggleGruppe>
-								{this.props.oppholdNesteTolv === "nei" && (
+								{this.props.oppholdNesteTolv === 'nei' && (
 									<div>
 										<Element>ettersom jeg var i utlandet...</Element>
 										<NumberSelector />

@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import DisplayTextWithLabel from "../display-text-with-label/DisplayTextWithLabel";
-import IconWithText from "../icon-with-text/IconWithText";
-import "./opplysningpanel.less";
+import React from 'react';
+import PropTypes from 'prop-types';
+import DisplayTextWithLabel from '../display-text-with-label/DisplayTextWithLabel';
+import IconWithText from '../icon-with-text/IconWithText';
+import './opplysningpanel.less';
 
 const OpplysningPanel = (props) => (
 	<div className="opplysningPanel">
@@ -24,7 +24,7 @@ OpplysningPanel.propTypes = {
 };
 
 OpplysningPanel.defaultProps = {
-	title: ""
+	title: ''
 };
 
 export default OpplysningPanel;

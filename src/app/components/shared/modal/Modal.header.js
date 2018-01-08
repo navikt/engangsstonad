@@ -1,20 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Undertittel } from "nav-frontend-typografi";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Undertittel } from 'nav-frontend-typografi';
 
-import infoIcon from "assets/svg/employee_nautral.svg";
-import alertIcon from "assets/svg/employee_sad.svg";
-import warningIcon from "assets/svg/employee_warning.svg";
-import successIcon from "assets/svg/employee_happy.svg";
-import CustomSVG from "shared/custom-svg/CustomSVG";
+import infoIcon from 'assets/svg/employee_nautral.svg';
+import alertIcon from 'assets/svg/employee_sad.svg';
+import warningIcon from 'assets/svg/employee_warning.svg';
+import successIcon from 'assets/svg/employee_happy.svg';
+import CustomSVG from 'shared/custom-svg/CustomSVG';
 
 const getIcon = (type) => {
 	switch (type) {
-		case "success":
+		case 'success':
 			return successIcon;
-		case "alert":
+		case 'alert':
 			return alertIcon;
-		case "warning":
+		case 'warning':
 			return warningIcon;
 		default:
 			return infoIcon;
@@ -34,8 +34,8 @@ ModalHeader.propTypes = {
 };
 
 ModalHeader.defaultProps = {
-	title: "",
-	type: "info"
+	title: '',
+	type: 'info'
 };
 
 export default ModalHeader;

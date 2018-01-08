@@ -1,5 +1,5 @@
-import React from "react";
-import { Route as ReactRoute } from "react-router-dom";
+import React from 'react';
+import { Route as ReactRoute } from 'react-router-dom';
 
 const RouteWithSubRoutes = (route) => (
 	<ReactRoute

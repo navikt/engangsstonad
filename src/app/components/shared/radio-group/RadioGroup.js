@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Radio, SkjemaGruppe } from "nav-frontend-skjema";
+import { Radio, SkjemaGruppe } from 'nav-frontend-skjema';
 
-import "./radioGroup.less";
+import './radioGroup.less';
 
 const RadioGroup = (props) => (
 	<SkjemaGruppe className="radioGroup">
