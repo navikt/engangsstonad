@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 
-import CheckboxBlock from 'shared/checkboxBlock/CheckboxBlock';
+import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWithLabel';
 import {
@@ -67,9 +67,8 @@ export class Step4 extends Component {
 					label="Skal oppholde seg i Norge de neste 12 månedene"
 					text="Ja"
 				/>
-				<CheckboxBlock
+				<ConfirmCheckbox
 					name="bekreftOpplysninger"
-					type="confirm"
 					checked={this.props.confirmedInformation}
 					onChange={this.props.confirmInformation}
 					// eslint-disable-next-line max-len

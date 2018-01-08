@@ -1,21 +1,16 @@
 @import './../../../../../node_modules/nav-frontend-core/less/_variabler';
 
-.checkboxField {
+.confirmCheckbox {
 	@checkboxSize: 1.5rem;
 	border-radius: 0.5rem;
 	padding: 1rem;
 	display: flex;
 
-	&--confirm {
-		background-color: #ccdee6;
+	&.checkboxField--checked {
+		background-color: #cde7d8;
 	}
-	&--info {
-		&.checkboxField--checked {
-			background-color: #cde7d8;
-		}
-		&.checkboxField--unchecked {
-			background-color: #ffe9cc;
-		}
+	&.checkboxField--unchecked {
+		background-color: #ffe9cc;
 	}
 
 	.skjemaelement__label {
