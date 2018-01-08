@@ -58,6 +58,7 @@ export class Step1 extends Component {
 					name="egenerklaring"
 					label="Jeg er klar over at at hvis jeg gir uriktige
 					opplysninger kan det få konsekvenser for min rett til engangsstønad."
+					type="confirmation"
 					onChange={approveConditions}
 					checked={approvedConditions}
 				/>
