@@ -4,10 +4,11 @@ import classNames from 'classnames';
 
 import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 
-import './checkboxField.less';
+import './checkboxBlock.less';
 
-export const Checkbox = (props) => {
+export const CheckboxBlock = (props) => {
 	const { checked, type, ...other } = props;
+
 	return (
 		<NavCheckbox
 			className={classNames('checkboxField', `checkboxField--${type}`, {
@@ -20,16 +21,14 @@ export const Checkbox = (props) => {
 	);
 };
 
-Checkbox.propTypes = {
-	className: PropTypes.string,
+CheckboxBlock.propTypes = {
 	checked: PropTypes.bool,
 	type: PropTypes.oneOf(['info', 'confirm'])
 };
 
-Checkbox.defaultProps = {
-	className: undefined,
+CheckboxBlock.defaultProps = {
 	checked: undefined,
 	type: 'info'
 };
 
-export default Checkbox;
+export default CheckboxBlock;
