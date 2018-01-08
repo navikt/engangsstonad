@@ -73,7 +73,6 @@ export class Step4 extends Component {
 				/>
 				<Checkbox
 					name="bekreftOpplysninger"
-					className="checkboxFieldWithBackground"
 					checked={this.props.confirmedInformation}
 					onChange={this.props.confirmInformation}
 					label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger

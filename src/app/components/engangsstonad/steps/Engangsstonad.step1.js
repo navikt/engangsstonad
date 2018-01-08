@@ -56,9 +56,8 @@ export class Step1 extends Component {
 				</DialogBox>
 				<Checkbox
 					name="egenerklaring"
-					label="Jeg er klar over at dersom jeg gir uriktige opplysninger eller holder tilbake 
-						opplysninger som har betydning for min rett til engangsstønad kan pengene holdes 
-						tilbake eller kreves tilbake, og det kan eventuelt medføre straffeansvar."
+					label="Jeg er klar over at at hvis jeg gir uriktige
+					opplysninger kan det få konsekvenser for min rett til engangsstønad."
 					onChange={approveConditions}
 					checked={approvedConditions}
 				/>

@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom';
 
 import { Sidetittel } from 'nav-frontend-typografi';
 
+import StepIndicator from 'components/shared/progress-indicator/StepIndicator';
 import Stepper from './../stepper/Stepper';
 import Step from './../step/Step';
 
@@ -28,6 +29,7 @@ const StepBasedForm = (props) => {
 		route.props.path === props.location.pathname.toLowerCase();
 	const findActiveRoute = () =>
 		props.routes.find((route) => isActiveRoute(route));
+	const findActiveRouteIndex = () => props.routes.indexOf(findActiveRoute());
 
 	const findNextRoutePath = () => {
 		const numRoutes = props.routes.length;
@@ -35,7 +37,7 @@ const StepBasedForm = (props) => {
 			return props.afterSubmissionRoute;
 		}
 
-		const activeRouteIndex = props.routes.indexOf(findActiveRoute());
+		const activeRouteIndex = findActiveRouteIndex();
 		const nextRoute = props.routes[activeRouteIndex + 1];
 		if (nextRoute && nextRoute.props) {
 			return nextRoute.props.path;
@@ -85,6 +87,12 @@ const StepBasedForm = (props) => {
 		<div className="stepBasedForm">
 			<form className={props.className}>
 				<Header title={props.title} />
+				{props.withStepIndicator && (
+					<StepIndicator
+						steps={props.steps}
+						activeStep={findActiveRouteIndex() + 1}
+					/>
+				)}
 				<Switch>{renderRoutes()}</Switch>
 				{renderStepper()}
 			</form>
@@ -94,17 +102,22 @@ const StepBasedForm = (props) => {
 
 StepBasedForm.propTypes = {
 	routes: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
-	location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+	location: PropTypes.shape({
+		pathname: PropTypes.string
+	}).isRequired,
+	steps: PropTypes.arrayOf(PropTypes.shape({})),
+	withStepIndicator: PropTypes.bool,
 	afterSubmissionRoute: PropTypes.bool,
 	title: PropTypes.string,
-	nextButtonEnabled: PropTypes.bool.isRequired, // eslint-disable-line react/no-unused-prop-types
 	className: PropTypes.string
 };
 
 StepBasedForm.defaultProps = {
+	withStepIndicator: false,
 	className: '',
 	title: '',
-	afterSubmissionRoute: true
+	afterSubmissionRoute: true,
+	steps: []
 };
 
 export default StepBasedForm;
