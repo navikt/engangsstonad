@@ -100,8 +100,6 @@ export class Step2 extends Component {
 									label=" termindato den..."
 									onChange={(e) => this.props.setTerminDato(e)}
 									errorMessage=""
-									//fromDate={new Date('2018-02-09')}
-									//toDate={new Date('2018-01-30')}
 								/>
 								{this.props.terminDato && (
 									<div>
