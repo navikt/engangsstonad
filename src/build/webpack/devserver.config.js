@@ -1,5 +1,5 @@
 module.exports = {
 	contentBase: 'dist',
-	hot: true,
+	watchContentBase: true,
 	historyApiFallback: true
 };
