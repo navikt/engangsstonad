@@ -19,6 +19,8 @@ import DialogBox from 'shared/dialog-box/DialogBox';
 import DateInput from 'shared/date-input/DateInput';
 import AttachmentList from 'shared/attachment-list/AttachmentList';
 import AttachmentButton from 'shared/attachment-button/AttachmentButton';
+// eslint-disable-next-line max-len
+import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
 
 export class Step2 extends Component {
 	constructor(props) {
@@ -59,6 +61,8 @@ export class Step2 extends Component {
 						gjelder
 					</Normaltekst>
 				</DialogBox>
+				<TransformingRadioGroupCollection />
+
 				<Element>Søknaden gjelder en fødsel som er...</Element>
 				<ToggleGruppe onChange={this.props.toggleChildBorn} name="isChildBorn">
 					<ToggleKnapp defaultChecked={this.props.childBorn} value="ja">
