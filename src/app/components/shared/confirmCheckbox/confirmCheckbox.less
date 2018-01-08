@@ -1,0 +1,32 @@
+@import './../../../../../node_modules/nav-frontend-core/less/_variabler';
+
+.confirmCheckbox {
+	@checkboxSize: 1.5rem;
+	border-radius: 0.5rem;
+	padding: 1rem;
+	display: flex;
+
+	&.confirmCheckbox--checked {
+		background-color: #cde7d8;
+	}
+	&.confirmCheckbox--unchecked {
+		background-color: #ffe9cc;
+	}
+
+	.skjemaelement__label {
+		padding-left: @checkboxSize + 1rem;
+	}
+
+	.checkboks:checked + .skjemaelement__label:before {
+		border-color: @navGronn;
+		background-color: @navGronn;
+	}
+
+	.checkboks + .skjemaelement__label:before {
+		border-radius: 12px;
+		width: @checkboxSize;
+		height: @checkboxSize;
+		top: 50%;
+		margin-top: -1 * @checkboxSize/2;
+	}
+}

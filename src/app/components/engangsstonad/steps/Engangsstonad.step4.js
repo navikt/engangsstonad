@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 
-import Checkbox from 'shared/checkbox/Checkbox';
+import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWithLabel';
 import {
@@ -67,13 +67,12 @@ export class Step4 extends Component {
 					label="Skal oppholde seg i Norge de neste 12 månedene"
 					text="Ja"
 				/>
-				<Checkbox
+				<ConfirmCheckbox
 					name="bekreftOpplysninger"
-					className="checkboxFieldWithBackground"
 					checked={this.props.confirmedInformation}
 					onChange={this.props.confirmInformation}
-					label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger
-                som har betydning for min rett til engangsstønad."
+					// eslint-disable-next-line max-len
+					label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger som har betydning for min rett til engangsstønad."
 				/>
 			</div>
 		);
