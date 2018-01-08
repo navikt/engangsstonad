@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import 'nav-frontend-stegindikator-style';
+import { Ingress } from 'nav-frontend-typografi';
 
 import Step from './Step';
 
@@ -11,6 +12,9 @@ export const StepIndicator = (props) => (
 		aria-valuenow={props.activeStep}
 		aria-valuemin="1"
 		aria-valuemax={props.steps.length}>
+		<div style={{ textAlign: 'center', margin: '0', paddingBottom: '12px' }}>
+			<Ingress>{props.steps[props.activeStep - 1].title}</Ingress>
+		</div>
 		<ul className="stegindikator">
 			{props.steps.map((step, index) => (
 				<Step
@@ -26,7 +30,11 @@ export const StepIndicator = (props) => (
 );
 
 StepIndicator.propTypes = {
-	steps: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	steps: PropTypes.arrayOf(
+		PropTypes.shape({
+			title: PropTypes.string
+		})
+	).isRequired,
 	activeStep: PropTypes.number.isRequired
 };
 

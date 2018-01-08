@@ -22,7 +22,7 @@ const steps = [
 		label: '3'
 	},
 	{
-		title: 'Oppsummering og godkjenning av søknadsinformasjon',
+		title: 'Oppsummering',
 		label: '4'
 	},
 	{
