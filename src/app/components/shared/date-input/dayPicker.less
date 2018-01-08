@@ -1,12 +1,8 @@
 // lesshint maxCharPerLine: false
-// @modig-frontend-images-root-url: '../node_modules/modig-frontend/modig-frontend-ressurser/src/main/resources/META-INF/resources/img';
-// @baseImagePath: '../node_modules/modig-frontend/modig-frontend-ressurser/src/main/resources/META-INF/resources/';
 
 @import '../../../../../node_modules/nav-frontend-core/less/_variabler';
 @import '../../../../../node_modules/react-day-picker/lib/style.css';
 
-// @mobil-hoyde: 900px;
-// @mobil-bredde: 950px;
 
  .DayPicker {
      display: flex;
@@ -155,10 +151,6 @@
     cursor: default;
 }
 
-.input-error {
-    background-color: #F1D8D4;
-}
-
 .datovelger {
     position: relative;
     width: 100%;
@@ -172,8 +164,20 @@
     }
 
     &__outer {
-        padding: 8px 0px 8px 8px;
-        margin-top: 20px;
+        padding-left: 8px;
+        padding-right: 8px;
+        padding-bottom: 8px;
+        margin-left: -8px;
+        margin-right: -8px;
+
+        &--withError {
+            background-color: #F1D8D4;
+            padding-top: 8px;
+
+            .skjemaelement__label {
+                margin-top: 0 !important;
+            }
+        }
     }
 
     &__inner {
@@ -194,11 +198,6 @@
     }
 }
 
-.skjemaelement__label {
-    margin: 0 !important;
-    padding-bottom: 12px;
-}
-
 .skjema__periodevalidering.skjema--harFeil {
     .skjema__feilomrade {
         outline: none;
@@ -209,7 +208,7 @@
     }
 }
 
-@fjern-ikon-bredde: 768px;
+@fjern-ikon-bredde: 300px;
 
 @media (min-width: @fjern-ikon-bredde) {
     .datovelger {

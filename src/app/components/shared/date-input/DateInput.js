@@ -120,8 +120,9 @@ class DateInput extends Component {
 
 		return (
 			<div
-				className={classnames('datovelger__outer skjemaelement', {
-					'input-error': errorMessage
+				className={classnames('skjemaelement', {
+					'datovelger__outer datovelger__outer--withError': errorMessage,
+					datovelger__outer: !errorMessage
 				})}
 				ref={(container) => {
 					this.container = container;
