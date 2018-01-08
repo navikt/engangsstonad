@@ -72,8 +72,8 @@ export class Step4 extends Component {
 					type="confirm"
 					checked={this.props.confirmedInformation}
 					onChange={this.props.confirmInformation}
-					label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger
-                som har betydning for min rett til engangsstønad."
+					// eslint-disable-next-line max-len
+					label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger som har betydning for min rett til engangsstønad."
 				/>
 			</div>
 		);

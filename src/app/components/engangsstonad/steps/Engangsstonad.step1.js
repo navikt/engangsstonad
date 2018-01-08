@@ -52,9 +52,8 @@ export class Step1 extends Component {
 				</DialogBox>
 				<CheckboxBlock
 					name="egenerklaring"
-					label="Jeg er klar over at dersom jeg gir uriktige opplysninger eller holder tilbake 
-						opplysninger som har betydning for min rett til engangsstønad kan pengene holdes 
-						tilbake eller kreves tilbake, og det kan eventuelt medføre straffeansvar."
+					// eslint-disable-next-line max-len
+					label="Jeg er klar over at dersom jeg gir uriktige opplysninger eller holder tilbake opplysninger som har betydning for min rett til engangsstønad kan pengene holdes tilbake eller kreves tilbake, og det kan eventuelt medføre straffeansvar."
 					onChange={approveConditions}
 					checked={approvedConditions}
 				/>
