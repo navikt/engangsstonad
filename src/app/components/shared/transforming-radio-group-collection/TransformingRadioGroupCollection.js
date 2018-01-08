@@ -41,8 +41,9 @@ export default class TransformingRadioGroupCollection extends Component {
 
 	isCollapsed(stage) {
 		return (
+			this.state.expandedStage === null ||
 			this.props.stages.indexOf(this.state.expandedStage) >
-			this.props.stages.indexOf(stage)
+				this.props.stages.indexOf(stage)
 		);
 	}
 
@@ -50,10 +51,19 @@ export default class TransformingRadioGroupCollection extends Component {
 		return stage === this.state.expandedStage;
 	}
 
+	getStagesToRender() {
+		return this.props.stages.slice(
+			0,
+			this.props.stages.indexOf(this.state.expandedStage) + 1 ||
+				this.props.stages.length
+		);
+	}
+
 	render() {
+		const stagesToRender = this.getStagesToRender();
 		return (
 			<div className="transformingRadioGroupCollection">
-				{this.props.stages.map((stage) => (
+				{stagesToRender.map((stage) => (
 					<TransformingRadioGroup
 						collapsed={this.isCollapsed(stage)}
 						expanded={this.isExpanded(stage)}
