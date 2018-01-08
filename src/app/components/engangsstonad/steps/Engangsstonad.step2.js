@@ -94,8 +94,13 @@ export class Step2 extends Component {
 						</ToggleGruppe>
 						{this.props.noOfChildren && (
 							<div>
-								<Element>med termindato den...</Element>
-								<DateInput onChange={this.props.setTerminDato} label="" />
+								<DateInput
+									id="termindato"
+									input={{ value: this.props.terminDato }}
+									label=" termindato den..."
+									onChange={(e) => this.props.setTerminDato(e)}
+									errorMessage=""
+								/>
 								{this.props.terminDato && (
 									<div>
 										<DialogBox type="warning">
@@ -106,10 +111,12 @@ export class Step2 extends Component {
 										</DialogBox>
 										<AttachmentList label="" />
 										<AttachmentButton />
-										<Element>Terminbekreftelsen er datert den...</Element>
 										<DateInput
-											onChange={this.props.setBekreftetTermindato}
-											label=""
+											id="terminbekreftelse"
+											input={{ value: this.props.bekreftetTermindato }}
+											label="Terminbekreftelsen er datert den..."
+											onChange={(e) => this.props.setBekreftetTermindato(e)}
+											errorMessage="error test"
 										/>
 									</div>
 								)}
@@ -131,13 +138,15 @@ Step2.propTypes = {
 	setTerminDato: PropTypes.func.isRequired,
 	noOfChildren: PropTypes.string,
 	childBorn: PropTypes.bool,
-	terminDato: PropTypes.string
+	terminDato: PropTypes.string,
+	bekreftetTermindato: PropTypes.string
 };
 
 Step2.defaultProps = {
 	childBorn: undefined,
 	noOfChildren: undefined,
-	terminDato: undefined
+	terminDato: undefined,
+	bekreftetTermindato: undefined
 };
 
 const mapStateToProps = (state) => ({
