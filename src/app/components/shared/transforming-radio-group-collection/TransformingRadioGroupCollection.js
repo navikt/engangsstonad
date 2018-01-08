@@ -6,9 +6,10 @@ export default class TransformingRadioGroupCollection extends Component {
 	componentWillMount() {
 		this.expandNext = this.expandNext.bind(this);
 
-		this.state = {
-			expandedStage: this.props.stages[0]
-		};
+		this.setState({
+			expandedStage: this.props.stages[0],
+			allStages: this.props.stages
+		});
 	}
 
 	getNextStage() {
@@ -21,9 +22,20 @@ export default class TransformingRadioGroupCollection extends Component {
 		return null;
 	}
 
+	mapSelectedValueToExpandedStage(value) {
+		const index = this.state.allStages.indexOf(this.state.expandedStage);
+		const copiedArray = this.state.allStages.slice();
+		copiedArray[index].selectedValue = value;
+		return copiedArray;
+	}
+
 	expandNext($e, value) {
+		const updatedStages = this.mapSelectedValueToExpandedStage(value);
+		const nextStage = this.getNextStage();
+
 		this.setState({
-			expandedStage: this.getNextStage()
+			expandedStage: nextStage,
+			allStages: updatedStages
 		});
 	}
 
@@ -45,9 +57,9 @@ export default class TransformingRadioGroupCollection extends Component {
 					<TransformingRadioGroup
 						collapsed={this.isCollapsed(stage)}
 						expanded={this.isExpanded(stage)}
-						stage={stage}
 						key={stage.name}
 						onClick={this.expandNext}
+						stage={stage}
 					/>
 				))}
 			</div>
@@ -60,7 +72,7 @@ TransformingRadioGroupCollection.propTypes = {
 		PropTypes.shape({
 			legend: PropTypes.string.isRequired,
 			name: PropTypes.string.isRequired,
-			radios: PropTypes.arrayOf(
+			values: PropTypes.arrayOf(
 				PropTypes.shape({
 					label: PropTypes.string.isRequired,
 					value: PropTypes.string.isRequired
@@ -75,7 +87,7 @@ TransformingRadioGroupCollection.defaultProps = {
 		{
 			name: 'whenInTime',
 			legend: 'Søknaden gjelder en fødsel som er...',
-			radios: [
+			values: [
 				{ label: 'frem i tid', value: 'ahead' },
 				{ label: 'tilbake i tid', value: 'before' }
 			]
@@ -83,7 +95,7 @@ TransformingRadioGroupCollection.defaultProps = {
 		{
 			name: 'numberOfExpected',
 			legend: 'og jeg venter...',
-			radios: [
+			values: [
 				{ label: 'ett barn', value: '1' },
 				{ label: 'tvillinger', value: '2' },
 				{ label: 'flere barn', value: '3' }

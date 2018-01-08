@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Radio } from 'nav-frontend-skjema';
+import { Checkbox, Radio } from 'nav-frontend-skjema';
 import './transformingRadioGroup.less';
 
 export default class TransformingRadioGroup extends Component {
@@ -12,21 +12,34 @@ export default class TransformingRadioGroup extends Component {
 		});
 	}
 
+	renderCollapsed() {
+		const checkboxAttrs = this.props.stage.values.find(
+			(el) => el.value === this.props.stage.selectedValue
+		);
+		return <Checkbox defaultChecked {...checkboxAttrs} />;
+	}
+
+	renderExpanded() {
+		const { name, values } = this.props.stage;
+		return values.map((radioAttrs) => (
+			<Radio
+				key={radioAttrs.value}
+				name={name}
+				onClick={($e) => {
+					this.props.onClick($e, radioAttrs.value);
+				}}
+				{...radioAttrs}
+			/>
+		));
+	}
+
 	render() {
-		const { legend, name, radios } = this.props.stage;
+		const { collapsed, expanded } = this.props;
 		return (
 			<div className={this.radioGroupClsNames()}>
-				<legend>{legend}</legend>
-				{radios.map((radioAttrs) => (
-					<Radio
-						key={radioAttrs.value}
-						name={name}
-						onClick={($e) => {
-							this.props.onClick($e, radioAttrs.value);
-						}}
-						{...radioAttrs}
-					/>
-				))}
+				<legend>{this.props.stage.legend}</legend>
+				{expanded && this.renderExpanded()}
+				{collapsed && this.renderCollapsed()}
 			</div>
 		);
 	}
@@ -38,12 +51,13 @@ TransformingRadioGroup.propTypes = {
 	stage: PropTypes.shape({
 		legend: PropTypes.string.isRequired,
 		name: PropTypes.string.isRequired,
-		radios: PropTypes.arrayOf(
+		values: PropTypes.arrayOf(
 			PropTypes.shape({
 				label: PropTypes.string.isRequired,
 				value: PropTypes.string.isRequired
 			}).isRequired
-		).isRequired
+		).isRequired,
+		selectedValue: PropTypes.string
 	}).isRequired,
 	onClick: PropTypes.func
 };
