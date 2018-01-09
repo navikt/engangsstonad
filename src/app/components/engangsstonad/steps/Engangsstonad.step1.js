@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
-import Checkbox from 'shared/checkbox/Checkbox';
+import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import {
 	enableNextButton,
@@ -50,12 +50,11 @@ export class Step1 extends Component {
 					</Normaltekst>
 					<Link to="/">Les mer her</Link>
 				</DialogBox>
-				<Checkbox
+				<ConfirmCheckbox
 					name="egenerklaring"
 					label="Jeg er klar over at dersom jeg gir uriktige opplysninger eller holder tilbake 
 						opplysninger som har betydning for min rett til engangsstønad kan pengene holdes 
 						tilbake eller kreves tilbake, og det kan eventuelt medføre straffeansvar."
-					type="confirmation"
 					onChange={approveConditions}
 					checked={approvedConditions}
 				/>
