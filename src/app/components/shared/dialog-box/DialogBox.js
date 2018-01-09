@@ -36,8 +36,12 @@ const DialogBoxBase = (props) => {
 
 	return (
 		<div className={getClassnames(props)}>
-			<CustomSVG className="dialogImage" iconRef={getIcon(type)} size={96} />
-			<div className="dialogText">{props.children}</div>
+			<CustomSVG
+				className="dialogBox__image"
+				iconRef={getIcon(type)}
+				size={96}
+			/>
+			<div className="dialogBox__text">{props.children}</div>
 		</div>
 	);
 };
