@@ -1,7 +1,7 @@
 import ErrorPage from 'components/error';
 import EngangsstonadIndex from 'components/engangsstonad/Engangsstonad.index';
 import engangsstonadSteps from 'components/engangsstonad/steps';
-import AktivitetsplanIndex from 'apps/aktivitetsplan/Aktivitetsplan.index';
+import Planlegger from 'apps/planlegger/Planlegger.index';
 
 const defaultRouteConfig = [
 	{
@@ -19,8 +19,8 @@ const defaultRouteConfig = [
 		})
 	},
 	{
-		path: '/aktivitetsplan',
-		component: AktivitetsplanIndex
+		path: '/planlegger',
+		component: Planlegger
 	},
 	{ component: ErrorPage }
 ];
