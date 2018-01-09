@@ -26,30 +26,33 @@ export class Step2 extends Component {
 	constructor(props) {
 		super(props);
 
-		if (this.shouldNextButtonBeEnabled(props)) {
-			this.props.enableNextButton();
-		} else {
-			this.props.disableNextButton();
-		}
+		this.radioGroupStages = [
+			{
+				name: 'whenInTime',
+				legend: 'Søknaden gjelder en fødsel som er...',
+				values: [
+					{ label: 'frem i tid', value: 'ahead' },
+					{ label: 'tilbake i tid', value: 'before' }
+				]
+			},
+			{
+				name: 'numberOfExpected',
+				legend: 'og jeg venter...',
+				values: [
+					{ label: 'ett barn', value: '1' },
+					{ label: 'tvillinger', value: '2' },
+					{ label: 'flere barn', value: '3' }
+				]
+			}
+		];
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (this.shouldNextButtonBeEnabled(nextProps)) {
-			this.props.enableNextButton();
-		} else {
-			this.props.disableNextButton();
-		}
+	informationAboutChildUpdated(stages, expandedStage) {
+		console.log('Updated', stages, expandedStage);
 	}
 
-	// eslint-disable-next-line class-methods-use-this
-	shouldNextButtonBeEnabled(props) {
-		return (
-			props.childBorn ||
-			(!props.childBorn &&
-				props.noOfChildren &&
-				props.terminDato &&
-				props.bekreftetTermindato)
-		);
+	handleRadioGroupStageChange($e, stages, expandedStage) {
+		this.informationAboutChildUpdated(stages, expandedStage);
 	}
 
 	render() {
@@ -61,19 +64,14 @@ export class Step2 extends Component {
 						gjelder
 					</Normaltekst>
 				</DialogBox>
-				<TransformingRadioGroupCollection />
 
-				<Element>Søknaden gjelder en fødsel som er...</Element>
-				<ToggleGruppe onChange={this.props.toggleChildBorn} name="isChildBorn">
-					<ToggleKnapp defaultChecked={this.props.childBorn} value="ja">
-						tilbake i tid
-					</ToggleKnapp>
-					<ToggleKnapp
-						defaultChecked={this.props.childBorn === false}
-						value="nei">
-						frem i tid
-					</ToggleKnapp>
-				</ToggleGruppe>
+				<TransformingRadioGroupCollection
+					stages={this.radioGroupStages}
+					onChange={($e, stages, expandedStage) =>
+						this.handleRadioGroupStageChange($e, stages, expandedStage)
+					}
+				/>
+
 				{this.props.childBorn === false && (
 					<div>
 						<Element>og jeg venter...</Element>
@@ -127,9 +125,6 @@ export class Step2 extends Component {
 }
 
 Step2.propTypes = {
-	toggleChildBorn: PropTypes.func.isRequired,
-	enableNextButton: PropTypes.func.isRequired,
-	disableNextButton: PropTypes.func.isRequired,
 	toggleNoOfChildren: PropTypes.func.isRequired,
 	setBekreftetTermindato: PropTypes.func.isRequired,
 	setTerminDato: PropTypes.func.isRequired,

@@ -4,8 +4,8 @@ import TransformingRadioGroup from './../transforming-radio-group/TransformingRa
 
 export default class TransformingRadioGroupCollection extends Component {
 	componentWillMount() {
-		this.expandNext = this.expandNext.bind(this);
-		this.resetExpandedStage = this.resetExpandedStage.bind(this);
+		this.handleOnClickCollapsed = this.handleOnClickCollapsed.bind(this);
+		this.handleOnClickExpanded = this.handleOnClickExpanded.bind(this);
 
 		const stages = this.props.stages.slice();
 		const expandedStage = stages[0];
@@ -30,7 +30,7 @@ export default class TransformingRadioGroupCollection extends Component {
 		return copiedArray;
 	}
 
-	expandNext($e, value) {
+	expandNext(value) {
 		const updatedStages = this.mapSelectedValueToExpandedStage(value);
 		const nextStage = this.getNextStage();
 
@@ -60,7 +60,7 @@ export default class TransformingRadioGroupCollection extends Component {
 		);
 	}
 
-	resetExpandedStage($e, newExpandedStage) {
+	resetExpandedStage(newExpandedStage) {
 		const { stages } = this.state;
 		const index = stages.indexOf(newExpandedStage);
 		if (index > -1) {
@@ -81,6 +81,24 @@ export default class TransformingRadioGroupCollection extends Component {
 		}
 	}
 
+	handleOnClickExpanded($e, newExpandedStage) {
+		this.expandNext(newExpandedStage);
+
+		setTimeout(() =>
+			// after new state is ready
+			this.props.onChange($e, this.state.stages, this.state.expandedStage)
+		);
+	}
+
+	handleOnClickCollapsed($e, newExpandedStage) {
+		this.resetExpandedStage(newExpandedStage);
+
+		setTimeout(() =>
+			// after new state is ready
+			this.props.onChange($e, this.state.stages, this.state.expandedStage)
+		);
+	}
+
 	render() {
 		const stagesToRender = this.getStagesToRender();
 		return (
@@ -90,8 +108,8 @@ export default class TransformingRadioGroupCollection extends Component {
 						collapsed={this.isCollapsed(stage)}
 						expanded={this.isExpanded(stage)}
 						key={stage.name}
-						onClickExpanded={this.expandNext}
-						onClickCollapsed={this.resetExpandedStage}
+						onClickExpanded={this.handleOnClickExpanded}
+						onClickCollapsed={this.handleOnClickCollapsed}
 						stage={stage}
 					/>
 				))}
@@ -112,36 +130,10 @@ TransformingRadioGroupCollection.propTypes = {
 				}).isRequired
 			).isRequired
 		})
-	)
+	).isRequired,
+	onChange: PropTypes.func
 };
 
 TransformingRadioGroupCollection.defaultProps = {
-	stages: [
-		{
-			name: 'whenInTime',
-			legend: 'Søknaden gjelder en fødsel som er...',
-			values: [
-				{ label: 'frem i tid', value: 'ahead' },
-				{ label: 'tilbake i tid', value: 'before' }
-			]
-		},
-		{
-			name: 'numberOfExpected',
-			legend: 'og jeg venter...',
-			values: [
-				{ label: 'ett barn', value: '1' },
-				{ label: 'tvillinger', value: '2' },
-				{ label: 'flere barn', value: '3' }
-			]
-		},
-		{
-			name: 'zzzz',
-			legend: 'abababab...',
-			values: [
-				{ label: 'asdf', value: '1' },
-				{ label: 'qewr', value: '2' },
-				{ label: 'zxcv', value: '3' }
-			]
-		}
-	]
+	onChange: () => {}
 };
