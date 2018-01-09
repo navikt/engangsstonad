@@ -18,16 +18,18 @@
 		padding-left: @checkboxSize + 1rem;
 	}
 
-	.checkboks:checked + .skjemaelement__label:before {
-		border-color: @navGronn;
-		background-color: @navGronn;
-	}
+	.checkboks {
+		&:checked + .skjemaelement__label:before {
+			border-color: @navGronn;
+			background-color: @navGronn;
+		}
 
-	.checkboks + .skjemaelement__label:before {
-		border-radius: 12px;
-		width: @checkboxSize;
-		height: @checkboxSize;
-		top: 50%;
-		margin-top: -1 * @checkboxSize/2;
+		+ .skjemaelement__label:before {
+			border-radius: 12px;
+			width: @checkboxSize;
+			height: @checkboxSize;
+			top: 50%;
+			margin-top: -1 * @checkboxSize/2;
+		}
 	}
 }
