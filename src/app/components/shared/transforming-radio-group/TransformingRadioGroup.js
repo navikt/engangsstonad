@@ -16,7 +16,15 @@ export default class TransformingRadioGroup extends Component {
 		const checkboxAttrs = this.props.stage.values.find(
 			(el) => el.value === this.props.stage.selectedValue
 		);
-		return <Checkbox defaultChecked {...checkboxAttrs} />;
+		return (
+			<Checkbox
+				defaultChecked
+				{...checkboxAttrs}
+				onClick={($e) => {
+					this.props.onClickCollapsed($e, this.props.stage);
+				}}
+			/>
+		);
 	}
 
 	renderExpanded() {
@@ -26,7 +34,7 @@ export default class TransformingRadioGroup extends Component {
 				key={radioAttrs.value}
 				name={name}
 				onClick={($e) => {
-					this.props.onClick($e, radioAttrs.value);
+					this.props.onClickExpanded($e, radioAttrs.value);
 				}}
 				{...radioAttrs}
 			/>
@@ -60,11 +68,13 @@ TransformingRadioGroup.propTypes = {
 		).isRequired,
 		selectedValue: PropTypes.string
 	}).isRequired,
-	onClick: PropTypes.func
+	onClickCollapsed: PropTypes.func,
+	onClickExpanded: PropTypes.func
 };
 
 TransformingRadioGroup.defaultProps = {
-	onClick: () => {},
+	onClickCollapsed: () => {},
+	onClickExpanded: () => {},
 	collapsed: false,
 	expanded: false
 };

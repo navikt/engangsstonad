@@ -5,26 +5,27 @@ import TransformingRadioGroup from './../transforming-radio-group/TransformingRa
 export default class TransformingRadioGroupCollection extends Component {
 	componentWillMount() {
 		this.expandNext = this.expandNext.bind(this);
+		this.resetExpandedStage = this.resetExpandedStage.bind(this);
 
-		this.setState({
-			expandedStage: this.props.stages[0],
-			allStages: this.props.stages
-		});
+		const stages = this.props.stages.slice();
+		const expandedStage = stages[0];
+
+		this.setState({ expandedStage, stages });
 	}
 
 	getNextStage() {
 		const nextStageIndex =
-			1 + this.props.stages.indexOf(this.state.expandedStage);
+			1 + this.state.stages.indexOf(this.state.expandedStage);
 
-		if (nextStageIndex <= this.props.stages.length - 1) {
-			return this.props.stages[nextStageIndex];
+		if (nextStageIndex <= this.state.stages.length - 1) {
+			return this.state.stages[nextStageIndex];
 		}
 		return null;
 	}
 
 	mapSelectedValueToExpandedStage(value) {
-		const index = this.state.allStages.indexOf(this.state.expandedStage);
-		const copiedArray = this.state.allStages.slice();
+		const index = this.state.stages.indexOf(this.state.expandedStage);
+		const copiedArray = this.state.stages.slice();
 		copiedArray[index].selectedValue = value;
 		return copiedArray;
 	}
@@ -35,15 +36,15 @@ export default class TransformingRadioGroupCollection extends Component {
 
 		this.setState({
 			expandedStage: nextStage,
-			allStages: updatedStages
+			stages: updatedStages
 		});
 	}
 
 	isCollapsed(stage) {
 		return (
 			this.state.expandedStage === null ||
-			this.props.stages.indexOf(this.state.expandedStage) >
-				this.props.stages.indexOf(stage)
+			this.state.stages.indexOf(this.state.expandedStage) >
+				this.state.stages.indexOf(stage)
 		);
 	}
 
@@ -52,11 +53,32 @@ export default class TransformingRadioGroupCollection extends Component {
 	}
 
 	getStagesToRender() {
-		return this.props.stages.slice(
+		return this.state.stages.slice(
 			0,
-			this.props.stages.indexOf(this.state.expandedStage) + 1 ||
-				this.props.stages.length
+			this.state.stages.indexOf(this.state.expandedStage) + 1 ||
+				this.state.stages.length
 		);
+	}
+
+	resetExpandedStage($e, newExpandedStage) {
+		const { stages } = this.state;
+		const index = stages.indexOf(newExpandedStage);
+		if (index > -1) {
+			const stagesToReset = stages.slice(index, stages.length + 1);
+			const updatedStagesSubArray = stagesToReset.map((stage) => ({
+				...stage,
+				selectedValue: undefined
+			}));
+			const updatedStages = [
+				...stages.slice(0, index),
+				...updatedStagesSubArray
+			];
+			updatedStages[index].selectedValue = undefined;
+			this.setState({
+				expandedStage: updatedStages[index],
+				stages: updatedStages
+			});
+		}
 	}
 
 	render() {
@@ -68,7 +90,8 @@ export default class TransformingRadioGroupCollection extends Component {
 						collapsed={this.isCollapsed(stage)}
 						expanded={this.isExpanded(stage)}
 						key={stage.name}
-						onClick={this.expandNext}
+						onClickExpanded={this.expandNext}
+						onClickCollapsed={this.resetExpandedStage}
 						stage={stage}
 					/>
 				))}
@@ -109,6 +132,15 @@ TransformingRadioGroupCollection.defaultProps = {
 				{ label: 'ett barn', value: '1' },
 				{ label: 'tvillinger', value: '2' },
 				{ label: 'flere barn', value: '3' }
+			]
+		},
+		{
+			name: 'zzzz',
+			legend: 'abababab...',
+			values: [
+				{ label: 'asdf', value: '1' },
+				{ label: 'qewr', value: '2' },
+				{ label: 'zxcv', value: '3' }
 			]
 		}
 	]
