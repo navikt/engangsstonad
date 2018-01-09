@@ -24,9 +24,9 @@
 		"node_modules",
 		"build",
 		"scripts",
-		"acceptance-tests",
-		"webpack",
+		"config",
 		"jest",
-		"src/setupTests.ts"
+		"src/build",
+		"src/config"
 	]
 }
