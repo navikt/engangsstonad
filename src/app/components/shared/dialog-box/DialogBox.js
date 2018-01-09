@@ -29,7 +29,7 @@ const getClassnames = (type, overflow) =>
 		'dialogBox--alert': type === 'alert',
 		'dialogBox--warning': type === 'warning',
 		'dialogBox--success': type === 'success',
-		'dialogBox--overflow': overflow === true
+		'm-overflow-horizontal': overflow === true
 	});
 
 const DialogBoxBase = (props) => {
@@ -58,7 +58,7 @@ DialogBoxBase.propTypes = {
 
 DialogBoxBase.defaultProps = {
 	type: '',
-	overflow: false
+	overflow: true
 };
 
 const DialogBox = (props) => <DialogBoxBase {...props} />;
