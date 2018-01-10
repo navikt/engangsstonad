@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import moment from 'moment';
-// import { FormattedDate, injectIntl, intlShape } from 'react-intl';
 import NavFrontendChevron from 'nav-frontend-chevron';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import MomentLocaleUtils from 'react-day-picker/moment';
@@ -13,25 +12,6 @@ const localeUtils = {
 	formatWeekdayShort: (i, locale) =>
 		MomentLocaleUtils.formatWeekdayLong(i, locale).substring(0, 3)
 };
-
-// export const Caption = ({ date }) => (
-//     <div
-//         className="DayPicker-Caption"
-//         role="heading"
-//         aria-live="assertive"
-//         aria-atomic="true"
-//     >
-//         <FormattedDate month="long" year="numeric" value={date} />
-//     </div>
-// );
-
-// Caption.propTypes = {
-//     date: PT.instanceOf(Date)
-// };
-
-// Caption.defaultProps = {
-//     date: undefined
-// };
 
 export const NavBar = ({
 	onNextClick,
@@ -137,7 +117,6 @@ DayPickerComponent.propTypes = {
 	close: PT.func.isRequired,
 	onDayClick: PT.func.isRequired,
 	fromDate: PT.instanceOf(Date)
-	// intl: intlShape.isRequired
 };
 
 DayPickerComponent.defaultProps = {
