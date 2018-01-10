@@ -33,41 +33,31 @@
 }
 
 .DayPicker-NavButton {
+    top: 12px;
     width: 2em;
     height: 2em;
     cursor: pointer;
     border: 0;
     background-color: transparent;
-     background-image: data-uri(
-         '../../../assets/svg/pil.svg'
-     );
-    background-size: 1.25em 1.25em;
 
     &:focus {
         outline: none;
         box-shadow: 0 0 0 3px @orangeFocus;
     }
 
-    &:focus,
-    &:hover {
-        background-image: data-uri(
-            '../../../assets/svg/pil--hover.svg'
-            );
-    }
-
     &--prev {
         left: 1em;
-        transform: rotate(180deg);
+        background-image: none;
     }
 
     &--next {
         right: 1em;
+        background-image: none;
     }
 }
 
 .DayPicker-Caption {
     display: table-caption;
-   //.typo-undertittel();
     height: 2em;
     text-align: center;
 }
@@ -78,7 +68,6 @@
 }
 
 .DayPicker-Weekday {
-    //.typo-element();
     abbr {
         text-decoration: none;
     }

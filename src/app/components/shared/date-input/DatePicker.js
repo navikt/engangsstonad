@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 import moment from 'moment';
 // import { FormattedDate, injectIntl, intlShape } from 'react-intl';
+import NavFrontendChevron from 'nav-frontend-chevron';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/nb';
@@ -49,8 +50,9 @@ export const NavBar = ({
 				onClick={(e) => {
 					e.preventDefault();
 					onPreviousClick();
-				}}
-			/>
+				}}>
+				<NavFrontendChevron type="venstre" />
+			</button>
 			<button
 				tabIndex="0"
 				className={`${className} DayPicker-NavButton--next`}
@@ -59,8 +61,9 @@ export const NavBar = ({
 				onClick={(e) => {
 					e.preventDefault();
 					onNextClick();
-				}}
-			/>
+				}}>
+				<NavFrontendChevron type="høyre" />
+			</button>
 		</div>
 	);
 };
