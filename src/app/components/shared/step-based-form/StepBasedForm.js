@@ -6,6 +6,7 @@ import { Sidetittel } from 'nav-frontend-typografi';
 
 import Stepper from './../stepper/Stepper';
 import Step from './../step/Step';
+import BackLink from './../back-link/BackLink';
 
 import './stepBasedForm.less';
 
@@ -43,7 +44,6 @@ const StepBasedForm = (props) => {
 		return '/';
 	};
 
-	// eslint-disable-next-line no-unused-vars
 	const findPreviousRoutePath = () => {
 		const activeRouteIndex = props.routes.indexOf(findActiveRoute());
 		if (activeRouteIndex > 0) {
@@ -81,10 +81,19 @@ const StepBasedForm = (props) => {
 		return null;
 	};
 
+	const renderBackLink = () => {
+		const activeRoute = findActiveRoute();
+		if (activeRoute !== props.routes[0]) {
+			return <BackLink href={findPreviousRoutePath()} />;
+		}
+		return null;
+	};
+
 	return (
 		<div className="stepBasedForm">
 			<form className={props.className}>
 				<Header title={props.title} />
+				{renderBackLink()}
 				<Switch>{renderRoutes()}</Switch>
 				{renderStepper()}
 			</form>

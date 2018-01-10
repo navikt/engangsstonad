@@ -84,10 +84,11 @@ export class Step2 extends Component {
 										Siden barnet ikke er født må du legge ved terminbekreftelse
 										fra jordmor eller lege
 									</Normaltekst>
-
-									<AttachmentList label="" />
-									<AttachmentButton />
 								</DialogBox>
+
+								<AttachmentList label="" />
+								<AttachmentButton />
+
 								<Element>Terminbekreftelsen er datert den...</Element>
 								<DateInput
 									onChange={this.props.setBekreftetTermindato}
