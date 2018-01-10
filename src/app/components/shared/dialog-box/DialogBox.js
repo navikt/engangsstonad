@@ -29,7 +29,7 @@ const getClassnames = (type, overflow) =>
 		'dialogBox--alert': type === 'alert',
 		'dialogBox--warning': type === 'warning',
 		'dialogBox--success': type === 'success',
-		'm-overflow-horizontal': overflow === true
+		'm_overflow-horizontal': overflow === true
 	});
 
 const DialogBoxBase = (props) => {
