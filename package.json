@@ -73,6 +73,8 @@
     "moment": "^2.20.1",
     "nav-frontend-alertstriper": "^0.2.16",
     "nav-frontend-alertstriper-style": "^0.2.22",
+    "nav-frontend-chevron": "^0.1.10",
+    "nav-frontend-chevron-style": "^0.3.4",
     "nav-frontend-core": "^4.0.5",
     "nav-frontend-grid": "^0.1.10",
     "nav-frontend-grid-style": "^0.2.4",
