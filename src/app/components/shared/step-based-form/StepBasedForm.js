@@ -97,7 +97,6 @@ StepBasedForm.propTypes = {
 	location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 	afterSubmissionRoute: PropTypes.bool,
 	title: PropTypes.string,
-	nextButtonEnabled: PropTypes.bool.isRequired, // eslint-disable-line react/no-unused-prop-types
 	className: PropTypes.string
 };
 

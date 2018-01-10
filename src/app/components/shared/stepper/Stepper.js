@@ -12,11 +12,7 @@ export const Stepper = (props) => (
 			<StepperButton href={props.previousRoute} label="Tilbake" />
 		)}
 		{props.showStepAhead && (
-			<StepperButton
-				disabled={!props.nextButtonEnabled}
-				href={props.nextRoute}
-				label="Fortsett med søknad"
-			/>
+			<StepperButton href={props.nextRoute} label="Fortsett med søknad" />
 		)}
 		{props.showSubmission && (
 			<StepperButton href={props.nextRoute} label="Send søknad" />
@@ -29,8 +25,7 @@ Stepper.propTypes = {
 	showStepBack: PropTypes.bool,
 	showSubmission: PropTypes.bool,
 	nextRoute: PropTypes.string,
-	previousRoute: PropTypes.string,
-	nextButtonEnabled: PropTypes.bool
+	previousRoute: PropTypes.string
 };
 
 Stepper.defaultProps = {
@@ -38,32 +33,16 @@ Stepper.defaultProps = {
 	showStepBack: false,
 	showSubmission: false,
 	nextRoute: undefined,
-	previousRoute: undefined,
-	nextButtonEnabled: false
+	previousRoute: undefined
 };
 
 const StepperButton = (props) => {
 	const btnClassNames = classNames('knapp', {
-		[`knapp--${props.knappType}`]: props.knappType && !props.disabled,
-		'knapp--disabled': props.disabled
+		[`knapp--${props.knappType}`]: props.knappType
 	});
 
-	const onClickListener = ($event) => {
-		if (props.disabled) {
-			$event.preventDefault();
-			$event.stopPropagation();
-		}
-	};
-
-	const tabIndex = () => (props.disabled ? -1 : 0);
-
 	return (
-		<Link
-			to={props.href}
-			className={btnClassNames}
-			onClick={onClickListener}
-			tabIndex={tabIndex()}
-			aria-disabled={props.disabled}>
+		<Link to={props.href} className={btnClassNames}>
 			{props.label}
 		</Link>
 	);
@@ -72,17 +51,13 @@ const StepperButton = (props) => {
 StepperButton.propTypes = {
 	label: PropTypes.string.isRequired,
 	href: PropTypes.string.isRequired,
-	knappType: PropTypes.string,
-	disabled: PropTypes.bool
+	knappType: PropTypes.string
 };
 
 StepperButton.defaultProps = {
-	disabled: false,
 	knappType: 'hoved'
 };
 
-const mapStateToProps = (state) => ({
-	nextButtonEnabled: state.engangsstonadReducer.nextButtonEnabled
-});
+const mapStateToProps = () => ({});
 
 export default connect(mapStateToProps)(Stepper);

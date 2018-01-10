@@ -3,14 +3,14 @@ import Api from './../../api';
 
 const APPROVE_CONDITIONS = 'APPROVE_CONDITIONS';
 const CONFIRM_INFORMATION = 'CONFIRM_INFORMATION';
-const ENABLE_NEXT_BUTTON = 'ENABLE_NEXT_BUTTON';
-const DISABLE_NEXT_BUTTON = 'DISABLE_NEXT_BUTTON';
 const TOGGLE_CHILD_BORN = 'TOGGLE_CHILD_BORN';
-const TOGGLE_NO_OF_CHILDREN = 'TOGGLE_NO_OF_CHILDREN';
+const SET_NUMBER_OF_CHILDREN = 'SET_NUMBER_OF_CHILDREN';
 const SET_TERMIN_DATO = 'SET_TERMIN_DATO';
 const SET_BEKREFTET_TERMIN_DATO = 'SET_BEKREFTET_TERMIN_DATO';
-const TOGGLE_SISTE_TOLV = 'TOGGLE_SISTE_TOLV';
-const TOGGLE_NESTE_TOLV = 'TOGGLE_NESTE_TOLV';
+const TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS =
+	'RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS';
+const TOGGLE_WORKED_IN_NORWAY_LAST_TWELVE_MONTHS =
+	'WORKED_IN_NORWAY_LAST_TWELVE_MONTHS';
 const TOGGLE_OPPHOLD_NAA = 'TOGGLE_OPPHOLD_NAA';
 const GET_DATA_REQUESTED = 'GET_DATA_REQUESTED';
 const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
@@ -18,15 +18,13 @@ const GET_DATA_FAILED = 'GET_DATA_FAILED';
 
 export const approveConditions = () => ({ type: APPROVE_CONDITIONS });
 export const confirmInformation = () => ({ type: CONFIRM_INFORMATION });
-export const enableNextButton = () => ({ type: ENABLE_NEXT_BUTTON });
-export const disableNextButton = () => ({ type: DISABLE_NEXT_BUTTON });
-export const toggleChildBorn = (e) => ({
+export const toggleChildBorn = (value) => ({
 	type: TOGGLE_CHILD_BORN,
-	data: e.target.value === 'ja'
+	data: value === 'before'
 });
-export const toggleNoOfChildren = (e) => ({
-	type: TOGGLE_NO_OF_CHILDREN,
-	data: e.target.value
+export const setNumberOfChildren = (value) => ({
+	type: SET_NUMBER_OF_CHILDREN,
+	data: value
 });
 export const setTerminDato = (e) => ({
 	type: SET_TERMIN_DATO,
@@ -36,13 +34,13 @@ export const setBekreftetTermindato = (e) => ({
 	type: SET_BEKREFTET_TERMIN_DATO,
 	data: e.target.value
 });
-export const toggleSisteTolv = (e) => ({
-	type: TOGGLE_SISTE_TOLV,
-	data: e.target.value
+export const toggleResidedInNorwayLastTwelveMonths = (value) => ({
+	type: TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS,
+	data: value
 });
-export const toggleNesteTolv = (e) => ({
-	type: TOGGLE_NESTE_TOLV,
-	data: e.target.value
+export const toggleWorkedInNorwayLastTwelveMonths = (value) => ({
+	type: TOGGLE_WORKED_IN_NORWAY_LAST_TWELVE_MONTHS,
+	data: value
 });
 export const toggleOppholdNaa = (e) => ({
 	type: TOGGLE_OPPHOLD_NAA,
@@ -53,12 +51,12 @@ export const getDataRequested = () => ({ type: GET_DATA_REQUESTED });
 const defaultState = {
 	approvedConditions: undefined,
 	confirmedInformation: undefined,
-	nextButtonEnabled: false,
 	childBorn: undefined,
 	noOfChildren: undefined,
 	terminDato: undefined,
 	bekreftetTermindato: undefined,
-	oppholdSisteTolv: undefined,
+	residedInNorwayLastTwelveMonths: undefined,
+	workedInNorwayLastTwelveMonths: undefined,
 	oppholdNesteTolv: undefined,
 	oppholdNaa: undefined,
 	data: null
@@ -76,22 +74,12 @@ const engangsstonadReducer = (state = defaultState, action) => {
 				...state,
 				confirmedInformation: !state.confirmedInformation
 			};
-		case ENABLE_NEXT_BUTTON:
-			return {
-				...state,
-				nextButtonEnabled: true
-			};
-		case DISABLE_NEXT_BUTTON:
-			return {
-				...state,
-				nextButtonEnabled: false
-			};
 		case TOGGLE_CHILD_BORN:
 			return {
 				...state,
 				childBorn: action.data
 			};
-		case TOGGLE_NO_OF_CHILDREN:
+		case SET_NUMBER_OF_CHILDREN:
 			return {
 				...state,
 				noOfChildren: action.data
@@ -106,15 +94,17 @@ const engangsstonadReducer = (state = defaultState, action) => {
 				...state,
 				bekreftetTermindato: action.data
 			};
-		case TOGGLE_SISTE_TOLV:
+		case TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS:
 			return {
 				...state,
-				oppholdSisteTolv: action.data
+				residedInNorwayLastTwelveMonths: action.data,
+				workedInNorwayLastTwelveMonths:
+					defaultState.workedInNorwayLastTwelveMonths
 			};
-		case TOGGLE_NESTE_TOLV:
+		case TOGGLE_WORKED_IN_NORWAY_LAST_TWELVE_MONTHS:
 			return {
 				...state,
-				oppholdNesteTolv: action.data
+				workedInNorwayLastTwelveMonths: action.data
 			};
 		case TOGGLE_OPPHOLD_NAA:
 			return {

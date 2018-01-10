@@ -8,31 +8,10 @@ import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import Checkbox from 'shared/checkbox/Checkbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWithLabel';
-import {
-	confirmInformation,
-	enableNextButton,
-	disableNextButton
-} from 'ducks/Engangsstonad.duck';
+import { confirmInformation } from 'ducks/Engangsstonad.duck';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export class Step4 extends Component {
-	constructor(props) {
-		super(props);
-
-		if (props.confirmedInformation) {
-			this.props.enableNextButton();
-		} else {
-			this.props.disableNextButton();
-		}
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.confirmedInformation) {
-			return this.props.enableNextButton();
-		}
-
-		return this.props.disableNextButton();
-	}
-
 	render() {
 		return (
 			<div>
@@ -82,8 +61,6 @@ export class Step4 extends Component {
 
 Step4.propTypes = {
 	confirmInformation: PropTypes.func.isRequired,
-	enableNextButton: PropTypes.func.isRequired,
-	disableNextButton: PropTypes.func.isRequired,
 	confirmedInformation: PropTypes.bool
 };
 
@@ -98,9 +75,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 	...bindActionCreators(
 		{
-			confirmInformation,
-			enableNextButton,
-			disableNextButton
+			confirmInformation
 		},
 		dispatch
 	)

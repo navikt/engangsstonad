@@ -4,13 +4,10 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { Normaltekst, Element } from 'nav-frontend-typografi';
-import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-skjema';
 
 import {
 	toggleChildBorn,
-	enableNextButton,
-	disableNextButton,
-	toggleNoOfChildren,
+	setNumberOfChildren,
 	setTerminDato,
 	setBekreftetTermindato
 } from 'ducks/Engangsstonad.duck';
@@ -47,8 +44,19 @@ export class Step2 extends Component {
 		];
 	}
 
-	informationAboutChildUpdated(stages, expandedStage) {
-		console.log('Updated', stages, expandedStage);
+	informationAboutChildUpdated(stages) {
+		stages.forEach((stage) => {
+			switch (stage.name) {
+				case 'whenInTime':
+					this.props.toggleChildBorn(stage.selectedValue);
+					break;
+				case 'numberOfExpected':
+					this.props.setNumberOfChildren(stage.selectedValue);
+					break;
+				default:
+					break;
+			}
+		});
 	}
 
 	handleRadioGroupStageChange($e, stages, expandedStage) {
@@ -72,49 +80,25 @@ export class Step2 extends Component {
 					}
 				/>
 
-				{this.props.childBorn === false && (
+				{this.props.noOfChildren && (
 					<div>
-						<Element>og jeg venter...</Element>
-						<ToggleGruppe
-							onChange={this.props.toggleNoOfChildren}
-							name="noOfChildren">
-							<ToggleKnapp
-								defaultChecked={this.props.noOfChildren === '1'}
-								value="1">
-								et barn
-							</ToggleKnapp>
-							<ToggleKnapp
-								defaultChecked={this.props.noOfChildren === '2'}
-								value="2">
-								tvillinger
-							</ToggleKnapp>
-							<ToggleKnapp
-								defaultChecked={this.props.noOfChildren === '3'}
-								value="3">
-								trillinger
-							</ToggleKnapp>
-						</ToggleGruppe>
-						{this.props.noOfChildren && (
+						<Element>med termindato den...</Element>
+						<DateInput onChange={this.props.setTerminDato} label="" />
+						{this.props.terminDato && (
 							<div>
-								<Element>med termindato den...</Element>
-								<DateInput onChange={this.props.setTerminDato} label="" />
-								{this.props.terminDato && (
-									<div>
-										<DialogBox type="warning">
-											<Normaltekst>
-												Siden barnet ikke er født må du legge ved
-												terminbekreftelse fra jordmor eller lege
-											</Normaltekst>
-										</DialogBox>
-										<AttachmentList label="" />
-										<AttachmentButton />
-										<Element>Terminbekreftelsen er datert den...</Element>
-										<DateInput
-											onChange={this.props.setBekreftetTermindato}
-											label=""
-										/>
-									</div>
-								)}
+								<DialogBox type="warning">
+									<Normaltekst>
+										Siden barnet ikke er født må du legge ved terminbekreftelse
+										fra jordmor eller lege
+									</Normaltekst>
+								</DialogBox>
+								<AttachmentList label="" />
+								<AttachmentButton />
+								<Element>Terminbekreftelsen er datert den...</Element>
+								<DateInput
+									onChange={this.props.setBekreftetTermindato}
+									label=""
+								/>
 							</div>
 						)}
 					</div>
@@ -125,22 +109,20 @@ export class Step2 extends Component {
 }
 
 Step2.propTypes = {
-	toggleNoOfChildren: PropTypes.func.isRequired,
+	toggleChildBorn: PropTypes.func.isRequired,
+	setNumberOfChildren: PropTypes.func.isRequired,
 	setBekreftetTermindato: PropTypes.func.isRequired,
 	setTerminDato: PropTypes.func.isRequired,
 	noOfChildren: PropTypes.string,
-	childBorn: PropTypes.bool,
 	terminDato: PropTypes.string
 };
 
 Step2.defaultProps = {
-	childBorn: undefined,
 	noOfChildren: undefined,
 	terminDato: undefined
 };
 
 const mapStateToProps = (state) => ({
-	childBorn: state.engangsstonadReducer.childBorn,
 	noOfChildren: state.engangsstonadReducer.noOfChildren,
 	terminDato: state.engangsstonadReducer.terminDato,
 	bekreftetTermindato: state.engangsstonadReducer.bekreftetTermindato
@@ -150,9 +132,7 @@ const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
 			toggleChildBorn,
-			enableNextButton,
-			disableNextButton,
-			toggleNoOfChildren,
+			setNumberOfChildren,
 			setTerminDato,
 			setBekreftetTermindato
 		},
