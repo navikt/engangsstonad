@@ -8,6 +8,7 @@
 	"license": "MIT",
 	"repository": "https://github.com/navikt/p2-selvbetjening-frontend-cookbook",
 	"devDependencies": {
+		"@types/react": "^16.0.34",
 		"axios": "^0.17.1",
 		"babel-core": "^6.26.0",
 		"babel-eslint": "^8.0.2",
@@ -96,7 +97,14 @@
 		"react-modal": "^3.1.7",
 		"react-redux": "^5.0.6",
 		"react-router-dom": "^4.2.2",
+		"react-scripts-ts": "2.8.0",
 		"redux": "^3.7.2",
-		"redux-saga": "^0.16.0"
+		"redux-saga": "^0.16.0",
+		"ts-jest": "^20.0.7",
+		"ts-loader": "^2.3.7",
+		"tslint": "^5.7.0",
+		"tslint-loader": "^3.5.3",
+		"tslint-react": "^3.2.0",
+		"typescript": "~2.5.3"
 	}
 }

@@ -12,7 +12,6 @@
 		"import/resolver": {
 			"webpack": {
 				"config": "./src/build/webpack/webpack.config.global.js"
-
 			}
 		}
 	},
