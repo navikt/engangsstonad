@@ -43,6 +43,7 @@ const StepBasedForm = (props) => {
 		return '/';
 	};
 
+	// eslint-disable-next-line no-unused-vars
 	const findPreviousRoutePath = () => {
 		const activeRouteIndex = props.routes.indexOf(findActiveRoute());
 		if (activeRouteIndex > 0) {
@@ -73,7 +74,6 @@ const StepBasedForm = (props) => {
 						showStepBack={activeRoute !== routes[0]}
 						showSubmission={activeRoute === routes[routes.length - 1]}
 						nextRoute={findNextRoutePath()}
-						previousRoute={findPreviousRoutePath()}
 					/>
 				);
 			}

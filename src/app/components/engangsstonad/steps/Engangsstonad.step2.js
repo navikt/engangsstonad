@@ -66,13 +66,6 @@ export class Step2 extends Component {
 	render() {
 		return (
 			<div className="engangsstonadStep2">
-				<DialogBox type="info">
-					<Normaltekst>
-						Vi trenger mer informasjon fra deg om barnet eller barna søknaden
-						gjelder
-					</Normaltekst>
-				</DialogBox>
-
 				<TransformingRadioGroupCollection
 					stages={this.radioGroupStages}
 					onChange={($e, stages, expandedStage) =>
@@ -91,9 +84,10 @@ export class Step2 extends Component {
 										Siden barnet ikke er født må du legge ved terminbekreftelse
 										fra jordmor eller lege
 									</Normaltekst>
+
+									<AttachmentList label="" />
+									<AttachmentButton />
 								</DialogBox>
-								<AttachmentList label="" />
-								<AttachmentButton />
 								<Element>Terminbekreftelsen er datert den...</Element>
 								<DateInput
 									onChange={this.props.setBekreftetTermindato}

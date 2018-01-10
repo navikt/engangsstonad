@@ -8,9 +8,6 @@ import './stepper.less';
 
 export const Stepper = (props) => (
 	<div className="stepper">
-		{props.showStepBack && (
-			<StepperButton href={props.previousRoute} label="Tilbake" />
-		)}
 		{props.showStepAhead && (
 			<StepperButton href={props.nextRoute} label="Fortsett med søknad" />
 		)}
@@ -22,18 +19,14 @@ export const Stepper = (props) => (
 
 Stepper.propTypes = {
 	showStepAhead: PropTypes.bool,
-	showStepBack: PropTypes.bool,
 	showSubmission: PropTypes.bool,
-	nextRoute: PropTypes.string,
-	previousRoute: PropTypes.string
+	nextRoute: PropTypes.string
 };
 
 Stepper.defaultProps = {
 	showStepAhead: false,
-	showStepBack: false,
 	showSubmission: false,
-	nextRoute: undefined,
-	previousRoute: undefined
+	nextRoute: undefined
 };
 
 const StepperButton = (props) => {
