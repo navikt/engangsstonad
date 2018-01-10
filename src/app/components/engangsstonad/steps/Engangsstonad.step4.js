@@ -33,6 +33,10 @@ export class Step4 extends Component {
 		return this.props.disableNextButton();
 	}
 
+	componentDidMount() {
+		document.title = 'NAV Engangsstønad - Oppsummering';
+	}
+
 	render() {
 		return (
 			<div>

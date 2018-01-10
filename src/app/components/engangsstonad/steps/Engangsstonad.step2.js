@@ -39,6 +39,10 @@ export class Step2 extends Component {
 		}
 	}
 
+	componentDidMount() {
+		document.title = 'NAV Engangsstønad - Relasjon til barn';
+	}
+
 	// eslint-disable-next-line class-methods-use-this
 	shouldNextButtonBeEnabled(props) {
 		return (
