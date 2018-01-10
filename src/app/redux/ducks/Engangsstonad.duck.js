@@ -28,13 +28,13 @@ export const toggleNoOfChildren = (e) => ({
 	type: TOGGLE_NO_OF_CHILDREN,
 	data: e.target.value
 });
-export const setTerminDato = (e) => ({
+export const setTerminDato = (date) => ({
 	type: SET_TERMIN_DATO,
-	data: e.target.value
+	data: date
 });
-export const setBekreftetTermindato = (e) => ({
+export const setBekreftetTermindato = (date) => ({
 	type: SET_BEKREFTET_TERMIN_DATO,
-	data: e.target.value
+	data: date
 });
 export const toggleSisteTolv = (e) => ({
 	type: TOGGLE_SISTE_TOLV,
