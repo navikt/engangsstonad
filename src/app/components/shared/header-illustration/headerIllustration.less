@@ -1,11 +1,16 @@
 @import '../../../styles/variables.less';
 
 .headerIllustration {
-	background: #e0dae7;
+	background: @c-headerIllustrationBkg;
 	padding-top: 1rem;
-	border-bottom: 1rem solid #826ba1;
+	border-bottom: 1rem solid @c-purpleLighten;
 	margin-bottom: @marginLarge;
 	text-align: center;
+
+	&__title {
+		margin: 1rem 0 2rem 0;
+		line-height: 1rem;
+	}
 
 	&__speechbubble {
 		margin: 0 auto;

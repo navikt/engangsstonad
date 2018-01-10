@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
-import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import {
@@ -14,8 +13,6 @@ import {
 	disableNextButton,
 	approveConditions
 } from 'ducks/Engangsstonad.duck';
-
-import VelkommenIllustration from '../../../assets/svg/frontpage.svg';
 
 export class Step1 extends Component {
 	constructor(props) {
@@ -41,14 +38,6 @@ export class Step1 extends Component {
 
 		return (
 			<div className="step1">
-				<HeaderIllustration
-					dialog={{
-						title: 'Hei Lise',
-						text:
-							'Jeg skal veilede deg gjennom søknaden. Vi har tre steg vi skal gjennom.'
-					}}
-					svg={VelkommenIllustration}
-				/>
 				<Ingress>
 					Engangsstønad er en skattefri engangssum du kan få for hvert barn du
 					/(føder eller) adopterer, når du ikke har tjent opp rett til
