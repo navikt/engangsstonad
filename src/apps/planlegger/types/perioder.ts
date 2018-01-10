@@ -34,7 +34,10 @@ export enum OppholdÅrsakType {
 }
 
 interface Basisperiode {
+	/** Hvilket tidsrom dette perioden er for */
 	periode: Tidsperiode;
+	/** Default false. Om perioden kan endres */
+	erLåst?: boolean;
 }
 
 interface Stønadsperiode extends Basisperiode {
@@ -110,3 +113,9 @@ export type Uttaksperiode =
 	| AnnenPeriode
 	| ManglendeSøktPeriode
 	| VenterSøknadFraAnnenForelder;
+
+export interface KravTilUttaksplan {
+	dagerMødrekvoteFørTerming: number;
+	dagerMødrekvoteEtterFødsel: number;
+	dagerFedrekvote: number;
+}

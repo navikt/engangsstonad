@@ -5,7 +5,7 @@ export enum Dekningsgrad {
 	'100%'
 }
 
-import { Uttaksperiode, Tidsperiode } from './perioder';
+import { Uttaksperiode, Tidsperiode, KravTilUttaksplan } from './perioder';
 
 export interface Søknad {
 	termin: Date;
@@ -20,4 +20,9 @@ export interface Uttaksplan {
 	fødselsdato: Date;
 	perioderMor: Uttaksperiode[];
 	perioderMedforelder: Uttaksperiode[];
+}
+
+export interface Uttaksregler {
+	periode: Tidsperiode;
+	krav: KravTilUttaksplan;
 }
