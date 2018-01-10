@@ -7,7 +7,7 @@ import './headerIllustration.less';
 import SpeechBubble from '../speech-bubble/SpeechBubble';
 
 const HeaderIllustration = ({ dialog, svg }) => (
-	<div className="headerIllustration m-overflow-horizontal">
+	<div className="headerIllustration m_overflow-horizontal">
 		<div className="headerIllustration__speechBubble">
 			<SpeechBubble title={dialog.title} text={dialog.text} />
 		</div>

@@ -10,7 +10,7 @@ const SpeechBubble = ({ title, text }) => (
 		<div className="speechBubble__content">
 			{title && (
 				<div className="speechBubble__title">
-					<Element className="">{title}</Element>
+					<Element className="m_no-margin">{title}</Element>
 				</div>
 			)}
 			<div className="speechBubble__text">{text}</div>
