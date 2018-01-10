@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { Element } from 'nav-frontend-typografi';
 import { Select } from 'nav-frontend-skjema';
 
 import DateInput from './../date-input/DateInput';
@@ -14,8 +12,20 @@ const CountryPicker = () => (
 			<option value="marshalloyene">Marshalløyene</option>
 		</Select>
 		<div className="dateWrapper">
-			<DateInput label={<Element>fra den...</Element>} />
-			<DateInput label={<Element>til den...</Element>} />
+			<DateInput
+				id="termindato"
+				input={{ value: '' }}
+				label="fra den.."
+				onChange={(e) => console.log(e)}
+				errorMessage=""
+			/>
+			<DateInput
+				id="termindato"
+				input={{ value: '' }}
+				label="fra den.."
+				onChange={(e) => console.log(e)}
+				errorMessage=""
+			/>
 		</div>
 	</div>
 );

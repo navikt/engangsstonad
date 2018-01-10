@@ -1,8 +1,7 @@
 {
 	"name": "babel-flow-webpack-setup",
 	"version": "1.0.0",
-	"description":
-		"Simple template webapp setup using React and nav-frontend, build on Webpack, Babel and with flow type inference",
+	"description": "Simple template webapp setup using React and nav-frontend, build on Webpack, Babel and with flow type inference",
 	"main": "./src/app/bootstrap.js",
 	"author": "NAV",
 	"license": "MIT",
@@ -75,6 +74,8 @@
 		"lodash.throttle": "^4.1.1",
 		"nav-frontend-alertstriper": "^0.2.16",
 		"nav-frontend-alertstriper-style": "^0.2.22",
+		"nav-frontend-chevron": "^0.1.10",
+		"nav-frontend-chevron-style": "^0.3.4",
 		"nav-frontend-core": "^4.0.5",
 		"nav-frontend-grid": "^0.1.10",
 		"nav-frontend-grid-style": "^0.2.4",
