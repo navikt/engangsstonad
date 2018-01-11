@@ -15,6 +15,9 @@ const TOGGLE_OPPHOLD_NAA = 'TOGGLE_OPPHOLD_NAA';
 const GET_DATA_REQUESTED = 'GET_DATA_REQUESTED';
 const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
 const GET_DATA_FAILED = 'GET_DATA_FAILED';
+const ADD_VISIT = 'ADD_COUNTRY';
+const EDIT_VISIT = 'EDIT_VISIT';
+const DELETE_VISIT = 'DELETE_COUNTRY';
 
 export const approveConditions = () => ({ type: APPROVE_CONDITIONS });
 export const confirmInformation = () => ({ type: CONFIRM_INFORMATION });
@@ -48,6 +51,22 @@ export const toggleOppholdNaa = (e) => ({
 });
 export const getDataRequested = () => ({ type: GET_DATA_REQUESTED });
 
+export const addVisit = (visitData) => ({
+	type: ADD_VISIT,
+	data: visitData
+});
+
+export const editVisit = (visitData, index) => ({
+	type: EDIT_VISIT,
+	data: visitData,
+	visitIndex: index
+});
+
+export const deleteVisit = (visitData) => ({
+	type: DELETE_VISIT,
+	data: visitData
+});
+
 const defaultState = {
 	approvedConditions: undefined,
 	confirmedInformation: undefined,
@@ -59,7 +78,8 @@ const defaultState = {
 	workedInNorwayLastTwelveMonths: undefined,
 	oppholdNesteTolv: undefined,
 	oppholdNaa: undefined,
-	data: null
+	data: null,
+	visits: []
 };
 
 const engangsstonadReducer = (state = defaultState, action) => {
@@ -120,6 +140,26 @@ const engangsstonadReducer = (state = defaultState, action) => {
 			return {
 				...state,
 				error: action.error
+			};
+		case ADD_VISIT:
+			return {
+				...state,
+				visits: state.visits.concat(action.data)
+			};
+		case EDIT_VISIT:
+			return {
+				...state,
+				visits: state.visits.map((visit, index) => {
+					if (index === action.visitIndex) {
+						return { ...visit, ...action.data };
+					}
+					return visit;
+				})
+			};
+		case DELETE_VISIT:
+			return {
+				...state,
+				visits: state.visits.filter((visit) => action.data !== visit)
 			};
 		default:
 			return state;

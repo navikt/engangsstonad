@@ -5,11 +5,15 @@ import PropTypes from 'prop-types';
 
 import {
 	toggleResidedInNorwayLastTwelveMonths,
-	toggleWorkedInNorwayLastTwelveMonths
+	toggleWorkedInNorwayLastTwelveMonths,
+	addVisit,
+	editVisit,
+	deleteVisit
 } from 'ducks/Engangsstonad.duck';
 
 // eslint-disable-next-line max-len
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
+import CountryPicker from 'shared/country-picker/CountryPicker';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class Step3 extends Component {
@@ -94,7 +98,15 @@ export class Step3 extends Component {
 				/>
 
 				{this.props.residedInNorwayLastTwelveMonths === false && (
-					<span>CountryPicker goes here</span>
+					<CountryPicker
+						label="ettersom jeg bodde i…"
+						visits={this.props.visits}
+						addVisit={(visit) => this.props.addVisit(visit)}
+						deleteVisit={(visit) => this.props.deleteVisit(visit)}
+						editVisit={(visit, updatedVisitIndex) => {
+							this.props.editVisit(visit, updatedVisitIndex);
+						}}
+					/>
 				)}
 
 				{this.props.residedInNorwayLastTwelveMonths !== undefined && (
@@ -129,7 +141,18 @@ Step3.propTypes = {
 	workedInNorwayLastTwelveMonths: PropTypes.bool,
 	residedInNorwayLastTwelveMonths: PropTypes.bool,
 	toggleWorkedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
-	toggleResidedInNorwayLastTwelveMonths: PropTypes.func.isRequired
+	toggleResidedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
+	addVisit: PropTypes.func.isRequired,
+	deleteVisit: PropTypes.func.isRequired,
+	editVisit: PropTypes.func.isRequired,
+
+	visits: PropTypes.arrayOf(
+		PropTypes.shape({
+			country: PropTypes.string,
+			startDate: PropTypes.string,
+			endDate: PropTypes.string
+		})
+	).isRequired
 };
 
 Step3.defaultProps = {
@@ -141,14 +164,18 @@ const mapStateToProps = (state) => ({
 	residedInNorwayLastTwelveMonths:
 		state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
 	workedInNorwayLastTwelveMonths:
-		state.engangsstonadReducer.workedInNorwayLastTwelveMonths
+		state.engangsstonadReducer.workedInNorwayLastTwelveMonths,
+	visits: state.engangsstonadReducer.visits
 });
 
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
 			toggleResidedInNorwayLastTwelveMonths,
-			toggleWorkedInNorwayLastTwelveMonths
+			toggleWorkedInNorwayLastTwelveMonths,
+			addVisit,
+			editVisit,
+			deleteVisit
 		},
 		dispatch
 	);
