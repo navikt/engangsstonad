@@ -15,11 +15,10 @@ const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
 	const html = decoratorResponse.data;
 	const { document } = new JSDOM(html).window;
 
-	const header = document.getElementById('header-withmenu').innerHTML;
-	const footer = document.getElementById('footer-withmenu').innerHTML;
+	const header = document.getElementById('header').innerHTML;
+	const footer = document.getElementById('footer').innerHTML;
 	const scripts = document.getElementById('scripts').innerHTML;
 	const styles = document.getElementById('styles').innerHTML;
-	const megaMenu = document.getElementById('megamenu-resources').innerHTML;
 
 	config.plugins.push(
 		new HtmlWebpackPlugin({
@@ -28,8 +27,7 @@ const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
 			NAVHeading: header,
 			NAVFooter: footer,
 			NAVScripts: scripts,
-			NAVStyles: styles,
-			NAVMegaMenuResources: megaMenu
+			NAVStyles: styles
 		})
 	);
 
@@ -37,7 +35,7 @@ const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
 };
 
 const prodDecorator =
-	'http://appres.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true';
+	'http://appres.nav.no/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true';
 const testDecorator =
 	'http://appres-t1.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true';
 
