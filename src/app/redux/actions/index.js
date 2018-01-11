@@ -9,7 +9,9 @@ import {
 	GET_DATA_REQUESTED,
 	TOGGLE_CHILD_BORN,
 	TOGGLE_OPPHOLD_NAA,
-	TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS
+	TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS,
+	TOGGLE_RESIDING_IN_NORWAY_DURING_BIRTH,
+	TOGGLE_RESIDING_IN_NORWAY_NEXT_TWELVE_MONTHS
 } from '../constants/index';
 
 export const activeRouteChanged = (route) => ({
@@ -23,7 +25,7 @@ export const getDataRequested = () => ({ type: GET_DATA_REQUESTED });
 
 export const toggleChildBorn = (value) => ({
 	type: TOGGLE_CHILD_BORN,
-	data: value === 'before'
+	data: value === undefined ? undefined : value === 'before'
 });
 
 export const setNumberOfChildren = (value) => ({
@@ -54,4 +56,14 @@ export const toggleWorkedInNorwayLastTwelveMonths = (value) => ({
 export const toggleOppholdNaa = (e) => ({
 	type: TOGGLE_OPPHOLD_NAA,
 	data: e.target.value
+});
+
+export const toggleResidingInNorwayDuringBirth = (value) => ({
+	type: TOGGLE_RESIDING_IN_NORWAY_DURING_BIRTH,
+	data: value === undefined ? undefined : value === 'norway'
+});
+
+export const toggleResidingInNorwayNextTwelveMonths = (value) => ({
+	type: TOGGLE_RESIDING_IN_NORWAY_NEXT_TWELVE_MONTHS,
+	data: value === undefined ? undefined : value === 'norway'
 });

@@ -10,24 +10,15 @@ import {
 	SET_TERMIN_DATO,
 	TOGGLE_CHILD_BORN,
 	TOGGLE_OPPHOLD_NAA,
-	TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS
+	TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS,
+	TOGGLE_RESIDING_IN_NORWAY_NEXT_TWELVE_MONTHS,
+	TOGGLE_RESIDING_IN_NORWAY_DURING_BIRTH
 } from '../constants/index';
 
 import { shouldShowStepper } from '../util';
 
 const defaultState = {
 	activeRoute: null,
-	approvedConditions: undefined,
-	confirmedInformation: undefined,
-	childBorn: undefined,
-	noOfChildren: undefined,
-	terminDato: undefined,
-	bekreftetTermindato: undefined,
-	residedInNorwayLastTwelveMonths: undefined,
-	workedInNorwayLastTwelveMonths: undefined,
-	oppholdNesteTolv: undefined,
-	oppholdNaa: undefined,
-	data: null,
 	showStepper: true
 };
 
@@ -78,6 +69,18 @@ const engangsstonadReducer = (state = defaultState, action) => {
 			return newState({
 				...state,
 				workedInNorwayLastTwelveMonths: action.data
+			});
+		}
+		case TOGGLE_RESIDING_IN_NORWAY_NEXT_TWELVE_MONTHS: {
+			return newState({
+				...state,
+				residingInNorwayNextTwelveMonths: action.data
+			});
+		}
+		case TOGGLE_RESIDING_IN_NORWAY_DURING_BIRTH: {
+			return newState({
+				...state,
+				residingInNorwayDuringBirth: action.data
 			});
 		}
 		case TOGGLE_OPPHOLD_NAA: {

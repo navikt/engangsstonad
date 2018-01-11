@@ -12,7 +12,9 @@ export const shouldShowStepper = (nextRoute, state) => {
 			case '/engangsstonad/step3':
 				return (
 					state.residedInNorwayLastTwelveMonths !== undefined &&
-					state.workedInNorwayLastTwelveMonths !== undefined
+					state.workedInNorwayLastTwelveMonths !== undefined &&
+					state.residingInNorwayDuringBirth !== undefined &&
+					state.residingInNorwayNextTwelveMonths !== undefined
 				);
 			default:
 				return true;

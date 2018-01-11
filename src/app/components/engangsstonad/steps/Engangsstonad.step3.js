@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 
 import {
 	toggleResidedInNorwayLastTwelveMonths,
-	toggleWorkedInNorwayLastTwelveMonths
+	toggleWorkedInNorwayLastTwelveMonths,
+	toggleResidingInNorwayNextTwelveMonths,
+	toggleResidingInNorwayDuringBirth
 } from 'actions';
 
 // eslint-disable-next-line max-len
@@ -77,7 +79,22 @@ export class Step3 extends Component {
 	}
 
 	// eslint-disable-next-line class-methods-use-this, no-unused-vars
-	nextTwelveMonthsValueChange($e, stages, expandedStage) {}
+	nextTwelveMonthsValueChange($e, stages, expandedStage) {
+		stages.forEach((stage) => {
+			switch (stage.name) {
+				case 'residingCountryNextTwelveMonths':
+					this.props.toggleResidingInNorwayNextTwelveMonths(
+						stage.selectedValue
+					);
+					break;
+				case 'residingCountryDuringBirth':
+					this.props.toggleResidingInNorwayDuringBirth(stage.selectedValue);
+					break;
+				default:
+					break;
+			}
+		});
+	}
 
 	render() {
 		return (
@@ -129,7 +146,9 @@ Step3.propTypes = {
 	workedInNorwayLastTwelveMonths: PropTypes.bool,
 	residedInNorwayLastTwelveMonths: PropTypes.bool,
 	toggleWorkedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
-	toggleResidedInNorwayLastTwelveMonths: PropTypes.func.isRequired
+	toggleResidedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
+	toggleResidingInNorwayDuringBirth: PropTypes.func.isRequired,
+	toggleResidingInNorwayNextTwelveMonths: PropTypes.func.isRequired
 };
 
 Step3.defaultProps = {
@@ -141,14 +160,20 @@ const mapStateToProps = (state) => ({
 	residedInNorwayLastTwelveMonths:
 		state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
 	workedInNorwayLastTwelveMonths:
-		state.engangsstonadReducer.workedInNorwayLastTwelveMonths
+		state.engangsstonadReducer.workedInNorwayLastTwelveMonths,
+	residingInNorwayNextTwelveMonths:
+		state.engangsstonadReducer.residingInNorwayNextTwelveMonths,
+	residingInNorwayDuringBirth:
+		state.engangsstonadReducer.residingInNorwayDuringBirth
 });
 
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
 			toggleResidedInNorwayLastTwelveMonths,
-			toggleWorkedInNorwayLastTwelveMonths
+			toggleWorkedInNorwayLastTwelveMonths,
+			toggleResidingInNorwayNextTwelveMonths,
+			toggleResidingInNorwayDuringBirth
 		},
 		dispatch
 	);
