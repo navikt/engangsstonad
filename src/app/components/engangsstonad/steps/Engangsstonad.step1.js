@@ -6,36 +6,12 @@ import { Link } from 'react-router-dom';
 
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
-import Checkbox from 'shared/checkbox/Checkbox';
+import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
-import {
-	enableNextButton,
-	disableNextButton,
-	approveConditions
-} from 'ducks/Engangsstonad.duck';
+import { approveConditions } from 'ducks/Engangsstonad.duck';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export class Step1 extends Component {
-	constructor(props) {
-		super(props);
-
-		if (props.approvedConditions) {
-			this.props.enableNextButton();
-		} else {
-			this.props.disableNextButton();
-		}
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.approvedConditions) {
-			return this.props.enableNextButton();
-		}
-		return this.props.disableNextButton();
-	}
-
-	componentDidMount() {
-		document.title = 'NAV Engangsstønad - Samtykke';
-	}
-
 	render() {
 		// eslint-disable-next-line no-shadow
 		const { approveConditions, approvedConditions } = this.props;
@@ -54,11 +30,11 @@ export class Step1 extends Component {
 					</Normaltekst>
 					<Link to="/">Les mer her</Link>
 				</DialogBox>
-				<Checkbox
+				<ConfirmCheckbox
 					name="egenerklaring"
-					label="Jeg er klar over at at hvis jeg gir uriktige
-					opplysninger kan det få konsekvenser for min rett til engangsstønad."
-					type="confirmation"
+					label="Jeg er klar over at dersom jeg gir uriktige opplysninger eller holder tilbake 
+						opplysninger som har betydning for min rett til engangsstønad kan pengene holdes 
+						tilbake eller kreves tilbake, og det kan eventuelt medføre straffeansvar."
 					onChange={approveConditions}
 					checked={approvedConditions}
 				/>
@@ -68,8 +44,6 @@ export class Step1 extends Component {
 }
 
 Step1.propTypes = {
-	enableNextButton: PropTypes.func.isRequired,
-	disableNextButton: PropTypes.func.isRequired,
 	approvedConditions: PropTypes.bool,
 	approveConditions: PropTypes.func.isRequired
 };
@@ -85,9 +59,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
-			approveConditions,
-			enableNextButton,
-			disableNextButton
+			approveConditions
 		},
 		dispatch
 	);

@@ -1,31 +1,37 @@
 .dialogBox {
 	align-items: center;
 	display: flex;
+	padding: 1rem 0;
 
-	.dialogText {
+	&--overflow {
+		margin-left: -1rem;
+		margin-right: -1rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+	&__text {
 		align-self: center;
-		margin-left: 10px;
-		margin-top: 4px;
+		margin-left: 1rem;
 	}
 
-	.dialogImage {
-		min-width: 96px;
+	&__image {
+		min-width: 6rem;
 	}
-}
 
-.dialogBox--info {
-	border-top: 2px solid #c1b5d0;
-	border-bottom: 2px solid #c1b5d0;
-}
+	&--info {
+		border-top: 2px solid #c1b5d0;
+		border-bottom: 2px solid #c1b5d0;
+	}
 
-.dialogBox--alert {
-	background: #e3b0a8;
-}
+	&--alert {
+		background: #e3b0a8;
+	}
 
-.dialogBox--warning {
-	background: #ffd399;
-}
+	&--warning {
+		background: #ffd399;
+	}
 
-.dialogBox--success {
-	background: #9bd0b0;
+	&--success {
+		background: #9bd0b0;
+	}
 }

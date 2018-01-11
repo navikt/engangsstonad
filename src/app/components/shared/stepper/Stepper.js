@@ -8,14 +8,11 @@ import './stepper.less';
 
 export const Stepper = (props) => (
 	<div className="stepper">
-		{props.showStepBack && (
-			<StepperButton href={props.previousRoute} label="Tilbake" />
-		)}
 		{props.showStepAhead && (
 			<StepperButton
-				disabled={!props.nextButtonEnabled}
 				href={props.nextRoute}
 				label="Fortsett med søknad"
+				onNextButtonClicked={props.onNextButtonClicked}
 			/>
 		)}
 		{props.showSubmission && (
@@ -26,44 +23,28 @@ export const Stepper = (props) => (
 
 Stepper.propTypes = {
 	showStepAhead: PropTypes.bool,
-	showStepBack: PropTypes.bool,
 	showSubmission: PropTypes.bool,
 	nextRoute: PropTypes.string,
-	previousRoute: PropTypes.string,
-	nextButtonEnabled: PropTypes.bool
+	onNextButtonClicked: PropTypes.func
 };
 
 Stepper.defaultProps = {
 	showStepAhead: false,
-	showStepBack: false,
 	showSubmission: false,
 	nextRoute: undefined,
-	previousRoute: undefined,
-	nextButtonEnabled: false
+	onNextButtonClicked: () => {}
 };
 
 const StepperButton = (props) => {
 	const btnClassNames = classNames('knapp', {
-		[`knapp--${props.knappType}`]: props.knappType && !props.disabled,
-		'knapp--disabled': props.disabled
+		[`knapp--${props.knappType}`]: props.knappType
 	});
-
-	const onClickListener = ($event) => {
-		if (props.disabled) {
-			$event.preventDefault();
-			$event.stopPropagation();
-		}
-	};
-
-	const tabIndex = () => (props.disabled ? -1 : 0);
 
 	return (
 		<Link
 			to={props.href}
 			className={btnClassNames}
-			onClick={onClickListener}
-			tabIndex={tabIndex()}
-			aria-disabled={props.disabled}>
+			onClick={($e) => props.onNextButtonClicked($e)}>
 			{props.label}
 		</Link>
 	);
@@ -73,16 +54,14 @@ StepperButton.propTypes = {
 	label: PropTypes.string.isRequired,
 	href: PropTypes.string.isRequired,
 	knappType: PropTypes.string,
-	disabled: PropTypes.bool
+	onNextButtonClicked: PropTypes.func
 };
 
 StepperButton.defaultProps = {
-	disabled: false,
-	knappType: 'hoved'
+	knappType: 'hoved',
+	onNextButtonClicked: () => {}
 };
 
-const mapStateToProps = (state) => ({
-	nextButtonEnabled: state.engangsstonadReducer.nextButtonEnabled
-});
+const mapStateToProps = () => ({});
 
 export default connect(mapStateToProps)(Stepper);

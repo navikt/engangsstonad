@@ -7,6 +7,7 @@ import { Sidetittel } from 'nav-frontend-typografi';
 import StepIndicator from 'components/shared/progress-indicator/StepIndicator';
 import Stepper from './../stepper/Stepper';
 import Step from './../step/Step';
+import BackLink from './../back-link/BackLink';
 
 import './stepBasedForm.less';
 
@@ -61,6 +62,10 @@ const StepBasedForm = (props) => {
 			return route;
 		});
 
+	const handleOnNextButtonClicked = ($e, activeRoute) => {
+		props.onNextButtonClicked($e, activeRoute);
+	};
+
 	const renderStepper = () => {
 		const { routes } = props;
 		const activeRoute = findActiveRoute();
@@ -75,10 +80,20 @@ const StepBasedForm = (props) => {
 						showStepBack={activeRoute !== routes[0]}
 						showSubmission={activeRoute === routes[routes.length - 1]}
 						nextRoute={findNextRoutePath()}
-						previousRoute={findPreviousRoutePath()}
+						onNextButtonClicked={($e) =>
+							handleOnNextButtonClicked($e, activeRoute)
+						}
 					/>
 				);
 			}
+		}
+		return null;
+	};
+
+	const renderBackLink = () => {
+		const activeRoute = findActiveRoute();
+		if (activeRoute !== props.routes[0]) {
+			return <BackLink href={findPreviousRoutePath()} />;
 		}
 		return null;
 	};
@@ -87,6 +102,7 @@ const StepBasedForm = (props) => {
 		<div className="stepBasedForm">
 			<form className={props.className}>
 				<Header title={props.title} />
+				{renderBackLink()}
 				{props.withStepIndicator && (
 					<StepIndicator
 						steps={props.steps}
@@ -94,7 +110,7 @@ const StepBasedForm = (props) => {
 					/>
 				)}
 				<Switch>{renderRoutes()}</Switch>
-				{renderStepper()}
+				{props.showStepper && renderStepper()}
 			</form>
 		</div>
 	);
@@ -109,7 +125,9 @@ StepBasedForm.propTypes = {
 	withStepIndicator: PropTypes.bool,
 	afterSubmissionRoute: PropTypes.bool,
 	title: PropTypes.string,
-	className: PropTypes.string
+	className: PropTypes.string,
+	showStepper: PropTypes.bool,
+	onNextButtonClicked: PropTypes.func
 };
 
 StepBasedForm.defaultProps = {
@@ -117,7 +135,8 @@ StepBasedForm.defaultProps = {
 	className: '',
 	title: '',
 	afterSubmissionRoute: true,
-	steps: []
+	showStepper: false,
+	onNextButtonClicked: () => {}
 };
 
 export default StepBasedForm;

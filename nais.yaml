@@ -26,5 +26,5 @@ ingress:
   enabled: true 
 fasitResources:
   used:
-  - alias: foreldrepengesoeknad-api
+  - alias: foreldrepengesoknad-api
     resourceType: restservice

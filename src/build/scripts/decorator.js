@@ -4,38 +4,47 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const axios = require('axios');
 
 const { JSDOM } = jsdom;
-const getDecorator = () => (axios({
-    method: 'get',
-    // eslint-disable-next-line
-    url: 'http://appres-t1.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true',
-    validateStatus: (status) => (status >= 200 || status === 302)
-}));
+
+const getDecorator = (decoratorUrl) =>
+	axios({
+		method: 'get',
+		url: decoratorUrl,
+		validateStatus: (status) => status >= 200 || status === 302
+	});
 
 const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
-    const html = decoratorResponse.data;
-    const { document } = (new JSDOM(html)).window;
+	const html = decoratorResponse.data;
+	const { document } = new JSDOM(html).window;
 
-    const header = (document.getElementById('header-withmenu')).innerHTML;
-    const footer = (document.getElementById('footer-withmenu')).innerHTML;
-    const scripts = (document.getElementById('scripts')).innerHTML;
-    const styles = (document.getElementById('styles')).innerHTML;
-    const megaMenu = (document.getElementById('megamenu-resources')).innerHTML;
+	const header = document.getElementById('header-withmenu').innerHTML;
+	const footer = document.getElementById('footer-withmenu').innerHTML;
+	const scripts = document.getElementById('scripts').innerHTML;
+	const styles = document.getElementById('styles').innerHTML;
+	const megaMenu = document.getElementById('megamenu-resources').innerHTML;
 
-    config.plugins.push(new HtmlWebpackPlugin({
-        template: './src/app/index.html',
-        inject: 'body',
-        NAVHeading: header,
-        NAVFooter: footer,
-        NAVScripts: scripts,
-        NAVStyles: styles,
-        NAVMegaMenuResources: megaMenu
-    }));
+	config.plugins.push(
+		new HtmlWebpackPlugin({
+			template: './src/app/index.html',
+			inject: 'body',
+			NAVHeading: header,
+			NAVFooter: footer,
+			NAVScripts: scripts,
+			NAVStyles: styles,
+			NAVMegaMenuResources: megaMenu
+		})
+	);
 
-    return config;
+	return config;
 };
 
-const configDecorator = (config) => (
-    getDecorator().then((response) => (reconfigureBuildWithDecorator(response, config)))
-);
+const prodDecorator =
+	'http://appres.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true';
+const testDecorator =
+	'http://appres-t1.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true';
+
+const configDecorator = (config, external) =>
+	getDecorator(external ? prodDecorator : testDecorator).then((response) =>
+		reconfigureBuildWithDecorator(response, config)
+	);
 
 module.exports = configDecorator;

@@ -41,11 +41,17 @@ export class EngangsstonadIndex extends React.Component {
 		this.props.dispatch(getDataRequested());
 	}
 
+	// eslint-disable-next-line class-methods-use-this
+	handleOnNextButtonClicked() {}
+
 	render() {
 		return (
 			<div className="engangsstonad">
 				<StepBasedForm
-					nextButtonEnabled
+					showStepper
+					onNextButtonClicked={($e, route) =>
+						this.handleOnNextButtonClicked($e, route)
+					}
 					routes={renderChildRoutes(this.props.routes) || []}
 					title="Søknad om engangsstønad"
 					location={this.props.location}
@@ -53,9 +59,6 @@ export class EngangsstonadIndex extends React.Component {
 					withStepIndicator
 				/>
 				{this.props.data && <div>Data: {JSON.stringify(this.props.data)}</div>}
-				{this.props.error && (
-					<div>Error getting data: {JSON.stringify(this.props.error)}</div>
-				)}
 			</div>
 		);
 	}
@@ -65,18 +68,15 @@ EngangsstonadIndex.propTypes = {
 	routes: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	location: PropTypes.shape({}).isRequired,
 	dispatch: PropTypes.func.isRequired,
-	data: PropTypes.shape({}),
-	error: PropTypes.shape({})
+	data: PropTypes.shape({})
 };
 
 EngangsstonadIndex.defaultProps = {
-	data: null,
-	error: null
+	data: null
 };
 
 const mapStateToProps = (state) => ({
-	data: state.engangsstonadReducer.data,
-	error: state.engangsstonadReducer.error
+	data: state.engangsstonadReducer.data
 });
 
 export default connect(mapStateToProps)(EngangsstonadIndex);

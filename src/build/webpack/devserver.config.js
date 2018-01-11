@@ -1,5 +1,6 @@
 module.exports = {
 	contentBase: 'dist',
+	watchContentBase: true,
 	historyApiFallback: true,
-	watchContentBase: true
+	stats: 'minimal'
 };
