@@ -27,7 +27,8 @@ const HeaderIllustration = ({ title, dialog, svg }) => (
 HeaderIllustration.propTypes = {
 	title: PropTypes.string.isRequired,
 	dialog: PropTypes.shape({
-		title: PropTypes.string
+		title: PropTypes.string,
+		text: PropTypes.string.isRequired
 	}),
 	svg: PropTypes.object
 };
