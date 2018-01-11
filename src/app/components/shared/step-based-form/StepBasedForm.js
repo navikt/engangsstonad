@@ -6,6 +6,7 @@ import { Sidetittel } from 'nav-frontend-typografi';
 
 import Stepper from './../stepper/Stepper';
 import Step from './../step/Step';
+import BackLink from './../back-link/BackLink';
 
 import './stepBasedForm.less';
 
@@ -59,6 +60,10 @@ const StepBasedForm = (props) => {
 			return route;
 		});
 
+	const handleOnNextButtonClicked = ($e, activeRoute) => {
+		props.onNextButtonClicked($e, activeRoute);
+	};
+
 	const renderStepper = () => {
 		const { routes } = props;
 		const activeRoute = findActiveRoute();
@@ -73,10 +78,20 @@ const StepBasedForm = (props) => {
 						showStepBack={activeRoute !== routes[0]}
 						showSubmission={activeRoute === routes[routes.length - 1]}
 						nextRoute={findNextRoutePath()}
-						previousRoute={findPreviousRoutePath()}
+						onNextButtonClicked={($e) =>
+							handleOnNextButtonClicked($e, activeRoute)
+						}
 					/>
 				);
 			}
+		}
+		return null;
+	};
+
+	const renderBackLink = () => {
+		const activeRoute = findActiveRoute();
+		if (activeRoute !== props.routes[0]) {
+			return <BackLink href={findPreviousRoutePath()} />;
 		}
 		return null;
 	};
@@ -85,8 +100,9 @@ const StepBasedForm = (props) => {
 		<div className="stepBasedForm">
 			<form className={props.className}>
 				<Header title={props.title} />
+				{renderBackLink()}
 				<Switch>{renderRoutes()}</Switch>
-				{renderStepper()}
+				{props.showStepper && renderStepper()}
 			</form>
 		</div>
 	);
@@ -97,14 +113,17 @@ StepBasedForm.propTypes = {
 	location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 	afterSubmissionRoute: PropTypes.bool,
 	title: PropTypes.string,
-	nextButtonEnabled: PropTypes.bool.isRequired, // eslint-disable-line react/no-unused-prop-types
-	className: PropTypes.string
+	className: PropTypes.string,
+	showStepper: PropTypes.bool,
+	onNextButtonClicked: PropTypes.func
 };
 
 StepBasedForm.defaultProps = {
 	className: '',
 	title: '',
-	afterSubmissionRoute: true
+	afterSubmissionRoute: true,
+	showStepper: false,
+	onNextButtonClicked: () => {}
 };
 
 export default StepBasedForm;

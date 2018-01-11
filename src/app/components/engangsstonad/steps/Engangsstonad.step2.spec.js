@@ -4,7 +4,7 @@ import { Step2 } from './Engangsstonad.step2';
 describe('<Step2 />', () => {
 	it('should not display remaining form if child is born', () => {
 		const wrapper = shallow(
-			<Step2 childBorn="ja" enableNextButton={() => true} />
+			<Step2 childBorn="ja" />
 		);
 		expect(wrapper.find('div')).to.have.length(1);
 	});

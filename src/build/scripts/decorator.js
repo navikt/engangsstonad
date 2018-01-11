@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const axios = require('axios');
 
 const { JSDOM } = jsdom;
+
 const getDecorator = (decoratorUrl) =>
 	axios({
 		method: 'get',
