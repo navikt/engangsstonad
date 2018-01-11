@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import DocumentTitle from 'react-document-title';
 
 import {
 	toggleResidedInNorwayLastTwelveMonths,
@@ -82,6 +83,7 @@ export class Step3 extends Component {
 	render() {
 		return (
 			<div className="step3">
+				<DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
 				<TransformingRadioGroupCollection
 					stages={this.radioGroupStages1}
 					onChange={($e, stages, expandedStage) =>
