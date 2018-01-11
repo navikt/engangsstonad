@@ -26,13 +26,13 @@ export const setNumberOfChildren = (value) => ({
 	type: SET_NUMBER_OF_CHILDREN,
 	data: value
 });
-export const setTerminDato = (e) => ({
+export const setTerminDato = (date) => ({
 	type: SET_TERMIN_DATO,
-	data: e.target.value
+	data: date
 });
-export const setBekreftetTermindato = (e) => ({
+export const setBekreftetTermindato = (date) => ({
 	type: SET_BEKREFTET_TERMIN_DATO,
-	data: e.target.value
+	data: date
 });
 export const toggleResidedInNorwayLastTwelveMonths = (value) => ({
 	type: TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS,

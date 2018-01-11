@@ -23,21 +23,26 @@ const getIcon = (type) => {
 	}
 };
 
-const getClassnames = (props) =>
+const getClassnames = (type, overflow) =>
 	classNames('dialogBox', {
-		'dialogBox--info': props.type === 'info',
-		'dialogBox--alert': props.type === 'alert',
-		'dialogBox--warning': props.type === 'warning',
-		'dialogBox--success': props.type === 'success'
+		'dialogBox--info': type === 'info',
+		'dialogBox--alert': type === 'alert',
+		'dialogBox--warning': type === 'warning',
+		'dialogBox--success': type === 'success',
+		'dialogBox--overflow': overflow === true
 	});
 
 const DialogBoxBase = (props) => {
-	const { type } = props;
+	const { type, overflow } = props;
 
 	return (
-		<div className={getClassnames(props)}>
-			<CustomSVG className="dialogImage" iconRef={getIcon(type)} size={96} />
-			<div className="dialogText">{props.children}</div>
+		<div className={getClassnames(type, overflow)}>
+			<CustomSVG
+				className="dialogBox__image"
+				iconRef={getIcon(type)}
+				size={96}
+			/>
+			<div className="dialogBox__text">{props.children}</div>
 		</div>
 	);
 };
@@ -47,11 +52,13 @@ DialogBoxBase.propTypes = {
 	children: PropTypes.oneOfType([
 		PropTypes.node,
 		PropTypes.arrayOf(PropTypes.node)
-	]).isRequired
+	]).isRequired,
+	overflow: PropTypes.bool
 };
 
 DialogBoxBase.defaultProps = {
-	type: ''
+	type: '',
+	overflow: false
 };
 
 const DialogBox = (props) => <DialogBoxBase {...props} />;

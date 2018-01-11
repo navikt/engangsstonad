@@ -4,12 +4,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const axios = require('axios');
 
 const { JSDOM } = jsdom;
-const getDecorator = () =>
+
+const getDecorator = (decoratorUrl) =>
 	axios({
 		method: 'get',
-		url:
-			// eslint-disable-next-line max-len
-			'http://appres-t1.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true',
+		url: decoratorUrl,
 		validateStatus: (status) => status >= 200 || status === 302
 	});
 
@@ -38,26 +37,14 @@ const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
 	return config;
 };
 
-const runWithoutDecorator = (config) => {
-	config.plugins.push(
-		new HtmlWebpackPlugin({
-			template: './src/app/index.html',
-			inject: 'body',
-			NAVHeading: '',
-			NAVFooter: '',
-			NAVScripts: '',
-			NAVStyles: '',
-			NAVMegaMenuResources: ''
-		})
-	);
+const prodDecorator =
+	'http://appres.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true';
+const testDecorator =
+	'http://appres-t1.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true';
 
-	return config;
-};
-
-const configDecorator = (config) =>
-	getDecorator().then(
-		(response) => reconfigureBuildWithDecorator(response, config),
-		() => runWithoutDecorator(config)
+const configDecorator = (config, external) =>
+	getDecorator(external ? prodDecorator : testDecorator).then((response) =>
+		reconfigureBuildWithDecorator(response, config)
 	);
 
 module.exports = configDecorator;

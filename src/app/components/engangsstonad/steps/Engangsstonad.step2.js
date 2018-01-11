@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import { Normaltekst, Element } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 import {
 	toggleChildBorn,
@@ -75,24 +75,29 @@ export class Step2 extends Component {
 
 				{this.props.noOfChildren && (
 					<div>
-						<Element>med termindato den...</Element>
-						<DateInput onChange={this.props.setTerminDato} label="" />
+						<DateInput
+							id="termindato"
+							input={{ value: this.props.terminDato }}
+							label=" termindato den..."
+							onChange={(e) => this.props.setTerminDato(e)}
+							errorMessage=""
+						/>
 						{this.props.terminDato && (
 							<div>
-								<DialogBox type="warning">
+								<DialogBox type="warning" overflow>
 									<Normaltekst>
 										Siden barnet ikke er født må du legge ved terminbekreftelse
 										fra jordmor eller lege
 									</Normaltekst>
 								</DialogBox>
-
 								<AttachmentList label="" />
 								<AttachmentButton />
-
-								<Element>Terminbekreftelsen er datert den...</Element>
 								<DateInput
-									onChange={this.props.setBekreftetTermindato}
-									label=""
+									id="terminbekreftelse"
+									input={{ value: this.props.bekreftetTermindato }}
+									label="Terminbekreftelsen er datert den..."
+									onChange={(e) => this.props.setBekreftetTermindato(e)}
+									errorMessage="error test"
 								/>
 							</div>
 						)}
@@ -109,11 +114,13 @@ Step2.propTypes = {
 	setBekreftetTermindato: PropTypes.func.isRequired,
 	setTerminDato: PropTypes.func.isRequired,
 	noOfChildren: PropTypes.string,
-	terminDato: PropTypes.string
+	terminDato: PropTypes.string,
+	bekreftetTermindato: PropTypes.string
 };
 
 Step2.defaultProps = {
 	noOfChildren: undefined,
+	bekreftetTermindato: undefined,
 	terminDato: undefined
 };
 
