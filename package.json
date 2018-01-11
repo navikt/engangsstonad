@@ -8,6 +8,7 @@
 	"repository": "https://github.com/navikt/p2-selvbetjening-frontend-cookbook",
 	"devDependencies": {
 		"@types/react": "^16.0.34",
+		"@types/react-router-dom": "^4.2.3",
 		"axios": "^0.17.1",
 		"babel-core": "^6.26.0",
 		"babel-eslint": "^8.0.2",
