@@ -9,7 +9,7 @@ const getDecorator = () =>
 		method: 'get',
 		url:
 			// eslint-disable-next-line max-len
-			'http://appres-p.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true',
+			'http://appres-t1.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true',
 		validateStatus: (status) => status >= 200 || status === 302
 	});
 
