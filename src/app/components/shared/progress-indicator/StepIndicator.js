@@ -6,13 +6,15 @@ import { Ingress } from 'nav-frontend-typografi';
 
 import Step from './Step';
 
+import './stepIndicator.less';
+
 export const StepIndicator = (props) => (
 	<div
 		role="progressbar"
 		aria-valuenow={props.activeStep}
 		aria-valuemin="1"
 		aria-valuemax={props.steps.length}>
-		<div style={{ textAlign: 'center', margin: '0', paddingBottom: '12px' }}>
+		<div className="stepIndicator">
 			<Ingress>{props.steps[props.activeStep - 1].title}</Ingress>
 		</div>
 		<ul className="stegindikator">
