@@ -12,9 +12,8 @@ export class EngangsstonadIndex extends React.Component {
 		this.props.dispatch(getDataRequested());
 	}
 
-	handleOnNextButtonClicked($e, route) {
-		console.log('Heisann', $e, route, this.props.routes.indexOf(route));
-	}
+	// eslint-disable-next-line class-methods-use-this
+	handleOnNextButtonClicked() {}
 
 	render() {
 		return (
