@@ -79,7 +79,7 @@ export class Step3 extends Component {
 	}
 
 	// eslint-disable-next-line class-methods-use-this, no-unused-vars
-	nextTwelveMonthsValueChange($e, stages, expandedStage) {
+	nextTwelveMonthsValueChange($e, stages) {
 		stages.forEach((stage) => {
 			switch (stage.name) {
 				case 'residingCountryNextTwelveMonths':

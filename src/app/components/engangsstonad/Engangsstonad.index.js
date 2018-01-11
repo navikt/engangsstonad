@@ -45,7 +45,6 @@ export class EngangsstonadIndex extends React.Component {
 		return true;
 	}
 
-	// eslint-disable-next-line class-methods-use-this
 	handleOnNextButtonClicked($e, activeRoute) {
 		if (this.formIsValidPOC()) {
 			const nextRouteIndex =
