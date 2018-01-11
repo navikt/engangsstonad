@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { VenstreChevron } from 'nav-frontend-chevron';
 import './backLink.less';
 
 const BackLink = (props) => (
-	<a className="backLink lenke" href={props.href}>
-		<VenstreChevron stor />
-		{props.text}
-	</a>
+	<div className="backLinkWrapper">
+		<Link className="backLink lenke" to={props.href}>
+			<VenstreChevron stor />
+			{props.text}
+		</Link>
+	</div>
 );
 
 BackLink.propTypes = {

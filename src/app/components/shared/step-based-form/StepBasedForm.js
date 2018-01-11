@@ -102,13 +102,13 @@ const StepBasedForm = (props) => {
 		<div className="stepBasedForm">
 			<form className={props.className}>
 				<Header title={props.title} />
-				{renderBackLink()}
 				{props.withStepIndicator && (
 					<StepIndicator
 						steps={props.steps}
 						activeStep={findActiveRouteIndex() + 1}
 					/>
 				)}
+				{renderBackLink()}
 				<Switch>{renderRoutes()}</Switch>
 				{props.showStepper && renderStepper()}
 			</form>
@@ -135,6 +135,7 @@ StepBasedForm.defaultProps = {
 	className: '',
 	title: '',
 	afterSubmissionRoute: true,
+	steps: [],
 	showStepper: false,
 	onNextButtonClicked: () => {}
 };
