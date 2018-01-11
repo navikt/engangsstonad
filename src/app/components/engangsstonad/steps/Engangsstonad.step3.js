@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {
 	toggleResidedInNorwayLastTwelveMonths,
 	toggleWorkedInNorwayLastTwelveMonths
-} from 'ducks/Engangsstonad.duck';
+} from 'actions';
 
 // eslint-disable-next-line max-len
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';

@@ -3,23 +3,37 @@ import PropTypes from 'prop-types';
 import renderChildRoutes from 'util/routing';
 import StepBasedForm from 'shared/step-based-form/StepBasedForm';
 import { connect } from 'react-redux';
-import { getDataRequested } from './../../redux/ducks/Engangsstonad.duck';
+import { getDataRequested, activeRouteChanged } from 'actions';
 import './engangsstonad.less';
 
-// eslint-disable-next-line react/prefer-stateless-function
 export class EngangsstonadIndex extends React.Component {
 	componentWillMount() {
 		this.props.dispatch(getDataRequested());
 	}
 
 	// eslint-disable-next-line class-methods-use-this
-	handleOnNextButtonClicked() {}
+	formIsValidPOC() {
+		return true;
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	handleOnNextButtonClicked($e, activeRoute) {
+		if (this.formIsValidPOC()) {
+			const nextRouteIndex =
+				this.props.routes.findIndex(
+					(route) => route.path === activeRoute.props.path
+				) + 1;
+			this.props.dispatch(
+				activeRouteChanged(this.props.routes[nextRouteIndex])
+			);
+		}
+	}
 
 	render() {
 		return (
 			<div className="engangsstonad">
 				<StepBasedForm
-					showStepper
+					showStepper={this.props.showStepper}
 					onNextButtonClicked={($e, route) =>
 						this.handleOnNextButtonClicked($e, route)
 					}
@@ -37,15 +51,18 @@ EngangsstonadIndex.propTypes = {
 	routes: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	location: PropTypes.shape({}).isRequired,
 	dispatch: PropTypes.func.isRequired,
-	data: PropTypes.shape({})
+	data: PropTypes.shape({}),
+	showStepper: PropTypes.bool
 };
 
 EngangsstonadIndex.defaultProps = {
-	data: null
+	data: null,
+	showStepper: true
 };
 
 const mapStateToProps = (state) => ({
-	data: state.engangsstonadReducer.data
+	data: state.engangsstonadReducer.data,
+	showStepper: state.engangsstonadReducer.showStepper
 });
 
 export default connect(mapStateToProps)(EngangsstonadIndex);

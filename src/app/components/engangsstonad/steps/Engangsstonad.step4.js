@@ -8,7 +8,7 @@ import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWithLabel';
-import { confirmInformation } from 'ducks/Engangsstonad.duck';
+import { confirmInformation } from 'actions';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class Step4 extends Component {
