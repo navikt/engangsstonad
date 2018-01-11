@@ -9,7 +9,7 @@ import './headerIllustration.less';
 import SpeechBubble from '../speech-bubble/SpeechBubble';
 
 const HeaderIllustration = ({ title, dialog, svg }) => (
-	<div className="headerIllustration m_overflow-horizontal">
+	<div className="headerIllustration">
 		<div className="headerIllustration__title">
 			<Sidetittel>{title}</Sidetittel>
 		</div>
