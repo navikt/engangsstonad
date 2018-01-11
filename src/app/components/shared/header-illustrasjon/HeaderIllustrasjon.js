@@ -13,9 +13,11 @@ const HeaderIllustration = ({ title, dialog, svg }) => (
 		<div className="headerIllustration__title">
 			<Sidetittel>{title}</Sidetittel>
 		</div>
-		<div className="headerIllustration__speechBubble">
-			<SpeechBubble title={dialog.title} text={dialog.text} />
-		</div>
+		{dialog && (
+			<div className="headerIllustration__speechBubble">
+				<SpeechBubble title={dialog.title} text={dialog.text} />
+			</div>
+		)}
 		<div className="headerIllustration__illustration">
 			<CustomSVG iconRef={svg} />
 		</div>
@@ -25,7 +27,8 @@ const HeaderIllustration = ({ title, dialog, svg }) => (
 HeaderIllustration.propTypes = {
 	title: PropTypes.string.isRequired,
 	dialog: PropTypes.shape({
-		title: PropTypes.string
+		title: PropTypes.string,
+		text: PropTypes.string.isRequired
 	}),
 	svg: PropTypes.object
 };
