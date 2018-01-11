@@ -103,14 +103,17 @@ const StepBasedForm = (props) => {
 		return null;
 	};
 
-	const activeRouteIndex = props.routes.indexOf(findActiveRoute());
-	const illustration = props.illustrations
-		? props.illustrations[activeRouteIndex.toString()]
-		: null;
+	const getStepIllustration = () => {
+		const activeRouteIndex = props.routes.indexOf(findActiveRoute());
+		return props.illustrations
+			? props.illustrations[activeRouteIndex.toString()]
+			: null;
+	};
+
 	return (
 		<div className="stepBasedForm">
 			<form className={props.className}>
-				<Header title={props.title} illustration={illustration} />
+				<Header title={props.title} illustration={getStepIllustration()} />
 				{renderBackLink()}
 				<Switch>{renderRoutes()}</Switch>
 				{props.showStepper && renderStepper()}
