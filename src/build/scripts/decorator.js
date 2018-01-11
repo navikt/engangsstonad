@@ -37,7 +37,7 @@ const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
 const prodDecorator =
 	'http://appres.nav.no/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true';
 const testDecorator =
-	'http://appres-t1.nav.no/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer-withmenu=true';
+	'http://appres-t1.nav.no/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true';
 
 const configDecorator = (config, external) =>
 	getDecorator(external ? prodDecorator : testDecorator).then((response) =>
