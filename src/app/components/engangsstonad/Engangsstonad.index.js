@@ -12,11 +12,18 @@ export class EngangsstonadIndex extends React.Component {
 		this.props.dispatch(getDataRequested());
 	}
 
+	handleOnNextButtonClicked($e, route) {
+		console.log('Heisann', $e, route, this.props.routes.indexOf(route));
+	}
+
 	render() {
 		return (
 			<div className="engangsstonad">
 				<StepBasedForm
 					showStepper
+					onNextButtonClicked={($e, route) =>
+						this.handleOnNextButtonClicked($e, route)
+					}
 					routes={renderChildRoutes(this.props.routes) || []}
 					title="Søknad om engangsstønad"
 					location={this.props.location}

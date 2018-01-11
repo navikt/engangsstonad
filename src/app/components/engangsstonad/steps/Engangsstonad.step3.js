@@ -126,10 +126,15 @@ export class Step3 extends Component {
 }
 
 Step3.propTypes = {
-	workedInNorwayLastTwelveMonths: PropTypes.bool.isRequired,
-	residedInNorwayLastTwelveMonths: PropTypes.bool.isRequired,
+	workedInNorwayLastTwelveMonths: PropTypes.bool,
+	residedInNorwayLastTwelveMonths: PropTypes.bool,
 	toggleWorkedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
 	toggleResidedInNorwayLastTwelveMonths: PropTypes.func.isRequired
+};
+
+Step3.defaultProps = {
+	workedInNorwayLastTwelveMonths: undefined,
+	residedInNorwayLastTwelveMonths: undefined
 };
 
 const mapStateToProps = (state) => ({

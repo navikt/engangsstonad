@@ -9,7 +9,11 @@ import './stepper.less';
 export const Stepper = (props) => (
 	<div className="stepper">
 		{props.showStepAhead && (
-			<StepperButton href={props.nextRoute} label="Fortsett med søknad" />
+			<StepperButton
+				href={props.nextRoute}
+				label="Fortsett med søknad"
+				onNextButtonClicked={props.onNextButtonClicked}
+			/>
 		)}
 		{props.showSubmission && (
 			<StepperButton href={props.nextRoute} label="Send søknad" />
@@ -20,13 +24,15 @@ export const Stepper = (props) => (
 Stepper.propTypes = {
 	showStepAhead: PropTypes.bool,
 	showSubmission: PropTypes.bool,
-	nextRoute: PropTypes.string
+	nextRoute: PropTypes.string,
+	onNextButtonClicked: PropTypes.func
 };
 
 Stepper.defaultProps = {
 	showStepAhead: false,
 	showSubmission: false,
-	nextRoute: undefined
+	nextRoute: undefined,
+	onNextButtonClicked: () => {}
 };
 
 const StepperButton = (props) => {
@@ -35,7 +41,10 @@ const StepperButton = (props) => {
 	});
 
 	return (
-		<Link to={props.href} className={btnClassNames}>
+		<Link
+			to={props.href}
+			className={btnClassNames}
+			onClick={($e) => props.onNextButtonClicked($e)}>
 			{props.label}
 		</Link>
 	);
@@ -44,11 +53,13 @@ const StepperButton = (props) => {
 StepperButton.propTypes = {
 	label: PropTypes.string.isRequired,
 	href: PropTypes.string.isRequired,
-	knappType: PropTypes.string
+	knappType: PropTypes.string,
+	onNextButtonClicked: PropTypes.func
 };
 
 StepperButton.defaultProps = {
-	knappType: 'hoved'
+	knappType: 'hoved',
+	onNextButtonClicked: () => {}
 };
 
 const mapStateToProps = () => ({});
