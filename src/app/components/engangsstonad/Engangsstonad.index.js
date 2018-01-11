@@ -1,14 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import renderChildRoutes from 'util/routing';
-import StepBasedForm from 'shared/step-based-form/StepBasedForm';
 import { connect } from 'react-redux';
+import renderChildRoutes from 'util/routing';
+
+import StepBasedForm from 'shared/step-based-form/StepBasedForm';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import { getDataRequested } from './../../redux/ducks/Engangsstonad.duck';
-import './engangsstonad.less';
 
 import VelkommenIllustration from '../../assets/svg/frontpage.svg';
 
+import './engangsstonad.less';
+
+const steps = [
+	{
+		title: 'Skal fjernes fra søknadsdialog',
+		label: '1'
+	},
+	{
+		title: 'Relasjon til barn',
+		label: '2'
+	},
+	{
+		title: 'Tilknytning til Norge',
+		label: '3'
+	},
+	{
+		title: 'Oppsummering',
+		label: '4'
+	},
+	{
+		title: 'Skal fjernes fra søknadsdialog',
+		label: '5'
+	},
+	{
+		title: 'Skal fjernes fra søknadsdialog',
+		label: '6'
+	}
+];
+
+// eslint-disable-next-line react/prefer-stateless-function
 export class EngangsstonadIndex extends React.Component {
 	componentWillMount() {
 		this.props.dispatch(getDataRequested());
@@ -29,6 +59,8 @@ export class EngangsstonadIndex extends React.Component {
 					routes={renderChildRoutes(this.props.routes) || []}
 					title={title}
 					location={this.props.location}
+					steps={steps}
+					withStepIndicator
 					illustrations={{
 						'0': (
 							<HeaderIllustration
