@@ -8,30 +8,10 @@ import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
-import {
-	enableNextButton,
-	disableNextButton,
-	approveConditions
-} from 'ducks/Engangsstonad.duck';
+import { approveConditions } from 'ducks/Engangsstonad.duck';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export class Step1 extends Component {
-	constructor(props) {
-		super(props);
-
-		if (props.approvedConditions) {
-			this.props.enableNextButton();
-		} else {
-			this.props.disableNextButton();
-		}
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.approvedConditions) {
-			return this.props.enableNextButton();
-		}
-		return this.props.disableNextButton();
-	}
-
 	render() {
 		// eslint-disable-next-line no-shadow
 		const { approveConditions, approvedConditions } = this.props;
@@ -64,8 +44,6 @@ export class Step1 extends Component {
 }
 
 Step1.propTypes = {
-	enableNextButton: PropTypes.func.isRequired,
-	disableNextButton: PropTypes.func.isRequired,
 	approvedConditions: PropTypes.bool,
 	approveConditions: PropTypes.func.isRequired
 };
@@ -81,9 +59,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
-			approveConditions,
-			enableNextButton,
-			disableNextButton
+			approveConditions
 		},
 		dispatch
 	);

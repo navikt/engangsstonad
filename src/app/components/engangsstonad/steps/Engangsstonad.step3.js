@@ -3,134 +3,121 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import { Normaltekst, Element } from 'nav-frontend-typografi';
-import { ToggleGruppe, ToggleKnapp } from 'nav-frontend-skjema';
-
 import {
-	toggleSisteTolv,
-	toggleNesteTolv,
-	toggleOppholdNaa,
-	enableNextButton,
-	disableNextButton
+	toggleResidedInNorwayLastTwelveMonths,
+	toggleWorkedInNorwayLastTwelveMonths
 } from 'ducks/Engangsstonad.duck';
 
-import DialogBox from 'shared/dialog-box/DialogBox';
-import CountryPicker from 'shared/country-picker/CountryPicker';
-import NumberSelector from 'shared/number-selector/NumberSelector';
+// eslint-disable-next-line max-len
+import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export class Step3 extends Component {
-	constructor(props) {
-		super(props);
+	componentWillMount() {
+		this.radioGroupStages1 = [
+			{
+				name: 'residedInNorway',
+				legend: 'De siste 12 månedene har jeg...',
+				values: [
+					{ label: 'bodd i Norge', value: 'norway' },
+					{ label: 'ikke bodd i Norge', value: 'abroad' }
+				]
+			}
+		];
 
-		if (this.shouldNextButtonBeEnabled(props)) {
-			this.props.enableNextButton();
+		this.radioGroupStages2 = [
+			{
+				name: 'workedInNorway',
+				legend: 'og har under den perioden...',
+				values: [
+					{ label: 'bare arbeidet i Norge', value: 'norway' },
+					{ label: 'arbeidet i utlandet', value: 'abroad' }
+				]
+			}
+		];
+
+		this.radioGroupStages3 = [
+			{
+				name: 'residingCountryNextTwelveMonths',
+				legend: 'De neste 12 månedene skal jeg...',
+				values: [
+					{ label: 'bo i Norge', value: 'norway' },
+					{ label: 'ikke bo i Norge', value: 'abroad' }
+				]
+			},
+			{
+				name: 'residingCountryDuringBirth',
+				legend: 'og kommer på fødselstidspunktet å...',
+				values: [
+					{ label: 'være i Norge', value: 'norway' },
+					{ label: 'være i et annet land', value: 'abroad' }
+				]
+			}
+		];
+	}
+
+	residedInNorwayLastTwelveMonthsValueChange($e, stages, expandedStage) {
+		if (expandedStage === null) {
+			this.props.toggleResidedInNorwayLastTwelveMonths(
+				stages[0].selectedValue === this.radioGroupStages1[0].values[0].value
+			);
 		} else {
-			this.props.disableNextButton();
+			this.props.toggleResidedInNorwayLastTwelveMonths(stages[0].selectedValue);
 		}
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (this.shouldNextButtonBeEnabled(nextProps)) {
-			return this.props.enableNextButton();
+	workedInNorwayLastTwelveMonthsValueChange($e, stages, expandedStage) {
+		if (expandedStage === null) {
+			this.props.toggleWorkedInNorwayLastTwelveMonths(
+				stages[0].selectedValue === this.radioGroupStages1[0].values[0].value
+			);
+		} else {
+			this.props.toggleWorkedInNorwayLastTwelveMonths(stages[0].selectedValue);
 		}
-
-		return this.props.disableNextButton();
 	}
 
-	// eslint-disable-next-line class-methods-use-this
-	shouldNextButtonBeEnabled(props) {
-		return props.oppholdSisteTolv && props.oppholdNaa && props.oppholdNesteTolv;
-	}
+	// eslint-disable-next-line class-methods-use-this, no-unused-vars
+	nextTwelveMonthsValueChange($e, stages, expandedStage) {}
 
 	render() {
 		return (
-			<div>
-				<DialogBox type="info">
-					<Normaltekst>
-						Vi fant denne informasjonen om din adresse og trenger at du svarer
-						på tre spørsmål om ditt opphold i Norge.
-					</Normaltekst>
-					<Normaltekst>
-						Korte ferier i utlandet regnes ikke som opphold i utlandet.
-					</Normaltekst>
-				</DialogBox>
-				<Element>De siste 12 månedene så har jeg sammenhengende...</Element>
-				<ToggleGruppe
-					onChange={this.props.toggleSisteTolv}
-					name="oppholdSisteTolv">
-					<ToggleKnapp
-						defaultChecked={this.props.oppholdSisteTolv === 'ja'}
-						value="ja">
-						oppholdt meg i Norge
-					</ToggleKnapp>
-					<ToggleKnapp
-						defaultChecked={this.props.oppholdSisteTolv === 'nei'}
-						value="nei">
-						ikke oppholdt meg i Norge
-					</ToggleKnapp>
-				</ToggleGruppe>
-				{this.props.oppholdSisteTolv === 'nei' && (
-					<div>
-						<Element>ettersom jeg var i utlandet...</Element>
-						<NumberSelector />
-						<Element>gang. Jeg oppholdte meg i...</Element>
-						<CountryPicker />
-					</div>
+			<div className="step3">
+				<TransformingRadioGroupCollection
+					stages={this.radioGroupStages1}
+					onChange={($e, stages, expandedStage) =>
+						this.residedInNorwayLastTwelveMonthsValueChange(
+							$e,
+							stages,
+							expandedStage
+						)
+					}
+				/>
+
+				{this.props.residedInNorwayLastTwelveMonths === false && (
+					<span>CountryPicker goes here</span>
 				)}
-				{this.props.oppholdSisteTolv && (
+
+				{this.props.residedInNorwayLastTwelveMonths !== undefined && (
+					<TransformingRadioGroupCollection
+						stages={this.radioGroupStages2}
+						onChange={($e, stages, expandedStage) =>
+							this.workedInNorwayLastTwelveMonthsValueChange(
+								$e,
+								stages,
+								expandedStage
+							)
+						}
+					/>
+				)}
+
+				{this.props.workedInNorwayLastTwelveMonths !== undefined && (
 					<div>
-						<Element>Jeg oppholder meg...</Element>
-						<ToggleGruppe
-							onChange={this.props.toggleOppholdNaa}
-							name="toggleOppholdNaa">
-							<ToggleKnapp
-								defaultChecked={this.props.oppholdNaa === 'ja'}
-								value="ja">
-								i Norge nå
-							</ToggleKnapp>
-							<ToggleKnapp
-								defaultChecked={this.props.oppholdNaa === 'nei'}
-								value="nei">
-								ikke i Norge nå
-							</ToggleKnapp>
-						</ToggleGruppe>
-						{this.props.oppholdNaa === 'nei' && (
-							<div>
-								<Element>ettersom jeg var i utlandet...</Element>
-								<NumberSelector />
-								<Element>gang. Jeg oppholdte meg i...</Element>
-								<CountryPicker />
-							</div>
-						)}
-						{this.props.oppholdNaa && (
-							<div>
-								<Element>
-									Og de neste 12 månedene så kommer jeg sammenhengende til å...
-								</Element>
-								<ToggleGruppe
-									onChange={this.props.toggleNesteTolv}
-									name="oppholdNesteTolv">
-									<ToggleKnapp
-										defaultChecked={this.props.oppholdNesteTolv === 'ja'}
-										value="ja">
-										oppholde meg i Norge
-									</ToggleKnapp>
-									<ToggleKnapp
-										defaultChecked={this.props.oppholdNesteTolv === 'nei'}
-										value="nei">
-										ikke oppholde meg i Norge
-									</ToggleKnapp>
-								</ToggleGruppe>
-								{this.props.oppholdNesteTolv === 'nei' && (
-									<div>
-										<Element>ettersom jeg var i utlandet...</Element>
-										<NumberSelector />
-										<Element>gang. Jeg oppholdte meg i...</Element>
-										<CountryPicker />
-									</div>
-								)}
-							</div>
-						)}
+						<TransformingRadioGroupCollection
+							stages={this.radioGroupStages3}
+							onChange={($e, stages, expandedStage) =>
+								this.nextTwelveMonthsValueChange($e, stages, expandedStage)
+							}
+						/>
 					</div>
 				)}
 			</div>
@@ -139,36 +126,29 @@ export class Step3 extends Component {
 }
 
 Step3.propTypes = {
-	toggleSisteTolv: PropTypes.func.isRequired,
-	toggleNesteTolv: PropTypes.func.isRequired,
-	toggleOppholdNaa: PropTypes.func.isRequired,
-	enableNextButton: PropTypes.func.isRequired,
-	disableNextButton: PropTypes.func.isRequired,
-	oppholdSisteTolv: PropTypes.string,
-	oppholdNesteTolv: PropTypes.string,
-	oppholdNaa: PropTypes.string
+	workedInNorwayLastTwelveMonths: PropTypes.bool,
+	residedInNorwayLastTwelveMonths: PropTypes.bool,
+	toggleWorkedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
+	toggleResidedInNorwayLastTwelveMonths: PropTypes.func.isRequired
 };
 
 Step3.defaultProps = {
-	oppholdSisteTolv: undefined,
-	oppholdNesteTolv: undefined,
-	oppholdNaa: undefined
+	workedInNorwayLastTwelveMonths: undefined,
+	residedInNorwayLastTwelveMonths: undefined
 };
 
 const mapStateToProps = (state) => ({
-	oppholdSisteTolv: state.engangsstonadReducer.oppholdSisteTolv,
-	oppholdNesteTolv: state.engangsstonadReducer.oppholdNesteTolv,
-	oppholdNaa: state.engangsstonadReducer.oppholdNaa
+	residedInNorwayLastTwelveMonths:
+		state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
+	workedInNorwayLastTwelveMonths:
+		state.engangsstonadReducer.workedInNorwayLastTwelveMonths
 });
 
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
-			toggleSisteTolv,
-			toggleNesteTolv,
-			toggleOppholdNaa,
-			enableNextButton,
-			disableNextButton
+			toggleResidedInNorwayLastTwelveMonths,
+			toggleWorkedInNorwayLastTwelveMonths
 		},
 		dispatch
 	);
