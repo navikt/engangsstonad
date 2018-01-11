@@ -4,9 +4,9 @@ import * as PropTypes from 'prop-types';
 import { Sidetittel } from 'nav-frontend-typografi';
 
 import CustomSVG from '../custom-svg/CustomSVG';
-import './headerIllustration.less';
-
 import SpeechBubble from '../speech-bubble/SpeechBubble';
+
+import './headerIllustration.less';
 
 const HeaderIllustration = ({ title, dialog, svg }) => (
 	<div className="headerIllustration">
