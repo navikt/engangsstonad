@@ -59,8 +59,8 @@ export class Step2 extends Component {
 		});
 	}
 
-	handleRadioGroupStageChange($e, stages, expandedStage) {
-		this.informationAboutChildUpdated(stages, expandedStage);
+	handleRadioGroupStageChange($e, stages) {
+		this.informationAboutChildUpdated(stages);
 	}
 
 	render() {
@@ -68,8 +68,8 @@ export class Step2 extends Component {
 			<div className="engangsstonadStep2">
 				<TransformingRadioGroupCollection
 					stages={this.radioGroupStages}
-					onChange={($e, stages, expandedStage) =>
-						this.handleRadioGroupStageChange($e, stages, expandedStage)
+					onChange={($e, stages) =>
+						this.handleRadioGroupStageChange($e, stages)
 					}
 				/>
 
