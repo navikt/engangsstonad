@@ -109,29 +109,31 @@ export class Step3 extends Component {
 					/>
 				)}
 
-				{this.props.residedInNorwayLastTwelveMonths !== undefined && (
-					<TransformingRadioGroupCollection
-						stages={this.radioGroupStages2}
-						onChange={($e, stages, expandedStage) =>
-							this.workedInNorwayLastTwelveMonthsValueChange(
-								$e,
-								stages,
-								expandedStage
-							)
-						}
-					/>
-				)}
-
-				{this.props.workedInNorwayLastTwelveMonths !== undefined && (
-					<div>
+				{this.props.residedInNorwayLastTwelveMonths !== undefined &&
+					this.props.visits.length > 0 && (
 						<TransformingRadioGroupCollection
-							stages={this.radioGroupStages3}
+							stages={this.radioGroupStages2}
 							onChange={($e, stages, expandedStage) =>
-								this.nextTwelveMonthsValueChange($e, stages, expandedStage)
+								this.workedInNorwayLastTwelveMonthsValueChange(
+									$e,
+									stages,
+									expandedStage
+								)
 							}
 						/>
-					</div>
-				)}
+					)}
+
+				{this.props.workedInNorwayLastTwelveMonths !== undefined &&
+					this.props.visits.length > 0 && (
+						<div>
+							<TransformingRadioGroupCollection
+								stages={this.radioGroupStages3}
+								onChange={($e, stages, expandedStage) =>
+									this.nextTwelveMonthsValueChange($e, stages, expandedStage)
+								}
+							/>
+						</div>
+					)}
 			</div>
 		);
 	}
