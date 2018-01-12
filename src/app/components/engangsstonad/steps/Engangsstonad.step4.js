@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import DocumentTitle from 'react-document-title';
 
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 
@@ -15,6 +16,7 @@ export class Step4 extends Component {
 	render() {
 		return (
 			<div>
+				<DocumentTitle title="NAV Engangsstønad - Oppsummering" />
 				<DialogBox type="info">
 					<Normaltekst>
 						Les nøye gjennom oppsummeringen før du sender inn søknaden. Hvis du

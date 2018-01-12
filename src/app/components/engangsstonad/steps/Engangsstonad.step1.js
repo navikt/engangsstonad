@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import DocumentTitle from 'react-document-title';
 
 import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
@@ -18,6 +19,7 @@ export class Step1 extends Component {
 
 		return (
 			<div className="step1">
+				<DocumentTitle title="NAV Engangsstønad - Samtykke" />
 				<Ingress>
 					Engangsstønad er en skattefri engangssum du kan få for hvert barn du
 					/(føder eller) adopterer, når du ikke har tjent opp rett til
