@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { Sidetittel } from 'nav-frontend-typografi';
 
@@ -11,18 +12,24 @@ import BackLink from './../back-link/BackLink';
 
 import './stepBasedForm.less';
 
-const Header = (props) => (
-	<div className="stepBasedForm__header">
-		<Sidetittel>{props.title}</Sidetittel>
+const Header = ({ title, illustration }) => (
+	<div
+		className={classNames('stepBasedForm__header', {
+			'stepBasedForm__header--withIllustration':
+				illustration !== null && illustration !== undefined
+		})}>
+		{illustration || <Sidetittel>{title}</Sidetittel>}
 	</div>
 );
 
 Header.propTypes = {
-	title: PropTypes.string
+	title: PropTypes.string,
+	illustration: PropTypes.element
 };
 
 Header.defaultProps = {
-	title: ''
+	title: '',
+	illustration: null
 };
 
 const StepBasedForm = (props) => {
@@ -98,10 +105,17 @@ const StepBasedForm = (props) => {
 		return null;
 	};
 
+	const getStepIllustration = () => {
+		const activeRouteIndex = props.routes.indexOf(findActiveRoute());
+		return props.illustrations
+			? props.illustrations[activeRouteIndex.toString()]
+			: null;
+	};
+
 	return (
 		<div className="stepBasedForm">
 			<form className={props.className}>
-				<Header title={props.title} />
+				<Header title={props.title} illustration={getStepIllustration()} />
 				{props.withStepIndicator && (
 					<StepIndicator
 						steps={props.steps}
@@ -125,7 +139,9 @@ StepBasedForm.propTypes = {
 	withStepIndicator: PropTypes.bool,
 	afterSubmissionRoute: PropTypes.bool,
 	title: PropTypes.string,
+	nextButtonEnabled: PropTypes.bool.isRequired, // eslint-disable-line react/no-unused-prop-types
 	className: PropTypes.string,
+	illustrations: PropTypes.object,
 	showStepper: PropTypes.bool,
 	onNextButtonClicked: PropTypes.func
 };
@@ -135,6 +151,7 @@ StepBasedForm.defaultProps = {
 	className: '',
 	title: '',
 	afterSubmissionRoute: true,
+	illustrations: null,
 	steps: [],
 	showStepper: false,
 	onNextButtonClicked: () => {}

@@ -1,14 +1,12 @@
+@import '../../../styles/globals.less';
+
 .stepBasedForm {
 	&__header {
-		display: block;
-		margin: 20px auto;
-
-		.typo-sidetittel {
-			text-align: center;
+		margin: @marginLarge auto;
+		text-align: center;
+		&--withIllustration {
+			margin-top: 0;
+			margin-bottom: @marginSmall;
 		}
 	}
-}
-
-.centerText {
-	text-align: center;
 }
