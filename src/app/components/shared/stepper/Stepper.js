@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-
+import createHistory from 'history/createBrowserHistory';
 import './stepper.less';
+
+const history = createHistory();
 
 export const Stepper = (props) => (
 	<div className="stepper">
@@ -40,13 +42,18 @@ const StepperButton = (props) => {
 		[`knapp--${props.knappType}`]: props.knappType
 	});
 
+	const handleOnNextBtnClicked = ($e) => {
+		props.onNextButtonClicked($e);
+		history.push(props.href);
+	};
+
 	return (
-		<Link
+		<Hovedknapp
 			to={props.href}
 			className={btnClassNames}
-			onClick={($e) => props.onNextButtonClicked($e)}>
+			onClick={($e) => handleOnNextBtnClicked($e)}>
 			{props.label}
-		</Link>
+		</Hovedknapp>
 	);
 };
 
