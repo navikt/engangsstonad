@@ -9,7 +9,7 @@ import { Normaltekst, Ingress } from 'nav-frontend-typografi';
 
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
-import { approveConditions } from 'ducks/Engangsstonad.duck';
+import { approveConditions } from 'actions';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class Step1 extends Component {

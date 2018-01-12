@@ -69,8 +69,8 @@ const StepBasedForm = (props) => {
 			return route;
 		});
 
-	const handleOnNextButtonClicked = ($e, activeRoute) => {
-		props.onNextButtonClicked($e, activeRoute);
+	const handleOnNextButtonClicked = ($e, activeRoute, href) => {
+		props.onNextButtonClicked($e, activeRoute, href);
 	};
 
 	const renderStepper = () => {
@@ -87,8 +87,8 @@ const StepBasedForm = (props) => {
 						showStepBack={activeRoute !== routes[0]}
 						showSubmission={activeRoute === routes[routes.length - 1]}
 						nextRoute={findNextRoutePath()}
-						onNextButtonClicked={($e) =>
-							handleOnNextButtonClicked($e, activeRoute)
+						onNextButtonClicked={($e, href) =>
+							handleOnNextButtonClicked($e, activeRoute, href)
 						}
 					/>
 				);
@@ -139,7 +139,6 @@ StepBasedForm.propTypes = {
 	withStepIndicator: PropTypes.bool,
 	afterSubmissionRoute: PropTypes.bool,
 	title: PropTypes.string,
-	nextButtonEnabled: PropTypes.bool.isRequired, // eslint-disable-line react/no-unused-prop-types
 	className: PropTypes.string,
 	illustrations: PropTypes.object,
 	showStepper: PropTypes.bool,
