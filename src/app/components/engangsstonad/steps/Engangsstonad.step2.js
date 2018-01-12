@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import DocumentTitle from 'react-document-title';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -66,6 +67,7 @@ export class Step2 extends Component {
 	render() {
 		return (
 			<div className="engangsstonadStep2">
+				<DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
 				<TransformingRadioGroupCollection
 					stages={this.radioGroupStages}
 					onChange={($e, stages) =>
