@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import renderChildRoutes from 'util/routing';
 
 import StepBasedForm from 'shared/step-based-form/StepBasedForm';
@@ -47,7 +48,7 @@ export class EngangsstonadIndex extends React.Component {
 		return true;
 	}
 
-	handleOnNextButtonClicked($e, activeRoute) {
+	handleOnNextButtonClicked($e, activeRoute, href) {
 		if (this.formIsValidPOC()) {
 			const nextRouteIndex =
 				this.props.routes.findIndex(
@@ -57,6 +58,7 @@ export class EngangsstonadIndex extends React.Component {
 				activeRouteChanged(this.props.routes[nextRouteIndex])
 			);
 		}
+		this.props.history.push(href);
 	}
 
 	render() {
@@ -65,8 +67,8 @@ export class EngangsstonadIndex extends React.Component {
 			<div className="engangsstonad">
 				<StepBasedForm
 					showStepper={this.props.showStepper}
-					onNextButtonClicked={($e, route) =>
-						this.handleOnNextButtonClicked($e, route)
+					onNextButtonClicked={($e, route, href) =>
+						this.handleOnNextButtonClicked($e, route, href)
 					}
 					routes={renderChildRoutes(this.props.routes) || []}
 					title={title}
@@ -98,7 +100,10 @@ EngangsstonadIndex.propTypes = {
 	location: PropTypes.shape({}).isRequired,
 	dispatch: PropTypes.func.isRequired,
 	data: PropTypes.shape({}),
-	showStepper: PropTypes.bool
+	showStepper: PropTypes.bool,
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired
+	}).isRequired
 };
 
 EngangsstonadIndex.defaultProps = {
@@ -111,4 +116,4 @@ const mapStateToProps = (state) => ({
 	showStepper: state.engangsstonadReducer.showStepper
 });
 
-export default connect(mapStateToProps)(EngangsstonadIndex);
+export default withRouter(connect(mapStateToProps)(EngangsstonadIndex));
