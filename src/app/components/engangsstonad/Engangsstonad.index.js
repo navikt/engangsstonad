@@ -12,7 +12,7 @@ import './engangsstonad.less';
 
 const steps = [
 	{
-		title: 'Skal fjernes fra søknadsdialog',
+		title: '',
 		label: '1'
 	},
 	{
@@ -28,16 +28,11 @@ const steps = [
 		label: '4'
 	},
 	{
-		title: 'Skal fjernes fra søknadsdialog',
+		title: '',
 		label: '5'
-	},
-	{
-		title: 'Skal fjernes fra søknadsdialog',
-		label: '6'
 	}
 ];
 
-// eslint-disable-next-line react/prefer-stateless-function
 export class EngangsstonadIndex extends React.Component {
 	componentWillMount() {
 		this.props.dispatch(getDataRequested());
@@ -61,8 +56,32 @@ export class EngangsstonadIndex extends React.Component {
 		this.props.history.push(href);
 	}
 
+	// eslint-disable-next-line class-methods-use-this
+	renderIllustration(title, text, theme) {
+		return (
+			<HeaderIllustration
+				dialog={{ title, text }}
+				svg={VelkommenIllustration}
+				theme={theme || 'purple'}
+				title="Søknad om engangsstønad"
+			/>
+		);
+	}
+
 	render() {
 		const title = 'Søknad om engangsstønad';
+		const illustrations = {
+			'0': this.renderIllustration(
+				'Hei Lise',
+				'Jeg skal veilede deg gjennom søknaden. Vi har tre steg vi skal gjennom.'
+			),
+			'4': this.renderIllustration(
+				'Bra jobbet Lise!',
+				'Din søknad er nå sendt til oss på NAV. Vi tar kontakt med deg hvis vi trenger noe mer.',
+				'green'
+			)
+		};
+
 		return (
 			<div className="engangsstonad">
 				<StepBasedForm
@@ -75,19 +94,7 @@ export class EngangsstonadIndex extends React.Component {
 					location={this.props.location}
 					steps={steps}
 					withStepIndicator
-					illustrations={{
-						'0': (
-							<HeaderIllustration
-								dialog={{
-									title: 'Hei Lise',
-									text:
-										'Jeg skal veilede deg gjennom søknaden. Vi har tre steg vi skal gjennom.'
-								}}
-								title={title}
-								svg={VelkommenIllustration}
-							/>
-						)
-					}}
+					illustrations={illustrations}
 				/>
 				{this.props.data && <div>Data: {JSON.stringify(this.props.data)}</div>}
 			</div>

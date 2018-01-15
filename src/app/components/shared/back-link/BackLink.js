@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import Lenke from 'nav-frontend-lenker';
 import { VenstreChevron } from 'nav-frontend-chevron';
 import './backLink.less';
 
 const BackLink = (props) => (
 	<div className="backLinkWrapper">
-		<Link className="backLink lenke" to={props.href}>
+		<Lenke className="backLink" href={props.href}>
 			<VenstreChevron stor />
 			{props.text}
-		</Link>
+		</Lenke>
 	</div>
 );
 

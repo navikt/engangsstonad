@@ -5,8 +5,8 @@ import { Element } from 'nav-frontend-typografi';
 
 import './speechBubble.less';
 
-const SpeechBubble = ({ title, text }) => (
-	<div className="speechBubble">
+const SpeechBubble = ({ title, text, theme }) => (
+	<div className={`speechBubble speechBubble--${theme}`}>
 		<div className="speechBubble__content">
 			{title && (
 				<div className="speechBubble__title">
@@ -20,11 +20,13 @@ const SpeechBubble = ({ title, text }) => (
 
 SpeechBubble.propTypes = {
 	title: PropTypes.string,
-	text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired
+	text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+	theme: PropTypes.oneOf(['purple', 'green'])
 };
 
 SpeechBubble.defaultProps = {
-	title: null
+	title: null,
+	theme: 'purple'
 };
 
 export default SpeechBubble;
