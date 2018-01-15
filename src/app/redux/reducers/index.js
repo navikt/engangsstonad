@@ -12,14 +12,18 @@ import {
 	TOGGLE_OPPHOLD_NAA,
 	TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS,
 	TOGGLE_RESIDING_IN_NORWAY_NEXT_TWELVE_MONTHS,
-	TOGGLE_RESIDING_IN_NORWAY_DURING_BIRTH
+	TOGGLE_RESIDING_IN_NORWAY_DURING_BIRTH,
+	ADD_VISIT,
+	EDIT_VISIT,
+	DELETE_VISIT
 } from '../constants/index';
 
 import { shouldShowStepper } from '../util';
 
 const defaultState = {
 	activeRoute: null,
-	showStepper: true
+	showStepper: true,
+	visits: []
 };
 
 const newState = (state) => ({
@@ -92,6 +96,26 @@ const engangsstonadReducer = (state = defaultState, action) => {
 		case GET_DATA_FAILED: {
 			return newState({ ...state, error: action.error });
 		}
+		case ADD_VISIT:
+			return {
+				...state,
+				visits: state.visits.concat(action.data)
+			};
+		case EDIT_VISIT:
+			return {
+				...state,
+				visits: state.visits.map((visit, index) => {
+					if (index === action.visitIndex) {
+						return { ...visit, ...action.data };
+					}
+					return visit;
+				})
+			};
+		case DELETE_VISIT:
+			return {
+				...state,
+				visits: state.visits.filter((visit) => action.data !== visit)
+			};
 		default:
 			return state;
 	}

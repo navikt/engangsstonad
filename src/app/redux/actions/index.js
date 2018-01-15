@@ -11,7 +11,10 @@ import {
 	TOGGLE_OPPHOLD_NAA,
 	TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS,
 	TOGGLE_RESIDING_IN_NORWAY_DURING_BIRTH,
-	TOGGLE_RESIDING_IN_NORWAY_NEXT_TWELVE_MONTHS
+	TOGGLE_RESIDING_IN_NORWAY_NEXT_TWELVE_MONTHS,
+	ADD_VISIT,
+	EDIT_VISIT,
+	DELETE_VISIT
 } from '../constants/index';
 
 export const activeRouteChanged = (route) => ({
@@ -66,4 +69,20 @@ export const toggleResidingInNorwayDuringBirth = (value) => ({
 export const toggleResidingInNorwayNextTwelveMonths = (value) => ({
 	type: TOGGLE_RESIDING_IN_NORWAY_NEXT_TWELVE_MONTHS,
 	data: value === undefined ? undefined : value === 'norway'
+});
+
+export const addVisit = (visitData) => ({
+	type: ADD_VISIT,
+	data: visitData
+});
+
+export const editVisit = (visitData, index) => ({
+	type: EDIT_VISIT,
+	data: visitData,
+	visitIndex: index
+});
+
+export const deleteVisit = (visitData) => ({
+	type: DELETE_VISIT,
+	data: visitData
 });

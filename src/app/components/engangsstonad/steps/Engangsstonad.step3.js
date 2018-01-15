@@ -5,14 +5,18 @@ import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 
 import {
+	toggleResidingInNorwayNextTwelveMonths,
+	toggleResidingInNorwayDuringBirth,
 	toggleResidedInNorwayLastTwelveMonths,
 	toggleWorkedInNorwayLastTwelveMonths,
-	toggleResidingInNorwayNextTwelveMonths,
-	toggleResidingInNorwayDuringBirth
+	addVisit,
+	editVisit,
+	deleteVisit
 } from 'actions';
 
 // eslint-disable-next-line max-len
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
+import CountryPicker from 'shared/country-picker/CountryPicker';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class Step3 extends Component {
@@ -97,6 +101,13 @@ export class Step3 extends Component {
 		});
 	}
 
+	shouldDisplayWorkedInNorway() {
+		return (
+			this.props.residedInNorwayLastTwelveMonths === true ||
+			this.props.visits.length > 0
+		);
+	}
+
 	render() {
 		return (
 			<div className="step3">
@@ -113,10 +124,18 @@ export class Step3 extends Component {
 				/>
 
 				{this.props.residedInNorwayLastTwelveMonths === false && (
-					<span>CountryPicker goes here</span>
+					<CountryPicker
+						label="ettersom jeg bodde i…"
+						visits={this.props.visits}
+						addVisit={(visit) => this.props.addVisit(visit)}
+						deleteVisit={(visit) => this.props.deleteVisit(visit)}
+						editVisit={(visit, updatedVisitIndex) => {
+							this.props.editVisit(visit, updatedVisitIndex);
+						}}
+					/>
 				)}
 
-				{this.props.residedInNorwayLastTwelveMonths !== undefined && (
+				{this.shouldDisplayWorkedInNorway() && (
 					<TransformingRadioGroupCollection
 						stages={this.radioGroupStages2}
 						onChange={($e, stages, expandedStage) =>
@@ -150,7 +169,17 @@ Step3.propTypes = {
 	toggleWorkedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
 	toggleResidedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
 	toggleResidingInNorwayDuringBirth: PropTypes.func.isRequired,
-	toggleResidingInNorwayNextTwelveMonths: PropTypes.func.isRequired
+	toggleResidingInNorwayNextTwelveMonths: PropTypes.func.isRequired,
+	addVisit: PropTypes.func.isRequired,
+	deleteVisit: PropTypes.func.isRequired,
+	editVisit: PropTypes.func.isRequired,
+	visits: PropTypes.arrayOf(
+		PropTypes.shape({
+			country: PropTypes.string,
+			startDate: PropTypes.string,
+			endDate: PropTypes.string
+		})
+	).isRequired
 };
 
 Step3.defaultProps = {
@@ -163,6 +192,7 @@ const mapStateToProps = (state) => ({
 		state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
 	workedInNorwayLastTwelveMonths:
 		state.engangsstonadReducer.workedInNorwayLastTwelveMonths,
+	visits: state.engangsstonadReducer.visits,
 	residingInNorwayNextTwelveMonths:
 		state.engangsstonadReducer.residingInNorwayNextTwelveMonths,
 	residingInNorwayDuringBirth:
@@ -175,7 +205,10 @@ const mapDispatchToProps = (dispatch) =>
 			toggleResidedInNorwayLastTwelveMonths,
 			toggleWorkedInNorwayLastTwelveMonths,
 			toggleResidingInNorwayNextTwelveMonths,
-			toggleResidingInNorwayDuringBirth
+			toggleResidingInNorwayDuringBirth,
+			addVisit,
+			editVisit,
+			deleteVisit
 		},
 		dispatch
 	);

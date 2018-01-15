@@ -1,9 +1,58 @@
-@import "./../../../styles/globals";
+@import '../../../styles/variables.less';
 
-.dateWrapper {
-	display: flex;
+.countryPicker {
+    &__addButton {
+        margin-bottom: @paddingLarge;
+    }
+}
 
-	> div:first-child {
-		margin-right: @marginMedium;
-	}
+.countryModal {
+    &__title {
+        margin-bottom: @paddingLarge;
+        text-align: center;
+    }
+}
+
+.countryElement {
+    position: relative;
+    width: 100%;
+    list-style-type: none;
+    color: #0067C5;
+    border: 1px solid #0067C5; 
+    margin-bottom: @paddingSmall;
+
+    &__country {
+        width: 72px;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &::-ms-clear {
+            display: none;
+        }
+    }
+
+    &__date {
+        float: right;
+        padding-right: 41px;
+    }    
+    
+    &__toggleDayPicker {
+        display: block;
+        top: 0;
+        right: 0;
+        width: 2rem;
+        height: 100%;
+        padding: 0;
+        border: none;
+        border-left: 1px solid #0067C5;
+        background: none;
+        padding: 0;
+        position: absolute;
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px orange;
+        }
+    }
 }
