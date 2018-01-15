@@ -122,7 +122,8 @@ const StepBasedForm = (props) => {
 						activeStep={findActiveRouteIndex() + 1}
 					/>
 				)}
-				{renderBackLink()}
+				{findActiveRoute() !== props.routes[props.routes.length - 1] &&
+					renderBackLink()}
 				<Switch>{renderRoutes()}</Switch>
 				{props.showStepper && renderStepper()}
 			</form>
