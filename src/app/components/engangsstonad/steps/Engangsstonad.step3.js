@@ -101,6 +101,13 @@ export class Step3 extends Component {
 		});
 	}
 
+	shouldDisplayWorkedInNorway() {
+		return (
+			this.props.residedInNorwayLastTwelveMonths === true ||
+			this.props.visits.length > 0
+		);
+	}
+
 	render() {
 		return (
 			<div className="step3">
@@ -128,31 +135,29 @@ export class Step3 extends Component {
 					/>
 				)}
 
-				{this.props.residedInNorwayLastTwelveMonths !== undefined &&
-					this.props.visits.length > 0 && (
+				{this.shouldDisplayWorkedInNorway() && (
+					<TransformingRadioGroupCollection
+						stages={this.radioGroupStages2}
+						onChange={($e, stages, expandedStage) =>
+							this.workedInNorwayLastTwelveMonthsValueChange(
+								$e,
+								stages,
+								expandedStage
+							)
+						}
+					/>
+				)}
+
+				{this.props.workedInNorwayLastTwelveMonths !== undefined && (
+					<div>
 						<TransformingRadioGroupCollection
-							stages={this.radioGroupStages2}
+							stages={this.radioGroupStages3}
 							onChange={($e, stages, expandedStage) =>
-								this.workedInNorwayLastTwelveMonthsValueChange(
-									$e,
-									stages,
-									expandedStage
-								)
+								this.nextTwelveMonthsValueChange($e, stages, expandedStage)
 							}
 						/>
-					)}
-
-				{this.props.workedInNorwayLastTwelveMonths !== undefined &&
-					this.props.visits.length > 0 && (
-						<div>
-							<TransformingRadioGroupCollection
-								stages={this.radioGroupStages3}
-								onChange={($e, stages, expandedStage) =>
-									this.nextTwelveMonthsValueChange($e, stages, expandedStage)
-								}
-							/>
-						</div>
-					)}
+					</div>
+				)}
 			</div>
 		);
 	}
