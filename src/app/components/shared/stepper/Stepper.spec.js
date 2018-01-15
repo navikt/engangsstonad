@@ -20,7 +20,10 @@ describe('<Stepper />', () => {
 	it('should render StepperButton with submission properties', () => {
 		const wrapper = shallow(<Stepper nextRoute="/" showSubmission />);
 		const stepperButton = wrapper.find('StepperButton');
-		expect(stepperButton.props()).to.have.property('label', 'Send søknad');
+		expect(stepperButton.props()).to.have.property(
+			'label',
+			'Lukk dette vinduet'
+		);
 		expect(stepperButton.props()).to.have.property('href', '/');
 	});
 });
