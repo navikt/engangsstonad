@@ -11,7 +11,7 @@ import {
 	setNumberOfChildren,
 	setTerminDato,
 	setBekreftetTermindato
-} from 'ducks/Engangsstonad.duck';
+} from 'actions';
 
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DateInput from 'shared/date-input/DateInput';
@@ -82,7 +82,6 @@ export class Step2 extends Component {
 							input={{ value: this.props.terminDato }}
 							label=" termindato den..."
 							onChange={(e) => this.props.setTerminDato(e)}
-							errorMessage=""
 						/>
 						{this.props.terminDato && (
 							<div>
@@ -99,7 +98,6 @@ export class Step2 extends Component {
 									input={{ value: this.props.bekreftetTermindato }}
 									label="Terminbekreftelsen er datert den..."
 									onChange={(e) => this.props.setBekreftetTermindato(e)}
-									errorMessage="error test"
 								/>
 							</div>
 						)}

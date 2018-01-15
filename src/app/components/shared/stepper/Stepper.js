@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-
 import './stepper.less';
 
 export const Stepper = (props) => (
@@ -16,7 +15,7 @@ export const Stepper = (props) => (
 			/>
 		)}
 		{props.showSubmission && (
-			<StepperButton href={props.nextRoute} label="Send søknad" />
+			<StepperButton href={props.nextRoute} label="Lukk dette vinduet" />
 		)}
 	</div>
 );
@@ -40,13 +39,17 @@ const StepperButton = (props) => {
 		[`knapp--${props.knappType}`]: props.knappType
 	});
 
+	const handleOnNextBtnClicked = ($e) => {
+		props.onNextButtonClicked($e, props.href);
+	};
+
 	return (
-		<Link
-			to={props.href}
+		<Hovedknapp
+			href={props.href}
 			className={btnClassNames}
-			onClick={($e) => props.onNextButtonClicked($e)}>
+			onClick={($e) => handleOnNextBtnClicked($e)}>
 			{props.label}
-		</Link>
+		</Hovedknapp>
 	);
 };
 

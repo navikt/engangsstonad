@@ -5,12 +5,14 @@ import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 
 import {
+	toggleResidingInNorwayNextTwelveMonths,
+	toggleResidingInNorwayDuringBirth,
 	toggleResidedInNorwayLastTwelveMonths,
 	toggleWorkedInNorwayLastTwelveMonths,
 	addVisit,
 	editVisit,
 	deleteVisit
-} from 'ducks/Engangsstonad.duck';
+} from 'actions';
 
 // eslint-disable-next-line max-len
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
@@ -82,7 +84,22 @@ export class Step3 extends Component {
 	}
 
 	// eslint-disable-next-line class-methods-use-this, no-unused-vars
-	nextTwelveMonthsValueChange($e, stages, expandedStage) {}
+	nextTwelveMonthsValueChange($e, stages) {
+		stages.forEach((stage) => {
+			switch (stage.name) {
+				case 'residingCountryNextTwelveMonths':
+					this.props.toggleResidingInNorwayNextTwelveMonths(
+						stage.selectedValue
+					);
+					break;
+				case 'residingCountryDuringBirth':
+					this.props.toggleResidingInNorwayDuringBirth(stage.selectedValue);
+					break;
+				default:
+					break;
+			}
+		});
+	}
 
 	render() {
 		return (
@@ -146,10 +163,11 @@ Step3.propTypes = {
 	residedInNorwayLastTwelveMonths: PropTypes.bool,
 	toggleWorkedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
 	toggleResidedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
+	toggleResidingInNorwayDuringBirth: PropTypes.func.isRequired,
+	toggleResidingInNorwayNextTwelveMonths: PropTypes.func.isRequired,
 	addVisit: PropTypes.func.isRequired,
 	deleteVisit: PropTypes.func.isRequired,
 	editVisit: PropTypes.func.isRequired,
-
 	visits: PropTypes.arrayOf(
 		PropTypes.shape({
 			country: PropTypes.string,
@@ -169,7 +187,11 @@ const mapStateToProps = (state) => ({
 		state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
 	workedInNorwayLastTwelveMonths:
 		state.engangsstonadReducer.workedInNorwayLastTwelveMonths,
-	visits: state.engangsstonadReducer.visits
+	visits: state.engangsstonadReducer.visits,
+	residingInNorwayNextTwelveMonths:
+		state.engangsstonadReducer.residingInNorwayNextTwelveMonths,
+	residingInNorwayDuringBirth:
+		state.engangsstonadReducer.residingInNorwayDuringBirth
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -177,6 +199,8 @@ const mapDispatchToProps = (dispatch) =>
 		{
 			toggleResidedInNorwayLastTwelveMonths,
 			toggleWorkedInNorwayLastTwelveMonths,
+			toggleResidingInNorwayNextTwelveMonths,
+			toggleResidingInNorwayDuringBirth,
 			addVisit,
 			editVisit,
 			deleteVisit

@@ -18,7 +18,37 @@
 		"noImplicitAny": true,
 		"strictNullChecks": true,
 		"suppressImplicitAnyIndexErrors": true,
-		"noUnusedLocals": true
+		"noUnusedLocals": true,
+		"baseUrl": "./src",
+		"paths": {
+			"shared/*": [
+				"app/components/shared/*"
+			],
+			"assets/*": [
+				"app/assets/*"
+			],
+			"components/*": [
+				"app/components/*"
+			],
+			"actions": [
+				"app/redux/actions"
+			],
+			"actions/*": [
+				"app/redux/actions/*"
+			],
+			"reducers/*": [
+				"app/redux/reducers/*"
+			],
+			"styles/*": [
+				"app/styles/*"
+			],
+			"util/*": [
+				"app/util/*"
+			],
+			"apps/*": [
+				"apps/*"
+			]
+		}
 	},
 	"exclude": [
 		"node_modules",

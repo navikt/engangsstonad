@@ -1,5 +1,6 @@
 import { combineReducers, createStore } from 'redux';
-import engangsstonadReducer, { sagas } from './ducks/Engangsstonad.duck';
+import engangsstonadReducer from './reducers';
+import sagas from './sagas';
 import middleware, { sagaMiddleware } from './middleware';
 
 const reducers = combineReducers({ engangsstonadReducer });

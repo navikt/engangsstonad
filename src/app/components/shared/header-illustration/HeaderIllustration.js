@@ -8,14 +8,14 @@ import SpeechBubble from '../speech-bubble/SpeechBubble';
 
 import './headerIllustration.less';
 
-const HeaderIllustration = ({ title, dialog, svg }) => (
-	<div className="headerIllustration">
+const HeaderIllustration = ({ title, dialog, svg, theme }) => (
+	<div className={`headerIllustration headerIllustration--${theme}`}>
 		<div className="headerIllustration__title">
 			<Sidetittel>{title}</Sidetittel>
 		</div>
 		{dialog && (
 			<div className="headerIllustration__speechBubble">
-				<SpeechBubble title={dialog.title} text={dialog.text} />
+				<SpeechBubble title={dialog.title} text={dialog.text} theme={theme} />
 			</div>
 		)}
 		<div className="headerIllustration__illustration">
@@ -30,12 +30,14 @@ HeaderIllustration.propTypes = {
 		title: PropTypes.string,
 		text: PropTypes.string.isRequired
 	}),
-	svg: PropTypes.object
+	svg: PropTypes.object,
+	theme: PropTypes.oneOf(['purple', 'green'])
 };
 
 HeaderIllustration.defaultProps = {
 	dialog: null,
-	svg: null
+	svg: null,
+	theme: 'purple'
 };
 
 export default HeaderIllustration;
