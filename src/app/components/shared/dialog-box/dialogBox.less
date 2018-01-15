@@ -1,6 +1,7 @@
 .dialogBox {
 	align-items: center;
 	display: flex;
+	flex-wrap: wrap;
 	padding: 1rem 0;
 
 	&--overflow {
@@ -9,13 +10,30 @@
 		padding-left: 1rem;
 		padding-right: 1rem;
 	}
-	&__text {
-		align-self: center;
+
+	&__content {
 		margin-left: 1rem;
+		flex: 0 0 75%;
 	}
 
 	&__image {
-		min-width: 6rem;
+		padding-left: 1rem;
+		flex: 0 0 20%;
+	}
+
+	&__buttonWrapper {
+		width: 100%;
+		padding: 12px 0;
+		display: flex;
+
+		&__button:first-child {
+			margin-right: 12px;
+			background-color: white;
+		}
+
+		&__button {
+			background-color: white;
+		}
 	}
 
 	&--info {

@@ -74,6 +74,12 @@ export class Step2 extends Component {
 						this.handleRadioGroupStageChange($e, stages)
 					}
 				/>
+				<DialogBox type="warning" overflow>
+					<Normaltekst>
+						Siden barnet ikke er født må du legge ved terminbekreftelse fra
+						jordmor eller lege
+					</Normaltekst>
+				</DialogBox>
 
 				{this.props.noOfChildren && (
 					<div>
