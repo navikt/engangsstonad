@@ -15,7 +15,7 @@ export const Stepper = (props) => (
 			/>
 		)}
 		{props.showSubmission && (
-			<StepperButton href={props.nextRoute} label="Send søknad" />
+			<StepperButton href={props.nextRoute} label="Lukk dette vinduet" />
 		)}
 	</div>
 );
