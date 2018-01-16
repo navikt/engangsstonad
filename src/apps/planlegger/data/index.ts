@@ -17,7 +17,7 @@ const førTermin: Mødrekvote = {
 	stønadskonto: StønadskontoType.Mødrekvote,
 	periodetype: Periodetype.Stønadsperiode,
 	forelder: Forelder.mor,
-	periode: {
+	tidsrom: {
 		start: new Date(2018, 1, 5),
 		slutt: new Date(2018, 1, 23),
 		uker: 3
@@ -29,7 +29,7 @@ const etterFødsel: Mødrekvote = {
 	periodetype: Periodetype.Stønadsperiode,
 	forelder: Forelder.mor,
 	prosent: 100,
-	periode: {
+	tidsrom: {
 		start: new Date(2018, 1, 26),
 		slutt: new Date(2018, 3, 6),
 		uker: 6

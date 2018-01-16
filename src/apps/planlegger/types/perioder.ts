@@ -41,7 +41,7 @@ export enum Forelder {
 
 interface Basisperiode {
 	/** Hvilket tidsrom dette perioden er for */
-	periode: Tidsperiode;
+	tidsrom: Tidsperiode;
 	/** Hvem som har perioden */
 	forelder: Forelder;
 }

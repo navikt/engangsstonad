@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-import { Uttaksperiode, Periodetype } from '../../types/index';
+import { Uttaksperiode, Periodetype, Forelder } from '../../types/index';
 
 export interface Props {
 	periode: Uttaksperiode;
@@ -12,7 +12,10 @@ const Periode: React.StatelessComponent<Props> = ({ periode }) => {
 	return (
 		<div className={cls}>
 			<h2>{Periodetype[periode.periodetype]}</h2>
-			{periode.periode.start.toDateString()} - {periode.periode.slutt.toDateString()}
+			<p>
+				{periode.tidsrom.start.toDateString()} - {periode.tidsrom.slutt.toDateString()} ({periode.tidsrom.uker} uker)
+			</p>
+			{Forelder[periode.forelder]}
 		</div>
 	);
 };
