@@ -17,8 +17,6 @@ import {
 import IconLink from 'shared/icon-link/IconLink';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DateInput from 'shared/date-input/DateInput';
-import AttachmentList from 'shared/attachment-list/AttachmentList';
-import AttachmentButton from 'shared/attachment-button/AttachmentButton';
 // eslint-disable-next-line max-len
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
 
