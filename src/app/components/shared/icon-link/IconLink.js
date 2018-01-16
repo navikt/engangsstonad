@@ -6,9 +6,9 @@ import Icon from 'nav-frontend-ikoner-assets';
 
 import './iconLink.less';
 
-export const IconLink = ({ iconKind, to, linkText }) => (
+export const IconLink = ({ iconKind, to, linkText, iconSize }) => (
 	<div className="iconLink">
-		<Icon kind={iconKind} size="15" />
+		<Icon kind={iconKind} size={iconSize} />
 		<Link className="iconLink__link" to={to}>
 			{linkText}
 		</Link>
@@ -18,7 +18,12 @@ export const IconLink = ({ iconKind, to, linkText }) => (
 IconLink.propTypes = {
 	iconKind: PropTypes.string.isRequired,
 	to: PropTypes.string.isRequired,
-	linkText: PropTypes.string.isRequired
+	linkText: PropTypes.string.isRequired,
+	iconSize: PropTypes.string
+};
+
+IconLink.defaultProps = {
+	iconSize: '16'
 };
 
 export default IconLink;
