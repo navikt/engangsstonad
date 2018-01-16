@@ -7,7 +7,11 @@
 	"license": "MIT",
 	"repository": "https://github.com/navikt/p2-selvbetjening-frontend-cookbook",
 	"devDependencies": {
+		"@types/classnames": "^2.2.3",
 		"@types/react": "^16.0.34",
+		"@types/react-dom": "^16.0.3",
+		"@types/react-redux": "^5.0.14",
+		"@types/react-router-dom": "^4.2.3",
 		"axios": "^0.17.1",
 		"babel-core": "^6.26.0",
 		"babel-eslint": "^8.0.2",
