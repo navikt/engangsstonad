@@ -2,8 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import { Knapp } from 'nav-frontend-knapper';
-
 import infoIcon from 'assets/svg/employee_nautral.svg';
 import alertIcon from 'assets/svg/employee_sad.svg';
 import warningIcon from 'assets/svg/employee_warning.svg';
@@ -44,10 +42,6 @@ const DialogBoxBase = (props) => {
 			</div>
 			<div className="dialogBox__content">
 				<div>{props.children}</div>
-				<div className="dialogBox__buttonWrapper">
-					<Knapp className="dialogBox__buttonWrapper__button">Ta foto</Knapp>
-					<Knapp className="dialogBox__buttonWrapper__button">Velg fil</Knapp>
-				</div>
 			</div>
 		</div>
 	);
