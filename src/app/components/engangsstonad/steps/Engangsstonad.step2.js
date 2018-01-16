@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 
 import { Normaltekst } from 'nav-frontend-typografi';
+import { Knapp } from 'nav-frontend-knapper';
 
 import {
 	toggleChildBorn,
@@ -13,12 +14,13 @@ import {
 	setBekreftetTermindato
 } from 'actions';
 
+import IconLink from 'shared/icon-link/IconLink';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DateInput from 'shared/date-input/DateInput';
-import AttachmentList from 'shared/attachment-list/AttachmentList';
-import AttachmentButton from 'shared/attachment-button/AttachmentButton';
 // eslint-disable-next-line max-len
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
+
+import './engangsstonad.step2.less';
 
 export class Step2 extends Component {
 	constructor(props) {
@@ -74,7 +76,6 @@ export class Step2 extends Component {
 						this.handleRadioGroupStageChange($e, stages)
 					}
 				/>
-
 				{this.props.noOfChildren && (
 					<div>
 						<DateInput
@@ -88,11 +89,23 @@ export class Step2 extends Component {
 								<DialogBox type="warning" overflow>
 									<Normaltekst>
 										Siden barnet ikke er født må du legge ved terminbekreftelse
-										fra jordmor eller lege
+										fra jordmor eller lege.
 									</Normaltekst>
+									<IconLink
+										iconKind="info-sirkel-fylt"
+										iconSize="24"
+										to="/#"
+										linkText="Siden barnet ikke er født må du legge ved terminbekreftelse fra jordmor eller lege."
+									/>
+									<div className="engangsstonadStep2__buttonWrapper">
+										<Knapp className="engangsstonadStep2__buttonWrapper__button">
+											Ta foto
+										</Knapp>
+										<Knapp className="engangsstonadStep2__buttonWrapper__button">
+											Velg fil
+										</Knapp>
+									</div>
 								</DialogBox>
-								<AttachmentList label="" />
-								<AttachmentButton />
 								<DateInput
 									id="terminbekreftelse"
 									input={{ value: this.props.bekreftetTermindato }}
