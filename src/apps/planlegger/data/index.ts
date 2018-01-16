@@ -1,4 +1,4 @@
-import { Uttaksplan, Forelder, Mødrekvote, StønadskontoType, Periodetype } from '../types';
+import { Uttaksplan, Forelder, Mødrekvote, StønadskontoType, Periodetype, Tidsperiode } from '../types';
 
 export const UttaksplanMock: Uttaksplan = {
 	periode: {
@@ -38,3 +38,22 @@ const etterFødsel: Mødrekvote = {
 
 UttaksplanMock.perioderMor.push(førTermin);
 UttaksplanMock.perioderMor.push(etterFødsel);
+
+export type Kvote = 'Mødrekvote' | 'Fedrekvote' | 'Fellesperiode';
+
+export interface Periode {
+	tidsrom: Tidsperiode;
+	navn: string;
+	kvote: Kvote;
+}
+
+export const mockPerioder: Periode[] = [
+	{
+		navn: 'Mammaperm før fødsel',
+		tidsrom: {
+			start: new Date(2018, 1, 5),
+			slutt: new Date(2018, 1, 23)
+		},
+		kvote: 'Mødrekvote'
+	}
+];
