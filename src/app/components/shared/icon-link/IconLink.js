@@ -6,18 +6,19 @@ import Icon from 'nav-frontend-ikoner-assets';
 
 import './iconLink.less';
 
-export const IconLink = ({ iconKind, to }) => (
+export const IconLink = ({ iconKind, to, linkText }) => (
 	<div className="iconLink">
 		<Icon kind={iconKind} size="15" />
 		<Link className="iconLink__link" to={to}>
-			Les mer om terminbekreftelsen
+			{linkText}
 		</Link>
 	</div>
 );
 
 IconLink.propTypes = {
 	iconKind: PropTypes.string.isRequired,
-	to: PropTypes.string.isRequired
+	to: PropTypes.string.isRequired,
+	linkText: PropTypes.string.isRequired
 };
 
 export default IconLink;

@@ -91,7 +91,11 @@ export class Step2 extends Component {
 										Siden barnet ikke er født må du legge ved terminbekreftelse
 										fra jordmor eller lege.
 									</Normaltekst>
-									<IconLink iconKind="info-sirkel-fylt" to="/#" />
+									<IconLink
+										iconKind="info-sirkel-fylt"
+										to="/#"
+										linkText="Siden barnet ikke er født må du legge ved terminbekreftelse fra jordmor eller lege."
+									/>
 									<div className="engangsstonadStep2__buttonWrapper">
 										<Knapp className="engangsstonadStep2__buttonWrapper__button">
 											Ta foto
