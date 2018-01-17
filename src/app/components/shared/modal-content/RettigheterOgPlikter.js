@@ -1,12 +1,11 @@
 import React from 'react';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
 import './modalContent.less';
 
 const RettigheterOgPlikter = () => (
 	<div className="simpleModal">
 		<Undertittel className="simpleModal__header">
-			<FormattedMessage id="intro.pageheading.samtykke" />
+			Rettigheter og Plikter
 		</Undertittel>
 		<ul>
 			<li>
