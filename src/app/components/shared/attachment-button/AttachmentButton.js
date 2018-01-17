@@ -4,11 +4,11 @@ import Icon from 'nav-frontend-ikoner-assets';
 
 const AttachmentButton = () => (
 	<Knapp htmlType="button">
+		<Icon kind="vedlegg" size="15" />
 		<label htmlFor="files">
 			<input id="files" className="hidden" type="file" />
 			Last opp vedlegg
 		</label>
-		<Icon kind="vedlegg" size="15px" />
 	</Knapp>
 );
 export default AttachmentButton;
