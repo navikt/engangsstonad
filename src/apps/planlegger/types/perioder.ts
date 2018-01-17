@@ -2,6 +2,7 @@ export interface Tidsperiode {
 	start: Date;
 	slutt: Date;
 	uker?: number;
+	dager?: number;
 }
 
 export enum Periodetype {
