@@ -24,7 +24,11 @@ export const activeRouteChanged = (route) => ({
 
 export const approveConditions = () => ({ type: APPROVE_CONDITIONS });
 export const confirmInformation = () => ({ type: CONFIRM_INFORMATION });
-export const getDataRequested = () => ({ type: GET_DATA_REQUESTED });
+
+export const getDataRequested = (params) => ({
+	type: GET_DATA_REQUESTED,
+	params
+});
 
 export const toggleChildBorn = (value) => ({
 	type: TOGGLE_CHILD_BORN,
