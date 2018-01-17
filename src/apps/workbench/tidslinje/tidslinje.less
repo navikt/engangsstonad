@@ -2,10 +2,11 @@
 @bkgColor: #e7e7e7;
 @dotSize: 0.8rem;
 
-.leftArrow() {
+.arrowLeft() {
 	content: '';
 	z-index: 1;
 	position: absolute;
+	top: 1.2rem;
 	left: -1 * @arrow-size;
 	margin-left: -1 * @arrow-size;
 	width: 0;
@@ -29,20 +30,33 @@
 	margin-left: -1 * @dotSize /2 + 0.15rem;
 	background-color: white;
 }
+
+.gradering(@col1, @col2: #e7e7e7) {
+	background: repeating-linear-gradient(
+		0deg,
+		@col1,
+		@col1 2px,
+		@col2 2px,
+		@col2 4px
+	);
+}
 .tidslinje {
 	> .tidslinje__kalenderinnslag {
 		margin-bottom: 1rem;
+
 		margin-left: 4rem;
 	}
 }
-
 .kalenderinnslag {
 	position: relative;
 	display: block;
 	background-color: @bkgColor;
-	padding: 1rem;
+	padding: 1rem 1rem;
 	&:before {
-		.leftArrow();
+		.arrowLeft();
+	}
+	p {
+		margin: 0;
 	}
 	&__linje {
 		width: 5px;
@@ -55,6 +69,12 @@
 		&--medforelder {
 			left: -1.5rem;
 			background-color: #a2ad00;
+			&.kalenderinnslag__linje--gradert {
+				.gradering(#a2ad00);
+			}
+		}
+		&--gradert {
+			.gradering(#66cbec);
 		}
 		&:before {
 			.hendelseDot(red);
@@ -70,5 +90,11 @@
 				display: none;
 			}
 		}
+	}
+}
+
+.formatert-dato {
+	&__ukedag {
+		text-transform: capitalize;
 	}
 }
