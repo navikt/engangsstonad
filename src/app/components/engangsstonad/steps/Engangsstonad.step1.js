@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
-import { FormattedMessage } from 'react-intl';
 import { Ingress } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 
@@ -37,22 +36,12 @@ export class Step1 extends Component {
 			<div className="step1">
 				<DocumentTitle title="NAV Engangsstønad - Samtykke" />
 				<Ingress>
-					<FormattedMessage id="intro.text.omES" />
+					Engangsstønad er en skattefri engangssum du kan få for hvert barn når
+					du ikke har rett på foreldrepenger.
 				</Ingress>
 				<ConfirmCheckbox
 					name="egenerklaring"
-					label={
-						<FormattedMessage
-							id="intro.text.samtykke"
-							values={{
-								link: (
-									<a href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
-										<FormattedMessage id="intro.pageheading.samtykke" />
-									</a>
-								)
-							}}
-						/>
-					}
+					label="Jeg har lest og forstått mine rettigheter og plikter."
 					onChange={approveConditions}
 					checked={approvedConditions}
 				/>
