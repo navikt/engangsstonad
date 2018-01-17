@@ -37,7 +37,8 @@
 	margin-left: -1 * (@dotSize/2 - @dotBorderWidth) + 1;
 	background-color: white; //rgba(255, 255, 255, 0.3);
 }
-.hendelseDotColor(@borderColor) {
+
+.setHendelseDotColor(@borderColor) {
 	border-color: @borderColor;
 }
 
@@ -50,13 +51,15 @@
 		@col1 4px
 	);
 }
+
 .tidslinje {
-	> .tidslinje__kalenderinnslag {
+	> .tidslinje__tidslinjeInnslag {
 		padding-bottom: 1rem;
 		padding-left: 4rem;
 	}
 }
-.kalenderinnslag {
+
+.tidslinjeInnslag {
 	position: relative;
 	display: block;
 	background-color: white;
@@ -101,14 +104,14 @@
 			left: -1.5rem;
 			background-color: @c-blue;
 			&:before {
-				.hendelseDotColor(@c-blue);
+				.setHendelseDotColor(@c-blue);
 			}
 			&:after {
-				.hendelseDotColor(@c-blue);
+				.setHendelseDotColor(@c-blue);
 			}
 		}
 		&--medforelder {
-			&.kalenderinnslag__linje--gradert {
+			&.tidslinjeInnslag__linje--gradert {
 				.gradering(@c-blue);
 			}
 		}
@@ -120,6 +123,14 @@
 				display: none;
 			}
 		}
+		&--slutt {
+			background-color: transparent;
+			bottom: auto;
+			&:after {
+				display: none;
+			}
+		}
+
 		/** Rød sirkel */
 		&--fodsel {
 			&:before {
@@ -130,12 +141,6 @@
 				background-color: @c-red;
 			}
 		}
-	}
-}
-
-.formatert-dato {
-	&__ukedag {
-		text-transform: capitalize;
 	}
 }
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ukedag, år, måned, dagIMåned } from './datoUtils';
 
 export type Datoformat = 'Full';
+import './dato.less';
 
 interface Props {
 	dato: Date;

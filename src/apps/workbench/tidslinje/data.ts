@@ -1,4 +1,4 @@
-import { TidslinjeInnslag, InnslagType } from './types';
+import { TidslinjeInnslag, InnslagType, HendelseType } from './types';
 
 export const mockTidslinjeData: TidslinjeInnslag[] = [
 	{
@@ -8,7 +8,7 @@ export const mockTidslinjeData: TidslinjeInnslag[] = [
 	},
 	{
 		dato: new Date(2018, 1, 24),
-		hendelser: [{ navn: 'Termin', forelder: 'mor' }],
+		hendelser: [{ navn: 'Termin', forelder: 'mor', type: HendelseType.fødsel }],
 		type: InnslagType.terminEllerFodsel
 	},
 	{
@@ -31,7 +31,7 @@ export const mockTidslinjeData: TidslinjeInnslag[] = [
 	},
 	{
 		dato: new Date(2018, 8, 7),
-		hendelser: [{ navn: 'Permisjonsperiode ferdig' }],
-		type: InnslagType.uttak
+		hendelser: [{ navn: 'Permisjonsperiode ferdig', forelder: 'medforelder' }],
+		type: InnslagType.slutt
 	}
 ];
