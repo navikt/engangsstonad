@@ -81,7 +81,7 @@ export class Step2 extends Component {
 						<DateInput
 							id="termindato"
 							input={{ value: this.props.terminDato }}
-							label=" termindato den..."
+							label="med termindato den..."
 							onChange={(e) => this.props.setTerminDato(e)}
 						/>
 						{this.props.terminDato && (
@@ -95,7 +95,8 @@ export class Step2 extends Component {
 										iconKind="info-sirkel-fylt"
 										iconSize="24"
 										to="/#"
-										linkText="Siden barnet ikke er født må du legge ved terminbekreftelse fra jordmor eller lege."
+										linkText={`Siden barnet ikke er født må du legge ved
+											terminbekreftelse fra jordmor eller lege.`}
 									/>
 									<div className="engangsstonadStep2__buttonWrapper">
 										<Knapp className="engangsstonadStep2__buttonWrapper__button">
