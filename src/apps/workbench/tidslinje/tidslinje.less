@@ -1,20 +1,26 @@
-@arrow-size: 0.5rem;
+@arrow-size: 0.8rem;
 @bkgColor: #e7e7e7;
-@dotSize: 0.8rem;
+@c-purple: #634689;
+@c-blue: #3385d1;
+@dotSize: 14px;
+@dotBorderWidth: 3px;
+@dotOffsetTop: @dotSize/2 - @dotBorderWidth/2;
+@dotOffsetBottom: -1 * @dotOffsetTop - 1px;
+@lineOffsetTop: 1.5rem;
+@lineOffsetBottom: -2.55rem;
 
 .arrowLeft() {
 	content: '';
 	z-index: 1;
 	position: absolute;
-	top: 1.2rem;
-	left: -1 * @arrow-size;
-	margin-left: -1 * @arrow-size;
-	width: 0;
-	height: 0;
-	border-left: @arrow-size solid transparent;
-	border-bottom: @arrow-size solid transparent;
-	border-top: @arrow-size solid transparent;
-	border-right: @arrow-size solid @bkgColor;
+	top: 1.15rem;
+	left: -1 * @arrow-size/1.8;
+	width: @arrow-size;
+	height: @arrow-size;
+	border-left: 1px solid @c-purple;
+	border-bottom: 1px solid @c-purple;
+	background-color: white;
+	transform: rotate(45deg);
 }
 
 .hendelseDot(@borderColor) {
@@ -25,10 +31,13 @@
 	width: @dotSize;
 	height: @dotSize;
 	border-radius: 50%;
-	border: 1px solid @borderColor;
-	margin-top: -1 * @dotSize/2 + 0.15rem;
-	margin-left: -1 * @dotSize /2 + 0.15rem;
-	background-color: white;
+	border: @dotBorderWidth solid @borderColor;
+	margin-top: -1 * @dotOffsetTop;
+	margin-left: -1 * (@dotSize/2 - @dotBorderWidth) + 1;
+	background-color: white; //rgba(255, 255, 255, 0.3);
+}
+.hendelseDotColor(@borderColor) {
+	border-color: @borderColor;
 }
 
 .gradering(@col1, @col2: #e7e7e7) {
@@ -50,8 +59,12 @@
 .kalenderinnslag {
 	position: relative;
 	display: block;
-	background-color: @bkgColor;
-	padding: 1rem 1rem;
+	background-color: white;
+	border: 1px solid @c-purple;
+	border-radius: 2px;
+	padding: 1rem;
+	margin-top: -1px;
+	margin-bottom: -2px;
 	&:before {
 		.arrowLeft();
 	}
@@ -59,32 +72,40 @@
 		margin: 0;
 	}
 	&__linje {
-		width: 5px;
-		background-color: #66cbec;
+		width: 8px;
+		background-color: @c-purple;
 		position: absolute;
-		top: 1.3rem;
-		bottom: -2.3rem;
+		top: @lineOffsetTop;
+		bottom: @lineOffsetBottom;
 		left: -2.9rem;
 		z-index: 100;
+		&:before {
+			.hendelseDot(@c-purple);
+		}
+		&:after {
+			.hendelseDot(@c-purple);
+			top: initial;
+			bottom: @dotOffsetBottom;
+		}
 		&--medforelder {
 			left: -1.5rem;
-			background-color: #a2ad00;
+			background-color: @c-blue;
+			&:before {
+				.hendelseDotColor(@c-blue);
+			}
+			&:after {
+				.hendelseDotColor(@c-blue);
+			}
+		}
+		&--medforelder {
 			&.kalenderinnslag__linje--gradert {
-				.gradering(#a2ad00);
+				.gradering(@c-blue);
 			}
 		}
 		&--gradert {
-			.gradering(#66cbec);
+			.gradering(@c-purple);
 		}
-		&:before {
-			.hendelseDot(red);
-		}
-		&:after {
-			.hendelseDot(red);
-			top: auto;
-			top: initial;
-			bottom: -1 * @dotSize + 0.25rem;
-		}
+
 		&--fortsetter {
 			&:after {
 				display: none;
