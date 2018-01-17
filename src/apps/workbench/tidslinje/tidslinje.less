@@ -2,24 +2,25 @@
 @bkgColor: #e7e7e7;
 @c-purple: #634689;
 @c-blue: #3385d1;
+@c-red: #c30000;
 @dotSize: 14px;
 @dotBorderWidth: 3px;
 @dotOffsetTop: @dotSize/2 - @dotBorderWidth/2;
-@dotOffsetBottom: -1 * @dotOffsetTop - 1px;
-@lineOffsetTop: 1.5rem;
+@dotOffsetBottom: -1 * @dotOffsetTop - 3px;
+@lineOffsetTop: 1.6rem;
 @lineOffsetBottom: -2.55rem;
 
-.arrowLeft() {
+.arrowLeft(@borderColor: @c-purple, @bkgColor: white) {
 	content: '';
 	z-index: 1;
 	position: absolute;
-	top: 1.15rem;
+	top: 1.3rem;
 	left: -1 * @arrow-size/1.8;
 	width: @arrow-size;
 	height: @arrow-size;
-	border-left: 1px solid @c-purple;
-	border-bottom: 1px solid @c-purple;
-	background-color: white;
+	border-left: 1px solid @borderColor;
+	border-bottom: 1px solid @borderColor;
+	background-color: @bkgColor;
 	transform: rotate(45deg);
 }
 
@@ -40,13 +41,13 @@
 	border-color: @borderColor;
 }
 
-.gradering(@col1, @col2: #e7e7e7) {
+.gradering(@col1, @col2: white) {
 	background: repeating-linear-gradient(
 		0deg,
-		@col1,
-		@col1 2px,
+		@col2,
 		@col2 2px,
-		@col2 4px
+		@col1 2px,
+		@col1 4px
 	);
 }
 .tidslinje {
@@ -65,11 +66,21 @@
 	padding: 1rem;
 	margin-top: -1px;
 	margin-bottom: -2px;
+	color: #3e3832;
 	&:before {
 		.arrowLeft();
 	}
-	p {
-		margin: 0;
+	&__dato {
+		margin-top: 0;
+		margin-bottom: 0.5rem;
+	}
+	&--fodsel {
+		background-color: @c-red;
+		color: white;
+		border-color: @c-red;
+		&:before {
+			.arrowLeft(@c-red, @c-red);
+		}
 	}
 	&__linje {
 		width: 8px;
@@ -105,10 +116,19 @@
 		&--gradert {
 			.gradering(@c-purple);
 		}
-
 		&--fortsetter {
 			&:after {
 				display: none;
+			}
+		}
+		/** Rød sirkel */
+		&--fodsel {
+			&:before {
+				width: @dotSize + 2px;
+				height: @dotSize + 2px;
+				margin-left: -1 * (@dotSize/2 - @dotBorderWidth);
+				border-color: white;
+				background-color: @c-red;
 			}
 		}
 	}
@@ -117,5 +137,18 @@
 .formatert-dato {
 	&__ukedag {
 		text-transform: capitalize;
+	}
+}
+
+.hendelsesliste {
+	margin: 0;
+	padding: 0;
+	list-style: inside;
+	li {
+		list-style: none;
+	}
+	&__ikon {
+		margin-right: 0.5rem;
+		vertical-align: middle;
 	}
 }

@@ -1,4 +1,4 @@
-export type Hendelsestype = 'start' | 'uttak' | 'termin' | 'fødsel' | 'slutt';
+export type Hendelsestype = 'start' | 'uttak' | 'termin' | 'slutt';
 export type Forelder = 'mor' | 'medforelder';
 
 export interface Hendelse {
