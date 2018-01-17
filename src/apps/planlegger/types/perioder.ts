@@ -1,3 +1,5 @@
+/** Test av typing for å skille mellom de ulike periodetypene */
+
 export interface Tidsperiode {
 	start: Date;
 	slutt: Date;
