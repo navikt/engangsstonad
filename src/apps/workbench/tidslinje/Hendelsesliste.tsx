@@ -12,12 +12,11 @@ const Hendelsesliste: React.StatelessComponent<Props> = ({ hendelser }) => (
 	<ul className="hendelsesliste">
 		{hendelser.map((hendelse, idx) => (
 			<li key={hendelse.forelder}>
-				{hendelse.type === HendelseType.fødsel ||
-					(hendelse.type === HendelseType.termin && (
-						<span className="hendelsesliste__ikon">
-							<CustomSVG iconRef={hjerte.default} size={14} />
-						</span>
-					))}
+				{(hendelse.type === HendelseType.fødsel || hendelse.type === HendelseType.termin) && (
+					<span className="hendelsesliste__ikon">
+						<CustomSVG iconRef={hjerte.default} size={14} />
+					</span>
+				)}
 				{hendelse.navn}
 			</li>
 		))}
