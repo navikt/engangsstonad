@@ -15,6 +15,7 @@ describe('<EngangsstonadIndex />', () => {
 				data={{ fornavn: 'foo' }}
 				match={{ path: 'foo' }}
 				dispatch={() => {}}
+				location={{ search: 'asdf' }}
 			/>
 		);
 		expect(wrapper.find('StepBasedForm'));
@@ -27,6 +28,7 @@ describe('<EngangsstonadIndex />', () => {
 				data={{ fornavn: 'foo' }}
 				match={{ path: 'foo' }}
 				dispatch={() => {}}
+				location={{ search: 'asdf' }}
 			/>
 		);
 		const stepBasedForm = wrapper.find('StepBasedForm');
