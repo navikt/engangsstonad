@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 function fetchData() {
-	return axios.get(
-		'https://foreldrepenger-selvbetjening-engangsstonad.nais.oera-q.local/rest/personinfo'
-	);
+	return axios.get('/rest/personinfo?fnr=12341234&stub=true');
 }
 
 const Api = { fetchData };

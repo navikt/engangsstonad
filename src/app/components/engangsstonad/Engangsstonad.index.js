@@ -69,36 +69,38 @@ export class EngangsstonadIndex extends React.Component {
 	}
 
 	render() {
-		const title = 'Søknad om engangsstønad';
-		const illustrations = {
-			'0': this.renderIllustration(
-				'Hei Lise',
-				'Jeg skal veilede deg gjennom søknaden. Vi har tre steg vi skal gjennom.'
-			),
-			'4': this.renderIllustration(
-				'Bra jobbet Lise!',
-				'Din søknad er nå sendt til oss på NAV. Vi tar kontakt med deg hvis vi trenger noe mer.',
-				'green'
-			)
-		};
+		if (this.props.data) {
+			const title = 'Søknad om engangsstønad';
+			const illustrations = {
+				'0': this.renderIllustration(
+					`Hei ${this.props.data.fornavn}`,
+					'Jeg skal veilede deg gjennom søknaden. Vi har tre steg vi skal gjennom.'
+				),
+				'4': this.renderIllustration(
+					`Bra jobbet ${this.props.data.fornavn}!`,
+					'Din søknad er nå sendt til oss på NAV. Vi tar kontakt med deg hvis vi trenger noe mer.',
+					'green'
+				)
+			};
 
-		return (
-			<div className="engangsstonad">
-				<StepBasedForm
-					showStepper={this.props.showStepper}
-					onNextButtonClicked={($e, route, href) =>
-						this.handleOnNextButtonClicked($e, route, href)
-					}
-					routes={renderChildRoutes(this.props.routes) || []}
-					title={title}
-					location={this.props.location}
-					steps={steps}
-					withStepIndicator
-					illustrations={illustrations}
-				/>
-				{this.props.data && <div>Data: {JSON.stringify(this.props.data)}</div>}
-			</div>
-		);
+			return (
+				<div className="engangsstonad">
+					<StepBasedForm
+						showStepper={this.props.showStepper}
+						onNextButtonClicked={($e, route, href) =>
+							this.handleOnNextButtonClicked($e, route, href)
+						}
+						routes={renderChildRoutes(this.props.routes) || []}
+						title={title}
+						location={this.props.location}
+						steps={steps}
+						withStepIndicator
+						illustrations={illustrations}
+					/>
+				</div>
+			);
+		}
+		return <div className="engangsstonad" />;
 	}
 }
 
@@ -106,7 +108,9 @@ EngangsstonadIndex.propTypes = {
 	routes: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	location: PropTypes.shape({}).isRequired,
 	dispatch: PropTypes.func.isRequired,
-	data: PropTypes.shape({}),
+	data: PropTypes.shape({
+		fornavn: PropTypes.string
+	}),
 	showStepper: PropTypes.bool,
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
@@ -114,8 +118,8 @@ EngangsstonadIndex.propTypes = {
 };
 
 EngangsstonadIndex.defaultProps = {
-	data: null,
-	showStepper: true
+	showStepper: true,
+	data: null
 };
 
 const mapStateToProps = (state) => ({

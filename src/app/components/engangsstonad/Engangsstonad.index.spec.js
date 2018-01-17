@@ -12,6 +12,7 @@ describe('<EngangsstonadIndex />', () => {
 		const wrapper = shallow(
 			<EngangsstonadIndex
 				routes={routeArray}
+				data={{ fornavn: 'foo' }}
 				match={{ path: 'foo' }}
 				dispatch={() => {}}
 			/>
@@ -23,6 +24,7 @@ describe('<EngangsstonadIndex />', () => {
 		const wrapper = shallow(
 			<EngangsstonadIndex
 				routes={routeArray}
+				data={{ fornavn: 'foo' }}
 				match={{ path: 'foo' }}
 				dispatch={() => {}}
 			/>

@@ -11,7 +11,7 @@ function* getData() {
 		const data = yield call(Api.fetchData);
 		yield put({
 			type: GET_DATA_SUCCESS,
-			data
+			data: data.data
 		});
 	} catch (error) {
 		yield put({
