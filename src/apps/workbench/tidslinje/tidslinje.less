@@ -1,1 +1,74 @@
+@arrow-size: 0.5rem;
+@bkgColor: #e7e7e7;
+@dotSize: 0.8rem;
 
+.leftArrow() {
+	content: '';
+	z-index: 1;
+	position: absolute;
+	left: -1 * @arrow-size;
+	margin-left: -1 * @arrow-size;
+	width: 0;
+	height: 0;
+	border-left: @arrow-size solid transparent;
+	border-bottom: @arrow-size solid transparent;
+	border-top: @arrow-size solid transparent;
+	border-right: @arrow-size solid @bkgColor;
+}
+
+.hendelseDot(@borderColor) {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: @dotSize;
+	height: @dotSize;
+	border-radius: 50%;
+	border: 1px solid @borderColor;
+	margin-top: -1 * @dotSize/2 + 0.15rem;
+	margin-left: -1 * @dotSize /2 + 0.15rem;
+	background-color: white;
+}
+.tidslinje {
+	> .tidslinje__kalenderinnslag {
+		margin-bottom: 1rem;
+		margin-left: 4rem;
+	}
+}
+
+.kalenderinnslag {
+	position: relative;
+	display: block;
+	background-color: @bkgColor;
+	padding: 1rem;
+	&:before {
+		.leftArrow();
+	}
+	&__linje {
+		width: 5px;
+		background-color: #66cbec;
+		position: absolute;
+		top: 1.3rem;
+		bottom: -2.3rem;
+		left: -2.9rem;
+		z-index: 100;
+		&--medforelder {
+			left: -1.5rem;
+			background-color: #a2ad00;
+		}
+		&:before {
+			.hendelseDot(red);
+		}
+		&:after {
+			.hendelseDot(red);
+			top: auto;
+			top: initial;
+			bottom: -1 * @dotSize + 0.25rem;
+		}
+		&--fortsetter {
+			&:after {
+				display: none;
+			}
+		}
+	}
+}
