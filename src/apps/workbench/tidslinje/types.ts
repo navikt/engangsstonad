@@ -1,16 +1,19 @@
-export type Hendelsestype = 'start' | 'uttak' | 'termin' | 'slutt';
+export enum InnslagType {
+	'start',
+	'uttak',
+	'terminEllerFodsel',
+	'slutt'
+}
 export type Forelder = 'mor' | 'medforelder';
 
-export interface Hendelse {
+export interface TidslinjeInnslag {
 	dato: Date;
-	delhendelser: Delhendelse[];
-	type: Hendelsestype;
+	type: InnslagType;
+	hendelser: Permisjonshendelse[];
 }
 
-export interface Delhendelse {
+export interface Permisjonshendelse {
 	navn: string;
-	beskrivelse?: string;
-	ekstrainfo?: string;
 	forelder?: Forelder;
 	gradert?: boolean;
 }

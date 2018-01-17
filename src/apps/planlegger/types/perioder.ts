@@ -6,14 +6,14 @@ export interface Tidsperiode {
 }
 
 export enum Periodetype {
-	'Stønadsperiode',
+	'Stonadsperiode',
 	'Utsettelse',
 	'Opphold'
 }
 
-export enum StønadskontoType {
+export enum StonadskontoType {
 	/** Kvote forbeholdt mor */
-	'Mødrekvote',
+	'Modrekvote',
 	/** Kvote forbehold medforelder */
 	'Fedrekvote',
 	/** Felleskvote som kan fordeles mellom mor og medforelder */
@@ -22,7 +22,7 @@ export enum StønadskontoType {
 	'Foreldrepenger'
 }
 
-export enum UtsettelseÅrsakType {
+export enum UtsettelseArsakType {
 	'Ferie',
 	'Arbeid',
 	'SykdomSkade',
@@ -30,9 +30,9 @@ export enum UtsettelseÅrsakType {
 	'Annet'
 }
 
-export enum OppholdÅrsakType {
-	'VenterSøknadFraAnnenForelder',
-	'ManglendeSøktPeriode'
+export enum OppholdArsakType {
+	'VenterSoknadFraAnnenForelder',
+	'ManglendeSoktPeriode'
 }
 
 export enum Forelder {
@@ -47,8 +47,8 @@ interface Basisperiode {
 	forelder: Forelder;
 }
 
-interface Stønadsperiode extends Basisperiode {
-	periodetype: Periodetype.Stønadsperiode;
+interface Stonadsperiode extends Basisperiode {
+	periodetype: Periodetype.Stonadsperiode;
 }
 
 interface Utsettelsesperiode extends Basisperiode {
@@ -59,57 +59,57 @@ interface Oppholdsperiode extends Basisperiode {
 	periodetype: Periodetype.Opphold;
 }
 
-export interface Mødrekvote extends Stønadsperiode {
-	stønadskonto: StønadskontoType.Mødrekvote;
+export interface Modrekvote extends Stonadsperiode {
+	stønadskonto: StonadskontoType.Modrekvote;
 	prosent?: number;
 }
 
-export interface Fedrekvote extends Stønadsperiode {
-	stønadskonto: StønadskontoType.Fedrekvote;
+export interface Fedrekvote extends Stonadsperiode {
+	stønadskonto: StonadskontoType.Fedrekvote;
 	prosent?: number;
 }
 
-export interface Fellesperiode extends Stønadsperiode {
-	stønadskonto: StønadskontoType.Fellesperiode;
+export interface Fellesperiode extends Stonadsperiode {
+	stønadskonto: StonadskontoType.Fellesperiode;
 	prosent?: number;
 }
 
-export interface Foreldrepenger extends Stønadsperiode {
-	stønadskonto: StønadskontoType.Foreldrepenger;
+export interface Foreldrepenger extends Stonadsperiode {
+	stønadskonto: StonadskontoType.Foreldrepenger;
 }
 
 export interface Ferie extends Utsettelsesperiode {
-	årsak: UtsettelseÅrsakType.Ferie;
+	årsak: UtsettelseArsakType.Ferie;
 }
 
 export interface Arbeid extends Utsettelsesperiode {
-	årsak: UtsettelseÅrsakType.Arbeid;
+	årsak: UtsettelseArsakType.Arbeid;
 	prosent: number;
 }
 
 export interface Sykdom extends Utsettelsesperiode {
-	årsak: UtsettelseÅrsakType.SykdomSkade;
+	årsak: UtsettelseArsakType.SykdomSkade;
 }
 
 export interface InnlagtBarn extends Utsettelsesperiode {
-	årsak: UtsettelseÅrsakType.InnlagtBarn;
+	årsak: UtsettelseArsakType.InnlagtBarn;
 }
 
 export interface AnnenPeriode extends Utsettelsesperiode {
-	årsak: UtsettelseÅrsakType.Annet;
+	årsak: UtsettelseArsakType.Annet;
 }
 
-export interface ManglendeSøktPeriode extends Oppholdsperiode {
-	årsak: OppholdÅrsakType.ManglendeSøktPeriode;
+export interface ManglendeSoktPeriode extends Oppholdsperiode {
+	årsak: OppholdArsakType.ManglendeSoktPeriode;
 }
 
-export interface VenterSøknadFraAnnenForelder extends Oppholdsperiode {
-	årsak: OppholdÅrsakType.ManglendeSøktPeriode;
+export interface VenterSoknadFraAnnenForelder extends Oppholdsperiode {
+	årsak: OppholdArsakType.ManglendeSoktPeriode;
 }
 
 /** Alle gyldige periodetyper som en kan fylle utaksplanen med */
 export type Uttaksperiode =
-	| Mødrekvote
+	| Modrekvote
 	| Fedrekvote
 	| Fellesperiode
 	| Foreldrepenger
@@ -118,11 +118,11 @@ export type Uttaksperiode =
 	| Sykdom
 	| InnlagtBarn
 	| AnnenPeriode
-	| ManglendeSøktPeriode
-	| VenterSøknadFraAnnenForelder;
+	| ManglendeSoktPeriode
+	| VenterSoknadFraAnnenForelder;
 
 export interface KravTilUttaksplan {
-	dagerMødrekvoteFørTerming: number;
-	dagerMødrekvoteEtterFødsel: number;
+	dagerModrekvoteForTermin: number;
+	dagerModrekvoteEtterFodsel: number;
 	dagerFedrekvote: number;
 }

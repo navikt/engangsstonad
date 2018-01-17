@@ -11,17 +11,17 @@ export function assertNever(x: never): never {
 
 import { Uttaksperiode, Tidsperiode, KravTilUttaksplan } from './perioder';
 
-export interface Søknad {
+export interface Soknad {
 	termin: Date;
 	dekningsgrad: Dekningsgrad;
-	ukerFørTermin: number;
+	ukerForTermin: number;
 	Uttaksplan?: Uttaksplan;
 }
 
 export interface Uttaksplan {
 	periode: Tidsperiode;
 	tilgjengeligeDager: number;
-	fødselsdato: Date;
+	fodselsdato: Date;
 	perioderMor: Uttaksperiode[];
 	perioderMedforelder: Uttaksperiode[];
 }

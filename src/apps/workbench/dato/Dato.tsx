@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ukedag, år, måned, dagIMåned } from 'apps/workbench/tidslinje/utils/date';
+import { ukedag, år, måned, dagIMåned } from './datoUtils';
 
 export type Datoformat = 'Full';
 

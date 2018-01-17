@@ -1,38 +1,64 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-import { hentNesteInnslag } from 'apps/workbench/tidslinje/utils/index';
-import Hendelseslinje from 'apps/workbench/tidslinje/Hendelseslinje';
+import { hentNesteInnslag } from './utils';
 import CustomSVG from 'shared/custom-svg/CustomSVG';
 
-import { Hendelse } from './types';
-import { kalenderinnslag } from './data';
-import Dato from './Dato';
+import { TidslinjeInnslag, Forelder, Permisjonshendelse, InnslagType } from './types';
+import { mockTidslinjeData } from './data';
+import Dato from '../Dato/Dato';
 
 const hjerte = require('./assets/hjerte.svg');
 
 import './tidslinje.less';
 
-const Kalenderinnslag: React.StatelessComponent<{
-	innslag: Hendelse;
-	nesteInnslag?: Hendelse;
+interface InnslagStrekProps {
+	forelder: Forelder;
+	hendelser: Permisjonshendelse[];
+	type: InnslagType;
+	kommendeHendelser?: Permisjonshendelse[];
+}
+
+const InnslagStrek: React.StatelessComponent<InnslagStrekProps> = ({
+	forelder,
+	type,
+	hendelser,
+	kommendeHendelser
+}) => {
+	const hendelse = hendelser.find((h) => h.forelder === forelder);
+	if (!hendelse) {
+		return null;
+	}
+	const erFødselEllerTermin = type === InnslagType.terminEllerFodsel;
+	const periodeFortsetter = kommendeHendelser && kommendeHendelser.find((h) => h.forelder === forelder) !== undefined;
+	const cls = classNames('kalenderinnslag__linje', `kalenderinnslag__linje--${forelder}`, {
+		'kalenderinnslag__linje--fortsetter': periodeFortsetter || erFødselEllerTermin,
+		'kalenderinnslag__linje--fodsel': erFødselEllerTermin,
+		'kalenderinnslag__linje--gradert': hendelse.gradert
+	});
+	return <div className={cls} />;
+};
+
+const TidslinjeInnslag: React.StatelessComponent<{
+	innslag: TidslinjeInnslag;
+	nesteInnslag?: TidslinjeInnslag;
 }> = ({ innslag, nesteInnslag }) => {
 	const cls = classNames('kalenderinnslag', {
-		'kalenderinnslag--fodsel': innslag.type === 'termin'
+		'kalenderinnslag--fodsel': innslag.type === InnslagType.terminEllerFodsel
 	});
 
 	return (
 		<div key={innslag.dato.toDateString()} className={cls}>
-			<Hendelseslinje
+			<InnslagStrek
 				forelder="mor"
-				hendelser={innslag.delhendelser}
+				hendelser={innslag.hendelser}
 				type={innslag.type}
-				kommendeHendelser={nesteInnslag && nesteInnslag.delhendelser}
+				kommendeHendelser={nesteInnslag && nesteInnslag.hendelser}
 			/>
-			<Hendelseslinje
+			<InnslagStrek
 				forelder="medforelder"
-				hendelser={innslag.delhendelser}
-				kommendeHendelser={nesteInnslag && nesteInnslag.delhendelser}
+				hendelser={innslag.hendelser}
+				kommendeHendelser={nesteInnslag && nesteInnslag.hendelser}
 				type={innslag.type}
 			/>
 			<p className="kalenderinnslag__dato">
@@ -40,9 +66,9 @@ const Kalenderinnslag: React.StatelessComponent<{
 			</p>
 			<div className="kalenderinnslag__hendelser">
 				<ul className="hendelsesliste">
-					{innslag.delhendelser.map((hendelse, idx) => (
+					{innslag.hendelser.map((hendelse, idx) => (
 						<li key={idx}>
-							{innslag.type === 'termin' && (
+							{innslag.type === InnslagType.terminEllerFodsel && (
 								<span className="hendelsesliste__ikon">
 									<CustomSVG iconRef={hjerte.default} size={14} />
 								</span>
@@ -59,9 +85,9 @@ const Kalenderinnslag: React.StatelessComponent<{
 const Tidslinje: React.StatelessComponent<{}> = () => {
 	return (
 		<div className="tidslinje">
-			{kalenderinnslag.map((innslag, idx) => (
+			{mockTidslinjeData.map((innslag, idx) => (
 				<div className="tidslinje__kalenderinnslag" key={idx}>
-					<Kalenderinnslag key={idx} innslag={innslag} nesteInnslag={hentNesteInnslag(idx, kalenderinnslag)} />
+					<TidslinjeInnslag key={idx} innslag={innslag} nesteInnslag={hentNesteInnslag(idx, mockTidslinjeData)} />
 				</div>
 			))}
 		</div>

@@ -1,4 +1,4 @@
-import { Uttaksplan, Forelder, Mødrekvote, StønadskontoType, Periodetype } from '../types';
+import { Uttaksplan, Forelder, Modrekvote, StonadskontoType, Periodetype } from '../types';
 
 export const UttaksplanMock: Uttaksplan = {
 	periode: {
@@ -8,14 +8,14 @@ export const UttaksplanMock: Uttaksplan = {
 	},
 
 	tilgjengeligeDager: 98,
-	fødselsdato: new Date(),
+	fodselsdato: new Date(),
 	perioderMor: [],
 	perioderMedforelder: []
 };
 
-const førTermin: Mødrekvote = {
-	stønadskonto: StønadskontoType.Mødrekvote,
-	periodetype: Periodetype.Stønadsperiode,
+const forTermin: Modrekvote = {
+	stønadskonto: StonadskontoType.Modrekvote,
+	periodetype: Periodetype.Stonadsperiode,
 	forelder: Forelder.mor,
 	tidsrom: {
 		start: new Date(2018, 1, 5),
@@ -24,9 +24,9 @@ const førTermin: Mødrekvote = {
 	}
 };
 
-const etterFødsel: Mødrekvote = {
-	stønadskonto: StønadskontoType.Mødrekvote,
-	periodetype: Periodetype.Stønadsperiode,
+const etterFodsel: Modrekvote = {
+	stønadskonto: StonadskontoType.Modrekvote,
+	periodetype: Periodetype.Stonadsperiode,
 	forelder: Forelder.mor,
 	prosent: 100,
 	tidsrom: {
@@ -36,5 +36,5 @@ const etterFødsel: Mødrekvote = {
 	}
 };
 
-UttaksplanMock.perioderMor.push(førTermin);
-UttaksplanMock.perioderMor.push(etterFødsel);
+UttaksplanMock.perioderMor.push(forTermin);
+UttaksplanMock.perioderMor.push(etterFodsel);
