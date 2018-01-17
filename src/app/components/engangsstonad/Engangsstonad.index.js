@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import queryStringParser from 'query-string';
 import renderChildRoutes from 'util/routing';
 
 import StepBasedForm from 'shared/step-based-form/StepBasedForm';
@@ -35,7 +36,17 @@ const steps = [
 
 export class EngangsstonadIndex extends React.Component {
 	componentWillMount() {
-		this.props.dispatch(getDataRequested());
+		const queryParams = this.getQueryParams();
+
+		if (Object.keys(queryParams).length > 0) {
+			this.props.dispatch(getDataRequested(queryParams));
+		} else {
+			this.props.dispatch(getDataRequested());
+		}
+	}
+
+	getQueryParams() {
+		return queryStringParser.parse(this.props.location.search);
 	}
 
 	// eslint-disable-next-line class-methods-use-this
@@ -106,7 +117,9 @@ export class EngangsstonadIndex extends React.Component {
 
 EngangsstonadIndex.propTypes = {
 	routes: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-	location: PropTypes.shape({}).isRequired,
+	location: PropTypes.shape({
+		search: PropTypes.string
+	}).isRequired,
 	dispatch: PropTypes.func.isRequired,
 	data: PropTypes.shape({
 		fornavn: PropTypes.string

@@ -6,9 +6,9 @@ import {
 	GET_DATA_FAILED
 } from '../constants';
 
-function* getData() {
+function* getData(action) {
 	try {
-		const data = yield call(Api.fetchData);
+		const data = yield call(Api.fetchData, action.params);
 		yield put({
 			type: GET_DATA_SUCCESS,
 			data: data.data
