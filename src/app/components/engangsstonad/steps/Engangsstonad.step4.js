@@ -10,10 +10,12 @@ import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWithLabel';
 import { confirmInformation } from 'actions';
+import { fullNameFormat } from 'util/formats/index';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class Step4 extends Component {
 	render() {
+		const { data } = this.props;
 		return (
 			<div>
 				<DocumentTitle title="NAV Engangsstønad - Oppsummering" />
@@ -24,7 +26,10 @@ export class Step4 extends Component {
 					</Normaltekst>
 				</DialogBox>
 				<Undertittel>Om deg som søker</Undertittel>
-				<DisplayTextWithLabel label="Navn" text="Lise Mari Haugland" />
+				<DisplayTextWithLabel
+					label="Navn"
+					text={fullNameFormat(data.fornavn, data.mellomnavn, data.etternavn)}
+				/>
 				<DisplayTextWithLabel label="Fødselsnummer" text="00000000000" />
 				<Undertittel>Opplysninger om barnet eller barna</Undertittel>
 				<DisplayTextWithLabel label="Antall barn forventet" text="1" />
@@ -35,10 +40,7 @@ export class Step4 extends Component {
 				/>
 				<DisplayTextWithLabel label="Vedlegg" text="<link til vedlegg her>" />
 				<Undertittel>Opplysninger om tilknytning til Norge</Undertittel>
-				<DisplayTextWithLabel
-					label="Adresse"
-					text="Stockholmsgata 16B, 0566 Oslo, Norge"
-				/>
+				<DisplayTextWithLabel label="Adresse" text={data.adresse} />
 				<DisplayTextWithLabel
 					label="Oppholdt seg i Norge de siste 12 månedene"
 					text="Ja"
@@ -62,15 +64,18 @@ export class Step4 extends Component {
 
 Step4.propTypes = {
 	confirmInformation: PropTypes.func.isRequired,
-	confirmedInformation: PropTypes.bool
+	confirmedInformation: PropTypes.bool,
+	data: PropTypes.shape({})
 };
 
 Step4.defaultProps = {
-	confirmedInformation: false
+	confirmedInformation: false,
+	data: null
 };
 
 const mapStateToProps = (state) => ({
-	confirmedInformation: state.engangsstonadReducer.confirmedInformation
+	confirmedInformation: state.engangsstonadReducer.confirmedInformation,
+	data: state.engangsstonadReducer.data
 });
 
 const mapDispatchToProps = (dispatch) => ({

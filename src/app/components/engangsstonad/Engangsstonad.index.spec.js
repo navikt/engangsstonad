@@ -12,8 +12,10 @@ describe('<EngangsstonadIndex />', () => {
 		const wrapper = shallow(
 			<EngangsstonadIndex
 				routes={routeArray}
+				data={{ fornavn: 'foo' }}
 				match={{ path: 'foo' }}
 				dispatch={() => {}}
+				location={{ search: 'asdf' }}
 			/>
 		);
 		expect(wrapper.find('StepBasedForm'));
@@ -23,8 +25,10 @@ describe('<EngangsstonadIndex />', () => {
 		const wrapper = shallow(
 			<EngangsstonadIndex
 				routes={routeArray}
+				data={{ fornavn: 'foo' }}
 				match={{ path: 'foo' }}
 				dispatch={() => {}}
+				location={{ search: 'asdf' }}
 			/>
 		);
 		const stepBasedForm = wrapper.find('StepBasedForm');

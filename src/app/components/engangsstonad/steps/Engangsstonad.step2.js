@@ -95,7 +95,7 @@ export class Step2 extends Component {
 						<DateInput
 							id="termindato"
 							input={{ value: this.props.terminDato }}
-							label=" termindato den..."
+							label="med termindato den..."
 							onChange={(e) => this.props.setTerminDato(e)}
 						/>
 						{this.props.terminDato && (

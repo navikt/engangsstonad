@@ -129,7 +129,7 @@ class DateInput extends Component {
 				ref={(container) => {
 					this.container = container;
 				}}>
-				<Element className="skjemaelement__label">{label}</Element>
+				<Element>{label}</Element>
 				<div // eslint-disable-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
 					className="datovelger__inner"
 					tabIndex=""
