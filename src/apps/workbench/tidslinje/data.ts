@@ -30,7 +30,7 @@ export const mockTidslinjeData: TidslinjeInnslag[] = [
 		type: InnslagType.uttak
 	},
 	{
-		dato: new Date(2018, 8, 7),
+		dato: new Date(2018, 11, 1),
 		hendelser: [{ navn: 'Permisjonsperiode ferdig', forelder: 'medforelder' }],
 		type: InnslagType.slutt
 	}

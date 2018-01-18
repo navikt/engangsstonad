@@ -9,6 +9,7 @@ import { mockTidslinjeData } from './data';
 import { hentNesteInnslag, getHendelseStrekProps } from './utils';
 
 import './tidslinje.less';
+import { kalkulerUttaksdagerIPeriode } from '../utils/tidsberegninger';
 
 export interface InnslagStrekProps {
 	forelder: Forelder;
@@ -43,6 +44,7 @@ const TidslinjeInnslag: React.StatelessComponent<{
 
 	const morProps = getHendelseStrekProps('mor', innslag, nesteInnslag);
 	const medforelderProps = getHendelseStrekProps('medforelder', innslag, nesteInnslag);
+	const antallUttaksdager = nesteInnslag ? kalkulerUttaksdagerIPeriode(innslag.dato, nesteInnslag.dato) : -1;
 
 	return (
 		<div key={innslag.dato.toDateString()} className={cls}>
@@ -50,6 +52,7 @@ const TidslinjeInnslag: React.StatelessComponent<{
 			{medforelderProps && <TidslinjeInnslagStrek {...medforelderProps} />}
 			<p className="tidslinjeInnslag__dato">
 				<Dato dato={innslag.dato} />
+				{antallUttaksdager >= 1 && <span> ({antallUttaksdager} dager)</span>}
 			</p>
 			<div className="tidslinjeInnslag__hendelser">
 				<Hendelsesliste hendelser={innslag.hendelser} />
