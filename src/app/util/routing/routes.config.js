@@ -1,7 +1,8 @@
 import ErrorPage from 'components/error';
 import EngangsstonadIndex from 'components/engangsstonad/Engangsstonad.index';
 import engangsstonadSteps from 'components/engangsstonad/steps';
-import Planlegger from 'apps/planlegger/Planlegger.index';
+import Planlegger from 'apps/planlegger/Planlegger.app';
+import Workbench from 'apps/workbench/';
 
 const defaultRouteConfig = [
 	{
@@ -21,6 +22,10 @@ const defaultRouteConfig = [
 	{
 		path: '/planlegger',
 		component: Planlegger
+	},
+	{
+		path: '/workbench',
+		component: Workbench
 	},
 	{ component: ErrorPage }
 ];

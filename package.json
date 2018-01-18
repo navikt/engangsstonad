@@ -1,13 +1,19 @@
 {
 	"name": "babel-flow-webpack-setup",
 	"version": "1.0.0",
-	"description": "Simple template webapp setup using React and nav-frontend, build on Webpack, Babel and with flow type inference",
+	"description":
+		"Simple template webapp setup using React and nav-frontend, build on Webpack, Babel and with flow type inference",
 	"main": "./src/app/bootstrap.js",
 	"author": "NAV",
 	"license": "MIT",
 	"repository": "https://github.com/navikt/p2-selvbetjening-frontend-cookbook",
 	"devDependencies": {
+		"@types/classnames": "^2.2.3",
+		"@types/date-fns": "^2.6.0",
 		"@types/react": "^16.0.34",
+		"@types/react-dom": "^16.0.3",
+		"@types/react-redux": "^5.0.14",
+		"@types/react-router-dom": "^4.2.3",
 		"axios": "^0.17.1",
 		"babel-core": "^6.26.0",
 		"babel-eslint": "^8.0.2",
@@ -66,9 +72,11 @@
 		"lint": "eslint src/**"
 	},
 	"dependencies": {
+		"@types/date-fns": "^2.6.0",
 		"axios": "^0.17.1",
 		"babel-polyfill": "^6.26.0",
 		"classnames": "^2.2.5",
+		"date-fns": "^1.29.0",
 		"dotenv": "^4.0.0",
 		"express": "^4.16.2",
 		"history": "^4.7.2",

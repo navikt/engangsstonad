@@ -15,22 +15,35 @@ const getDecorator = (decoratorUrl) =>
 const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
 	const html = decoratorResponse.data;
 	const { document } = new JSDOM(html).window;
-
-	const header = document.getElementById('header').innerHTML;
-	const footer = document.getElementById('footer').innerHTML;
-	const scripts = document.getElementById('scripts').innerHTML;
-	const styles = document.getElementById('styles').innerHTML;
-
-	config.plugins.push(
-		new HtmlWebpackPlugin({
-			template: './src/app/index.html',
-			inject: 'body',
-			NAVHeading: header,
-			NAVFooter: footer,
-			NAVScripts: scripts,
-			NAVStyles: styles
-		})
-	);
+	try {
+		const header = document.getElementById('header').innerHTML;
+		const footer = document.getElementById('footer').innerHTML;
+		const scripts = document.getElementById('scripts').innerHTML;
+		const styles = document.getElementById('styles').innerHTML;
+		config.plugins.push(
+			new HtmlWebpackPlugin({
+				template: './src/app/index.html',
+				inject: 'body',
+				NAVHeading: header,
+				NAVFooter: footer,
+				NAVScripts: scripts,
+				NAVStyles: styles
+			})
+		);
+	} catch (e) {
+		console.error('Dekoratør feilet; starter uten dekoratør.');
+		console.error(e);
+		config.plugins.push(
+			new HtmlWebpackPlugin({
+				template: './src/app/index.html',
+				inject: 'body',
+				NAVHeading: '',
+				NAVFooter: '',
+				NAVScripts: '',
+				NAVStyles: ''
+			})
+		);
+	}
 
 	return config;
 };
