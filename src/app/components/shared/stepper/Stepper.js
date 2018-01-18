@@ -15,7 +15,11 @@ export const Stepper = (props) => (
 			/>
 		)}
 		{props.showSubmission && (
-			<StepperButton href={props.nextRoute} label="Lukk dette vinduet" />
+			<StepperButton
+				href={props.nextRoute}
+				label="Lukk dette vinduet"
+				type="submit"
+			/>
 		)}
 	</div>
 );
@@ -46,6 +50,7 @@ const StepperButton = (props) => {
 	return (
 		<Hovedknapp
 			href={props.href}
+			htmlType={props.type}
 			className={btnClassNames}
 			onClick={($e) => handleOnNextBtnClicked($e)}>
 			{props.label}
@@ -57,10 +62,12 @@ StepperButton.propTypes = {
 	label: PropTypes.string.isRequired,
 	href: PropTypes.string.isRequired,
 	knappType: PropTypes.string,
-	onNextButtonClicked: PropTypes.func
+	onNextButtonClicked: PropTypes.func,
+	type: PropTypes.string
 };
 
 StepperButton.defaultProps = {
+	type: 'button',
 	knappType: 'hoved',
 	onNextButtonClicked: () => {}
 };
