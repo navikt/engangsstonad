@@ -80,7 +80,8 @@
 			{
 				"extensions": [".js", ".jsx"]
 			}
-		]
+		],
+		"react/jsx-curly-brace-presence": 0
 	},
 	"extends": ["airbnb", "prettier", "prettier/react"]
 }
