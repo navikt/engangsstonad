@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import Icon from 'nav-frontend-ikoner-assets';
 import './iconLink.less';
 
-export const IconLink = ({ iconKind, to, linkText, iconSize, onClick }) => (
+export const IconLink = ({ iconKind, to, linkText, iconSize, ...other }) => (
 	<div className="iconLink">
 		<Icon kind={iconKind} size={iconSize} />
-		<Link className="iconLink__link" to={to} onClick={(e) => onClick(e)}>
+		<Link className="iconLink__link" to={to} {...other}>
 			{linkText}
 		</Link>
 	</div>

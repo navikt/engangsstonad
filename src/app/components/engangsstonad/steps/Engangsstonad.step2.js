@@ -53,7 +53,6 @@ export class Step2 extends Component {
 	}
 
 	openTerminbekreftelseModal(e) {
-		console.log('open');
 		e.preventDefault();
 		this.setState({ isModalOpen: true });
 	}

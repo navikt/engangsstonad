@@ -3,8 +3,8 @@ import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import './modalContent.less';
 
 const RettigheterOgPlikter = () => (
-	<div className="simpleModal">
-		<Undertittel className="simpleModal__header">
+	<div className="modalContent">
+		<Undertittel className="modalContent__header">
 			Rettigheter og Plikter
 		</Undertittel>
 		<ul>

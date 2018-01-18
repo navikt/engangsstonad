@@ -15,7 +15,7 @@ export class Step1 extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isModalOpen: false
+			isModalOpen: true
 		};
 	}
 
