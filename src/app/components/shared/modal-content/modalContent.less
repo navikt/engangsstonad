@@ -11,12 +11,23 @@
         padding-bottom: 10px;
     }
 
-
-    &__subList {
-        list-style-type: none;
-    }
-
     ul {
         margin-top: 0;
+    }
+
+    li {
+        padding-bottom: 8px;
+    }
+
+    &__subList {
+        list-style-type: none; 
+        margin-left: 15px;
+        padding-top: 8px;
+
+        li::before {
+            content: "-";
+            position: absolute;
+            margin-left: -15px;
+        }
     }
 }

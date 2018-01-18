@@ -19,7 +19,7 @@ const RettigheterOgPlikter = () => (
 					Jeg samtykker til at NAV kan innhente opplysninger som er nødvendig
 					for å behandle søknaden min.
 				</Normaltekst>
-				<ul>
+				<ul className="modalContent__sublist">
 					<li>
 						<Normaltekst>arbeidsforhold</Normaltekst>
 					</li>
