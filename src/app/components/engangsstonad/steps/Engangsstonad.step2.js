@@ -6,6 +6,7 @@ import DocumentTitle from 'react-document-title';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
+import Modal from 'nav-frontend-modal';
 
 import {
 	toggleChildBorn,
@@ -17,6 +18,7 @@ import {
 import IconLink from 'shared/icon-link/IconLink';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DateInput from 'shared/date-input/DateInput';
+import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
 // eslint-disable-next-line max-len
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
 
@@ -25,6 +27,9 @@ import './engangsstonad.step2.less';
 export class Step2 extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			isModalOpen: false
+		};
 
 		this.radioGroupStages = [
 			{
@@ -45,6 +50,19 @@ export class Step2 extends Component {
 				]
 			}
 		];
+	}
+
+	componentDidMount() {
+		Modal.setAppElement('#app');
+	}
+
+	openTerminbekreftelseModal(e) {
+		e.preventDefault();
+		this.setState({ isModalOpen: true });
+	}
+
+	closeTerminbekreftelseModal() {
+		this.setState({ isModalOpen: false });
 	}
 
 	informationAboutChildUpdated(stages) {
@@ -94,9 +112,9 @@ export class Step2 extends Component {
 									<IconLink
 										iconKind="info-sirkel-fylt"
 										iconSize="24"
-										to="/#"
-										linkText={`Siden barnet ikke er født må du legge ved
-											terminbekreftelse fra jordmor eller lege.`}
+										to="#"
+										linkText="Les om terminbekreftelsen"
+										onClick={(e) => this.openTerminbekreftelseModal(e)}
 									/>
 									<div className="engangsstonadStep2__buttonWrapper">
 										<Knapp className="engangsstonadStep2__buttonWrapper__button">
@@ -115,6 +133,13 @@ export class Step2 extends Component {
 								/>
 							</div>
 						)}
+						<Modal
+							isOpen={this.state.isModalOpen}
+							closeButton
+							onRequestClose={() => this.closeTerminbekreftelseModal()}
+							contentLabel="om terminbekreftelsen">
+							<OmTerminbekreftelsen />
+						</Modal>
 					</div>
 				)}
 			</div>
