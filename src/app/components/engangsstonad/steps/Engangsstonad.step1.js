@@ -15,8 +15,12 @@ export class Step1 extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isModalOpen: true
+			isModalOpen: false
 		};
+	}
+
+	componentDidMount() {
+		Modal.setAppElement('#app');
 	}
 
 	openRettigheterOgPlikterModal(e) {
@@ -45,14 +49,13 @@ export class Step1 extends Component {
 					onChange={approveConditions}
 					checked={approvedConditions}
 				/>
-				{this.state.isModalOpen && (
-					<Modal
-						isOpen={this.state.isModalOpen}
-						closeButton
-						onRequestClose={() => this.closeRettigheterOgPlikterModal()}>
-						<RettigheterOgPlikter />
-					</Modal>
-				)}
+				<Modal
+					isOpen={this.state.isModalOpen}
+					closeButton
+					onRequestClose={() => this.closeRettigheterOgPlikterModal()}
+					contentLabel="rettigheter og plikter">
+					<RettigheterOgPlikter />
+				</Modal>
 			</div>
 		);
 	}

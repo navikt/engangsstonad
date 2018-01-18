@@ -52,6 +52,10 @@ export class Step2 extends Component {
 		];
 	}
 
+	componentDidMount() {
+		Modal.setAppElement('#app');
+	}
+
 	openTerminbekreftelseModal(e) {
 		e.preventDefault();
 		this.setState({ isModalOpen: true });
@@ -129,14 +133,13 @@ export class Step2 extends Component {
 								/>
 							</div>
 						)}
-						{this.state.isModalOpen && (
-							<Modal
-								isOpen={this.state.isModalOpen}
-								closeButton
-								onRequestClose={() => this.closeTerminbekreftelseModal()}>
-								<OmTerminbekreftelsen />
-							</Modal>
-						)}
+						<Modal
+							isOpen={this.state.isModalOpen}
+							closeButton
+							onRequestClose={() => this.closeTerminbekreftelseModal()}
+							contentLabel="om terminbekreftelsen">
+							<OmTerminbekreftelsen />
+						</Modal>
 					</div>
 				)}
 			</div>
