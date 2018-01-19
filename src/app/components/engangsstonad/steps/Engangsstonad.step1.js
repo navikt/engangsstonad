@@ -17,7 +17,7 @@ export class Step1 extends Component {
 
 		return (
 			<div className="step1">
-				<DocumentTitle title="NAV Engangsstønad - Samtykke" />
+				<DocumentTitle title="Samtykke - NAV Engangsstønad" />
 				<Ingress>
 					Engangsstønad er en skattefri engangssum du kan få for hvert barn når
 					du ikke har rett på foreldrepenger.
