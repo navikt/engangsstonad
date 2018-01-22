@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+import { injectIntl, intlShape } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
@@ -31,22 +32,48 @@ export class Step2 extends Component {
 			isModalOpen: false
 		};
 
+		const { intl } = props;
 		this.radioGroupStages = [
 			{
 				name: 'whenInTime',
-				legend: 'Søknaden gjelder en fødsel som er...',
+				legend: intl.formatMessage({ id: 'relasjonBarn.text.fodselTidspunkt' }),
 				values: [
-					{ label: 'frem i tid', value: 'ahead' },
-					{ label: 'tilbake i tid', value: 'before' }
+					{
+						label: intl.formatMessage({
+							id: 'relasjonBarn.radiobutton.fremtid'
+						}),
+						value: 'ahead'
+					},
+					{
+						label: intl.formatMessage({
+							id: 'relasjonBarn.radiobutton.fortid'
+						}),
+						value: 'before'
+					}
 				]
 			},
 			{
 				name: 'numberOfExpected',
-				legend: 'og jeg venter...',
+				legend: intl.formatMessage({ id: 'relasjonBarn.text.antallBarn' }),
 				values: [
-					{ label: 'ett barn', value: '1' },
-					{ label: 'tvillinger', value: '2' },
-					{ label: 'flere barn', value: '3' }
+					{
+						label: intl.formatMessage({
+							id: 'relasjonBarn.radiobutton.etbarn'
+						}),
+						value: '1'
+					},
+					{
+						label: intl.formatMessage({
+							id: 'relasjonBarn.radiobutton.tvillinger'
+						}),
+						value: '2'
+					},
+					{
+						label: intl.formatMessage({
+							id: 'relasjonBarn.radiobutton.flere'
+						}),
+						value: '3'
+					}
 				]
 			}
 		];
@@ -85,6 +112,7 @@ export class Step2 extends Component {
 	}
 
 	render() {
+		const { intl } = this.props;
 		return (
 			<div className="engangsstonadStep2">
 				<DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
@@ -99,36 +127,47 @@ export class Step2 extends Component {
 						<DateInput
 							id="termindato"
 							input={{ value: this.props.terminDato }}
-							label="med termindato den..."
+							label={intl.formatMessage({
+								id: 'relasjonBarn.text.termindato'
+							})}
 							onChange={(e) => this.props.setTerminDato(e)}
 						/>
 						{this.props.terminDato && (
 							<div>
 								<DialogBox type="warning" overflow>
 									<Normaltekst>
-										Siden barnet ikke er født må du legge ved terminbekreftelse
-										fra jordmor eller lege.
+										{intl.formatMessage({
+											id: 'relasjonBarn.text.terminbekreftelse'
+										})}
 									</Normaltekst>
 									<IconLink
 										iconKind="info-sirkel-fylt"
 										iconSize="24"
 										to="#"
-										linkText="Les om terminbekreftelsen"
+										linkText={intl.formatMessage({
+											id: 'relasjonBarn.link.lesTerminbekreftelse'
+										})}
 										onClick={(e) => this.openTerminbekreftelseModal(e)}
 									/>
 									<div className="engangsstonadStep2__buttonWrapper">
 										<Knapp className="engangsstonadStep2__buttonWrapper__button">
-											Ta foto
+											{intl.formatMessage({
+												id: 'standard.button.foto'
+											})}
 										</Knapp>
 										<Knapp className="engangsstonadStep2__buttonWrapper__button">
-											Velg fil
+											{intl.formatMessage({
+												id: 'standard.button.fil'
+											})}
 										</Knapp>
 									</div>
 								</DialogBox>
 								<DateInput
 									id="terminbekreftelse"
 									input={{ value: this.props.bekreftetTermindato }}
-									label="Terminbekreftelsen er datert den..."
+									label={intl.formatMessage({
+										id: 'relasjonBarn.text.datoTerminbekreftelse'
+									})}
 									onChange={(e) => this.props.setBekreftetTermindato(e)}
 								/>
 							</div>
@@ -154,7 +193,8 @@ Step2.propTypes = {
 	setTerminDato: PropTypes.func.isRequired,
 	noOfChildren: PropTypes.string,
 	terminDato: PropTypes.string,
-	bekreftetTermindato: PropTypes.string
+	bekreftetTermindato: PropTypes.string,
+	intl: intlShape.isRequired
 };
 
 Step2.defaultProps = {
@@ -180,4 +220,5 @@ const mapDispatchToProps = (dispatch) =>
 		dispatch
 	);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Step2);
+const withIntl = injectIntl(Step2);
+export default connect(mapStateToProps, mapDispatchToProps)(withIntl);

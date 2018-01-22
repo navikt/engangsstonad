@@ -1,4 +1,5 @@
 import React from 'react';
+import { mount } from 'enzyme';
 import { EngangsstonadIndex } from './Engangsstonad.index';
 
 const routeArray = [
@@ -9,26 +10,28 @@ const routeArray = [
 
 describe('<EngangsstonadIndex />', () => {
 	it('should render StepBasedForm', () => {
-		const wrapper = shallow(
+		const wrapper = mount(
 			<EngangsstonadIndex
 				routes={routeArray}
 				data={{ fornavn: 'foo' }}
 				match={{ path: 'foo' }}
 				dispatch={() => {}}
-				location={{ search: 'asdf' }}
+				location={{ search: 'asdf', pathname: '/' }}
+				title="title"
 			/>
 		);
 		expect(wrapper.find('StepBasedForm'));
 	});
 
 	it('should render StepBasedFrom with correct number of routes', () => {
-		const wrapper = shallow(
+		const wrapper = mount(
 			<EngangsstonadIndex
 				routes={routeArray}
 				data={{ fornavn: 'foo' }}
 				match={{ path: 'foo' }}
 				dispatch={() => {}}
 				location={{ search: 'asdf' }}
+				title="title"
 			/>
 		);
 		const stepBasedForm = wrapper.find('StepBasedForm');

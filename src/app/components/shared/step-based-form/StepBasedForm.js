@@ -23,7 +23,7 @@ const Header = ({ title, illustration }) => (
 );
 
 Header.propTypes = {
-	title: PropTypes.string,
+	title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	illustration: PropTypes.element
 };
 

@@ -3,38 +3,49 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import queryStringParser from 'query-string';
+import { injectIntl, intlShape } from 'react-intl';
 import renderChildRoutes from 'util/routing';
-
 import StepBasedForm from 'shared/step-based-form/StepBasedForm';
 import { getDataRequested, activeRouteChanged } from 'actions';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from '../../assets/svg/frontpage.svg';
 import './engangsstonad.less';
 
-const steps = [
-	{
-		title: '',
-		label: '1'
-	},
-	{
-		title: 'Relasjon til barn',
-		label: '2'
-	},
-	{
-		title: 'Tilknytning til Norge',
-		label: '3'
-	},
-	{
-		title: 'Oppsummering',
-		label: '4'
-	},
-	{
-		title: '',
-		label: '5'
-	}
-];
-
 export class EngangsstonadIndex extends React.Component {
+	constructor(props) {
+		super(props);
+
+		const { intl } = this.props;
+		this.steps = [
+			{
+				title: intl.formatMessage({ id: 'relasjonBarn.text.fodselTidspunkt' }),
+				label: '1'
+			},
+			{
+				title: intl.formatMessage({
+					id: 'relasjonBarn.sectionheading.relasjonBarn'
+				}),
+				label: '2'
+			},
+			{
+				title: intl.formatMessage({
+					id: 'medlemmskap.sectionheading.medlemmskap'
+				}),
+				label: '3'
+			},
+			{
+				title: intl.formatMessage({
+					id: 'oppsummering.sectionheading.oppsummering'
+				}),
+				label: '4'
+			},
+			{
+				title: '',
+				label: '5'
+			}
+		];
+	}
+
 	componentWillMount() {
 		const queryParams = this.getQueryParams();
 
@@ -69,28 +80,41 @@ export class EngangsstonadIndex extends React.Component {
 
 	// eslint-disable-next-line class-methods-use-this
 	renderIllustration(title, text, theme) {
+		const { intl } = this.props;
 		return (
 			<HeaderIllustration
 				dialog={{ title, text }}
 				svg={VelkommenIllustration}
 				theme={theme || 'purple'}
-				title="Søknad om engangsstønad"
+				title={intl.formatMessage({
+					id: 'intro.pageheading.soknadES'
+				})}
 			/>
 		);
 	}
 
 	render() {
+		const { intl } = this.props;
 		if (this.props.data) {
-			const title = 'Søknad om engangsstønad';
+			const title = intl.formatMessage({ id: 'intro.pageheading.soknadES' });
 			const illustrations = {
 				'0': this.renderIllustration(
-					`Hei ${this.props.data.fornavn}`,
-					'Jeg skal veilede deg gjennom søknaden. Vi har tre steg vi skal gjennom.'
+					intl.formatMessage(
+						{ id: 'intro.snakkeboble.overskrift' },
+						{ name: 'Kalle' }
+					),
+					intl.formatMessage({
+						id: 'intro.text.hjelpedeg'
+					})
 				),
 				'4': this.renderIllustration(
-					`Bra jobbet ${this.props.data.fornavn}!`,
-					'Din søknad er nå sendt til oss på NAV. Vi tar kontakt med deg hvis vi trenger noe mer.',
-					'green'
+					intl.formatMessage(
+						{ id: 'kvittering.snakkeboble.overskrift' },
+						{ name: 'Kalle' }
+					),
+					intl.formatMessage({
+						id: 'kvittering.sectionheading.soknadMottatt'
+					})
 				)
 			};
 
@@ -104,7 +128,7 @@ export class EngangsstonadIndex extends React.Component {
 						routes={renderChildRoutes(this.props.routes) || []}
 						title={title}
 						location={this.props.location}
-						steps={steps}
+						steps={this.steps}
 						withStepIndicator
 						illustrations={illustrations}
 					/>
@@ -127,7 +151,8 @@ EngangsstonadIndex.propTypes = {
 	showStepper: PropTypes.bool,
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
-	}).isRequired
+	}).isRequired,
+	intl: intlShape.isRequired
 };
 
 EngangsstonadIndex.defaultProps = {
@@ -140,4 +165,5 @@ const mapStateToProps = (state) => ({
 	showStepper: state.engangsstonadReducer.showStepper
 });
 
-export default withRouter(connect(mapStateToProps)(EngangsstonadIndex));
+const withIntl = injectIntl(EngangsstonadIndex);
+export default withRouter(connect(mapStateToProps)(withIntl));
