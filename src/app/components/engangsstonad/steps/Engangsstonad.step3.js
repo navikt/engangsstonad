@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+import { FormattedMessage } from 'react-intl';
 
 import {
 	toggleResidingInNorwayNextTwelveMonths,
@@ -24,10 +25,15 @@ export class Step3 extends Component {
 		this.radioGroupStages1 = [
 			{
 				name: 'residedInNorway',
-				legend: 'De siste 12 månedene har jeg...',
+				legend: <FormattedMessage id="medlemmskap.text.siste12mnd" />,
 				values: [
-					{ label: 'bodd i Norge', value: 'norway' },
-					{ label: 'ikke bodd i Norge', value: 'abroad' }
+					{
+						label: <FormattedMessage id="medlemmskap.radiobutton.boddNorge" />
+					},
+					{
+						label: <FormattedMessage id="medlemmskap.radiobutton.utlandet" />,
+						value: 'abroad'
+					}
 				]
 			}
 		];
@@ -35,10 +41,26 @@ export class Step3 extends Component {
 		this.radioGroupStages2 = [
 			{
 				name: 'workedInNorway',
-				legend: 'og har under den perioden...',
+				legend: <FormattedMessage id="medlemmskap.text.arbeid" />,
 				values: [
-					{ label: 'bare arbeidet i Norge', value: 'norway' },
-					{ label: 'arbeidet i utlandet', value: 'abroad' }
+					{
+						label: (
+							<FormattedMessage id="medlemmskap.radiobutton.arbeidNorge" />
+						),
+						value: 'norway'
+					},
+					{
+						label: (
+							<FormattedMessage id="medlemmskap.radiobutton.arbeidUtlandet" />
+						),
+						value: 'abroad'
+					},
+					{
+						label: (
+							<FormattedMessage id="medlemmskap.radiobutton.arbeidIkkeJobbet" />
+						),
+						value: 'none'
+					}
 				]
 			}
 		];
@@ -46,18 +68,30 @@ export class Step3 extends Component {
 		this.radioGroupStages3 = [
 			{
 				name: 'residingCountryNextTwelveMonths',
-				legend: 'De neste 12 månedene skal jeg...',
+				legend: <FormattedMessage id="medlemmskap.text.neste12mnd" />,
 				values: [
-					{ label: 'bo i Norge', value: 'norway' },
-					{ label: 'ikke bo i Norge', value: 'abroad' }
+					{
+						label: <FormattedMessage id="medlemmskap.radiobutton.boNorge" />,
+						value: 'norway'
+					},
+					{
+						label: <FormattedMessage id="medlemmskap.radiobutton.utlandet" />,
+						value: 'abroad'
+					}
 				]
 			},
 			{
 				name: 'residingCountryDuringBirth',
-				legend: 'og kommer på fødselstidspunktet å...',
+				legend: <FormattedMessage id="medlemmskap.text.bostedFodsel" />,
 				values: [
-					{ label: 'være i Norge', value: 'norway' },
-					{ label: 'være i et annet land', value: 'abroad' }
+					{
+						label: <FormattedMessage id="medlemmskap.radiobutton.vareNorge" />,
+						value: 'norway'
+					},
+					{
+						label: <FormattedMessage id="medlemmskap.vareUtlandet" />,
+						value: 'abroad'
+					}
 				]
 			}
 		];
@@ -125,7 +159,7 @@ export class Step3 extends Component {
 
 				{this.props.residedInNorwayLastTwelveMonths === false && (
 					<CountryPicker
-						label="ettersom jeg bodde i…"
+						label={<FormattedMessage id="medlemmskap.text.jegBodde" />}
 						visits={this.props.visits}
 						addVisit={(visit) => this.props.addVisit(visit)}
 						deleteVisit={(visit) => this.props.deleteVisit(visit)}

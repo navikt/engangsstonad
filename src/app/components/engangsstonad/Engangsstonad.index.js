@@ -3,38 +3,46 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import queryStringParser from 'query-string';
+import { FormattedMessage } from 'react-intl';
 import renderChildRoutes from 'util/routing';
-
 import StepBasedForm from 'shared/step-based-form/StepBasedForm';
 import { getDataRequested, activeRouteChanged } from 'actions';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from '../../assets/svg/frontpage.svg';
 import './engangsstonad.less';
 
-const steps = [
-	{
-		title: '',
-		label: '1'
-	},
-	{
-		title: 'Relasjon til barn',
-		label: '2'
-	},
-	{
-		title: 'Tilknytning til Norge',
-		label: '3'
-	},
-	{
-		title: 'Oppsummering',
-		label: '4'
-	},
-	{
-		title: '',
-		label: '5'
-	}
-];
-
 export class EngangsstonadIndex extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.steps = [
+			{
+				title: <FormattedMessage id="relasjonBarn.text.fodselTidspunkt" />,
+				label: '1'
+			},
+			{
+				title: (
+					<FormattedMessage id="relasjonBarn.sectionheading.relasjonBarn" />
+				),
+				label: '2'
+			},
+			{
+				title: <FormattedMessage id="medlemmskap.sectionheading.medlemmskap" />,
+				label: '3'
+			},
+			{
+				title: (
+					<FormattedMessage id="oppsummering.sectionheading.oppsummering" />
+				),
+				label: '4'
+			},
+			{
+				title: '',
+				label: '5'
+			}
+		];
+	}
+
 	componentWillMount() {
 		const queryParams = this.getQueryParams();
 
@@ -74,23 +82,25 @@ export class EngangsstonadIndex extends React.Component {
 				dialog={{ title, text }}
 				svg={VelkommenIllustration}
 				theme={theme || 'purple'}
-				title="Søknad om engangsstønad"
+				title={<FormattedMessage id="intro.pageheading.soknadES" />}
 			/>
 		);
 	}
 
 	render() {
 		if (this.props.data) {
-			const title = 'Søknad om engangsstønad';
+			const title = <FormattedMessage id="intro.pageheading.soknadES" />;
 			const illustrations = {
 				'0': this.renderIllustration(
-					`Hei ${this.props.data.fornavn}`,
-					'Jeg skal veilede deg gjennom søknaden. Vi har tre steg vi skal gjennom.'
+					<FormattedMessage
+						id="intro.snakkeboble.bruker"
+						values={{ name: 'Kalle' }}
+					/>,
+					<FormattedMessage id="intro.text.hjelpedeg" />
 				),
 				'4': this.renderIllustration(
-					`Bra jobbet ${this.props.data.fornavn}!`,
-					'Din søknad er nå sendt til oss på NAV. Vi tar kontakt med deg hvis vi trenger noe mer.',
-					'green'
+					<FormattedMessage id="kvittering.snakkeboble.overskrift" />,
+					<FormattedMessage id="kvittering.sectionheading.soknadMottatt" />
 				)
 			};
 
@@ -104,7 +114,7 @@ export class EngangsstonadIndex extends React.Component {
 						routes={renderChildRoutes(this.props.routes) || []}
 						title={title}
 						location={this.props.location}
-						steps={steps}
+						steps={this.steps}
 						withStepIndicator
 						illustrations={illustrations}
 					/>

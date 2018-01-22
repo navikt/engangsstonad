@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+import { FormattedMessage } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
@@ -34,19 +35,36 @@ export class Step2 extends Component {
 		this.radioGroupStages = [
 			{
 				name: 'whenInTime',
-				legend: 'Søknaden gjelder en fødsel som er...',
+				legend: <FormattedMessage id="relasjonBarn.text.fodselTidspunkt" />,
 				values: [
-					{ label: 'frem i tid', value: 'ahead' },
-					{ label: 'tilbake i tid', value: 'before' }
+					{
+						label: <FormattedMessage id="relasjonBarn.radiobutton.fremtid" />,
+						value: 'ahead'
+					},
+					{
+						label: <FormattedMessage id="relasjonBarn.radiobutton.fortid" />,
+						value: 'before'
+					}
 				]
 			},
 			{
 				name: 'numberOfExpected',
-				legend: 'og jeg venter...',
+				legend: <FormattedMessage id="relasjonBarn.text.antallBarn" />,
 				values: [
-					{ label: 'ett barn', value: '1' },
-					{ label: 'tvillinger', value: '2' },
-					{ label: 'flere barn', value: '3' }
+					{
+						label: <FormattedMessage id="relasjonBarn.radiobutton.etbarn" />,
+						value: '1'
+					},
+					{
+						label: (
+							<FormattedMessage id="relasjonBarn.radiobutton.tvillinger" />
+						),
+						value: '2'
+					},
+					{
+						label: <FormattedMessage id="relasjonBarn.radiobutton.flere" />,
+						value: '3'
+					}
 				]
 			}
 		];
@@ -99,36 +117,39 @@ export class Step2 extends Component {
 						<DateInput
 							id="termindato"
 							input={{ value: this.props.terminDato }}
-							label="med termindato den..."
+							label={
+								<FormattedMessage id="relasjonBarn.text.fodselTidspunkt" />
+							}
 							onChange={(e) => this.props.setTerminDato(e)}
 						/>
 						{this.props.terminDato && (
 							<div>
 								<DialogBox type="warning" overflow>
 									<Normaltekst>
-										Siden barnet ikke er født må du legge ved terminbekreftelse
-										fra jordmor eller lege.
+										<FormattedMessage id="relasjonBarn.text.terminbekreftelse" />
 									</Normaltekst>
 									<IconLink
 										iconKind="info-sirkel-fylt"
 										iconSize="24"
 										to="#"
-										linkText="Les om terminbekreftelsen"
+										linkText={
+											<FormattedMessage id="relasjonBarn.link.lesTerminbekreftelse" />
+										}
 										onClick={(e) => this.openTerminbekreftelseModal(e)}
 									/>
 									<div className="engangsstonadStep2__buttonWrapper">
 										<Knapp className="engangsstonadStep2__buttonWrapper__button">
-											Ta foto
+											<FormattedMessage id="standard.button.foto" />
 										</Knapp>
 										<Knapp className="engangsstonadStep2__buttonWrapper__button">
-											Velg fil
+											<FormattedMessage id="standard.button.fil" />
 										</Knapp>
 									</div>
 								</DialogBox>
 								<DateInput
 									id="terminbekreftelse"
 									input={{ value: this.props.bekreftetTermindato }}
-									label="Terminbekreftelsen er datert den..."
+									label={<FormattedMessage id="relasjonBarn.text.termindato" />}
 									onChange={(e) => this.props.setBekreftetTermindato(e)}
 								/>
 							</div>
@@ -180,4 +201,4 @@ const mapDispatchToProps = (dispatch) =>
 		dispatch
 	);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Step2);
+export default connect(mapStateToProps, mapDispatchToProps);

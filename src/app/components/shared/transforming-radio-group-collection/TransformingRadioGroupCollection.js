@@ -121,12 +121,12 @@ export default class TransformingRadioGroupCollection extends Component {
 TransformingRadioGroupCollection.propTypes = {
 	stages: PropTypes.arrayOf(
 		PropTypes.shape({
-			legend: PropTypes.string.isRequired,
-			name: PropTypes.string.isRequired,
+			legend: PropTypes.node.isRequired,
+			name: PropTypes.node.isRequired,
 			values: PropTypes.arrayOf(
 				PropTypes.shape({
-					label: PropTypes.string.isRequired,
-					value: PropTypes.string.isRequired
+					label: PropTypes.node.isRequired,
+					value: PropTypes.node.isRequired
 				}).isRequired
 			).isRequired
 		})
