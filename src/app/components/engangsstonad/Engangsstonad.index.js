@@ -93,13 +93,16 @@ export class EngangsstonadIndex extends React.Component {
 			const illustrations = {
 				'0': this.renderIllustration(
 					<FormattedMessage
-						id="intro.snakkeboble.bruker"
+						id="intro.snakkeboble.overskrift"
 						values={{ name: 'Kalle' }}
 					/>,
 					<FormattedMessage id="intro.text.hjelpedeg" />
 				),
 				'4': this.renderIllustration(
-					<FormattedMessage id="kvittering.snakkeboble.overskrift" />,
+					<FormattedMessage
+						id="kvittering.snakkeboble.overskrift"
+						values={{ name: 'Kalle' }}
+					/>,
 					<FormattedMessage id="kvittering.sectionheading.soknadMottatt" />
 				)
 			};

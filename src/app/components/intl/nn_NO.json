@@ -1,7 +1,7 @@
 {
     "intro.pageheading.soknadES": "Søknad om engangsstonad ",
     "intro.text.under18": "Fordi du er under 18 år, må en av foreldrene dine eller en foresatt skrive under på søknaden sammen med deg. Du må derfor fylle ut søknaden på papir og sende den i posten. ",
-    "intro.fornavn.bruker": "Hei! {name}!",
+    "intro.snakkeboble.overskrift": "Hei {name}!",
     "intro.text.hjelpedeg": "Jeg skal hjelpe deg med å fylle ut søknaden. ",
     "intro.text.omES": "Engangsstønad er en skattefri engangssum du kan få for hvert barn du føder eller adopterer.",
     "intro.text.samtykke": "Jeg har lest og forstått mine { link }",
@@ -9,6 +9,7 @@
     "intro.pageheading.samtykke": "Rettigheter og plikter.",
     "intro.button.startSoknad": "Begynn med søknaden",
 
+    "relasjonBarn.sectionheading.relasjonBarn": "Relasjon til barn",
     "relasjonBarn.text.fodselTidspunkt": "Søknaden min gjelder en fødsel som er…",
     "relasjonBarn.radiobutton.fremtid": "frem i tid",
     "relasjonBarn.radiobutton.fortid": "tilbake i tid",
@@ -56,7 +57,8 @@
     "oppsummering.text.samtykke": "De opplysninger jeg har oppgitt er riktige og jeg har ikke holdt tilbake opplysninger som har betydning for min rett til engangsstønad.",
     "standard.sectionheading.sendSoknad": "Send inn søknad",
     "kvittering.sectionheading.navdame": "Illustrasjon av NAV ansatt som takk for mottatt søknad!",
-    "kvittering.sectionheading.soknadMottatt": "Takk for søknaden {0}. Vi tar kontakt med deg hvis vi trenger noe mer.",
+    "kvittering.snakkeboble.overskrift": "Bra jobbet { name }!",
+    "kvittering.sectionheading.soknadMottatt": "Vi tar kontakt med deg hvis vi trenger noe mer.",
     "kvittering.sectionheading.innsendtInfo": "Vi mottok søknaden din den {1} kl. {0}. Du kan følge med på søknaden på { linkText }.",
     "kvittering.sectionheading.innsendtInfo.linkText": "Ditt Nav"
 

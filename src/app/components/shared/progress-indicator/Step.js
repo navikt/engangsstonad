@@ -21,7 +21,7 @@ export const Step = ({ step, activeStep, title }) => {
 Step.propTypes = {
 	step: PropTypes.number.isRequired,
 	activeStep: PropTypes.number.isRequired,
-	title: PropTypes.string.isRequired
+	title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired
 };
 
 export default Step;

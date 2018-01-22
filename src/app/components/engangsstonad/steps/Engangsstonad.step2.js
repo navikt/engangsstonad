@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
@@ -32,10 +32,11 @@ export class Step2 extends Component {
 			isModalOpen: false
 		};
 
+		const { intl } = props;
 		this.radioGroupStages = [
 			{
 				name: 'whenInTime',
-				legend: <FormattedMessage id="relasjonBarn.text.fodselTidspunkt" />,
+				legend: intl.formatMessage({ id: 'relasjonBarn.text.fodselTidspunkt' }),
 				values: [
 					{
 						label: <FormattedMessage id="relasjonBarn.radiobutton.fremtid" />,
@@ -49,7 +50,7 @@ export class Step2 extends Component {
 			},
 			{
 				name: 'numberOfExpected',
-				legend: <FormattedMessage id="relasjonBarn.text.antallBarn" />,
+				legend: intl.formatMessage({ id: 'relasjonBarn.text.antallBarn' }),
 				values: [
 					{
 						label: <FormattedMessage id="relasjonBarn.radiobutton.etbarn" />,
@@ -175,7 +176,8 @@ Step2.propTypes = {
 	setTerminDato: PropTypes.func.isRequired,
 	noOfChildren: PropTypes.string,
 	terminDato: PropTypes.string,
-	bekreftetTermindato: PropTypes.string
+	bekreftetTermindato: PropTypes.string,
+	intl: intlShape.isRequired
 };
 
 Step2.defaultProps = {
@@ -201,4 +203,5 @@ const mapDispatchToProps = (dispatch) =>
 		dispatch
 	);
 
-export default connect(mapStateToProps, mapDispatchToProps);
+const withIntl = injectIntl(Step2);
+export default connect(mapStateToProps, mapDispatchToProps)(withIntl);

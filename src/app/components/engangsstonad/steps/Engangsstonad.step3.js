@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import {
 	toggleResidingInNorwayNextTwelveMonths,
@@ -22,13 +22,15 @@ import CountryPicker from 'shared/country-picker/CountryPicker';
 // eslint-disable-next-line react/prefer-stateless-function
 export class Step3 extends Component {
 	componentWillMount() {
+		const { intl } = this.props;
 		this.radioGroupStages1 = [
 			{
 				name: 'residedInNorway',
-				legend: <FormattedMessage id="medlemmskap.text.siste12mnd" />,
+				legend: intl.formatMessage({ id: 'medlemmskap.text.siste12mnd' }),
 				values: [
 					{
-						label: <FormattedMessage id="medlemmskap.radiobutton.boddNorge" />
+						label: <FormattedMessage id="medlemmskap.radiobutton.boddNorge" />,
+						value: 'norway'
 					},
 					{
 						label: <FormattedMessage id="medlemmskap.radiobutton.utlandet" />,
@@ -41,7 +43,7 @@ export class Step3 extends Component {
 		this.radioGroupStages2 = [
 			{
 				name: 'workedInNorway',
-				legend: <FormattedMessage id="medlemmskap.text.arbeid" />,
+				legend: intl.formatMessage({ id: 'medlemmskap.text.arbeid' }),
 				values: [
 					{
 						label: (
@@ -68,7 +70,7 @@ export class Step3 extends Component {
 		this.radioGroupStages3 = [
 			{
 				name: 'residingCountryNextTwelveMonths',
-				legend: <FormattedMessage id="medlemmskap.text.neste12mnd" />,
+				legend: intl.formatMessage({ id: 'medlemmskap.text.neste12mnd' }),
 				values: [
 					{
 						label: <FormattedMessage id="medlemmskap.radiobutton.boNorge" />,
@@ -82,7 +84,7 @@ export class Step3 extends Component {
 			},
 			{
 				name: 'residingCountryDuringBirth',
-				legend: <FormattedMessage id="medlemmskap.text.bostedFodsel" />,
+				legend: intl.formatMessage({ id: 'medlemmskap.text.bostedFodsel' }),
 				values: [
 					{
 						label: <FormattedMessage id="medlemmskap.radiobutton.vareNorge" />,
@@ -213,7 +215,8 @@ Step3.propTypes = {
 			startDate: PropTypes.string,
 			endDate: PropTypes.string
 		})
-	).isRequired
+	).isRequired,
+	intl: intlShape.isRequired
 };
 
 Step3.defaultProps = {
@@ -247,4 +250,5 @@ const mapDispatchToProps = (dispatch) =>
 		dispatch
 	);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Step3);
+const withIntl = injectIntl(Step3);
+export default connect(mapStateToProps, mapDispatchToProps)(withIntl);

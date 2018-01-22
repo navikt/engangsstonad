@@ -19,7 +19,7 @@ const SpeechBubble = ({ title, text, theme }) => (
 );
 
 SpeechBubble.propTypes = {
-	title: PropTypes.string,
+	title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 	theme: PropTypes.oneOf(['purple', 'green'])
 };

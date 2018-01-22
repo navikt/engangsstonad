@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
 import nn from 'react-intl/locale-data/nn';
@@ -15,14 +16,6 @@ class IntlProvider extends Component {
 		};
 	}
 
-	componentWillMount() {
-		console.log(navigator.language);
-	}
-
-	toggle(e) {
-		console.log(e);
-	}
-
 	render() {
 		const messages = this.state.locale === 'nb' ? nbMessages : nnMessages;
 		return (
@@ -32,4 +25,9 @@ class IntlProvider extends Component {
 		);
 	}
 }
+
+IntlProvider.propTypes = {
+	children: PropTypes.node.isRequired
+};
+
 export default IntlProvider;
