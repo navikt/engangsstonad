@@ -1,36 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch } from 'react-router-dom';
-import classNames from 'classnames';
 
-import { Sidetittel } from 'nav-frontend-typografi';
-
-import StepIndicator from 'components/shared/progress-indicator/StepIndicator';
-import Stepper from './../stepper/Stepper';
-import Step from './../step/Step';
-import BackLink from './../back-link/BackLink';
+import StepIndicator from 'shared/progress-indicator/StepIndicator';
+import Stepper from 'shared/stepper/Stepper';
+import Step from 'shared/step/Step';
+import BackLink from 'shared/back-link/BackLink';
+// import Header from 'shared/header/Header';
 
 import './stepBasedForm.less';
-
-const Header = ({ title, illustration }) => (
-	<div
-		className={classNames('stepBasedForm__header', {
-			'stepBasedForm__header--withIllustration':
-				illustration !== null && illustration !== undefined
-		})}>
-		{illustration || <Sidetittel>{title}</Sidetittel>}
-	</div>
-);
-
-Header.propTypes = {
-	title: PropTypes.string,
-	illustration: PropTypes.element
-};
-
-Header.defaultProps = {
-	title: '',
-	illustration: null
-};
 
 const StepBasedForm = (props) => {
 	const isActiveRoute = (route) =>
@@ -105,17 +83,17 @@ const StepBasedForm = (props) => {
 		return null;
 	};
 
-	const getStepIllustration = () => {
-		const activeRouteIndex = props.routes.indexOf(findActiveRoute());
-		return props.illustrations
-			? props.illustrations[activeRouteIndex.toString()]
-			: null;
-	};
+	// const getStepIllustration = () => {
+	// 	const activeRouteIndex = props.routes.indexOf(findActiveRoute());
+	// 	return props.illustrations
+	// 		? props.illustrations[activeRouteIndex.toString()]
+	// 		: null;
+	// };
 
 	return (
 		<div className="stepBasedForm">
 			<form className={props.className}>
-				<Header title={props.title} illustration={getStepIllustration()} />
+				{/* <Header title={props.title} illustration={getStepIllustration()} /> */}
 				{props.withStepIndicator && (
 					<StepIndicator
 						steps={props.steps}
@@ -132,16 +110,16 @@ const StepBasedForm = (props) => {
 };
 
 StepBasedForm.propTypes = {
-	routes: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+	routes: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	location: PropTypes.shape({
 		pathname: PropTypes.string
 	}).isRequired,
 	steps: PropTypes.arrayOf(PropTypes.shape({})),
 	withStepIndicator: PropTypes.bool,
 	afterSubmissionRoute: PropTypes.bool,
-	title: PropTypes.string,
+	// title: PropTypes.string,
 	className: PropTypes.string,
-	illustrations: PropTypes.object,
+	// illustrations: PropTypes.object,
 	showStepper: PropTypes.bool,
 	onNextButtonClicked: PropTypes.func
 };
@@ -149,9 +127,9 @@ StepBasedForm.propTypes = {
 StepBasedForm.defaultProps = {
 	withStepIndicator: false,
 	className: '',
-	title: '',
+	// title: '',
 	afterSubmissionRoute: true,
-	illustrations: null,
+	// illustrations: null,
 	steps: [],
 	showStepper: false,
 	onNextButtonClicked: () => {}
