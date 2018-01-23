@@ -4,6 +4,7 @@ import ErrorPage from 'components/error';
 import Planlegger from 'apps/planlegger/Planlegger.app';
 import Workbench from 'apps/workbench/';
 import EngangsstonadConfirmation from 'components/engangsstonad/EngangsstonadConfirmation';
+import { EngangsstonadIndex } from 'components/engangsstonad/EnangsstonadIndex';
 
 const defaultRouteConfig = [
 	// {
@@ -24,6 +25,10 @@ const defaultRouteConfig = [
 		path: '/engangsstonad',
 		component: EngangsstonadConfirmation,
 		exact: true
+	},
+	{
+		path: '/engangsstonad/:stepNo',
+		component: EngangsstonadIndex
 	},
 	{
 		path: '/planlegger',

@@ -12,7 +12,6 @@ import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
 import { approveConditions } from 'actions';
 
-import 'shared/step/step.less';
 import './engangsstonad.less';
 
 export class EngangsstonadConfirmation extends Component {
@@ -38,7 +37,7 @@ export class EngangsstonadConfirmation extends Component {
 	render() {
 		const { approvedConditions } = this.props;
 		return (
-			<div className="engangsstonad step">
+			<div className="engangsstonad">
 				<DocumentTitle title="Samtykke - NAV Engangsstønad" />
 				<HeaderIllustration
 					dialog={{
