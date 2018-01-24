@@ -58,9 +58,13 @@ export class EngangsstonadConfirmation extends Component {
 					onChange={this.handleConfirmCheckboxChange}
 					checked={approvedConditions}
 				/>
-				<Hovedknapp onClick={this.handleStartApplicationClick}>
-					Begynn med søknaden
-				</Hovedknapp>
+				<div className="engangsstonad__centerButton">
+					<Hovedknapp
+						onClick={this.handleStartApplicationClick}
+						disabled={!approvedConditions}>
+						Begynn med søknaden
+					</Hovedknapp>
+				</div>
 			</div>
 		);
 	}
