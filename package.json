@@ -6,7 +6,8 @@
 	"main": "./src/app/bootstrap.js",
 	"author": "NAV",
 	"license": "MIT",
-	"repository": "https://github.com/navikt/p2-selvbetjening-frontend-cookbook",
+	"repository": "https://github.com/navikt/p2-selvbetjening-frontend",
+
 	"devDependencies": {
 		"@types/classnames": "^2.2.3",
 		"@types/date-fns": "^2.6.0",
@@ -59,12 +60,12 @@
 	"scripts": {
 		"build": "node src/build/scripts/production-build.js",
 		"clean-build": "rimraf ./dist",
-		"docker-build": "npm run clean-build && npm run build && docker build . -t p2-selvbetjening-frontend",
-		"docker-start": "docker run --name p2-selvbetjening-frontend -p 8080:8080 -d p2-selvbetjening-frontend",
+		"docker-build": "npm run clean-build && npm run build && docker build . -t engangsstonad",
+		"docker-start": "docker run --name engangsstonad -p 8080:8080 -d engangsstonad",
 		"docker-kill": "npm run docker-stop && npm run docker-rm",
-		"docker-rm": "docker rm p2-selvbetjening-frontend",
-		"docker-stop": "docker stop p2-selvbetjening-frontend",
-		"docker-rmi": "npm run docker-kill && docker rmi p2-selvbetjening-frontend",
+		"docker-rm": "docker rm engangsstonad",
+		"docker-stop": "docker stop engangsstonad",
+		"docker-rmi": "npm run docker-kill && docker rmi engangsstonad",
 		"start-express": "node ./server.js",
 		"start": "node ./src/build/scripts/start-dev.js",
 		"start-ext": "node ./src/build/scripts/start-dev-ext.js",
