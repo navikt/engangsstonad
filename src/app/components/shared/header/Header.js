@@ -4,7 +4,9 @@ import classNames from 'classnames';
 
 import { Sidetittel } from 'nav-frontend-typografi';
 
-const Header = ({ title, illustration }) => (
+import './header.less';
+
+export const Header = ({ title, illustration }) => (
 	<div
 		className={classNames('header', {
 			'header--withIllustration':
@@ -23,3 +25,5 @@ Header.defaultProps = {
 	title: '',
 	illustration: null
 };
+
+export default Header;

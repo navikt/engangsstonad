@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 
 import { Normaltekst } from 'nav-frontend-typografi';
-import { Knapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 
 import {
@@ -116,14 +115,6 @@ export class Step2 extends Component {
 										linkText="Les om terminbekreftelsen"
 										onClick={(e) => this.openTerminbekreftelseModal(e)}
 									/>
-									<div className="engangsstonadStep2__buttonWrapper">
-										<Knapp className="engangsstonadStep2__buttonWrapper__button">
-											Ta foto
-										</Knapp>
-										<Knapp className="engangsstonadStep2__buttonWrapper__button">
-											Velg fil
-										</Knapp>
-									</div>
 								</DialogBox>
 								<DateInput
 									id="terminbekreftelse"

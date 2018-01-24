@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Ikon from 'nav-frontend-ikoner-assets';
 import classnames from 'classnames';
+
+import Ikon from 'nav-frontend-ikoner-assets';
 
 export const Step = ({ step, activeStep, title }) => {
 	const passed = step < activeStep;

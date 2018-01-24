@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import 'nav-frontend-stegindikator-style';
 import { Ingress } from 'nav-frontend-typografi';
+
+import 'nav-frontend-stegindikator-style';
 
 import Step from './Step';
 
@@ -14,7 +15,7 @@ export const StepIndicator = (props) => (
 		aria-valuenow={props.activeStep}
 		aria-valuemin="1"
 		aria-valuemax={props.steps.length}>
-		<div className="stepIndicator">
+		<div className="stepIndicatorTitle">
 			<Ingress>{props.steps[props.activeStep - 1].title}</Ingress>
 		</div>
 		<ul className="stegindikator">
