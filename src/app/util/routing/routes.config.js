@@ -4,23 +4,9 @@ import ErrorPage from 'components/error';
 import Planlegger from 'apps/planlegger/Planlegger.app';
 import Workbench from 'apps/workbench/';
 import EngangsstonadConfirmation from 'components/engangsstonad/EngangsstonadConfirmation';
-import { EngangsstonadIndex } from 'components/engangsstonad/EnangsstonadIndex';
+import EngangsstonadIndex from 'components/engangsstonad/EnangsstonadIndex';
 
 const defaultRouteConfig = [
-	// {
-	// 	path: '/engangsstonad',
-	// 	component: EngangsstonadIndex,
-	// 	routes: engangsstonadSteps.map((step) => {
-	// 		const subpath = step.WrappedComponent
-	// 			? step.WrappedComponent.name.toLowerCase()
-	// 			: step.name.toLowerCase();
-	// 		return {
-	// 			subpath,
-	// 			path: `/engangsstonad/${subpath}`,
-	// 			component: step
-	// 		};
-	// 	})
-	// },
 	{
 		path: '/engangsstonad',
 		component: EngangsstonadConfirmation,
