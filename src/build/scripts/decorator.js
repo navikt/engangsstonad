@@ -27,7 +27,8 @@ const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
 				NAVHeading: header,
 				NAVFooter: footer,
 				NAVScripts: scripts,
-				NAVStyles: styles
+				NAVStyles: styles,
+				REST_API_URL: '<%= REST_API_URL %>'
 			})
 		);
 	} catch (e) {

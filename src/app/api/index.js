@@ -7,7 +7,11 @@ const defaultParams = {
 };
 
 function fetchData(params = defaultParams) {
-	return axios.get(`/rest/personinfo?${queryStringParser.stringify(params)}`);
+	return axios.get(
+		`${window.REST_API_URL}/rest/personinfo?${queryStringParser.stringify(
+			params
+		)}`
+	);
 }
 
 const Api = { fetchData };

@@ -18,8 +18,7 @@ const webpackConfig = {
 			actions: path.resolve(__dirname, './../../app/redux/actions/'),
 			reducers: path.resolve(__dirname, './../../app/redux/reducers'),
 			styles: path.resolve(__dirname, './../../app/styles/'),
-			util: path.resolve(__dirname, './../../app/util/'),
-			apps: path.resolve(__dirname, './../../apps/')
+			util: path.resolve(__dirname, './../../app/util/')
 		},
 		extensions: ['.ts', '.tsx', '.js', '.json', '.jsx']
 	},
@@ -32,10 +31,7 @@ const webpackConfig = {
 			},
 			{
 				test: /\.(ts|tsx)$/,
-				include: [
-					path.resolve(__dirname, './../../app'),
-					path.resolve(__dirname, './../../apps')
-				],
+				include: [path.resolve(__dirname, './../../app')],
 				loader: require.resolve('ts-loader')
 			},
 
