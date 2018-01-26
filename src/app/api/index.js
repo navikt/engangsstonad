@@ -7,10 +7,13 @@ const defaultParams = {
 };
 
 function fetchData(params = defaultParams) {
+	const url =
+		window.REST_API_URL === '<%= REST_API_URL %>'
+			? 'http://localhost:8888'
+			: window.REST_API_URL;
+
 	return axios.get(
-		`${window.REST_API_URL}/rest/personinfo?${queryStringParser.stringify(
-			params
-		)}`
+		`${url}/rest/personinfo?${queryStringParser.stringify(params)}`
 	);
 }
 
