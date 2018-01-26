@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+<<<<<<< HEAD
 import { injectIntl, intlShape } from 'react-intl';
+=======
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+>>>>>>> 92fe0a448f92d7e922ec84cc7bd8b44aba5e2421
 
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
@@ -39,6 +43,7 @@ export class Step2 extends Component {
 				legend: intl.formatMessage({ id: 'relasjonBarn.text.fodselTidspunkt' }),
 				values: [
 					{
+<<<<<<< HEAD
 						label: intl.formatMessage({
 							id: 'relasjonBarn.radiobutton.fremtid'
 						}),
@@ -48,6 +53,13 @@ export class Step2 extends Component {
 						label: intl.formatMessage({
 							id: 'relasjonBarn.radiobutton.fortid'
 						}),
+=======
+						label: <FormattedMessage id="relasjonBarn.radiobutton.fremtid" />,
+						value: 'ahead'
+					},
+					{
+						label: <FormattedMessage id="relasjonBarn.radiobutton.fortid" />,
+>>>>>>> 92fe0a448f92d7e922ec84cc7bd8b44aba5e2421
 						value: 'before'
 					}
 				]
@@ -57,6 +69,7 @@ export class Step2 extends Component {
 				legend: intl.formatMessage({ id: 'relasjonBarn.text.antallBarn' }),
 				values: [
 					{
+<<<<<<< HEAD
 						label: intl.formatMessage({
 							id: 'relasjonBarn.radiobutton.etbarn'
 						}),
@@ -72,6 +85,19 @@ export class Step2 extends Component {
 						label: intl.formatMessage({
 							id: 'relasjonBarn.radiobutton.flere'
 						}),
+=======
+						label: <FormattedMessage id="relasjonBarn.radiobutton.etbarn" />,
+						value: '1'
+					},
+					{
+						label: (
+							<FormattedMessage id="relasjonBarn.radiobutton.tvillinger" />
+						),
+						value: '2'
+					},
+					{
+						label: <FormattedMessage id="relasjonBarn.radiobutton.flere" />,
+>>>>>>> 92fe0a448f92d7e922ec84cc7bd8b44aba5e2421
 						value: '3'
 					}
 				]
@@ -127,30 +153,47 @@ export class Step2 extends Component {
 						<DateInput
 							id="termindato"
 							input={{ value: this.props.terminDato }}
+<<<<<<< HEAD
 							label={intl.formatMessage({
 								id: 'relasjonBarn.text.termindato'
 							})}
+=======
+							label={
+								<FormattedMessage id="relasjonBarn.text.fodselTidspunkt" />
+							}
+>>>>>>> 92fe0a448f92d7e922ec84cc7bd8b44aba5e2421
 							onChange={(e) => this.props.setTerminDato(e)}
 						/>
 						{this.props.terminDato && (
 							<div>
 								<DialogBox type="warning" overflow>
 									<Normaltekst>
+<<<<<<< HEAD
 										{intl.formatMessage({
 											id: 'relasjonBarn.text.terminbekreftelse'
 										})}
+=======
+										<FormattedMessage id="relasjonBarn.text.terminbekreftelse" />
+>>>>>>> 92fe0a448f92d7e922ec84cc7bd8b44aba5e2421
 									</Normaltekst>
 									<IconLink
 										iconKind="info-sirkel-fylt"
 										iconSize="24"
 										to="#"
+<<<<<<< HEAD
 										linkText={intl.formatMessage({
 											id: 'relasjonBarn.link.lesTerminbekreftelse'
 										})}
+=======
+										linkText={
+											<FormattedMessage id="relasjonBarn.link.lesTerminbekreftelse" />
+										}
+>>>>>>> 92fe0a448f92d7e922ec84cc7bd8b44aba5e2421
 										onClick={(e) => this.openTerminbekreftelseModal(e)}
 									/>
 									<div className="engangsstonadStep2__buttonWrapper">
 										<Knapp className="engangsstonadStep2__buttonWrapper__button">
+<<<<<<< HEAD
 											{intl.formatMessage({
 												id: 'standard.button.foto'
 											})}
@@ -159,15 +202,25 @@ export class Step2 extends Component {
 											{intl.formatMessage({
 												id: 'standard.button.fil'
 											})}
+=======
+											<FormattedMessage id="standard.button.foto" />
+										</Knapp>
+										<Knapp className="engangsstonadStep2__buttonWrapper__button">
+											<FormattedMessage id="standard.button.fil" />
+>>>>>>> 92fe0a448f92d7e922ec84cc7bd8b44aba5e2421
 										</Knapp>
 									</div>
 								</DialogBox>
 								<DateInput
 									id="terminbekreftelse"
 									input={{ value: this.props.bekreftetTermindato }}
+<<<<<<< HEAD
 									label={intl.formatMessage({
 										id: 'relasjonBarn.text.datoTerminbekreftelse'
 									})}
+=======
+									label={<FormattedMessage id="relasjonBarn.text.termindato" />}
+>>>>>>> 92fe0a448f92d7e922ec84cc7bd8b44aba5e2421
 									onChange={(e) => this.props.setBekreftetTermindato(e)}
 								/>
 							</div>

@@ -139,7 +139,7 @@ StepBasedForm.propTypes = {
 	steps: PropTypes.arrayOf(PropTypes.shape({})),
 	withStepIndicator: PropTypes.bool,
 	afterSubmissionRoute: PropTypes.bool,
-	title: PropTypes.string,
+	title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	className: PropTypes.string,
 	illustrations: PropTypes.object,
 	showStepper: PropTypes.bool,
