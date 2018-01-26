@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+import { FormattedMessage } from 'react-intl';
 
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -40,8 +41,7 @@ export class EngangsstonadStep3 extends Component {
 				<DocumentTitle title="NAV Engangsstønad - Oppsummering" />
 				<DialogBox type="info">
 					<Normaltekst>
-						Les nøye gjennom oppsummeringen før du sender inn søknaden. Hvis du
-						trenger å gjøre endringer kan du gå tilbake til tidligere steg
+						<FormattedMessage id="oppsummering.text.lesNoye" />
 					</Normaltekst>
 				</DialogBox>
 				<Undertittel>Om deg som søker</Undertittel>
@@ -73,8 +73,7 @@ export class EngangsstonadStep3 extends Component {
 					name="bekreftOpplysninger"
 					checked={confirmedInformation}
 					onChange={this.props.confirmInformation}
-					label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger
-                som har betydning for min rett til engangsstønad."
+					label={<FormattedMessage id="oppsummering.text.samtykke" />}
 				/>
 				<div className="engangsstonad__centerButton">
 					<Hovedknapp

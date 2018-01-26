@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+import { injectIntl, intlShape } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
@@ -34,22 +35,49 @@ export class EngangsstonadStep1 extends Component {
 			isModalOpen: false
 		};
 
+		const { intl } = this.props;
+
 		this.radioGroupStages = [
 			{
 				name: 'whenInTime',
 				legend: 'Søknaden gjelder en fødsel som er...',
 				values: [
-					{ label: 'frem i tid', value: 'ahead' },
-					{ label: 'tilbake i tid', value: 'before' }
+					{
+						label: intl.formatMessage({
+							id: 'relasjonBarn.radiobutton.fremtid'
+						}),
+						value: 'ahead'
+					},
+					{
+						label: intl.formatMessage({
+							id: 'relasjonBarn.radiobutton.fortid'
+						}),
+						value: 'before'
+					}
 				]
 			},
 			{
 				name: 'numberOfExpected',
 				legend: 'og jeg venter...',
 				values: [
-					{ label: 'ett barn', value: '1' },
-					{ label: 'tvillinger', value: '2' },
-					{ label: 'flere barn', value: '3' }
+					{
+						label: intl.formatMessage({
+							id: 'relasjonBarn.radiobutton.etbarn'
+						}),
+						value: '1'
+					},
+					{
+						label: intl.formatMessage({
+							id: 'relasjonBarn.radiobutton.tvillinger'
+						}),
+						value: '2'
+					},
+					{
+						label: intl.formatMessage({
+							id: 'relasjonBarn.radiobutton.flere'
+						}),
+						value: '3'
+					}
 				]
 			}
 		];
@@ -93,6 +121,8 @@ export class EngangsstonadStep1 extends Component {
 	}
 
 	render() {
+		const { intl } = this.props;
+
 		return (
 			<div className="engangsstonad">
 				<DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
@@ -107,28 +137,35 @@ export class EngangsstonadStep1 extends Component {
 						<DateInput
 							id="termindato"
 							input={{ value: this.props.terminDato }}
-							label="med termindato den..."
+							label={intl.formatMessage({
+								id: 'relasjonBarn.text.termindato'
+							})}
 							onChange={(e) => this.props.setTerminDato(e)}
 						/>
 						{this.props.terminDato && (
 							<div>
 								<DialogBox type="warning" overflow>
 									<Normaltekst>
-										Siden barnet ikke er født må du legge ved terminbekreftelse
-										fra jordmor eller lege.
+										{intl.formatMessage({
+											id: 'relasjonBarn.text.terminbekreftelse'
+										})}
 									</Normaltekst>
 									<IconLink
 										iconKind="info-sirkel-fylt"
 										iconSize="24"
 										to="#"
-										linkText="Les om terminbekreftelsen"
+										linkText={intl.formatMessage({
+											id: 'relasjonBarn.link.lesTerminbekreftelse'
+										})}
 										onClick={(e) => this.openTerminbekreftelseModal(e)}
 									/>
 								</DialogBox>
 								<DateInput
 									id="terminbekreftelse"
 									input={{ value: this.props.bekreftetTermindato }}
-									label="Terminbekreftelsen er datert den..."
+									label={intl.formatMessage({
+										id: 'relasjonBarn.text.datoTerminbekreftelse'
+									})}
 									onChange={(e) => this.props.setBekreftetTermindato(e)}
 								/>
 								<div className="engangsstonad__centerButton">
@@ -162,7 +199,8 @@ EngangsstonadStep1.propTypes = {
 	bekreftetTermindato: PropTypes.string,
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
-	}).isRequired
+	}).isRequired,
+	intl: intlShape.isRequired
 };
 
 EngangsstonadStep1.defaultProps = {
@@ -188,4 +226,6 @@ const mapDispatchToProps = (dispatch) =>
 		dispatch
 	);
 
-export default connect(mapStateToProps, mapDispatchToProps)(EngangsstonadStep1);
+export default injectIntl(
+	connect(mapStateToProps, mapDispatchToProps)(EngangsstonadStep1)
+);

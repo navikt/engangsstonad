@@ -7,12 +7,13 @@ node {
     def commitHash, commitHashShort, commitUrl, currentVersion
     def project = "navikt"
     def repo = "p2-selvbetjening-frontend"
+    def app = "engangsstonad"
     def committer, committerEmail, changelog, pom, releaseVersion, nextVersion // metadata
     def appConfig = "nais.yaml"
     def dockerRepo = "docker.adeo.no:5000"
     def branch = "master"
     def groupId = "nais"
-    def environment = 'q1'
+    def environment = 'q6'
     def zone = 'sbs'
     def namespace = 'default'
 
@@ -47,17 +48,16 @@ node {
     }
 
     stage("Release") {
-        sh "docker build --build-arg version=${releaseVersion} --build-arg app_name=${repo} -t ${dockerRepo}/${repo}:${releaseVersion} ."
+        sh "docker build --build-arg version=${releaseVersion} --build-arg app_name=${app} -t ${dockerRepo}/${app}:${releaseVersion} ."
     }
     
     stage("Publish artifact") {
-        sh "docker push ${dockerRepo}/${repo}:${releaseVersion}"
+        sh "docker push ${dockerRepo}/${app}:${releaseVersion}"
     }
 
     stage("publish yaml") {
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'nexusUser', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-            // sh "curl -s -F r=m2internal -F hasPom=false -F e=yaml -F g=${groupId} -F a=${repo} -F v=${releaseVersion} -F p=yaml -F file=@${appConfig} -u ${env.USERNAME}:${env.PASSWORD} http://maven.adeo.no/nexus/service/local/artifact/maven/content"
-            sh "curl --user uploader:upl04d3r --upload-file ${appConfig} https://repo.adeo.no/repository/raw/${groupId}/${repo}/${releaseVersion}/nais.yaml"
+            sh "curl --fail -v -u ${env.USERNAME}:${env.PASSWORD} --upload-file ${appConfig} https://repo.adeo.no/repository/raw/${groupId}/${app}/${releaseVersion}/nais.yaml"
         }
     }
     
@@ -65,7 +65,7 @@ node {
         callback = "${env.BUILD_URL}input/Deploy/"
         deployLib.testCmd(releaseVersion)
         deployLib.testCmd(committer)
-        def deploy = deployLib.deployNaisApp(repo, releaseVersion, environment, zone, namespace, callback, committer).key
+        def deploy = deployLib.deployNaisApp(app, releaseVersion, environment, zone, namespace, callback, committer).key
         try {
             timeout(time: 15, unit: 'MINUTES') {
                 input id: 'deploy', message: "Check status here:  https://jira.adeo.no/browse/${deploy}"

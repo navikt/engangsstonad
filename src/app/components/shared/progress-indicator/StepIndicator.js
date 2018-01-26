@@ -35,7 +35,7 @@ export const StepIndicator = (props) => (
 StepIndicator.propTypes = {
 	steps: PropTypes.arrayOf(
 		PropTypes.shape({
-			title: PropTypes.string
+			title: PropTypes.string.isRequired
 		})
 	).isRequired,
 	activeStep: PropTypes.number.isRequired
