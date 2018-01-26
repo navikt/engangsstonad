@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+
 import { Ingress } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 
@@ -35,17 +37,27 @@ export class Step1 extends Component {
 	render() {
 		// eslint-disable-next-line no-shadow
 		const { approveConditions, approvedConditions } = this.props;
+		const { intl } = this.props;
+		const confirmBoxLabel = () => (
+			<FormattedMessage
+				id="intro.text.samtykke"
+				values={{
+					link: (
+						<a href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
+							<FormattedMessage id="intro.text.samtykke.link" />
+						</a>
+					)
+				}}
+			/>
+		);
 
 		return (
 			<div className="step1">
 				<DocumentTitle title="NAV Engangsstønad - Samtykke" />
-				<Ingress>
-					Engangsstønad er en skattefri engangssum du kan få for hvert barn når
-					du ikke har rett på foreldrepenger.
-				</Ingress>
+				<Ingress>{intl.formatMessage({ id: 'intro.text.omES' })}</Ingress>
 				<ConfirmCheckbox
 					name="egenerklaring"
-					label="Jeg har lest og forstått mine rettigheter og plikter."
+					label={confirmBoxLabel()}
 					onChange={approveConditions}
 					checked={approvedConditions}
 				/>
@@ -63,7 +75,8 @@ export class Step1 extends Component {
 
 Step1.propTypes = {
 	approvedConditions: PropTypes.bool,
-	approveConditions: PropTypes.func.isRequired
+	approveConditions: PropTypes.func.isRequired,
+	intl: intlShape.isRequired
 };
 
 Step1.defaultProps = {
@@ -82,4 +95,5 @@ const mapDispatchToProps = (dispatch) =>
 		dispatch
 	);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Step1);
+const withIntl = injectIntl(Step1);
+export default connect(mapStateToProps, mapDispatchToProps)(withIntl);

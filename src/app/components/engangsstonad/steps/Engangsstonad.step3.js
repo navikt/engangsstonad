@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+import { injectIntl, intlShape } from 'react-intl';
 
 import {
 	toggleResidingInNorwayNextTwelveMonths,
@@ -21,13 +22,24 @@ import CountryPicker from 'shared/country-picker/CountryPicker';
 // eslint-disable-next-line react/prefer-stateless-function
 export class Step3 extends Component {
 	componentWillMount() {
+		const { intl } = this.props;
 		this.radioGroupStages1 = [
 			{
 				name: 'residedInNorway',
-				legend: 'De siste 12 månedene har jeg...',
+				legend: intl.formatMessage({ id: 'medlemmskap.text.siste12mnd' }),
 				values: [
-					{ label: 'bodd i Norge', value: 'norway' },
-					{ label: 'ikke bodd i Norge', value: 'abroad' }
+					{
+						label: intl.formatMessage({
+							id: 'medlemmskap.radiobutton.boddNorge'
+						}),
+						value: 'norway'
+					},
+					{
+						label: intl.formatMessage({
+							id: 'medlemmskap.radiobutton.utlandet'
+						}),
+						value: 'abroad'
+					}
 				]
 			}
 		];
@@ -35,10 +47,26 @@ export class Step3 extends Component {
 		this.radioGroupStages2 = [
 			{
 				name: 'workedInNorway',
-				legend: 'og har under den perioden...',
+				legend: intl.formatMessage({ id: 'medlemmskap.text.arbeid' }),
 				values: [
-					{ label: 'bare arbeidet i Norge', value: 'norway' },
-					{ label: 'arbeidet i utlandet', value: 'abroad' }
+					{
+						label: intl.formatMessage({
+							id: 'medlemmskap.radiobutton.arbeidNorge'
+						}),
+						value: 'norway'
+					},
+					{
+						label: intl.formatMessage({
+							id: 'medlemmskap.radiobutton.arbeidUtlandet'
+						}),
+						value: 'abroad'
+					},
+					{
+						label: intl.formatMessage({
+							id: 'medlemmskap.radiobutton.arbeidIkkeJobbet'
+						}),
+						value: 'none'
+					}
 				]
 			}
 		];
@@ -46,18 +74,38 @@ export class Step3 extends Component {
 		this.radioGroupStages3 = [
 			{
 				name: 'residingCountryNextTwelveMonths',
-				legend: 'De neste 12 månedene skal jeg...',
+				legend: intl.formatMessage({ id: 'medlemmskap.text.neste12mnd' }),
 				values: [
-					{ label: 'bo i Norge', value: 'norway' },
-					{ label: 'ikke bo i Norge', value: 'abroad' }
+					{
+						label: intl.formatMessage({
+							id: 'medlemmskap.radiobutton.boNorge'
+						}),
+						value: 'norway'
+					},
+					{
+						label: intl.formatMessage({
+							id: 'medlemmskap.radiobutton.utlandet'
+						}),
+						value: 'abroad'
+					}
 				]
 			},
 			{
 				name: 'residingCountryDuringBirth',
-				legend: 'og kommer på fødselstidspunktet å...',
+				legend: intl.formatMessage({ id: 'medlemmskap.text.bostedFodsel' }),
 				values: [
-					{ label: 'være i Norge', value: 'norway' },
-					{ label: 'være i et annet land', value: 'abroad' }
+					{
+						label: intl.formatMessage({
+							id: 'medlemmskap.radiobutton.vareNorge'
+						}),
+						value: 'norway'
+					},
+					{
+						label: intl.formatMessage({
+							id: 'medlemmskap.radioButton.vareUtlandet'
+						}),
+						value: 'abroad'
+					}
 				]
 			}
 		];
@@ -109,6 +157,7 @@ export class Step3 extends Component {
 	}
 
 	render() {
+		const { intl } = this.props;
 		return (
 			<div className="step3">
 				<DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
@@ -125,7 +174,9 @@ export class Step3 extends Component {
 
 				{this.props.residedInNorwayLastTwelveMonths === false && (
 					<CountryPicker
-						label="ettersom jeg bodde i…"
+						label={intl.formatMessage({
+							id: 'medlemmskap.text.jegBodde'
+						})}
 						visits={this.props.visits}
 						addVisit={(visit) => this.props.addVisit(visit)}
 						deleteVisit={(visit) => this.props.deleteVisit(visit)}
@@ -179,7 +230,8 @@ Step3.propTypes = {
 			startDate: PropTypes.string,
 			endDate: PropTypes.string
 		})
-	).isRequired
+	).isRequired,
+	intl: intlShape.isRequired
 };
 
 Step3.defaultProps = {
@@ -213,4 +265,5 @@ const mapDispatchToProps = (dispatch) =>
 		dispatch
 	);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Step3);
+const withIntl = injectIntl(Step3);
+export default connect(mapStateToProps, mapDispatchToProps)(withIntl);

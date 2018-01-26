@@ -9,8 +9,8 @@ describe('<Step2 />', () => {
 		expect(wrapper.find('div')).to.have.length(1);
 	});
 
-	xit('should display remaining form if child is not born', () => {
-		const wrapper = shallow(<Step2 childBorn="nei" />);
+	it('should display remaining form if child is not born', () => {
+		const wrapper = shallow(<Step2 />);
 		wrapper.setState({ childBorn: false });
 		expect(wrapper.find('div')).to.have.length(2);
 	});
