@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import queryStringParser from 'query-string';
-
-import { getDataRequested } from 'actions';
+import { Switch, Route } from 'react-router-dom';
 
 import StepIndicator from 'shared/progress-indicator/StepIndicator';
 import BackLink from 'shared/back-link/BackLink';
@@ -44,24 +39,10 @@ export class EngangsstonadIndex extends Component {
 		};
 	}
 
-	componentWillMount() {
-		const queryParams = this.getQueryParams();
-
-		if (Object.keys(queryParams).length > 0) {
-			this.props.dispatch(getDataRequested(queryParams));
-		} else {
-			this.props.dispatch(getDataRequested());
-		}
-	}
-
 	componentWillReceiveProps(newProps) {
 		this.setState({
 			activeStep: parseInt(newProps.location.pathname.substr(-1), 10)
 		});
-	}
-
-	getQueryParams() {
-		return queryStringParser.parse(this.props.location.search);
 	}
 
 	render() {
@@ -84,16 +65,4 @@ export class EngangsstonadIndex extends Component {
 	}
 }
 
-EngangsstonadIndex.propTypes = {
-	location: PropTypes.shape({
-		search: PropTypes.string,
-		pathname: PropTypes.string
-	}).isRequired,
-	dispatch: PropTypes.func.isRequired
-};
-
-const mapStateToProps = (state) => ({
-	data: state.engangsstonadReducer.data
-});
-
-export default withRouter(connect(mapStateToProps)(EngangsstonadIndex));
+export default EngangsstonadIndex;
