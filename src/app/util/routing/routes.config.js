@@ -1,21 +1,16 @@
 import ErrorPage from 'components/error';
-import EngangsstonadIndex from 'components/engangsstonad/Engangsstonad.index';
-import engangsstonadSteps from 'components/engangsstonad/steps';
+import EngangsstonadConfirmation from 'components/engangsstonad/EngangsstonadConfirmation';
+import EngangsstonadIndex from 'components/engangsstonad/EnangsstonadIndex';
 
 const defaultRouteConfig = [
 	{
 		path: '/engangsstonad',
-		component: EngangsstonadIndex,
-		routes: engangsstonadSteps.map((step) => {
-			const subpath = step.WrappedComponent
-				? step.WrappedComponent.name.toLowerCase()
-				: step.name.toLowerCase();
-			return {
-				subpath,
-				path: `/engangsstonad/${subpath}`,
-				component: step
-			};
-		})
+		component: EngangsstonadConfirmation,
+		exact: true
+	},
+	{
+		path: '/engangsstonad/:stepNo',
+		component: EngangsstonadIndex
 	},
 	{ component: ErrorPage }
 ];

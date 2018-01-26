@@ -1,8 +1,11 @@
 @import '../../styles/globals';
+@import '../../styles/variables.less';
 
 .engangsstonad {
 	max-width: 600px;
 	margin: 0 auto;
+	padding: @stepPadding;
+
 	.dialogBox {
 		margin-top: @marginLarge;
 		margin-bottom: @marginLarge;
@@ -16,15 +19,37 @@
 		padding: 15px;
 		display: flex;
 	}
+
 	.typo-element {
 		margin-top: @marginLarge;
 		margin-bottom: @marginMedium;
 	}
+
+	.typo-ingress {
+		margin-top: @marginLarge;
+		margin-bottom: @marginMedium;
+	}
+
 	.radioGroup {
 		margin: @marginSmall 0;
 	}
 
 	.confirmCheckbox {
-		margin-top: @marginLarge;
+		margin: @marginLarge 0;
+	}
+
+	.linkIndicatorWrapper {
+		position: relative;
+		margin-bottom: 16px;
+
+		&__link {
+			position: absolute;
+			bottom: 0.35rem;
+		}
+	}
+
+	&__centerButton {
+		display: flex;
+		justify-content: center;
 	}
 }

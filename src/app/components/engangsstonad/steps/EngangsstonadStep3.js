@@ -6,6 +6,7 @@ import DocumentTitle from 'react-document-title';
 import { FormattedMessage } from 'react-intl';
 
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import { Hovedknapp } from 'nav-frontend-knapper';
 
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
@@ -13,12 +14,30 @@ import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWith
 import { confirmInformation } from 'actions';
 import { fullNameFormat } from 'util/formats/index';
 
+import './../engangsstonad.less';
+
 // eslint-disable-next-line react/prefer-stateless-function
-export class Step4 extends Component {
+export class EngangsstonadStep3 extends Component {
+	constructor(props) {
+		super(props);
+
+		this.handleNextClicked = this.handleNextClicked.bind(this);
+	}
+
+	handleNextClicked(e) {
+		e.preventDefault();
+		this.props.history.push('/engangsstonad/step4');
+	}
+
 	render() {
-		const { data } = this.props;
+		const { data, confirmedInformation } = this.props;
+
+		if (!data) {
+			return null;
+		}
+
 		return (
-			<div>
+			<div className="engangsstonad">
 				<DocumentTitle title="NAV Engangsstønad - Oppsummering" />
 				<DialogBox type="info">
 					<Normaltekst>
@@ -52,22 +71,32 @@ export class Step4 extends Component {
 				/>
 				<ConfirmCheckbox
 					name="bekreftOpplysninger"
-					checked={this.props.confirmedInformation}
+					checked={confirmedInformation}
 					onChange={this.props.confirmInformation}
 					label={<FormattedMessage id="oppsummering.text.samtykke" />}
 				/>
+				<div className="engangsstonad__centerButton">
+					<Hovedknapp
+						onClick={this.handleNextClicked}
+						disabled={!confirmedInformation}>
+						Send søknad
+					</Hovedknapp>
+				</div>
 			</div>
 		);
 	}
 }
 
-Step4.propTypes = {
+EngangsstonadStep3.propTypes = {
 	confirmInformation: PropTypes.func.isRequired,
 	confirmedInformation: PropTypes.bool,
-	data: PropTypes.shape({})
+	data: PropTypes.shape({}),
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired
+	}).isRequired
 };
 
-Step4.defaultProps = {
+EngangsstonadStep3.defaultProps = {
 	confirmedInformation: false,
 	data: null
 };
@@ -86,4 +115,4 @@ const mapDispatchToProps = (dispatch) => ({
 	)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Step4);
+export default connect(mapStateToProps, mapDispatchToProps)(EngangsstonadStep3);

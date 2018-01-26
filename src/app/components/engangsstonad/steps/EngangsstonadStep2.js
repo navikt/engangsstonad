@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { injectIntl, intlShape } from 'react-intl';
 
+import { Hovedknapp } from 'nav-frontend-knapper';
+
 import {
 	toggleResidingInNorwayNextTwelveMonths,
 	toggleResidingInNorwayDuringBirth,
@@ -19,8 +21,16 @@ import {
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
 import CountryPicker from 'shared/country-picker/CountryPicker';
 
+import './../engangsstonad.less';
+
 // eslint-disable-next-line react/prefer-stateless-function
-export class Step3 extends Component {
+export class EngangsstonadStep2 extends Component {
+	constructor(props) {
+		super(props);
+
+		this.handleNextClicked = this.handleNextClicked.bind(this);
+	}
+
 	componentWillMount() {
 		const { intl } = this.props;
 		this.radioGroupStages1 = [
@@ -131,6 +141,11 @@ export class Step3 extends Component {
 		}
 	}
 
+	handleNextClicked(e) {
+		e.preventDefault();
+		this.props.history.push('/engangsstonad/step3');
+	}
+
 	// eslint-disable-next-line class-methods-use-this, no-unused-vars
 	nextTwelveMonthsValueChange($e, stages) {
 		stages.forEach((stage) => {
@@ -159,7 +174,7 @@ export class Step3 extends Component {
 	render() {
 		const { intl } = this.props;
 		return (
-			<div className="step3">
+			<div className="engangsstonad">
 				<DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
 				<TransformingRadioGroupCollection
 					stages={this.radioGroupStages1}
@@ -207,6 +222,9 @@ export class Step3 extends Component {
 								this.nextTwelveMonthsValueChange($e, stages, expandedStage)
 							}
 						/>
+						<div className="engangsstonad__centerButton">
+							<Hovedknapp onClick={this.handleNextClicked}>Neste</Hovedknapp>
+						</div>
 					</div>
 				)}
 			</div>
@@ -214,7 +232,7 @@ export class Step3 extends Component {
 	}
 }
 
-Step3.propTypes = {
+EngangsstonadStep2.propTypes = {
 	workedInNorwayLastTwelveMonths: PropTypes.bool,
 	residedInNorwayLastTwelveMonths: PropTypes.bool,
 	toggleWorkedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
@@ -231,10 +249,13 @@ Step3.propTypes = {
 			endDate: PropTypes.string
 		})
 	).isRequired,
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired
+	}).isRequired,
 	intl: intlShape.isRequired
 };
 
-Step3.defaultProps = {
+EngangsstonadStep2.defaultProps = {
 	workedInNorwayLastTwelveMonths: undefined,
 	residedInNorwayLastTwelveMonths: undefined
 };
@@ -265,5 +286,6 @@ const mapDispatchToProps = (dispatch) =>
 		dispatch
 	);
 
-const withIntl = injectIntl(Step3);
-export default connect(mapStateToProps, mapDispatchToProps)(withIntl);
+export default injectIntl(
+	connect(mapStateToProps, mapDispatchToProps)(EngangsstonadStep2)
+);

@@ -6,8 +6,8 @@ import DocumentTitle from 'react-document-title';
 import { injectIntl, intlShape } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
-import { Knapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
+import { Hovedknapp } from 'nav-frontend-knapper';
 
 import {
 	toggleChildBorn,
@@ -23,11 +23,14 @@ import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
 // eslint-disable-next-line max-len
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
 
-import './engangsstonad.step2.less';
+import './../engangsstonad.less';
 
-export class Step2 extends Component {
+export class EngangsstonadStep1 extends Component {
 	constructor(props) {
 		super(props);
+
+		this.handleNextClicked = this.handleNextClicked.bind(this);
+
 		this.state = {
 			isModalOpen: false
 		};
@@ -93,6 +96,11 @@ export class Step2 extends Component {
 		this.setState({ isModalOpen: false });
 	}
 
+	handleNextClicked(e) {
+		e.preventDefault();
+		this.props.history.push('/engangsstonad/step2');
+	}
+
 	informationAboutChildUpdated(stages) {
 		stages.forEach((stage) => {
 			switch (stage.name) {
@@ -116,7 +124,7 @@ export class Step2 extends Component {
 		const { intl } = this.props;
 
 		return (
-			<div className="engangsstonadStep2">
+			<div className="engangsstonad">
 				<DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
 				<TransformingRadioGroupCollection
 					stages={this.radioGroupStages}
@@ -151,18 +159,6 @@ export class Step2 extends Component {
 										})}
 										onClick={(e) => this.openTerminbekreftelseModal(e)}
 									/>
-									<div className="engangsstonadStep2__buttonWrapper">
-										<Knapp className="engangsstonadStep2__buttonWrapper__button">
-											{intl.formatMessage({
-												id: 'standard.button.foto'
-											})}
-										</Knapp>
-										<Knapp className="engangsstonadStep2__buttonWrapper__button">
-											{intl.formatMessage({
-												id: 'standard.button.fil'
-											})}
-										</Knapp>
-									</div>
 								</DialogBox>
 								<DateInput
 									id="terminbekreftelse"
@@ -172,6 +168,11 @@ export class Step2 extends Component {
 									})}
 									onChange={(e) => this.props.setBekreftetTermindato(e)}
 								/>
+								<div className="engangsstonad__centerButton">
+									<Hovedknapp onClick={this.handleNextClicked}>
+										Neste
+									</Hovedknapp>
+								</div>
 							</div>
 						)}
 						<Modal
@@ -188,7 +189,7 @@ export class Step2 extends Component {
 	}
 }
 
-Step2.propTypes = {
+EngangsstonadStep1.propTypes = {
 	toggleChildBorn: PropTypes.func.isRequired,
 	setNumberOfChildren: PropTypes.func.isRequired,
 	setBekreftetTermindato: PropTypes.func.isRequired,
@@ -196,10 +197,13 @@ Step2.propTypes = {
 	noOfChildren: PropTypes.string,
 	terminDato: PropTypes.string,
 	bekreftetTermindato: PropTypes.string,
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired
+	}).isRequired,
 	intl: intlShape.isRequired
 };
 
-Step2.defaultProps = {
+EngangsstonadStep1.defaultProps = {
 	noOfChildren: undefined,
 	bekreftetTermindato: undefined,
 	terminDato: undefined
@@ -222,4 +226,6 @@ const mapDispatchToProps = (dispatch) =>
 		dispatch
 	);
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(Step2));
+export default injectIntl(
+	connect(mapStateToProps, mapDispatchToProps)(EngangsstonadStep1)
+);
