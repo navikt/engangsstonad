@@ -58,19 +58,11 @@ TransformingRadioGroup.propTypes = {
 	collapsed: PropTypes.bool,
 	expanded: PropTypes.bool,
 	stage: PropTypes.shape({
-<<<<<<< HEAD
 		legend: PropTypes.string,
 		name: PropTypes.string.isRequired,
 		values: PropTypes.arrayOf(
 			PropTypes.shape({
 				label: PropTypes.string,
-=======
-		legend: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-		name: PropTypes.string.isRequired,
-		values: PropTypes.arrayOf(
-			PropTypes.shape({
-				label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
->>>>>>> 92fe0a448f92d7e922ec84cc7bd8b44aba5e2421
 				value: PropTypes.string.isRequired
 			}).isRequired
 		).isRequired,
