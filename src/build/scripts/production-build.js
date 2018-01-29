@@ -11,7 +11,9 @@ const cb = (err) => {
 	}
 };
 
-configDecorator(webpackConfig).then((config) => {
-	const compiler = webpack(config);
-	compiler.run(cb);
-});
+configDecorator(webpackConfig, process.env.NODE_ENV === 'heroku').then(
+	(config) => {
+		const compiler = webpack(config);
+		compiler.run(cb);
+	}
+);

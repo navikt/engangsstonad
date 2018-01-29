@@ -6,11 +6,18 @@ const defaultParams = {
 	stub: true
 };
 
+const stub = () => ({
+	data: {
+		fornavn: 'Brukernavn'
+	}
+});
+
+const url = __ENV__ === 'dev' ? 'http://localhost:8888' : window.REST_API_URL;
+
 function fetchData(params = defaultParams) {
-	const url =
-		window.REST_API_URL === '<%= REST_API_URL %>'
-			? 'http://localhost:8888'
-			: window.REST_API_URL;
+	if (__ENV__ === 'heroku') {
+		return stub();
+	}
 
 	return axios.get(
 		`${url}/rest/personinfo?${queryStringParser.stringify(params)}`

@@ -1,3 +1,3 @@
-web: yarn build
+web: yarn start-express
 dev: yarn start
-test: yarn test
+test: yarn

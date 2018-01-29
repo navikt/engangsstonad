@@ -1,5 +1,5 @@
 const path = require('path');
-const FlowWebpackPlugin = require('flow-webpack-plugin');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
@@ -8,7 +8,7 @@ const webpackConfig = {
 	output: {
 		path: path.resolve(__dirname, './../../../dist'),
 		filename: 'bundle.js',
-		publicPath: ''
+		publicPath: '/'
 	},
 	resolve: {
 		alias: {
@@ -74,8 +74,10 @@ const webpackConfig = {
 			disable: false,
 			allChunks: true
 		}),
-		new FlowWebpackPlugin(),
-		new SpriteLoaderPlugin({ plainSprite: true })
+		new SpriteLoaderPlugin({ plainSprite: true }),
+		new webpack.DefinePlugin({
+			__ENV__: JSON.stringify(process.env.NODE_ENV)
+		})
 	]
 };
 
