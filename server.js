@@ -5,7 +5,7 @@ const path = require('path');
 const axios = require('axios');
 
 const server = express();
-server.use(express.static(path.resolve(__dirname, 'dist')));
+server.use('/engangsstonad', express.static(path.resolve(__dirname, 'dist')));
 server.set('views', `${__dirname  }/dist`);
 server.engine('html', require('ejs').renderFile);
 
