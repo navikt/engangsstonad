@@ -7,7 +7,7 @@ const webpackConfig = {
 	entry: ['babel-polyfill', './src/app/bootstrap.js'],
 	output: {
 		path: path.resolve(__dirname, './../../../dist'),
-		filename: 'bundle.js',
+		filename: 'js/bundle.js',
 		publicPath: '/engangsstonad'
 	},
 	resolve: {
