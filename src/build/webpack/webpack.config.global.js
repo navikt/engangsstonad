@@ -7,13 +7,8 @@ const webpackConfig = {
 	entry: ['babel-polyfill', './src/app/bootstrap.js'],
 	output: {
 		path: path.resolve(__dirname, './../../../dist'),
-<<<<<<< HEAD
-		filename: 'bundle.js',
-		publicPath: '/'
-=======
 		filename: 'js/bundle.js',
 		publicPath: '/engangsstonad'
->>>>>>> origin
 	},
 	resolve: {
 		alias: {
