@@ -3,7 +3,10 @@ import Api from './../../api';
 import {
 	GET_DATA_REQUESTED,
 	GET_DATA_SUCCESS,
-	GET_DATA_FAILED
+	GET_DATA_FAILED,
+	POST_DATA_REQUESTED,
+	POST_DATA_SUCCESS,
+	POST_DATA_FAILED
 } from '../constants';
 
 function* getData(action) {
@@ -21,6 +24,26 @@ function* getData(action) {
 	}
 }
 
+function* postData(action) {
+	try {
+		const data = yield call(Api.postData, action.params);
+		console.log(data);
+		yield put({
+			type: POST_DATA_SUCCESS,
+			data: data.data
+		});
+	} catch (error) {
+		console.log(error);
+		yield put({
+			type: POST_DATA_FAILED,
+			error
+		});
+	}
+}
+
 export default function* sagas() {
-	yield all([takeEvery(GET_DATA_REQUESTED, getData)]);
+	yield all([
+		takeEvery(GET_DATA_REQUESTED, getData),
+		takeEvery(POST_DATA_REQUESTED, postData)
+	]);
 }
