@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import StepIndicator from 'shared/progress-indicator/StepIndicator';
 import BackLink from 'shared/back-link/BackLink';
@@ -39,6 +40,12 @@ export class EngangsstonadIndex extends Component {
 		};
 	}
 
+	componentWillMount() {
+		this.setState({
+			activeStep: parseInt(this.props.location.pathname.substr(-1), 10)
+		});
+	}
+
 	componentWillReceiveProps(newProps) {
 		this.setState({
 			activeStep: parseInt(newProps.location.pathname.substr(-1), 10)
@@ -64,5 +71,11 @@ export class EngangsstonadIndex extends Component {
 		);
 	}
 }
+
+EngangsstonadIndex.propTypes = {
+	location: PropTypes.shape({
+		pathname: PropTypes.string
+	}).isRequired
+};
 
 export default EngangsstonadIndex;
