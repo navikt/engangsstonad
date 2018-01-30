@@ -24,6 +24,10 @@ function fetchData(params = defaultParams) {
 	);
 }
 
-const Api = { fetchData };
+function postData(data) {
+	return axios.post('http://localhost:8888/rest/engangsstonad', data);
+}
+
+const Api = { fetchData, postData };
 
 export default Api;

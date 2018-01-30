@@ -15,7 +15,10 @@ import {
 	TOGGLE_RESIDING_IN_NORWAY_DURING_BIRTH,
 	ADD_VISIT,
 	EDIT_VISIT,
-	DELETE_VISIT
+	DELETE_VISIT,
+	POST_DATA_REQUESTED,
+	POST_DATA_SUCCESS,
+	POST_DATA_FAILED
 } from '../constants/index';
 
 import { shouldShowStepper } from '../util';
@@ -23,7 +26,8 @@ import { shouldShowStepper } from '../util';
 const defaultState = {
 	activeRoute: null,
 	showStepper: true,
-	visits: []
+	visits: [],
+	isLoading: false
 };
 
 const newState = (state) => ({
@@ -96,6 +100,27 @@ const engangsstonadReducer = (state = defaultState, action) => {
 		case GET_DATA_FAILED: {
 			return newState({ ...state, error: action.error });
 		}
+
+		case POST_DATA_REQUESTED: {
+			return newState({ ...state, isLoading: action.isLoading });
+		}
+
+		case POST_DATA_SUCCESS: {
+			return newState({
+				...state,
+				postReponse: action.data,
+				isLoading: false
+			});
+		}
+
+		case POST_DATA_FAILED: {
+			return newState({
+				...state,
+				postReponse: action.error,
+				isLoading: false
+			});
+		}
+
 		case ADD_VISIT:
 			return {
 				...state,

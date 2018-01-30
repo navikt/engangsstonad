@@ -7,6 +7,7 @@ import {
 	SET_BEKREFTET_TERMIN_DATO,
 	SET_TERMIN_DATO,
 	GET_DATA_REQUESTED,
+	POST_DATA_REQUESTED,
 	TOGGLE_CHILD_BORN,
 	TOGGLE_OPPHOLD_NAA,
 	TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS,
@@ -27,6 +28,12 @@ export const confirmInformation = () => ({ type: CONFIRM_INFORMATION });
 
 export const getDataRequested = (params) => ({
 	type: GET_DATA_REQUESTED,
+	params
+});
+
+export const postEngangsstonadToApi = (params) => ({
+	type: POST_DATA_REQUESTED,
+	isLoading: true,
 	params
 });
 
