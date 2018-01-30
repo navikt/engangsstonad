@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { injectIntl, intlShape } from 'react-intl';
 
 import StepIndicator from 'shared/progress-indicator/StepIndicator';
 import BackLink from 'shared/back-link/BackLink';
@@ -11,24 +12,31 @@ import EngangsstonadStep3 from './steps/EngangsstonadStep3';
 
 import './engangsstonad.less';
 
-const steps = [
-	{
-		title: 'Relasjon til barn',
-		label: '1'
-	},
-	{
-		title: 'Tilknytning til Norge',
-		label: '2'
-	},
-	{
-		title: 'Oppsummering',
-		label: '3'
-	}
-];
-
 export class EngangsstonadIndex extends Component {
 	constructor(props) {
 		super(props);
+
+		const { intl } = this.props;
+		this.steps = [
+			{
+				title: intl.formatMessage({
+					id: 'relasjonBarn.sectionheading.relasjonBarn'
+				}),
+				label: '1'
+			},
+			{
+				title: intl.formatMessage({
+					id: 'medlemmskap.sectionheading.medlemmskap'
+				}),
+				label: '2'
+			},
+			{
+				title: intl.formatMessage({
+					id: 'oppsummering.sectionheading.oppsummering'
+				}),
+				label: '3'
+			}
+		];
 
 		this.state = {
 			activeStep: 1,
@@ -60,7 +68,10 @@ export class EngangsstonadIndex extends Component {
 					<div className="linkIndicatorWrapper__link">
 						<BackLink to={this.state.backLinks[this.state.activeStep - 1]} />
 					</div>
-					<StepIndicator steps={steps} activeStep={this.state.activeStep} />
+					<StepIndicator
+						steps={this.steps}
+						activeStep={this.state.activeStep}
+					/>
 				</div>
 				<Switch>
 					<Route path="/engangsstonad/step1" component={EngangsstonadStep1} />
@@ -75,7 +86,9 @@ export class EngangsstonadIndex extends Component {
 EngangsstonadIndex.propTypes = {
 	location: PropTypes.shape({
 		pathname: PropTypes.string
-	}).isRequired
+	}).isRequired,
+	intl: intlShape.isRequired
 };
 
-export default EngangsstonadIndex;
+const withIntl = injectIntl(EngangsstonadIndex);
+export default withIntl;
