@@ -27,13 +27,11 @@ function* getData(action) {
 function* postData(action) {
 	try {
 		const data = yield call(Api.postData, action.params);
-		console.log(data);
 		yield put({
 			type: POST_DATA_SUCCESS,
 			data: data.data
 		});
 	} catch (error) {
-		console.log(error);
 		yield put({
 			type: POST_DATA_FAILED,
 			error

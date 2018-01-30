@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { EtikettLiten, Normaltekst, Element } from 'nav-frontend-typografi';
+import { EtikettLiten, Element } from 'nav-frontend-typografi';
 
 import './displayTextWithLabel.less';
 

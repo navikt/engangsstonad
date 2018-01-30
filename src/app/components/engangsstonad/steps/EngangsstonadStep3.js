@@ -4,12 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 
-import {
-	Normaltekst,
-	Ingress,
-	EtikettLiten,
-	Element
-} from 'nav-frontend-typografi';
+import { Normaltekst, Ingress, EtikettLiten } from 'nav-frontend-typografi';
 
 import { Hovedknapp } from 'nav-frontend-knapper';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
@@ -19,9 +14,9 @@ import { confirmInformation, postEngangsstonadToApi } from 'actions';
 import { fullNameFormat } from 'util/formats/index';
 import CountryList from 'shared/country-picker/CountryList';
 import PersonaliaLabel from 'shared/personalia-label/PersonaliaLabel';
-import { ISODateToMaskedInput } from 'util/date'
+import { ISODateToMaskedInput } from 'util/date';
 
-import '../engangsstonad.less'
+import '../engangsstonad.less';
 
 // eslint-disable-next-line react/prefer-stateless-function
 
@@ -36,7 +31,7 @@ export class Step4 extends Component {
 		const {
 			childBorn,
 			noOfChildren,
-			terminDato,
+			termindato,
 			bekreftetTermindato,
 			residedInNorwayLastTwelveMonths,
 			visits,
@@ -49,7 +44,7 @@ export class Step4 extends Component {
 			erBarnetFodt: childBorn,
 			fodselsDato: undefined,
 			antallBarn: noOfChildren,
-			terminDato: terminDato,
+			termindato,
 			terminDatoBekreftelse: bekreftetTermindato,
 			boddINorgeSisteAar: residedInNorwayLastTwelveMonths,
 			BoddIUtlandetListe: visits,
@@ -61,54 +56,52 @@ export class Step4 extends Component {
 
 	componentWillReceiveProps(props) {
 		if (props.postReponse) {
-			console.log('componentWillReceiveProps', props.postReponse);
 			// this.props.history.push('/engangsstonad/step4');
 		}
 	}
 
 	renderRelasjonTilBarnSummary() {
-		const { 
-			data, 
-			confirmedInformation,
+		const {
 			childBorn,
 			noOfChildren,
 			termindato,
-			bekreftetTermindato } = this.props;
+			bekreftetTermindato
+		} = this.props;
 
-		if(childBorn) {
-			return(
+		if (childBorn) {
+			return (
 				<div>
 					<DisplayTextWithLabel
-					label="Søknaden gjelder bla bla..."
-					text="<fødselsdato her>"
-				/>	
-				</div>
-			)
-		} 
-		return(
-			<div> 
-			{childBorn === false && (
-				<div>
-					<DisplayTextWithLabel
-						label="Søknaden gjelder..."
-						text={noOfChildren}
-					/>
-					<DisplayTextWithLabel
-						label="Med termindato den..."
-						text={ISODateToMaskedInput(termindato)}
-					/>
-					<DisplayTextWithLabel
-						label="Det er vedlagt en terminbekreftelse..."
-						text="<link til vedlegg her>"
-					/>
-					<DisplayTextWithLabel
-						label="Som er datert den..."
-						text={ISODateToMaskedInput(bekreftetTermindato)}
+						label="Søknaden gjelder bla bla..."
+						text="<fødselsdato her>"
 					/>
 				</div>
-			)}
+			);
+		}
+		return (
+			<div>
+				{childBorn === false && (
+					<div>
+						<DisplayTextWithLabel
+							label="Søknaden gjelder..."
+							text={noOfChildren}
+						/>
+						<DisplayTextWithLabel
+							label="Med termindato den..."
+							text={ISODateToMaskedInput(termindato)}
+						/>
+						<DisplayTextWithLabel
+							label="Det er vedlagt en terminbekreftelse..."
+							text="<link til vedlegg her>"
+						/>
+						<DisplayTextWithLabel
+							label="Som er datert den..."
+							text={ISODateToMaskedInput(bekreftetTermindato)}
+						/>
+					</div>
+				)}
 			</div>
-		)}
+		);
 	}
 
 	renderTilknyningTilNorgeSummary() {
@@ -136,9 +129,9 @@ export class Step4 extends Component {
 			<div>
 				{residedInNorwayLastTwelveMonths ? (
 					<DisplayTextWithLabel
-					label="De siste månedene har jeg bodd i..."
-					text="Norge"
-				/>
+						label="De siste månedene har jeg bodd i..."
+						text="Norge"
+					/>
 				) : (
 					<div>
 						<EtikettLiten className="textWithLabel__label">
@@ -165,13 +158,7 @@ export class Step4 extends Component {
 	}
 
 	render() {
-		const { 
-			data, 
-			confirmedInformation,
-			childBorn,
-			noOfChildren,
-			termindato,
-			bekreftetTermindato } = this.props;
+		const { data, confirmedInformation } = this.props;
 
 		if (!data) {
 			return null;
@@ -205,7 +192,8 @@ export class Step4 extends Component {
 					name="bekreftOpplysninger"
 					checked={this.props.confirmedInformation}
 					onChange={this.props.confirmInformation}
-					label="De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt tilbake opplysninger som har betydning for min rett til engangsstønad."
+					label={`De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt
+							tilbake opplysninger som har betydning for min rett til engangsstønad.`}
 				/>
 				<div className="engangsstonad__centerButton">
 					<Hovedknapp
@@ -223,15 +211,18 @@ Step4.propTypes = {
 	confirmInformation: PropTypes.func.isRequired,
 	confirmedInformation: PropTypes.bool,
 	data: PropTypes.shape({}),
+	childBorn: PropTypes.bool.isRequired,
 	noOfChildren: PropTypes.string,
 	termindato: PropTypes.string,
 	bekreftetTermindato: PropTypes.string,
-	residedInNorway: PropTypes.bool,
 	residedInNorwayLastTwelveMonths: PropTypes.bool,
 	visits: PropTypes.shape([]),
 	workedInNorwayLastTwelveMonths: PropTypes.bool,
 	residingInNorwayNextTwelveMonths: PropTypes.bool,
-	residingInNorwayDuringBirth: PropTypes.bool
+	residingInNorwayDuringBirth: PropTypes.bool,
+	postEngangsstonadToApi: PropTypes.func.isRequired,
+	postReponse: PropTypes.shape({}),
+	isLoading: PropTypes.isLoading.isRequired
 };
 
 Step4.defaultProps = {
@@ -240,12 +231,12 @@ Step4.defaultProps = {
 	noOfChildren: undefined,
 	termindato: undefined,
 	bekreftetTermindato: undefined,
-	residedInNorway: undefined,
 	residedInNorwayLastTwelveMonths: undefined,
 	visits: undefined,
 	workedInNorwayLastTwelveMonths: undefined,
 	residingInNorwayNextTwelveMonths: undefined,
-	residingInNorwayDuringBirth: undefined
+	residingInNorwayDuringBirth: undefined,
+	postReponse: undefined
 };
 
 const mapStateToProps = (state) => ({
@@ -255,7 +246,6 @@ const mapStateToProps = (state) => ({
 	noOfChildren: state.engangsstonadReducer.noOfChildren,
 	termindato: state.engangsstonadReducer.terminDato,
 	bekreftetTermindato: state.engangsstonadReducer.bekreftetTermindato,
-	residedInNorway: state.engangsstonadReducer.residedInNorway,
 	residedInNorwayLastTwelveMonths:
 		state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
 	workedInNorwayLastTwelveMonths:
