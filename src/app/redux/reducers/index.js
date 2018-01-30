@@ -8,6 +8,7 @@ import {
 	CONFIRM_INFORMATION,
 	SET_BEKREFTET_TERMIN_DATO,
 	SET_TERMIN_DATO,
+	SET_FODSEL_DATO,
 	TOGGLE_CHILD_BORN,
 	TOGGLE_OPPHOLD_NAA,
 	TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS,
@@ -51,6 +52,12 @@ const engangsstonadReducer = (state = defaultState, action) => {
 			return newState({
 				...state,
 				confirmedInformation: !state.confirmedInformation
+			});
+		}
+		case SET_FODSEL_DATO: {
+			return newState({
+				...state,
+				fodselDato: action.data
 			});
 		}
 		case TOGGLE_CHILD_BORN: {
