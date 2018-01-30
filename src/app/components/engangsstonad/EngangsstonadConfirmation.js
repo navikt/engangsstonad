@@ -61,7 +61,7 @@ export class EngangsstonadConfirmation extends Component {
 				<DocumentTitle title="Samtykke - NAV Engangsstønad" />
 				<HeaderIllustration
 					dialog={{
-						title: `Hei, ${this.props.data.fornavn}`,
+						title: `Hei ${this.props.data.fornavn}`,
 						text: 'Jeg skal hjelpe deg med å fylle ut søknaden'
 					}}
 					svg={VelkommenIllustration}

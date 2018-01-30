@@ -2,6 +2,7 @@ require('dotenv').config();
 const jsdom = require('jsdom');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const axios = require('axios');
+const webpack = require('webpack');
 
 const { JSDOM } = jsdom;
 
@@ -12,7 +13,8 @@ const getDecorator = (decoratorUrl) =>
 		validateStatus: (status) => status >= 200 || status === 302
 	});
 
-const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
+const reconfigureBuildWithDecorator = (decoratorResponse, oldConfig) => {
+	const config = Object.assign({}, oldConfig);
 	const html = decoratorResponse.data;
 	const { document } = new JSDOM(html).window;
 	try {
@@ -20,15 +22,29 @@ const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
 		const footer = document.getElementById('footer').innerHTML;
 		const scripts = document.getElementById('scripts').innerHTML;
 		const styles = document.getElementById('styles').innerHTML;
+
+		config.module.rules.push({
+			test: /index\.html$/,
+			use: [
+				{
+					loader: 'mustache-loader',
+					options: {
+						render: {
+							REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL,
+							NAV_HEADING: header,
+							NAV_FOOTER: footer,
+							NAV_SCRIPTS: scripts,
+							NAV_STYLES: styles
+						}
+					}
+				}
+			]
+		});
+
 		config.plugins.push(
 			new HtmlWebpackPlugin({
 				template: './src/app/index.html',
-				inject: 'body',
-				NAVHeading: header,
-				NAVFooter: footer,
-				NAVScripts: scripts,
-				NAVStyles: styles,
-				REST_API_URL: '<%= REST_API_URL %>'
+				inject: 'body'
 			})
 		);
 	} catch (e) {

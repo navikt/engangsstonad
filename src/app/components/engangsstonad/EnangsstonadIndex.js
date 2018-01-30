@@ -30,7 +30,7 @@ export class EngangsstonadIndex extends Component {
 		super(props);
 
 		this.state = {
-			activeStep: 1,
+			activeStep: parseInt(props.location.pathname.substr(-1), 10),
 			backLinks: [
 				'/engangsstonad',
 				'/engangsstonad/step1',
