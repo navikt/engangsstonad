@@ -1,6 +1,6 @@
 import ErrorPage from 'components/error';
 import EngangsstonadConfirmation from 'components/engangsstonad/EngangsstonadConfirmation';
-import EngangsstonadIndex from 'components/engangsstonad/EnangsstonadIndex';
+import EngangsstonadIndex from 'components/engangsstonad/EngangsstonadIndex';
 
 const defaultRouteConfig = [
 	{

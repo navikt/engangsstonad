@@ -1,14 +1,13 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script type="text/javascript">window.REST_API_URL="<%= htmlWebpackPlugin.options.REST_API_URL %>";</script>
-        <%= htmlWebpackPlugin.options.NAVScripts %>
-        <%= htmlWebpackPlugin.options.NAVMegaMenuResources %>
-        <%= htmlWebpackPlugin.options.NAVStyles %>
+        <script type="text/javascript">window.REST_API_URL="{{{REST_API_URL}}}";</script>
+        {{{NAV_SCRIPTS}}
+        {{{NAV_STYLES}}}
     </head>
     <body>
-        <%= htmlWebpackPlugin.options.NAVHeading %>
+        {{{NAV_HEADING}}}
         <div id="app"></div>
-        <%= htmlWebpackPlugin.options.NAVFooter %>
+        {{{NAV_FOOTER}}}
     </body>
 </html>

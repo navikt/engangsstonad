@@ -2,6 +2,7 @@ const path = require('path');
 const FlowWebpackPlugin = require('flow-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const webpackConfig = {
 	entry: ['babel-polyfill', './src/app/bootstrap.js'],
@@ -75,7 +76,11 @@ const webpackConfig = {
 			allChunks: true
 		}),
 		new FlowWebpackPlugin(),
-		new SpriteLoaderPlugin({ plainSprite: true })
+		new SpriteLoaderPlugin({ plainSprite: true }),
+		new HtmlWebpackPlugin({
+			template: './src/app/index.html',
+			inject: 'body'
+		})
 	]
 };
 
