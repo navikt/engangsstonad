@@ -28,7 +28,6 @@ export const EngangsstonadCompleted = (props) => {
 	);
 
 	const { intl, postReponse } = props;
-	console.log(postReponse);
 	return (
 		<div className="engangsstonad">
 			<DocumentTitle title="Kvittering - NAV Engangsstønad" />
