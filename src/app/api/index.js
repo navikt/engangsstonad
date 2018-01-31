@@ -25,7 +25,7 @@ function fetchData(params = defaultParams) {
 }
 
 function postData(data) {
-	return axios.post('http://localhost:8888/rest/engangsstonad', data);
+	return axios.post(`${url}/rest/engangsstonad`, data);
 }
 
 const Api = { fetchData, postData };
