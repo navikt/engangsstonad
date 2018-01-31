@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { withRouter } from 'react-router-dom';
 import queryStringParser from 'query-string';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import { Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import Modal from 'nav-frontend-modal';
 
+import RettigheterOgPlikter from 'shared/modal-content/RettigheterOgPlikter';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
@@ -18,6 +21,9 @@ import './engangsstonad.less';
 export class EngangsstonadConfirmation extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			isModalOpen: false
+		};
 
 		this.handleConfirmCheckboxChange = this.handleConfirmCheckboxChange.bind(
 			this
@@ -37,6 +43,15 @@ export class EngangsstonadConfirmation extends Component {
 		}
 	}
 
+	openRettigheterOgPlikterModal(e) {
+		e.preventDefault();
+		this.setState({ isModalOpen: true });
+	}
+
+	closeRettigheterOgPlikterModal() {
+		this.setState({ isModalOpen: false });
+	}
+
 	getQueryParams() {
 		return queryStringParser.parse(this.props.location.search);
 	}
@@ -50,31 +65,44 @@ export class EngangsstonadConfirmation extends Component {
 	}
 
 	render() {
-		const { data, approvedConditions } = this.props;
+		const { data, approvedConditions, intl } = this.props;
 
 		if (!data) {
 			return null;
 		}
+
+		const confirmBoxLabel = () => (
+			<FormattedMessage
+				id="intro.text.samtykke"
+				values={{
+					link: (
+						<a href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
+							<FormattedMessage id="intro.text.samtykke.link" />
+						</a>
+					)
+				}}
+			/>
+		);
 
 		return (
 			<div className="engangsstonad">
 				<DocumentTitle title="Samtykke - NAV Engangsstønad" />
 				<HeaderIllustration
 					dialog={{
-						title: `Hei, ${this.props.data.fornavn}`,
-						text: 'Jeg skal hjelpe deg med å fylle ut søknaden'
+						title: intl.formatMessage(
+							{ id: 'intro.snakkeboble.overskrift' },
+							{ name: this.props.data.fornavn }
+						),
+						text: intl.formatMessage({ id: 'intro.text.hjelpedeg' })
 					}}
 					svg={VelkommenIllustration}
 					theme={'purple'}
-					title="Søknad om engangsstønad"
+					title={intl.formatMessage({ id: 'intro.pageheading.soknadES' })}
 				/>
-				<Ingress>
-					Engangsstønad er en skattefri engangssum du kan få for hvert barn du
-					føder eller adopterer.
-				</Ingress>
+				<Ingress>{intl.formatMessage({ id: 'intro.text.omES' })}</Ingress>
 				<ConfirmCheckbox
 					name="egenerklaring"
-					label="Jeg bekrefter at jeg har lest og forstått mine rettigheter og plikter."
+					label={confirmBoxLabel()}
 					onChange={this.handleConfirmCheckboxChange}
 					checked={approvedConditions}
 				/>
@@ -82,9 +110,16 @@ export class EngangsstonadConfirmation extends Component {
 					<Hovedknapp
 						onClick={this.handleStartApplicationClick}
 						disabled={!approvedConditions}>
-						Begynn med søknaden
+						{intl.formatMessage({ id: 'intro.button.startSoknad' })}
 					</Hovedknapp>
 				</div>
+				<Modal
+					isOpen={this.state.isModalOpen}
+					closeButton
+					onRequestClose={() => this.closeRettigheterOgPlikterModal()}
+					contentLabel="rettigheter og plikter">
+					<RettigheterOgPlikter />
+				</Modal>
 			</div>
 		);
 	}
@@ -101,7 +136,8 @@ EngangsstonadConfirmation.propTypes = {
 	}).isRequired,
 	data: PropTypes.shape({
 		fornavn: PropTypes.string
-	})
+	}),
+	intl: intlShape.isRequired
 };
 
 EngangsstonadConfirmation.defaultProps = {
@@ -114,4 +150,5 @@ const mapStateToProps = (state) => ({
 	approvedConditions: state.engangsstonadReducer.approvedConditions
 });
 
-export default withRouter(connect(mapStateToProps)(EngangsstonadConfirmation));
+const withIntl = injectIntl(EngangsstonadConfirmation);
+export default withRouter(connect(mapStateToProps)(withIntl));
