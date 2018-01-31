@@ -7,6 +7,8 @@ import nn from 'react-intl/locale-data/nn';
 import nnMessages from './nn_NO.json';
 import nbMessages from './nb_NO.json';
 
+import './languageButtonOfShame.less';
+
 addLocaleData([...nb, ...nn]);
 class IntlProvider extends Component {
 	constructor(props) {
@@ -16,12 +18,22 @@ class IntlProvider extends Component {
 		};
 	}
 
+	toggleLanguage() {
+		if (this.state.locale === 'nb') {
+			this.setState({ locale: 'nn' });
+		} else {
+			this.setState({ locale: 'nb' });
+		}
+	}
+
 	render() {
 		const messages = this.state.locale === 'nb' ? nbMessages : nnMessages;
 		return (
-			<Provider locale="nb" messages={messages || {}}>
-				{this.props.children}
-			</Provider>
+			<div>
+				<Provider locale="nb" messages={messages || {}}>
+					{this.props.children}
+				</Provider>
+			</div>
 		);
 	}
 }

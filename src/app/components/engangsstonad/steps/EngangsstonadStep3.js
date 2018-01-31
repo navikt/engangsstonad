@@ -56,7 +56,7 @@ export class Step4 extends Component {
 
 	componentWillReceiveProps(props) {
 		if (props.postReponse) {
-			// this.props.history.push('/engangsstonad/step4');
+			this.props.history.push('/engangsstonad/completed');
 		}
 	}
 
