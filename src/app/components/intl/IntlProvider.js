@@ -7,21 +7,13 @@ import nn from 'react-intl/locale-data/nn';
 import nnMessages from './nn_NO.json';
 import nbMessages from './nb_NO.json';
 
-addLocaleData([...nb, ...nn]);
 class IntlProvider extends Component {
 	constructor(props) {
 		super(props);
+		addLocaleData([...nb, ...nn]);
 		this.state = {
 			locale: 'nb'
 		};
-	}
-
-	toggleLanguage() {
-		if (this.state.locale === 'nb') {
-			this.setState({ locale: 'nn' });
-		} else {
-			this.setState({ locale: 'nb' });
-		}
 	}
 
 	render() {
