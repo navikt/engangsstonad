@@ -15,8 +15,8 @@ server.use(
 );
 
 server.set('views', `${__dirname}/dist`);
-server.engine('html', mustacheExpress());
 server.set('view engine', 'mustache');
+server.engine('html', mustacheExpress());
 
 server.get(['/engangsstonad/?', '/engangsstonad/**'], (req, res) => {
 	res.render('index.html', {
@@ -27,6 +27,7 @@ server.get(['/engangsstonad/?', '/engangsstonad/**'], (req, res) => {
 server.get('/health/isAlive', (req, res) => res.sendStatus(200));
 server.get('/health/isReady', (req, res) => res.sendStatus(200));
 
-server.listen(8080, () => {
-	console.log('App listening on port 8080');
+const port = process.env.PORT || 8080;
+server.listen(port, () => {
+	console.log(`App listening on port: ${port}`);
 });
