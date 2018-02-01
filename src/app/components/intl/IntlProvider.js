@@ -12,7 +12,7 @@ class IntlProvider extends Component {
 		super(props);
 		addLocaleData([...nb, ...nn]);
 		this.state = {
-			locale: 'nb'
+			locale: 'nn'
 		};
 	}
 

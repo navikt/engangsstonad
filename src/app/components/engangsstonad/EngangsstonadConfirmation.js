@@ -76,6 +76,7 @@ export class EngangsstonadConfirmation extends Component {
 				id="intro.text.samtykke"
 				values={{
 					link: (
+						// eslint-disable-next-line jsx-a11y/anchor-is-valid
 						<a href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
 							<FormattedMessage id="intro.text.samtykke.link" />
 						</a>

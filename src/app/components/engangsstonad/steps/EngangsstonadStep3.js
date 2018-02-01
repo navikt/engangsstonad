@@ -81,13 +81,38 @@ export class Step3 extends Component {
 			);
 		}
 
-		const noOfChildrenText = noOfChildren === 'ett' ? 'ett barn' : noOfChildren;
+		// const noOfChildrenText =
+		// 	noOfChildren === 'ett'
+		// 		? intl.formatMessage({ id: 'relasjonBarn.radiobutton.ettbarn' })
+		// 		: noOfChildren;
+
+		let noOfChildrenText;
+		switch (noOfChildren) {
+			case 'tvillinger':
+				noOfChildrenText = intl.formatMessage({
+					id: 'relasjonBarn.radiobutton.tvillinger'
+				});
+				break;
+			case 'flere':
+				noOfChildrenText = intl.formatMessage({
+					id: 'relasjonBarn.radiobutton.flere'
+				});
+				break;
+			default:
+				noOfChildrenText = intl.formatMessage({
+					id: 'relasjonBarn.radiobutton.ettbarn'
+				});
+				break;
+		}
+
 		return (
 			<div>
 				{childBorn === false && (
 					<div>
 						<DisplayTextWithLabel
-							label="Søknaden gjelder..."
+							label={intl.formatMessage({
+								id: 'oppsummering.text.soknadenGjelder'
+							})}
 							text={noOfChildrenText}
 						/>
 						<DisplayTextWithLabel
@@ -237,13 +262,16 @@ Step3.propTypes = {
 	termindato: PropTypes.string,
 	bekreftetTermindato: PropTypes.string,
 	residedInNorwayLastTwelveMonths: PropTypes.bool,
-	visits: PropTypes.shape([]),
+	visits: PropTypes.array,
 	workedInNorwayLastTwelveMonths: PropTypes.bool,
 	residingInNorwayNextTwelveMonths: PropTypes.bool,
 	residingInNorwayDuringBirth: PropTypes.bool,
 	postEngangsstonadToApi: PropTypes.func.isRequired,
 	postReponse: PropTypes.shape({}),
 	isLoading: PropTypes.bool.isRequired,
+	history: PropTypes.shape({
+		push: PropTypes.func.isRequired
+	}).isRequired,
 	intl: intlShape.isRequired
 };
 
@@ -254,7 +282,7 @@ Step3.defaultProps = {
 	termindato: undefined,
 	bekreftetTermindato: undefined,
 	residedInNorwayLastTwelveMonths: undefined,
-	visits: undefined,
+	visits: [],
 	workedInNorwayLastTwelveMonths: undefined,
 	residingInNorwayNextTwelveMonths: undefined,
 	residingInNorwayDuringBirth: undefined,

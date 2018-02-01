@@ -94,7 +94,7 @@ export class EngangsstonadStep2 extends Component {
 					},
 					{
 						label: intl.formatMessage({
-							id: 'medlemmskap.radiobutton.utlandet'
+							id: 'medlemmskap.radiobutton.boUtlandet'
 						}),
 						value: 'abroad'
 					}

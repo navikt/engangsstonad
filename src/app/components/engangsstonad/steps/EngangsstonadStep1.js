@@ -13,7 +13,8 @@ import {
 	toggleChildBorn,
 	setNumberOfChildren,
 	setTerminDato,
-	setBekreftetTermindato
+	setBekreftetTermindato,
+	setFodselDato
 } from 'actions';
 
 import IconLink from 'shared/icon-link/IconLink';
@@ -37,10 +38,10 @@ export class EngangsstonadStep1 extends Component {
 
 		const { intl } = this.props;
 
-		this.radioGroupStages = [
+		this.radioGroupFodsel = [
 			{
 				name: 'whenInTime',
-				legend: 'Søknaden gjelder en fødsel som er...',
+				legend: intl.formatMessage({ id: 'relasjonBarn.text.fodselTidspunkt' }),
 				values: [
 					{
 						label: intl.formatMessage({
@@ -55,14 +56,17 @@ export class EngangsstonadStep1 extends Component {
 						value: 'before'
 					}
 				]
-			},
+			}
+		];
+
+		this.radioGroupTermindato = [
 			{
 				name: 'numberOfExpected',
-				legend: 'og jeg venter...',
+				legend: intl.formatMessage({ id: 'relasjonBarn.text.antallBarn' }),
 				values: [
 					{
 						label: intl.formatMessage({
-							id: 'relasjonBarn.radiobutton.etbarn'
+							id: 'relasjonBarn.radiobutton.ettbarn'
 						}),
 						value: 'ett'
 					},
@@ -101,23 +105,20 @@ export class EngangsstonadStep1 extends Component {
 		this.props.history.push('/engangsstonad/step2');
 	}
 
-	informationAboutChildUpdated(stages) {
-		stages.forEach((stage) => {
-			switch (stage.name) {
-				case 'whenInTime':
-					this.props.toggleChildBorn(stage.selectedValue);
-					break;
-				case 'numberOfExpected':
-					this.props.setNumberOfChildren(stage.selectedValue);
-					break;
-				default:
-					break;
-			}
-		});
+	childBirthChanged($e, stages, expandedStage) {
+		if (expandedStage === null) {
+			this.props.toggleChildBorn(stages[0].selectedValue);
+		} else {
+			this.props.toggleChildBorn(stages[0].selectedValue);
+		}
 	}
 
-	handleRadioGroupStageChange($e, stages) {
-		this.informationAboutChildUpdated(stages);
+	noOfChildrenChanged($e, stages, expandedStage) {
+		if (expandedStage === null) {
+			this.props.setNumberOfChildren(stages[0].selectedValue);
+		} else {
+			this.props.setNumberOfChildren(stages[0].selectedValue);
+		}
 	}
 
 	render() {
@@ -127,73 +128,102 @@ export class EngangsstonadStep1 extends Component {
 			<div className="engangsstonad">
 				<DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
 				<TransformingRadioGroupCollection
-					stages={this.radioGroupStages}
-					onChange={($e, stages) =>
-						this.handleRadioGroupStageChange($e, stages)
+					stages={this.radioGroupFodsel}
+					onChange={($e, stages, expandedStage) =>
+						this.childBirthChanged($e, stages, expandedStage)
 					}
 				/>
-				{this.props.noOfChildren && (
+				{this.props.childBorn === true && (
 					<div>
 						<DateInput
-							id="termindato"
-							input={{ value: this.props.terminDato }}
+							id="fodselsdato"
+							input={{ value: this.props.fodselDato }}
 							label={intl.formatMessage({
-								id: 'relasjonBarn.text.termindato'
+								id: 'relasjonBarn.text.fodseldato'
 							})}
-							onChange={(e) => this.props.setTerminDato(e)}
+							onChange={(e) => this.props.setFodselDato(e)}
 						/>
-						{this.props.terminDato && (
-							<div>
-								<DialogBox type="warning" overflow>
-									<Normaltekst>
-										{intl.formatMessage({
-											id: 'relasjonBarn.text.terminbekreftelse'
-										})}
-									</Normaltekst>
-									<IconLink
-										iconKind="info-sirkel-fylt"
-										iconSize="24"
-										to="#"
-										linkText={intl.formatMessage({
-											id: 'relasjonBarn.link.lesTerminbekreftelse'
-										})}
-										onClick={(e) => this.openTerminbekreftelseModal(e)}
-									/>
-								</DialogBox>
-								<DateInput
-									id="terminbekreftelse"
-									input={{ value: this.props.bekreftetTermindato }}
-									label={intl.formatMessage({
-										id: 'relasjonBarn.text.datoTerminbekreftelse'
-									})}
-									onChange={(e) => this.props.setBekreftetTermindato(e)}
-								/>
-								<div className="engangsstonad__centerButton">
-									<Hovedknapp onClick={this.handleNextClicked}>
-										Neste
-									</Hovedknapp>
-								</div>
-							</div>
-						)}
-						<Modal
-							isOpen={this.state.isModalOpen}
-							closeButton
-							onRequestClose={() => this.closeTerminbekreftelseModal()}
-							contentLabel="om terminbekreftelsen">
-							<OmTerminbekreftelsen />
-						</Modal>
+						<div className="engangsstonad__centerButton">
+							<Hovedknapp onClick={this.handleNextClicked}>Neste</Hovedknapp>
+						</div>
 					</div>
 				)}
+				{this.props.childBorn === false && (
+					<TransformingRadioGroupCollection
+						stages={this.radioGroupTermindato}
+						onChange={($e, stages, expandedStage) =>
+							this.noOfChildrenChanged($e, stages, expandedStage)
+						}
+					/>
+				)}
+				{this.props.noOfChildren &&
+					this.props.childBorn === false && (
+						<div>
+							<DateInput
+								id="termindato"
+								input={{ value: this.props.terminDato }}
+								label={intl.formatMessage({
+									id: 'relasjonBarn.text.termindato'
+								})}
+								onChange={(e) => this.props.setTerminDato(e)}
+							/>
+							{this.props.terminDato && (
+								<div>
+									<DialogBox type="warning" overflow>
+										<Normaltekst>
+											{intl.formatMessage({
+												id: 'relasjonBarn.text.terminbekreftelse'
+											})}
+										</Normaltekst>
+										<IconLink
+											iconKind="info-sirkel-fylt"
+											iconSize="24"
+											to="#"
+											linkText={intl.formatMessage({
+												id: 'relasjonBarn.link.lesTerminbekreftelse'
+											})}
+											onClick={(e) => this.openTerminbekreftelseModal(e)}
+										/>
+									</DialogBox>
+									<DateInput
+										id="terminbekreftelse"
+										input={{ value: this.props.bekreftetTermindato }}
+										label={intl.formatMessage({
+											id: 'relasjonBarn.text.datoTerminbekreftelse'
+										})}
+										onChange={(e) => this.props.setBekreftetTermindato(e)}
+									/>
+									<div className="engangsstonad__centerButton">
+										<Hovedknapp onClick={this.handleNextClicked}>
+											{intl.formatMessage({
+												id: 'standard.button.neste'
+											})}
+										</Hovedknapp>
+									</div>
+								</div>
+							)}
+							<Modal
+								isOpen={this.state.isModalOpen}
+								closeButton
+								onRequestClose={() => this.closeTerminbekreftelseModal()}
+								contentLabel="om terminbekreftelsen">
+								<OmTerminbekreftelsen />
+							</Modal>
+						</div>
+					)}
 			</div>
 		);
 	}
 }
 
 EngangsstonadStep1.propTypes = {
+	fodselDato: PropTypes.string,
+	childBorn: PropTypes.bool,
 	toggleChildBorn: PropTypes.func.isRequired,
 	setNumberOfChildren: PropTypes.func.isRequired,
 	setBekreftetTermindato: PropTypes.func.isRequired,
 	setTerminDato: PropTypes.func.isRequired,
+	setFodselDato: PropTypes.func.isRequired,
 	noOfChildren: PropTypes.string,
 	terminDato: PropTypes.string,
 	bekreftetTermindato: PropTypes.string,
@@ -206,13 +236,17 @@ EngangsstonadStep1.propTypes = {
 EngangsstonadStep1.defaultProps = {
 	noOfChildren: undefined,
 	bekreftetTermindato: undefined,
-	terminDato: undefined
+	terminDato: undefined,
+	childBorn: undefined,
+	fodselDato: undefined
 };
 
 const mapStateToProps = (state) => ({
 	noOfChildren: state.engangsstonadReducer.noOfChildren,
 	terminDato: state.engangsstonadReducer.terminDato,
-	bekreftetTermindato: state.engangsstonadReducer.bekreftetTermindato
+	bekreftetTermindato: state.engangsstonadReducer.bekreftetTermindato,
+	childBorn: state.engangsstonadReducer.childBorn,
+	fodselDato: state.engangsstonadReducer.fodselDato
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -221,7 +255,8 @@ const mapDispatchToProps = (dispatch) =>
 			toggleChildBorn,
 			setNumberOfChildren,
 			setTerminDato,
-			setBekreftetTermindato
+			setBekreftetTermindato,
+			setFodselDato
 		},
 		dispatch
 	);
