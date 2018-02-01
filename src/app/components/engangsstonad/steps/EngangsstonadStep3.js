@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+import { injectIntl, intlShape } from 'react-intl';
 
 import { Normaltekst, Ingress, EtikettLiten } from 'nav-frontend-typografi';
-
 import { Hovedknapp } from 'nav-frontend-knapper';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
@@ -15,12 +15,13 @@ import { fullNameFormat } from 'util/formats/index';
 import CountryList from 'shared/country-picker/CountryList';
 import PersonaliaLabel from 'shared/personalia-label/PersonaliaLabel';
 import { ISODateToMaskedInput } from 'util/date';
+import getMessage from '../../intl/util';
 
 import '../engangsstonad.less';
 
 // eslint-disable-next-line react/prefer-stateless-function
 
-export class Step4 extends Component {
+export class Step3 extends Component {
 	constructor(props) {
 		super(props);
 		this.handleNextClicked = this.handleNextClicked.bind(this);
@@ -42,13 +43,13 @@ export class Step4 extends Component {
 
 		this.props.postEngangsstonadToApi({
 			erBarnetFodt: childBorn,
-			fodselsDato: undefined,
+			fodselsdato: undefined,
 			antallBarn: noOfChildren,
 			termindato,
-			terminDatoBekreftelse: bekreftetTermindato,
+			terminbekreftelseDato: bekreftetTermindato,
 			boddINorgeSisteAar: residedInNorwayLastTwelveMonths,
-			BoddIUtlandetListe: visits,
-			arbeidetINorgeSisteTolvMnd: workedInNorwayLastTwelveMonths,
+			boddIUtlandetListe: visits,
+			jobbetINorgeSisteTolvMnd: workedInNorwayLastTwelveMonths,
 			skalBoINorgeNesteTolvMnd: residingInNorwayNextTwelveMonths,
 			skalFodeINorge: residingInNorwayDuringBirth
 		});
@@ -60,15 +61,22 @@ export class Step4 extends Component {
 		}
 	}
 
-	renderRelasjonTilBarnSummary() {
-		const {
-			childBorn,
-			noOfChildren,
-			termindato,
-			bekreftetTermindato
-		} = this.props;
+	createNumberOfChildrenSummaryString() {
+		const { noOfChildren, intl } = this.props;
+		switch (noOfChildren) {
+			case 'tvillinger':
+				return getMessage(intl, 'relasjonBarn.radiobutton.tvillinger');
+			case 'flere':
+				return getMessage(intl, 'relasjonBarn.radiobutton.flere');
+			default:
+				return getMessage(intl, 'relasjonBarn.radiobutton.ettbarn');
+		}
+	}
 
-		if (childBorn) {
+	renderRelasjonTilBarnSummary() {
+		const { erBarnetFodt, termindato, terminbekreftelseDato, intl } = this.props;
+
+		if (erBarnetFodt) {
 			return (
 				<div>
 					<DisplayTextWithLabel
@@ -78,25 +86,26 @@ export class Step4 extends Component {
 				</div>
 			);
 		}
+
 		return (
 			<div>
-				{childBorn === false && (
+				{erBarnetFodt === false && (
 					<div>
 						<DisplayTextWithLabel
-							label="Søknaden gjelder..."
-							text={noOfChildren}
+							label={getMessage(intl, 'relasjonBarn.radiobutton.tvillinger')}
+							text={this.createNumberOfChildrenSummaryString()}
 						/>
 						<DisplayTextWithLabel
-							label="Med termindato den..."
+							label={getMessage(intl, 'relasjonBarn.text.termindato')}
 							text={ISODateToMaskedInput(termindato)}
 						/>
 						<DisplayTextWithLabel
-							label="Det er vedlagt en terminbekreftelse..."
+							label={getMessage(intl,'oppsummering.text.vedlagtTerminbekreftelse')}
 							text="<link til vedlegg her>"
 						/>
 						<DisplayTextWithLabel
-							label="Som er datert den..."
-							text={ISODateToMaskedInput(bekreftetTermindato)}
+							label={getMessage(intl,'oppsummering.text.vedlagtTerminbekreftelse')}
+							text={ISODateToMaskedInput(terminbekreftelseDato)}
 						/>
 					</div>
 				)}
@@ -106,51 +115,52 @@ export class Step4 extends Component {
 
 	renderTilknyningTilNorgeSummary() {
 		const {
-			residedInNorwayLastTwelveMonths,
-			visits,
-			workedInNorwayLastTwelveMonths,
-			residingInNorwayNextTwelveMonths,
-			residingInNorwayDuringBirth
+			boddINorgeSisteAar,
+			boddIUtlandetListe,
+			jobbetINorgeSisteTolvMnd,
+			skalBoINorgeNesteTolvMnd,
+			skalFodeINorge,
+			intl
 		} = this.props;
 
-		const workedInNorwayLastYearText = workedInNorwayLastTwelveMonths
-			? 'Kun jobbet i norge'
-			: 'Kun jobbet i utlandet';
+		const workedInNorwayLastYearText = jobbetINorgeSisteTolvMnd
+			? getMessage(intl, 'medlemmskap.radiobutton.arbeidNorge')
+			: getMessage(intl, 'medlemmskap.radiobutton.arbeidUtlandet');
 
-		const resideInNorwayNextYearText = residingInNorwayNextTwelveMonths
-			? 'kun bo i norge'
-			: 'bo i utlandet';
+		const resideInNorwayNextYearText = skalBoINorgeNesteTolvMnd
+			? getMessage(intl, 'medlemmskap.radiobutton.boNorge')
+			: getMessage(intl, 'medlemmskap.radiobutton.boUtlandet');
 
-		const residingInNorwayDuringBirthText = residingInNorwayDuringBirth
-			? 'være i Norge'
-			: 'være i utlandet';
+		const residingInNorwayDuringBirthText = skalFodeINorge
+			? getMessage(intl, 'medlemmskap.radiobutton.vareNorge')
+			: getMessage(intl, 'medlemmskap.radioButton.vareUtlandet');
 
 		return (
 			<div>
-				{residedInNorwayLastTwelveMonths ? (
+				{boddINorgeSisteAar ? (
 					<DisplayTextWithLabel
-						label="De siste månedene har jeg bodd i..."
+						label={getMessage(intl, 'oppsummering.text.boddSisteTolv')}
 						text="Norge"
 					/>
 				) : (
 					<div>
 						<EtikettLiten className="textWithLabel__label">
-							De siste månedene har jeg bodd i...
+							{getMessage(intl, 'oppsummering.text.boddSisteTolv')}
 						</EtikettLiten>
-						<CountryList visits={visits} type="oppsummering" />
+						<CountryList visits={boddIUtlandetListe} type="oppsummering" />
 					</div>
 				)}
 
 				<DisplayTextWithLabel
-					label="I denne perioden har jeg…"
+					label={getMessage(intl, 'medlemmskap.text.arbeid')}
 					text={workedInNorwayLastYearText}
 				/>
 				<DisplayTextWithLabel
-					label="De neste 12 månedene skal jeg…"
+					label={getMessage(intl,'medlemmskap.text.neste12mnd')}
 					text={resideInNorwayNextYearText}
 				/>
 				<DisplayTextWithLabel
-					label="og kommer på fødselstidspunktet til å…"
+					label={getMessage(intl, 'oppsummering.text.ogKommerPåFødselstispunktet')}
 					text={residingInNorwayDuringBirthText}
 				/>
 			</div>
@@ -158,7 +168,7 @@ export class Step4 extends Component {
 	}
 
 	render() {
-		const { data, confirmedInformation } = this.props;
+		const { data, confirmedInformation, intl } = this.props;
 
 		if (!data) {
 			return null;
@@ -169,8 +179,7 @@ export class Step4 extends Component {
 				<DocumentTitle title="NAV Engangsstønad - Oppsummering" />
 				<DialogBox type="info">
 					<Normaltekst>
-						Les nøye gjennom oppsummeringen før du sender inn søknaden. Hvis du
-						trenger å gjøre endringer kan du gå tilbake til tidligere steg
+						{getMessage(intl, 'oppsummering.text.lesNoye')}
 					</Normaltekst>
 				</DialogBox>
 				<PersonaliaLabel
@@ -179,12 +188,12 @@ export class Step4 extends Component {
 				/>
 
 				<Ingress className="engangsstonadOppsumering__underTitle">
-					Relasjon til barn
+					{getMessage(intl, 'relasjonBarn.sectionheading.relasjonBarn')}
 				</Ingress>
 				{this.renderRelasjonTilBarnSummary()}
 
 				<Ingress className="engangsstonadOppsumering__underTitle">
-					Tilknytning til Norge
+					{getMessage(intl, 'medlemmskap.sectionheading.medlemmskap')}
 				</Ingress>
 				{this.renderTilknyningTilNorgeSummary()}
 
@@ -192,14 +201,13 @@ export class Step4 extends Component {
 					name="bekreftOpplysninger"
 					checked={this.props.confirmedInformation}
 					onChange={this.props.confirmInformation}
-					label={`De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt
-							tilbake opplysninger som har betydning for min rett til engangsstønad.`}
+					label={getMessage(intl, 'oppsummering.text.samtykke')}
 				/>
 				<div className="engangsstonad__centerButton">
 					<Hovedknapp
 						onClick={this.handleNextClicked}
 						disabled={!confirmedInformation || this.props.isLoading}>
-						Send søknad
+						{getMessage(intl, 'standard.sectionheading.sendSoknad')}
 					</Hovedknapp>
 				</div>
 			</div>
@@ -207,56 +215,54 @@ export class Step4 extends Component {
 	}
 }
 
-Step4.propTypes = {
+Step3.propTypes = {
 	confirmInformation: PropTypes.func.isRequired,
 	confirmedInformation: PropTypes.bool,
 	data: PropTypes.shape({}),
-	childBorn: PropTypes.bool.isRequired,
-	noOfChildren: PropTypes.string,
+	erBarnetFodt: PropTypes.bool.isRequired,
+	antallBarn: PropTypes.string,
 	termindato: PropTypes.string,
-	bekreftetTermindato: PropTypes.string,
-	residedInNorwayLastTwelveMonths: PropTypes.bool,
-	visits: PropTypes.shape([]),
-	workedInNorwayLastTwelveMonths: PropTypes.bool,
-	residingInNorwayNextTwelveMonths: PropTypes.bool,
-	residingInNorwayDuringBirth: PropTypes.bool,
+	terminbekreftelseDato: PropTypes.string,
+	boddINorgeSisteAar: PropTypes.bool,
+	boddIUtlandetListe: PropTypes.array,
+	jobbetINorgeSisteTolvMnd: PropTypes.bool,
+	skalBoINorgeNesteTolvMnd: PropTypes.bool,
+	skalFodeINorge: PropTypes.bool,
 	postEngangsstonadToApi: PropTypes.func.isRequired,
 	postReponse: PropTypes.shape({}),
 	isLoading: PropTypes.bool.isRequired,
 	history: PropTypes.shape({
-		push: PropTypes.func
-	}).isRequired
+		push: PropTypes.func.isRequired
+	}).isRequired,
+	intl: intlShape.isRequired
 };
 
-Step4.defaultProps = {
+Step3.defaultProps = {
 	confirmedInformation: false,
 	data: undefined,
-	noOfChildren: undefined,
+	antallBarn: undefined,
 	termindato: undefined,
-	bekreftetTermindato: undefined,
-	residedInNorwayLastTwelveMonths: undefined,
-	visits: undefined,
-	workedInNorwayLastTwelveMonths: undefined,
-	residingInNorwayNextTwelveMonths: undefined,
-	residingInNorwayDuringBirth: undefined,
+	terminbekreftelseDato: undefined,
+	boddINorgeSisteAar: undefined,
+	boddIUtlandetListe: [],
+	jobbetINorgeSisteTolvMnd: undefined,
+	skalBoINorgeNesteTolvMnd: undefined,
+	skalFodeINorge: undefined,
 	postReponse: undefined
 };
 
 const mapStateToProps = (state) => ({
 	confirmedInformation: state.engangsstonadReducer.confirmedInformation,
 	data: state.engangsstonadReducer.data,
-	childBorn: state.engangsstonadReducer.childBorn,
-	noOfChildren: state.engangsstonadReducer.noOfChildren,
+	erBarnetFodt: state.engangsstonadReducer.childBorn,
+	antallBarn: state.engangsstonadReducer.noOfChildren,
 	termindato: state.engangsstonadReducer.terminDato,
-	bekreftetTermindato: state.engangsstonadReducer.bekreftetTermindato,
-	residedInNorwayLastTwelveMonths:
-		state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
-	workedInNorwayLastTwelveMonths:
-		state.engangsstonadReducer.workedInNorwayLastTwelveMonths,
-	residingInNorwayNextTwelveMonths:
-		state.engangsstonadReducer.residingInNorwayNextTwelveMonths,
-	residingInNorwayDuringBirth:
-		state.engangsstonadReducer.residingInNorwayDuringBirth,
+	terminbekreftelseDato: state.engangsstonadReducer.bekreftetTermindato,
+	boddINorgeSisteAar: state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
+	boddIUtlandetListe: state.engangsstonadReducer.visits,
+	jobbetINorgeSisteTolvMnd: state.engangsstonadReducer.workedInNorwayLastTwelveMonths,
+	skalBoINorgeNesteTolvMnd: state.engangsstonadReducer.residingInNorwayNextTwelveMonths,
+	skalFodeINorge: state.engangsstonadReducer.residingInNorwayDuringBirth,
 	postReponse: state.engangsstonadReducer.postReponse,
 	isLoading: state.engangsstonadReducer.isLoading
 });
@@ -271,4 +277,5 @@ const mapDispatchToProps = (dispatch) => ({
 	)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Step4);
+const withIntl = injectIntl(Step3);
+export default connect(mapStateToProps, mapDispatchToProps)(withIntl);

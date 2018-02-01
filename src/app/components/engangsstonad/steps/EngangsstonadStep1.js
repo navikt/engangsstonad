@@ -41,7 +41,7 @@ export class EngangsstonadStep1 extends Component {
 		this.radioGroupFodsel = [
 			{
 				name: 'whenInTime',
-				legend: 'Søknaden gjelder en fødsel som er...',
+				legend: intl.formatMessage({ id: 'relasjonBarn.text.fodselTidspunkt' }),
 				values: [
 					{
 						label: intl.formatMessage({
@@ -62,25 +62,25 @@ export class EngangsstonadStep1 extends Component {
 		this.radioGroupTermindato = [
 			{
 				name: 'numberOfExpected',
-				legend: 'og jeg venter...',
+				legend: intl.formatMessage({ id: 'relasjonBarn.text.antallBarn' }),
 				values: [
 					{
 						label: intl.formatMessage({
-							id: 'relasjonBarn.radiobutton.etbarn'
+							id: 'relasjonBarn.radiobutton.ettbarn'
 						}),
-						value: '1'
+						value: 'ett'
 					},
 					{
 						label: intl.formatMessage({
 							id: 'relasjonBarn.radiobutton.tvillinger'
 						}),
-						value: '2'
+						value: 'tvillinger'
 					},
 					{
 						label: intl.formatMessage({
 							id: 'relasjonBarn.radiobutton.flere'
 						}),
-						value: '3'
+						value: 'flere'
 					}
 				]
 			}
@@ -195,7 +195,9 @@ export class EngangsstonadStep1 extends Component {
 									/>
 									<div className="engangsstonad__centerButton">
 										<Hovedknapp onClick={this.handleNextClicked}>
-											Neste
+											{intl.formatMessage({
+												id: 'standard.button.neste'
+											})}
 										</Hovedknapp>
 									</div>
 								</div>

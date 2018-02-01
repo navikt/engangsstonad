@@ -61,12 +61,18 @@ export class EngangsstonadIndex extends Component {
 	}
 
 	render() {
+		const { intl } = this.props;
 		return (
 			<div className="engangsstonad">
-				<Header title="Søknad om engangsstønad" />
+				<Header
+					title={intl.formatMessage({ id: 'intro.pageheading.soknadES' })}
+				/>
 				<div className="linkIndicatorWrapper">
 					<div className="linkIndicatorWrapper__link">
-						<BackLink to={this.state.backLinks[this.state.activeStep - 1]} />
+						<BackLink
+							to={this.state.backLinks[this.state.activeStep - 1]}
+							tekst={intl.formatMessage({ id: 'standard.button.gaTilbake' })}
+						/>
 					</div>
 					<StepIndicator
 						steps={this.steps}

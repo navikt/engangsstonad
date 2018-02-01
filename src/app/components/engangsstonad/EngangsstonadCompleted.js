@@ -6,29 +6,30 @@ import PropTypes from 'prop-types';
 
 import { Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import moment from 'moment';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
 
 import './engangsstonad.less';
 
 export const EngangsstonadCompleted = (props) => {
+	const { intl, postReponse } = props;
 	const summaryText = () => (
 		<FormattedMessage
 			id="kvittering.text.innsendtInfo"
 			values={{
-				0: 'kl',
-				1: 'dato',
+				0: moment(postReponse.opprettet).format('HH:mm'),
+				1: moment(postReponse.opprettet).format('DD. MMMM YYYY'),
 				linkText: (
 					// eslint-disable-next-line jsx-a11y/anchor-is-valid
 					<a href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
-						<FormattedMessage id="kvittering.text.innsendtInfo.dittNav" />
+						<FormattedMessage id="kvittering.text.innsendtInfo.linkText" />
 					</a>
 				)
 			}}
 		/>
 	);
 
-	const { intl } = props;
 	return (
 		<div className="engangsstonad">
 			<DocumentTitle title="Kvittering - NAV Engangsstønad" />
@@ -42,7 +43,7 @@ export const EngangsstonadCompleted = (props) => {
 					),
 					text: intl.formatMessage({ id: 'kvittering.text.soknadMottatt' })
 				}}
-				title="Søknad om engangsstønad"
+				title={intl.formatMessage({ id: 'intro.pageheading.soknadES' })}
 				svg={VelkommenIllustration}
 				theme="purple"
 			/>
@@ -58,6 +59,7 @@ export const EngangsstonadCompleted = (props) => {
 
 EngangsstonadCompleted.propTypes = {
 	intl: intlShape.isRequired,
+	postReponse: PropTypes.shape({}).isRequired,
 	data: PropTypes.shape({
 		fornavn: PropTypes.string
 	})
