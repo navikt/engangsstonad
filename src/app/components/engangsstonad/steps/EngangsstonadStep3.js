@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
+import { injectIntl, intlShape } from 'react-intl';
 
 import { Normaltekst, Ingress, EtikettLiten } from 'nav-frontend-typografi';
 
@@ -20,7 +21,7 @@ import '../engangsstonad.less';
 
 // eslint-disable-next-line react/prefer-stateless-function
 
-export class Step4 extends Component {
+export class Step3 extends Component {
 	constructor(props) {
 		super(props);
 		this.handleNextClicked = this.handleNextClicked.bind(this);
@@ -42,13 +43,13 @@ export class Step4 extends Component {
 
 		this.props.postEngangsstonadToApi({
 			erBarnetFodt: childBorn,
-			fodselsDato: undefined,
+			fodselsdato: undefined,
 			antallBarn: noOfChildren,
 			termindato,
-			terminDatoBekreftelse: bekreftetTermindato,
+			terminbekreftelseDato: bekreftetTermindato,
 			boddINorgeSisteAar: residedInNorwayLastTwelveMonths,
-			BoddIUtlandetListe: visits,
-			arbeidetINorgeSisteTolvMnd: workedInNorwayLastTwelveMonths,
+			boddIUtlandetListe: visits,
+			jobbetINorgeSisteTolvMnd: workedInNorwayLastTwelveMonths,
 			skalBoINorgeNesteTolvMnd: residingInNorwayNextTwelveMonths,
 			skalFodeINorge: residingInNorwayDuringBirth
 		});
@@ -65,7 +66,8 @@ export class Step4 extends Component {
 			childBorn,
 			noOfChildren,
 			termindato,
-			bekreftetTermindato
+			bekreftetTermindato,
+			intl
 		} = this.props;
 
 		if (childBorn) {
@@ -78,24 +80,32 @@ export class Step4 extends Component {
 				</div>
 			);
 		}
+
+		const noOfChildrenText = noOfChildren === 'ett' ? 'ett barn' : noOfChildren;
 		return (
 			<div>
 				{childBorn === false && (
 					<div>
 						<DisplayTextWithLabel
 							label="Søknaden gjelder..."
-							text={noOfChildren}
+							text={noOfChildrenText}
 						/>
 						<DisplayTextWithLabel
-							label="Med termindato den..."
+							label={intl.formatMessage({
+								id: 'relasjonBarn.text.termindato'
+							})}
 							text={ISODateToMaskedInput(termindato)}
 						/>
 						<DisplayTextWithLabel
-							label="Det er vedlagt en terminbekreftelse..."
+							label={intl.formatMessage({
+								id: 'oppsummering.text.vedlagtTerminbekreftelse'
+							})}
 							text="<link til vedlegg her>"
 						/>
 						<DisplayTextWithLabel
-							label="Som er datert den..."
+							label={intl.formatMessage({
+								id: 'oppsummering.text.somErDatert'
+							})}
 							text={ISODateToMaskedInput(bekreftetTermindato)}
 						/>
 					</div>
@@ -110,47 +120,56 @@ export class Step4 extends Component {
 			visits,
 			workedInNorwayLastTwelveMonths,
 			residingInNorwayNextTwelveMonths,
-			residingInNorwayDuringBirth
+			residingInNorwayDuringBirth,
+			intl
 		} = this.props;
 
 		const workedInNorwayLastYearText = workedInNorwayLastTwelveMonths
-			? 'Kun jobbet i norge'
-			: 'Kun jobbet i utlandet';
+			? intl.formatMessage({ id: 'medlemmskap.radiobutton.arbeidNorge' })
+			: intl.formatMessage({ id: 'medlemmskap.radiobutton.arbeidUtlandet' });
 
 		const resideInNorwayNextYearText = residingInNorwayNextTwelveMonths
-			? 'kun bo i norge'
-			: 'bo i utlandet';
+			? intl.formatMessage({ id: 'medlemmskap.radiobutton.boNorge' })
+			: intl.formatMessage({ id: 'medlemmskap.radiobutton.boUtlandet' });
 
 		const residingInNorwayDuringBirthText = residingInNorwayDuringBirth
-			? 'være i Norge'
-			: 'være i utlandet';
+			? intl.formatMessage({ id: 'medlemmskap.radiobutton.vareNorge' })
+			: intl.formatMessage({ id: 'medlemmskap.radioButton.vareUtlandet' });
 
 		return (
 			<div>
 				{residedInNorwayLastTwelveMonths ? (
 					<DisplayTextWithLabel
-						label="De siste månedene har jeg bodd i..."
+						label={intl.formatMessage({
+							id: 'oppsummering.text.boddSisteTolv'
+						})}
 						text="Norge"
 					/>
 				) : (
 					<div>
 						<EtikettLiten className="textWithLabel__label">
-							De siste månedene har jeg bodd i...
+							{intl.formatMessage({ id: 'oppsummering.text.boddSisteTolv' })}
 						</EtikettLiten>
 						<CountryList visits={visits} type="oppsummering" />
 					</div>
 				)}
 
 				<DisplayTextWithLabel
-					label="I denne perioden har jeg…"
+					label={intl.formatMessage({
+						id: 'medlemmskap.text.arbeid'
+					})}
 					text={workedInNorwayLastYearText}
 				/>
 				<DisplayTextWithLabel
-					label="De neste 12 månedene skal jeg…"
+					label={intl.formatMessage({
+						id: 'medlemmskap.text.neste12mnd'
+					})}
 					text={resideInNorwayNextYearText}
 				/>
 				<DisplayTextWithLabel
-					label="og kommer på fødselstidspunktet til å…"
+					label={intl.formatMessage({
+						id: 'oppsummering.text.ogKommerPåFødselstispunktet'
+					})}
 					text={residingInNorwayDuringBirthText}
 				/>
 			</div>
@@ -158,7 +177,7 @@ export class Step4 extends Component {
 	}
 
 	render() {
-		const { data, confirmedInformation } = this.props;
+		const { data, confirmedInformation, intl } = this.props;
 
 		if (!data) {
 			return null;
@@ -169,8 +188,7 @@ export class Step4 extends Component {
 				<DocumentTitle title="NAV Engangsstønad - Oppsummering" />
 				<DialogBox type="info">
 					<Normaltekst>
-						Les nøye gjennom oppsummeringen før du sender inn søknaden. Hvis du
-						trenger å gjøre endringer kan du gå tilbake til tidligere steg
+						{intl.formatMessage({ id: 'oppsummering.text.lesNoye' })}
 					</Normaltekst>
 				</DialogBox>
 				<PersonaliaLabel
@@ -179,12 +197,16 @@ export class Step4 extends Component {
 				/>
 
 				<Ingress className="engangsstonadOppsumering__underTitle">
-					Relasjon til barn
+					{intl.formatMessage({
+						id: 'relasjonBarn.sectionheading.relasjonBarn'
+					})}
 				</Ingress>
 				{this.renderRelasjonTilBarnSummary()}
 
 				<Ingress className="engangsstonadOppsumering__underTitle">
-					Tilknytning til Norge
+					{intl.formatMessage({
+						id: 'medlemmskap.sectionheading.medlemmskap'
+					})}
 				</Ingress>
 				{this.renderTilknyningTilNorgeSummary()}
 
@@ -192,14 +214,13 @@ export class Step4 extends Component {
 					name="bekreftOpplysninger"
 					checked={this.props.confirmedInformation}
 					onChange={this.props.confirmInformation}
-					label={`De opplysninger jeg har oppgitt er riktig og jeg har ikke holdt
-							tilbake opplysninger som har betydning for min rett til engangsstønad.`}
+					label={intl.formatMessage({ id: 'oppsummering.text.samtykke' })}
 				/>
 				<div className="engangsstonad__centerButton">
 					<Hovedknapp
 						onClick={this.handleNextClicked}
 						disabled={!confirmedInformation || this.props.isLoading}>
-						Send søknad
+						{intl.formatMessage({ id: 'standard.sectionheading.sendSoknad' })}
 					</Hovedknapp>
 				</div>
 			</div>
@@ -207,7 +228,7 @@ export class Step4 extends Component {
 	}
 }
 
-Step4.propTypes = {
+Step3.propTypes = {
 	confirmInformation: PropTypes.func.isRequired,
 	confirmedInformation: PropTypes.bool,
 	data: PropTypes.shape({}),
@@ -222,10 +243,11 @@ Step4.propTypes = {
 	residingInNorwayDuringBirth: PropTypes.bool,
 	postEngangsstonadToApi: PropTypes.func.isRequired,
 	postReponse: PropTypes.shape({}),
-	isLoading: PropTypes.bool.isRequired
+	isLoading: PropTypes.bool.isRequired,
+	intl: intlShape.isRequired
 };
 
-Step4.defaultProps = {
+Step3.defaultProps = {
 	confirmedInformation: false,
 	data: undefined,
 	noOfChildren: undefined,
@@ -248,6 +270,7 @@ const mapStateToProps = (state) => ({
 	bekreftetTermindato: state.engangsstonadReducer.bekreftetTermindato,
 	residedInNorwayLastTwelveMonths:
 		state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
+	visits: state.engangsstonadReducer.visits,
 	workedInNorwayLastTwelveMonths:
 		state.engangsstonadReducer.workedInNorwayLastTwelveMonths,
 	residingInNorwayNextTwelveMonths:
@@ -268,4 +291,5 @@ const mapDispatchToProps = (dispatch) => ({
 	)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Step4);
+const withIntl = injectIntl(Step3);
+export default connect(mapStateToProps, mapDispatchToProps)(withIntl);

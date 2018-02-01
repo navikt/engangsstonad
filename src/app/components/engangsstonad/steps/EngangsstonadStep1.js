@@ -64,19 +64,19 @@ export class EngangsstonadStep1 extends Component {
 						label: intl.formatMessage({
 							id: 'relasjonBarn.radiobutton.etbarn'
 						}),
-						value: '1'
+						value: 'ett'
 					},
 					{
 						label: intl.formatMessage({
 							id: 'relasjonBarn.radiobutton.tvillinger'
 						}),
-						value: '2'
+						value: 'tvillinger'
 					},
 					{
 						label: intl.formatMessage({
 							id: 'relasjonBarn.radiobutton.flere'
 						}),
-						value: '3'
+						value: 'flere'
 					}
 				]
 			}
