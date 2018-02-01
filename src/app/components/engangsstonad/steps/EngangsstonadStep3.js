@@ -81,11 +81,6 @@ export class Step3 extends Component {
 			);
 		}
 
-		// const noOfChildrenText =
-		// 	noOfChildren === 'ett'
-		// 		? intl.formatMessage({ id: 'relasjonBarn.radiobutton.ettbarn' })
-		// 		: noOfChildren;
-
 		let noOfChildrenText;
 		switch (noOfChildren) {
 			case 'tvillinger':
