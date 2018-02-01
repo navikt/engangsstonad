@@ -8,6 +8,7 @@ import {
 	CONFIRM_INFORMATION,
 	SET_BEKREFTET_TERMIN_DATO,
 	SET_TERMIN_DATO,
+	SET_FODSEL_DATO,
 	TOGGLE_CHILD_BORN,
 	TOGGLE_OPPHOLD_NAA,
 	TOGGLE_RESIDED_IN_NORWAY_LAST_TWELVE_MONTHS,
@@ -15,7 +16,10 @@ import {
 	TOGGLE_RESIDING_IN_NORWAY_DURING_BIRTH,
 	ADD_VISIT,
 	EDIT_VISIT,
-	DELETE_VISIT
+	DELETE_VISIT,
+	POST_DATA_REQUESTED,
+	POST_DATA_SUCCESS,
+	POST_DATA_FAILED
 } from '../constants/index';
 
 import { shouldShowStepper } from '../util';
@@ -23,7 +27,8 @@ import { shouldShowStepper } from '../util';
 const defaultState = {
 	activeRoute: null,
 	showStepper: true,
-	visits: []
+	visits: [],
+	isLoading: false
 };
 
 const newState = (state) => ({
@@ -47,6 +52,12 @@ const engangsstonadReducer = (state = defaultState, action) => {
 			return newState({
 				...state,
 				confirmedInformation: !state.confirmedInformation
+			});
+		}
+		case SET_FODSEL_DATO: {
+			return newState({
+				...state,
+				fodselDato: action.data
 			});
 		}
 		case TOGGLE_CHILD_BORN: {
@@ -96,6 +107,27 @@ const engangsstonadReducer = (state = defaultState, action) => {
 		case GET_DATA_FAILED: {
 			return newState({ ...state, error: action.error });
 		}
+
+		case POST_DATA_REQUESTED: {
+			return newState({ ...state, isLoading: action.isLoading });
+		}
+
+		case POST_DATA_SUCCESS: {
+			return newState({
+				...state,
+				postReponse: action.data,
+				isLoading: false
+			});
+		}
+
+		case POST_DATA_FAILED: {
+			return newState({
+				...state,
+				postReponse: action.error,
+				isLoading: false
+			});
+		}
+
 		case ADD_VISIT:
 			return {
 				...state,

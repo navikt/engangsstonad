@@ -6,7 +6,8 @@
 		"jest": true
 	},
 	"globals": {
-		"shallow": true
+		"shallow": true,
+		"__ENV__": false
 	},
 	"settings": {
 		"import/resolver": {

@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import TransformingRadioGroup from './../transforming-radio-group/TransformingRadioGroup';
 
 export default class TransformingRadioGroupCollection extends Component {
-	componentWillMount() {
+	constructor(props) {
+		super(props);
 		this.handleOnClickCollapsed = this.handleOnClickCollapsed.bind(this);
 		this.handleOnClickExpanded = this.handleOnClickExpanded.bind(this);
+	}
 
+	componentWillMount() {
 		const stages = this.props.stages.slice();
 		const expandedStage = stages[0];
 

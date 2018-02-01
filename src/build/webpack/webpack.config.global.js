@@ -1,5 +1,5 @@
 const path = require('path');
-const FlowWebpackPlugin = require('flow-webpack-plugin');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -75,11 +75,13 @@ const webpackConfig = {
 			disable: false,
 			allChunks: true
 		}),
-		new FlowWebpackPlugin(),
-		new SpriteLoaderPlugin({ plainSprite: true }),
 		new HtmlWebpackPlugin({
 			template: './src/app/index.html',
 			inject: 'body'
+		}),
+		new SpriteLoaderPlugin({ plainSprite: true }),
+		new webpack.DefinePlugin({
+			__ENV__: JSON.stringify(process.env.NODE_ENV)
 		})
 	]
 };
