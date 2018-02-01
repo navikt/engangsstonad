@@ -30,28 +30,28 @@ export class Step3 extends Component {
 	handleNextClicked(e) {
 		e.preventDefault();
 		const {
-			childBorn,
-			noOfChildren,
+			erBarnetFodt,
+			antallBarn,
 			termindato,
-			bekreftetTermindato,
-			residedInNorwayLastTwelveMonths,
-			visits,
-			workedInNorwayLastTwelveMonths,
-			residingInNorwayNextTwelveMonths,
-			residingInNorwayDuringBirth
+			terminbekreftelseDato,
+			boddINorgeSisteAar,
+			boddIUtlandetListe,
+			jobbetINorgeSisteTolvMnd,
+			skalBoINorgeNesteTolvMnd,
+			skalFodeINorge
 		} = this.props;
 
 		this.props.postEngangsstonadToApi({
-			erBarnetFodt: childBorn,
+			erBarnetFodt,
 			fodselsdato: undefined,
-			antallBarn: noOfChildren,
+			antallBarn,
 			termindato,
-			terminbekreftelseDato: bekreftetTermindato,
-			boddINorgeSisteAar: residedInNorwayLastTwelveMonths,
-			boddIUtlandetListe: visits,
-			jobbetINorgeSisteTolvMnd: workedInNorwayLastTwelveMonths,
-			skalBoINorgeNesteTolvMnd: residingInNorwayNextTwelveMonths,
-			skalFodeINorge: residingInNorwayDuringBirth
+			terminbekreftelseDato,
+			boddINorgeSisteAar,
+			boddIUtlandetListe,
+			jobbetINorgeSisteTolvMnd,
+			skalBoINorgeNesteTolvMnd,
+			skalFodeINorge
 		});
 	}
 
@@ -62,8 +62,8 @@ export class Step3 extends Component {
 	}
 
 	createNumberOfChildrenSummaryString() {
-		const { noOfChildren, intl } = this.props;
-		switch (noOfChildren) {
+		const { antallBarn, intl } = this.props;
+		switch (antallBarn) {
 			case 'tvillinger':
 				return getMessage(intl, 'relasjonBarn.radiobutton.tvillinger');
 			case 'flere':
@@ -74,7 +74,12 @@ export class Step3 extends Component {
 	}
 
 	renderRelasjonTilBarnSummary() {
-		const { erBarnetFodt, termindato, terminbekreftelseDato, intl } = this.props;
+		const {
+			erBarnetFodt,
+			termindato,
+			terminbekreftelseDato,
+			intl
+		} = this.props;
 
 		if (erBarnetFodt) {
 			return (
@@ -100,11 +105,17 @@ export class Step3 extends Component {
 							text={ISODateToMaskedInput(termindato)}
 						/>
 						<DisplayTextWithLabel
-							label={getMessage(intl,'oppsummering.text.vedlagtTerminbekreftelse')}
+							label={getMessage(
+								intl,
+								'oppsummering.text.vedlagtTerminbekreftelse'
+							)}
 							text="<link til vedlegg her>"
 						/>
 						<DisplayTextWithLabel
-							label={getMessage(intl,'oppsummering.text.vedlagtTerminbekreftelse')}
+							label={getMessage(
+								intl,
+								'oppsummering.text.vedlagtTerminbekreftelse'
+							)}
 							text={ISODateToMaskedInput(terminbekreftelseDato)}
 						/>
 					</div>
@@ -156,11 +167,14 @@ export class Step3 extends Component {
 					text={workedInNorwayLastYearText}
 				/>
 				<DisplayTextWithLabel
-					label={getMessage(intl,'medlemmskap.text.neste12mnd')}
+					label={getMessage(intl, 'medlemmskap.text.neste12mnd')}
 					text={resideInNorwayNextYearText}
 				/>
 				<DisplayTextWithLabel
-					label={getMessage(intl, 'oppsummering.text.ogKommerPåFødselstispunktet')}
+					label={getMessage(
+						intl,
+						'oppsummering.text.ogKommerPåFødselstispunktet'
+					)}
 					text={residingInNorwayDuringBirthText}
 				/>
 			</div>
@@ -258,10 +272,13 @@ const mapStateToProps = (state) => ({
 	antallBarn: state.engangsstonadReducer.noOfChildren,
 	termindato: state.engangsstonadReducer.terminDato,
 	terminbekreftelseDato: state.engangsstonadReducer.bekreftetTermindato,
-	boddINorgeSisteAar: state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
+	boddINorgeSisteAar:
+		state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
 	boddIUtlandetListe: state.engangsstonadReducer.visits,
-	jobbetINorgeSisteTolvMnd: state.engangsstonadReducer.workedInNorwayLastTwelveMonths,
-	skalBoINorgeNesteTolvMnd: state.engangsstonadReducer.residingInNorwayNextTwelveMonths,
+	jobbetINorgeSisteTolvMnd:
+		state.engangsstonadReducer.workedInNorwayLastTwelveMonths,
+	skalBoINorgeNesteTolvMnd:
+		state.engangsstonadReducer.residingInNorwayNextTwelveMonths,
 	skalFodeINorge: state.engangsstonadReducer.residingInNorwayDuringBirth,
 	postReponse: state.engangsstonadReducer.postReponse,
 	isLoading: state.engangsstonadReducer.isLoading
