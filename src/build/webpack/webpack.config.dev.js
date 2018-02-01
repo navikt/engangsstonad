@@ -5,8 +5,6 @@ webpackConfig.entry = webpackConfig.entry.concat([
 	'webpack-dev-server/client?http://localhost:8080'
 ]);
 
-webpackConfig.module.rules.push();
-
 module.exports = Object.assign(webpackConfig, {
 	devtool: 'inline-source-map',
 	devServer: devServerConfig

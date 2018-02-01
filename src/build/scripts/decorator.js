@@ -1,8 +1,6 @@
 require('dotenv').config();
 const jsdom = require('jsdom');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const axios = require('axios');
-const webpack = require('webpack');
 
 const { JSDOM } = jsdom;
 
@@ -13,54 +11,33 @@ const getDecorator = (decoratorUrl) =>
 		validateStatus: (status) => status >= 200 || status === 302
 	});
 
-const reconfigureBuildWithDecorator = (decoratorResponse, oldConfig) => {
-	const config = Object.assign({}, oldConfig);
+const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
 	const html = decoratorResponse.data;
 	const { document } = new JSDOM(html).window;
-	try {
-		const header = document.getElementById('header').innerHTML;
-		const footer = document.getElementById('footer').innerHTML;
-		const scripts = document.getElementById('scripts').innerHTML;
-		const styles = document.getElementById('styles').innerHTML;
 
-		config.module.rules.push({
-			test: /index\.html$/,
-			use: [
-				{
-					loader: 'mustache-loader',
-					options: {
-						render: {
-							REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL,
-							NAV_HEADING: header,
-							NAV_FOOTER: footer,
-							NAV_SCRIPTS: scripts,
-							NAV_STYLES: styles
-						}
+	const header = document.getElementById('header').innerHTML;
+	const footer = document.getElementById('footer').innerHTML;
+	const scripts = document.getElementById('scripts').innerHTML;
+	const styles = document.getElementById('styles').innerHTML;
+
+	config.module.rules.push({
+		test: /index\.html$/,
+		use: [
+			{
+				loader: 'mustache-loader',
+				options: {
+					render: {
+						REST_API_URL:
+							process.env.FORELDREPENGESOKNAD_API_URL || '{{{REST_API_URL}}}',
+						NAV_HEADING: header,
+						NAV_FOOTER: footer,
+						NAV_SCRIPTS: scripts,
+						NAV_STYLES: styles
 					}
 				}
-			]
-		});
-
-		config.plugins.push(
-			new HtmlWebpackPlugin({
-				template: './src/app/index.html',
-				inject: 'body'
-			})
-		);
-	} catch (e) {
-		console.error('Dekoratør feilet; starter uten dekoratør.');
-		console.error(e);
-		config.plugins.push(
-			new HtmlWebpackPlugin({
-				template: './src/app/index.html',
-				inject: 'body',
-				NAVHeading: '',
-				NAVFooter: '',
-				NAVScripts: '',
-				NAVStyles: ''
-			})
-		);
-	}
+			}
+		]
+	});
 
 	return config;
 };

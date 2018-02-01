@@ -1,10 +1,13 @@
 require('dotenv').config();
 
+const publicPath = '/engangsstonad';
+
 module.exports = {
-	contentBase: 'dist',
+	historyApiFallback: {
+		index: `${publicPath}/index.html`
+	},
+	publicPath,
 	watchContentBase: true,
-	historyApiFallback: true,
-	publicPath: '/engangsstonad',
 	quiet: false,
 	noInfo: false,
 	stats: {
