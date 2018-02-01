@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import PropTypes from 'prop-types';
 
 import { Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -19,6 +19,7 @@ export const EngangsstonadCompleted = (props) => {
 				0: 'kl',
 				1: 'dato',
 				linkText: (
+					// eslint-disable-next-line jsx-a11y/anchor-is-valid
 					<a href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
 						<FormattedMessage id="kvittering.text.innsendtInfo.dittNav" />
 					</a>
@@ -27,7 +28,7 @@ export const EngangsstonadCompleted = (props) => {
 		/>
 	);
 
-	const { intl, postReponse } = props;
+	const { intl } = props;
 	return (
 		<div className="engangsstonad">
 			<DocumentTitle title="Kvittering - NAV Engangsstønad" />
@@ -47,7 +48,7 @@ export const EngangsstonadCompleted = (props) => {
 			/>
 			<Ingress>{summaryText()}</Ingress>
 			<div className="engangsstonad__centerButton">
-				<Hovedknapp onClick={() => console.log('lukk vinduet')}>
+				<Hovedknapp>
 					{intl.formatMessage({ id: 'kvittering.text.lukkVinduet' })}
 				</Hovedknapp>
 			</div>
@@ -55,7 +56,16 @@ export const EngangsstonadCompleted = (props) => {
 	);
 };
 
-EngangsstonadCompleted.propTypes = { intl: intlShape.isRequired };
+EngangsstonadCompleted.propTypes = {
+	intl: intlShape.isRequired,
+	data: PropTypes.shape({
+		fornavn: PropTypes.string
+	})
+};
+
+EngangsstonadCompleted.defaultProps = {
+	data: null
+};
 
 const mapStateToProps = (state) => ({
 	data: state.engangsstonadReducer.data,

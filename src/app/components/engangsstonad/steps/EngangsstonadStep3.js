@@ -222,7 +222,10 @@ Step4.propTypes = {
 	residingInNorwayDuringBirth: PropTypes.bool,
 	postEngangsstonadToApi: PropTypes.func.isRequired,
 	postReponse: PropTypes.shape({}),
-	isLoading: PropTypes.bool.isRequired
+	isLoading: PropTypes.bool.isRequired,
+	history: PropTypes.shape({
+		push: PropTypes.func
+	}).isRequired
 };
 
 Step4.defaultProps = {

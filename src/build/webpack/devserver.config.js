@@ -1,12 +1,22 @@
 require('dotenv').config();
 
+const publicPath = '/engangsstonad';
+
 module.exports = {
-	contentBase: 'dist',
+	historyApiFallback: {
+		index: `${publicPath}/index.html`
+	},
+	publicPath,
 	watchContentBase: true,
-	historyApiFallback: true,
-	stats: 'minimal',
-	proxy: {
-		'/rest': process.env.FORELDREPENGESOKNAD_API_URL,
-		changeOrigin: true
+	quiet: false,
+	noInfo: false,
+	stats: {
+		assets: false,
+		colors: true,
+		version: false,
+		hash: false,
+		timings: false,
+		chunks: false,
+		chunkModules: false
 	}
 };
