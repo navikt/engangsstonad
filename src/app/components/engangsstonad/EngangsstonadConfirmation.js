@@ -71,9 +71,9 @@ export class EngangsstonadConfirmation extends Component {
 			return null;
 		}
 
-		const confirmBoxLabel = () => (
+		const confirmBoxLabelHeader = () => (
 			<FormattedMessage
-				id="intro.text.samtykke"
+				id="intro.text.samtykkeIntro"
 				values={{
 					link: (
 						// eslint-disable-next-line jsx-a11y/anchor-is-valid
@@ -103,7 +103,10 @@ export class EngangsstonadConfirmation extends Component {
 				<Ingress>{intl.formatMessage({ id: 'intro.text.omES' })}</Ingress>
 				<ConfirmCheckbox
 					name="egenerklaring"
-					label={confirmBoxLabel()}
+					labelHeader={confirmBoxLabelHeader()}
+					label={intl.formatMessage({
+						id: 'intro.text.samtykke'
+					})}
 					onChange={this.handleConfirmCheckboxChange}
 					checked={approvedConditions}
 				/>
