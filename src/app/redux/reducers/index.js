@@ -19,7 +19,8 @@ import {
 	DELETE_VISIT,
 	POST_DATA_REQUESTED,
 	POST_DATA_SUCCESS,
-	POST_DATA_FAILED
+	POST_DATA_FAILED,
+	TOGGLE_LANGUAGE
 } from '../constants/index';
 
 import { shouldShowStepper } from '../util';
@@ -28,7 +29,8 @@ const defaultState = {
 	activeRoute: null,
 	showStepper: true,
 	visits: [],
-	isLoading: false
+	isLoading: false,
+	language: 'nb'
 };
 
 const newState = (state) => ({
@@ -148,6 +150,11 @@ const engangsstonadReducer = (state = defaultState, action) => {
 				...state,
 				visits: state.visits.filter((visit) => action.data !== visit)
 			};
+		case TOGGLE_LANGUAGE:
+			return newState({
+				...state,
+				language: action.data
+			});
 		default:
 			return state;
 	}

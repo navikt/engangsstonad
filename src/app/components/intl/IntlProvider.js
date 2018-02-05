@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import nb from 'react-intl/locale-data/nb';
@@ -11,13 +12,10 @@ class IntlProvider extends Component {
 	constructor(props) {
 		super(props);
 		addLocaleData([...nb, ...nn]);
-		this.state = {
-			locale: 'nb'
-		};
 	}
 
 	render() {
-		const messages = this.state.locale === 'nb' ? nbMessages : nnMessages;
+		const messages = this.props.language === 'nb' ? nbMessages : nnMessages;
 		return (
 			<Provider locale="nb" messages={messages || {}}>
 				{this.props.children}
@@ -27,7 +25,12 @@ class IntlProvider extends Component {
 }
 
 IntlProvider.propTypes = {
-	children: PropTypes.node.isRequired
+	children: PropTypes.node.isRequired,
+	language: PropTypes.string.isRequired
 };
 
-export default IntlProvider;
+const mapStateToProps = (state) => ({
+	language: state.engangsstonadReducer.language
+});
+
+export default connect(mapStateToProps)(IntlProvider);

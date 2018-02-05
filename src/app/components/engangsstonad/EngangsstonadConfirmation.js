@@ -14,7 +14,8 @@ import RettigheterOgPlikter from 'shared/modal-content/RettigheterOgPlikter';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
-import { getDataRequested, approveConditions } from 'actions';
+import { getDataRequested, approveConditions, toggleLanguage } from 'actions';
+import LanguageToggle from '../intl/LanguageToggle';
 import getMessage from '../intl/util';
 
 import './engangsstonad.less';
@@ -65,6 +66,10 @@ export class EngangsstonadConfirmation extends Component {
 		this.props.history.push('/engangsstonad/step1');
 	}
 
+	toggleLanguage(languageCode) {
+		this.props.dispatch(toggleLanguage(languageCode));
+	}
+
 	render() {
 		const { data, approvedConditions, intl } = this.props;
 
@@ -89,6 +94,10 @@ export class EngangsstonadConfirmation extends Component {
 		return (
 			<div className="engangsstonad">
 				<DocumentTitle title="Samtykke - NAV Engangsstønad" />
+				<LanguageToggle
+					language={this.props.language}
+					toggleLanguage={(e) => this.toggleLanguage(e)}
+				/>
 				<HeaderIllustration
 					dialog={{
 						title: getMessage(intl, 'intro.snakkeboble.overskrift', {
@@ -139,7 +148,8 @@ EngangsstonadConfirmation.propTypes = {
 	data: PropTypes.shape({
 		fornavn: PropTypes.string
 	}),
-	intl: intlShape.isRequired
+	intl: intlShape.isRequired,
+	language: PropTypes.string.isRequired
 };
 
 EngangsstonadConfirmation.defaultProps = {
@@ -149,7 +159,8 @@ EngangsstonadConfirmation.defaultProps = {
 
 const mapStateToProps = (state) => ({
 	data: state.engangsstonadReducer.data,
-	approvedConditions: state.engangsstonadReducer.approvedConditions
+	approvedConditions: state.engangsstonadReducer.approvedConditions,
+	language: state.engangsstonadReducer.language
 });
 
 const withIntl = injectIntl(EngangsstonadConfirmation);
