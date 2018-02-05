@@ -7,7 +7,11 @@ import './displayTextWithLabel.less';
 
 export const DisplayTextWithLabel = (props) => (
 	<div className="textWithLabel">
-		<EtikettLiten className="textWithLabel__label">{props.label}</EtikettLiten>
+		{props.label && (
+			<EtikettLiten className="textWithLabel__label">
+				{props.label}
+			</EtikettLiten>
+		)}
 		<Element className="textWithLabel__text">{props.text}</Element>
 	</div>
 );

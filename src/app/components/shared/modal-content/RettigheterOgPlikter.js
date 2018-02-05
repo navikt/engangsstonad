@@ -1,53 +1,80 @@
 import React from 'react';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
+import getMessage from '../../intl/util';
 import './modalContent.less';
 
-const RettigheterOgPlikter = () => (
+const RettigheterOgPlikter = ({ intl }) => (
 	<div className="modalContent">
 		<Undertittel className="modalContent__header">
-			Rettigheter og Plikter
+			{getMessage(intl, 'rettigheter.sectionheading.rettigheterOgPlikter')}
 		</Undertittel>
 		<ul>
 			<li>
 				<Normaltekst>
-					Jeg forstår at når jeg søker engangsstønad kan jeg ikke få
-					foreldrepenger for det samme barnet.
+					{getMessage(intl, 'rettigheter.text.sammeBarnet')}
 				</Normaltekst>
 			</li>
 			<li>
 				<Normaltekst>
-					Jeg samtykker til at NAV kan innhente opplysninger som er nødvendig
-					for å behandle søknaden min.
+					{getMessage(intl, 'rettigheter.text.innhenteOpplysninger')}
 				</Normaltekst>
 				<ul className="modalContent__sublist">
 					<li>
-						<Normaltekst>arbeidsforhold</Normaltekst>
+						<Normaltekst>
+							{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.1')}
+						</Normaltekst>
 					</li>
 					<li>
-						<Normaltekst>inntekt</Normaltekst>
+						<Normaltekst>
+							{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.2')}
+						</Normaltekst>
 					</li>
 					<li>
-						<Normaltekst>tillknytning til norge</Normaltekst>
+						<Normaltekst>
+							{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.3')}
+						</Normaltekst>
 					</li>
 					<li>
-						<Normaltekst>opplysninger om barnet</Normaltekst>
+						<Normaltekst>
+							{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.4')}
+						</Normaltekst>
 					</li>
 					<li>
-						<Normaltekst>opplysninger om den andre forelderen</Normaltekst>
+						<Normaltekst>
+							{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.5')}
+						</Normaltekst>
 					</li>
 				</ul>
 			</li>
 			<li>
 				<Normaltekst>
-					Jeg forstår at hvis jeg gir uriktige opplysninger kan det få
-					konsekvenser for retten til engangsstønaden.
+					{getMessage(intl, 'rettigheter.text.uretteOpplysninger')}
 				</Normaltekst>
 			</li>
 			<li>
-				<Normaltekst>Jeg har lest og forstått det som står på</Normaltekst>
+				<Normaltekst>
+					<FormattedMessage
+						id="rettigheter.text.lestOgForstått"
+						values={{
+							link: (
+								// eslint-disable-next-line jsx-a11y/anchor-is-valid
+								<a
+									href="#"
+									onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
+									<FormattedMessage id="rettigheter.text.lestOgForstått.link" />
+								</a>
+							)
+						}}
+					/>
+				</Normaltekst>
 			</li>
 		</ul>
 	</div>
 );
 
-export default RettigheterOgPlikter;
+RettigheterOgPlikter.propTypes = {
+	intl: intlShape.isRequired
+};
+
+export default injectIntl(RettigheterOgPlikter);

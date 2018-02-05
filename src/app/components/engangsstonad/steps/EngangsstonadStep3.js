@@ -128,15 +128,10 @@ export class Step3 extends Component {
 		const {
 			boddINorgeSisteAar,
 			boddIUtlandetListe,
-			jobbetINorgeSisteTolvMnd,
 			skalBoINorgeNesteTolvMnd,
 			skalFodeINorge,
 			intl
 		} = this.props;
-
-		const workedInNorwayLastYearText = jobbetINorgeSisteTolvMnd
-			? getMessage(intl, 'medlemmskap.radiobutton.arbeidNorge')
-			: getMessage(intl, 'medlemmskap.radiobutton.arbeidUtlandet');
 
 		const resideInNorwayNextYearText = skalBoINorgeNesteTolvMnd
 			? getMessage(intl, 'medlemmskap.radiobutton.boNorge')
@@ -162,10 +157,6 @@ export class Step3 extends Component {
 					</div>
 				)}
 
-				<DisplayTextWithLabel
-					label={getMessage(intl, 'medlemmskap.text.arbeid')}
-					text={workedInNorwayLastYearText}
-				/>
 				<DisplayTextWithLabel
 					label={getMessage(intl, 'medlemmskap.text.neste12mnd')}
 					text={resideInNorwayNextYearText}
@@ -239,7 +230,6 @@ Step3.propTypes = {
 	terminbekreftelseDato: PropTypes.string,
 	boddINorgeSisteAar: PropTypes.bool,
 	boddIUtlandetListe: PropTypes.array,
-	jobbetINorgeSisteTolvMnd: PropTypes.bool,
 	skalBoINorgeNesteTolvMnd: PropTypes.bool,
 	skalFodeINorge: PropTypes.bool,
 	postEngangsstonadToApi: PropTypes.func.isRequired,
@@ -259,7 +249,6 @@ Step3.defaultProps = {
 	terminbekreftelseDato: undefined,
 	boddINorgeSisteAar: undefined,
 	boddIUtlandetListe: [],
-	jobbetINorgeSisteTolvMnd: undefined,
 	skalBoINorgeNesteTolvMnd: undefined,
 	skalFodeINorge: undefined,
 	postReponse: undefined
@@ -275,8 +264,6 @@ const mapStateToProps = (state) => ({
 	boddINorgeSisteAar:
 		state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
 	boddIUtlandetListe: state.engangsstonadReducer.visits,
-	jobbetINorgeSisteTolvMnd:
-		state.engangsstonadReducer.workedInNorwayLastTwelveMonths,
 	skalBoINorgeNesteTolvMnd:
 		state.engangsstonadReducer.residingInNorwayNextTwelveMonths,
 	skalFodeINorge: state.engangsstonadReducer.residingInNorwayDuringBirth,

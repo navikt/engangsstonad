@@ -202,19 +202,6 @@ export class EngangsstonadStep2 extends Component {
 				)}
 
 				{this.shouldDisplayWorkedInNorway() && (
-					<TransformingRadioGroupCollection
-						stages={this.radioGroupStages2}
-						onChange={($e, stages, expandedStage) =>
-							this.workedInNorwayLastTwelveMonthsValueChange(
-								$e,
-								stages,
-								expandedStage
-							)
-						}
-					/>
-				)}
-
-				{this.props.workedInNorwayLastTwelveMonths !== undefined && (
 					<div>
 						<TransformingRadioGroupCollection
 							stages={this.radioGroupStages3}

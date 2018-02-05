@@ -16,7 +16,8 @@ import {
 	TOGGLE_RESIDING_IN_NORWAY_NEXT_TWELVE_MONTHS,
 	ADD_VISIT,
 	EDIT_VISIT,
-	DELETE_VISIT
+	DELETE_VISIT,
+	TOGGLE_LANGUAGE
 } from '../constants/index';
 
 export const activeRouteChanged = (route) => ({
@@ -102,4 +103,9 @@ export const editVisit = (visitData, index) => ({
 export const deleteVisit = (visitData) => ({
 	type: DELETE_VISIT,
 	data: visitData
+});
+
+export const toggleLanguage = (languageCode) => ({
+	type: TOGGLE_LANGUAGE,
+	data: languageCode
 });

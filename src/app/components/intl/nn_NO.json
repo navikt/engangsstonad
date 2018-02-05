@@ -1,10 +1,11 @@
 {
     "intro.pageheading.soknadES": "Søknad om eingongsstønad",
     "intro.text.under18": "Sidan du er under 18 år, må ein av foreldra dine eller ein verje skrive under på søknaden saman med deg. Du må difor fylle ut søknaden på papir og sende den i posten. ",
-    "intro.snakkeboble.overskrift": "Hei! {name}!",
+    "intro.snakkeboble.overskrift": "Hei {name}!",
     "intro.text.hjelpedeg": "Eg skal hjelpe deg med å fylle ut søknaden. ",
     "intro.text.omES": "Eingongsstønad er ein skattefri eingongsum du kan få for kvart barn du føder eller adopterer.",
-    "intro.text.samtykke": "Eg har lest og forstått mine { link }",
+    "intro.text.samtykkeIntro": "For å begynne med søknaden må du bekrefte at du har lest og forstått dine { link }",
+    "intro.text.samtykke": "Eg bekreftar at eg har lest og forstått",
     "intro.text.samtykke.link": "rettar og pliktar",
     "intro.pageheading.samtykke": "Rettar og pliktar.",
     "intro.button.startSoknad": "Start søknaden",
@@ -66,5 +67,20 @@
     "kvittering.text.soknadMottatt": "Vi kontaktar deg om vi treng noko meir.",
     "kvittering.text.innsendtInfo": "Vi fekk søknaden din den {1} kl. {0}. Du kan følgje med på søknaden på { linkText }.",
     "kvittering.text.innsendtInfo.linkText": "Ditt Nav",
-    "kvittering.text.lukkVinduet": "Lukk dette vindauget"
+    "kvittering.text.lukkVinduet": "Lukk dette vindauget",
+
+    "rettigheter.sectionheading.rettigheterOgPlikter": "Rettigheter og Plikter",
+    "rettigheter.text.sammeBarnet": "Eg forstår at når eg søkjer eingongsstønad kan eg ikkje få foreldrepengar for det same barnet.",
+    "rettigheter.text.innhenteOpplysninger": "Eg samtykker til at NAV kan hente inn opplysningar som er nødvendig for å handsame søknaden min",
+    "rettigheter.text.innhenteOpplysninger.1": "Arbeidsforhold",
+    "rettigheter.text.innhenteOpplysninger.2": "Inntekt",
+    "rettigheter.text.innhenteOpplysninger.3": "Tilhøyrsle til Noreg",
+    "rettigheter.text.innhenteOpplysninger.4": "Opplysningar om barnet",
+    "rettigheter.text.innhenteOpplysninger.5": "Opplysningar om den andre forelderen",
+    "rettigheter.text.uretteOpplysninger": "Eg forstår at om eg gjev urette opplysningar kan det få konsekvens for retten til eingongsstønaden",
+    "rettigheter.text.lestOgForstått": "Eg har lest og forstått det som står på",
+    "rettigheter.text.lestOgForstått.link": "nav.no/rettogplikt",
+
+    "terminbekrefelsen.sectionheading.terminbekreftelsen": "Om terminbekreftelsen",
+    "terminbekrefelsen.text.termingbekreftelsen": "Du må leggje ved ei stadfesting på termin. Stadfestinga må vere skrive ut av lege eller jordmor når du er i 26. svangerskapsveke eller seinere."
 }
