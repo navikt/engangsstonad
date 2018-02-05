@@ -4,52 +4,27 @@ const axios = require('axios');
 
 const { JSDOM } = jsdom;
 
-const getDecorator = (decoratorUrl) =>
+const requestDecorator = () =>
 	axios({
 		method: 'get',
-		url: decoratorUrl,
+		url: `${
+			process.env.APPRES_CMS_URL
+		}/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true`,
 		validateStatus: (status) => status >= 200 || status === 302
 	});
 
-const reconfigureBuildWithDecorator = (decoratorResponse, config) => {
-	const html = decoratorResponse.data;
-	const { document } = new JSDOM(html).window;
+const getDecorator = () =>
+	requestDecorator().then((decoratorResponse) => {
+		const html = decoratorResponse.data;
+		const { document } = new JSDOM(html).window;
+		const prop = 'innerHTML';
 
-	const header = document.getElementById('header').innerHTML;
-	const footer = document.getElementById('footer').innerHTML;
-	const scripts = document.getElementById('scripts').innerHTML;
-	const styles = document.getElementById('styles').innerHTML;
-
-	config.module.rules.push({
-		test: /index\.html$/,
-		use: [
-			{
-				loader: 'mustache-loader',
-				options: {
-					render: {
-						REST_API_URL:
-							process.env.FORELDREPENGESOKNAD_API_URL || '{{{REST_API_URL}}}',
-						NAV_HEADING: header,
-						NAV_FOOTER: footer,
-						NAV_SCRIPTS: scripts,
-						NAV_STYLES: styles
-					}
-				}
-			}
-		]
+		return {
+			NAV_SCRIPTS: document.getElementById('scripts')[prop],
+			NAV_STYLES: document.getElementById('styles')[prop],
+			NAV_HEADING: document.getElementById('header')[prop],
+			NAV_FOOTER: document.getElementById('footer')[prop]
+		};
 	});
 
-	return config;
-};
-
-const prodDecorator =
-	'http://appres.nav.no/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true';
-const testDecorator =
-	'http://appres-t1.nav.no/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true';
-
-const configDecorator = (config, external) =>
-	getDecorator(external ? prodDecorator : testDecorator).then((response) =>
-		reconfigureBuildWithDecorator(response, config)
-	);
-
-module.exports = configDecorator;
+module.exports = getDecorator;
