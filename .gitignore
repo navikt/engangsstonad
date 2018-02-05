@@ -4,4 +4,3 @@ dist
 .vscode
 *DS_Store
 *.log
-src/build/webpack/views

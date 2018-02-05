@@ -17,7 +17,7 @@ webpackConfig.plugins.push(
 
 webpackConfig.plugins.push(
 	new HtmlWebpackHarddiskPlugin({
-		outputPath: path.resolve(__dirname, 'views')
+		outputPath: path.resolve(__dirname, '../../../dist/dev')
 	})
 );
 
