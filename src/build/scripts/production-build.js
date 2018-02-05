@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const webpackConfig = require('../webpack/webpack.config.production');
-const configDecorator = require('./decorator');
 
 const cb = (err) => {
 	if (err) {
@@ -11,9 +10,5 @@ const cb = (err) => {
 	}
 };
 
-configDecorator(webpackConfig, process.env.NODE_ENV === 'heroku').then(
-	(config) => {
-		const compiler = webpack(config);
-		compiler.run(cb);
-	}
-);
+const compiler = webpack(webpackConfig);
+compiler.run(cb);
