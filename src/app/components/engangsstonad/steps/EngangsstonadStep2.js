@@ -164,7 +164,7 @@ export class EngangsstonadStep2 extends Component {
 		});
 	}
 
-	shouldDisplayWorkedInNorway() {
+	shouldDisplayResidingInFutureRadioGroup() {
 		return (
 			this.props.residedInNorwayLastTwelveMonths === true ||
 			this.props.visits.length > 0
@@ -201,7 +201,7 @@ export class EngangsstonadStep2 extends Component {
 					/>
 				)}
 
-				{this.shouldDisplayWorkedInNorway() && (
+				{this.shouldDisplayResidingInFutureRadioGroup() && (
 					<div>
 						<TransformingRadioGroupCollection
 							stages={this.radioGroupStages3}
@@ -220,7 +220,6 @@ export class EngangsstonadStep2 extends Component {
 }
 
 EngangsstonadStep2.propTypes = {
-	workedInNorwayLastTwelveMonths: PropTypes.bool,
 	residedInNorwayLastTwelveMonths: PropTypes.bool,
 	toggleWorkedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
 	toggleResidedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
@@ -243,7 +242,6 @@ EngangsstonadStep2.propTypes = {
 };
 
 EngangsstonadStep2.defaultProps = {
-	workedInNorwayLastTwelveMonths: undefined,
 	residedInNorwayLastTwelveMonths: undefined
 };
 
