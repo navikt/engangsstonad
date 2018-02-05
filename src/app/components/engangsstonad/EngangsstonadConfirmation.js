@@ -15,6 +15,7 @@ import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
 import { getDataRequested, approveConditions } from 'actions';
+import getMessage from '../intl/util';
 
 import './engangsstonad.less';
 
@@ -71,9 +72,9 @@ export class EngangsstonadConfirmation extends Component {
 			return null;
 		}
 
-		const confirmBoxLabel = () => (
+		const confirmBoxLabelHeader = () => (
 			<FormattedMessage
-				id="intro.text.samtykke"
+				id="intro.text.samtykkeIntro"
 				values={{
 					link: (
 						// eslint-disable-next-line jsx-a11y/anchor-is-valid
@@ -90,20 +91,20 @@ export class EngangsstonadConfirmation extends Component {
 				<DocumentTitle title="Samtykke - NAV Engangsstønad" />
 				<HeaderIllustration
 					dialog={{
-						title: intl.formatMessage(
-							{ id: 'intro.snakkeboble.overskrift' },
-							{ name: this.props.data.fornavn }
-						),
-						text: intl.formatMessage({ id: 'intro.text.hjelpedeg' })
+						title: getMessage(intl, 'intro.snakkeboble.overskrift', {
+							name: this.props.data.fornavn
+						}),
+						text: getMessage(intl, 'intro.text.hjelpedeg')
 					}}
 					svg={VelkommenIllustration}
 					theme={'purple'}
-					title={intl.formatMessage({ id: 'intro.pageheading.soknadES' })}
+					title={getMessage(intl, 'intro.pageheading.soknadES')}
 				/>
-				<Ingress>{intl.formatMessage({ id: 'intro.text.omES' })}</Ingress>
+				<Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
 				<ConfirmCheckbox
 					name="egenerklaring"
-					label={confirmBoxLabel()}
+					labelHeader={confirmBoxLabelHeader()}
+					label={getMessage(intl, 'intro.text.samtykke')}
 					onChange={this.handleConfirmCheckboxChange}
 					checked={approvedConditions}
 				/>
@@ -111,7 +112,7 @@ export class EngangsstonadConfirmation extends Component {
 					<Hovedknapp
 						onClick={this.handleStartApplicationClick}
 						disabled={!approvedConditions}>
-						{intl.formatMessage({ id: 'intro.button.startSoknad' })}
+						{getMessage(intl, 'intro.button.startSoknad')}
 					</Hovedknapp>
 				</div>
 				<Modal
