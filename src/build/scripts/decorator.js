@@ -7,7 +7,9 @@ const { JSDOM } = jsdom;
 const requestDecorator = () =>
 	axios({
 		method: 'get',
-		url: process.env.DECORATOR_URL,
+		url: `${
+			process.env.APPRES_CMS_URL
+		}/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true`,
 		validateStatus: (status) => status >= 200 || status === 302
 	});
 
