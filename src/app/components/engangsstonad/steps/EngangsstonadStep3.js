@@ -98,7 +98,7 @@ export class Step3 extends Component {
 				{erBarnetFodt === false && (
 					<div>
 						<DisplayTextWithLabel
-							label={getMessage(intl, 'relasjonBarn.radiobutton.tvillinger')}
+							label={getMessage(intl, 'oppsummering.text.antallBarn')}
 							text={this.createNumberOfChildrenSummaryString()}
 						/>
 						<DisplayTextWithLabel
