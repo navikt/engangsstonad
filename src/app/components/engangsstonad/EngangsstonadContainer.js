@@ -12,7 +12,7 @@ import EngangsstonadStep3 from 'components/engangsstonad/steps/EngangsstonadStep
 
 import './engangsstonad.less';
 
-export class EngangsstonadIndex extends Component {
+export class EngangsstonadContainer extends Component {
 	constructor(props) {
 		super(props);
 
@@ -85,7 +85,7 @@ export class EngangsstonadIndex extends Component {
 					<Route path="/engangsstonad/step3" component={EngangsstonadStep3} />
 					<Redirect
 						to={this.state.backLinks[this.state.activeStep - 1]}
-						component={EngangsstonadIndex}
+						component={EngangsstonadContainer}
 					/>
 				</Switch>
 			</div>
@@ -93,12 +93,12 @@ export class EngangsstonadIndex extends Component {
 	}
 }
 
-EngangsstonadIndex.propTypes = {
+EngangsstonadContainer.propTypes = {
 	intl: intlShape.isRequired,
 	location: PropTypes.shape({
 		pathname: PropTypes.string
 	}).isRequired
 };
 
-const withIntl = injectIntl(EngangsstonadIndex);
+const withIntl = injectIntl(EngangsstonadContainer);
 export default withRouter(withIntl);
