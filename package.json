@@ -68,8 +68,7 @@
 		"docker-rmi": "npm run docker-kill && docker rmi engangsstonad",
 		"start-express": "node ./server.js",
 		"start-express-heroku": "cross-env NODE_ENV=heroku node ./server.js",
-		"start": "cross-env NODE_ENV=production node ./src/build/scripts/start-dev.js",
-		"start-dev": "cross-env NODE_ENV=dev node ./src/build/scripts/start-dev.js",
+		"start": "node ./src/build/scripts/start-dev.js",
 		"test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts ./src/app/**/*.spec.js",
 		"lint": "eslint src/**",
 		"heroku-postbuild": "cross-env NODE_ENV=heroku node src/build/scripts/production-build.js"
