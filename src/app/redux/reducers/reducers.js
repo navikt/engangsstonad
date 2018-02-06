@@ -23,19 +23,15 @@ import {
 	TOGGLE_LANGUAGE
 } from '../constants/constants';
 
-import { shouldShowStepper } from '../util/utils';
-
 const defaultState = {
 	activeRoute: null,
-	showStepper: true,
 	visits: [],
 	isLoading: false,
 	language: 'nb'
 };
 
 const newState = (state) => ({
-	...state,
-	showStepper: shouldShowStepper(state.activeRoute, state)
+	...state
 });
 
 const engangsstonadReducer = (state = defaultState, action) => {
