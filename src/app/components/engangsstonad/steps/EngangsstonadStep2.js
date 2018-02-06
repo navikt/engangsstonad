@@ -154,9 +154,6 @@ export class EngangsstonadStep2 extends Component {
 						stage.selectedValue
 					);
 					break;
-				case 'residingCountryDuringBirth':
-					this.props.toggleResidingInNorwayDuringBirth(stage.selectedValue);
-					break;
 				default:
 					break;
 			}

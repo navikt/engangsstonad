@@ -16,10 +16,15 @@ const renderApp = (decoratorFragments) =>
 	new Promise((resolve, reject) => {
 		server.render(
 			'index.html',
-			{
-				REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL,
-				...decoratorFragments
-			},
+			Object.assign(
+				{
+					REST_API_URL:
+						process.env.NODE_ENV === 'heroku'
+							? 'heroku'
+							: process.env.FORELDREPENGESOKNAD_API_URL
+				},
+				decoratorFragments
+			),
 			(err, html) => {
 				if (err) {
 					reject(err);

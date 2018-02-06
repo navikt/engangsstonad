@@ -22,8 +22,6 @@ import getMessage from '../../../util/i18n';
 
 import '../engangsstonad.less';
 
-// eslint-disable-next-line react/prefer-stateless-function
-
 export class Step3 extends Component {
 	constructor(props) {
 		super(props);
@@ -88,7 +86,7 @@ export class Step3 extends Component {
 			return (
 				<div>
 					<DisplayTextWithLabel
-						label="Søknaden gjelder bla bla..."
+						label="Søknaden gjelder barn født med termindato..."
 						text="<fødselsdato her>"
 					/>
 				</div>
@@ -167,7 +165,7 @@ export class Step3 extends Component {
 				<DisplayTextWithLabel
 					label={getMessage(
 						intl,
-						'oppsummering.text.ogKommerPåFødselstispunktet'
+						'oppsummering.text.ogKommerPåFødselstidspunktet'
 					)}
 					text={residingInNorwayDuringBirthText}
 				/>

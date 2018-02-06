@@ -7,10 +7,10 @@ import './modalContent.less';
 const OmTerminbekreftelsen = ({ intl }) => (
 	<div className="modalContent">
 		<Undertittel className="modalContent__header">
-			{getMessage(intl, 'terminbekrefelsen.sectionheading.terminbekrefelsen')}
+			{getMessage(intl, 'terminbekreftelsen.sectionheading.terminbekreftelsen')}
 		</Undertittel>
 		<Normaltekst className="modalContent__paragraph">
-			{getMessage(intl, 'terminbekrefelsen.text.terminbekrefelsen')}
+			{getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}
 		</Normaltekst>
 	</div>
 );

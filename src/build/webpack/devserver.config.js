@@ -7,10 +7,15 @@ const configureDevServer = (decoratorFragments) => ({
 		app.set('views', `${__dirname}/../../../dist/dev`);
 		app.set('view engine', 'mustache');
 		app.get(['/', '/engangsstonad/?', '/engangsstonad/**'], (req, res) => {
-			res.render('index.html', {
-				REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL,
-				...decoratorFragments
-			});
+			res.render(
+				'index.html',
+				Object.assign(
+					{
+						REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL
+					},
+					decoratorFragments
+				)
+			);
 		});
 	},
 	watchContentBase: true,
