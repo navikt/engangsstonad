@@ -1,5 +1,26 @@
 import { SoknadActionKeys, SoknadActionTypes } from './soknadActionDefinitions';
-import { ArbeidSiste12 } from '../../../types/Medlemsskap';
+import { ArbeidSiste12, Utenlandsopphold } from '../../../types/Medlemsskap';
+
+export function addUtenlandsopphold(utenlandsopphold: Utenlandsopphold): SoknadActionTypes {
+    return {
+        type: SoknadActionKeys.ADD_UTENLANDSOPPHOLD,
+        utenlandsopphold
+    }
+}
+
+export function editUtenlandsopphold(utenlandsopphold: Utenlandsopphold): SoknadActionTypes {
+    return {
+        type: SoknadActionKeys.EDIT_UTENLANDSOPPHOLD,
+        utenlandsopphold
+    }
+}
+
+export function deleteUtenlandsopphold(utenlandsopphold: Utenlandsopphold): SoknadActionTypes {
+    return {
+        type: SoknadActionKeys.DELETE_UTENLANDSOPPHOLD,
+        utenlandsopphold
+    }
+}
 
 export function setAntallBarn(antallBarn: number): SoknadActionTypes {
     return {

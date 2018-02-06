@@ -8,7 +8,7 @@ type UtenlandsoppholdVarighet = {
     tom: string;
 }
 
-type Utenlandsopphold = {
+export type Utenlandsopphold = {
     land: string;
     varighet: UtenlandsoppholdVarighet;
 }

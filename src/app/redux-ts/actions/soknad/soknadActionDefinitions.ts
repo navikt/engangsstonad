@@ -1,4 +1,4 @@
-import { ArbeidSiste12 } from '../../../types/Medlemsskap';
+import { ArbeidSiste12, Utenlandsopphold } from '../../../types/Medlemsskap';
 
 export enum SoknadActionKeys {
     // RelasjonTilBarn
@@ -8,6 +8,9 @@ export enum SoknadActionKeys {
     'SET_UTSTEDT_DATO' = 'setUtstedtDato',
 
     // Medlemsskap
+    'ADD_UTENLANDSOPPHOLD' = 'addUtelandsopphold',
+    'EDIT_UTENLANDSOPPHOLD' = 'editUtenlandsopphold',
+    'DELETE_UTENLANDSOPPHOLD' = 'deleteUtenlandsopphold',
     'SET_ARBEID_SISTE_12' = 'setArbeidSiste12',
     'SET_I_NORGE_SISTE_12' = 'setINorgeSiste12',
     'SET_I_NORGE_NESTE_12' = 'setINorgeNeste12',
@@ -36,6 +39,21 @@ interface SetUtstedtDato {
 }
 
 // Medlemsskap
+interface AddUtenlandsopphold {
+    type: SoknadActionKeys.ADD_UTENLANDSOPPHOLD;
+    utenlandsopphold: Utenlandsopphold
+}
+
+interface EditUtenlandsopphold {
+    type: SoknadActionKeys.EDIT_UTENLANDSOPPHOLD;
+    utenlandsopphold: Utenlandsopphold
+}
+
+interface DeleteUtenlandsopphold {
+    type: SoknadActionKeys.DELETE_UTENLANDSOPPHOLD;
+    utenlandsopphold: Utenlandsopphold
+}
+
 interface SetArbeidSiste12 {
     type: SoknadActionKeys.SET_ARBEID_SISTE_12;
     arbeidSiste12: ArbeidSiste12;
@@ -57,6 +75,9 @@ interface SetINorgeNeste12 {
 }
 
 export type SoknadActionTypes =
+    | AddUtenlandsopphold
+    | EditUtenlandsopphold
+    | DeleteUtenlandsopphold
     | SetAntallBarn
     | SetFodselsdato
     | SetFodselINorge
