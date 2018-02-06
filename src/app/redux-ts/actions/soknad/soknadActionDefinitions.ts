@@ -1,3 +1,5 @@
+import { ArbeidSiste12 } from '../../../types/Medlemsskap';
+
 export enum SoknadActionKeys {
     // RelasjonTilBarn
     'SET_ANTALL_BARN' = 'setAntallBarn',
@@ -13,43 +15,53 @@ export enum SoknadActionKeys {
 }
 
 // RelasjonTilBarn
-export interface SetAntallBarn {
+interface SetAntallBarn {
     type: SoknadActionKeys.SET_ANTALL_BARN;
     antallBarn: number;
 }
 
-export interface SetFodselsdato {
+interface SetFodselsdato {
     type: SoknadActionKeys.SET_FODSELSDATO;
     fodselsdato: string;
 }
 
-export interface SetTerminDato {
+interface SetTerminDato {
     type: SoknadActionKeys.SET_TERMIN_DATO;
     terminDato: string;
 }
 
-export interface SetUtstedtDato {
+interface SetUtstedtDato {
     type: SoknadActionKeys.SET_UTSTEDT_DATO;
     utstedtDato: string;
 }
 
 // Medlemsskap
-export interface SetArbeidSiste12 {
+interface SetArbeidSiste12 {
     type: SoknadActionKeys.SET_ARBEID_SISTE_12;
-    antallBarn: number;
+    arbeidSiste12: ArbeidSiste12;
 }
 
-export interface SetINorgeSiste12 {
-    type: SoknadActionKeys.SET_I_NORGE_SISTE_12;
-    fodselsdato: string;
-}
-
-export interface SetINorgeNeste12 {
-    type: SoknadActionKeys.SET_I_NORGE_NESTE_12;
-    terminDato: string;
-}
-
-export interface SetFodselINorge {
+interface SetFodselINorge {
     type: SoknadActionKeys.SET_FODSEL_I_NORGE;
-    utstedtDato: string;
+    fodselINorge: boolean;
 }
+
+interface SetINorgeSiste12 {
+    type: SoknadActionKeys.SET_I_NORGE_SISTE_12;
+    iNorgeSiste12: boolean;
+}
+
+interface SetINorgeNeste12 {
+    type: SoknadActionKeys.SET_I_NORGE_NESTE_12;
+    iNorgeNeste12: boolean;
+}
+
+export type SoknadActionTypes =
+    | SetAntallBarn
+    | SetFodselsdato
+    | SetFodselINorge
+    | SetTerminDato
+    | SetUtstedtDato
+    | SetArbeidSiste12
+    | SetINorgeSiste12
+    | SetINorgeNeste12;
