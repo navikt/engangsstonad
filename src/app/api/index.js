@@ -23,7 +23,7 @@ function fetchData(params = defaultParams) {
 }
 
 function postData(data) {
-	return axios.post(`${window.REST_API_URL}/rest/engangsstonad`, data);
+	return axios.post(`${window.REST_API_URL}/engangsstonad`, data);
 }
 
 const Api = { fetchData, postData };
