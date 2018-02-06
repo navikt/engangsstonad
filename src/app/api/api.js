@@ -8,12 +8,13 @@ const defaultParams = {
 
 const stub = () => ({
 	data: {
-		fornavn: 'Brukernavn'
+		fornavn: 'Test',
+		etternavn: 'Testesen'
 	}
 });
 
 function fetchData(params = defaultParams) {
-	if (__ENV__ === 'heroku') {
+	if (window.REST_API_URL === 'heroku') {
 		return stub();
 	}
 
