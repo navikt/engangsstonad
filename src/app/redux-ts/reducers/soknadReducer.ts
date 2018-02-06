@@ -1,10 +1,7 @@
 import { SoknadActionKeys, SoknadActionTypes } from '../actions/soknad/soknadActionDefinitions';
 
 const getDefaultState = () => ({
-    activeRoute: null,
-    visits: [],
-    isLoading: false,
-    language: 'nb'
+    visits: []
 });
 
 const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => {
