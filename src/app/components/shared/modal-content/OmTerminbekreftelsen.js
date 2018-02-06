@@ -1,7 +1,7 @@
 import React from 'react';
 import { injectIntl, intlShape } from 'react-intl';
 import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
-import getMessage from '../../intl/util';
+import getMessage from '../../../util/i18n';
 import './modalContent.less';
 
 const OmTerminbekreftelsen = ({ intl }) => (

@@ -21,9 +21,9 @@ import {
 	POST_DATA_SUCCESS,
 	POST_DATA_FAILED,
 	TOGGLE_LANGUAGE
-} from '../constants/index';
+} from '../constants/constants';
 
-import { shouldShowStepper } from '../util';
+import { shouldShowStepper } from '../util/utils';
 
 const defaultState = {
 	activeRoute: null,

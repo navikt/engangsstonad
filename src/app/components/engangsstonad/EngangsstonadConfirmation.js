@@ -14,9 +14,13 @@ import RettigheterOgPlikter from 'shared/modal-content/RettigheterOgPlikter';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
-import { getDataRequested, approveConditions, toggleLanguage } from 'actions';
+import {
+	getDataRequested,
+	approveConditions,
+	toggleLanguage
+} from '../../redux/actions/actions';
 import LanguageToggle from '../intl/LanguageToggle';
-import getMessage from '../intl/util';
+import getMessage from '../../util/i18n';
 
 import './engangsstonad.less';
 

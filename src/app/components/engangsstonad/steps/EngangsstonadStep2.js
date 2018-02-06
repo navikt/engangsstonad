@@ -4,8 +4,11 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { injectIntl, intlShape } from 'react-intl';
-
 import { Hovedknapp } from 'nav-frontend-knapper';
+
+// eslint-disable-next-line max-len
+import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
+import CountryPicker from 'shared/country-picker/CountryPicker';
 
 import {
 	toggleResidingInNorwayNextTwelveMonths,
@@ -15,11 +18,7 @@ import {
 	addVisit,
 	editVisit,
 	deleteVisit
-} from 'actions';
-
-// eslint-disable-next-line max-len
-import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
-import CountryPicker from 'shared/country-picker/CountryPicker';
+} from '../../../redux/actions/actions';
 
 import './../engangsstonad.less';
 

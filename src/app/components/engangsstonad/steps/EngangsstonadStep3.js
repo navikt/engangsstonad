@@ -10,12 +10,15 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWithLabel';
-import { confirmInformation, postEngangsstonadToApi } from 'actions';
 import { fullNameFormat } from 'util/formats/index';
 import CountryList from 'shared/country-picker/CountryList';
 import PersonaliaLabel from 'shared/personalia-label/PersonaliaLabel';
 import { ISODateToMaskedInput } from 'util/date';
-import getMessage from '../../intl/util';
+import {
+	confirmInformation,
+	postEngangsstonadToApi
+} from '../../../redux/actions/actions';
+import getMessage from '../../../util/i18n';
 
 import '../engangsstonad.less';
 
@@ -232,6 +235,7 @@ Step3.propTypes = {
 	boddIUtlandetListe: PropTypes.array,
 	skalBoINorgeNesteTolvMnd: PropTypes.bool,
 	skalFodeINorge: PropTypes.bool,
+	jobbetINorgeSisteTolvMnd: PropTypes.bool,
 	postEngangsstonadToApi: PropTypes.func.isRequired,
 	postReponse: PropTypes.shape({}),
 	isLoading: PropTypes.bool.isRequired,
@@ -245,6 +249,7 @@ Step3.defaultProps = {
 	confirmedInformation: false,
 	data: undefined,
 	antallBarn: undefined,
+	jobbetINorgeSisteTolvMnd: undefined,
 	termindato: undefined,
 	terminbekreftelseDato: undefined,
 	boddINorgeSisteAar: undefined,

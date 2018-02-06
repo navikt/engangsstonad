@@ -4,6 +4,7 @@ import classnames from 'classnames';
 
 import './languageToggle.less';
 
+/* eslint-disable jsx-a11y/anchor-is-valid */
 const LangaugeToggle = ({ language, toggleLanguage }) => (
 	<div className="languageToggle">
 		<a
@@ -20,6 +21,7 @@ const LangaugeToggle = ({ language, toggleLanguage }) => (
 		</a>
 	</div>
 );
+/* eslint-enable jsx-a11y/anchor-is-valid */
 
 LangaugeToggle.propTypes = {
 	language: PropTypes.string.isRequired,
