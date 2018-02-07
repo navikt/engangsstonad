@@ -1,5 +1,5 @@
 import { all, put, call, takeEvery } from 'redux-saga/effects';
-import Api from './../../api';
+import Api from '../../api/api';
 import {
 	GET_DATA_REQUESTED,
 	GET_DATA_SUCCESS,
@@ -7,7 +7,7 @@ import {
 	POST_DATA_REQUESTED,
 	POST_DATA_SUCCESS,
 	POST_DATA_FAILED
-} from '../constants';
+} from '../constants/constants';
 
 function* getData(action) {
 	try {

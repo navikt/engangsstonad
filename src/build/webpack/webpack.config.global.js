@@ -2,14 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const webpackConfig = {
 	entry: ['babel-polyfill', './src/app/bootstrap.js'],
 	output: {
 		path: path.resolve(__dirname, './../../../dist'),
 		filename: 'js/bundle.js',
-		publicPath: '/engangsstonad'
+		publicPath: '/'
 	},
 	resolve: {
 		alias: {
@@ -74,10 +73,6 @@ const webpackConfig = {
 			filename: 'css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]',
 			disable: false,
 			allChunks: true
-		}),
-		new HtmlWebpackPlugin({
-			template: './src/app/index.html',
-			inject: 'body'
 		}),
 		new SpriteLoaderPlugin({ plainSprite: true }),
 		new webpack.DefinePlugin({

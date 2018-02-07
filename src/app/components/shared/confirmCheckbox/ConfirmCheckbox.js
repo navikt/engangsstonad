@@ -14,7 +14,11 @@ export const Checkbox = (props) => {
 				'confirmCheckbox--checked': checked,
 				'confirmCheckbox--unchecked': !checked
 			})}>
-			<Normaltekst className="confirmCheckbox__text">{labelHeader}</Normaltekst>
+			{labelHeader && (
+				<Normaltekst className="confirmCheckbox__text">
+					{labelHeader}
+				</Normaltekst>
+			)}
 			<NavCheckbox checked={checked} {...other} />
 		</div>
 	);

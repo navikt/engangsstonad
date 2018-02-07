@@ -8,24 +8,23 @@ const defaultParams = {
 
 const stub = () => ({
 	data: {
-		fornavn: 'Brukernavn'
+		fornavn: 'Test',
+		etternavn: 'Testesen'
 	}
 });
 
-const url = __ENV__ === 'dev' ? 'http://localhost:8888' : window.REST_API_URL;
-
 function fetchData(params = defaultParams) {
-	if (__ENV__ === 'heroku') {
+	if (window.REST_API_URL === 'heroku') {
 		return stub();
 	}
 
 	return axios.get(
-		`${url}/rest/personinfo?${queryStringParser.stringify(params)}`
+		`${window.REST_API_URL}/personinfo?${queryStringParser.stringify(params)}`
 	);
 }
 
 function postData(data) {
-	return axios.post(`${url}/rest/engangsstonad`, data);
+	return axios.post(`${window.REST_API_URL}/engangsstonad?stub=true`, data);
 }
 
 const Api = { fetchData, postData };

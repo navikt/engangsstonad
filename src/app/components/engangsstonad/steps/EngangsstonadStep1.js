@@ -9,20 +9,21 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
+import IconLink from 'shared/icon-link/IconLink';
+import DialogBox from 'shared/dialog-box/DialogBox';
+import DateInput from 'shared/date-input/DateInput';
+import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
+
+// eslint-disable-next-line max-len
+import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
+
 import {
 	toggleChildBorn,
 	setNumberOfChildren,
 	setTerminDato,
 	setBekreftetTermindato,
 	setFodselDato
-} from 'actions';
-
-import IconLink from 'shared/icon-link/IconLink';
-import DialogBox from 'shared/dialog-box/DialogBox';
-import DateInput from 'shared/date-input/DateInput';
-import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
-// eslint-disable-next-line max-len
-import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
+} from '../../../redux/actions/actions';
 
 import './../engangsstonad.less';
 

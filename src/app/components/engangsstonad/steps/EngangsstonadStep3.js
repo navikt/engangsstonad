@@ -10,16 +10,17 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWithLabel';
-import { confirmInformation, postEngangsstonadToApi } from 'actions';
 import { fullNameFormat } from 'util/formats/index';
 import CountryList from 'shared/country-picker/CountryList';
 import PersonaliaLabel from 'shared/personalia-label/PersonaliaLabel';
 import { ISODateToMaskedInput } from 'util/date';
-import getMessage from '../../intl/util';
+import {
+	confirmInformation,
+	postEngangsstonadToApi
+} from '../../../redux/actions/actions';
+import getMessage from '../../../util/i18n';
 
 import '../engangsstonad.less';
-
-// eslint-disable-next-line react/prefer-stateless-function
 
 export class Step3 extends Component {
 	constructor(props) {
@@ -36,7 +37,6 @@ export class Step3 extends Component {
 			terminbekreftelseDato,
 			boddINorgeSisteAar,
 			boddIUtlandetListe,
-			jobbetINorgeSisteTolvMnd,
 			skalBoINorgeNesteTolvMnd,
 			skalFodeINorge
 		} = this.props;
@@ -49,7 +49,6 @@ export class Step3 extends Component {
 			terminbekreftelseDato,
 			boddINorgeSisteAar,
 			boddIUtlandetListe,
-			jobbetINorgeSisteTolvMnd,
 			skalBoINorgeNesteTolvMnd,
 			skalFodeINorge
 		});
@@ -85,7 +84,7 @@ export class Step3 extends Component {
 			return (
 				<div>
 					<DisplayTextWithLabel
-						label="Søknaden gjelder bla bla..."
+						label="Søknaden gjelder barn født med termindato..."
 						text="<fødselsdato her>"
 					/>
 				</div>
@@ -97,7 +96,7 @@ export class Step3 extends Component {
 				{erBarnetFodt === false && (
 					<div>
 						<DisplayTextWithLabel
-							label={getMessage(intl, 'relasjonBarn.radiobutton.tvillinger')}
+							label={getMessage(intl, 'oppsummering.text.antallBarn')}
 							text={this.createNumberOfChildrenSummaryString()}
 						/>
 						<DisplayTextWithLabel
@@ -164,7 +163,7 @@ export class Step3 extends Component {
 				<DisplayTextWithLabel
 					label={getMessage(
 						intl,
-						'oppsummering.text.ogKommerPåFødselstispunktet'
+						'oppsummering.text.ogKommerPåFødselstidspunktet'
 					)}
 					text={residingInNorwayDuringBirthText}
 				/>

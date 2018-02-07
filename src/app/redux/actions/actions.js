@@ -18,7 +18,7 @@ import {
 	EDIT_VISIT,
 	DELETE_VISIT,
 	TOGGLE_LANGUAGE
-} from '../constants/index';
+} from '../constants/constants';
 
 export const activeRouteChanged = (route) => ({
 	type: ACTIVE_ROUTE_CHANGED,

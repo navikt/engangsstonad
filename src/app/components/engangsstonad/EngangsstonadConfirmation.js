@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { withRouter } from 'react-router-dom';
-import queryStringParser from 'query-string';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import { Ingress } from 'nav-frontend-typografi';
@@ -14,9 +13,9 @@ import RettigheterOgPlikter from 'shared/modal-content/RettigheterOgPlikter';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
-import { getDataRequested, approveConditions, toggleLanguage } from 'actions';
+import { approveConditions, toggleLanguage } from '../../redux/actions/actions';
 import LanguageToggle from '../intl/LanguageToggle';
-import getMessage from '../intl/util';
+import getMessage from '../../util/i18n';
 
 import './engangsstonad.less';
 
@@ -35,16 +34,6 @@ export class EngangsstonadConfirmation extends Component {
 		);
 	}
 
-	componentWillMount() {
-		const queryParams = this.getQueryParams();
-
-		if (Object.keys(queryParams).length > 0) {
-			this.props.dispatch(getDataRequested(queryParams));
-		} else {
-			this.props.dispatch(getDataRequested());
-		}
-	}
-
 	openRettigheterOgPlikterModal(e) {
 		e.preventDefault();
 		this.setState({ isModalOpen: true });
@@ -52,10 +41,6 @@ export class EngangsstonadConfirmation extends Component {
 
 	closeRettigheterOgPlikterModal() {
 		this.setState({ isModalOpen: false });
-	}
-
-	getQueryParams() {
-		return queryStringParser.parse(this.props.location.search);
 	}
 
 	handleConfirmCheckboxChange() {
@@ -141,9 +126,6 @@ EngangsstonadConfirmation.propTypes = {
 	dispatch: PropTypes.func.isRequired,
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
-	}).isRequired,
-	location: PropTypes.shape({
-		search: PropTypes.string
 	}).isRequired,
 	data: PropTypes.shape({
 		fornavn: PropTypes.string
