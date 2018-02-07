@@ -1,12 +1,12 @@
 import { SoknadActionKeys, SoknadActionTypes } from '../actions/soknad/soknadActionDefinitions';
-import { Utenlandsopphold } from "../../types/Medlemsskap";
+import { Utenlandsopphold } from '../../types/domain/Medlemsskap';
 
 const getDefaultState = () => ({
     utenlandsopphold: [] as Utenlandsopphold[]
 });
 
 const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => {
-    switch(action.type) {
+    switch (action.type) {
         case SoknadActionKeys.ADD_UTENLANDSOPPHOLD:
             const utenlandsopphold = state.utenlandsopphold;
             utenlandsopphold.concat(action.utenlandsopphold);
@@ -35,6 +35,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
         case SoknadActionKeys.SET_I_NORGE_NESTE_12:
             return { ...state, iNorgeNeste12: action.iNorgeNeste12 };
     }
+    return state;
 };
 
 export default soknadReducer;

@@ -4,6 +4,6 @@ type Person = {
     etternavn: string;
     adresse: string;
     kjonn: string;
-}
+};
 
 export default Person;

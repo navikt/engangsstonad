@@ -6,12 +6,12 @@ export enum ArbeidSiste12 {
 type UtenlandsoppholdVarighet = {
     fom: string;
     tom: string;
-}
+};
 
 export type Utenlandsopphold = {
     land: string;
     varighet: UtenlandsoppholdVarighet;
-}
+};
 
 type Medlemsskap = {
     iNorgeSiste12: boolean;
@@ -19,6 +19,6 @@ type Medlemsskap = {
     fodselINorge: boolean;
     iNorgeNeste12: true;
     utenlandsopphold: Utenlandsopphold[];
-}
+};
 
 export default Medlemsskap;

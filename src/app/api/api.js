@@ -26,6 +26,6 @@ function sendSoknad(data) {
 	return axios.post(`${window.REST_API_URL}/engangsstonad?stub=true`, data);
 }
 
-const Api = { getPerson, sendSoknad };
+const Api = { getPerson, sendSoknad, fetchData: () => {}, postData: () => {} };
 
 export default Api;

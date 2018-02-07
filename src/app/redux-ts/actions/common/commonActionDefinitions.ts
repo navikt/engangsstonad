@@ -5,18 +5,18 @@ export enum CommonActionKeys {
 }
 
 interface SetBekreftetInformasjon {
-    type: CommonActionKeys.SET_BEKREFTET_INFORMASJON,
-    bekreftetInformasjon: boolean
+    type: CommonActionKeys.SET_BEKREFTET_INFORMASJON;
+    bekreftetInformasjon: boolean;
 }
 
 interface SetGodkjentVilkar {
-    type: CommonActionKeys.SET_GODKJENT_VILKAR,
-    godkjentVilkar: boolean
+    type: CommonActionKeys.SET_GODKJENT_VILKAR;
+    godkjentVilkar: boolean;
 }
 
 interface SetLanguage {
-    type: CommonActionKeys.SET_LANGUAGE,
-    language: string
+    type: CommonActionKeys.SET_LANGUAGE;
+    language: string;
 }
 
 export type CommonActionTypes =

@@ -1,4 +1,4 @@
-import { ArbeidSiste12, Utenlandsopphold } from '../../../types/Medlemsskap';
+import { ArbeidSiste12, Utenlandsopphold } from '../../../types/domain/Medlemsskap';
 
 export enum SoknadActionKeys {
     // RelasjonTilBarn
@@ -41,17 +41,17 @@ interface SetUtstedtDato {
 // Medlemsskap
 interface AddUtenlandsopphold {
     type: SoknadActionKeys.ADD_UTENLANDSOPPHOLD;
-    utenlandsopphold: Utenlandsopphold
+    utenlandsopphold: Utenlandsopphold;
 }
 
 interface EditUtenlandsopphold {
     type: SoknadActionKeys.EDIT_UTENLANDSOPPHOLD;
-    utenlandsopphold: Utenlandsopphold
+    utenlandsopphold: Utenlandsopphold;
 }
 
 interface DeleteUtenlandsopphold {
     type: SoknadActionKeys.DELETE_UTENLANDSOPPHOLD;
-    utenlandsopphold: Utenlandsopphold
+    utenlandsopphold: Utenlandsopphold;
 }
 
 interface SetArbeidSiste12 {

@@ -15,10 +15,9 @@ import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
 import {
-	getDataRequested,
-	approveConditions,
-	toggleLanguage
-} from '../../redux/actions/actions';
+	apiActionCreators as api,
+	commonActionCreators as common
+} from '../../redux-ts/actions';
 import LanguageToggle from '../intl/LanguageToggle';
 import getMessage from '../../util/i18n';
 
@@ -43,9 +42,9 @@ export class EngangsstonadConfirmation extends Component {
 		const queryParams = this.getQueryParams();
 
 		if (Object.keys(queryParams).length > 0) {
-			this.props.dispatch(getDataRequested(queryParams));
+			this.props.dispatch(api.getPersonRequested(queryParams));
 		} else {
-			this.props.dispatch(getDataRequested());
+			this.props.dispatch(api.getPersonRequested());
 		}
 	}
 
@@ -63,7 +62,8 @@ export class EngangsstonadConfirmation extends Component {
 	}
 
 	handleConfirmCheckboxChange() {
-		this.props.dispatch(approveConditions());
+		const { godkjentVilkar } = this.props;
+		this.props.dispatch(common.setGodkjentVilkar(!godkjentVilkar));
 	}
 
 	handleStartApplicationClick() {
@@ -71,13 +71,13 @@ export class EngangsstonadConfirmation extends Component {
 	}
 
 	toggleLanguage(languageCode) {
-		this.props.dispatch(toggleLanguage(languageCode));
+		this.props.dispatch(common.setLanguage(languageCode));
 	}
 
 	render() {
-		const { data, approvedConditions, intl } = this.props;
+		const { person, godkjentVilkar, intl } = this.props;
 
-		if (!data) {
+		if (!person) {
 			return null;
 		}
 
@@ -105,7 +105,7 @@ export class EngangsstonadConfirmation extends Component {
 				<HeaderIllustration
 					dialog={{
 						title: getMessage(intl, 'intro.snakkeboble.overskrift', {
-							name: this.props.data.fornavn
+							name: this.props.person.fornavn
 						}),
 						text: getMessage(intl, 'intro.text.hjelpedeg')
 					}}
@@ -119,12 +119,12 @@ export class EngangsstonadConfirmation extends Component {
 					labelHeader={confirmBoxLabelHeader()}
 					label={getMessage(intl, 'intro.text.samtykke')}
 					onChange={this.handleConfirmCheckboxChange}
-					checked={approvedConditions}
+					checked={godkjentVilkar}
 				/>
 				<div className="engangsstonad__centerButton">
 					<Hovedknapp
 						onClick={this.handleStartApplicationClick}
-						disabled={!approvedConditions}>
+						disabled={!godkjentVilkar}>
 						{getMessage(intl, 'intro.button.startSoknad')}
 					</Hovedknapp>
 				</div>
@@ -141,7 +141,8 @@ export class EngangsstonadConfirmation extends Component {
 }
 
 EngangsstonadConfirmation.propTypes = {
-	approvedConditions: PropTypes.bool,
+	godkjentVilkar: PropTypes.bool.isRequired,
+	language: PropTypes.string.isRequired,
 	dispatch: PropTypes.func.isRequired,
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
@@ -149,22 +150,20 @@ EngangsstonadConfirmation.propTypes = {
 	location: PropTypes.shape({
 		search: PropTypes.string
 	}).isRequired,
-	data: PropTypes.shape({
+	person: PropTypes.shape({
 		fornavn: PropTypes.string
 	}),
-	intl: intlShape.isRequired,
-	language: PropTypes.string.isRequired
+	intl: intlShape.isRequired
 };
 
 EngangsstonadConfirmation.defaultProps = {
-	approvedConditions: false,
-	data: undefined
+	person: undefined
 };
 
 const mapStateToProps = (state) => ({
-	data: state.engangsstonadReducer.data,
-	approvedConditions: state.engangsstonadReducer.approvedConditions,
-	language: state.engangsstonadReducer.language
+	person: state.apiReducer.person,
+	godkjentVilkar: state.commonReducer.godkjentVilkar,
+	language: state.commonReducer.language
 });
 
 const withIntl = injectIntl(EngangsstonadConfirmation);

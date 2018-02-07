@@ -30,7 +30,7 @@ IntlProvider.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-	language: state.engangsstonadReducer.language
+	language: state.commonReducer.language
 });
 
 export default connect(mapStateToProps)(IntlProvider);
