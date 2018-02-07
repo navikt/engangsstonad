@@ -12,7 +12,7 @@ const stub = () => ({
 	}
 });
 
-function fetchData(params = defaultParams) {
+function getPerson(params = defaultParams) {
 	if (__ENV__ === 'heroku') {
 		return stub();
 	}
@@ -22,10 +22,10 @@ function fetchData(params = defaultParams) {
 	);
 }
 
-function postData(data) {
+function sendSoknad(data) {
 	return axios.post(`${window.REST_API_URL}/engangsstonad?stub=true`, data);
 }
 
-const Api = { fetchData, postData };
+const Api = { getPerson, sendSoknad };
 
 export default Api;
