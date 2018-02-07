@@ -32,7 +32,7 @@
 	"relasjonBarn.text.ettersendvedlegg":
 		"Vi kan ikke behandle søknaden din før du sender oss terminbekreftelsen. Denne må du sende oss innen 14 dager.",
 	"relasjonBarn.text.fortsette": "Vil du fortsette med søknaden?",
-	"relasjonBarn.text.fodseldato": "med fødseldato",
+	"relasjonBarn.text.fodseldato": "med fødseldato...",
 	"standard.button.gaTilbake": "Nei, gå tilbake",
 	"standard.button.fortsett": "Ja, fortsett",
 	"standard.label.ddmmaaaa": "dd.mm.åååå",
@@ -59,7 +59,7 @@
 		"Les gjennom oppsummeringen før du sender inn søknaden. Hvis du trenger å gjøre endringer kan du gå tilbake.",
 	"oppsummering.text.vedlagtTerminbekreftelse": "Det er vedlagt en terminbekreftelse…",
 	"oppsummering.text.somErDatert": "Som er datert den...",
-	"oppsummering.text.antallBarn": "Antall barn",
+	"oppsummering.text.antallBarn": "Antall barn...",
 	"oppsummering.text.boddSisteTolv": "De siste 12 månedene har jeg bodd i...",
 	"oppsummering.text.ogKommerPåFødselstidspunktet": "og kommer på fødselstidspunktet til å…",
 	"oppsummering.text.samtykke":
@@ -87,7 +87,7 @@
 	"rettigheter.text.innhenteOpplysninger.5": "Opplysninger om den andre forelderen",
 	"rettigheter.text.uretteOpplysninger":
 		"Jeg forstår at hvis jeg gir uriktige opplysninger kan det få konsekvenser for retten til engangsstønaden.",
-	"rettigheter.text.lestOgForstått": "Jeg har lest og forstått det som står på",
+	"rettigheter.text.lestOgForstått": "Jeg har lest og forstått det som står på {link}",
 	"rettigheter.text.lestOgForstått.link": "nav.no/rettogplikt",
 
 	"terminbekreftelsen.sectionheading.terminbekreftelsen": "Om terminbekreftelsen",

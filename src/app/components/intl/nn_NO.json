@@ -32,7 +32,7 @@
 	"relasjonBarn.text.ettersendvedlegg":
 		"Vi kan ikkje handsame søknaden din innan du sender oss stadfesting på termin. Denne må du sende oss innan 14 dagar.",
 	"relasjonBarn.text.fortsette": "Vil du fortsetje med søknaden?",
-	"relasjonBarn.text.fodseldato": "med fødselsdato",
+	"relasjonBarn.text.fodseldato": "med fødselsdato...",
 	"standard.button.gaTilbake": "Nei, gå tilbake",
 	"standard.button.fortsett": "Ja, fortsett",
 	"standard.label.ddmmaaaa": "dd.mm.åååå",
@@ -58,7 +58,7 @@
 	"oppsummering.text.lesNoye": "Les gjennom oppsummeringa før du sender inn søknaden. Om du må gjøre endringar kan du gå tilbake.",
 	"oppsummering.text.vedlagtTerminbekreftelse": "Det er lagt ved ein stadfesting på termin",
 	"oppsummering.text.somErDatert": "Som er datert den...",
-	"oppsummering.text.antallBarn": "Tal barn",
+	"oppsummering.text.antallBarn": "Tal barn...",
 	"oppsummering.text.boddSisteTolv": "Dei siste 12 månadene har eg budd i...",
 	"oppsummering.text.ogKommerPåFødselstidspunktet": "og kjem når barnet blir fødd til å…",
 	"oppsummering.text.samtykke":
@@ -86,7 +86,7 @@
 	"rettigheter.text.innhenteOpplysninger.5": "Opplysningar om den andre forelderen",
 	"rettigheter.text.uretteOpplysninger":
 		"Eg forstår at om eg gjev urette opplysningar kan det få konsekvens for retten til eingongsstønaden",
-	"rettigheter.text.lestOgForstått": "Eg har lest og forstått det som står på",
+	"rettigheter.text.lestOgForstått": "Eg har lest og forstått det som står på {link}",
 	"rettigheter.text.lestOgForstått.link": "nav.no/rettogplikt",
 
 	"terminbekreftelsen.sectionheading.terminbekreftelsen": "Om terminbekreftelsen",

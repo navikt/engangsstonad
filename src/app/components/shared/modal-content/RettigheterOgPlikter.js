@@ -60,8 +60,9 @@ const RettigheterOgPlikter = ({ intl }) => (
 							link: (
 								// eslint-disable-next-line jsx-a11y/anchor-is-valid
 								<a
-									href="#"
-									onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
+									href="https://nav.no/rettOgPlikt"
+									target="_blank"
+									rel="noopener noreferrer">
 									<FormattedMessage id="rettigheter.text.lestOgForstått.link" />
 								</a>
 							)
