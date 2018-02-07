@@ -21,7 +21,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
         case SoknadActionKeys.SET_ANTALL_BARN:
             return { ...state, antallBarn: action.antallBarn };
         case SoknadActionKeys.SET_FODSELSDATO:
-            return { ...state, antallBarn: action.fodselsdato };
+            return { ...state, fodselsdato: action.fodselsdato };
         case SoknadActionKeys.SET_TERMIN_DATO:
             return { ...state, terminDato: action.terminDato };
         case SoknadActionKeys.SET_UTSTEDT_DATO:

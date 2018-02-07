@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { injectIntl, intlShape } from 'react-intl';
@@ -18,12 +17,9 @@ import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
 
 import {
-	toggleChildBorn,
-	setNumberOfChildren,
-	setTerminDato,
-	setBekreftetTermindato,
-	setFodselDato
-} from '../../../redux/actions/actions';
+	commonActionCreators as common,
+	soknadActionCreators as soknad
+} from '../../../redux-ts/actions';
 
 import './../engangsstonad.less';
 
@@ -106,59 +102,50 @@ export class EngangsstonadStep1 extends Component {
 		this.props.history.push('/engangsstonad/step2');
 	}
 
-	childBirthChanged($e, stages, expandedStage) {
-		if (expandedStage === null) {
-			this.props.toggleChildBorn(stages[0].selectedValue);
-		} else {
-			this.props.toggleChildBorn(stages[0].selectedValue);
-		}
-	}
-
-	noOfChildrenChanged($e, stages, expandedStage) {
-		if (expandedStage === null) {
-			this.props.setNumberOfChildren(stages[0].selectedValue);
-		} else {
-			this.props.setNumberOfChildren(stages[0].selectedValue);
-		}
+	antallBarnChanged($e, stages) {
+		this.props.dispatch(soknad.setAntallBarn(stages[0].selectedValue));
 	}
 
 	render() {
-		const { intl } = this.props;
+		const { intl, dispatch } = this.props;
 
 		return (
 			<div className="engangsstonad">
 				<DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
 				<TransformingRadioGroupCollection
 					stages={this.radioGroupFodsel}
-					onChange={($e, stages, expandedStage) =>
-						this.childBirthChanged($e, stages, expandedStage)
+					onChange={($e, stages) =>
+						dispatch(common.setBarnErFodt(stages[0].selectedValue === 'before'))
 					}
 				/>
-				{this.props.childBorn === true && (
+
+				{this.props.barnErFodt === true && (
 					<div>
 						<DateInput
 							id="fodselsdato"
-							input={{ value: this.props.fodselDato }}
+							input={{ value: this.props.fodselsdato }}
 							label={intl.formatMessage({
-								id: 'relasjonBarn.text.fodseldato'
+								id: 'relasjonBarn.text.fodselsdato'
 							})}
-							onChange={(e) => this.props.setFodselDato(e)}
+							onChange={(e) => dispatch(soknad.setFodselsdato(e))}
 						/>
 						<div className="engangsstonad__centerButton">
 							<Hovedknapp onClick={this.handleNextClicked}>Neste</Hovedknapp>
 						</div>
 					</div>
 				)}
-				{this.props.childBorn === false && (
+
+				{this.props.barnErFodt === false && (
 					<TransformingRadioGroupCollection
 						stages={this.radioGroupTermindato}
-						onChange={($e, stages, expandedStage) =>
-							this.noOfChildrenChanged($e, stages, expandedStage)
+						onChange={($e, stages) =>
+							dispatch(soknad.setAntallBarn(stages[0].selectedValue))
 						}
 					/>
 				)}
-				{this.props.noOfChildren &&
-					this.props.childBorn === false && (
+
+				{this.props.antallBarn &&
+					this.props.barnErFodt === false && (
 						<div>
 							<DateInput
 								id="termindato"
@@ -166,8 +153,9 @@ export class EngangsstonadStep1 extends Component {
 								label={intl.formatMessage({
 									id: 'relasjonBarn.text.termindato'
 								})}
-								onChange={(e) => this.props.setTerminDato(e)}
+								onChange={(e) => dispatch(soknad.setTerminDato(e))}
 							/>
+
 							{this.props.terminDato && (
 								<div>
 									<DialogBox type="warning" overflow>
@@ -188,11 +176,11 @@ export class EngangsstonadStep1 extends Component {
 									</DialogBox>
 									<DateInput
 										id="terminbekreftelse"
-										input={{ value: this.props.bekreftetTermindato }}
+										input={{ value: this.props.utstedtDato }}
 										label={intl.formatMessage({
 											id: 'relasjonBarn.text.datoTerminbekreftelse'
 										})}
-										onChange={(e) => this.props.setBekreftetTermindato(e)}
+										onChange={(e) => dispatch(soknad.setUtstedtDato(e))}
 									/>
 									<div className="engangsstonad__centerButton">
 										<Hovedknapp onClick={this.handleNextClicked}>
@@ -218,16 +206,12 @@ export class EngangsstonadStep1 extends Component {
 }
 
 EngangsstonadStep1.propTypes = {
-	fodselDato: PropTypes.string,
-	childBorn: PropTypes.bool,
-	toggleChildBorn: PropTypes.func.isRequired,
-	setNumberOfChildren: PropTypes.func.isRequired,
-	setBekreftetTermindato: PropTypes.func.isRequired,
-	setTerminDato: PropTypes.func.isRequired,
-	setFodselDato: PropTypes.func.isRequired,
-	noOfChildren: PropTypes.string,
+	dispatch: PropTypes.func.isRequired,
+	fodselsdato: PropTypes.string,
+	barnErFodt: PropTypes.bool,
+	antallBarn: PropTypes.string,
 	terminDato: PropTypes.string,
-	bekreftetTermindato: PropTypes.string,
+	utstedtDato: PropTypes.string,
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
 	}).isRequired,
@@ -235,33 +219,19 @@ EngangsstonadStep1.propTypes = {
 };
 
 EngangsstonadStep1.defaultProps = {
-	noOfChildren: undefined,
-	bekreftetTermindato: undefined,
+	antallBarn: undefined,
+	utstedtDato: undefined,
 	terminDato: undefined,
-	childBorn: undefined,
-	fodselDato: undefined
+	barnErFodt: undefined,
+	fodselsdato: undefined
 };
 
 const mapStateToProps = (state) => ({
-	noOfChildren: state.engangsstonadReducer.noOfChildren,
-	terminDato: state.engangsstonadReducer.terminDato,
-	bekreftetTermindato: state.engangsstonadReducer.bekreftetTermindato,
-	childBorn: state.engangsstonadReducer.childBorn,
-	fodselDato: state.engangsstonadReducer.fodselDato
+	antallBarn: state.soknadReducer.antallBarn,
+	terminDato: state.soknadReducer.terminDato,
+	utstedtDato: state.soknadReducer.utstedtDato,
+	fodselsdato: state.soknadReducer.fodselsdato,
+	barnErFodt: state.commonReducer.barnErFodt
 });
 
-const mapDispatchToProps = (dispatch) =>
-	bindActionCreators(
-		{
-			toggleChildBorn,
-			setNumberOfChildren,
-			setTerminDato,
-			setBekreftetTermindato,
-			setFodselDato
-		},
-		dispatch
-	);
-
-export default injectIntl(
-	connect(mapStateToProps, mapDispatchToProps)(EngangsstonadStep1)
-);
+export default injectIntl(connect(mapStateToProps)(EngangsstonadStep1));

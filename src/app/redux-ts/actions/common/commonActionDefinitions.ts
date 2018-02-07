@@ -1,7 +1,13 @@
 export enum CommonActionKeys {
+    'SET_BARN_ER_FODT' = 'setBarnErFodt',
     'SET_BEKREFTET_INFORMASJON' = 'setBekreftetInformasjon',
     'SET_GODKJENT_VILKAR' = 'setGodkjentVilkar',
     'SET_LANGUAGE' = 'setLanguage'
+}
+
+interface SetBarnErFodt {
+    type: CommonActionKeys.SET_BARN_ER_FODT;
+    barnErFodt: boolean;
 }
 
 interface SetBekreftetInformasjon {
@@ -20,6 +26,7 @@ interface SetLanguage {
 }
 
 export type CommonActionTypes =
+    | SetBarnErFodt
     | SetBekreftetInformasjon
     | SetGodkjentVilkar
     | SetLanguage;
