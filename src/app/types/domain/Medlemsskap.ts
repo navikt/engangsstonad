@@ -14,10 +14,10 @@ export type Utenlandsopphold = {
 };
 
 type Medlemsskap = {
-    iNorgeSiste12: boolean;
-    arbeidSiste12: ArbeidSiste12;
-    fodselINorge: boolean;
-    iNorgeNeste12: true;
+    iNorgeSiste12?: boolean;
+    arbeidSiste12?: ArbeidSiste12;
+    fodselINorge?: boolean;
+    iNorgeNeste12?: boolean;
     utenlandsopphold: Utenlandsopphold[];
 };
 

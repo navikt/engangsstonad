@@ -102,40 +102,47 @@ export class EngangsstonadStep1 extends Component {
 		this.props.history.push('/engangsstonad/step2');
 	}
 
-	antallBarnChanged($e, stages) {
-		this.props.dispatch(soknad.setAntallBarn(stages[0].selectedValue));
-	}
-
 	render() {
-		const { intl, dispatch } = this.props;
+		const { intl, dispatch, relasjonTilBarn, barnErFodt } = this.props;
 
 		return (
 			<div className="engangsstonad">
 				<DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
 				<TransformingRadioGroupCollection
 					stages={this.radioGroupFodsel}
-					onChange={($e, stages) =>
-						dispatch(common.setBarnErFodt(stages[0].selectedValue === 'before'))
-					}
+					onChange={($e, stages) => {
+						const value = stages[0].selectedValue;
+						dispatch(
+							soknad.setBarnErFodt(
+								value === undefined
+									? value
+									: stages[0].selectedValue === 'before'
+							)
+						);
+					}}
 				/>
 
-				{this.props.barnErFodt === true && (
+				{barnErFodt === true && (
 					<div>
 						<DateInput
 							id="fodselsdato"
-							input={{ value: this.props.fodselsdato }}
+							input={{ value: relasjonTilBarn && relasjonTilBarn.fodselsdato }}
 							label={intl.formatMessage({
 								id: 'relasjonBarn.text.fodselsdato'
 							})}
 							onChange={(e) => dispatch(soknad.setFodselsdato(e))}
 						/>
 						<div className="engangsstonad__centerButton">
-							<Hovedknapp onClick={this.handleNextClicked}>Neste</Hovedknapp>
+							<Hovedknapp onClick={this.handleNextClicked}>
+								{intl.formatMessage({
+									id: 'standard.button.neste'
+								})}
+							</Hovedknapp>
 						</div>
 					</div>
 				)}
 
-				{this.props.barnErFodt === false && (
+				{barnErFodt === false && (
 					<TransformingRadioGroupCollection
 						stages={this.radioGroupTermindato}
 						onChange={($e, stages) =>
@@ -144,19 +151,20 @@ export class EngangsstonadStep1 extends Component {
 					/>
 				)}
 
-				{this.props.antallBarn &&
-					this.props.barnErFodt === false && (
+				{relasjonTilBarn &&
+					relasjonTilBarn.antallBarn &&
+					barnErFodt === false && (
 						<div>
 							<DateInput
 								id="termindato"
-								input={{ value: this.props.terminDato }}
+								input={{ value: relasjonTilBarn.terminDato }}
 								label={intl.formatMessage({
 									id: 'relasjonBarn.text.termindato'
 								})}
 								onChange={(e) => dispatch(soknad.setTerminDato(e))}
 							/>
 
-							{this.props.terminDato && (
+							{relasjonTilBarn.terminDato && (
 								<div>
 									<DialogBox type="warning" overflow>
 										<Normaltekst>
@@ -176,7 +184,7 @@ export class EngangsstonadStep1 extends Component {
 									</DialogBox>
 									<DateInput
 										id="terminbekreftelse"
-										input={{ value: this.props.utstedtDato }}
+										input={{ value: relasjonTilBarn.utstedtDato }}
 										label={intl.formatMessage({
 											id: 'relasjonBarn.text.datoTerminbekreftelse'
 										})}
@@ -207,31 +215,19 @@ export class EngangsstonadStep1 extends Component {
 
 EngangsstonadStep1.propTypes = {
 	dispatch: PropTypes.func.isRequired,
-	fodselsdato: PropTypes.string,
+	// eslint-disable-next-line react/require-default-props
 	barnErFodt: PropTypes.bool,
-	antallBarn: PropTypes.string,
-	terminDato: PropTypes.string,
-	utstedtDato: PropTypes.string,
+	// eslint-disable-next-line react/require-default-props
+	relasjonTilBarn: PropTypes.shape({}),
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
 	}).isRequired,
 	intl: intlShape.isRequired
 };
 
-EngangsstonadStep1.defaultProps = {
-	antallBarn: undefined,
-	utstedtDato: undefined,
-	terminDato: undefined,
-	barnErFodt: undefined,
-	fodselsdato: undefined
-};
-
 const mapStateToProps = (state) => ({
-	antallBarn: state.soknadReducer.antallBarn,
-	terminDato: state.soknadReducer.terminDato,
-	utstedtDato: state.soknadReducer.utstedtDato,
-	fodselsdato: state.soknadReducer.fodselsdato,
-	barnErFodt: state.commonReducer.barnErFodt
+	relasjonTilBarn: state.soknadReducer.relasjonTilBarn,
+	barnErFodt: state.soknadReducer.barnErFodt
 });
 
 export default injectIntl(connect(mapStateToProps)(EngangsstonadStep1));

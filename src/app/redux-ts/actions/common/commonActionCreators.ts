@@ -1,12 +1,5 @@
 import { CommonActionKeys, CommonActionTypes } from './commonActionDefinitions';
 
-export function setBarnErFodt(barnErFodt: boolean): CommonActionTypes {
-    return {
-        type: CommonActionKeys.SET_BARN_ER_FODT,
-        barnErFodt
-    };
-}
-
 export function setBekreftetInformasjon(bekreftetInformasjon: boolean): CommonActionTypes {
     return {
         type: CommonActionKeys.SET_BEKREFTET_INFORMASJON,
@@ -29,7 +22,6 @@ export function setLanguage(language: string): CommonActionTypes {
 }
 
 export default {
-    setBarnErFodt,
     setBekreftetInformasjon,
     setGodkjentVilkar,
     setLanguage

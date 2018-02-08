@@ -30,6 +30,13 @@ export function setAntallBarn(antallBarn: number): SoknadActionTypes {
     };
 }
 
+export function setBarnErFodt(barnErFodt: boolean): SoknadActionTypes {
+    return {
+        type: SoknadActionKeys.SET_BARN_ER_FODT,
+        barnErFodt
+    };
+}
+
 export function setFodselsdato(fodselsdato: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_FODSELSDATO,
@@ -84,6 +91,7 @@ export default {
     editUtenlandsopphold,
     deleteUtenlandsopphold,
     setAntallBarn,
+    setBarnErFodt,
     setFodselsdato,
     setTerminDato,
     setUtstedtDato,

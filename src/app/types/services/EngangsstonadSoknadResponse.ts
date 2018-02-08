@@ -1,9 +1,6 @@
-import { RelasjonTilFodtBarn, RelasjonTilUfodtBarn } from '../domain/RelasjonTilBarn';
-import Medlemsskap from '../domain/Medlemsskap';
+import EngangsstonadSoknad from '../domain/EngangsstonadSoknad';
 
-export type EngangsstonadSoknadResponse = {
-    medlemsskap: Medlemsskap;
-    relasjonTilBarn: RelasjonTilFodtBarn | RelasjonTilUfodtBarn;
+export interface EngangsstonadSoknadResponse extends EngangsstonadSoknad {
     id: string;
     opprettet: string;
-};
+}

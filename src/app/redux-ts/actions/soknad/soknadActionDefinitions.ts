@@ -3,6 +3,7 @@ import { ArbeidSiste12, Utenlandsopphold } from '../../../types/domain/Medlemssk
 export enum SoknadActionKeys {
     // RelasjonTilBarn
     'SET_ANTALL_BARN' = 'setAntallBarn',
+    'SET_BARN_ER_FODT' = 'setBarnErFodt',
     'SET_FODSELSDATO' = 'setFodselsdato',
     'SET_TERMIN_DATO' = 'setTerminDato',
     'SET_UTSTEDT_DATO' = 'setUtstedtDato',
@@ -21,6 +22,11 @@ export enum SoknadActionKeys {
 interface SetAntallBarn {
     type: SoknadActionKeys.SET_ANTALL_BARN;
     antallBarn: number;
+}
+
+interface SetBarnErFodt {
+    type: SoknadActionKeys.SET_BARN_ER_FODT;
+    barnErFodt: boolean;
 }
 
 interface SetFodselsdato {
@@ -80,6 +86,7 @@ export type SoknadActionTypes =
     | EditUtenlandsopphold
     | DeleteUtenlandsopphold
     | SetAntallBarn
+    | SetBarnErFodt
     | SetFodselsdato
     | SetFodselINorge
     | SetTerminDato

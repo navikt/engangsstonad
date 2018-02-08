@@ -88,21 +88,37 @@ export class EngangsstonadStep2 extends Component {
 		const { dispatch } = this.props;
 		const { selectedValue } = stages[0];
 		const inNorway = this.radioGroupStages1[0].values[0].value;
-		dispatch(soknad.setINorgeSiste12(inNorway === selectedValue));
+		dispatch(
+			soknad.setINorgeSiste12(
+				selectedValue === undefined ? selectedValue : inNorway === selectedValue
+			)
+		);
 	}
 
 	neste12ValueChanged($e, stages) {
 		const { dispatch } = this.props;
 		stages.forEach((stage) => {
-			const { selectedValue } = stages;
+			const { selectedValue } = stages[0];
 			const inNorway = stage.values[0].value;
 
 			switch (stage.name) {
 				case 'iNorgeNeste12':
-					dispatch(soknad.setINorgeNeste12(selectedValue === inNorway));
+					dispatch(
+						soknad.setINorgeNeste12(
+							selectedValue === undefined
+								? selectedValue
+								: selectedValue === inNorway
+						)
+					);
 					break;
 				case 'fodselINorge':
-					dispatch(soknad.setFodselINorge(selectedValue === inNorway));
+					dispatch(
+						soknad.setFodselINorge(
+							selectedValue === undefined
+								? selectedValue
+								: selectedValue === inNorway
+						)
+					);
 					break;
 				default:
 					break;
@@ -116,12 +132,39 @@ export class EngangsstonadStep2 extends Component {
 	}
 
 	shouldDisplayResidingInFutureRadioGroup() {
-		const { iNorgeSiste12, utenlandsopphold } = this.props;
+		const { iNorgeSiste12, utenlandsopphold } = this.props.medlemsskap;
 		return iNorgeSiste12 === true || utenlandsopphold.length > 0;
 	}
 
+	renderNesteKnapp() {
+		const {
+			iNorgeSiste12,
+			utenlandsopphold,
+			iNorgeNeste12,
+			fodselINorge
+		} = this.props.medlemsskap;
+
+		const completedFirstPath =
+			iNorgeSiste12 !== undefined &&
+			iNorgeNeste12 !== undefined &&
+			fodselINorge !== undefined;
+		const completedSecondPath =
+			iNorgeSiste12 !== undefined &&
+			utenlandsopphold.length > 0 &&
+			iNorgeNeste12 !== undefined &&
+			fodselINorge !== undefined;
+
+		if (completedFirstPath || completedSecondPath)
+			return (
+				<div className="engangsstonad__centerButton">
+					<Hovedknapp onClick={this.handleNextClicked}>Neste</Hovedknapp>
+				</div>
+			);
+		return null;
+	}
+
 	render() {
-		const { dispatch, intl, utenlandsopphold } = this.props;
+		const { dispatch, intl, medlemsskap } = this.props;
 		return (
 			<div className="engangsstonad">
 				<DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
@@ -130,17 +173,20 @@ export class EngangsstonadStep2 extends Component {
 					onChange={($e, stages) => this.iNorgeSiste12ValueChanged($e, stages)}
 				/>
 
-				{this.props.iNorgeSiste12 === false && (
+				{medlemsskap.iNorgeSiste12 === false && (
 					<CountryPicker
 						label={intl.formatMessage({
 							id: 'medlemmskap.text.jegBodde'
 						})}
-						visits={utenlandsopphold}
+						visits={medlemsskap.utenlandsopphold}
 						addVisit={(utl) => dispatch(soknad.addUtenlandsopphold(utl))}
 						deleteVisit={(utl) => dispatch(soknad.deleteUtenlandsopphold(utl))}
 						editVisit={(utl) =>
 							dispatch(
-								soknad.editUtenlandsopphold(utl, utenlandsopphold.indexOf(utl))
+								soknad.editUtenlandsopphold(
+									utl,
+									medlemsskap.utenlandsopphold.indexOf(utl)
+								)
 							)
 						}
 					/>
@@ -154,11 +200,10 @@ export class EngangsstonadStep2 extends Component {
 								this.neste12ValueChanged($e, stages, expandedStage)
 							}
 						/>
-						<div className="engangsstonad__centerButton">
-							<Hovedknapp onClick={this.handleNextClicked}>Neste</Hovedknapp>
-						</div>
 					</div>
 				)}
+
+				{this.renderNesteKnapp()}
 			</div>
 		);
 	}
@@ -166,29 +211,20 @@ export class EngangsstonadStep2 extends Component {
 
 EngangsstonadStep2.propTypes = {
 	dispatch: PropTypes.func.isRequired,
-	iNorgeSiste12: PropTypes.bool,
-	utenlandsopphold: PropTypes.arrayOf(
-		PropTypes.shape({
-			land: PropTypes.string,
-			fom: PropTypes.string,
-			tom: PropTypes.string
-		})
-	).isRequired,
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
 	}).isRequired,
-	intl: intlShape.isRequired
-};
-
-EngangsstonadStep2.defaultProps = {
-	iNorgeSiste12: undefined
+	intl: intlShape.isRequired,
+	medlemsskap: PropTypes.shape({
+		utenlandsopphold: PropTypes.array,
+		iNorgeSiste12: PropTypes.bool,
+		iNorgeNeste12: PropTypes.bool,
+		fodselINorge: PropTypes.bool
+	}).isRequired
 };
 
 const mapStateToProps = (state) => ({
-	iNorgeSiste12: state.soknadReducer.iNorgeSiste12,
-	utenlandsopphold: state.soknadReducer.utenlandsopphold,
-	iNorgeNeste12: state.soknadReducer.iNorgeNeste12,
-	fodselINorge: state.soknadReducer.fodselINorge
+	medlemsskap: state.soknadReducer.medlemsskap
 });
 
 export default injectIntl(connect(mapStateToProps)(EngangsstonadStep2));
