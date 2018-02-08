@@ -53,6 +53,11 @@
 	"medlemmskap.text.bostedFodsel": "og når barnet blir fødd skal eg",
 	"medlemmskap.radiobutton.vareNorge": "vere i Noreg",
 	"medlemmskap.radioButton.vareUtlandet": "vere i eit anna land",
+	"medlemmskap.landvelger.endre": "Endre opphald i utlandet",
+  "medlemmskap.landvelger.leggTil": "Legg til opphald i utlandet",
+  "medlemmskap.landvelger.lagre": "Lagre endringar",
+  "medlemmskap.landvelger.leggTilLand": "Legg til land",
+  "medlemmskap.landvelger.avbryt": "Avbryt",
 
 	"oppsummering.sectionheading.oppsummering": "Oppsummering",
 	"oppsummering.text.lesNoye": "Les gjennom oppsummeringa før du sender inn søknaden. Om du må gjøre endringar kan du gå tilbake.",

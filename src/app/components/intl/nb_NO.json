@@ -9,7 +9,8 @@
 	"intro.text.samtykke": "Jeg bekrefter at jeg har lest og forstått",
 	"intro.text.samtykke.link": "rettigheter og plikter",
 	"intro.pageheading.samtykke": "Rettigheter og plikter.",
-	"intro.button.startSoknad": "Begynn med søknaden",
+    "intro.button.startSoknad": "Begynn med søknaden",
+    "intro.text.lastNedPapirsoknad": "Her kan du laste ned papirsøknaden",
 
 	"relasjonBarn.sectionheading.relasjonBarn": "Informasjon om barnet",
 	"relasjonBarn.text.fodselTidspunkt": "Søknaden min gjelder en fødsel som er…",
@@ -52,7 +53,12 @@
 	"medlemmskap.radiobutton.boUtlandet": "ikke bo i Norge",
 	"medlemmskap.text.bostedFodsel": "og når barnet blir født skal jeg…",
 	"medlemmskap.radiobutton.vareNorge": "være i Norge",
-	"medlemmskap.radioButton.vareUtlandet": "være i et annet land",
+  "medlemmskap.radioButton.vareUtlandet": "være i et annet land",
+  "medlemmskap.landvelger.endre": "Endre utenlandsopphold",
+  "medlemmskap.landvelger.leggTil": "Legg til utenlandsopphold",
+  "medlemmskap.landvelger.lagre": "Lagre endringer",
+  "medlemmskap.landvelger.leggTilLand": "Legg til land",
+  "medlemmskap.landvelger.avbryt": "Avbryt",
 
 	"oppsummering.sectionheading.oppsummering": "Oppsummering",
 	"oppsummering.text.lesNoye":
