@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { injectIntl, intlShape } from 'react-intl';
@@ -10,15 +9,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
 import CountryPicker from 'shared/country-picker/CountryPicker';
 
-import {
-	toggleResidingInNorwayNextTwelveMonths,
-	toggleResidingInNorwayDuringBirth,
-	toggleResidedInNorwayLastTwelveMonths,
-	toggleWorkedInNorwayLastTwelveMonths,
-	addVisit,
-	editVisit,
-	deleteVisit
-} from '../../../redux/actions/actions';
+import { soknadActionCreators as soknad } from '../../../redux-ts/actions';
 
 import './../engangsstonad.less';
 
@@ -55,34 +46,7 @@ export class EngangsstonadStep2 extends Component {
 
 		this.radioGroupStages2 = [
 			{
-				name: 'workedInNorway',
-				legend: intl.formatMessage({ id: 'medlemmskap.text.arbeid' }),
-				values: [
-					{
-						label: intl.formatMessage({
-							id: 'medlemmskap.radiobutton.arbeidNorge'
-						}),
-						value: 'norway'
-					},
-					{
-						label: intl.formatMessage({
-							id: 'medlemmskap.radiobutton.arbeidUtlandet'
-						}),
-						value: 'abroad'
-					},
-					{
-						label: intl.formatMessage({
-							id: 'medlemmskap.radiobutton.arbeidIkkeJobbet'
-						}),
-						value: 'none'
-					}
-				]
-			}
-		];
-
-		this.radioGroupStages3 = [
-			{
-				name: 'residingCountryNextTwelveMonths',
+				name: 'iNorgeNeste12',
 				legend: intl.formatMessage({ id: 'medlemmskap.text.neste12mnd' }),
 				values: [
 					{
@@ -100,7 +64,7 @@ export class EngangsstonadStep2 extends Component {
 				]
 			},
 			{
-				name: 'residingCountryDuringBirth',
+				name: 'fodselINorge',
 				legend: intl.formatMessage({ id: 'medlemmskap.text.bostedFodsel' }),
 				values: [
 					{
@@ -120,42 +84,25 @@ export class EngangsstonadStep2 extends Component {
 		];
 	}
 
-	residedInNorwayLastTwelveMonthsValueChange($e, stages, expandedStage) {
-		if (expandedStage === null) {
-			this.props.toggleResidedInNorwayLastTwelveMonths(
-				stages[0].selectedValue === this.radioGroupStages1[0].values[0].value
-			);
-		} else {
-			this.props.toggleResidedInNorwayLastTwelveMonths(stages[0].selectedValue);
-		}
+	iNorgeSiste12ValueChanged($e, stages) {
+		const { dispatch } = this.props;
+		const { selectedValue } = stages[0];
+		const inNorway = this.radioGroupStages1[0].values[0].value;
+		dispatch(soknad.setINorgeSiste12(inNorway === selectedValue));
 	}
 
-	workedInNorwayLastTwelveMonthsValueChange($e, stages, expandedStage) {
-		if (expandedStage === null) {
-			this.props.toggleWorkedInNorwayLastTwelveMonths(
-				stages[0].selectedValue === this.radioGroupStages1[0].values[0].value
-			);
-		} else {
-			this.props.toggleWorkedInNorwayLastTwelveMonths(stages[0].selectedValue);
-		}
-	}
-
-	handleNextClicked(e) {
-		e.preventDefault();
-		this.props.history.push('/engangsstonad/step3');
-	}
-
-	// eslint-disable-next-line class-methods-use-this, no-unused-vars
-	nextTwelveMonthsValueChange($e, stages) {
+	neste12ValueChanged($e, stages) {
+		const { dispatch } = this.props;
 		stages.forEach((stage) => {
+			const { selectedValue } = stages;
+			const inNorway = stage.values[0].value;
+
 			switch (stage.name) {
-				case 'residingCountryNextTwelveMonths':
-					this.props.toggleResidingInNorwayNextTwelveMonths(
-						stage.selectedValue
-					);
+				case 'iNorgeNeste12':
+					dispatch(soknad.setINorgeNeste12(selectedValue === inNorway));
 					break;
-				case 'residingCountryDuringBirth':
-					this.props.toggleResidingInNorwayDuringBirth(stage.selectedValue);
+				case 'fodselINorge':
+					dispatch(soknad.setFodselINorge(selectedValue === inNorway));
 					break;
 				default:
 					break;
@@ -163,49 +110,48 @@ export class EngangsstonadStep2 extends Component {
 		});
 	}
 
+	handleNextClicked(e) {
+		e.preventDefault();
+		this.props.history.push('/engangsstonad/step3');
+	}
+
 	shouldDisplayResidingInFutureRadioGroup() {
-		return (
-			this.props.residedInNorwayLastTwelveMonths === true ||
-			this.props.visits.length > 0
-		);
+		const { iNorgeSiste12, utenlandsopphold } = this.props;
+		return iNorgeSiste12 === true || utenlandsopphold.length > 0;
 	}
 
 	render() {
-		const { intl } = this.props;
+		const { dispatch, intl, utenlandsopphold } = this.props;
 		return (
 			<div className="engangsstonad">
 				<DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
 				<TransformingRadioGroupCollection
 					stages={this.radioGroupStages1}
-					onChange={($e, stages, expandedStage) =>
-						this.residedInNorwayLastTwelveMonthsValueChange(
-							$e,
-							stages,
-							expandedStage
-						)
-					}
+					onChange={($e, stages) => this.iNorgeSiste12ValueChanged($e, stages)}
 				/>
 
-				{this.props.residedInNorwayLastTwelveMonths === false && (
+				{this.props.iNorgeSiste12 === false && (
 					<CountryPicker
 						label={intl.formatMessage({
 							id: 'medlemmskap.text.jegBodde'
 						})}
-						visits={this.props.visits}
-						addVisit={(visit) => this.props.addVisit(visit)}
-						deleteVisit={(visit) => this.props.deleteVisit(visit)}
-						editVisit={(visit, updatedVisitIndex) => {
-							this.props.editVisit(visit, updatedVisitIndex);
-						}}
+						visits={utenlandsopphold}
+						addVisit={(utl) => dispatch(soknad.addUtenlandsopphold(utl))}
+						deleteVisit={(utl) => dispatch(soknad.deleteUtenlandsopphold(utl))}
+						editVisit={(utl) =>
+							dispatch(
+								soknad.editUtenlandsopphold(utl, utenlandsopphold.indexOf(utl))
+							)
+						}
 					/>
 				)}
 
 				{this.shouldDisplayResidingInFutureRadioGroup() && (
 					<div>
 						<TransformingRadioGroupCollection
-							stages={this.radioGroupStages3}
+							stages={this.radioGroupStages2}
 							onChange={($e, stages, expandedStage) =>
-								this.nextTwelveMonthsValueChange($e, stages, expandedStage)
+								this.neste12ValueChanged($e, stages, expandedStage)
 							}
 						/>
 						<div className="engangsstonad__centerButton">
@@ -219,19 +165,13 @@ export class EngangsstonadStep2 extends Component {
 }
 
 EngangsstonadStep2.propTypes = {
-	residedInNorwayLastTwelveMonths: PropTypes.bool,
-	toggleWorkedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
-	toggleResidedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
-	toggleResidingInNorwayDuringBirth: PropTypes.func.isRequired,
-	toggleResidingInNorwayNextTwelveMonths: PropTypes.func.isRequired,
-	addVisit: PropTypes.func.isRequired,
-	deleteVisit: PropTypes.func.isRequired,
-	editVisit: PropTypes.func.isRequired,
-	visits: PropTypes.arrayOf(
+	dispatch: PropTypes.func.isRequired,
+	iNorgeSiste12: PropTypes.bool,
+	utenlandsopphold: PropTypes.arrayOf(
 		PropTypes.shape({
-			country: PropTypes.string,
-			startDate: PropTypes.string,
-			endDate: PropTypes.string
+			land: PropTypes.string,
+			fom: PropTypes.string,
+			tom: PropTypes.string
 		})
 	).isRequired,
 	history: PropTypes.shape({
@@ -241,35 +181,14 @@ EngangsstonadStep2.propTypes = {
 };
 
 EngangsstonadStep2.defaultProps = {
-	residedInNorwayLastTwelveMonths: undefined
+	iNorgeSiste12: undefined
 };
 
 const mapStateToProps = (state) => ({
-	residedInNorwayLastTwelveMonths:
-		state.engangsstonadReducer.residedInNorwayLastTwelveMonths,
-	workedInNorwayLastTwelveMonths:
-		state.engangsstonadReducer.workedInNorwayLastTwelveMonths,
-	visits: state.engangsstonadReducer.visits,
-	residingInNorwayNextTwelveMonths:
-		state.engangsstonadReducer.residingInNorwayNextTwelveMonths,
-	residingInNorwayDuringBirth:
-		state.engangsstonadReducer.residingInNorwayDuringBirth
+	iNorgeSiste12: state.soknadReducer.iNorgeSiste12,
+	utenlandsopphold: state.soknadReducer.utenlandsopphold,
+	iNorgeNeste12: state.soknadReducer.iNorgeNeste12,
+	fodselINorge: state.soknadReducer.fodselINorge
 });
 
-const mapDispatchToProps = (dispatch) =>
-	bindActionCreators(
-		{
-			toggleResidedInNorwayLastTwelveMonths,
-			toggleWorkedInNorwayLastTwelveMonths,
-			toggleResidingInNorwayNextTwelveMonths,
-			toggleResidingInNorwayDuringBirth,
-			addVisit,
-			editVisit,
-			deleteVisit
-		},
-		dispatch
-	);
-
-export default injectIntl(
-	connect(mapStateToProps, mapDispatchToProps)(EngangsstonadStep2)
-);
+export default injectIntl(connect(mapStateToProps)(EngangsstonadStep2));

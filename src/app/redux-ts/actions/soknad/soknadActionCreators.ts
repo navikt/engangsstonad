@@ -8,10 +8,11 @@ export function addUtenlandsopphold(utenlandsopphold: Utenlandsopphold): SoknadA
     };
 }
 
-export function editUtenlandsopphold(utenlandsopphold: Utenlandsopphold): SoknadActionTypes {
+export function editUtenlandsopphold(utenlandsopphold: Utenlandsopphold, index: number): SoknadActionTypes {
     return {
         type: SoknadActionKeys.EDIT_UTENLANDSOPPHOLD,
-        utenlandsopphold
+        utenlandsopphold,
+        index
     };
 }
 

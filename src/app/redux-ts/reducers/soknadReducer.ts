@@ -8,16 +8,18 @@ const getDefaultState = () => ({
 const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => {
     switch (action.type) {
         case SoknadActionKeys.ADD_UTENLANDSOPPHOLD:
-            const utenlandsopphold = state.utenlandsopphold;
-            utenlandsopphold.concat(action.utenlandsopphold);
+            let utenlandsopphold = state.utenlandsopphold;
+            utenlandsopphold = utenlandsopphold.concat([action.utenlandsopphold]);
             return { ...state, utenlandsopphold };
         case SoknadActionKeys.EDIT_UTENLANDSOPPHOLD:
-            const index = state.utenlandsopphold.indexOf(action.utenlandsopphold);
-            state.utenlandsopphold[index] = action.utenlandsopphold;
+            state.utenlandsopphold[action.index] = action.utenlandsopphold;
             return { ...state };
         case SoknadActionKeys.DELETE_UTENLANDSOPPHOLD:
-            state.utenlandsopphold.splice(0, 1, action.utenlandsopphold);
-            return {...state};
+            const index = state.utenlandsopphold.findIndex((current) =>
+                (action.utenlandsopphold.land === current.land)
+            );
+            state.utenlandsopphold.splice(index, 1);
+            return { ...{}, ...state };
         case SoknadActionKeys.SET_ANTALL_BARN:
             return { ...state, antallBarn: action.antallBarn };
         case SoknadActionKeys.SET_FODSELSDATO:

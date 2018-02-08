@@ -47,6 +47,7 @@ interface AddUtenlandsopphold {
 interface EditUtenlandsopphold {
     type: SoknadActionKeys.EDIT_UTENLANDSOPPHOLD;
     utenlandsopphold: Utenlandsopphold;
+    index: number;
 }
 
 interface DeleteUtenlandsopphold {
