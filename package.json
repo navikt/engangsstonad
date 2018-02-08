@@ -82,6 +82,7 @@
 		"ejs": "2.5.7",
 		"express": "4.16.2",
 		"history": "4.7.2",
+		"i18n-iso-countries": "3.4.0",
 		"lodash.throttle": "4.1.1",
 		"moment": "2.20.1",
 		"nav-frontend-alertstriper": "0.2.16",

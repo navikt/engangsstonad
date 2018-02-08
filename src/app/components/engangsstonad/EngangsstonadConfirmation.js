@@ -57,7 +57,6 @@ export class EngangsstonadConfirmation extends Component {
 
 	render() {
 		const { data, approvedConditions, intl } = this.props;
-
 		if (!data) {
 			return null;
 		}

@@ -37,7 +37,6 @@ export class Step3 extends Component {
 			terminbekreftelseDato,
 			boddINorgeSisteAar,
 			boddIUtlandetListe,
-			jobbetINorgeSisteTolvMnd,
 			skalBoINorgeNesteTolvMnd,
 			skalFodeINorge
 		} = this.props;
@@ -50,7 +49,6 @@ export class Step3 extends Component {
 			terminbekreftelseDato,
 			boddINorgeSisteAar,
 			boddIUtlandetListe,
-			jobbetINorgeSisteTolvMnd,
 			skalBoINorgeNesteTolvMnd,
 			skalFodeINorge
 		});
@@ -233,7 +231,6 @@ Step3.propTypes = {
 	boddIUtlandetListe: PropTypes.array,
 	skalBoINorgeNesteTolvMnd: PropTypes.bool,
 	skalFodeINorge: PropTypes.bool,
-	jobbetINorgeSisteTolvMnd: PropTypes.bool,
 	postEngangsstonadToApi: PropTypes.func.isRequired,
 	postReponse: PropTypes.shape({}),
 	isLoading: PropTypes.bool.isRequired,
@@ -247,7 +244,6 @@ Step3.defaultProps = {
 	confirmedInformation: false,
 	data: undefined,
 	antallBarn: undefined,
-	jobbetINorgeSisteTolvMnd: undefined,
 	termindato: undefined,
 	terminbekreftelseDato: undefined,
 	boddINorgeSisteAar: undefined,
