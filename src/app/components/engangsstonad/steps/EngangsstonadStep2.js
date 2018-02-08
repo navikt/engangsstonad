@@ -188,6 +188,7 @@ export class EngangsstonadStep2 extends Component {
 						label={intl.formatMessage({
 							id: 'medlemmskap.text.jegBodde'
 						})}
+						language={this.props.language}
 						visits={this.props.visits}
 						addVisit={(visit) => this.props.addVisit(visit)}
 						deleteVisit={(visit) => this.props.deleteVisit(visit)}
@@ -219,21 +220,21 @@ EngangsstonadStep2.propTypes = {
 	residedInNorwayLastTwelveMonths: PropTypes.bool,
 	toggleWorkedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
 	toggleResidedInNorwayLastTwelveMonths: PropTypes.func.isRequired,
-	toggleResidingInNorwayDuringBirth: PropTypes.func.isRequired,
 	toggleResidingInNorwayNextTwelveMonths: PropTypes.func.isRequired,
 	addVisit: PropTypes.func.isRequired,
 	deleteVisit: PropTypes.func.isRequired,
 	editVisit: PropTypes.func.isRequired,
 	visits: PropTypes.arrayOf(
 		PropTypes.shape({
-			country: PropTypes.string,
-			startDate: PropTypes.string,
-			endDate: PropTypes.string
+			land: PropTypes.string,
+			startDato: PropTypes.string,
+			sluttDato: PropTypes.string
 		})
 	).isRequired,
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
 	}).isRequired,
+	language: PropTypes.string.isRequired,
 	intl: intlShape.isRequired
 };
 
@@ -250,7 +251,8 @@ const mapStateToProps = (state) => ({
 	residingInNorwayNextTwelveMonths:
 		state.engangsstonadReducer.residingInNorwayNextTwelveMonths,
 	residingInNorwayDuringBirth:
-		state.engangsstonadReducer.residingInNorwayDuringBirth
+		state.engangsstonadReducer.residingInNorwayDuringBirth,
+	language: state.engangsstonadReducer.language
 });
 
 const mapDispatchToProps = (dispatch) =>

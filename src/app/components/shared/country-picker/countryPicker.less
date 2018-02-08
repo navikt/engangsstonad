@@ -17,27 +17,25 @@
     position: relative;
     width: 100%;
     list-style-type: none;
-    color: #0067C5;
-    border: 1px solid #0067C5; 
-    margin-bottom: @paddingSmall;
+    padding-bottom: @paddingLarge;
+    display: inline-block;
 
     &__country {
         width: 72px;
         display: inline-block;
         overflow: hidden;
         text-overflow: ellipsis;
-
-        &::-ms-clear {
-            display: none;
-        }
     }
 
     &__date {
-        float: right;
+        padding-left: 6px;
+        display: inline-block;
         padding-right: 41px;
+        text-decoration: underline;
+        color: #0067C5;
     }    
     
-    &__toggleDayPicker {
+    &__deleteButton {
         display: block;
         top: 0;
         right: 0;
@@ -45,7 +43,6 @@
         height: 100%;
         padding: 0;
         border: none;
-        border-left: 1px solid #0067C5;
         background: none;
         padding: 0;
         position: absolute;
@@ -54,5 +51,15 @@
             outline: none;
             box-shadow: 0 0 0 3px orange;
         }
+    }
+}
+
+.countrySummaryElement {
+    display: flex;
+    padding-top: @paddingSmall;
+    padding-bottom: @paddingSmall;
+
+    &__flagIcon {
+        margin-right: 12px;
     }
 }

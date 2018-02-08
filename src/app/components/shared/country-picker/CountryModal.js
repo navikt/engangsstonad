@@ -1,54 +1,65 @@
 import React, { Component } from 'react';
+import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
+import countries from 'i18n-iso-countries';
+import bokmalCountryList from 'i18n-iso-countries/langs/nb.json';
+import nynorskCountryList from 'i18n-iso-countries/langs/nn.json';
+
 import { Select } from 'nav-frontend-skjema';
 import { Undertittel, Element } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
-import DateInput from 'shared/date-input/DateInput';
 import { Knapp } from 'nav-frontend-knapper';
 
-const selectOptions = ['Marshalløyene', 'Argentina', 'Kina'];
-
-const renderSelectOptions = (selectOption) =>
-	selectOption.map((optionValue) => (
-		<option key={optionValue} value={optionValue}>
-			{optionValue}
-		</option>
-	));
+import DateInput from 'shared/date-input/DateInput';
+import getMessage from '../../../util/i18n/index';
 
 class CountryModal extends Component {
 	constructor(props) {
 		super(props);
+		const contriesLanguage =
+			props.language === 'nb' ? bokmalCountryList : nynorskCountryList;
+		countries.registerLocale(contriesLanguage);
+		const { intl } = props;
 		if (props.visit) {
 			this.state = {
-				titleText: 'Endre utenlandsopphold',
-				submitButtonText: 'Lagre endringer',
+				titleText: getMessage(intl, 'medlemmskap.landvelger.endre'),
+				submitButtonText: getMessage(intl, 'medlemmskap.landvelger.lagre'),
 				...props.visit
 			};
 		} else {
 			this.state = {
-				titleText: 'Legg til utenlandsopphold',
-				submitButtonText: 'Legg til land',
-				country: '',
-				startDate: '',
-				endDate: ''
+				titleText: getMessage(intl, 'medlemmskap.landvelger.leggTil'),
+				submitButtonText: getMessage(intl, 'medlemmskap.landvelger.leggTilLand')
 			};
 		}
 	}
 
+	renderSelectOptions() {
+		const { language } = this.props;
+		return Object.entries(countries.getNames(language))
+			.sort((a, b) => a[1].localeCompare(b[1], language))
+			.map((optionValue) => (
+				<option key={optionValue[0]} value={optionValue[0]}>
+					{optionValue[1]}
+				</option>
+			));
+	}
+
 	onSubmit() {
 		const visit = {
-			country: this.state.country,
-			startDate: this.state.startDate,
-			endDate: this.state.endDate
+			land: this.state.land,
+			startDato: this.state.startDato,
+			sluttDato: this.state.sluttDato
 		};
 		this.props.onSubmit(visit);
 	}
 
 	render() {
+		const { intl } = this.props;
 		return (
 			<Modal
 				isOpen
-				contentLabel="test"
+				contentLabel="landvelger"
 				closeButton={false}
 				onRequestClose={() => {
 					this.props.closeModal();
@@ -57,29 +68,31 @@ class CountryModal extends Component {
 					<Undertittel className="countryModal__title">
 						{this.state.titleText}
 					</Undertittel>
-					<Element>Jeg bodde i...</Element>
+					<Element>{getMessage(intl, 'medlemmskap.text.jegBodde')}</Element>
 					<Select
-						onChange={(e) => this.setState({ country: e.target.value })}
 						label=""
-						defaultValue={this.state.country}>
+						onChange={(e) => this.setState({ land: e.target.value })}
+						defaultValue={this.state.land}>
 						<option value="" />
-						{selectOptions && renderSelectOptions(selectOptions)}
+						{this.renderSelectOptions()}
 					</Select>
 					<DateInput
-						id="termindato"
-						input={{ value: this.state.startDate }}
+						id="boddFraDato"
+						input={{ value: this.state.startDato }}
 						label="fra"
-						onChange={(date) => this.setState({ startDate: date })}
+						onChange={(date) => this.setState({ startDato: date })}
 						errorMessage=""
 					/>
 					<DateInput
-						id="fra dato"
+						id="boddTilDato"
 						label="til"
-						input={{ value: this.state.endDate }}
-						onChange={(date) => this.setState({ endDate: date })}
+						input={{ value: this.state.sluttDato }}
+						onChange={(date) => this.setState({ sluttDato: date })}
 						errorMessage=""
 					/>
-					<Knapp onClick={() => this.props.closeModal()}>Avbryt</Knapp>
+					<Knapp onClick={() => this.props.closeModal()}>
+						{getMessage(intl, 'medlemmskap.landvelger.avbryt')}
+					</Knapp>
 					<Knapp onClick={() => this.onSubmit()}>
 						{this.state.submitButtonText}
 					</Knapp>
@@ -91,19 +104,21 @@ class CountryModal extends Component {
 
 CountryModal.propTypes = {
 	visit: PropTypes.shape({
-		country: PropTypes.string,
-		startDate: PropTypes.string,
-		endDate: PropTypes.string
+		land: PropTypes.string,
+		startDato: PropTypes.string,
+		sluttDato: PropTypes.string
 	}),
 	closeModal: PropTypes.func.isRequired,
-	onSubmit: PropTypes.func.isRequired
+	onSubmit: PropTypes.func.isRequired,
+	language: PropTypes.string.isRequired,
+	intl: intlShape.isRequired
 };
 
 CountryModal.defaultProps = {
 	visit: {
-		country: '',
-		startDate: '',
-		endDate: ''
+		land: '',
+		startDato: '',
+		sluttDato: ''
 	}
 };
-export default CountryModal;
+export default injectIntl(CountryModal);
