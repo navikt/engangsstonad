@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import moment from 'moment';
 
 import { Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -59,6 +60,12 @@ export class EngangsstonadConfirmation extends Component {
 		const { data, approvedConditions, intl } = this.props;
 		if (!data) {
 			return null;
+		}
+
+		const now = moment();
+		const birthDate = moment(data.fodselsdato);
+		if (now.diff(birthDate, 'years') < 18) {
+			this.props.history.push('/engangsstonad/underAge');
 		}
 
 		const confirmBoxLabelHeader = () => (

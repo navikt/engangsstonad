@@ -7,6 +7,7 @@ import queryStringParser from 'query-string';
 import EngangsstonadConfirmation from 'components/engangsstonad/EngangsstonadConfirmation';
 import EngangsstonadCompleted from 'components/engangsstonad/EngangsstonadCompleted';
 import EngangsstonadContainer from 'components/engangsstonad/EngangsstonadContainer';
+import EngangsstonadUnderAge from 'components/engangsstonad/EngangsstonadUnderAge';
 
 import { getDataRequested } from '../../redux/actions/actions';
 
@@ -40,6 +41,10 @@ export class EngangsstonadIndex extends Component {
 					<Route
 						path="/engangsstonad/confirmation"
 						component={EngangsstonadConfirmation}
+					/>
+					<Route
+						path="/engangsstonad/underAge"
+						component={EngangsstonadUnderAge}
 					/>
 					<Route
 						path="/engangsstonad/completed"
