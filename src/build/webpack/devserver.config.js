@@ -6,17 +6,20 @@ const configureDevServer = (decoratorFragments) => ({
 		app.engine('html', mustacheExpress());
 		app.set('views', `${__dirname}/../../../dist/dev`);
 		app.set('view engine', 'mustache');
-		app.get(['/', '/engangsstonad/?', '/engangsstonad/**'], (req, res) => {
-			res.render(
-				'index.html',
-				Object.assign(
-					{
-						REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL
-					},
-					decoratorFragments
-				)
-			);
-		});
+		app.get(
+			['/', '/engangsstonad/?', /^\/engangsstonad\/(?!.*dist).*$/],
+			(req, res) => {
+				res.render(
+					'index.html',
+					Object.assign(
+						{
+							REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL
+						},
+						decoratorFragments
+					)
+				);
+			}
+		);
 	},
 	watchContentBase: true,
 	quiet: false,
@@ -29,7 +32,8 @@ const configureDevServer = (decoratorFragments) => ({
 		timings: false,
 		chunks: false,
 		chunkModules: false
-	}
+	},
+	publicPath: '/engangsstonad/dist'
 });
 
 module.exports = configureDevServer;

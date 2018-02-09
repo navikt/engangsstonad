@@ -36,12 +36,21 @@ const renderApp = (decoratorFragments) =>
 	});
 
 const startServer = (html) => {
-	server.use('/js', express.static(path.resolve(__dirname, 'dist/js')));
-	server.use('/css', express.static(path.resolve(__dirname, 'dist/css')));
+	server.use(
+		'/engangsstonad/dist/js',
+		express.static(path.resolve(__dirname, 'dist/js'))
+	);
+	server.use(
+		'/engangsstonad/dist/css',
+		express.static(path.resolve(__dirname, 'dist/css'))
+	);
 
-	server.get(['/', '/engangsstonad/?', '/engangsstonad/**'], (req, res) => {
-		res.send(html);
-	});
+	server.get(
+		['/', '/engangsstonad/?', /^\/engangsstonad\/(?!.*dist).*$/],
+		(req, res) => {
+			res.send(html);
+		}
+	);
 
 	server.get('/health/isAlive', (req, res) => res.sendStatus(200));
 	server.get('/health/isReady', (req, res) => res.sendStatus(200));
