@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { injectIntl, intlShape } from 'react-intl';
-
+import PropTypes from 'prop-types';
 import { Normaltekst, Ingress, EtikettLiten } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
@@ -70,32 +69,22 @@ export class Step3 extends Component {
 
 		return (
 			<div>
-				{!barnErFodt && (
-					<div>
-						<DisplayTextWithLabel
-							label={getMessage(intl, 'relasjonBarn.radiobutton.tvillinger')}
-							text={this.antallBarnSummary()}
-						/>,
-						<DisplayTextWithLabel
-							label={getMessage(intl, 'relasjonBarn.text.termindato')}
-							text={ISODateToMaskedInput(terminDato)}
-						/>,
-						<DisplayTextWithLabel
-							label={getMessage(
-								intl,
-								'oppsummering.text.vedlagtTerminbekreftelse'
-							)}
-							text="<link til vedlegg her>"
-						/>,
-						<DisplayTextWithLabel
-							label={getMessage(
-								intl,
-								'oppsummering.text.vedlagtTerminbekreftelse'
-							)}
-							text={ISODateToMaskedInput(utstedtDato)}
-						/>
-					</div>
-				)}
+				<DisplayTextWithLabel
+					label={getMessage(intl, 'relasjonBarn.radiobutton.tvillinger')}
+					text={this.antallBarnSummary()}
+				/>
+				<DisplayTextWithLabel
+					label={getMessage(intl, 'relasjonBarn.text.termindato')}
+					text={ISODateToMaskedInput(terminDato)}
+				/>
+				<DisplayTextWithLabel
+					label={getMessage(intl, 'oppsummering.text.vedlagtTerminbekreftelse')}
+					text="<link til vedlegg her>"
+				/>
+				<DisplayTextWithLabel
+					label={getMessage(intl, 'oppsummering.text.vedlagtTerminbekreftelse')}
+					text={ISODateToMaskedInput(utstedtDato)}
+				/>
 			</div>
 		);
 	}
@@ -140,7 +129,7 @@ export class Step3 extends Component {
 				<DisplayTextWithLabel
 					label={getMessage(
 						intl,
-						'oppsummering.text.ogKommerPåFødselstispunktet'
+						'oppsummering.text.ogKommerPåFødselstidspunktet'
 					)}
 					text={fodselINorgeText}
 				/>

@@ -164,7 +164,7 @@ export class EngangsstonadStep2 extends Component {
 	}
 
 	render() {
-		const { dispatch, intl, medlemsskap } = this.props;
+		const { dispatch, intl, medlemsskap, language } = this.props;
 		return (
 			<div className="engangsstonad">
 				<DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
@@ -178,6 +178,7 @@ export class EngangsstonadStep2 extends Component {
 						label={intl.formatMessage({
 							id: 'medlemmskap.text.jegBodde'
 						})}
+						language={language}
 						visits={medlemsskap.utenlandsopphold}
 						addVisit={(utl) => dispatch(soknad.addUtenlandsopphold(utl))}
 						deleteVisit={(utl) => dispatch(soknad.deleteUtenlandsopphold(utl))}
@@ -215,12 +216,17 @@ EngangsstonadStep2.propTypes = {
 		push: PropTypes.func.isRequired
 	}).isRequired,
 	intl: intlShape.isRequired,
+	language: PropTypes.string,
 	medlemsskap: PropTypes.shape({
 		utenlandsopphold: PropTypes.array,
 		iNorgeSiste12: PropTypes.bool,
 		iNorgeNeste12: PropTypes.bool,
 		fodselINorge: PropTypes.bool
 	}).isRequired
+};
+
+EngangsstonadStep2.defaultProps = {
+	language: 'nb'
 };
 
 const mapStateToProps = (state) => ({

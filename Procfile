@@ -1,1 +1,1 @@
-web: yarn start-express-heroku
+web: npm run start-express-heroku

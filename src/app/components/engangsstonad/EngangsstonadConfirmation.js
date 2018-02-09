@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { withRouter } from 'react-router-dom';
-import queryStringParser from 'query-string';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import moment from 'moment';
 
 import { Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -14,10 +14,7 @@ import RettigheterOgPlikter from 'shared/modal-content/RettigheterOgPlikter';
 import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
-import {
-	apiActionCreators as api,
-	commonActionCreators as common
-} from '../../redux/actions';
+import { commonActionCreators as common } from '../../redux/actions';
 import LanguageToggle from '../intl/LanguageToggle';
 import getMessage from '../../util/i18n';
 
@@ -38,16 +35,6 @@ export class EngangsstonadConfirmation extends Component {
 		);
 	}
 
-	componentWillMount() {
-		const queryParams = this.getQueryParams();
-
-		if (Object.keys(queryParams).length > 0) {
-			this.props.dispatch(api.getPerson(queryParams));
-		} else {
-			this.props.dispatch(api.getPerson());
-		}
-	}
-
 	openRettigheterOgPlikterModal(e) {
 		e.preventDefault();
 		this.setState({ isModalOpen: true });
@@ -55,10 +42,6 @@ export class EngangsstonadConfirmation extends Component {
 
 	closeRettigheterOgPlikterModal() {
 		this.setState({ isModalOpen: false });
-	}
-
-	getQueryParams() {
-		return queryStringParser.parse(this.props.location.search);
 	}
 
 	handleConfirmCheckboxChange() {
@@ -79,6 +62,12 @@ export class EngangsstonadConfirmation extends Component {
 
 		if (!person) {
 			return null;
+		}
+
+		const now = moment();
+		const birthDate = moment(person.fodselsdato);
+		if (now.diff(birthDate, 'years') < 18) {
+			this.props.history.push('/engangsstonad/underAge');
 		}
 
 		const confirmBoxLabelHeader = () => (
@@ -146,9 +135,6 @@ EngangsstonadConfirmation.propTypes = {
 	dispatch: PropTypes.func.isRequired,
 	history: PropTypes.shape({
 		push: PropTypes.func.isRequired
-	}).isRequired,
-	location: PropTypes.shape({
-		search: PropTypes.string
 	}).isRequired,
 	person: PropTypes.shape({
 		fornavn: PropTypes.string

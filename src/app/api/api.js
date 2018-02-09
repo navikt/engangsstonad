@@ -8,7 +8,8 @@ const defaultParams = {
 
 const stub = () => ({
 	data: {
-		fornavn: 'Brukernavn'
+		fornavn: 'Test',
+		etternavn: 'Testesen'
 	}
 });
 
@@ -16,7 +17,6 @@ function getPerson(params = defaultParams) {
 	if (__ENV__ === 'heroku') {
 		return stub();
 	}
-
 	return axios.get(
 		`${window.REST_API_URL}/personinfo?${queryStringParser.stringify(params)}`
 	);

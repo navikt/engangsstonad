@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import queryStringParser from 'query-string';
 
-import StepIndicator from 'shared/progress-indicator/StepIndicator';
-import BackLink from 'shared/back-link/BackLink';
-import Header from 'shared/header/Header';
-import EngangsstonadStep1 from './steps/EngangsstonadStep1';
-import EngangsstonadStep2 from './steps/EngangsstonadStep2';
-import EngangsstonadStep3 from './steps/EngangsstonadStep3';
+import EngangsstonadConfirmation from 'components/engangsstonad/EngangsstonadConfirmation';
+import EngangsstonadCompleted from 'components/engangsstonad/EngangsstonadCompleted';
+import EngangsstonadContainer from 'components/engangsstonad/EngangsstonadContainer';
+import EngangsstonadUnderAge from 'components/engangsstonad/EngangsstonadUnderAge';
+
+import { apiActionCreators as api } from '../../redux/actions';
 
 import './engangsstonad.less';
 
@@ -16,73 +17,48 @@ export class EngangsstonadIndex extends Component {
 	constructor(props) {
 		super(props);
 
-		const { intl } = this.props;
-		this.steps = [
-			{
-				title: intl.formatMessage({
-					id: 'relasjonBarn.sectionheading.relasjonBarn'
-				}),
-				label: '1'
-			},
-			{
-				title: intl.formatMessage({
-					id: 'medlemmskap.sectionheading.medlemmskap'
-				}),
-				label: '2'
-			},
-			{
-				title: intl.formatMessage({
-					id: 'oppsummering.sectionheading.oppsummering'
-				}),
-				label: '3'
-			}
-		];
-
-		this.state = {
-			activeStep: parseInt(props.location.pathname.substr(-1), 10),
-			backLinks: [
-				'/engangsstonad',
-				'/engangsstonad/step1',
-				'/engangsstonad/step2'
-			]
-		};
+		this.getQueryParams = this.getQueryParams.bind(this);
 	}
 
 	componentWillMount() {
-		this.setState({
-			activeStep: parseInt(this.props.location.pathname.substr(-1), 10)
-		});
+		const { dispatch } = this.props;
+		const queryParams = this.getQueryParams();
+
+		if (Object.keys(queryParams).length > 0) {
+			dispatch(api.getPerson(queryParams));
+		} else {
+			dispatch(api.getPerson());
+		}
 	}
 
-	componentWillReceiveProps(newProps) {
-		this.setState({
-			activeStep: parseInt(newProps.location.pathname.substr(-1), 10)
-		});
+	getQueryParams() {
+		return queryStringParser.parse(this.props.location.search);
 	}
 
 	render() {
-		const { intl } = this.props;
 		return (
 			<div className="engangsstonad">
-				<Header
-					title={intl.formatMessage({ id: 'intro.pageheading.soknadES' })}
-				/>
-				<div className="linkIndicatorWrapper">
-					<div className="linkIndicatorWrapper__link">
-						<BackLink
-							to={this.state.backLinks[this.state.activeStep - 1]}
-							tekst={intl.formatMessage({ id: 'standard.button.gaTilbake' })}
-						/>
-					</div>
-					<StepIndicator
-						steps={this.steps}
-						activeStep={this.state.activeStep}
-					/>
-				</div>
 				<Switch>
-					<Route path="/engangsstonad/step1" component={EngangsstonadStep1} />
-					<Route path="/engangsstonad/step2" component={EngangsstonadStep2} />
-					<Route path="/engangsstonad/step3" component={EngangsstonadStep3} />
+					<Route
+						path="/engangsstonad/confirmation"
+						component={EngangsstonadConfirmation}
+					/>
+					<Route
+						path="/engangsstonad/underAge"
+						component={EngangsstonadUnderAge}
+					/>
+					<Route
+						path="/engangsstonad/completed"
+						component={EngangsstonadCompleted}
+					/>
+					<Route
+						path="/engangsstonad/:routeName"
+						component={EngangsstonadContainer}
+					/>
+					<Redirect
+						to="/engangsstonad/confirmation"
+						component={EngangsstonadConfirmation}
+					/>
 				</Switch>
 			</div>
 		);
@@ -90,11 +66,15 @@ export class EngangsstonadIndex extends Component {
 }
 
 EngangsstonadIndex.propTypes = {
-	intl: intlShape.isRequired,
 	location: PropTypes.shape({
-		pathname: PropTypes.string
-	}).isRequired
+		pathname: PropTypes.string,
+		search: PropTypes.string
+	}).isRequired,
+	dispatch: PropTypes.func.isRequired
 };
 
-const withIntl = injectIntl(EngangsstonadIndex);
-export default withIntl;
+const mapStateToProps = (state) => ({
+	person: state.apiReducer.person
+});
+
+export default withRouter(connect(mapStateToProps)(EngangsstonadIndex));

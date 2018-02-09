@@ -13,7 +13,7 @@ node {
     def dockerRepo = "docker.adeo.no:5000"
     def branch = "master"
     def groupId = "nais"
-    def environment = 'q6'
+    def environment = 't1'
     def zone = 'sbs'
     def namespace = 'default'
 
@@ -63,8 +63,6 @@ node {
     
     stage('Deploy to t') {
         callback = "${env.BUILD_URL}input/Deploy/"
-        deployLib.testCmd(releaseVersion)
-        deployLib.testCmd(committer)
         def deploy = deployLib.deployNaisApp(app, releaseVersion, environment, zone, namespace, callback, committer).key
         try {
             timeout(time: 15, unit: 'MINUTES') {

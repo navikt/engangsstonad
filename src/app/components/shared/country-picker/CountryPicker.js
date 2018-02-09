@@ -50,11 +50,10 @@ class CountryPicker extends Component {
 
 	onModalSubmit(visit) {
 		const { editVisit } = this.state;
-		const allVisits = this.props.visits;
 		if (editVisit === null) {
 			this.props.addVisit(visit);
 		} else {
-			const updatedVisitIndex = allVisits.indexOf(editVisit);
+			const updatedVisitIndex = this.props.visits.indexOf(editVisit);
 			this.props.editVisit(visit, updatedVisitIndex);
 		}
 		this.setState({ isOpen: false, editVisit: null });
@@ -74,6 +73,7 @@ class CountryPicker extends Component {
 						visit={this.state.editVisit}
 						onSubmit={(visit) => this.onModalSubmit(visit)}
 						closeModal={() => this.closeModal()}
+						language={this.props.language}
 					/>
 				)}
 				<Knapp
@@ -93,11 +93,12 @@ CountryPicker.propTypes = {
 	editVisit: PropTypes.func.isRequired,
 	visits: PropTypes.arrayOf(
 		PropTypes.shape({
-			country: PropTypes.string,
-			startDate: PropTypes.string,
-			endDate: PropTypes.string
+			land: PropTypes.string,
+			startDato: PropTypes.string,
+			sluttDato: PropTypes.string
 		})
-	).isRequired
+	).isRequired,
+	language: PropTypes.string.isRequired
 };
 
 CountryPicker.defaultProps = {

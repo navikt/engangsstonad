@@ -31,7 +31,7 @@ HeaderIllustration.propTypes = {
 		text: PropTypes.string.isRequired
 	}),
 	svg: PropTypes.object,
-	theme: PropTypes.oneOf(['purple', 'green'])
+	theme: PropTypes.oneOf(['purple', 'green', 'orange'])
 };
 
 HeaderIllustration.defaultProps = {
