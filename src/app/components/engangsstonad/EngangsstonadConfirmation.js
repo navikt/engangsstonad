@@ -42,9 +42,9 @@ export class EngangsstonadConfirmation extends Component {
 		const queryParams = this.getQueryParams();
 
 		if (Object.keys(queryParams).length > 0) {
-			this.props.dispatch(api.getPersonRequested(queryParams));
+			this.props.dispatch(api.getPerson(queryParams));
 		} else {
-			this.props.dispatch(api.getPersonRequested());
+			this.props.dispatch(api.getPerson());
 		}
 	}
 

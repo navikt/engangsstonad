@@ -23,10 +23,17 @@ export function deleteUtenlandsopphold(utenlandsopphold: Utenlandsopphold): Sokn
     };
 }
 
-export function setAntallBarn(antallBarn: number): SoknadActionTypes {
+export function setAntallBarn(antallBarn: string): SoknadActionTypes {
+    let numerical = 1;
+    if (antallBarn === 'tvillinger') {
+        numerical = 2;
+    } else if (antallBarn === 'flere') {
+        numerical = 3;
+    }
+
     return {
         type: SoknadActionKeys.SET_ANTALL_BARN,
-        antallBarn
+        antallBarn: numerical
     };
 }
 

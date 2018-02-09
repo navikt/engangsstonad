@@ -11,67 +11,84 @@ import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
 
 import './engangsstonad.less';
+import { apiActionCreators as api } from '../../redux-ts/actions';
 
-export const EngangsstonadCompleted = (props) => {
-	const { intl, postReponse } = props;
-	const summaryText = () => (
-		<FormattedMessage
-			id="kvittering.text.innsendtInfo"
-			values={{
-				0: moment(postReponse.opprettet).format('HH:mm'),
-				1: moment(postReponse.opprettet).format('DD. MMMM YYYY'),
-				linkText: (
-					// eslint-disable-next-line jsx-a11y/anchor-is-valid
-					<a href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
-						<FormattedMessage id="kvittering.text.innsendtInfo.linkText" />
-					</a>
-				)
-			}}
-		/>
-	);
+export class EngangsstonadCompleted extends React.Component {
+	componentWillMount() {
+		this.props.dispatch(api.getPerson());
+	}
 
-	return (
-		<div className="engangsstonad">
-			<DocumentTitle title="Kvittering - NAV Engangsstønad" />
-			<HeaderIllustration
-				dialog={{
-					title: intl.formatMessage(
-						{
-							id: 'kvittering.snakkeboble.overskrift'
-						},
-						{ name: props.data.fornavn }
-					),
-					text: intl.formatMessage({ id: 'kvittering.text.soknadMottatt' })
+	summaryText() {
+		const { soknad } = this.props;
+		return (
+			<FormattedMessage
+				id="kvittering.text.innsendtInfo"
+				values={{
+					0: moment(soknad.opprettet).format('HH:mm'),
+					1: moment(soknad.opprettet).format('DD. MMMM YYYY'),
+					linkText: (
+						// eslint-disable-next-line jsx-a11y/anchor-is-valid
+						<a href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
+							<FormattedMessage id="kvittering.text.innsendtInfo.linkText" />
+						</a>
+					)
 				}}
-				title={intl.formatMessage({ id: 'intro.pageheading.soknadES' })}
-				svg={VelkommenIllustration}
-				theme="purple"
 			/>
-			<Ingress>{summaryText()}</Ingress>
-			<div className="engangsstonad__centerButton">
-				<Hovedknapp>
-					{intl.formatMessage({ id: 'kvittering.text.lukkVinduet' })}
-				</Hovedknapp>
+		);
+	}
+
+	render() {
+		const { intl, person } = this.props;
+
+		if (!person) {
+			return null;
+		}
+
+		return (
+			<div className="engangsstonad">
+				<DocumentTitle title="Kvittering - NAV Engangsstønad" />
+				<HeaderIllustration
+					dialog={{
+						title: intl.formatMessage(
+							{
+								id: 'kvittering.snakkeboble.overskrift'
+							},
+							{ name: person.fornavn }
+						),
+						text: intl.formatMessage({ id: 'kvittering.text.soknadMottatt' })
+					}}
+					title={intl.formatMessage({ id: 'intro.pageheading.soknadES' })}
+					svg={VelkommenIllustration}
+					theme="purple"
+				/>
+				<Ingress>{this.summaryText()}</Ingress>
+				<div className="engangsstonad__centerButton">
+					<Hovedknapp>
+						{intl.formatMessage({ id: 'kvittering.text.lukkVinduet' })}
+					</Hovedknapp>
+				</div>
 			</div>
-		</div>
-	);
-};
+		);
+	}
+}
 
 EngangsstonadCompleted.propTypes = {
+	dispatch: PropTypes.func.isRequired,
 	intl: intlShape.isRequired,
-	postReponse: PropTypes.shape({}).isRequired,
-	data: PropTypes.shape({
+	soknad: PropTypes.shape({}),
+	person: PropTypes.shape({
 		fornavn: PropTypes.string
 	})
 };
 
 EngangsstonadCompleted.defaultProps = {
-	data: null
+	person: null,
+	soknad: {}
 };
 
 const mapStateToProps = (state) => ({
-	data: state.engangsstonadReducer.data,
-	postReponse: state.engangsstonadReducer.postReponse
+	person: state.apiReducer.person,
+	soknad: state.apiReducer.soknad
 });
 
 const withIntl = injectIntl(EngangsstonadCompleted);

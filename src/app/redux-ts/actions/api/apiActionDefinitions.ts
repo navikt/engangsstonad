@@ -4,16 +4,16 @@ import { EngangsstonadSoknadResponse } from '../../../types/services/Engangsston
 import PersonRequest from '../../../types/services/PersonRequest';
 
 export enum ApiActionKeys {
-    'GET_PERSON_REQUESTED' = 'getPersonRequested',
+    'GET_PERSON' = 'getPerson',
     'GET_PERSON_SUCCESS' = 'getPersonSuccess',
     'GET_PERSON_FAILED' = 'getPersonFailed',
-    'SEND_SOKNAD_REQUESTED' = 'sendSoknadRequested',
+    'SEND_SOKNAD' = 'sendSoknad',
     'SEND_SOKNAD_SUCCESS' = 'sendSoknadSuccess',
     'SEND_SOKNAD_FAILED' = 'sendSoknadFailed'
 }
 
-interface GetPersonRequested {
-    type: ApiActionKeys.GET_PERSON_REQUESTED;
+interface GetPerson {
+    type: ApiActionKeys.GET_PERSON;
     params: PersonRequest;
 }
 
@@ -28,8 +28,8 @@ interface GetPersonFailed {
     reason: any;
 }
 
-interface SendSoknadRequested {
-    type: ApiActionKeys.SEND_SOKNAD_REQUESTED;
+interface SendSoknad {
+    type: ApiActionKeys.SEND_SOKNAD;
     soknad: EngangsstonadSoknad;
 }
 
@@ -48,9 +48,9 @@ export type GetPersonActionType = GetPersonSuccess | GetPersonFailed;
 export type SendSoknadActionType = SendSoknadSuccess | SendSoknadFailed;
 
 export type ApiActionTypes =
-    | GetPersonRequested
+    | GetPerson
     | GetPersonSuccess
     | GetPersonFailed
-    | SendSoknadRequested
+    | SendSoknad
     | SendSoknadSuccess
     | SendSoknadFailed;

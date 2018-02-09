@@ -2,10 +2,11 @@ import { ApiActionKeys, ApiActionTypes } from './apiActionDefinitions';
 import Person from '../../../types/domain/Person';
 import PersonRequest from '../../../types/services/PersonRequest';
 import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
+import EngangsstonadSoknad from '../../../types/domain/EngangsstonadSoknad';
 
-export function getPersonRequested(person: PersonRequest): ApiActionTypes {
+export function getPerson(person: PersonRequest): ApiActionTypes {
     return {
-        type: ApiActionKeys.GET_PERSON_REQUESTED,
+        type: ApiActionKeys.GET_PERSON,
         params: person
     };
 }
@@ -25,9 +26,9 @@ export function getPersonFailed(reason: any): ApiActionTypes {
     };
 }
 
-export function sendSoknadRequested(soknad: EngangsstonadSoknadResponse): ApiActionTypes {
+export function sendSoknad(soknad: EngangsstonadSoknad): ApiActionTypes {
     return {
-        type: ApiActionKeys.SEND_SOKNAD_REQUESTED,
+        type: ApiActionKeys.SEND_SOKNAD,
         soknad
     };
 }
@@ -48,10 +49,10 @@ export function sendSoknadFailed(reason: any): ApiActionTypes {
 }
 
 export default {
-    getPersonRequested,
+    getPerson,
     getPersonSuccess,
     getPersonFailed,
-    sendSoknadRequested,
+    sendSoknad,
     sendSoknadSuccess,
     sendSoknadFailed
 };

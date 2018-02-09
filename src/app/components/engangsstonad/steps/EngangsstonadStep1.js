@@ -16,10 +16,7 @@ import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
 // eslint-disable-next-line max-len
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
 
-import {
-	commonActionCreators as common,
-	soknadActionCreators as soknad
-} from '../../../redux-ts/actions';
+import { soknadActionCreators as soknad } from '../../../redux-ts/actions';
 
 import './../engangsstonad.less';
 
@@ -227,7 +224,8 @@ EngangsstonadStep1.propTypes = {
 
 const mapStateToProps = (state) => ({
 	relasjonTilBarn: state.soknadReducer.relasjonTilBarn,
-	barnErFodt: state.soknadReducer.barnErFodt
+	barnErFodt: state.soknadReducer.barnErFodt,
+	person: state.commonReducer.person
 });
 
 export default injectIntl(connect(mapStateToProps)(EngangsstonadStep1));

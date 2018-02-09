@@ -2,13 +2,13 @@ import { ApiActionKeys, ApiActionTypes } from '../actions/api/apiActionDefinitio
 
 const apiReducer = (state = {}, action: ApiActionTypes) => {
     switch (action.type) {
-        case ApiActionKeys.GET_PERSON_REQUESTED:
+        case ApiActionKeys.GET_PERSON:
             return { ...state, params: action.params };
         case ApiActionKeys.GET_PERSON_SUCCESS:
             return { ...state, person: action.person };
         case ApiActionKeys.GET_PERSON_FAILED:
             return { ...state, reason: action.reason };
-        case ApiActionKeys.SEND_SOKNAD_REQUESTED:
+        case ApiActionKeys.SEND_SOKNAD:
             return { ...state, soknad: action.soknad };
         case ApiActionKeys.SEND_SOKNAD_SUCCESS:
             return { ...state, soknad: action.soknad };

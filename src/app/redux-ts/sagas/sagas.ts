@@ -17,7 +17,7 @@ function* getPerson(action: any) {
 // tslint:disable-next-line:no-any
 function* sendSoknad(action: any) {
     try {
-        const response = yield call(Api.sendSoknad, action.params);
+        const response = yield call(Api.sendSoknad, action.soknad);
         const soknad: EngangsstonadSoknadResponse = response.data;
         yield put({ type: ApiActionKeys.SEND_SOKNAD_SUCCESS, soknad });
     } catch (reason) {
@@ -27,7 +27,7 @@ function* sendSoknad(action: any) {
 
 export default function* sagas() {
     yield all([
-        takeEvery(ApiActionKeys.GET_PERSON_REQUESTED, getPerson),
-        takeEvery(ApiActionKeys.SEND_SOKNAD_REQUESTED, sendSoknad)
+        takeEvery(ApiActionKeys.GET_PERSON, getPerson),
+        takeEvery(ApiActionKeys.SEND_SOKNAD, sendSoknad)
     ]);
 }
