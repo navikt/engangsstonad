@@ -17,7 +17,7 @@ import VelkommenIllustration from 'assets/svg/frontpage.svg';
 import {
 	apiActionCreators as api,
 	commonActionCreators as common
-} from '../../redux-ts/actions';
+} from '../../redux/actions';
 import LanguageToggle from '../intl/LanguageToggle';
 import getMessage from '../../util/i18n';
 

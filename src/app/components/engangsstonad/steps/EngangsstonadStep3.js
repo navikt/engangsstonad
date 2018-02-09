@@ -16,7 +16,7 @@ import { ISODateToMaskedInput } from 'util/date';
 import {
 	apiActionCreators as api,
 	commonActionCreators as common
-} from '../../../redux-ts/actions';
+} from '../../../redux/actions';
 import getMessage from '../../../util/i18n';
 
 import '../engangsstonad.less';

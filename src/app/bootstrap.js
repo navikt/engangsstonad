@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import IntlProvider from './../app/components/intl/IntlProvider';
 import renderTopLevelRoutes from './util/routing';
 import routeConfig from './util/routing/routes.config';
-import store from './redux-ts';
+import store from './redux';
 
 const root = document.getElementById('app');
 render(

@@ -16,7 +16,7 @@ import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
 // eslint-disable-next-line max-len
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
 
-import { soknadActionCreators as soknad } from '../../../redux-ts/actions';
+import { soknadActionCreators as soknad } from '../../../redux/actions';
 
 import './../engangsstonad.less';
 

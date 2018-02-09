@@ -9,7 +9,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import TransformingRadioGroupCollection from 'shared/transforming-radio-group-collection/TransformingRadioGroupCollection';
 import CountryPicker from 'shared/country-picker/CountryPicker';
 
-import { soknadActionCreators as soknad } from '../../../redux-ts/actions';
+import { soknadActionCreators as soknad } from '../../../redux/actions';
 
 import './../engangsstonad.less';
 

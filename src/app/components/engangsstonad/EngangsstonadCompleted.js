@@ -11,7 +11,7 @@ import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
 
 import './engangsstonad.less';
-import { apiActionCreators as api } from '../../redux-ts/actions';
+import { apiActionCreators as api } from '../../redux/actions';
 
 export class EngangsstonadCompleted extends React.Component {
 	componentWillMount() {
