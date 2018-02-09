@@ -24,11 +24,15 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             medlemsskap.utenlandsopphold[action.index] = action.utenlandsopphold;
             return { ...state, medlemsskap };
         case SoknadActionKeys.DELETE_UTENLANDSOPPHOLD:
-            const index = medlemsskap.utenlandsopphold.findIndex((current) =>
-                (action.utenlandsopphold.land === current.land)
-            );
-            medlemsskap.utenlandsopphold.splice(index, 1);
-            return { ...state, medlemsskap };
+            return {
+                ...state,
+                medlemsskap: {
+                    ...medlemsskap,
+                    utenlandsopphold: medlemsskap.utenlandsopphold.filter((opphold) => {
+                        return opphold.land !== action.utenlandsopphold.land;
+                    })
+                }
+            };
         case SoknadActionKeys.SET_ARBEID_SISTE_12:
             const { arbeidSiste12 } = action;
             return { ...state, medlemsskap: { ...medlemsskap, arbeidSiste12 } };
