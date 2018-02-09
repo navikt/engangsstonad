@@ -11,7 +11,6 @@ import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
 
 import './engangsstonad.less';
-import { apiActionCreators as api } from '../../redux/actions';
 
 export class EngangsstonadCompleted extends React.Component {
 	summaryText() {
@@ -69,7 +68,6 @@ export class EngangsstonadCompleted extends React.Component {
 }
 
 EngangsstonadCompleted.propTypes = {
-	dispatch: PropTypes.func.isRequired,
 	intl: intlShape.isRequired,
 	soknad: PropTypes.shape({}),
 	person: PropTypes.shape({
