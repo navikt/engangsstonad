@@ -9,7 +9,7 @@ import EngangsstonadCompleted from 'components/engangsstonad/EngangsstonadComple
 import EngangsstonadContainer from 'components/engangsstonad/EngangsstonadContainer';
 import EngangsstonadUnderAge from 'components/engangsstonad/EngangsstonadUnderAge';
 
-import { getDataRequested } from '../../redux/actions/actions';
+import { apiActionCreators as api } from '../../redux/actions';
 
 import './engangsstonad.less';
 
@@ -21,12 +21,13 @@ export class EngangsstonadIndex extends Component {
 	}
 
 	componentWillMount() {
+		const { dispatch } = this.props;
 		const queryParams = this.getQueryParams();
 
 		if (Object.keys(queryParams).length > 0) {
-			this.props.dispatch(getDataRequested(queryParams));
+			dispatch(api.getPerson(queryParams));
 		} else {
-			this.props.dispatch(getDataRequested());
+			dispatch(api.getPerson());
 		}
 	}
 
@@ -73,7 +74,7 @@ EngangsstonadIndex.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-	data: state.engangsstonadReducer.data
+	person: state.apiReducer.person
 });
 
 export default withRouter(connect(mapStateToProps)(EngangsstonadIndex));
