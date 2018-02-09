@@ -26,10 +26,6 @@ export class Step3 extends Component {
 		this.handleNextClicked = this.handleNextClicked.bind(this);
 	}
 
-	componentWillMount() {
-		this.props.dispatch(api.getPerson());
-	}
-
 	componentWillReceiveProps(props) {
 		if (props.soknad) {
 			this.props.history.push('/engangsstonad/completed');

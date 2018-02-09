@@ -14,10 +14,6 @@ import './engangsstonad.less';
 import { apiActionCreators as api } from '../../redux/actions';
 
 export class EngangsstonadCompleted extends React.Component {
-	componentWillMount() {
-		this.props.dispatch(api.getPerson());
-	}
-
 	summaryText() {
 		const { soknad } = this.props;
 		return (
