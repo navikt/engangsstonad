@@ -182,13 +182,8 @@ export class EngangsstonadStep2 extends Component {
 						visits={medlemsskap.utenlandsopphold}
 						addVisit={(utl) => dispatch(soknad.addUtenlandsopphold(utl))}
 						deleteVisit={(utl) => dispatch(soknad.deleteUtenlandsopphold(utl))}
-						editVisit={(utl) =>
-							dispatch(
-								soknad.editUtenlandsopphold(
-									utl,
-									medlemsskap.utenlandsopphold.indexOf(utl)
-								)
-							)
+						editVisit={(utl, index) =>
+							dispatch(soknad.editUtenlandsopphold(utl, index))
 						}
 					/>
 				)}
