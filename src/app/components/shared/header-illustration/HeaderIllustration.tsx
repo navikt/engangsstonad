@@ -25,8 +25,9 @@ interface Props {
     theme: Theme;
 }
 
-const HeaderIllustration: React.StatelessComponent<Props> = ({ title, dialog, svg, theme }) => (
-    <div className={`headerIllustration headerIllustration--${theme}`}>
+const HeaderIllustration: React.StatelessComponent<Props> = ({ title, dialog, svg, theme }) => {
+    return (
+        <div className={`headerIllustration headerIllustration--${theme}`}>
         <div className="headerIllustration__title">
             <Sidetittel>{title}</Sidetittel>
         </div>
@@ -39,6 +40,7 @@ const HeaderIllustration: React.StatelessComponent<Props> = ({ title, dialog, sv
             <CustomSVG iconRef={svg} />
         </div>
     </div>
-);
+    );
+};
 
 export default HeaderIllustration;

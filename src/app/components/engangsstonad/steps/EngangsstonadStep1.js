@@ -8,7 +8,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import IconLink from 'shared/icon-link/IconLink';
+import LinkWithIcon from 'shared/link-with-icon/LinkWithIcon';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DateInput from 'shared/date-input/DateInput';
 import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
@@ -169,10 +169,10 @@ export class EngangsstonadStep1 extends Component {
 												id: 'relasjonBarn.text.terminbekreftelse'
 											})}
 										</Normaltekst>
-										<IconLink
+										<LinkWithIcon
 											iconKind="info-sirkel-fylt"
-											iconSize="24"
-											to="#"
+											iconSize={24}
+											href="#"
 											linkText={intl.formatMessage({
 												id: 'relasjonBarn.link.lesTerminbekreftelse'
 											})}
