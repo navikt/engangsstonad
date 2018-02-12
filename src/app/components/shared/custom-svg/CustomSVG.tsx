@@ -1,14 +1,14 @@
 import * as React from 'react';
 
-type IconRef = {
+export type IconRef = {
     id: string,
     viewBox: string
 };
 
 interface Props {
     iconRef: IconRef;
-    size: number;
-    className: string;
+    size?: number;
+    className?: string;
 }
 
 const CustomSVGFromSprite: React.StatelessComponent<Props> = ({ iconRef, size, className, ...other }) => {
