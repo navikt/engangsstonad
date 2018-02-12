@@ -70,8 +70,8 @@ export class EngangsstonadContainer extends Component {
 				<div className="linkIndicatorWrapper">
 					<div className="linkIndicatorWrapper__link">
 						<BackLink
-							to={this.state.backLinks[this.state.activeStep - 1]}
-							tekst={intl.formatMessage({ id: 'standard.button.gaTilbake' })}
+							href={this.state.backLinks[this.state.activeStep - 1]}
+							text={intl.formatMessage({ id: 'standard.button.gaTilbake' })}
 						/>
 					</div>
 					<StepIndicator
