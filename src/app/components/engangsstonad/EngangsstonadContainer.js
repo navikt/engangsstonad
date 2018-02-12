@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
+import { Sidetittel } from 'nav-frontend-typografi';
 
 import StepIndicator from 'shared/progress-indicator/StepIndicator';
 import BackLink from 'shared/back-link/BackLink';
-import Header from 'shared/header/Header';
 import EngangsstonadStep1 from 'components/engangsstonad/steps/EngangsstonadStep1';
 import EngangsstonadStep2 from 'components/engangsstonad/steps/EngangsstonadStep2';
 import EngangsstonadStep3 from 'components/engangsstonad/steps/EngangsstonadStep3';
@@ -64,9 +64,9 @@ export class EngangsstonadContainer extends Component {
 		const { intl } = this.props;
 		return (
 			<div className="engangsstonad">
-				<Header
-					title={intl.formatMessage({ id: 'intro.pageheading.soknadES' })}
-				/>
+				<Sidetittel>
+					{intl.formatMessage({ id: 'intro.pageheading.soknadES' })}
+				</Sidetittel>
 				<div className="linkIndicatorWrapper">
 					<div className="linkIndicatorWrapper__link">
 						<BackLink
