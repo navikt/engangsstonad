@@ -5,7 +5,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Normaltekst, Ingress, EtikettLiten } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
+import BekreftCheckbox from 'shared/bekreft-checkbox/BekreftCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWithLabel';
 import { fullNameFormat } from 'util/formats/index';
@@ -167,7 +167,7 @@ export class Step3 extends Component {
 				</Ingress>
 				{this.renderMedlemsskapSummary()}
 
-				<ConfirmCheckbox
+				<BekreftCheckbox
 					name="bekreftOpplysninger"
 					checked={this.props.bekreftetInformasjon}
 					onChange={() =>

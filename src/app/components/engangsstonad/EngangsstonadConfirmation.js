@@ -11,7 +11,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 
 import RettigheterOgPlikter from 'shared/modal-content/RettigheterOgPlikter';
-import ConfirmCheckbox from 'shared/confirmCheckbox/ConfirmCheckbox';
+import BekreftCheckbox from 'shared/bekreft-checkbox/BekreftCheckbox';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
 import { commonActionCreators as common } from '../../redux/actions';
@@ -27,12 +27,8 @@ export class EngangsstonadConfirmation extends Component {
 			isModalOpen: false
 		};
 
-		this.handleConfirmCheckboxChange = this.handleConfirmCheckboxChange.bind(
-			this
-		);
-		this.handleStartApplicationClick = this.handleStartApplicationClick.bind(
-			this
-		);
+		this.bekreftetVilkarChange = this.bekreftetVilkarChange.bind(this);
+		this.startSoknad = this.startSoknad.bind(this);
 	}
 
 	openRettigheterOgPlikterModal(e) {
@@ -44,12 +40,12 @@ export class EngangsstonadConfirmation extends Component {
 		this.setState({ isModalOpen: false });
 	}
 
-	handleConfirmCheckboxChange() {
+	bekreftetVilkarChange() {
 		const { godkjentVilkar } = this.props;
 		this.props.dispatch(common.setGodkjentVilkar(!godkjentVilkar));
 	}
 
-	handleStartApplicationClick() {
+	startSoknad() {
 		this.props.history.push('/engangsstonad/step1');
 	}
 
@@ -103,17 +99,15 @@ export class EngangsstonadConfirmation extends Component {
 					title={getMessage(intl, 'intro.pageheading.soknadES')}
 				/>
 				<Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
-				<ConfirmCheckbox
+				<BekreftCheckbox
 					name="egenerklaring"
-					labelHeader={confirmBoxLabelHeader()}
+					text={confirmBoxLabelHeader()}
 					label={getMessage(intl, 'intro.text.samtykke')}
-					onChange={this.handleConfirmCheckboxChange}
+					onChange={this.bekreftetVilkarChange}
 					checked={godkjentVilkar}
 				/>
 				<div className="engangsstonad__centerButton">
-					<Hovedknapp
-						onClick={this.handleStartApplicationClick}
-						disabled={!godkjentVilkar}>
+					<Hovedknapp onClick={this.startSoknad} disabled={!godkjentVilkar}>
 						{getMessage(intl, 'intro.button.startSoknad')}
 					</Hovedknapp>
 				</div>
