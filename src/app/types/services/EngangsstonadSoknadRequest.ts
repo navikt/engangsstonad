@@ -3,7 +3,7 @@ import { RelasjonTilFodtBarn, RelasjonTilUfodtBarn } from './../domain/RelasjonT
 
 type EngangsstonadSoknad = {
     medlemsskap: Medlemsskap;
-    relasjonTilBarn?: RelasjonTilFodtBarn | RelasjonTilUfodtBarn;
+    relasjonTilBarn: RelasjonTilFodtBarn | RelasjonTilUfodtBarn;
 };
 
 export default EngangsstonadSoknad;
