@@ -1,12 +1,13 @@
 import * as React from 'react';
 const { FormattedMessage, injectIntl } = require('react-intl');
 const { Undertittel, Normaltekst } = require('nav-frontend-typografi');
-import getMessage from '../../../util/i18n';
+import getMessage from '../../../util/i18n/i18nUtils';
 
 import './modalContent.less';
+import InjectedIntl = ReactIntl.InjectedIntl;
 
 interface Props {
-    intl: object;
+    intl: InjectedIntl;
 }
 
 const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (

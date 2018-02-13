@@ -75,7 +75,7 @@ export class EngangsstonadContainer extends Component {
 						/>
 					</div>
 					<StepIndicator
-						steps={this.steps}
+						stepTitles={this.steps.map((step) => step.title)}
 						activeStep={this.state.activeStep}
 					/>
 				</div>

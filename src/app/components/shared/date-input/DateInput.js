@@ -12,7 +12,7 @@ import {
 	isValidISODate,
 	ISODateToMaskedInput,
 	datePickerToISODate
-} from '../../../util/date';
+} from '../../../util/date/dateUtils';
 
 import './dayPicker.less';
 

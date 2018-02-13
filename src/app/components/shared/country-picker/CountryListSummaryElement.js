@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import countries from 'i18n-iso-countries';
 import { injectIntl, intlShape } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { ISODateToMaskedInput } from '../../../util/date';
-import getMessage from '../../../util/i18n/index';
+import { ISODateToMaskedInput } from '../../../util/date/dateUtils';
+import getMessage from '../../../util/i18n/i18nUtils';
 import './countryPicker.less';
 
 const CountryListSummaryElement = (props) => {
