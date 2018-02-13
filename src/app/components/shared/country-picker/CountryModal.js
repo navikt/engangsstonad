@@ -11,7 +11,7 @@ import Modal from 'nav-frontend-modal';
 import { Knapp } from 'nav-frontend-knapper';
 
 import DateInput from 'shared/date-input/DateInput';
-import getMessage from '../../../util/i18n/index';
+import getMessage from '../../../util/i18n/i18nUtils';
 
 class CountryModal extends Component {
 	constructor(props) {

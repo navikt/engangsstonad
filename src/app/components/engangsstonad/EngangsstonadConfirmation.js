@@ -16,7 +16,7 @@ import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
 import { commonActionCreators as common } from '../../redux/actions';
 import LanguageToggle from '../intl/LanguageToggle';
-import getMessage from '../../util/i18n';
+import getMessage from '../../util/i18n/i18nUtils';
 
 import './engangsstonad.less';
 

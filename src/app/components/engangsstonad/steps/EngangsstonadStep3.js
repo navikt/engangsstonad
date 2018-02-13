@@ -8,15 +8,15 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import BekreftCheckbox from 'shared/bekreft-checkbox/BekreftCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWithLabel';
-import { fullNameFormat } from 'util/formats/index';
+import { fullNameFormat } from 'util/formats/formatUtils';
 import CountryList from 'shared/country-picker/CountryList';
 import PersonaliaLabel from 'shared/personalia-label/PersonaliaLabel';
-import { ISODateToMaskedInput } from 'util/date';
+import { ISODateToMaskedInput } from 'util/date/dateUtils';
 import {
 	apiActionCreators as api,
 	commonActionCreators as common
 } from '../../../redux/actions';
-import getMessage from '../../../util/i18n';
+import getMessage from '../../../util/i18n/i18nUtils';
 
 import '../engangsstonad.less';
 

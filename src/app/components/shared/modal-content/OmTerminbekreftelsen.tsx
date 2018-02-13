@@ -2,12 +2,13 @@ import * as React from 'react';
 
 const { injectIntl, intlShape } = require('react-intl');
 const { Undertittel, Normaltekst } = require('nav-frontend-typografi');
-import getMessage from '../../../util/i18n';
+import getMessage from '../../../util/i18n/i18nUtils';
 
 import './modalContent.less';
+import InjectedIntl = ReactIntl.InjectedIntl;
 
 interface Props {
-    intl: object;
+    intl: InjectedIntl;
 }
 
 const OmTerminbekreftelsen: React.StatelessComponent<Props> = ({ intl }) => (

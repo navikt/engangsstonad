@@ -8,7 +8,7 @@ import { Ingress } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import HeaderIllustration from 'shared/header-illustration/HeaderIllustration';
 import VelkommenIllustration from 'assets/svg/frontpage.svg';
-import getMessage from '../../util/i18n/index';
+import getMessage from '../../util/i18n/i18nUtils';
 
 import './engangsstonad.less';
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 import Icon from 'nav-frontend-ikoner-assets';
-import { ISODateToMaskedInput } from '../../../util/date';
+import { ISODateToMaskedInput } from '../../../util/date/dateUtils';
 import './countryPicker.less';
 
 const CountryListElement = (props) => {
