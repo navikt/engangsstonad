@@ -26,7 +26,7 @@ interface SetAntallBarn {
 
 interface SetBarnErFodt {
     type: SoknadActionKeys.SET_BARN_ER_FODT;
-    barnErFodt: boolean;
+    barnErFodt?: boolean;
 }
 
 interface SetFodselsdato {

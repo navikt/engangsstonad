@@ -37,7 +37,7 @@ export function setAntallBarn(antallBarn: string): SoknadActionTypes {
     };
 }
 
-export function setBarnErFodt(barnErFodt: boolean): SoknadActionTypes {
+export function setBarnErFodt(barnErFodt?: boolean): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_BARN_ER_FODT,
         barnErFodt

@@ -74,6 +74,7 @@
 	},
 	"dependencies": {
 		"@types/date-fns": "2.6.0",
+		"@types/react-document-title": "^2.0.2",
 		"@types/react-intl": "^2.3.5",
 		"axios": "0.17.1",
 		"babel-polyfill": "6.26.0",
@@ -104,7 +105,7 @@
 		"nav-frontend-modal": "0.2.16",
 		"nav-frontend-modal-style": "0.3.8",
 		"nav-frontend-paneler-style": "0.3.7",
-		"nav-frontend-skjema": "0.1.21",
+		"nav-frontend-skjema": "0.1.23",
 		"nav-frontend-skjema-style": "0.3.11",
 		"nav-frontend-stegindikator-style": "0.3.22",
 		"nav-frontend-typografi": "1.0.12",
