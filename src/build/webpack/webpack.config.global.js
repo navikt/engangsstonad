@@ -38,8 +38,15 @@ const webpackConfig = {
 			{
 				test: /\.js$/,
 				use: [
-					{ loader: 'babel-loader' },
-					{ loader: 'eslint-loader', options: { emitWarning: true } }
+					{
+						loader: 'babel-loader'
+					},
+					{
+						loader: 'eslint-loader',
+						options: {
+							emitWarning: true
+						}
+					}
 				],
 				exclude: /node_modules/
 			},
@@ -48,8 +55,12 @@ const webpackConfig = {
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
 					use: [
-						{ loader: 'css-loader' },
-						{ loader: 'postcss-loader' },
+						{
+							loader: 'css-loader'
+						},
+						{
+							loader: 'postcss-loader'
+						},
 						{
 							loader: 'less-loader',
 							options: {
@@ -74,7 +85,9 @@ const webpackConfig = {
 			disable: false,
 			allChunks: true
 		}),
-		new SpriteLoaderPlugin({ plainSprite: true }),
+		new SpriteLoaderPlugin({
+			plainSprite: true
+		}),
 		new webpack.DefinePlugin({
 			__ENV__: JSON.stringify(process.env.NODE_ENV)
 		})

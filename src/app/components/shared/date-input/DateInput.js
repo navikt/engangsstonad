@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import MaskedInput from 'react-maskedinput';
-import { Element } from 'nav-frontend-typografi';
 import Icon from 'nav-frontend-ikoner-assets';
 import classnames from 'classnames';
 
@@ -12,8 +11,7 @@ import {
 	isValidISODate,
 	ISODateToMaskedInput,
 	datePickerToISODate
-} from '../../../util/date/dateUtils';
-
+} from './dateInputUtil';
 import './dayPicker.less';
 
 const stopEvent = (event) => {
@@ -106,18 +104,20 @@ class DateInput extends Component {
 	render() {
 		const {
 			id,
-			input,
+			inputProps,
 			label,
 			disabled,
 			fromDate,
 			toDate,
-			errorMessage
+			errorMessage,
+			selectedDate
 		} = this.props;
 
-		const { value } = input;
 		const maskedInputProps = {
-			...input,
-			value: isValidISODate(value) ? ISODateToMaskedInput(value) : value
+			...inputProps,
+			value: isValidISODate(selectedDate)
+				? ISODateToMaskedInput(selectedDate)
+				: selectedDate
 		};
 
 		return (
@@ -129,7 +129,9 @@ class DateInput extends Component {
 				ref={(container) => {
 					this.container = container;
 				}}>
-				<Element>{label}</Element>
+				<label className="skjemaelement__label" htmlFor={id}>
+					{label}
+				</label>
 				<div // eslint-disable-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
 					className="datovelger__inner"
 					tabIndex=""
@@ -173,6 +175,9 @@ class DateInput extends Component {
 							onDayClick={this.onDayClick}
 							onKeyUp={this.onKeyUp}
 							close={this.close}
+							disabledRanges={this.props.disabledRanges}
+							disableWeekends={this.props.disableWeekends}
+							fullscreen={this.props.fullscreen}
 						/>
 					)}
 				</div>
@@ -190,11 +195,20 @@ class DateInput extends Component {
 DateInput.propTypes = {
 	id: PT.string.isRequired,
 	label: PT.oneOfType([PT.string, PT.node]).isRequired,
-	input: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
+	inputProps: PT.object, // eslint-disable-line react/forbid-prop-types
+	selectedDate: PT.instanceOf(Date),
 	disabled: PT.bool,
 	fromDate: PT.instanceOf(Date),
 	toDate: PT.instanceOf(Date),
+	disableWeekends: PT.bool,
+	disabledRanges: PT.arrayOf(
+		PT.shape({
+			from: PT.instanceOf(Date).isRequired,
+			to: PT.instanceOf(Date).isRequired
+		})
+	),
 	errorMessage: PT.oneOfType([PT.arrayOf(PT.node), PT.node]),
+	fullscreen: PT.bool,
 	onChange: PT.func.isRequired
 };
 
@@ -202,6 +216,11 @@ DateInput.defaultProps = {
 	disabled: false,
 	fromDate: undefined,
 	toDate: undefined,
-	errorMessage: undefined
+	errorMessage: undefined,
+	selectedDate: undefined,
+	inputProps: undefined,
+	disableWeekends: false,
+	disabledRanges: undefined,
+	fullscreen: false
 };
 export default DateInput;
