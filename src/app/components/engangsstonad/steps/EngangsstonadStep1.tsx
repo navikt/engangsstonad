@@ -11,7 +11,6 @@ import {
 } from '../../../types/domain/RelasjonTilBarn';
 import { Normaltekst } from 'nav-frontend-typografi';
 import DateInput from './../../shared/date-input/DateInput';
-import { History } from 'history';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Person from '../../../types/domain/Person';
 import { DispatchProps } from '../../../redux/types';
@@ -20,15 +19,12 @@ import getMessage from 'util/i18n/i18nUtils';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import LinkWithIcon from 'shared/link-with-icon/LinkWithIcon';
 import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
+import { ExternalProps } from '../../../types/index';
 
 interface StateProps {
     barnErFodt?: boolean;
     relasjonTilBarn: RelasjonTilBarn;
     person: Person;
-}
-
-interface ExternalProps {
-    history: History;
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps & ExternalProps;
