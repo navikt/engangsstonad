@@ -11,7 +11,7 @@ import {
 	isValidISODate,
 	ISODateToMaskedInput,
 	datePickerToISODate
-} from './../../../util/date/dateUtils';
+} from './dateInputUtil';
 import './dayPicker.less';
 
 const stopEvent = (event) => {

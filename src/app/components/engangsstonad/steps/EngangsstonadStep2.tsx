@@ -1,12 +1,11 @@
 import * as React from 'react';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import DocumentTitle from 'react-document-title';
 import renderRadioList from 'util/render/renderUtils';
 import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../../redux/actions';
-import {default as Medlemsskap, Utenlandsopphold} from '../../../types/domain/Medlemsskap';
-import injectIntl = ReactIntl.injectIntl;
+import { default as Medlemsskap, Utenlandsopphold } from '../../../types/domain/Medlemsskap';
 import { connect } from 'react-redux';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { DispatchProps } from '../../../redux/types/index';
 import { ExternalProps } from '../../../types/index';
 import CountryPicker from './../../shared/country-picker/CountryPicker';
@@ -64,7 +63,7 @@ export class EngangsstonadStep2 extends React.Component<Props> {
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegBodde')}
                         language={language}
-                        visits={medlemsskap.utenlandsopphold}
+                        utenlandsoppholdListe={medlemsskap.utenlandsopphold}
                         addVisit={(u: Utenlandsopphold) => dispatch(soknad.addUtenlandsopphold(u))}
                         editVisit={(u: Utenlandsopphold, i: number) => dispatch(soknad.editUtenlandsopphold(u, i))}
                         deleteVisit={(u: Utenlandsopphold) => dispatch(soknad.deleteUtenlandsopphold(u))}
