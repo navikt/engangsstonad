@@ -118,7 +118,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                     <DateInput
                         id="fodselsdato"
                         label={getMessage(intl, 'relasjonBarn.text.fodselsdato')}
-                        inputProps={{ value: relasjonTilBarn && (relasjonTilBarn as RelasjonTilFodtBarn).fodselsdato }}
+                        selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilFodtBarn).fodselsdato}
                         onChange={(e) => dispatch(soknad.setFodselsdato(e))}
                     />
                 )}
@@ -128,7 +128,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                     <DateInput
                         id="termindato"
                         label={getMessage(intl, 'relasjonBarn.text.termindato')}
-                        inputProps={{ value: relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).terminDato }}
+                        selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).terminDato}
                         onChange={(e) => dispatch(soknad.setTerminDato(e))}
                     />
                 )}
@@ -147,7 +147,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                     <DateInput
                         id="terminbekreftelse"
                         key="dateInputTerminBekreftelse"
-                        inputProps={{ value: relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).utstedtDato }}
+                        selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).utstedtDato}
                         label={getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}
                         onChange={(e) => dispatch(soknad.setUtstedtDato(e))}
                     />
