@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import DocumentTitle from 'react-document-title';
 import renderRadioList from 'util/render/renderUtils';
 import getMessage from 'util/i18n/i18nUtils';
@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { DispatchProps } from '../../../redux/types/index';
 import { ExternalProps } from '../../../types/index';
 import CountryPicker from './../../shared/country-picker/CountryPicker';
+import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 
 interface StateProps {
     medlemsskap: Medlemsskap;
@@ -21,10 +22,9 @@ export class EngangsstonadStep2 extends React.Component<Props> {
     render() {
         const { dispatch, intl, medlemsskap, language } = this.props;
         const { iNorgeSiste12, iNorgeNeste12, utenlandsopphold } = medlemsskap;
-
         const iNorgeSiste12RadioList = renderRadioList({
             intl,
-            titleIntlId: getMessage(intl, 'medlemmskap.text.siste12mnd'),
+            titleIntlId: 'medlemmskap.text.siste12mnd',
             action: (value: string) => dispatch(soknad.setINorgeSiste12(value)),
             name: 'iNorgeSiste12',
             options: [
@@ -35,7 +35,7 @@ export class EngangsstonadStep2 extends React.Component<Props> {
 
         const iNorgeNeste12RadioList = renderRadioList({
             intl,
-            titleIntlId: getMessage(intl, 'medlemmskap.text.neste12mnd'),
+            titleIntlId: 'medlemmskap.text.neste12mnd',
             action: (value: string) => dispatch(soknad.setINorgeNeste12(value)),
             name: 'iNorgeNeste12',
             options: [
@@ -46,7 +46,7 @@ export class EngangsstonadStep2 extends React.Component<Props> {
 
         const fodselINorgeRadioList = renderRadioList({
             intl,
-            titleIntlId: getMessage(intl, 'medlemmskap.text.bostedFodsel'),
+            titleIntlId: 'medlemmskap.text.bostedFodsel',
             action: (value: string) => dispatch(soknad.setFodselINorge(value)),
             name: 'fodselINorge',
             options: [

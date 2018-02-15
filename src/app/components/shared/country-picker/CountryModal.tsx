@@ -71,7 +71,7 @@ class CountryModal extends React.Component<Props, State> {
     render() {
         const { intl } = this.props;
         const { utenlandsopphold } = this.state;
-        const landValue = utenlandsopphold ? utenlandsopphold.land : null;
+        const landValue = utenlandsopphold ? utenlandsopphold.land : '';
         const fomValue = utenlandsopphold ? utenlandsopphold.varighet.fom : '';
         const tomValue = utenlandsopphold ? utenlandsopphold.varighet.tom : '';
 
@@ -111,8 +111,15 @@ class CountryModal extends React.Component<Props, State> {
                         inputProps={{ value: fomValue }}
                         label="fra"
                         onChange={(date: string) => {
-                            (utenlandsopphold as Utenlandsopphold).varighet.fom = date;
-                            this.setState({utenlandsopphold});
+                            this.setState({
+                                utenlandsopphold: {
+                                    land: landValue,
+                                    varighet: {
+                                        tom: tomValue,
+                                        fom: date
+                                    }
+                                }
+                            });
                         }}
                         errorMessage=""
                     />
@@ -121,8 +128,15 @@ class CountryModal extends React.Component<Props, State> {
                         label="til"
                         inputProps={{ value: tomValue }}
                         onChange={(date: string) => {
-                            (utenlandsopphold as Utenlandsopphold).varighet.tom = date;
-                            this.setState({utenlandsopphold});
+                            this.setState({
+                                utenlandsopphold: {
+                                    land: landValue,
+                                    varighet: {
+                                        tom: date,
+                                        fom: fomValue
+                                    }
+                                }
+                            });
                         }}
                         errorMessage=""
                     />
