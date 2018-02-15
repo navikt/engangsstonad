@@ -166,7 +166,6 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
     }
 }
 
-// tslint:disable-next-line no-any
 const mapStateToProps = (state: any) => ({
     relasjonTilBarn: state.soknadReducer.relasjonTilBarn,
     barnErFodt: state.soknadReducer.barnErFodt,

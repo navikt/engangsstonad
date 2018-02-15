@@ -72,24 +72,24 @@ export function setArbeidSiste12(arbeidSiste12: ArbeidSiste12): SoknadActionType
     };
 }
 
-export function setFodselINorge(fodselINorge: boolean): SoknadActionTypes {
+export function setFodselINorge(fodselINorge: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_FODSEL_I_NORGE,
-        fodselINorge
+        fodselINorge: fodselINorge === undefined ? fodselINorge : fodselINorge === 'norway'
     };
 }
 
-export function setINorgeSiste12(iNorgeSiste12: boolean): SoknadActionTypes {
+export function setINorgeSiste12(iNorgeSiste12: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_I_NORGE_SISTE_12,
-        iNorgeSiste12
+        iNorgeSiste12: iNorgeSiste12 === undefined ? iNorgeSiste12 : iNorgeSiste12 === 'norway'
     };
 }
 
-export function setINorgeNeste12(iNorgeNeste12: boolean): SoknadActionTypes {
+export function setINorgeNeste12(iNorgeNeste12: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_I_NORGE_NESTE_12,
-        iNorgeNeste12
+        iNorgeNeste12: iNorgeNeste12 === undefined ? iNorgeNeste12 : iNorgeNeste12 === 'norway'
     };
 }
 
