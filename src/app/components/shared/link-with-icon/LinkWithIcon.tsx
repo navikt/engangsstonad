@@ -8,10 +8,13 @@ interface Props {
     href: string;
     linkText: string;
     iconSize: number;
+    onClick: Function;
 }
 
-const LinkWithIcon: React.StatelessComponent<Props> = ({ iconKind, href, linkText, iconSize = 16, ...other }) => (
-    <div className="linkWithIcon">
+const LinkWithIcon: React.StatelessComponent<Props> = (
+    { onClick, iconKind, href, linkText, iconSize = 16, ...other }
+) => (
+    <div className="linkWithIcon" onClick={(e) => onClick(e)}>
         <Icon kind={iconKind} size={iconSize} />
         <Link className="linkWithIcon__link" to={href} {...other}>
             {linkText}

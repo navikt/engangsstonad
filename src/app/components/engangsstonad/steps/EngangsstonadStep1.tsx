@@ -2,30 +2,29 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { injectIntl } from 'react-intl';
-
 const Modal = require('nav-frontend-modal').default;
-
-import RadioList, { OptionProps, RadioListChangeEvent, RadioListProps } from 'components/shared/radio-list/RadioList';
-
-import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../../redux/actions';
-
 import './../engangsstonad.less';
-import RelasjonTilBarn from '../../../types/domain/RelasjonTilBarn';
+import {
+    default as RelasjonTilBarn,
+    RelasjonTilFodtBarn, RelasjonTilUfodtBarn
+} from '../../../types/domain/RelasjonTilBarn';
+import { Normaltekst } from 'nav-frontend-typografi';
+import DateInput from './../../shared/date-input/DateInput';
 import { History } from 'history';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Person from '../../../types/domain/Person';
+import { DispatchProps } from '../../../redux/types';
+import renderRadioList from 'util/render/renderUtils';
+import getMessage from 'util/i18n/i18nUtils';
+import DialogBox from 'shared/dialog-box/DialogBox';
+import LinkWithIcon from 'shared/link-with-icon/LinkWithIcon';
+import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
 
 interface StateProps {
     barnErFodt?: boolean;
     relasjonTilBarn: RelasjonTilBarn;
     person: Person;
-}
-
-export type Dispatch = (action: any) => any;
-
-export interface DispatchProps {
-    dispatch: Dispatch;
 }
 
 interface ExternalProps {
@@ -38,20 +37,14 @@ interface State {
     isModalOpen: boolean;
 }
 
-interface RadioListConfig {
-    name: string;
-    titleIntlId: string;
-    selectedValue?: string;
-    options: OptionProps[];
-    action: RadioListChangeEvent;
-}
-
 export class EngangsstonadStep1 extends React.Component<Props, State> {
-    constructor(props: Props, state: State) {
+    constructor(props: Props) {
         super(props);
         this.handleNextClicked = this.handleNextClicked.bind(this);
-        this.fodselTidspunktChange = this.fodselTidspunktChange.bind(this);
-        this.setState({ ...state, isModalOpen: false });
+    }
+
+    componentWillMount() {
+        this.setState({ ...this.state, isModalOpen: false });
         Modal.setAppElement('#app');
     }
 
@@ -68,57 +61,110 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
         this.props.history.push('/engangsstonad/step2');
     }
 
-    renderRadioList(config: RadioListConfig) {
-        const { intl } = this.props;
-        const { titleIntlId, action, options, ...other } = config;
-        const title = getMessage(intl, titleIntlId);
-        const radioListProps: RadioListProps = {
-            title,
-            options: options.map((option) => ({ ...option, label: getMessage(intl, option.label) })),
-            onChange: action,
-            ...other
-        };
-        return <RadioList {...radioListProps} />;
+    getFodselsTidspunktSelectedValue(barnErFodt?: boolean) {
+        if (barnErFodt === true) {
+            return 'before';
+        } else if (barnErFodt === false) {
+            return 'ahead';
+        } else {
+            return undefined;
+        }
     }
 
-    fodselTidspunktChange(barnErFodt: string) {
-        const { dispatch } = this.props;
-        dispatch(soknad.setBarnErFodt(barnErFodt === undefined ? barnErFodt : barnErFodt === 'before'));
+    getAntallBarnSelectedValue(antallBarn?: number) {
+        if (antallBarn === 1) {
+            return 'ett';
+        } else if (antallBarn === 2) {
+            return 'tvillinger';
+        } else if (antallBarn === 3) {
+            return 'flere';
+        } else {
+            return undefined;
+        }
     }
 
     render() {
-        const { barnErFodt } = this.props;
+        const { barnErFodt, relasjonTilBarn, dispatch, intl } = this.props;
+        const antallBarn = relasjonTilBarn && relasjonTilBarn.antallBarn;
+        const terminDato = relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).terminDato;
 
-        let valgtVerdi;
-        if (barnErFodt === true) {
-          valgtVerdi = 'before';
-        } else if (barnErFodt === false) {
-          valgtVerdi = 'ahead';
-        }
-
-        const options = [
-            { label: 'relasjonBarn.radiobutton.fremtid', value: 'ahead' },
-            { label: 'relasjonBarn.radiobutton.fortid', value: 'before' }
-        ];
-
-        const fodselTidspunktRadioList = this.renderRadioList({
+        const fodselTidspunktRadioList = renderRadioList({
+            intl,
             titleIntlId: 'relasjonBarn.text.fodselTidspunkt',
-            action: (value: string) => this.fodselTidspunktChange(value),
+            action: (value: string) => dispatch(soknad.setBarnErFodt(value)),
             name: 'fodselTidspunkt',
-            selectedValue: valgtVerdi,
-            options
+            selectedValue: this.getFodselsTidspunktSelectedValue(barnErFodt),
+            options: [
+                { labelIntlId: 'relasjonBarn.radiobutton.fremtid', value: 'ahead' },
+                { labelIntlId: 'relasjonBarn.radiobutton.fortid', value: 'before' }
+            ]
+        });
+
+        const antallBarnRadioList = renderRadioList({
+            intl,
+            titleIntlId: 'relasjonBarn.text.antallBarn',
+            action: (value: string) => dispatch(soknad.setAntallBarn(value)),
+            name: 'antallBarn',
+            selectedValue: this.getAntallBarnSelectedValue(antallBarn),
+            options: [
+                { labelIntlId: 'relasjonBarn.radiobutton.ettbarn', value: 'ett' },
+                { labelIntlId: 'relasjonBarn.radiobutton.tvillinger', value: 'tvillinger' },
+                { labelIntlId: 'relasjonBarn.radiobutton.flere', value: 'flere' }
+            ]
         });
 
         return (
-            <div className="engangsstonad">
+            <div className="engangsstonad__step">
                 <DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
                 {fodselTidspunktRadioList}
 
                 {barnErFodt === true && (
-                    <div>
-                        hei
-                    </div>
+                    <DateInput
+                        id="fodselsdato"
+                        label={getMessage(intl, 'relasjonBarn.text.fodselsdato')}
+                        inputProps={{ value: relasjonTilBarn && (relasjonTilBarn as RelasjonTilFodtBarn).fodselsdato }}
+                        onChange={(e) => dispatch(soknad.setFodselsdato(e))}
+                    />
                 )}
+
+                {barnErFodt === false && antallBarnRadioList}
+                {barnErFodt === false && antallBarn &&  (
+                    <DateInput
+                        id="termindato"
+                        label={getMessage(intl, 'relasjonBarn.text.termindato')}
+                        inputProps={{ value: relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).terminDato }}
+                        onChange={(e) => dispatch(soknad.setTerminDato(e))}
+                    />
+                )}
+
+                {terminDato && ([
+                    <DialogBox type="warning" overflow={true} key="dialog">
+                        <Normaltekst>{getMessage(intl, 'relasjonBarn.text.terminbekreftelse')}</Normaltekst>
+                        <LinkWithIcon
+                            iconKind="info-sirkel-fylt"
+                            iconSize={24}
+                            href="#"
+                            linkText={getMessage(intl, 'relasjonBarn.link.lesTerminbekreftelse')}
+                            onClick={() => this.openTerminbekreftelseModal()}
+                        />
+                    </DialogBox>,
+                    <DateInput
+                        id="terminbekreftelse"
+                        key="dateInputTerminBekreftelse"
+                        inputProps={{ value: relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).utstedtDato }}
+                        label={getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}
+                        onChange={(e) => dispatch(soknad.setUtstedtDato(e))}
+                    />
+                ])}
+
+                <Modal
+                    isOpen={this.state.isModalOpen}
+                    closeButton={true}
+                    onRequestClose={() => this.closeTerminbekreftelseModal()}
+                    contentLabel="Om terminbekreftelsen"
+                >
+                    <OmTerminbekreftelsen />
+                </Modal>
             </div>
         );
     }

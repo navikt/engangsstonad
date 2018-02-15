@@ -16,7 +16,12 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
 
     switch (action.type) {
         case SoknadActionKeys.SET_BARN_ER_FODT:
-            return { ...state, barnErFodt: action.barnErFodt, relasjonTilBarn: undefined };
+            const { barnErFodt } = action;
+            return {
+                ...state,
+                barnErFodt: barnErFodt,
+                relasjonTilBarn: undefined
+            };
         case SoknadActionKeys.ADD_UTENLANDSOPPHOLD:
             const utenlandsopphold = medlemsskap.utenlandsopphold.concat([action.utenlandsopphold]);
             return { ...state, medlemsskap: { ...medlemsskap, utenlandsopphold } };

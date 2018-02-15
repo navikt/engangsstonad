@@ -2,11 +2,11 @@ abstract class RelasjonTilBarn {
     antallBarn: number | undefined;
 }
 
-export interface RelasjonTilFodtBarn extends RelasjonTilBarn {
+export class RelasjonTilFodtBarn extends RelasjonTilBarn {
     fodselsdato: string | undefined;
 }
 
-export interface RelasjonTilUfodtBarn extends RelasjonTilBarn {
+export class RelasjonTilUfodtBarn extends RelasjonTilBarn {
     terminDato: string | undefined;
     utstedtDato: string | undefined;
 }
