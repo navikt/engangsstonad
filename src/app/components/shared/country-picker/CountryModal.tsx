@@ -109,6 +109,7 @@ class CountryModal extends React.Component<Props, State> {
                     <DateInput
                         id="boddFraDato"
                         inputProps={{ value: fomValue }}
+                        selectedDate={fomValue}
                         label="fra"
                         onChange={(date: string) => {
                             this.setState({
@@ -127,6 +128,7 @@ class CountryModal extends React.Component<Props, State> {
                         id="boddTilDato"
                         label="til"
                         inputProps={{ value: tomValue }}
+                        selectedDate={tomValue}
                         onChange={(date: string) => {
                             this.setState({
                                 utenlandsopphold: {

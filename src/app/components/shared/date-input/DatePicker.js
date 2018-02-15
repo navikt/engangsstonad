@@ -144,7 +144,7 @@ class DayPickerComponent extends Component {
 
 DayPickerComponent.propTypes = {
 	// input: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
-	selectedDate: PT.instanceOf(Date),
+	selectedDate: PT.string,
 	onKeyUp: PT.func.isRequired,
 	close: PT.func.isRequired,
 	onDayClick: PT.func.isRequired,

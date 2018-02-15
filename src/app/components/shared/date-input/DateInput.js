@@ -196,7 +196,7 @@ DateInput.propTypes = {
 	id: PT.string.isRequired,
 	label: PT.oneOfType([PT.string, PT.node]).isRequired,
 	inputProps: PT.object, // eslint-disable-line react/forbid-prop-types
-	selectedDate: PT.instanceOf(Date),
+	selectedDate: PT.string,
 	disabled: PT.bool,
 	fromDate: PT.instanceOf(Date),
 	toDate: PT.instanceOf(Date),

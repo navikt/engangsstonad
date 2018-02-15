@@ -8,7 +8,7 @@ export interface Range {
 export interface DateInputProps {
     id: string;
     label: React.ReactNode;
-    selectedDate?: Date;
+    selectedDate?: string;
     inputProps?: React.HTMLProps<HTMLInputElement>;
     disabled?: boolean;
     fromDate?: Date;
