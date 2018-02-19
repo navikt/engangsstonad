@@ -4,7 +4,7 @@ import PersonRequest from '../../../types/services/PersonRequest';
 import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
 import EngangsstonadSoknad from '../../../types/domain/EngangsstonadSoknad';
 
-export function getPerson(person: PersonRequest): ApiActionTypes {
+export function getPerson(person?: PersonRequest): ApiActionTypes {
     return {
         type: ApiActionKeys.GET_PERSON,
         params: person
