@@ -74,6 +74,7 @@
 	},
 	"dependencies": {
 		"@types/date-fns": "2.6.0",
+		"@types/query-string": "^5.1.0",
 		"@types/react-document-title": "^2.0.2",
 		"@types/react-intl": "^2.3.5",
 		"axios": "0.17.1",
