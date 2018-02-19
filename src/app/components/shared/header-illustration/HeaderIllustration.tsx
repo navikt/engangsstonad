@@ -7,10 +7,10 @@ import SpeechBubble from '../speech-bubble/SpeechBubble';
 
 import './headerIllustration.less';
 
-enum Theme {
-    'purple' = 'purple',
-    'green' = 'green',
-    'orange' = 'orange'
+export enum Theme {
+    purple = 'purple',
+    green = 'green',
+    orange = 'orange'
 }
 
 type Dialog = {

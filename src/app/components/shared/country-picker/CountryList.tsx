@@ -1,48 +1,37 @@
 import * as React from 'react';
 import CountryListElement from './CountryListElement';
 import CountryListSummaryElement from './CountryListSummaryElement';
-import { utlandsopphold } from './types';
 import './countryPicker.less';
-
-interface CountryListElementProps {
-    visits: utlandsopphold[];
-    onEditClick: (utl: utlandsopphold) => void;
-    onDeleteClick: (utl: utlandsopphold) => void;
-}
-
-const renderCountryListElement = (props: CountryListElementProps) =>
-    props.visits.map((visit, index) => (
-        <CountryListElement
-            key={index}
-            visit={visit}
-            onEditClick={() => props.onEditClick(visit)}
-            onDeleteClick={() => props.onDeleteClick(visit)}
-        />
-    ));
-
-interface CountryListSummaryElementProps {
-    visits: utlandsopphold[];
-}
-
-const renderCountryListSummaryElement = (props: CountryListSummaryElementProps ) =>
-    props.visits.map((visit: utlandsopphold, index: number) => (
-        <CountryListSummaryElement
-            key={index}
-            visit={visit}
-        />
-    ));
+import { Utenlandsopphold } from '../../../types/domain/Medlemsskap';
 
 interface CountryListProps {
-    type?: string;
-    visits: utlandsopphold[];
-    onDeleteClick: (utl: utlandsopphold) => void;
-    onEditClick: (utl: utlandsopphold) => void;
+    utenlandsoppholdListe: Utenlandsopphold[];
 }
 
-const CountryList: React.StatelessComponent<CountryListProps> = (props) => {
-    if (props.type === 'oppsummering') {
-        return <div>{props.visits && renderCountryListSummaryElement(props)}</div>;
-    }
-    return <div>{props.visits && renderCountryListElement(props)}</div>;
-};
-export default CountryList;
+export const CountrySumnmaryList: React.StatelessComponent<CountryListProps> = (props) => (
+    <ul>{props.utenlandsoppholdListe.map((visit: Utenlandsopphold, index: number) => (
+        <CountryListSummaryElement
+            key={index}
+            utenlandsopphold={visit}
+        />
+    ))};
+    </ul>
+);
+
+interface EditableCountryListProps extends CountryListProps {
+    onEditClick: (utl: Utenlandsopphold) => void;
+    onDeleteClick: (utl: Utenlandsopphold) => void;
+}
+
+export const CountryList: React.StatelessComponent<EditableCountryListProps> = (props) => (
+    <ul>
+        {props.utenlandsoppholdListe.map((utenlandsopphold, index) => (
+            <CountryListElement
+                key={index}
+                utenlandsopphold={utenlandsopphold}
+                onEditClick={() => props.onEditClick(utenlandsopphold)}
+                onDeleteClick={() => props.onDeleteClick(utenlandsopphold)}
+            />
+        ))};
+    </ul>
+);

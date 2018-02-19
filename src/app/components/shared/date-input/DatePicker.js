@@ -8,6 +8,7 @@ import DayPicker, { DateUtils } from 'react-day-picker';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/nb';
 import { addDays } from 'date-fns';
+import './dayPicker.less';
 
 const localeUtils = {
 	...MomentLocaleUtils,
@@ -143,7 +144,7 @@ class DayPickerComponent extends Component {
 
 DayPickerComponent.propTypes = {
 	// input: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
-	selectedDate: PT.instanceOf(Date),
+	selectedDate: PT.string,
 	onKeyUp: PT.func.isRequired,
 	close: PT.func.isRequired,
 	onDayClick: PT.func.isRequired,

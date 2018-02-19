@@ -4,20 +4,21 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 const { Normaltekst } = require('nav-frontend-typografi');
 import { ISODateToMaskedInput } from '../../../util/date/dateUtils';
 import getMessage from '../../../util/i18n/i18nUtils';
-import { utlandsopphold } from './types';
 import './countryPicker.less';
+import { Utenlandsopphold } from '../../../types/domain/Medlemsskap';
 
 interface OwnProps {
-    visit: utlandsopphold;
+    utenlandsopphold: Utenlandsopphold;
 }
 
 type Props = OwnProps & InjectedIntlProps;
 
 const CountryListSummaryElement: React.StatelessComponent<Props>  = (props) => {
-    const { land, startDato, sluttDato } = props.visit;
+    const { land } = props.utenlandsopphold;
+    const { fom, tom } = props.utenlandsopphold.varighet;
 
     return (
-        <div className="countrySummaryElement">
+        <li className="countrySummaryElement">
             <span
                 className={`countrySummaryElement__flagIcon flag-icon flag-icon-${land.toLowerCase()}`}
             />
@@ -27,12 +28,12 @@ const CountryListSummaryElement: React.StatelessComponent<Props>  = (props) => {
                 </Normaltekst>
                 <Normaltekst className="countrySummaryElement__date">
                     {getMessage(props.intl, 'standard.text.fromTo', {
-                        from: ISODateToMaskedInput(startDato),
-                        to: ISODateToMaskedInput(sluttDato)
+                        from: ISODateToMaskedInput(fom),
+                        to: ISODateToMaskedInput(tom)
                     })}
                 </Normaltekst>
             </div>
-        </div>
+        </li>
     );
 };
 export default injectIntl(CountryListSummaryElement);

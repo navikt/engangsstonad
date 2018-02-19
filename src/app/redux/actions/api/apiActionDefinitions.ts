@@ -14,7 +14,7 @@ export enum ApiActionKeys {
 
 interface GetPerson {
     type: ApiActionKeys.GET_PERSON;
-    params: PersonRequest;
+    params?: PersonRequest;
 }
 
 interface GetPersonSuccess {

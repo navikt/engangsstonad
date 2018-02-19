@@ -7,8 +7,11 @@ const { Checkbox } = require('nav-frontend-skjema');
 import './bekreftCheckbox.less';
 
 interface Props {
+    name?: string;
     checked: boolean;
-    text: string;
+    text?: string | JSX.Element;
+    label: string;
+    onChange: () => void;
 }
 
 export const BekreftCheckbox: React.StatelessComponent<Props> = ({ checked, text, ...other }) => {
