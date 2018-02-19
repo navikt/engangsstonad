@@ -138,11 +138,9 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
     }
 }
 
-// tslint:disable-next-line no-any
 const mapStateToProps = (state: any) => ({
     person: state.apiReducer.person,
     godkjentVilkar: state.commonReducer.godkjentVilkar,
     language: state.commonReducer.language
 });
-
 export default connect<StateProps>(mapStateToProps)(injectIntl(EngangsstonadConfirmation));
