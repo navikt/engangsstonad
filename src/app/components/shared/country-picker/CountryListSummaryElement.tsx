@@ -18,7 +18,7 @@ const CountryListSummaryElement: React.StatelessComponent<Props>  = (props) => {
     const { fom, tom } = props.utenlandsopphold.varighet;
 
     return (
-        <div className="countrySummaryElement">
+        <li className="countrySummaryElement">
             <span
                 className={`countrySummaryElement__flagIcon flag-icon flag-icon-${land.toLowerCase()}`}
             />
@@ -33,7 +33,7 @@ const CountryListSummaryElement: React.StatelessComponent<Props>  = (props) => {
                     })}
                 </Normaltekst>
             </div>
-        </div>
+        </li>
     );
 };
 export default injectIntl(CountryListSummaryElement);

@@ -16,7 +16,7 @@ const CountryListElement: React.StatelessComponent<Props> = (props) => {
     const { land } = props.utenlandsopphold;
     const { fom, tom } = props.utenlandsopphold.varighet;
     return (
-        <div id="helediv" className="countryElement" onClick={() => props.onEditClick(props.utenlandsopphold)}>
+        <li id="helediv" className="countryElement" onClick={() => props.onEditClick(props.utenlandsopphold)}>
             <span className={`flag-icon flag-icon-${land.toLowerCase()}`} />
             <Normaltekst className="countryElement__date">
                 {ISODateToMaskedInput(fom)} - {ISODateToMaskedInput(tom)}
@@ -31,7 +31,7 @@ const CountryListElement: React.StatelessComponent<Props> = (props) => {
             >
                 <Icon kind="trashcan" size={20} />
             </button>
-        </div>
+        </li>
     );
 };
 export default CountryListElement;

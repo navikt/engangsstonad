@@ -2,10 +2,10 @@ import * as React from 'react';
 const { Hovedknapp } = require('nav-frontend-knapper');
 const { Element } = require('nav-frontend-typografi');
 const Modal = require('nav-frontend-modal').default;
-import CountryList from 'shared/country-picker/CountryList';
 import CountryModal from 'shared/country-picker/CountryModal';
 import './countryPicker.less';
 import { Utenlandsopphold } from '../../../types/domain/Medlemsskap';
+import { CountryList } from 'shared/country-picker/CountryList';
 
 interface Props {
     label: string;
