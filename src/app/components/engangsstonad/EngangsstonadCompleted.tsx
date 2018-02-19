@@ -70,7 +70,6 @@ export class EngangsstonadCompleted extends React.Component<Props> {
     }
 }
 
-// tslint:disable-next-line no-any
 const mapStateToProps = (state: any) => ({
     person: state.apiReducer.person,
     soknad: state.apiReducer.soknad
