@@ -4,14 +4,14 @@ import deploy
 def deployLib = new deploy()
 
 node {
-    def commitHash, commitHashShort, commitUrl, currentVersion
+    def commitHash, commitHashShort, commitUrl
     def project = "navikt"
     def repo = "p2-selvbetjening-frontend"
     def app = "engangsstonad"
-    def committer, committerEmail, changelog, pom, releaseVersion, nextVersion // metadata
+    def committer, committerEmail, changelog, releaseVersion
     def appConfig = "nais.yaml"
-    def dockerRepo = "docker.adeo.no:5000"
-    def branch = "master"
+    def dockerRepo = "repo.adeo.no:5443"
+    def branch = "ny-jenkins"
     def groupId = "nais"
     def environment = 't1'
     def zone = 'sbs'
@@ -20,7 +20,7 @@ node {
     stage("Checkout") {
         cleanWs()
         withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
-            sh(script: "git clone https://github.com/${project}/${repo}.git .")
+            sh(script: "git clone https://github.com/${project}/${repo}.git -b ${branch} .")
         }
         commitHash = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
         commitHashShort = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
@@ -28,40 +28,28 @@ node {
         committer = sh(script: 'git log -1 --pretty=format:"%an"', returnStdout: true).trim()
         committerEmail = sh(script: 'git log -1 --pretty=format:"%ae"', returnStdout: true).trim()
         changelog = sh(script: 'git log `git describe --tags --abbrev=0`..HEAD --oneline', returnStdout: true)
-        // slackSend([
-        //         color: 'good',
-        //         message: "Build <${env.BUILD_URL}|#${env.BUILD_NUMBER}> (<${commitUrl}|${commitHashShort}>) of ${project}/${repo}@master by ${committer} passed  (${changelog})"
-        // ])
-    }
 
-    stage("Initialize") {
         releaseVersion = "${env.major_version}.${env.BUILD_NUMBER}-${commitHashShort}"
         echo "release version: ${releaseVersion}"
     }
 
-    stage("Build, test and install artifact") {
-        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
+    stage("Build & publish") {
+        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088', 'HTTP_PROXY=http://webproxy-utvikler.nav.no:8088', 'NO_PROXY=localhost,127.0.0.1', 'NODE_TLS_REJECT_UNAUTHORIZED=0', 'PORT=8081']) {
             sh "npm install"
-            sh "npm run test"
+            //sh "npm run test"
             sh "npm run build"
+            sh "npm run cypress"
         }
-    }
 
-    stage("Release") {
         sh "docker build --build-arg version=${releaseVersion} --build-arg app_name=${app} -t ${dockerRepo}/${app}:${releaseVersion} ."
-    }
-    
-    stage("Publish artifact") {
-        sh "docker push ${dockerRepo}/${app}:${releaseVersion}"
-    }
 
-    stage("publish yaml") {
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'nexusUser', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+            sh "docker login -u ${env.USERNAME} -p ${env.PASSWORD} ${dockerRepo} && docker push ${dockerRepo}/${app}:${releaseVersion}"
             sh "curl --fail -v -u ${env.USERNAME}:${env.PASSWORD} --upload-file ${appConfig} https://repo.adeo.no/repository/raw/${groupId}/${app}/${releaseVersion}/nais.yaml"
         }
     }
     
-    stage('Deploy to t') {
+    stage('Deploy to preprod') {
         callback = "${env.BUILD_URL}input/Deploy/"
         def deploy = deployLib.deployNaisApp(app, releaseVersion, environment, zone, namespace, callback, committer).key
         try {
@@ -71,6 +59,16 @@ node {
         } catch (Exception e) {
             throw new Exception("Deploy feilet :( \n Se https://jira.adeo.no/browse/" + deploy + " for detaljer", e)
 
+        }
+    }
+
+    stage("Tag") {
+        // TODO: Tag only releases that go to production
+        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
+            withCredentials([string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
+                sh ("git tag -a ${releaseVersion} -m ${releaseVersion}")
+                sh ("git push https://${token}:x-oauth-basic@github.com/${project}/${repo}.git --tags")
+            }
         }
     }
 }

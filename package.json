@@ -28,7 +28,7 @@
 		"chai": "4.1.2",
 		"cross-env": "5.1.1",
 		"css-loader": "0.28.7",
-		"cypress": "1.4.2",
+		"cypress": "2.0.3",
 		"enzyme": "3.2.0",
 		"enzyme-adapter-react-16": "1.1.0",
 		"eslint": "4.16.0",
@@ -85,7 +85,7 @@
 		"test": "cross-env NODE_ENV=test jest",
 		"lint": "eslint src/**",
 		"heroku-postbuild": "cross-env NODE_ENV=heroku node src/build/scripts/production-build.js",
-		"cypress": "npm run start & wait-on http://localhost:8080 && cypress run"
+		"cypress": "export PORT=8081 && npm run start-express & wait-on -v -t 15000 http://localhost:8081 && cypress run"
 	},
 	"dependencies": {
 		"axios": "0.17.1",
@@ -135,6 +135,7 @@
 		"react-router-dom": "4.2.2",
 		"react-scripts-ts": "2.8.0",
 		"redux": "3.7.2",
-		"redux-saga": "0.16.0"
+		"redux-saga": "0.16.0",
+		"request": "2.83.0"
 	}
 }

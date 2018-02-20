@@ -1,5 +1,5 @@
 name: engangsstonad
-image: docker.adeo.no:5000/engangsstonad
+image: repo.adeo.no:5443/engangsstonad
 replicas: 
   min: 1 
   max: 1 
