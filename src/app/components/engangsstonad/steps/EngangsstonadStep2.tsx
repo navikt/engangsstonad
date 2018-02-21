@@ -7,7 +7,6 @@ import { soknadActionCreators as soknad } from '../../../redux/actions';
 import { default as Medlemsskap, Utenlandsopphold } from '../../../types/domain/Medlemsskap';
 import { connect } from 'react-redux';
 import { DispatchProps } from '../../../redux/types/index';
-import { ExternalProps } from '../../../types/index';
 import CountryPicker from './../../shared/country-picker/CountryPicker';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 
@@ -16,7 +15,7 @@ interface StateProps {
     language: string;
 }
 
-type Props = StateProps & InjectedIntlProps & DispatchProps & ExternalProps;
+type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 export class EngangsstonadStep2 extends React.Component<Props> {
     render() {

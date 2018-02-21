@@ -4,17 +4,15 @@ import DocumentTitle from 'react-document-title';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import BekreftCheckbox from 'shared/bekreft-checkbox/BekreftCheckbox';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import { fullNameFormat } from 'util/formats/formatUtils';
 import PersonaliaLabel from 'shared/personalia-label/PersonaliaLabel';
-import { apiActionCreators as api, commonActionCreators as common } from '../../../redux/actions';
+import { commonActionCreators as common } from '../../../redux/actions';
 import getMessage from '../../../util/i18n/i18nUtils';
 
 import Person from '../../../types/domain/Person';
 import { RelasjonTilFodtBarn, RelasjonTilUfodtBarn } from '../../../types/domain/RelasjonTilBarn';
-import { ExternalProps } from '../../../types/index';
 import { DispatchProps } from 'app/redux/types';
 import Medlemsskap from '../../../types/domain/Medlemsskap';
 import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
@@ -31,27 +29,10 @@ interface StateProps {
     soknadPostResponse: EngangsstonadSoknadResponse;
 }
 
-type Props = StateProps & InjectedIntlProps & DispatchProps & ExternalProps;
+type Props = StateProps & InjectedIntlProps & DispatchProps;
 export class Step3 extends React.Component<Props> {
-    constructor(props: Props) {
-        super(props);
-        this.handleNextClicked = this.handleNextClicked.bind(this);
-    }
-
-    componentWillReceiveProps(props: Props) {
-        if (props.soknadPostResponse) {
-            this.props.history.push('/engangsstonad/completed');
-        }
-    }
-
-    handleNextClicked(e: React.SyntheticEvent<HTMLButtonElement>) {
-        e.preventDefault();
-        const { dispatch, medlemsskap, relasjonTilBarn } = this.props;
-        dispatch(api.sendSoknad({ medlemsskap, relasjonTilBarn }));
-    }
-
     render() {
-        const { person, bekreftetInformasjon, intl, dispatch } = this.props;
+        const { person, intl, dispatch } = this.props;
         if (!person) {
             return null;
         }
@@ -77,11 +58,6 @@ export class Step3 extends React.Component<Props> {
                     onChange={() => dispatch(common.setBekreftetInformasjon(!this.props.bekreftetInformasjon))}
                     label={getMessage(intl, 'oppsummering.text.samtykke')}
                 />
-                <div className="engangsstonad__centerButton">
-                    <Hovedknapp onClick={this.handleNextClicked} disabled={!bekreftetInformasjon}>
-                        {getMessage(intl, 'standard.sectionheading.sendSoknad')}
-                    </Hovedknapp>
-                </div>
             </div>
         );
     }
