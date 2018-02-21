@@ -4,8 +4,9 @@ import commonReducer from './reducers/commonReducer';
 import apiReducer from './reducers/apiReducer';
 import sagas from './sagas/sagas';
 import middleware, { sagaMiddleware } from './middleware';
+import stepReducer from 'reducers/stepReducer';
 
-const reducers = combineReducers({ soknadReducer, commonReducer, apiReducer });
+const reducers = combineReducers({ soknadReducer, commonReducer, apiReducer, stepReducer });
 
 const store = createStore(
     reducers,

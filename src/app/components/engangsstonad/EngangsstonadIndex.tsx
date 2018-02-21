@@ -5,8 +5,8 @@ import * as queryStringParser from 'query-string';
 
 import EngangsstonadConfirmation from 'components/engangsstonad/EngangsstonadConfirmation';
 import EngangsstonadCompleted from 'components/engangsstonad/EngangsstonadCompleted';
-import EngangsstonadContainer from 'components/engangsstonad/EngangsstonadContainer';
 import EngangsstonadUnderAge from 'components/engangsstonad/EngangsstonadUnderAge';
+import SoknadWrapper from 'components/engangsstonad/SoknadWrapper';
 
 import { apiActionCreators as api } from '../../redux/actions';
 import { ExternalProps } from '../../types';
@@ -45,29 +45,29 @@ export class EngangsstonadIndex extends React.Component<Props> {
     render() {
         return (
             <div className="engangsstonad">
-            <Switch>
-                <Route
-                    path="/engangsstonad/confirmation"
-                    component={EngangsstonadConfirmation}
-                />
-                <Route
-                    path="/engangsstonad/underAge"
-                    component={EngangsstonadUnderAge}
-                />
-                <Route
-                    path="/engangsstonad/completed"
-                    component={EngangsstonadCompleted}
-                />
-                <Route
-                    path="/engangsstonad/:routeName"
-                    component={EngangsstonadContainer}
-                />
-                <Redirect
-                    to="/engangsstonad/confirmation"
-                />
-            </Switch>
-        </div>
-    );
+                <Switch>
+                    <Route
+                        path="/engangsstonad/confirmation"
+                        component={EngangsstonadConfirmation}
+                    />
+                    <Route
+                        path="/engangsstonad/underAge"
+                        component={EngangsstonadUnderAge}
+                    />
+                    <Route
+                        path="/engangsstonad/completed"
+                        component={EngangsstonadCompleted}
+                    />
+                    <Route
+                        path="/engangsstonad/soknad"
+                        component={SoknadWrapper}
+                    />
+                    <Redirect
+                        to="/engangsstonad/confirmation"
+                    />
+                </Switch>
+            </div>
+        );
     }
 }
 

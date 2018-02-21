@@ -4,7 +4,7 @@ import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWith
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import getMessage from 'util/i18n/i18nUtils';
 import EtikettLiten from 'nav-frontend-typografi/lib/etikett-liten';
-import { CountrySumnmaryList } from 'shared/country-picker/CountryList';
+import { CountrySummaryList } from 'shared/country-picker/CountryList';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 import '../engangsstonad/engangsstonad.less';
@@ -38,7 +38,7 @@ const OppsummeringMedlemskap: React.StatelessComponent<Props & InjectedIntlProps
                     <EtikettLiten className="textWithLabel__label">
                         {getMessage(intl, 'oppsummering.text.boddSisteTolv')}
                     </EtikettLiten>
-                    <CountrySumnmaryList utenlandsoppholdListe={utenlandsopphold}/>
+                    <CountrySummaryList utenlandsoppholdListe={utenlandsopphold}/>
                 </div>
             )}
             <DisplayTextWithLabel

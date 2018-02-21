@@ -58,7 +58,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
     }
 
     startSoknad() {
-        this.props.history.push('/engangsstonad/step1');
+        this.props.history.push('/engangsstonad/soknad');
     }
 
     toggleLanguage(languageCode: string) {

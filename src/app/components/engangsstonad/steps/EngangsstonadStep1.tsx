@@ -19,7 +19,6 @@ import getMessage from 'util/i18n/i18nUtils';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import LinkWithIcon from 'shared/link-with-icon/LinkWithIcon';
 import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
-import { ExternalProps } from '../../../types/index';
 
 interface StateProps {
     barnErFodt?: boolean;
@@ -27,7 +26,7 @@ interface StateProps {
     person: Person;
 }
 
-type Props = StateProps & InjectedIntlProps & DispatchProps & ExternalProps;
+type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 interface State {
     isModalOpen: boolean;
@@ -36,7 +35,6 @@ interface State {
 export class EngangsstonadStep1 extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.handleNextClicked = this.handleNextClicked.bind(this);
     }
 
     componentWillMount() {
@@ -50,11 +48,6 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
 
     closeTerminbekreftelseModal() {
         this.setState({ isModalOpen: false });
-    }
-
-    handleNextClicked(e: React.SyntheticEvent<HTMLButtonElement>) {
-        e.preventDefault();
-        this.props.history.push('/engangsstonad/step2');
     }
 
     getFodselsTidspunktSelectedValue(barnErFodt?: boolean) {

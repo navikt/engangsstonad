@@ -9,7 +9,8 @@
 	"devDependencies": {
 		"@types/classnames": "2.2.3",
 		"@types/date-fns": "2.6.0",
-		"@types/mocha": "2.2.48",
+		"@types/enzyme": "^3.1.9",
+		"@types/jest": "^22.1.3",
 		"@types/react": "16.0.34",
 		"@types/react-dom": "16.0.3",
 		"@types/react-redux": "5.0.14",
@@ -42,10 +43,11 @@
 		"html-webpack-harddisk-plugin": "0.1.0",
 		"html-webpack-plugin": "2.30.1",
 		"ignore-styles": "5.0.1",
+		"jest": "^22.4.0",
+		"jest-css-modules": "^1.1.0",
 		"jsdom": "11.4.0",
 		"less": "2.7.3",
 		"less-loader": "4.0.5",
-		"mocha": "4.0.1",
 		"mustache-express": "1.2.5",
 		"mustache-loader": "1.4.0",
 		"postcss-loader": "2.0.9",
@@ -54,6 +56,12 @@
 		"sinon": "4.2.2",
 		"style-loader": "0.19.0",
 		"svg-sprite-loader": "3.5.1",
+		"ts-jest": "^22.0.4",
+		"ts-loader": "2.3.7",
+		"tslint": "5.7.0",
+		"tslint-loader": "3.5.3",
+		"tslint-react": "3.2.0",
+		"typescript": "2.5.3",
 		"uglifyjs-webpack-plugin": "1.1.3",
 		"wait-on": "2.1.0",
 		"webpack": "3.10.0",
@@ -71,7 +79,7 @@
 		"start-express": "node ./server.js",
 		"start-express-heroku": "cross-env NODE_ENV=heroku node ./server.js",
 		"start": "node ./src/build/scripts/start-dev.js",
-		"test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts ./src/app/**/*.spec.js",
+		"test": "cross-env NODE_ENV=test jest",
 		"lint": "eslint src/**",
 		"heroku-postbuild": "cross-env NODE_ENV=heroku node src/build/scripts/production-build.js",
 		"cypress": "npm run start & wait-on http://localhost:8080 && cypress run"
@@ -128,11 +136,6 @@
 		"react-router-dom": "4.2.2",
 		"react-scripts-ts": "2.8.0",
 		"redux": "3.7.2",
-		"redux-saga": "0.16.0",
-		"ts-loader": "2.3.7",
-		"tslint": "5.7.0",
-		"tslint-loader": "3.5.3",
-		"tslint-react": "3.2.0",
-		"typescript": "2.5.3"
+		"redux-saga": "0.16.0"
 	}
 }

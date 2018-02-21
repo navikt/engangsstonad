@@ -8,13 +8,13 @@ interface CountryListProps {
     utenlandsoppholdListe: Utenlandsopphold[];
 }
 
-export const CountrySumnmaryList: React.StatelessComponent<CountryListProps> = (props) => (
+export const CountrySummaryList: React.StatelessComponent<CountryListProps> = (props) => (
     <ul>{props.utenlandsoppholdListe.map((visit: Utenlandsopphold, index: number) => (
         <CountryListSummaryElement
             key={index}
             utenlandsopphold={visit}
         />
-    ))};
+    ))}
     </ul>
 );
 
@@ -32,6 +32,6 @@ export const CountryList: React.StatelessComponent<EditableCountryListProps> = (
                 onEditClick={() => props.onEditClick(utenlandsopphold)}
                 onDeleteClick={() => props.onDeleteClick(utenlandsopphold)}
             />
-        ))};
+        ))}
     </ul>
 );
