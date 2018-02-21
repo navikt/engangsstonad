@@ -16,28 +16,19 @@ import './engangsstonad.less';
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
 import Medlemsskap from '../../types/domain/Medlemsskap';
 import { RelasjonTilFodtBarn, RelasjonTilUfodtBarn } from '../../types/domain/RelasjonTilBarn';
-import { apiActionCreators as api } from 'actions';
+import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../../redux/types';
 
 interface OwnProps {
     soknadPostResponse: EngangsstonadSoknadResponse;
     medlemsskap: Medlemsskap;
     relasjonTilBarn: RelasjonTilFodtBarn & RelasjonTilUfodtBarn;
+    activeStep: number;
 }
 
 type Props = OwnProps & DispatchProps & InjectedIntlProps & History & RouteComponentProps<{}>;
 
-interface State {
-    activeStep: number;
-}
-
-export class SoknadWrapper extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-
-        this.state = { activeStep: 1 };
-    }
-
+export class SoknadWrapper extends React.Component<Props> {
     componentWillReceiveProps(props: OwnProps) {
         if (props.soknadPostResponse) {
             const { history } = this.props;
@@ -50,25 +41,25 @@ export class SoknadWrapper extends React.Component<Props, State> {
     }
 
     hasToWaitForResponse() {
-        const { activeStep } = this.state;
+        const { activeStep } = this.props;
         return activeStep === 3;
     }
 
     handleNextClicked() {
+        const { dispatch, medlemsskap, relasjonTilBarn } = this.props;
+
         if (this.hasToWaitForResponse()) {
-            const { dispatch, medlemsskap, relasjonTilBarn } = this.props;
             return dispatch(api.sendSoknad({ medlemsskap, relasjonTilBarn }));
         }
 
         if (this.formIsValid()) {
-            const { activeStep } = this.state;
-            this.setState({ activeStep: activeStep + 1 });
+            const { activeStep } = this.props;
+            dispatch(stepActions.setActiveStep(activeStep + 1));
         }
     }
 
     render() {
-        const { intl } = this.props;
-        const { activeStep } = this.state;
+        const { intl, activeStep } = this.props;
 
         return (
             <div className="engangsstonad">
@@ -80,7 +71,7 @@ export class SoknadWrapper extends React.Component<Props, State> {
                         getMessage(intl, 'oppsummering.sectionheading.oppsummering')
 
                     ]}
-                    activeStep={this.state.activeStep}
+                    activeStep={activeStep}
                 />
 
                 {activeStep === 1 && <EngangsstonadStep1 />}
@@ -98,7 +89,8 @@ export class SoknadWrapper extends React.Component<Props, State> {
 const mapStateToProps = (state: any) => ({
     medlemsskap: state.soknadReducer.medlemsskap,
     relasjonTilBarn: state.soknadReducer.relasjonTilBarn,
-    soknadPostResponse: state.apiReducer.soknad
+    soknadPostResponse: state.apiReducer.soknad,
+    activeStep: state.stepReducer.activeStep
 });
 
 export default connect<OwnProps>(mapStateToProps)(injectIntl(SoknadWrapper));
