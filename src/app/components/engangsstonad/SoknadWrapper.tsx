@@ -18,6 +18,7 @@ import Medlemsskap from '../../types/domain/Medlemsskap';
 import { RelasjonTilFodtBarn, RelasjonTilUfodtBarn } from '../../types/domain/RelasjonTilBarn';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../../redux/types';
+import getStepConfig from './steps/steps.conf';
 
 interface OwnProps {
     soknadPostResponse: EngangsstonadSoknadResponse;
@@ -58,29 +59,36 @@ export class SoknadWrapper extends React.Component<Props> {
         }
     }
 
+    shouldRenderFortsettKnapp(): boolean {
+        const { activeStep, medlemsskap, relasjonTilBarn } = this.props;
+        if (activeStep === 1 && relasjonTilBarn) {
+            return relasjonTilBarn.utstedtDato !== undefined || relasjonTilBarn.fodselsdato !== undefined;
+        } else if (activeStep === 2 && medlemsskap) {
+            return medlemsskap.fodselINorge !== undefined;
+        }
+        return activeStep === 3;
+    }
+
     render() {
         const { intl, activeStep } = this.props;
+        const stepsConfig = getStepConfig(intl);
+        const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
+        const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
 
         return (
             <div className="engangsstonad">
                 <Sidetittel>{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
-                <StepIndicator
-                    stepTitles={[
-                        getMessage(intl, 'relasjonBarn.sectionheading.relasjonBarn'),
-                        getMessage(intl, 'medlemmskap.sectionheading.medlemmskap'),
-                        getMessage(intl, 'oppsummering.sectionheading.oppsummering')
-
-                    ]}
-                    activeStep={activeStep}
-                />
+                <StepIndicator stepTitles={titles} activeStep={activeStep} />
 
                 {activeStep === 1 && <EngangsstonadStep1 />}
                 {activeStep === 2 && <EngangsstonadStep2 />}
                 {activeStep === 3 && <EngangsstonadStep3 />}
 
+                { this.shouldRenderFortsettKnapp() === true &&
                 <Hovedknapp className="fortsettKnapp" onClick={() => this.handleNextClicked()}>
-                    Fortsett
+                    {fortsettKnappLabel}
                 </Hovedknapp>
+                }
             </div>
         );
     }
