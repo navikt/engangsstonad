@@ -85,9 +85,9 @@ export class SoknadWrapper extends React.Component<Props> {
                 {activeStep === 3 && <EngangsstonadStep3 />}
 
                 { this.shouldRenderFortsettKnapp() === true &&
-                    <Hovedknapp className="fortsettKnapp" onClick={() => this.handleNextClicked()}>
-                        {fortsettKnappLabel}
-                    </Hovedknapp>
+                <Hovedknapp className="fortsettKnapp" onClick={() => this.handleNextClicked()}>
+                    {fortsettKnappLabel}
+                </Hovedknapp>
                 }
             </div>
         );
