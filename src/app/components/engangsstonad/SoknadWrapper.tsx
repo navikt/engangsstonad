@@ -59,6 +59,16 @@ export class SoknadWrapper extends React.Component<Props> {
         }
     }
 
+    shouldRenderFortsettKnapp(): boolean {
+        const { activeStep, medlemsskap, relasjonTilBarn } = this.props;
+        if (activeStep === 1 && relasjonTilBarn) {
+            return relasjonTilBarn.utstedtDato !== undefined || relasjonTilBarn.fodselsdato !== undefined;
+        } else if (activeStep === 2 && medlemsskap) {
+            return medlemsskap.fodselINorge !== undefined;
+        }
+        return activeStep === 3;
+    }
+
     render() {
         const { intl, activeStep } = this.props;
         const stepsConfig = getStepConfig(intl);
@@ -74,9 +84,11 @@ export class SoknadWrapper extends React.Component<Props> {
                 {activeStep === 2 && <EngangsstonadStep2 />}
                 {activeStep === 3 && <EngangsstonadStep3 />}
 
-                <Hovedknapp className="fortsettKnapp" onClick={() => this.handleNextClicked()}>
-                    {fortsettKnappLabel}
-                </Hovedknapp>
+                { this.shouldRenderFortsettKnapp() === true &&
+                    <Hovedknapp className="fortsettKnapp" onClick={() => this.handleNextClicked()}>
+                        {fortsettKnappLabel}
+                    </Hovedknapp>
+                }
             </div>
         );
     }
