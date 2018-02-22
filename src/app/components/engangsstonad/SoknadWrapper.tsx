@@ -77,7 +77,7 @@ export class SoknadWrapper extends React.Component<Props> {
 
         return (
             <div className="engangsstonad">
-                <Sidetittel>{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
+                <Sidetittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
                 <StepIndicator stepTitles={titles} activeStep={activeStep} />
 
                 {activeStep === 1 && <EngangsstonadStep1 />}
