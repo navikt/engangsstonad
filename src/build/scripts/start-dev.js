@@ -11,7 +11,7 @@ getDecorator().then((decoratorData) => {
 		configureDevServer(decoratorData)
 	);
 
-	server.listen(8081, '127.0.0.1', () =>
-		console.log('Started server on http://localhost:8081')
+	server.listen(8080, '127.0.0.1', () =>
+		console.log('Started server on http://localhost:8080')
 	);
 });

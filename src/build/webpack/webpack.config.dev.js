@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackConfig = require('./webpack.config.global.js');
 
 webpackConfig.entry = webpackConfig.entry.concat([
-	'webpack-dev-server/client?http://localhost:8081'
+	'webpack-dev-server/client?http://localhost:8080'
 ]);
 
 webpackConfig.plugins.push(
