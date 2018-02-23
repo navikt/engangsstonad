@@ -74,7 +74,7 @@
 		"test": "cross-env NODE_ENV=test mocha --opts ./mocha.opts ./src/app/**/*.spec.js",
 		"lint": "eslint src/**",
 		"heroku-postbuild": "cross-env NODE_ENV=heroku node src/build/scripts/production-build.js",
-		"cypress": "export PORT=8081 && npm run start-express & wait-on http://localhost:8081 && cypress run"
+		"cypress": "export PORT=8081 && npm run start-express & wait-on -v -t 15000 http://localhost:8081 && cypress run"
 	},
 	"dependencies": {
 		"@types/date-fns": "2.6.0",
