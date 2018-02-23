@@ -27,7 +27,8 @@ const getDecorator = () =>
 				};
 				resolve(data);
 			} else {
-				reject(new Error('Wops.'));
+				console.log(error);
+				reject(new Error(error));
 			}
 		};
 
