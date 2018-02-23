@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { injectIntl } from 'react-intl';
+const { RadioPanelGruppe } = require('nav-frontend-skjema');
 const Modal = require('nav-frontend-modal').default;
 import { soknadActionCreators as soknad } from '../../../redux/actions';
 import './../engangsstonad.less';
@@ -14,7 +15,6 @@ import DateInput from './../../shared/date-input/DateInput';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Person from '../../../types/domain/Person';
 import { DispatchProps } from '../../../redux/types';
-import renderRadioList from 'util/render/renderUtils';
 import getMessage from 'util/i18n/i18nUtils';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import LinkWithIcon from 'shared/link-with-icon/LinkWithIcon';
@@ -50,7 +50,8 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
         this.setState({ isModalOpen: false });
     }
 
-    getFodselsTidspunktSelectedValue(barnErFodt?: boolean) {
+    getFodselsTidspunktSelectedValue() {
+        const { barnErFodt } = this.props;
         if (barnErFodt === true) {
             return 'before';
         } else if (barnErFodt === false) {
@@ -60,16 +61,19 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
         }
     }
 
-    getAntallBarnSelectedValue(antallBarn?: number) {
-        if (antallBarn === 1) {
-            return 'ett';
-        } else if (antallBarn === 2) {
-            return 'tvillinger';
-        } else if (antallBarn === 3) {
-            return 'flere';
-        } else {
-            return undefined;
+    getAntallBarnSelectedValue() {
+        const { relasjonTilBarn } = this.props;
+        if (relasjonTilBarn) {
+            const { antallBarn } = relasjonTilBarn;
+            if (antallBarn === 1) {
+                return 'ett';
+            } else if (antallBarn === 2) {
+                return 'tvillinger';
+            } else if (antallBarn === 3) {
+                return 'flere';
+            }
         }
+        return undefined;
     }
 
     render() {
@@ -77,35 +81,19 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
         const antallBarn = relasjonTilBarn && relasjonTilBarn.antallBarn;
         const terminDato = relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).terminDato;
 
-        const fodselTidspunktRadioList = renderRadioList({
-            intl,
-            titleIntlId: 'relasjonBarn.text.fodselTidspunkt',
-            action: (value: string) => dispatch(soknad.setBarnErFodt(value)),
-            name: 'fodselTidspunkt',
-            selectedValue: this.getFodselsTidspunktSelectedValue(barnErFodt),
-            options: [
-                { labelIntlId: 'relasjonBarn.radiobutton.fremtid', value: 'ahead' },
-                { labelIntlId: 'relasjonBarn.radiobutton.fortid', value: 'before' }
-            ]
-        });
-
-        const antallBarnRadioList = renderRadioList({
-            intl,
-            titleIntlId: 'relasjonBarn.text.antallBarn',
-            action: (value: string) => dispatch(soknad.setAntallBarn(value)),
-            name: 'antallBarn',
-            selectedValue: this.getAntallBarnSelectedValue(antallBarn),
-            options: [
-                { labelIntlId: 'relasjonBarn.radiobutton.ettbarn', value: 'ett' },
-                { labelIntlId: 'relasjonBarn.radiobutton.tvillinger', value: 'tvillinger' },
-                { labelIntlId: 'relasjonBarn.radiobutton.flere', value: 'flere' }
-            ]
-        });
-
         return (
             <div className="engangsstonad__step">
                 <DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
-                {fodselTidspunktRadioList}
+                <RadioPanelGruppe
+                    legend={getMessage(intl, 'relasjonBarn.text.fodselTidspunkt')}
+                    name="fodselsTidspunkt"
+                    onChange={(event: any, value: string) => dispatch(soknad.setBarnErFodt(value))}
+                    checked={this.getFodselsTidspunktSelectedValue()}
+                    radios={[
+                        {label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead'},
+                        {label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'), value: 'before'}
+                    ]}
+                />
 
                 {barnErFodt === true && (
                     <DateInput
@@ -116,7 +104,20 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                     />
                 )}
 
-                {barnErFodt === false && antallBarnRadioList}
+                {barnErFodt === false && (
+                    <RadioPanelGruppe
+                        legend={getMessage(intl, 'relasjonBarn.text.antallBarn')}
+                        name="antallBarn"
+                        onChange={(event: any, value: string) => dispatch(soknad.setAntallBarn(value))}
+                        checked={this.getAntallBarnSelectedValue()}
+                        radios={[
+                            {label: getMessage(intl, 'relasjonBarn.radiobutton.ettbarn'), value: 'ett'},
+                            {label: getMessage(intl, 'relasjonBarn.radiobutton.tvillinger'), value: 'tvillinger'},
+                            {label: getMessage(intl, 'relasjonBarn.radiobutton.flere'), value: 'flere'}
+                        ]}
+                    />
+                )}
+
                 {barnErFodt === false && antallBarn &&  (
                     <DateInput
                         id="termindato"

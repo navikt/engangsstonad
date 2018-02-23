@@ -11,6 +11,7 @@ interface Props {
 
 const StepIndicator: React.StatelessComponent<Props> = ({ stepTitles, activeStep }) => (
     <div
+        className="stegindikatorWrapper"
         role="progressbar"
         aria-valuenow={activeStep}
         aria-valuemin="1"

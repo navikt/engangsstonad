@@ -14,18 +14,14 @@
 		margin-top: @marginLarge;
 		margin-bottom: @marginLarge;
 	}
+
 	.alertstripe {
 		margin: @marginSmall 0;
 	}
 
 	.fortsettKnapp {
 		width: 100%;
-	}
-
-	.checkboxFieldWithBackground {
-		background-color: #ccdee6;
-		padding: 15px;
-		display: flex;
+        margin-top: 12px;
 	}
 
 	.typo-element {
@@ -46,14 +42,9 @@
 		margin: @marginLarge 0;
 	}
 
-	.linkIndicatorWrapper {
+	.stegindikatorWrapper {
 		position: relative;
 		margin-bottom: 16px;
-
-		&__link {
-			position: absolute;
-			bottom: 0.35rem;
-		}
 	}
 
 	&__centerButton {
@@ -66,6 +57,28 @@
 		margin-top: @marginMedium;
 		margin-bottom: @marginLarge;
 	}
+
+  .datovelger__outer {
+    .skjemaelement__label {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+  }
+
+  .radioPanelGruppe {
+    .skjema__legend {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+  }
+
+  .radioPanelGruppe:not(:first-child) {
+    margin-top: 12px;
+  }
+
+  .radioPanelGruppe .radioPanel:not(:first-child) {
+    margin-top: 8px;
+  }
 }
 
 .engangsstonadOppsumering {
