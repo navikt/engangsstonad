@@ -11,7 +11,7 @@ node {
     def committer, committerEmail, changelog, releaseVersion
     def appConfig = "nais.yaml"
     def dockerRepo = "repo.adeo.no:5443"
-    def branch = "ny-jenkins"
+    def branch = "master"
     def groupId = "nais"
     def environment = 't1'
     def zone = 'sbs'
