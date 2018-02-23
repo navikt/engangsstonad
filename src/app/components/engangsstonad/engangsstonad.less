@@ -2,83 +2,95 @@
 @import '../../styles/variables.less';
 
 .engangsstonad {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: @stepPadding;
+	max-width: 600px;
+	margin: 0 auto;
+	padding: @stepPadding;
 
-    .centerText {
-        text-align: center;
-    }
+	.centerText {
+		text-align: center;
+	}
 
-    .dialogBox {
-        margin-top: @marginLarge;
-        margin-bottom: @marginLarge;
-    }
-    .alertstripe {
-        margin: @marginSmall 0;
-    }
+	.dialogBox {
+		margin-top: @marginLarge;
+		margin-bottom: @marginLarge;
+	}
+	.alertstripe {
+		margin: @marginSmall 0;
+	}
 
-    .fortsettKnapp {
-        width: 100%;
-    }
+	.fortsettKnapp {
+		width: 100%;
+		margin-top: 12px;
+	}
 
-    .checkboxFieldWithBackground {
-        background-color: #ccdee6;
-        padding: 15px;
-        display: flex;
-    }
+	.typo-element {
+		margin-top: @marginLarge;
+		margin-bottom: @marginMedium;
+	}
 
-    .typo-element {
-        margin-top: @marginLarge;
-        margin-bottom: @marginMedium;
-    }
+	.typo-ingress {
+		margin-top: @marginLarge;
+		margin-bottom: @marginMedium;
+	}
 
-    .typo-ingress {
-        margin-top: @marginLarge;
-        margin-bottom: @marginMedium;
-    }
+	.radioGroup {
+		margin: @marginSmall 0;
+	}
 
-    .radioGroup {
-        margin: @marginSmall 0;
-    }
+	.bekreftCheckbox {
+		margin: @marginLarge 0;
+	}
 
-    .bekreftCheckbox {
-        margin: @marginLarge 0;
-    }
+	.stegindikatorWrapper {
+		position: relative;
+		margin-bottom: 16px;
+	}
 
-    .linkIndicatorWrapper {
-        position: relative;
-        margin-bottom: 16px;
+	&__centerButton {
+		display: flex;
+		justify-content: center;
+	}
 
-        &__link {
-            position: absolute;
-            bottom: 0.35rem;
-        }
-    }
+	.paperVersionLink {
+		display: inline-block;
+		margin-top: @marginMedium;
+		margin-bottom: @marginLarge;
+	}
 
-    &__centerButton {
-        display: flex;
-        justify-content: center;
-    }
+	.datovelger__outer {
+		.skjemaelement__label {
+			margin-top: 12px;
+			font-weight: bold;
+		}
+	}
 
-    .paperVersionLink {
-        display: inline-block;
-        margin-top: @marginMedium;
-        margin-bottom: @marginLarge;
-    }
+	.radioPanelGruppe {
+		.skjema__legend {
+			font-size: 16px;
+			margin-bottom: 8px;
+		}
+	}
 
-    .stepWrapper {
-        display: flex;
-        justify-content: space-between;
-    }
+	.radioPanelGruppe:not(:first-child) {
+		margin-top: 12px;
+	}
 
-    .buffer {
-        width: 15%;
-    }
+	.radioPanelGruppe .radioPanel:not(:first-child) {
+		margin-top: 8px;
+	}
+
+	.stepWrapper {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.buffer {
+		width: 15%;
+	}
 }
 
 .engangsstonadOppsumering {
-    &__underTitle {
-        border-bottom: 1px solid grey;
-    }
+	&__underTitle {
+		border-bottom: 1px solid grey;
+	}
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import DocumentTitle from 'react-document-title';
-import renderRadioList from 'util/render/renderUtils';
+const { RadioPanelGruppe } = require('nav-frontend-skjema');
 import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../../redux/actions';
 import { default as Medlemsskap, Utenlandsopphold } from '../../../types/domain/Medlemsskap';
@@ -18,46 +18,56 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 export class EngangsstonadStep2 extends React.Component<Props> {
+    getINorgeSiste12SelectedValue() {
+        const { iNorgeSiste12 } = this.props.medlemsskap;
+        if (iNorgeSiste12 === true) {
+            return 'norway';
+        } else if (iNorgeSiste12 === false) {
+            return 'abroad';
+        } else {
+            return undefined;
+        }
+    }
+    
+    getINorgeNeste12SelectedValue() {
+        const { iNorgeNeste12 } = this.props.medlemsskap;
+        if (iNorgeNeste12 === true) {
+            return 'norway';
+        } else if (iNorgeNeste12 === false) {
+            return 'abroad';
+        } else {
+            return undefined;
+        }
+    }
+
+    getFodselINorgeSelectedValue() {
+        const { fodselINorge } = this.props.medlemsskap;
+        if (fodselINorge === true) {
+            return 'norway';
+        } else if (fodselINorge === false) {
+            return 'abroad';
+        } else {
+            return undefined;
+        }
+    }
+
     render() {
         const { dispatch, intl, medlemsskap, language } = this.props;
         const { iNorgeSiste12, iNorgeNeste12, utenlandsopphold } = medlemsskap;
-        const iNorgeSiste12RadioList = renderRadioList({
-            intl,
-            titleIntlId: 'medlemmskap.text.siste12mnd',
-            action: (value: string) => dispatch(soknad.setINorgeSiste12(value)),
-            name: 'iNorgeSiste12',
-            options: [
-                { labelIntlId: 'medlemmskap.radiobutton.boddNorge', value: 'norway' },
-                { labelIntlId: 'medlemmskap.radiobutton.utlandet', value: 'abroad' }
-            ]
-        });
-
-        const iNorgeNeste12RadioList = renderRadioList({
-            intl,
-            titleIntlId: 'medlemmskap.text.neste12mnd',
-            action: (value: string) => dispatch(soknad.setINorgeNeste12(value)),
-            name: 'iNorgeNeste12',
-            options: [
-                { labelIntlId: 'medlemmskap.radiobutton.boNorge', value: 'norway' },
-                { labelIntlId: 'medlemmskap.radiobutton.boUtlandet', value: 'abroad' }
-            ]
-        });
-
-        const fodselINorgeRadioList = renderRadioList({
-            intl,
-            titleIntlId: 'medlemmskap.text.bostedFodsel',
-            action: (value: string) => dispatch(soknad.setFodselINorge(value)),
-            name: 'fodselINorge',
-            options: [
-                { labelIntlId: 'medlemmskap.radiobutton.vareNorge', value: 'norway' },
-                { labelIntlId: 'medlemmskap.radiobutton.vareUtlandet', value: 'abroad' }
-            ]
-        });
 
         return (
             <div className="engangsstonad__step">
                 <DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
-                {iNorgeSiste12RadioList}
+                <RadioPanelGruppe
+                    legend={getMessage(intl, 'medlemmskap.text.siste12mnd')}
+                    name="iNorgeSiste12"
+                    onChange={(event: any, value: string) => dispatch(soknad.setINorgeSiste12(value))}
+                    checked={this.getINorgeSiste12SelectedValue()}
+                    radios={[
+                        {label: getMessage(intl, 'medlemmskap.radiobutton.boddNorge'), value: 'norway'},
+                        {label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'), value: 'abroad'}
+                    ]}
+                />
                 {medlemsskap.iNorgeSiste12 === false && (
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegBodde')}
@@ -68,8 +78,30 @@ export class EngangsstonadStep2 extends React.Component<Props> {
                         deleteVisit={(u: Utenlandsopphold) => dispatch(soknad.deleteUtenlandsopphold(u))}
                     />
                 )}
-                {(iNorgeSiste12 || utenlandsopphold.length > 0) && iNorgeNeste12RadioList}
-                {iNorgeNeste12 !== undefined && fodselINorgeRadioList}
+                {(iNorgeSiste12 || utenlandsopphold.length > 0) && (
+                    <RadioPanelGruppe
+                        legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
+                        name="iNorgeNeste12"
+                        onChange={(event: any, value: string) => dispatch(soknad.setINorgeNeste12(value))}
+                        checked={this.getINorgeNeste12SelectedValue()}
+                        radios={[
+                            {label: getMessage(intl, 'medlemmskap.radiobutton.boNorge'), value: 'norway'},
+                            {label: getMessage(intl, 'medlemmskap.radiobutton.boUtlandet'), value: 'abroad'}
+                        ]}
+                    />
+                )}
+                {iNorgeNeste12 !== undefined && (
+                    <RadioPanelGruppe
+                        legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
+                        name="fodselINorge"
+                        onChange={(event: any, value: string) => dispatch(soknad.setFodselINorge(value))}
+                        checked={this.getFodselINorgeSelectedValue()}
+                        radios={[
+                            {label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'), value: 'norway'},
+                            {label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'), value: 'abroad'}
+                        ]}
+                    />
+                )}
             </div>
         );
     }
