@@ -18,6 +18,7 @@ import Medlemsskap from '../../types/domain/Medlemsskap';
 import { RelasjonTilFodtBarn, RelasjonTilUfodtBarn } from '../../types/domain/RelasjonTilBarn';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../../redux/types';
+import BackStep from 'shared/back-step/BackStep';
 import getStepConfig from './steps/steps.conf';
 
 interface OwnProps {
@@ -59,6 +60,14 @@ export class SoknadWrapper extends React.Component<Props> {
         }
     }
 
+    handleBackClicked() {
+        const { activeStep, dispatch } = this.props;
+
+        if (activeStep !== 1) {
+            dispatch(stepActions.setActiveStep(activeStep - 1));
+        }
+    }
+
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, medlemsskap, relasjonTilBarn } = this.props;
         if (activeStep === 1 && relasjonTilBarn) {
@@ -78,17 +87,21 @@ export class SoknadWrapper extends React.Component<Props> {
         return (
             <div className="engangsstonad">
                 <Sidetittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
-                <StepIndicator stepTitles={titles} activeStep={activeStep} />
+                <div className="stepWrapper">
+                    <BackStep onClick={() => this.handleBackClicked()} />
+                    <StepIndicator stepTitles={titles} activeStep={activeStep} />
+                    <div className="buffer" />
+                </div>
 
                 {activeStep === 1 && <EngangsstonadStep1 />}
                 {activeStep === 2 && <EngangsstonadStep2 />}
                 {activeStep === 3 && <EngangsstonadStep3 />}
 
-                { this.shouldRenderFortsettKnapp() === true &&
-                <Hovedknapp className="fortsettKnapp" onClick={() => this.handleNextClicked()}>
-                    {fortsettKnappLabel}
-                </Hovedknapp>
-                }
+                {this.shouldRenderFortsettKnapp() === true && (
+                    <Hovedknapp className="fortsettKnapp" onClick={() => this.handleNextClicked()}>
+                        {fortsettKnappLabel}
+                    </Hovedknapp>
+                )}
             </div>
         );
     }
