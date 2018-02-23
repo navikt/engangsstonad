@@ -5,7 +5,7 @@ import './backStep.less';
 
 interface Props {
     text?: string;
-    onClick(): void;
+    onClick: () => void;
 }
 
 const BackStep: React.StatelessComponent<Props> = ({ text = 'Tilbake', onClick }) => (

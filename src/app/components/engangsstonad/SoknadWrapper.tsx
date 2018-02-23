@@ -61,10 +61,12 @@ export class SoknadWrapper extends React.Component<Props> {
     }
 
     handleBackClicked() {
-        const { activeStep, dispatch } = this.props;
+        const { activeStep, dispatch, history } = this.props;
 
         if (activeStep !== 1) {
             dispatch(stepActions.setActiveStep(activeStep - 1));
+        } else {
+            history.push('/engangsstonad/confirmation');
         }
     }
 
@@ -87,7 +89,7 @@ export class SoknadWrapper extends React.Component<Props> {
         return (
             <div className="engangsstonad">
                 <Sidetittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
-                <div className="stepWrapper">
+                <div className="topContent">
                     <BackStep onClick={() => this.handleBackClicked()} />
                     <StepIndicator stepTitles={titles} activeStep={activeStep} />
                     <div className="buffer" />

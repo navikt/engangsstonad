@@ -6,7 +6,9 @@ const { RadioPanelGruppe } = require('nav-frontend-skjema');
 const Modal = require('nav-frontend-modal').default;
 import { soknadActionCreators as soknad } from '../../../redux/actions';
 import './../engangsstonad.less';
-import { default as RelasjonTilBarn, RelasjonTilFodtBarn, RelasjonTilUfodtBarn } from '../../../types/domain/RelasjonTilBarn';
+import {
+    default as RelasjonTilBarn, RelasjonTilFodtBarn, RelasjonTilUfodtBarn
+} from '../../../types/domain/RelasjonTilBarn';
 import { Normaltekst } from 'nav-frontend-typografi';
 import DateInput from './../../shared/date-input/DateInput';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
@@ -149,7 +151,8 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                     isOpen={this.state.isModalOpen}
                     closeButton={true}
                     onRequestClose={() => this.closeTerminbekreftelseModal()}
-                    contentLabel="Om terminbekreftelsen">
+                    contentLabel="Om terminbekreftelsen"
+                >
                     <OmTerminbekreftelsen />
                 </Modal>
             </div>
