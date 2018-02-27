@@ -58,6 +58,7 @@ export class Step3 extends React.Component<Props> {
                     validators={[
                         {test: () => (bekreftetInformasjon === true), failText: 'Du må bekrefte at informasjonen stemmer'}
                     ]}
+                    name="bekreftOpplysninger"
                 >
                 <BekreftCheckbox
                     name="bekreftOpplysninger"
