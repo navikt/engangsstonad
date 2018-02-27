@@ -19,6 +19,7 @@ import { EngangsstonadSoknadResponse } from '../../../types/services/Engangsston
 import '../engangsstonad.less';
 import OppsummeringRelasjonTilBarn from 'components/oppsummering/OppsummeringRelasjonTilBarn';
 import OppsummeringMedlemskap from 'components/oppsummering/OppsummeringMedlemskap';
+import { ValidGroup } from './../../../lib';
 
 interface StateProps {
     bekreftetInformasjon: boolean;
@@ -32,10 +33,11 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 export class Step3 extends React.Component<Props> {
     render() {
-        const { person, intl, dispatch } = this.props;
+        const { person, intl, dispatch, bekreftetInformasjon } = this.props;
         if (!person) {
             return null;
         }
+        let ValidGroupComponent = ValidGroup as any;
         return (
             <div>
                 <DocumentTitle title="NAV Engangsstønad - Oppsummering" />
@@ -52,12 +54,18 @@ export class Step3 extends React.Component<Props> {
                 />
                 <OppsummeringMedlemskap medlemsskap={this.props.medlemsskap}/>
 
+                <ValidGroupComponent
+                    validators={[
+                        {test: () => (bekreftetInformasjon === true), failText: 'Du må bekrefte at informasjonen stemmer'}
+                    ]}
+                >
                 <BekreftCheckbox
                     name="bekreftOpplysninger"
-                    checked={this.props.bekreftetInformasjon}
-                    onChange={() => dispatch(common.setBekreftetInformasjon(!this.props.bekreftetInformasjon))}
+                    checked={bekreftetInformasjon}
+                    onChange={() => dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))}
                     label={getMessage(intl, 'oppsummering.text.samtykke')}
                 />
+                </ValidGroupComponent>
             </div>
         );
     }

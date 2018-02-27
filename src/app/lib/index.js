@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 
-import { Input, Textarea, Select } from 'nav-frontend-skjema';
+import { Input, Textarea, Select, SkjemaGruppe } from 'nav-frontend-skjema';
 import DateInput from './../components/shared/date-input/DateInput';
 
 class ValidBase extends Component {
@@ -147,7 +147,7 @@ ValidBase.contextTypes = {
 };
 
 ValidBase.propTypes = {
-    component: PT.oneOf([Input, Textarea, Select, DateInput]).isRequired,
+    component: PT.oneOf([Input, Textarea, Select, DateInput, SkjemaGruppe]).isRequired,
     name: PT.string,
     onChange: PT.func,
     onBlur: PT.func,
@@ -178,6 +178,7 @@ export default ValidBase;
 
 export { default as ValidForm } from './valid-form';
 export { default as ValidInput } from './valid-input';
+export { default as ValidGroup } from './valid-group';
 export { default as ValidDateInput } from './valid-date-input';
 export { default as FeilOppsummeringBoks } from './feil-oppsummering-boks';
 /* eslint-enable */
