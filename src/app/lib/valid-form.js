@@ -58,15 +58,17 @@ class ValidForm extends Component {
     validateOne(component) {
         const index = this.components.indexOf(component);
         if (index !== -1) {
-            const results = this.state.results.slice();
-            const fieldResult = this.components[index].validate();
-            results[index] = fieldResult;
-            const valid = results.every((result) => result.valid === true);
+            setTimeout(() => {
+              const results = this.state.results.slice();
+              const fieldResult = this.components[index].validate();
+              results[index] = fieldResult;
+              const valid = results.every((result) => result.valid === true);
 
-            this.setState({
-                results,
-                valid,
-                failedSubmit: this.state.failedSubmit && !valid
+              this.setState({
+                  results,
+                  valid,
+                  failedSubmit: this.state.failedSubmit && !valid
+              });
             });
         }
     }

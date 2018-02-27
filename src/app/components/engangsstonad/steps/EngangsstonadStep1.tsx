@@ -88,7 +88,6 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
 
     getTerminDatoValidators() {
         const relasjonTilBarn = this.props.relasjonTilBarn as any;
-        console.log(relasjonTilBarn);
         return [
             { test: () => (relasjonTilBarn.terminDato), failText: 'Du må oppgi en termindato' },
             { test: () => (relasjonTilBarn.terminDato !== ''), failText: 'Du må oppgi en termindato' },
@@ -101,7 +100,10 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
         return [
             { test: () => (relasjonTilBarn.utstedtDato), failText: 'Du må oppgi en terminbekreftelsesdato' },
             { test: () => (relasjonTilBarn.utstedtDato !== ''), failText: 'Du må oppgi en terminbekreftelsesdato' },
-            { test: () => (new Date(relasjonTilBarn.utstedtDato) > new Date()), failText: 'Terminbekreftelsesdatoen kan ikke være tilbake i tid' }
+            {
+                test: () => (new Date(relasjonTilBarn.utstedtDato) < new Date(relasjonTilBarn.terminDato)),
+                failText: 'Terminbekreftelsesdatoen må være før termindato'
+            }
         ];
     }
 
@@ -109,7 +111,6 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
         const { barnErFodt, relasjonTilBarn, dispatch, intl } = this.props;
         const antallBarn = relasjonTilBarn && relasjonTilBarn.antallBarn;
         const terminDato = relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).terminDato;
-
         let ValidDateInputComponent = ValidDateInput as any;
 
         return (
