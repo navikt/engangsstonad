@@ -4,7 +4,6 @@ import PT from 'prop-types';
 
 import { Input, Textarea, Select, SkjemaGruppe } from 'nav-frontend-skjema';
 import DateInput from './../components/shared/date-input/DateInput';
-import Promise from 'promise';
 
 class ValidBase extends Component {
     constructor(props) {
