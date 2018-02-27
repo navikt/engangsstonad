@@ -4,6 +4,7 @@ import PT from 'prop-types';
 
 import { Input, Textarea, Select, SkjemaGruppe } from 'nav-frontend-skjema';
 import DateInput from './../components/shared/date-input/DateInput';
+import Promise from 'promise';
 
 class ValidBase extends Component {
     constructor(props) {
@@ -34,15 +35,16 @@ class ValidBase extends Component {
 
     onChange(e) {
         if (this.state.hasBlurred) {
-            this.validate();
+          setTimeout(() => {
+              this.validate();
+          })
         }
-
         if (this.context.validForm) {
-            this.context.validForm.onChange(e, this);
+          this.context.validForm.onChange(e, this);
         }
 
         if (this.props.onChange) {
-            this.props.onChange(e);
+          this.props.onChange(e);
         }
     }
 
@@ -51,14 +53,17 @@ class ValidBase extends Component {
             hasBlurred: true
         });
 
-        this.validate();
+        setTimeout(() => {
+          this.validate();
+        });
+
 
         if (this.context.validForm) {
-            this.context.validForm.onBlur(e, this);
+          this.context.validForm.onBlur(e, this);
         }
 
         if (this.props.onBlur) {
-            this.props.onBlur(e);
+          this.props.onBlur(e);
         }
     }
 

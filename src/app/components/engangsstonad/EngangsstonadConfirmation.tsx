@@ -117,7 +117,10 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                     <Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
                     <ValidGroupComponent
                         validators={[
-                            {test: () => (godkjentVilkar === true), failText: 'Du må bekrefte at du har lest og forstått'}
+                            {
+                                test: () => (godkjentVilkar === true),
+                                failText: 'Du må bekrefte at du har lest og forstått'
+                            }
                         ]}
                     >
                         <BekreftCheckbox
