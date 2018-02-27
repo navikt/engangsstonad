@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 import classNames from 'classnames';
 import { Systemtittel } from 'nav-frontend-typografi';
-import 'nav-frontend-validering-style';// eslint-disable-line import/extensions
+import './validering-style.less';// eslint-disable-line import/extensions
 
 const cls = (show, className) => classNames('feil-oppsummering-boks', className, {
     'feil-oppsummering-boks--visible': show

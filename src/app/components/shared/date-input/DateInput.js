@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable */
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import MaskedInput from 'react-maskedinput';
@@ -224,3 +224,4 @@ DateInput.defaultProps = {
 	fullscreen: false
 };
 export default DateInput;
+/* eslint-enable */

@@ -20,6 +20,8 @@ import { apiActionCreators as api, stepActionCreators as stepActions } from 'act
 import { DispatchProps } from '../../redux/types';
 import getStepConfig from './steps/steps.conf';
 
+import { ValidForm } from './../../lib';
+
 interface OwnProps {
     soknadPostResponse: EngangsstonadSoknadResponse;
     medlemsskap: Medlemsskap;
@@ -77,18 +79,21 @@ export class SoknadWrapper extends React.Component<Props> {
 
         return (
             <div className="engangsstonad">
-                <Sidetittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
-                <StepIndicator stepTitles={titles} activeStep={activeStep} />
+                <ValidForm>
+                    <Sidetittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
+                    <StepIndicator stepTitles={titles} activeStep={activeStep} />
 
-                {activeStep === 1 && <EngangsstonadStep1 />}
-                {activeStep === 2 && <EngangsstonadStep2 />}
-                {activeStep === 3 && <EngangsstonadStep3 />}
+                    {activeStep === 1 && <EngangsstonadStep1 />}
+                    {activeStep === 2 && <EngangsstonadStep2 />}
+                    {activeStep === 3 && <EngangsstonadStep3 />}
 
-                { this.shouldRenderFortsettKnapp() === true &&
-                <Hovedknapp className="fortsettKnapp" onClick={() => this.handleNextClicked()}>
-                    {fortsettKnappLabel}
-                </Hovedknapp>
-                }
+                    {
+                        this.shouldRenderFortsettKnapp() === true &&
+                        <Hovedknapp className="fortsettKnapp" onClick={() => this.handleNextClicked()}>
+                            {fortsettKnappLabel}
+                        </Hovedknapp>
+                    }
+                </ValidForm>
             </div>
         );
     }

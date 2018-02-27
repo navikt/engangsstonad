@@ -2,11 +2,10 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 
-import { Input, Textarea, Select } from '../../nav-frontend-skjema';
-import { skjemaelementFeilmeldingShape } from '../../nav-frontend-skjema/src/skjemaelement-feilmelding';
+import { Input, Textarea, Select } from 'nav-frontend-skjema';
+import { skjemaelementFeilmeldingShape } from './skjemaelement-feilmelding';
 
-import { hasValue, isNumeric } from '../../nav-frontend-js-utils/src/validators';
-import { isIE } from '../../nav-frontend-js-utils';
+import { hasValue, isNumeric, isIE } from './validators';
 
 class ValidBase extends Component {
     constructor(props) {
@@ -183,7 +182,7 @@ ValidBase.propTypes = {
     onValidate: PT.func,
     validateOnChange: PT.bool,
     validateOnBlur: PT.bool,
-    feil: PT.shape(skjemaelementFeilmeldingShape),
+    feil: PT.shape(),
     validators: PT.arrayOf(PT.shape({
         test: PT.func.isRequired,
         failText: PT.string.isRequired
