@@ -4,7 +4,6 @@ import PT from 'prop-types';
 import MaskedInput from 'react-maskedinput';
 import Icon from 'nav-frontend-ikoner-assets';
 import classnames from 'classnames';
-
 import DatePicker from './DatePicker';
 import {
 	dateToISODate,
@@ -48,7 +47,7 @@ class DateInput extends Component {
 
 	onFocusOut(e) {
 		const { relatedTarget } = e;
-		if (relatedTarget) {
+		if (relatedTarget && this.container) {
 			const targetIsChildNode = this.container.contains(relatedTarget);
 			if (!targetIsChildNode) {
 				this.close(false);
@@ -137,6 +136,7 @@ class DateInput extends Component {
 					tabIndex=""
 					onClick={stopEvent}>
 					<div className="datovelger__inputContainer">
+
 						<MaskedInput
 							type="tel"
 							mask="11.11.1111"

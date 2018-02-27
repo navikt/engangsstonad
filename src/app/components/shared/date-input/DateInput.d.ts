@@ -5,6 +5,11 @@ export interface Range {
     to: Date;
 }
 
+export interface FieldValidator {
+    test: () => void;
+    failText: string;
+}
+
 export interface DateInputProps {
     id: string;
     label: React.ReactNode;
@@ -18,6 +23,7 @@ export interface DateInputProps {
     disableWeekends?: boolean;
     fullscreen?: boolean;
     onChange: (date: string) => void;
+    validators: FieldValidator[];
 }
 
 declare class DateInput extends React.Component<DateInputProps> {}

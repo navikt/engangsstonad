@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 
 import { Input, Textarea, Select } from 'nav-frontend-skjema';
-import { skjemaelementFeilmeldingShape } from './skjemaelement-feilmelding';
-
-import { hasValue, isNumeric, isIE } from './validators';
+import DateInput from './../components/shared/date-input/DateInput';
 
 class ValidBase extends Component {
     constructor(props) {
@@ -64,32 +62,8 @@ class ValidBase extends Component {
         }
     }
 
-    getValue() {
-        const stringValue = this.element.value.toString();
-
-        if (
-            this.element.type === 'number' ||
-                (
-                    isIE() &&
-                    isIE() <= 9 &&
-                    isNumeric(this.element.value) &&
-                    this.element.type === 'text'
-                )
-            ) {
-            // Desimal-sjekk
-            if (stringValue.indexOf(',') !== -1 || stringValue.indexOf('.') !== -1) {
-                return parseFloat(stringValue.replace(',', '.'));
-            }
-        }
-        return this.element.value;
-    }
-
     getFirstFailedVerdict() {
         return this.state.tests.find((test) => !test.verdict);
-    }
-
-    isRequired() {
-        return !this.state.optional;
     }
 
     validate() {
@@ -107,29 +81,16 @@ class ValidBase extends Component {
 
         let valid = true;
         const testsCopy = this.props.validators.map((validator) => {
-            let validatorResult;
-            if (validator.test.name === 'hasValue') {
-                validatorResult = {
-                    verdict: validator.test(this.element),
-                    failText: validator.failText
-                };
-            } else {
-                validatorResult = {
-                    verdict: validator.test(this.getValue()),
-                    failText: validator.failText
-                };
-            }
+            let validatorResult = {
+                verdict: validator.test(this.element),
+                failText: validator.failText
+            };
 
             if (!validatorResult.verdict) {
                 valid = false;
             }
             return validatorResult;
         });
-
-        // Overstyr valid verdi hvis feltet ikke har verdi og ikke er påkrevd
-        if (!hasValue(this.element) && !this.isRequired()) {
-            valid = true;
-        }
 
         this.setState({
             tests: testsCopy.slice(),
@@ -156,6 +117,18 @@ class ValidBase extends Component {
             case Input: elementRef.inputRef = (node) => { this.element = node; }; break;
             case Select: elementRef.selectRef = (node) => { this.element = node; }; break;
             case Textarea: elementRef.textareaRef = (node) => { this.element = node; }; break;
+            case DateInput: elementRef.ref = (node) => { this.element = node; }; break;
+        }
+
+        if (component === DateInput) {
+          return (
+            <this.props.component
+              onChange={this.onChange}
+              onBlur={this.onBlur}
+              errorMessage={failedVerdict && failedVerdict.feilmelding}
+              {...other}
+            />
+          )
         }
 
         return (
@@ -163,7 +136,6 @@ class ValidBase extends Component {
                 onChange={this.onChange}
                 onBlur={this.onBlur}
                 feil={feil || failedVerdict}
-                {...elementRef}
                 {...other}
             />
         );
@@ -175,10 +147,11 @@ ValidBase.contextTypes = {
 };
 
 ValidBase.propTypes = {
-    component: PT.oneOf([Input, Textarea, Select]).isRequired,
+    component: PT.oneOf([Input, Textarea, Select, DateInput]).isRequired,
     name: PT.string,
     onChange: PT.func,
     onBlur: PT.func,
+    id: PT.string,
     onValidate: PT.func,
     validateOnChange: PT.bool,
     validateOnBlur: PT.bool,
@@ -205,5 +178,6 @@ export default ValidBase;
 
 export { default as ValidForm } from './valid-form';
 export { default as ValidInput } from './valid-input';
+export { default as ValidDateInput } from './valid-date-input';
 export { default as FeilOppsummeringBoks } from './feil-oppsummering-boks';
 /* eslint-enable */

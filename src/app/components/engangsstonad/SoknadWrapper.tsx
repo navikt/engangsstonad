@@ -32,6 +32,10 @@ interface OwnProps {
 type Props = OwnProps & DispatchProps & InjectedIntlProps & History & RouteComponentProps<{}>;
 
 export class SoknadWrapper extends React.Component<Props> {
+    componentWillMount() {
+        this.handleNextClicked = this.handleNextClicked.bind(this);
+    }
+
     componentWillReceiveProps(props: OwnProps) {
         if (props.soknadPostResponse) {
             const { history } = this.props;
@@ -76,10 +80,11 @@ export class SoknadWrapper extends React.Component<Props> {
         const stepsConfig = getStepConfig(intl);
         const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
+        let ValidFormComponent = ValidForm as any;
 
         return (
             <div className="engangsstonad">
-                <ValidForm>
+                <ValidFormComponent summaryTitle="Du må rette opp i følgende feil:" onSubmit={this.handleNextClicked}>
                     <Sidetittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
                     <StepIndicator stepTitles={titles} activeStep={activeStep} />
 
@@ -89,11 +94,11 @@ export class SoknadWrapper extends React.Component<Props> {
 
                     {
                         this.shouldRenderFortsettKnapp() === true &&
-                        <Hovedknapp className="fortsettKnapp" onClick={() => this.handleNextClicked()}>
+                        <Hovedknapp className="fortsettKnapp">
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     }
-                </ValidForm>
+                </ValidFormComponent>
             </div>
         );
     }

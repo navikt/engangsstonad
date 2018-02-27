@@ -43,13 +43,12 @@ class ValidForm extends Component {
     }
 
     onSubmit(e) {
+      e.preventDefault();
         if (this.validateAll()) {
             if (this.props.onSubmit) {
-                e.preventDefault();
                 this.props.onSubmit(e);
             }
         } else {
-            e.preventDefault();
             this.setState({
                 failedSubmit: true
             });
@@ -111,6 +110,7 @@ class ValidForm extends Component {
     }
 
     mapResultsToErrorSummary() {
+      console.log(this.state.results);
         return this.state.results.filter((result) => !result.valid).map((result) => ({
             name: result.name,
             text: result.tests.find((test) => !test.verdict).failText

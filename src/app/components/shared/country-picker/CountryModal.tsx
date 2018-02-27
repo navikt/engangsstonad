@@ -123,6 +123,12 @@ class CountryModal extends React.Component<Props, State> {
                             });
                         }}
                         errorMessage=""
+                        validators={[
+                            {
+                                test: () => fomValue !== undefined,
+                                failText: 'Du må oppgi en fra-dato'
+                            }
+                        ]}
                     />
                     <DateInput
                         id="boddTilDato"
@@ -141,6 +147,12 @@ class CountryModal extends React.Component<Props, State> {
                             });
                         }}
                         errorMessage=""
+                        validators={[
+                            {
+                                test: () => tomValue !== undefined,
+                                failText: 'Du må oppgi en til-dato'
+                            }
+                        ]}
                     />
                     <Knapp
                         onClick={() => this.props.closeModal()}
