@@ -77,6 +77,34 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
         return undefined;
     }
 
+    getFodselsdatoValidators() {
+        const relasjonTilBarn = this.props.relasjonTilBarn as any;
+        return [
+            { test: () => (relasjonTilBarn.fodselsdato), failText: 'Du må oppgi en fødselsdato' },
+            { test: () => (relasjonTilBarn.fodselsdato !== ''), failText: 'Du må oppgi en fødselsdato' },
+            { test: () => (new Date(relasjonTilBarn.fodselsdato) <= new Date()), failText: 'Fødselsdatoen kan ikke være fram i tid' }
+        ];
+    }
+
+    getTerminDatoValidators() {
+        const relasjonTilBarn = this.props.relasjonTilBarn as any;
+        console.log(relasjonTilBarn);
+        return [
+            { test: () => (relasjonTilBarn.terminDato), failText: 'Du må oppgi en termindato' },
+            { test: () => (relasjonTilBarn.terminDato !== ''), failText: 'Du må oppgi en termindato' },
+            { test: () => (new Date(relasjonTilBarn.terminDato) > new Date()), failText: 'Termindatoen kan ikke være tilbake i tid' }
+        ];
+    }
+
+    getUtstedtDatoValidators() {
+        const relasjonTilBarn = this.props.relasjonTilBarn as any;
+        return [
+            { test: () => (relasjonTilBarn.utstedtDato), failText: 'Du må oppgi en terminbekreftelsesdato' },
+            { test: () => (relasjonTilBarn.utstedtDato !== ''), failText: 'Du må oppgi en terminbekreftelsesdato' },
+            { test: () => (new Date(relasjonTilBarn.utstedtDato) > new Date()), failText: 'Terminbekreftelsesdatoen kan ikke være tilbake i tid' }
+        ];
+    }
+
     render() {
         const { barnErFodt, relasjonTilBarn, dispatch, intl } = this.props;
         const antallBarn = relasjonTilBarn && relasjonTilBarn.antallBarn;
@@ -106,23 +134,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                         selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilFodtBarn).fodselsdato}
                         onChange={(e: string) => dispatch(soknad.setFodselsdato(e))}
                         name="fodselsdato"
-                        validators={[{
-                            test: () => {
-                                return ((relasjonTilBarn as RelasjonTilFodtBarn).fodselsdato);
-                            } ,
-                            failText: 'Du må oppgi en fødselsdato'
-                        },
-                        {
-                            test: () => {
-                                if ((relasjonTilBarn as RelasjonTilFodtBarn).fodselsdato) {
-                                    const fodselsdato = (relasjonTilBarn as any).fodselsdato;
-                                    return new Date() > fodselsdato;
-                                }
-                                return false;
-                            } ,
-                            failText: 'Fodselsdatoen kan ikke være fram i tid'
-                        },
-                        ]}
+                        validators={this.getFodselsdatoValidators()}
                     />
                 )}
 
@@ -148,10 +160,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                         label={getMessage(intl, 'relasjonBarn.text.termindato')}
                         selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).terminDato}
                         onChange={(e: string) => dispatch(soknad.setTerminDato(e))}
-                        validators={[{
-                            test: () => (relasjonTilBarn as RelasjonTilUfodtBarn).utstedtDato !== undefined,
-                            failText: 'Du må oppgi en termindato'
-                        }]}
+                        validators={this.getTerminDatoValidators()}
                     />
                 )}
 
@@ -174,10 +183,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                         selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).utstedtDato}
                         label={getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}
                         onChange={(e: string) => dispatch(soknad.setUtstedtDato(e))}
-                        validators={[{
-                            test: () => (relasjonTilBarn as RelasjonTilUfodtBarn).utstedtDato !== undefined,
-                            failText: 'Du må oppgi en terminbekreftelsesdato'
-                        }]}
+                        validators={this.getUtstedtDatoValidators()}
                     />
                 ])}
 

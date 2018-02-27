@@ -43,10 +43,6 @@ export class SoknadWrapper extends React.Component<Props> {
         }
     }
 
-    formIsValid() {
-        return true;
-    }
-
     hasToWaitForResponse() {
         const { activeStep } = this.props;
         return activeStep === 3;
@@ -54,15 +50,11 @@ export class SoknadWrapper extends React.Component<Props> {
 
     handleNextClicked() {
         const { dispatch, medlemsskap, relasjonTilBarn } = this.props;
-
         if (this.hasToWaitForResponse()) {
             return dispatch(api.sendSoknad({ medlemsskap, relasjonTilBarn }));
         }
-
-        if (this.formIsValid()) {
-            const { activeStep } = this.props;
-            dispatch(stepActions.setActiveStep(activeStep + 1));
-        }
+        const { activeStep } = this.props;
+        dispatch(stepActions.setActiveStep(activeStep + 1));
     }
 
     shouldRenderFortsettKnapp(): boolean {
