@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import * as moment from 'moment';
-import { ValidGroup, ValidForm } from './../../lib';
+const { ValidGroup, ValidForm } = require('./../../lib') as any;
 const { Ingress } = require('nav-frontend-typografi');
 import { Hovedknapp } from 'nav-frontend-knapper';
 const Modal = require('nav-frontend-modal').default;
@@ -79,6 +79,13 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
         );
     }
 
+    getGodkjentVilkarValidators() {
+        const { godkjentVilkar } = this.props;
+        return [
+            { test: () => godkjentVilkar === true, failText: 'Du må bekrefte at du har lest og forstått'}
+        ];
+    }
+
     render() {
         const { person, godkjentVilkar, intl } = this.props;
 
@@ -92,11 +99,8 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
             this.props.history.push('/engangsstonad/underAge');
         }
 
-        let ValidFormComponent = ValidForm as any;
-        let ValidGroupComponent = ValidGroup as any;
-
         return (
-            <ValidFormComponent summaryTitle="Du må rette opp i følgende feil:" noSummary={true} onSubmit={this.startSoknad}>
+            <ValidForm summaryTitle="Du må rette opp i følgende feil:" noSummary={true} onSubmit={this.startSoknad}>
                 <div className="engangsstonad">
                     <DocumentTitle title="Samtykke - NAV Engangsstønad" />
                     <LanguageToggle
@@ -115,14 +119,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                         title={getMessage(intl, 'intro.pageheading.soknadES')}
                     />
                     <Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
-                    <ValidGroupComponent
-                        validators={[
-                            {
-                                test: () => (godkjentVilkar === true),
-                                failText: 'Du må bekrefte at du har lest og forstått'
-                            }
-                        ]}
-                    >
+                    <ValidGroup validators={this.getGodkjentVilkarValidators()}>
                         <BekreftCheckbox
                             name="egenerklaring"
                             text={this.confirmBoxLabelHeaderText()}
@@ -130,7 +127,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                             onChange={this.bekreftetVilkarChange}
                             checked={godkjentVilkar}
                         />
-                    </ValidGroupComponent>
+                    </ValidGroup>
                     <div className="engangsstonad__centerButton">
                         <Hovedknapp>
                             {getMessage(intl, 'intro.button.startSoknad')}
@@ -145,7 +142,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                         <RettigheterOgPlikter />
                     </Modal>
                 </div>
-            </ValidFormComponent>
+            </ValidForm>
         );
     }
 }

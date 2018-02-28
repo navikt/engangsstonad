@@ -11,8 +11,7 @@ import {
     RelasjonTilFodtBarn, RelasjonTilUfodtBarn
 } from '../../../types/domain/RelasjonTilBarn';
 import { Normaltekst } from 'nav-frontend-typografi';
-import ValidDateInput from './../../../lib';
-import DateInput from './../../shared/date-input/DateInput';
+const { ValidDateInput } = require('./../../../lib') as any;
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Person from '../../../types/domain/Person';
 import { DispatchProps } from '../../../redux/types';
@@ -111,7 +110,6 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
         const { barnErFodt, relasjonTilBarn, dispatch, intl } = this.props;
         const antallBarn = relasjonTilBarn && relasjonTilBarn.antallBarn;
         const terminDato = relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).terminDato;
-        let ValidDateInputComponent = ValidDateInput as any;
 
         return (
             <div className="engangsstonad__step">
@@ -128,9 +126,8 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                 />
 
                 {barnErFodt === true && (
-                    <ValidDateInputComponent
+                    <ValidDateInput
                         id="fodselsdato"
-                        component={DateInput}
                         label={getMessage(intl, 'relasjonBarn.text.fodselsdato')}
                         selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilFodtBarn).fodselsdato}
                         onChange={(e: string) => dispatch(soknad.setFodselsdato(e))}
@@ -154,10 +151,9 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                 )}
 
                 {barnErFodt === false && antallBarn &&  (
-                    <ValidDateInputComponent
+                    <ValidDateInput
                         id="termindato"
                         name="termindato"
-                        component={DateInput}
                         label={getMessage(intl, 'relasjonBarn.text.termindato')}
                         selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).terminDato}
                         onChange={(e: string) => dispatch(soknad.setTerminDato(e))}
@@ -176,11 +172,10 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                             onClick={() => this.openTerminbekreftelseModal()}
                         />
                     </DialogBox>,
-                    <ValidDateInputComponent
+                    <ValidDateInput
                         id="terminbekreftelse"
                         name="terminbekreftelse"
                         key="dateInputTerminBekreftelse"
-                        component={DateInput}
                         selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).utstedtDato}
                         label={getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}
                         onChange={(e: string) => dispatch(soknad.setUtstedtDato(e))}
