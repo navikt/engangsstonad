@@ -64,7 +64,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             return {
                 ...state,
                 relasjonTilBarn: relasjonTilBarn ?
-                    { ...relasjonTilBarn, terminDato, utstedtDato: undefined } : { terminDato, utstedtDato: undefined }
+                    { ...relasjonTilBarn, terminDato } : { terminDato }
             };
         case SoknadActionKeys.SET_UTSTEDT_DATO:
             const { utstedtDato } = action;

@@ -19,6 +19,10 @@ import getMessage from 'util/i18n/i18nUtils';
 import DialogBox from 'shared/dialog-box/DialogBox';
 import LinkWithIcon from 'shared/link-with-icon/LinkWithIcon';
 import OmTerminbekreftelsen from 'shared/modal-content/OmTerminbekreftelsen';
+import {
+    erIUke26Pluss3, erMindreEnn3UkerSiden, idagEllerTidligere,
+    utstedtDatoErIUke26
+} from 'util/validation/validationUtils';
 
 interface StateProps {
     barnErFodt?: boolean;
@@ -90,7 +94,8 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
         return [
             { test: () => (relasjonTilBarn.terminDato), failText: 'Du må oppgi en termindato' },
             { test: () => (relasjonTilBarn.terminDato !== ''), failText: 'Du må oppgi en termindato' },
-            { test: () => (new Date(relasjonTilBarn.terminDato) > new Date()), failText: 'Termindatoen kan ikke være tilbake i tid' }
+            { test: () => (erIUke26Pluss3(relasjonTilBarn.terminDato)), failText: 'Du må være i uke 26 eller senere' },
+            { test: () => (erMindreEnn3UkerSiden(relasjonTilBarn.terminDato)), failText: 'Du kan ikke søke mer enn 3 uker etter termindato'}
         ];
     }
 
@@ -99,9 +104,14 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
         return [
             { test: () => (relasjonTilBarn.utstedtDato), failText: 'Du må oppgi en terminbekreftelsesdato' },
             { test: () => (relasjonTilBarn.utstedtDato !== ''), failText: 'Du må oppgi en terminbekreftelsesdato' },
+            { test: () => (idagEllerTidligere(relasjonTilBarn.utstedtDato)), failText: 'Terminbekreftelsesdatoen må være idag eller tidligere' },
             {
                 test: () => (new Date(relasjonTilBarn.utstedtDato) < new Date(relasjonTilBarn.terminDato)),
                 failText: 'Terminbekreftelsesdatoen må være før termindato'
+            },
+            {
+                test: () => (utstedtDatoErIUke26(relasjonTilBarn.utstedtDato, relasjonTilBarn.terminDato)),
+                failText: 'Terminbekreftelsesdatoen må ha passert 26 uker i svangerskapet'
             }
         ];
     }
