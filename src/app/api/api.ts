@@ -15,10 +15,13 @@ const stub = () => ({
     }
 });
 
+let useStub = defaultParams.stub;
+
 // tslint:disable-next-line no-any
 declare const __ENV__: any;
 
 function getPerson(params: PersonRequest = defaultParams) {
+    useStub = params.stub;
     if (__ENV__ === 'heroku') {
         return stub();
     }
@@ -29,7 +32,8 @@ function getPerson(params: PersonRequest = defaultParams) {
 
 function sendSoknad(soknad: EngangsstonadSoknadRequest) {
     // tslint:disable-next-line no-any
-    return axios.post(`${(<any> window).REST_API_URL}/engangsstonad?stub=true`, soknad);
+    const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub?'?stub=true':''}`;
+    return axios.post(url, soknad);
 }
 
 const Api = { getPerson, sendSoknad };
