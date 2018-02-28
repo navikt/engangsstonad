@@ -1,5 +1,5 @@
 import * as React from 'react';
-const { Hovedknapp } = require('nav-frontend-knapper');
+const { Knapp } = require('nav-frontend-knapper');
 const { Element } = require('nav-frontend-typografi');
 const Modal = require('nav-frontend-modal').default;
 import CountryModal from 'shared/country-picker/CountryModal';
@@ -89,12 +89,9 @@ class CountryPicker extends React.Component<Props, State> {
                         language={this.props.language}
                     />
                 )}
-                <Hovedknapp
-                    className="countryPicker__addButton"
-                    onClick={() => this.openModal()}
-                >
+                <Knapp className="countryPicker__addButton" onClick={() => this.openModal()} htmlType="button">
                     Legg til land
-                </Hovedknapp>
+                </Knapp>
             </div>
         );
     }

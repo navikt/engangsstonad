@@ -122,13 +122,6 @@ class CountryModal extends React.Component<Props, State> {
                                 }
                             });
                         }}
-                        errorMessage=""
-                        validators={[
-                            {
-                                test: () => fomValue !== undefined,
-                                failText: 'Du må oppgi en fra-dato'
-                            }
-                        ]}
                     />
                     <DateInput
                         id="boddTilDato"
@@ -146,20 +139,13 @@ class CountryModal extends React.Component<Props, State> {
                                 }
                             });
                         }}
-                        errorMessage=""
-                        validators={[
-                            {
-                                test: () => tomValue !== undefined,
-                                failText: 'Du må oppgi en til-dato'
-                            }
-                        ]}
                     />
-                    <Knapp
-                        onClick={() => this.props.closeModal()}
-                    >
+                    <Knapp onClick={() => this.props.closeModal()} htmlType="button">
                         {getMessage(intl, 'medlemmskap.landvelger.avbryt')}
                     </Knapp>
-                    <Knapp onClick={() => utenlandsopphold && this.onSubmit()}>{this.state.submitButtonText}</Knapp>
+                    <Knapp onClick={() => utenlandsopphold && this.onSubmit()} htmlType="button">
+                        {this.state.submitButtonText}
+                    </Knapp>
                 </div>
             </Modal>
         );
