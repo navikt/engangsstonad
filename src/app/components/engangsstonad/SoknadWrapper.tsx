@@ -20,7 +20,7 @@ import { apiActionCreators as api, stepActionCreators as stepActions } from 'act
 import { DispatchProps } from '../../redux/types';
 import getStepConfig from './steps/steps.conf';
 
-import { ValidForm } from './../../lib';
+const { ValidForm } = require('./../../lib') as any;
 
 interface OwnProps {
     soknadPostResponse: EngangsstonadSoknadResponse;
@@ -72,11 +72,14 @@ export class SoknadWrapper extends React.Component<Props> {
         const stepsConfig = getStepConfig(intl);
         const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
-        let ValidFormComponent = ValidForm as any;
 
         return (
             <div className="engangsstonad">
-                <ValidFormComponent summaryTitle="Du må rette opp i følgende feil:" onSubmit={this.handleNextClicked}>
+                <ValidForm
+                    summaryTitle="Du må rette opp i følgende feil:"
+                    noSummary={activeStep === 3}
+                    onSubmit={this.handleNextClicked}
+                >
                     <Sidetittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
                     <StepIndicator stepTitles={titles} activeStep={activeStep} />
 
@@ -90,7 +93,7 @@ export class SoknadWrapper extends React.Component<Props> {
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     }
-                </ValidFormComponent>
+                </ValidForm>
             </div>
         );
     }

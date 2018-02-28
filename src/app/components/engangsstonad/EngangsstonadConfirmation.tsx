@@ -100,7 +100,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
         }
 
         return (
-            <ValidForm summaryTitle="Du må rette opp i følgende feil:" noSummary={true} onSubmit={this.startSoknad}>
+            <ValidForm noSummary={true} onSubmit={this.startSoknad}>
                 <div className="engangsstonad">
                     <DocumentTitle title="Samtykke - NAV Engangsstønad" />
                     <LanguageToggle

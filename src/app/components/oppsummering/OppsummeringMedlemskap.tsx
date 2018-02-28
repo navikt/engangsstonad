@@ -23,7 +23,7 @@ const OppsummeringMedlemskap: React.StatelessComponent<Props & InjectedIntlProps
 
     const fodselINorgeText = fodselINorge
         ? getMessage(intl, 'medlemmskap.radiobutton.vareNorge')
-        : getMessage(intl, 'medlemmskap.radioButton.vareUtlandet');
+        : getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet');
 
     return (
         <div>
