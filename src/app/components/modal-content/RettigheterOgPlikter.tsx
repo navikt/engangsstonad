@@ -64,7 +64,6 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                         id="rettigheter.text.lestOgForstått"
                         values={{
                             link: (
-                                // eslint-disable-next-line jsx-a11y/anchor-is-valid
                                 <a
                                     href="https://nav.no/rettOgPlikt"
                                     target="_blank"
@@ -83,7 +82,6 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                         id="rettigheter.text.personvernerklering"
                         values={{
                             link: (
-                                // eslint-disable-next-line jsx-a11y/anchor-is-valid
                                 <a
                                     href={'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/' +
                                     'Teknisk+brukerstotte/Snarveier/' +

@@ -1,9 +1,8 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import classNames from 'classnames';
 import { Systemtittel } from 'nav-frontend-typografi';
-import './validering-style.less';// eslint-disable-line import/extensions
+import './validering-style.less';
 
 const cls = (show, className) => classNames('feil-oppsummering-boks', className, {
     'feil-oppsummering-boks--visible': show
@@ -18,7 +17,7 @@ class FeilOppsummeringBoks extends Component {
     render() {
         const { className, show, errors, title, ...other } = this.props;
         const listItems = errors.map((error) => {
-            const link = '#' + error.name; // eslint-disable-line prefer-template
+            const link = '#' + error.name;
             return (
                 <li key={error.name}>
                     <a className="feil-oppsummering-boks__lenke" href={link}>
@@ -54,4 +53,3 @@ FeilOppsummeringBoks.defaultProps = {
 };
 
 export default FeilOppsummeringBoks;
-/* eslint-enable */

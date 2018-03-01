@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import classnames from 'classnames';
@@ -120,7 +119,7 @@ class DayPickerComponent extends Component {
 		const disabledDays = this.getDisabledDays();
 
 		return (
-			<div // eslint-disable-line jsx-a11y/no-static-element-interactions
+			<div
 				className={classnames('datovelger__DayPicker', {
 					'datovelger__DayPicker--fullscreen': this.props.fullscreen
 				})}
@@ -143,7 +142,6 @@ class DayPickerComponent extends Component {
 }
 
 DayPickerComponent.propTypes = {
-	// input: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
 	selectedDate: PT.string,
 	onKeyUp: PT.func.isRequired,
 	close: PT.func.isRequired,
@@ -170,4 +168,3 @@ DayPickerComponent.defaultProps = {
 };
 
 export default DayPickerComponent;
-/* eslint-enable */

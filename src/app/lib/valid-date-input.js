@@ -1,9 +1,8 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import ValidBase from './';
 import DateInput from '../components/date-input/DateInput';
 
-class ValidDateInput extends Component { // eslint-disable-line react/prefer-stateless-function
+class ValidDateInput extends Component {
   render() {
     const { ...other } = this.props;
     return (
@@ -13,4 +12,3 @@ class ValidDateInput extends Component { // eslint-disable-line react/prefer-sta
 }
 
 export default ValidDateInput;
-/* eslint-enable */

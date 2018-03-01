@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import MaskedInput from 'react-maskedinput';
@@ -131,7 +130,7 @@ class DateInput extends Component {
 				<label className="skjemaelement__label" htmlFor={id}>
 					{label}
 				</label>
-				<div // eslint-disable-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
+				<div
 					className="datovelger__inner"
 					tabIndex=""
 					onClick={stopEvent}>
@@ -195,7 +194,7 @@ class DateInput extends Component {
 DateInput.propTypes = {
 	id: PT.string.isRequired,
 	label: PT.oneOfType([PT.string, PT.node]).isRequired,
-	inputProps: PT.object, // eslint-disable-line react/forbid-prop-types
+	inputProps: PT.object,
 	selectedDate: PT.string,
 	disabled: PT.bool,
 	fromDate: PT.instanceOf(Date),
@@ -224,4 +223,3 @@ DateInput.defaultProps = {
 	fullscreen: false
 };
 export default DateInput;
-/* eslint-enable */

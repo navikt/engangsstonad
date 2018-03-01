@@ -38,17 +38,7 @@ const webpackConfig = {
 
       {
         test: /\.js$/,
-        use: [
-          {
-            loader: 'babel-loader'
-          },
-          {
-            loader: 'eslint-loader',
-            options: {
-              emitWarning: true
-            }
-          }
-        ],
+        use: [{ loader: 'babel-loader' }],
         exclude: /node_modules/
       },
       {

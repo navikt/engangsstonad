@@ -1,9 +1,8 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { Input } from 'nav-frontend-skjema';
 import ValidBase from './';
 
-class ValidInput extends Component { // eslint-disable-line react/prefer-stateless-function
+class ValidInput extends Component {
     render() {
         const { ...other } = this.props;
         return (
@@ -13,4 +12,3 @@ class ValidInput extends Component { // eslint-disable-line react/prefer-statele
 }
 
 export default ValidInput;
-/* eslint-enable */
