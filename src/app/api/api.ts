@@ -1,6 +1,6 @@
 import axios from 'axios';
 import PersonRequest from '../types/services/PersonRequest';
-import EngangsstonadSoknadRequest from '../types/services/EngangsstonadSoknadRequest';
+import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 const queryStringParser = require('query-string');
 
 const defaultParams: PersonRequest = {
@@ -30,7 +30,7 @@ function getPerson(params: PersonRequest = defaultParams) {
     return axios.get(`${endpoint}/personinfo?${queryStringParser.stringify(params)}`);
 }
 
-function sendSoknad(soknad: EngangsstonadSoknadRequest) {
+function sendSoknad(soknad: EngangsstonadSoknad) {
     // tslint:disable-next-line no-any
     const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub ? '?stub=true' : ''}`;
     return axios.post(url, soknad);
