@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import ValidBase from './';
-import DateInput from './../components/shared/date-input/DateInput';
+import DateInput from '../components/date-input/DateInput';
 
 class ValidDateInput extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 
 import { Input, Textarea, Select, SkjemaGruppe } from 'nav-frontend-skjema';
-import DateInput from './../components/shared/date-input/DateInput';
+import DateInput from '../components/date-input/DateInput';
 
 class ValidBase extends Component {
     constructor(props) {

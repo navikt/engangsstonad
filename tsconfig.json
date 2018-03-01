@@ -33,6 +33,9 @@
 			"components/*": [
 				"app/components/*"
 			],
+            "connectedComponents/*": [
+                "app/connected-components"
+            ],
 			"actions": [
 				"app/redux/actions"
 			],
