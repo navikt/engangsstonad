@@ -37,17 +37,17 @@ export function setAntallBarn(antallBarn: string): SoknadActionTypes {
     };
 }
 
-export function setErBarnetFodt(erBarnetFodt?: string): SoknadActionTypes {
+export function setErBarnetFødt(erBarnetFødt?: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_ER_BARNET_FODT,
-        erBarnetFodt: erBarnetFodt === undefined ? erBarnetFodt : erBarnetFodt === 'before'
+        erBarnetFødt: erBarnetFødt === undefined ? erBarnetFødt : erBarnetFødt === 'before'
     };
 }
 
-export function addFodselsdato(fodselsdato: string): SoknadActionTypes {
+export function addFødselsdato(fødselsdato: string): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.ADD_FODSELSDATO,
-        fodselsdato
+        type: SoknadActionKeys.ADD_FØDSELSDATO,
+        fødselsdato
     };
 }
 
@@ -72,10 +72,10 @@ export function setJobbetINorgeSiste12Mnd(jobbetINorgeSiste12Mnd: string): Sokna
     };
 }
 
-export function setFodselINorge(fodselINorge: string): SoknadActionTypes {
+export function setFødselINorge(fødselINorge: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_FODSEL_I_NORGE,
-        fodselINorge: fodselINorge === undefined ? fodselINorge : fodselINorge === 'norway'
+        fødselINorge: fødselINorge === undefined ? fødselINorge : fødselINorge === 'norway'
     };
 }
 
@@ -98,12 +98,12 @@ export default {
     editPeriode,
     deletePeriode,
     setAntallBarn,
-    setErBarnetFodt,
-    addFodselsdato,
+    setErBarnetFødt,
+    addFødselsdato,
     setTermindato,
     setTerminbekreftelseDato,
     setJobbetINorgeSiste12Mnd,
-    setFodselINorge,
+    setFødselINorge,
     setINorgeSiste12Mnd,
     setINorgeNeste12Mnd
 };

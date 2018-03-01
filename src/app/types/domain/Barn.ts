@@ -1,10 +1,10 @@
 abstract class Barn {
     antallBarn?: number | undefined;
-    erBarnetFodt?: boolean;
+    erBarnetFødt?: boolean;
 }
 
 export class FodtBarn extends Barn {
-    fodselsdatoer: string[];
+    fødselsdatoer: string[];
 }
 
 export class UfodtBarn extends Barn {

@@ -2,7 +2,6 @@ import  * as React from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import * as moment from 'moment';
 const { ValidGroup, ValidForm } = require('./../../lib') as any;
 const { Ingress } = require('nav-frontend-typografi');
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -93,11 +92,11 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
             return null;
         }
 
-        const now = moment();
-        const birthDate = moment(person.fodselsdato);
+        /*const now = moment();
+        const birthDate = moment(person.fødselsdato);
         if (now.diff(birthDate, 'years') < 18) {
             this.props.history.push('/engangsstonad/underAge');
-        }
+        }*/
 
         return (
             <ValidForm noSummary={true} onSubmit={this.startSoknad}>

@@ -4,7 +4,7 @@ import EngangsstonadSoknad from '../../types/domain/EngangsstonadSoknad';
 const getDefaultState = () => {
     const engangsstonadSoknad: EngangsstonadSoknad = {
         barn: {
-            fodselsdatoer: []
+            fødselsdatoer: []
         },
         utenlandsopphold: {
             perioder: []
@@ -37,23 +37,23 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             const { jobbetINorgeSiste12Mnd } = action;
             return { ...state, utenlandsopphold: { ...utenlandsopphold, jobbetINorgeSiste12Mnd } };
         case SoknadActionKeys.SET_FODSEL_I_NORGE:
-            const { fodselINorge } = action;
-            return { ...state, utenlandsopphold: { ...utenlandsopphold, fodselINorge } };
+            const { fødselINorge } = action;
+            return { ...state, utenlandsopphold: { ...utenlandsopphold, fødselINorge } };
         case SoknadActionKeys.SET_I_NORGE_SISTE_12_MND:
             const { iNorgeSiste12Mnd } = action;
             return { ...state, utenlandsopphold: { ...getDefaultState().utenlandsopphold, iNorgeSiste12Mnd } };
         case SoknadActionKeys.SET_I_NORGE_NESTE_12_MND:
             const { iNorgeNeste12Mnd } = action;
-            return { ...state, utenlandsopphold: { ...utenlandsopphold, iNorgeNeste12Mnd, fodselINorge: undefined } };
+            return { ...state, utenlandsopphold: { ...utenlandsopphold, iNorgeNeste12Mnd, fødselINorge: undefined } };
         case SoknadActionKeys.SET_ER_BARNET_FODT:
-            const { erBarnetFodt } = action;
-            return { ...state, barn: { ...barn, erBarnetFodt } };
+            const { erBarnetFødt } = action;
+            return { ...state, barn: { ...barn, erBarnetFødt } };
         case SoknadActionKeys.SET_ANTALL_BARN:
             const { antallBarn } = action;
             return { ...state, barn: { ...barn, antallBarn } };
-        case SoknadActionKeys.ADD_FODSELSDATO:
-            const fodselsdatoer = [action.fodselsdato];
-            return { ...state, barn: { ...barn, fodselsdatoer }};
+        case SoknadActionKeys.ADD_FØDSELSDATO:
+            const fødselsdatoer = [action.fødselsdato];
+            return { ...state, barn: { ...barn, fødselsdatoer }};
         case SoknadActionKeys.SET_TERMINDATO:
             const { termindato } = action;
             return {

@@ -6,7 +6,7 @@ export type Periode = {
 
 type Utenlandsopphold = {
     jobbetINorgeSiste12Mnd?: boolean;
-    fodselINorge?: boolean;
+    fødselINorge?: boolean;
     iNorgeSiste12Mnd?: boolean;
     iNorgeNeste12Mnd?: boolean;
     perioder: Periode[];

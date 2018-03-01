@@ -15,13 +15,13 @@ interface Props {
 
 const OppsummeringUtenlandsopphold: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl } = props;
-    const { fodselINorge, iNorgeNeste12Mnd, iNorgeSiste12Mnd, perioder } = props.utenlandsopphold;
+    const { fødselINorge, iNorgeNeste12Mnd, iNorgeSiste12Mnd, perioder } = props.utenlandsopphold;
 
     const iNorgeNeste12MndText = iNorgeNeste12Mnd
         ? getMessage(intl, 'medlemmskap.radiobutton.boNorge')
         : getMessage(intl, 'medlemmskap.radiobutton.boUtlandet');
 
-    const fodselINorgeMndText = fodselINorge
+    const fødselINorgeMndText = fødselINorge
         ? getMessage(intl, 'medlemmskap.radiobutton.vareNorge')
         : getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet');
 
@@ -47,7 +47,7 @@ const OppsummeringUtenlandsopphold: React.StatelessComponent<Props & InjectedInt
             />
             <DisplayTextWithLabel
                 label={getMessage(intl, 'oppsummering.text.ogKommerPåFødselstidspunktet')}
-                text={fodselINorgeMndText}
+                text={fødselINorgeMndText}
             />
         </div>
     );

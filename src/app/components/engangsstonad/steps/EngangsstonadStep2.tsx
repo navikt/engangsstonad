@@ -40,11 +40,11 @@ export class EngangsstonadStep2 extends React.Component<Props> {
         }
     }
 
-    getFodselINorgeSelectedValue() {
-        const { fodselINorge } = this.props.utenlandsopphold;
-        if (fodselINorge === true) {
+    getFødselINorgeSelectedValue() {
+        const { fødselINorge } = this.props.utenlandsopphold;
+        if (fødselINorge === true) {
             return 'norway';
-        } else if (fodselINorge === false) {
+        } else if (fødselINorge === false) {
             return 'abroad';
         } else {
             return undefined;
@@ -93,9 +93,9 @@ export class EngangsstonadStep2 extends React.Component<Props> {
                 {iNorgeNeste12Mnd !== undefined && (
                     <RadioPanelGruppe
                         legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
-                        name="fodselINorge"
-                        onChange={(event: any, value: string) => dispatch(soknad.setFodselINorge(value))}
-                        checked={this.getFodselINorgeSelectedValue()}
+                        name="fødselINorge"
+                        onChange={(event: any, value: string) => dispatch(soknad.setFødselINorge(value))}
+                        checked={this.getFødselINorgeSelectedValue()}
                         radios={[
                             {label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'), value: 'norway'},
                             {label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'), value: 'abroad'}

@@ -14,13 +14,13 @@ interface Props {
 
 const OppsummeringBarn: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl } = props;
-    const { erBarnetFodt, fodselsdatoer, termindato, terminbekreftelseDato } = props.barn;
+    const { erBarnetFødt, fødselsdatoer, termindato, terminbekreftelseDato } = props.barn;
 
-    if (erBarnetFodt && fodselsdatoer && fodselsdatoer.length > 0) {
+    if (erBarnetFødt && fødselsdatoer && fødselsdatoer.length > 0) {
         return (
             <DisplayTextWithLabel
                 label="Søknaden gjelder bla bla..."
-                text={fodselsdatoer[0]}
+                text={fødselsdatoer[0]}
             />
         );
     } else if (termindato && terminbekreftelseDato) {

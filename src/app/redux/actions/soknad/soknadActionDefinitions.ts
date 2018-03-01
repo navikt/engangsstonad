@@ -2,9 +2,9 @@ import { Periode } from '../../../types/domain/Utenlandsopphold';
 
 export enum SoknadActionKeys {
     // RelasjonTilBarn
-    'ADD_FODSELSDATO' = 'addFodselsdato',
+    'ADD_FØDSELSDATO' = 'addFødselsdato',
     'SET_ANTALL_BARN' = 'setAntallBarn',
-    'SET_ER_BARNET_FODT' = 'setErBarnetFodt',
+    'SET_ER_BARNET_FODT' = 'setErBarnetFødt',
     'SET_TERMINDATO' = 'setTermindato',
     'SET_TERMINBEKREFTELSE_DATO' = 'setTerminbekreftelseDato',
 
@@ -15,13 +15,13 @@ export enum SoknadActionKeys {
     'SET_JOBBET_I_NORGE_SISTE_12_MND' = 'setJobbetINorgeSiste12Mnd',
     'SET_I_NORGE_SISTE_12_MND' = 'setINorgeSiste12Mnd',
     'SET_I_NORGE_NESTE_12_MND' = 'setINorgeNeste12Mnd',
-    'SET_FODSEL_I_NORGE' = 'setFodselINorge'
+    'SET_FODSEL_I_NORGE' = 'setFødselINorge'
 }
 
 // Barn
-interface AddFodselsdato {
-    type: SoknadActionKeys.ADD_FODSELSDATO;
-    fodselsdato: string;
+interface AddFødselsdato {
+    type: SoknadActionKeys.ADD_FØDSELSDATO;
+    fødselsdato: string;
 }
 
 interface SetAntallBarn {
@@ -29,9 +29,9 @@ interface SetAntallBarn {
     antallBarn: number;
 }
 
-interface SetErBarnetFodt {
+interface SetErBarnetFødt {
     type: SoknadActionKeys.SET_ER_BARNET_FODT;
-    erBarnetFodt?: boolean;
+    erBarnetFødt?: boolean;
 }
 
 interface SetTermindato {
@@ -66,9 +66,9 @@ interface SetJobbetINorgeSiste12Mnd {
     jobbetINorgeSiste12Mnd: boolean;
 }
 
-interface SetFodselINorge {
+interface SetFødselINorge {
     type: SoknadActionKeys.SET_FODSEL_I_NORGE;
-    fodselINorge: boolean;
+    fødselINorge: boolean;
 }
 
 interface SetINorgeSiste12Mnd {
@@ -83,12 +83,12 @@ interface SetINorgeNeste12Mnd {
 
 export type SoknadActionTypes =
     | AddPeriode
-    | AddFodselsdato
+    | AddFødselsdato
     | EditPeriode
     | DeletePeriode
     | SetAntallBarn
-    | SetErBarnetFodt
-    | SetFodselINorge
+    | SetErBarnetFødt
+    | SetFødselINorge
     | SetTermindato
     | SetTerminbekreftelseDato
     | SetJobbetINorgeSiste12Mnd

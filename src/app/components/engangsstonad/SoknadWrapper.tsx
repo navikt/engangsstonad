@@ -60,9 +60,9 @@ export class SoknadWrapper extends React.Component<Props> {
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, utenlandsopphold, barn } = this.props;
         if (activeStep === 1 && barn) {
-            return barn.terminbekreftelseDato !== undefined || (barn.fodselsdatoer && barn.fodselsdatoer.length > 0);
+            return barn.terminbekreftelseDato !== undefined || (barn.fødselsdatoer && barn.fødselsdatoer.length > 0);
         } else if (activeStep === 2 && utenlandsopphold) {
-            return utenlandsopphold.fodselINorge !== undefined;
+            return utenlandsopphold.fødselINorge !== undefined;
         }
         return activeStep === 3;
     }

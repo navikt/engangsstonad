@@ -53,10 +53,10 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
     getFodselsTidspunktSelectedValue() {
         const { barn } = this.props;
         if (barn) {
-            const { erBarnetFodt } = barn;
-            if (erBarnetFodt === true) {
+            const { erBarnetFødt } = barn;
+            if (erBarnetFødt === true) {
                 return 'before';
-            } else if (erBarnetFodt === false) {
+            } else if (erBarnetFødt === false) {
                 return 'ahead';
             }
         }
@@ -79,12 +79,12 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
         return undefined;
     }
 
-    getFodselsdatoValidators() {
+    getFødselsdatoValidators() {
         const barn = this.props.barn as any;
         return [
-            { test: () => (barn.fodselsdatoer[0]), failText: 'Du må oppgi en fødselsdato' },
-            { test: () => (barn.fodselsdatoer[0] !== ''), failText: 'Du må oppgi en fødselsdato' },
-            { test: () => (new Date(barn.fodselsdatoer[0]) <= new Date()), failText: 'Fødselsdatoen kan ikke være fram i tid' }
+            { test: () => (barn.fødselsdatoer[0]), failText: 'Du må oppgi en fødselsdato' },
+            { test: () => (barn.fødselsdatoer[0] !== ''), failText: 'Du må oppgi en fødselsdato' },
+            { test: () => (new Date(barn.fødselsdatoer[0]) <= new Date()), failText: 'Fødselsdatoen kan ikke være fram i tid' }
         ];
     }
 
@@ -126,7 +126,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                 <RadioPanelGruppe
                     legend={getMessage(intl, 'relasjonBarn.text.fodselTidspunkt')}
                     name="fodselsTidspunkt"
-                    onChange={(event: any, value: string) => dispatch(soknad.setErBarnetFodt(value))}
+                    onChange={(event: any, value: string) => dispatch(soknad.setErBarnetFødt(value))}
                     checked={this.getFodselsTidspunktSelectedValue()}
                     radios={[
                         {label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead'},
@@ -134,18 +134,18 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                     ]}
                 />
 
-                {barn.erBarnetFodt === true && (
+                {barn.erBarnetFødt === true && (
                     <ValidDateInput
-                        id="fodselsdato"
-                        label={getMessage(intl, 'relasjonBarn.text.fodselsdato')}
-                        selectedDate={barn && (barn as FodtBarn).fodselsdatoer.length > 0 ? (barn as any).fodselsdatoer[0] : ''}
-                        onChange={(e: string) => dispatch(soknad.addFodselsdato(e))}
-                        name="fodselsdato"
-                        validators={this.getFodselsdatoValidators()}
+                        id="fødselsdato"
+                        label={getMessage(intl, 'relasjonBarn.text.fødselsdato')}
+                        selectedDate={barn && (barn as FodtBarn).fødselsdatoer.length > 0 ? (barn as any).fødselsdatoer[0] : ''}
+                        onChange={(e: string) => dispatch(soknad.addFødselsdato(e))}
+                        name="fødselsdato"
+                        validators={this.getFødselsdatoValidators()}
                     />
                 )}
 
-                {barn.erBarnetFodt === false && (
+                {barn.erBarnetFødt === false && (
                     <RadioPanelGruppe
                         legend={getMessage(intl, 'relasjonBarn.text.antallBarn')}
                         name="antallBarn"
@@ -159,7 +159,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                     />
                 )}
 
-                {barn.erBarnetFodt === false && antallBarn &&  (
+                {barn.erBarnetFødt === false && antallBarn &&  (
                     <ValidDateInput
                         id="termindato"
                         name="termindato"
