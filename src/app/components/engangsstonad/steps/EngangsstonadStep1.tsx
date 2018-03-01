@@ -7,8 +7,7 @@ const Modal = require('nav-frontend-modal').default;
 import { soknadActionCreators as soknad } from '../../../redux/actions';
 import './../engangsstonad.less';
 import {
-    default as RelasjonTilBarn,
-    RelasjonTilFodtBarn, RelasjonTilUfodtBarn
+    default as RelasjonTilBarn, RelasjonTilFodtBarn, RelasjonTilUfodtBarn
 } from '../../../types/domain/RelasjonTilBarn';
 import { Normaltekst } from 'nav-frontend-typografi';
 const { ValidDateInput } = require('./../../../lib') as any;
@@ -130,8 +129,8 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                     onChange={(event: any, value: string) => dispatch(soknad.setBarnErFodt(value))}
                     checked={this.getFodselsTidspunktSelectedValue()}
                     radios={[
-                        {label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead'},
-                        {label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'), value: 'before'}
+                        { label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead' },
+                        { label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'), value: 'before' }
                     ]}
                 />
 
@@ -153,9 +152,9 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                         onChange={(event: any, value: string) => dispatch(soknad.setAntallBarn(value))}
                         checked={this.getAntallBarnSelectedValue()}
                         radios={[
-                            {label: getMessage(intl, 'relasjonBarn.radiobutton.ettbarn'), value: 'ett'},
-                            {label: getMessage(intl, 'relasjonBarn.radiobutton.tvillinger'), value: 'tvillinger'},
-                            {label: getMessage(intl, 'relasjonBarn.radiobutton.flere'), value: 'flere'}
+                            { label: getMessage(intl, 'relasjonBarn.radiobutton.ettbarn'), value: 'ett' },
+                            { label: getMessage(intl, 'relasjonBarn.radiobutton.tvillinger'), value: 'tvillinger' },
+                            { label: getMessage(intl, 'relasjonBarn.radiobutton.flere'), value: 'flere' }
                         ]}
                     />
                 )}
@@ -171,7 +170,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                     />
                 )}
 
-                {terminDato && ([
+                {terminDato && [
                     <DialogBox type="warning" overflow={true} key="dialog">
                         <Normaltekst>{getMessage(intl, 'relasjonBarn.text.terminbekreftelse')}</Normaltekst>
                         <LinkWithIcon
@@ -191,7 +190,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                         onChange={(e: string) => dispatch(soknad.setUtstedtDato(e))}
                         validators={this.getUtstedtDatoValidators()}
                     />
-                ])}
+                ]}
 
                 <Modal
                     isOpen={this.state.isModalOpen}
