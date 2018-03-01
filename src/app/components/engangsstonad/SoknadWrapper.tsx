@@ -86,14 +86,10 @@ export class SoknadWrapper extends React.Component<Props> {
 
         return (
             <div className="engangsstonad">
-                <ValidForm
-                    summaryTitle="Du må rette opp i følgende feil:"
-                    noSummary={activeStep === 3}
-                    onSubmit={this.handleNextClicked}
-                >
+                <ValidForm summaryTitle="Du må rette opp i følgende feil:" noSummary={activeStep === 3} onSubmit={this.handleNextClicked}>
                     <Sidetittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
                     <div className="topContent">
-                        <BackStep onClick={() => this.handleBackClicked()} />
+                        <BackStep className="topContent__backStep" onClick={() => this.handleBackClicked()} />
                         <StepIndicator stepTitles={titles} activeStep={activeStep} />
                         <div className="buffer" />
                     </div>
@@ -102,11 +98,7 @@ export class SoknadWrapper extends React.Component<Props> {
                     {activeStep === 2 && <EngangsstonadStep2 />}
                     {activeStep === 3 && <EngangsstonadStep3 />}
 
-                    {this.shouldRenderFortsettKnapp() === true && (
-                        <Hovedknapp className="fortsettKnapp">
-                            {fortsettKnappLabel}
-                        </Hovedknapp>
-                    )}
+                    {this.shouldRenderFortsettKnapp() === true && <Hovedknapp className="fortsettKnapp">{fortsettKnappLabel}</Hovedknapp>}
                 </ValidForm>
             </div>
         );
