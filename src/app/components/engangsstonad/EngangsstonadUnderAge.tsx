@@ -12,43 +12,51 @@ import getMessage from '../../util/i18n/i18nUtils';
 import './engangsstonad.less';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Person from '../../types/domain/Person';
+import { erOver18ÅrSiden } from 'util/validation/validationUtils';
+import { ExternalProps } from '../../types/index';
 
 interface StateProps {
     person: Person;
 }
 
-type Props = StateProps & InjectedIntlProps;
-export const EngangsstonadUnderAge: React.StatelessComponent<Props> = (props) => {
-    const { intl } = props;
+type Props = StateProps & InjectedIntlProps & ExternalProps;
 
-    return (
-        <div className="engangsstonad">
-            <DocumentTitle title="Kvittering - NAV Engangsstønad" />
-            <HeaderIllustration
-                dialog={{
-                    title: getMessage(intl, 'kvittering.snakkeboble.overskrift', {
-                        name: props.person.fornavn
-                    }),
-                    text: getMessage(intl, 'intro.text.under18')
-                }}
-                title={getMessage(intl, 'intro.pageheading.soknadES')}
-                svg={VelkommenIllustration}
-                theme={Theme.orange}
-            />
-            <Ingress>{intl.formatMessage({ id: 'intro.text.omES' })}</Ingress>
-            <a
-                className="paperVersionLink"
-                href="#"
-            >
-                {getMessage(intl, 'intro.text.lastNedPapirsoknad')}
-            </a>
-            <div className="engangsstonad__centerButton">
-                <Hovedknapp>
-                    {intl.formatMessage({ id: 'kvittering.text.lukkVinduet' })}
-                </Hovedknapp>
+export const EngangsstonadUnderAge: React.StatelessComponent<Props> = (props: Props) => {
+    const { history, intl, person } = props;
+
+    if (person && erOver18ÅrSiden(person.fødselsdato)) {
+        history.push('/engangsstonad/confirmation');
+    } else if (person) {
+        return (
+            <div className="engangsstonad">
+                <DocumentTitle title="Kvittering - NAV Engangsstønad" />
+                <HeaderIllustration
+                    dialog={{
+                        title: getMessage(intl, 'kvittering.snakkeboble.overskrift', {
+                            name: props.person.fornavn
+                        }),
+                        text: getMessage(intl, 'intro.text.under18')
+                    }}
+                    title={getMessage(intl, 'intro.pageheading.soknadES')}
+                    svg={VelkommenIllustration}
+                    theme={Theme.orange}
+                />
+                <Ingress>{intl.formatMessage({ id: 'intro.text.omES' })}</Ingress>
+                <a
+                    className="paperVersionLink"
+                    href="#"
+                >
+                    {getMessage(intl, 'intro.text.lastNedPapirsoknad')}
+                </a>
+                <div className="engangsstonad__centerButton">
+                    <Hovedknapp>
+                        {intl.formatMessage({ id: 'kvittering.text.lukkVinduet' })}
+                    </Hovedknapp>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+    return null;
 };
 
 // tslint:disable-next-line no-any

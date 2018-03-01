@@ -77,6 +77,27 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                     />
                 </Normaltekst>
             </li>
+            <li>
+                <Normaltekst>
+                    <FormattedMessage
+                        id="rettigheter.text.personvernerklering"
+                        values={{
+                            link: (
+                                // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                                <a
+                                    href={'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/' +
+                                    'Teknisk+brukerstotte/Snarveier/' +
+                                    'personvernerkl%C3%A6ring-for-arbeids-og-velferdsetaten'}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <FormattedMessage id="rettigheter.text.personvernerklering.link" />
+                                </a>
+                            )
+                        }}
+                    />
+                </Normaltekst>
+            </li>
         </ul>
     </div>
 );

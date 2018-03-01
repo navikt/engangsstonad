@@ -96,6 +96,8 @@
 		"Jeg forstår at hvis jeg gir uriktige opplysninger kan det få konsekvenser for retten til engangsstønaden.",
 	"rettigheter.text.lestOgForstått": "Jeg har lest og forstått det som står på {link}",
 	"rettigheter.text.lestOgForstått.link": "nav.no/rettogplikt",
+	"rettigheter.text.personvernerklering": "Jeg kan lese mer om NAV sin personvernerklering her {link}",
+	"rettigheter.text.personvernerklering.link": "NAVs personvernerklæring",
 
 	"terminbekreftelsen.sectionheading.terminbekreftelsen": "Om terminbekreftelsen",
 	"terminbekreftelsen.text.terminbekreftelsen":

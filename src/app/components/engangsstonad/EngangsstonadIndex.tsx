@@ -14,6 +14,7 @@ import { ExternalProps } from '../../types';
 import './engangsstonad.less';
 import { DispatchProps } from '../../redux/types';
 import Person from '../../types/domain/Person';
+import { erOver18ÅrSiden } from 'util/validation/validationUtils';
 
 interface StateProps {
     person: Person;
@@ -42,31 +43,51 @@ export class EngangsstonadIndex extends React.Component<Props> {
         return queryStringParser.parse(this.props.location.search);
     }
 
-    render() {
+    renderContent(content: React.ReactNode) {
         return (
             <div className="engangsstonad">
-                <Switch>
-                    <Route
-                        path="/engangsstonad/confirmation"
-                        component={EngangsstonadConfirmation}
-                    />
-                    <Route
-                        path="/engangsstonad/underAge"
-                        component={EngangsstonadUnderAge}
-                    />
-                    <Route
-                        path="/engangsstonad/completed"
-                        component={EngangsstonadCompleted}
-                    />
-                    <Route
-                        path="/engangsstonad/soknad"
-                        component={SoknadWrapper}
-                    />
-                    <Redirect
-                        to="/engangsstonad/confirmation"
-                    />
-                </Switch>
+                {content}
             </div>
+        );
+    }
+
+    render() {
+        const { person } = this.props;
+
+        if (!person || !person.fødselsdato) {
+            return this.renderContent(<div>No person found</div>);
+        }
+
+        if (person.kjønn === 'M') {
+            return this.renderContent(<div>Fordi du er mann må du bla bla bla</div>);
+        }
+
+        if (!erOver18ÅrSiden(person.fødselsdato)) {
+            this.props.history.push('/engangsstonad/underAge');
+        }
+
+        return this.renderContent(
+            <Switch>
+            <Route
+                path="/engangsstonad/confirmation"
+                component={EngangsstonadConfirmation}
+            />
+            <Route
+                path="/engangsstonad/underAge"
+                component={EngangsstonadUnderAge}
+            />
+            <Route
+                path="/engangsstonad/completed"
+                component={EngangsstonadCompleted}
+            />
+            <Route
+                path="/engangsstonad/soknad"
+                component={SoknadWrapper}
+            />
+            <Redirect
+                to="/engangsstonad/confirmation"
+            />
+        </Switch>
         );
     }
 }
