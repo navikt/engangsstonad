@@ -14,7 +14,6 @@ const webpackConfig = {
     alias: {
       assets: path.resolve(__dirname, './../../app/assets/'),
       components: path.resolve(__dirname, './../../app/components/'),
-      connectedComponents: path.resolve(__dirname, './../../app/connected-components/'),
       containers: path.resolve(__dirname, './../../app/containers/'),
       actions: path.resolve(__dirname, './../../app/redux/actions/'),
       reducers: path.resolve(__dirname, './../../app/redux/reducers'),

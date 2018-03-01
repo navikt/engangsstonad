@@ -8,9 +8,10 @@ import getMessage from '../util/i18n/i18nUtils';
 import StepIndicator from 'components/progress-indicator/StepIndicator';
 import { Sidetittel } from 'nav-frontend-typografi';
 
-import Steg1 from 'connectedComponents/engangsstonad-steg/Steg1';
-import Steg2 from 'connectedComponents/engangsstonad-steg/Steg2';
-import Steg3 from 'connectedComponents/engangsstonad-steg/Steg3';
+import Steg1 from './../connected-components//engangsstonad-steg/Steg1';
+import Steg2 from './../connected-components/engangsstonad-steg/Steg2';
+import Steg3 from './../connected-components/engangsstonad-steg/Steg3';
+import getStepConfig from './../connected-components/engangsstonad-steg/steg.config';
 
 import '../styles/engangsstonad.less';
 import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSoknadResponse';
@@ -18,7 +19,6 @@ import Utenlandsopphold from '../types/domain/Utenlandsopphold';
 import { FodtBarn, UfodtBarn } from '../types/domain/Barn';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../redux/types';
-import getStepConfig from './../connected-components/engangsstonad-steg/steg.config';
 
 const { ValidForm } = require('./../lib') as any;
 

@@ -17,8 +17,8 @@ import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 import { DispatchProps } from 'app/redux/types';
 import Utenlandsopphold from '../../types/domain/Utenlandsopphold';
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
-import OppsummeringBarn from 'connectedComponents/oppsummering/BarnOppsummering';
-import OppsummeringUtenlandsopphold from 'connectedComponents/oppsummering/UtenlandsoppholdOppsummering';
+import OppsummeringBarn from './../oppsummering/BarnOppsummering';
+import OppsummeringUtenlandsopphold from './../oppsummering/UtenlandsoppholdOppsummering';
 const { ValidGroup } = require('./../../lib') as any;
 import '../../styles/engangsstonad.less';
 
