@@ -94,7 +94,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
         }
 
         const now = moment();
-        const birthDate = moment(person.fodselsdato);
+        const birthDate = moment(person.fødselsdato);
         if (now.diff(birthDate, 'years') < 18) {
             this.props.history.push('/engangsstonad/underAge');
         }
