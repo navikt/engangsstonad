@@ -2,25 +2,25 @@ import * as React from 'react';
 import CountryListElement from './CountryListElement';
 import CountryListSummaryElement from './CountryListSummaryElement';
 import './countryPicker.less';
-import { Utenlandsopphold } from '../../../types/domain/Medlemsskap';
+import { Periode } from '../../../types/domain/Utenlandsopphold';
 
 interface CountryListProps {
-    utenlandsoppholdListe: Utenlandsopphold[];
+    utenlandsoppholdListe: Periode[];
 }
 
 export const CountrySummaryList: React.StatelessComponent<CountryListProps> = (props) => (
-    <ul>{props.utenlandsoppholdListe.map((visit: Utenlandsopphold, index: number) => (
+    <ul>{props.utenlandsoppholdListe.map((periode: Periode, index: number) => (
         <CountryListSummaryElement
             key={index}
-            utenlandsopphold={visit}
+            utenlandsopphold={periode}
         />
     ))}
     </ul>
 );
 
 interface EditableCountryListProps extends CountryListProps {
-    onEditClick: (utl: Utenlandsopphold) => void;
-    onDeleteClick: (utl: Utenlandsopphold) => void;
+    onEditClick: (periode: Periode) => void;
+    onDeleteClick: (periode: Periode) => void;
 }
 
 export const CountryList: React.StatelessComponent<EditableCountryListProps> = (props) => (

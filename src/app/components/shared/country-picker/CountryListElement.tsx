@@ -4,17 +4,17 @@ const { Normaltekst } = require('nav-frontend-typografi');
 const Icon = require('nav-frontend-ikoner-assets').default;
 import { ISODateToMaskedInput } from '../../../util/date/dateUtils';
 import './countryPicker.less';
-import { Utenlandsopphold } from '../../../types/domain/Medlemsskap';
+import { Periode } from '../../../types/domain/Utenlandsopphold';
 
 interface Props {
-    utenlandsopphold: Utenlandsopphold;
-    onDeleteClick: (utl: Utenlandsopphold) => void;
-    onEditClick: (utl: Utenlandsopphold) => void;
+    utenlandsopphold: Periode;
+    onDeleteClick: (periode: Periode) => void;
+    onEditClick: (periode: Periode) => void;
 }
 
 const CountryListElement: React.StatelessComponent<Props> = (props) => {
-    const { land } = props.utenlandsopphold;
-    const { fom, tom } = props.utenlandsopphold.varighet;
+    const { fom, tom, land } = props.utenlandsopphold;
+
     return (
         <li id="helediv" className="countryElement" onClick={() => props.onEditClick(props.utenlandsopphold)}>
             <span className={`flag-icon flag-icon-${land.toLowerCase()}`} />

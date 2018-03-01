@@ -3,30 +3,30 @@ import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWith
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import getMessage from 'util/i18n/i18nUtils';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { RelasjonTilFodtBarn, RelasjonTilUfodtBarn } from 'app/types/domain/RelasjonTilBarn';
+import { FodtBarn, UfodtBarn } from 'app/types/domain/Barn';
 import { ISODateToMaskedInput } from 'util/date/dateUtils';
 
 import '../engangsstonad/engangsstonad.less';
 
 interface Props {
-    barnErFodt?: boolean;
-    relasjonTilBarn: RelasjonTilFodtBarn & RelasjonTilUfodtBarn;
+    barn: FodtBarn & UfodtBarn;
 }
 
-const OppsummeringRelasjonTilBarn: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
-    const { intl, barnErFodt } = props;
-    const { fodselsdato, terminDato, utstedtDato } = props.relasjonTilBarn;
+const OppsummeringBarn: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
+    const { intl } = props;
+    const { erBarnetFodt, fodselsdatoer, termindato, terminbekreftelseDato } = props.barn;
 
-    if (barnErFodt && fodselsdato) {
-        return(
+    if (erBarnetFodt && fodselsdatoer && fodselsdatoer.length > 0) {
+        return (
             <DisplayTextWithLabel
                 label="Søknaden gjelder bla bla..."
-                text={fodselsdato}
-            />);
-    } else if (terminDato && utstedtDato) {
+                text={fodselsdatoer[0]}
+            />
+        );
+    } else if (termindato && terminbekreftelseDato) {
 
         let antallBarnSummaryText;
-        const { antallBarn } = props.relasjonTilBarn;
+        const { antallBarn } = props.barn;
         if (antallBarn === 1) {
             antallBarnSummaryText = getMessage(intl, 'relasjonBarn.radiobutton.ettbarn');
         } else if (antallBarn === 2) {
@@ -47,7 +47,7 @@ const OppsummeringRelasjonTilBarn: React.StatelessComponent<Props & InjectedIntl
                 />
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'relasjonBarn.text.termindato')}
-                    text={ISODateToMaskedInput(terminDato)}
+                    text={ISODateToMaskedInput(termindato)}
                 />
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.vedlagtTerminbekreftelse')}
@@ -55,11 +55,11 @@ const OppsummeringRelasjonTilBarn: React.StatelessComponent<Props & InjectedIntl
                 />
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.vedlagtTerminbekreftelse')}
-                    text={ISODateToMaskedInput(utstedtDato)}
+                    text={ISODateToMaskedInput(terminbekreftelseDato)}
                 />
             </div>
         );
     }
     return null;
 };
-export default injectIntl(OppsummeringRelasjonTilBarn);
+export default injectIntl(OppsummeringBarn);

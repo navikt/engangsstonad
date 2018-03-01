@@ -5,17 +5,16 @@ const { Normaltekst } = require('nav-frontend-typografi');
 import { ISODateToMaskedInput } from '../../../util/date/dateUtils';
 import getMessage from '../../../util/i18n/i18nUtils';
 import './countryPicker.less';
-import { Utenlandsopphold } from '../../../types/domain/Medlemsskap';
+import { Periode } from '../../../types/domain/Utenlandsopphold';
 
 interface OwnProps {
-    utenlandsopphold: Utenlandsopphold;
+    utenlandsopphold: Periode;
 }
 
 type Props = OwnProps & InjectedIntlProps;
 
 const CountryListSummaryElement: React.StatelessComponent<Props>  = (props) => {
-    const { land } = props.utenlandsopphold;
-    const { fom, tom } = props.utenlandsopphold.varighet;
+    const { fom, tom, land } = props.utenlandsopphold;
 
     return (
         <li className="countrySummaryElement">

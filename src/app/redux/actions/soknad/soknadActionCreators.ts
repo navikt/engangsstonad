@@ -1,25 +1,25 @@
 import { SoknadActionKeys, SoknadActionTypes } from './soknadActionDefinitions';
-import { ArbeidSiste12, Utenlandsopphold } from '../../../types/domain/Medlemsskap';
+import { Periode } from '../../../types/domain/Utenlandsopphold';
 
-export function addUtenlandsopphold(utenlandsopphold: Utenlandsopphold): SoknadActionTypes {
+export function addPeriode(periode: Periode): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.ADD_UTENLANDSOPPHOLD,
-        utenlandsopphold
+        type: SoknadActionKeys.ADD_PERIODE,
+        periode
     };
 }
 
-export function editUtenlandsopphold(utenlandsopphold: Utenlandsopphold, index: number): SoknadActionTypes {
+export function editPeriode(periode: Periode, index: number): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.EDIT_UTENLANDSOPPHOLD,
-        utenlandsopphold,
+        type: SoknadActionKeys.EDIT_PERIODE,
+        periode,
         index
     };
 }
 
-export function deleteUtenlandsopphold(utenlandsopphold: Utenlandsopphold): SoknadActionTypes {
+export function deletePeriode(periode: Periode): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.DELETE_UTENLANDSOPPHOLD,
-        utenlandsopphold
+        type: SoknadActionKeys.DELETE_PERIODE,
+        periode
     };
 }
 
@@ -37,38 +37,38 @@ export function setAntallBarn(antallBarn: string): SoknadActionTypes {
     };
 }
 
-export function setBarnErFodt(barnErFodt?: string): SoknadActionTypes {
+export function setErBarnetFodt(erBarnetFodt?: string): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.SET_BARN_ER_FODT,
-        barnErFodt: barnErFodt === undefined ? barnErFodt : barnErFodt === 'before'
+        type: SoknadActionKeys.SET_ER_BARNET_FODT,
+        erBarnetFodt: erBarnetFodt === undefined ? erBarnetFodt : erBarnetFodt === 'before'
     };
 }
 
-export function setFodselsdato(fodselsdato: string): SoknadActionTypes {
+export function addFodselsdato(fodselsdato: string): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.SET_FODSELSDATO,
+        type: SoknadActionKeys.ADD_FODSELSDATO,
         fodselsdato
     };
 }
 
-export function setTerminDato(terminDato: string): SoknadActionTypes {
+export function setTermindato(termindato: string): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.SET_TERMIN_DATO,
-        terminDato
+        type: SoknadActionKeys.SET_TERMINDATO,
+        termindato
     };
 }
 
-export function setUtstedtDato(utstedtDato: string): SoknadActionTypes {
+export function setTerminbekreftelseDato(terminbekreftelseDato: string): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.SET_UTSTEDT_DATO,
-        utstedtDato
+        type: SoknadActionKeys.SET_TERMINBEKREFTELSE_DATO,
+        terminbekreftelseDato
     };
 }
 
-export function setArbeidSiste12(arbeidSiste12: ArbeidSiste12): SoknadActionTypes {
+export function setJobbetINorgeSiste12Mnd(jobbetINorgeSiste12Mnd: string): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.SET_ARBEID_SISTE_12,
-        arbeidSiste12
+        type: SoknadActionKeys.SET_JOBBET_I_NORGE_SISTE_12_MND,
+        jobbetINorgeSiste12Mnd: jobbetINorgeSiste12Mnd === undefined ? jobbetINorgeSiste12Mnd : jobbetINorgeSiste12Mnd === ''
     };
 }
 
@@ -79,31 +79,31 @@ export function setFodselINorge(fodselINorge: string): SoknadActionTypes {
     };
 }
 
-export function setINorgeSiste12(iNorgeSiste12: string): SoknadActionTypes {
+export function setINorgeSiste12Mnd(iNorgeSiste12Mnd: string): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.SET_I_NORGE_SISTE_12,
-        iNorgeSiste12: iNorgeSiste12 === undefined ? iNorgeSiste12 : iNorgeSiste12 === 'norway'
+        type: SoknadActionKeys.SET_I_NORGE_SISTE_12_MND,
+        iNorgeSiste12Mnd: iNorgeSiste12Mnd === undefined ? iNorgeSiste12Mnd : iNorgeSiste12Mnd === 'norway'
     };
 }
 
-export function setINorgeNeste12(iNorgeNeste12: string): SoknadActionTypes {
+export function setINorgeNeste12Mnd(iNorgeNeste12Mnd: string): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.SET_I_NORGE_NESTE_12,
-        iNorgeNeste12: iNorgeNeste12 === undefined ? iNorgeNeste12 : iNorgeNeste12 === 'norway'
+        type: SoknadActionKeys.SET_I_NORGE_NESTE_12_MND,
+        iNorgeNeste12Mnd: iNorgeNeste12Mnd === undefined ? iNorgeNeste12Mnd : iNorgeNeste12Mnd === 'norway'
     };
 }
 
 export default {
-    addUtenlandsopphold,
-    editUtenlandsopphold,
-    deleteUtenlandsopphold,
+    addPeriode,
+    editPeriode,
+    deletePeriode,
     setAntallBarn,
-    setBarnErFodt,
-    setFodselsdato,
-    setTerminDato,
-    setUtstedtDato,
-    setArbeidSiste12,
+    setErBarnetFodt,
+    addFodselsdato,
+    setTermindato,
+    setTerminbekreftelseDato,
+    setJobbetINorgeSiste12Mnd,
     setFodselINorge,
-    setINorgeSiste12,
-    setINorgeNeste12
+    setINorgeSiste12Mnd,
+    setINorgeNeste12Mnd
 };

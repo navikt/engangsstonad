@@ -12,21 +12,20 @@ import { commonActionCreators as common } from '../../../redux/actions';
 import getMessage from '../../../util/i18n/i18nUtils';
 
 import Person from '../../../types/domain/Person';
-import { RelasjonTilFodtBarn, RelasjonTilUfodtBarn } from '../../../types/domain/RelasjonTilBarn';
+import { FodtBarn, UfodtBarn } from '../../../types/domain/Barn';
 import { DispatchProps } from 'app/redux/types';
-import Medlemsskap from '../../../types/domain/Medlemsskap';
+import Utenlandsopphold from '../../../types/domain/Utenlandsopphold';
 import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
 import '../engangsstonad.less';
-import OppsummeringRelasjonTilBarn from 'components/oppsummering/OppsummeringRelasjonTilBarn';
-import OppsummeringMedlemskap from 'components/oppsummering/OppsummeringMedlemskap';
+import OppsummeringBarn from 'components/oppsummering/OppsummeringBarn';
+import OppsummeringUtenlandsopphold from 'components/oppsummering/OppsummeringUtenlandsopphold';
 const { ValidGroup } = require('./../../../lib') as any;
 
 interface StateProps {
     bekreftetInformasjon: boolean;
     person: Person;
-    medlemsskap: Medlemsskap;
-    relasjonTilBarn: RelasjonTilFodtBarn & RelasjonTilUfodtBarn;
-    barnErFodt?: boolean;
+    utenlandsopphold: Utenlandsopphold;
+    barn: FodtBarn & UfodtBarn;
     soknadPostResponse: EngangsstonadSoknadResponse;
 }
 
@@ -47,11 +46,8 @@ export class Step3 extends React.Component<Props> {
                     navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn)}
                     personnummer="XXXXXXXXXXX"
                 />
-                <OppsummeringRelasjonTilBarn
-                    barnErFodt={this.props.barnErFodt}
-                    relasjonTilBarn={this.props.relasjonTilBarn}
-                />
-                <OppsummeringMedlemskap medlemsskap={this.props.medlemsskap}/>
+                <OppsummeringBarn barn={this.props.barn} />
+                <OppsummeringUtenlandsopphold utenlandsopphold={this.props.utenlandsopphold} />
 
                 <ValidGroup
                     validators={[
@@ -73,9 +69,8 @@ export class Step3 extends React.Component<Props> {
 const mapStateToProps = (state: any) => ({
     bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
     person: state.apiReducer.person,
-    medlemsskap: state.soknadReducer.medlemsskap,
-    relasjonTilBarn: state.soknadReducer.relasjonTilBarn,
-    barnErFodt: state.soknadReducer.barnErFodt,
+    barn: state.soknadReducer.barn,
+    utenlandsopphold: state.soknadReducer.utenlandsopphold,
     soknadPostResponse: state.apiReducer.soknad
 });
 export default connect<StateProps>(mapStateToProps)(injectIntl(Step3));

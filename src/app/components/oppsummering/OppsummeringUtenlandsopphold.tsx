@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Medlemsskap from '../../types/domain/Medlemsskap';
+import Utenlandsopphold from '../../types/domain/Utenlandsopphold';
 import DisplayTextWithLabel from 'shared/display-text-with-label/DisplayTextWithLabel';
 import Ingress from 'nav-frontend-typografi/lib/ingress';
 import getMessage from 'util/i18n/i18nUtils';
@@ -10,18 +10,18 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import '../engangsstonad/engangsstonad.less';
 
 interface Props {
-    medlemsskap: Medlemsskap;
+    utenlandsopphold: Utenlandsopphold;
 }
 
-const OppsummeringMedlemskap: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
-    const {intl } = props;
-    const {fodselINorge, iNorgeNeste12, iNorgeSiste12, utenlandsopphold} = props.medlemsskap;
+const OppsummeringUtenlandsopphold: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
+    const { intl } = props;
+    const { fodselINorge, iNorgeNeste12Mnd, iNorgeSiste12Mnd, perioder } = props.utenlandsopphold;
 
-    const iNorgeNeste12Text = iNorgeNeste12
+    const iNorgeNeste12MndText = iNorgeNeste12Mnd
         ? getMessage(intl, 'medlemmskap.radiobutton.boNorge')
         : getMessage(intl, 'medlemmskap.radiobutton.boUtlandet');
 
-    const fodselINorgeText = fodselINorge
+    const fodselINorgeMndText = fodselINorge
         ? getMessage(intl, 'medlemmskap.radiobutton.vareNorge')
         : getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet');
 
@@ -31,25 +31,25 @@ const OppsummeringMedlemskap: React.StatelessComponent<Props & InjectedIntlProps
                 {getMessage(intl, 'medlemmskap.sectionheading.medlemmskap')}
             </Ingress>
 
-            {iNorgeSiste12 ? (
+            {iNorgeSiste12Mnd ? (
                 <DisplayTextWithLabel label={getMessage(intl, 'oppsummering.text.boddSisteTolv')} text="Norge"/>
             ) : (
                 <div>
                     <EtikettLiten className="textWithLabel__label">
                         {getMessage(intl, 'oppsummering.text.boddSisteTolv')}
                     </EtikettLiten>
-                    <CountrySummaryList utenlandsoppholdListe={utenlandsopphold}/>
+                    <CountrySummaryList utenlandsoppholdListe={perioder} />
                 </div>
             )}
             <DisplayTextWithLabel
                 label={getMessage(intl, 'medlemmskap.text.neste12mnd')}
-                text={iNorgeNeste12Text}
+                text={iNorgeNeste12MndText}
             />
             <DisplayTextWithLabel
                 label={getMessage(intl, 'oppsummering.text.ogKommerPåFødselstidspunktet')}
-                text={fodselINorgeText}
+                text={fodselINorgeMndText}
             />
         </div>
     );
 };
-export default injectIntl(OppsummeringMedlemskap);
+export default injectIntl(OppsummeringUtenlandsopphold);

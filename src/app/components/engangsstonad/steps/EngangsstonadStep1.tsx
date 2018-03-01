@@ -6,10 +6,7 @@ const { RadioPanelGruppe } = require('nav-frontend-skjema');
 const Modal = require('nav-frontend-modal').default;
 import { soknadActionCreators as soknad } from '../../../redux/actions';
 import './../engangsstonad.less';
-import {
-    default as RelasjonTilBarn,
-    RelasjonTilFodtBarn, RelasjonTilUfodtBarn
-} from '../../../types/domain/RelasjonTilBarn';
+import { default as Barn, FodtBarn, UfodtBarn } from '../../../types/domain/Barn';
 import { Normaltekst } from 'nav-frontend-typografi';
 const { ValidDateInput } = require('./../../../lib') as any;
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
@@ -25,8 +22,7 @@ import {
 } from 'util/validation/validationUtils';
 
 interface StateProps {
-    barnErFodt?: boolean;
-    relasjonTilBarn: RelasjonTilBarn;
+    barn: Barn;
     person: Person;
 }
 
@@ -55,20 +51,23 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
     }
 
     getFodselsTidspunktSelectedValue() {
-        const { barnErFodt } = this.props;
-        if (barnErFodt === true) {
-            return 'before';
-        } else if (barnErFodt === false) {
-            return 'ahead';
-        } else {
-            return undefined;
+        const { barn } = this.props;
+        if (barn) {
+            const { erBarnetFodt } = barn;
+            if (erBarnetFodt === true) {
+                return 'before';
+            } else if (erBarnetFodt === false) {
+                return 'ahead';
+            }
         }
+        return undefined;
+
     }
 
     getAntallBarnSelectedValue() {
-        const { relasjonTilBarn } = this.props;
-        if (relasjonTilBarn) {
-            const { antallBarn } = relasjonTilBarn;
+        const { barn } = this.props;
+        if (barn) {
+            const { antallBarn } = barn;
             if (antallBarn === 1) {
                 return 'ett';
             } else if (antallBarn === 2) {
@@ -81,45 +80,45 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
     }
 
     getFodselsdatoValidators() {
-        const relasjonTilBarn = this.props.relasjonTilBarn as any;
+        const barn = this.props.barn as any;
         return [
-            { test: () => (relasjonTilBarn.fodselsdato), failText: 'Du må oppgi en fødselsdato' },
-            { test: () => (relasjonTilBarn.fodselsdato !== ''), failText: 'Du må oppgi en fødselsdato' },
-            { test: () => (new Date(relasjonTilBarn.fodselsdato) <= new Date()), failText: 'Fødselsdatoen kan ikke være fram i tid' }
+            { test: () => (barn.fodselsdatoer[0]), failText: 'Du må oppgi en fødselsdato' },
+            { test: () => (barn.fodselsdatoer[0] !== ''), failText: 'Du må oppgi en fødselsdato' },
+            { test: () => (new Date(barn.fodselsdatoer[0]) <= new Date()), failText: 'Fødselsdatoen kan ikke være fram i tid' }
         ];
     }
 
-    getTerminDatoValidators() {
-        const relasjonTilBarn = this.props.relasjonTilBarn as any;
+    getTermindatoValidators() {
+        const barn = this.props.barn as any;
         return [
-            { test: () => (relasjonTilBarn.terminDato), failText: 'Du må oppgi en termindato' },
-            { test: () => (relasjonTilBarn.terminDato !== ''), failText: 'Du må oppgi en termindato' },
-            { test: () => (erIUke26Pluss3(relasjonTilBarn.terminDato)), failText: 'Du må være i uke 26 eller senere' },
-            { test: () => (erMindreEnn3UkerSiden(relasjonTilBarn.terminDato)), failText: 'Du kan ikke søke mer enn 3 uker etter termindato'}
+            { test: () => (barn.termindato), failText: 'Du må oppgi en termindato' },
+            { test: () => (barn.termindato !== ''), failText: 'Du må oppgi en termindato' },
+            { test: () => (erIUke26Pluss3(barn.termindato)), failText: 'Du må være i uke 26 eller senere' },
+            { test: () => (erMindreEnn3UkerSiden(barn.termindato)), failText: 'Du kan ikke søke mer enn 3 uker etter termindato'}
         ];
     }
 
-    getUtstedtDatoValidators() {
-        const relasjonTilBarn = this.props.relasjonTilBarn as any;
+    getTerminbekreftelseDatoValidators() {
+        const barn = this.props.barn as any;
         return [
-            { test: () => (relasjonTilBarn.utstedtDato), failText: 'Du må oppgi en terminbekreftelsesdato' },
-            { test: () => (relasjonTilBarn.utstedtDato !== ''), failText: 'Du må oppgi en terminbekreftelsesdato' },
-            { test: () => (idagEllerTidligere(relasjonTilBarn.utstedtDato)), failText: 'Terminbekreftelsesdatoen må være idag eller tidligere' },
+            { test: () => (barn.terminbekreftelseDato), failText: 'Du må oppgi en terminbekreftelsesdato' },
+            { test: () => (barn.terminbekreftelseDato !== ''), failText: 'Du må oppgi en terminbekreftelsesdato' },
+            { test: () => (idagEllerTidligere(barn.terminbekreftelseDato)), failText: 'Terminbekreftelsesdatoen må være idag eller tidligere' },
             {
-                test: () => (new Date(relasjonTilBarn.utstedtDato) < new Date(relasjonTilBarn.terminDato)),
+                test: () => (new Date(barn.terminbekreftelseDato) < new Date(barn.termindato)),
                 failText: 'Terminbekreftelsesdatoen må være før termindato'
             },
             {
-                test: () => (utstedtDatoErIUke26(relasjonTilBarn.utstedtDato, relasjonTilBarn.terminDato)),
+                test: () => (utstedtDatoErIUke26(barn.terminbekreftelseDato, barn.termindato)),
                 failText: 'Terminbekreftelsesdatoen må ha passert 26 uker i svangerskapet'
             }
         ];
     }
 
     render() {
-        const { barnErFodt, relasjonTilBarn, dispatch, intl } = this.props;
-        const antallBarn = relasjonTilBarn && relasjonTilBarn.antallBarn;
-        const terminDato = relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).terminDato;
+        const { barn, dispatch, intl } = this.props;
+        const antallBarn = barn && barn.antallBarn;
+        const terminDato = barn && (barn as UfodtBarn).termindato;
 
         return (
             <div className="engangsstonad__step">
@@ -127,7 +126,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                 <RadioPanelGruppe
                     legend={getMessage(intl, 'relasjonBarn.text.fodselTidspunkt')}
                     name="fodselsTidspunkt"
-                    onChange={(event: any, value: string) => dispatch(soknad.setBarnErFodt(value))}
+                    onChange={(event: any, value: string) => dispatch(soknad.setErBarnetFodt(value))}
                     checked={this.getFodselsTidspunktSelectedValue()}
                     radios={[
                         {label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead'},
@@ -135,18 +134,18 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                     ]}
                 />
 
-                {barnErFodt === true && (
+                {barn.erBarnetFodt === true && (
                     <ValidDateInput
                         id="fodselsdato"
                         label={getMessage(intl, 'relasjonBarn.text.fodselsdato')}
-                        selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilFodtBarn).fodselsdato}
-                        onChange={(e: string) => dispatch(soknad.setFodselsdato(e))}
+                        selectedDate={barn && (barn as FodtBarn).fodselsdatoer.length > 0 ? (barn as any).fodselsdatoer[0] : ''}
+                        onChange={(e: string) => dispatch(soknad.addFodselsdato(e))}
                         name="fodselsdato"
                         validators={this.getFodselsdatoValidators()}
                     />
                 )}
 
-                {barnErFodt === false && (
+                {barn.erBarnetFodt === false && (
                     <RadioPanelGruppe
                         legend={getMessage(intl, 'relasjonBarn.text.antallBarn')}
                         name="antallBarn"
@@ -160,14 +159,14 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                     />
                 )}
 
-                {barnErFodt === false && antallBarn &&  (
+                {barn.erBarnetFodt === false && antallBarn &&  (
                     <ValidDateInput
                         id="termindato"
                         name="termindato"
                         label={getMessage(intl, 'relasjonBarn.text.termindato')}
-                        selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).terminDato}
-                        onChange={(e: string) => dispatch(soknad.setTerminDato(e))}
-                        validators={this.getTerminDatoValidators()}
+                        selectedDate={barn && (barn as UfodtBarn).termindato}
+                        onChange={(e: string) => dispatch(soknad.setTermindato(e))}
+                        validators={this.getTermindatoValidators()}
                     />
                 )}
 
@@ -186,10 +185,10 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
                         id="terminbekreftelse"
                         name="terminbekreftelse"
                         key="dateInputTerminBekreftelse"
-                        selectedDate={relasjonTilBarn && (relasjonTilBarn as RelasjonTilUfodtBarn).utstedtDato}
+                        selectedDate={barn && (barn as UfodtBarn).terminbekreftelseDato}
                         label={getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}
-                        onChange={(e: string) => dispatch(soknad.setUtstedtDato(e))}
-                        validators={this.getUtstedtDatoValidators()}
+                        onChange={(e: string) => dispatch(soknad.setTerminbekreftelseDato(e))}
+                        validators={this.getTerminbekreftelseDatoValidators()}
                     />
                 ])}
 
@@ -207,8 +206,7 @@ export class EngangsstonadStep1 extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => ({
-    relasjonTilBarn: state.soknadReducer.relasjonTilBarn,
-    barnErFodt: state.soknadReducer.barnErFodt,
+    barn: state.soknadReducer.barn,
     person: state.commonReducer.person
 });
 

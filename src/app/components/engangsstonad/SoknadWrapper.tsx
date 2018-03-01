@@ -14,8 +14,8 @@ import EngangsstonadStep3 from 'components/engangsstonad/steps/EngangsstonadStep
 
 import './engangsstonad.less';
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
-import Medlemsskap from '../../types/domain/Medlemsskap';
-import { RelasjonTilFodtBarn, RelasjonTilUfodtBarn } from '../../types/domain/RelasjonTilBarn';
+import Utenlandsopphold from '../../types/domain/Utenlandsopphold';
+import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../../redux/types';
 import getStepConfig from './steps/steps.conf';
@@ -24,8 +24,8 @@ const { ValidForm } = require('./../../lib') as any;
 
 interface OwnProps {
     soknadPostResponse: EngangsstonadSoknadResponse;
-    medlemsskap: Medlemsskap;
-    relasjonTilBarn: RelasjonTilFodtBarn & RelasjonTilUfodtBarn;
+    utenlandsopphold: Utenlandsopphold;
+    barn: FodtBarn & UfodtBarn;
     activeStep: number;
 }
 
@@ -49,20 +49,20 @@ export class SoknadWrapper extends React.Component<Props> {
     }
 
     handleNextClicked() {
-        const { dispatch, medlemsskap, relasjonTilBarn } = this.props;
+        const { dispatch, barn, utenlandsopphold } = this.props;
         if (this.hasToWaitForResponse()) {
-            return dispatch(api.sendSoknad({ medlemsskap, relasjonTilBarn }));
+            return dispatch(api.sendSoknad({ utenlandsopphold, barn }));
         }
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
     }
 
     shouldRenderFortsettKnapp(): boolean {
-        const { activeStep, medlemsskap, relasjonTilBarn } = this.props;
-        if (activeStep === 1 && relasjonTilBarn) {
-            return relasjonTilBarn.utstedtDato !== undefined || relasjonTilBarn.fodselsdato !== undefined;
-        } else if (activeStep === 2 && medlemsskap) {
-            return medlemsskap.fodselINorge !== undefined;
+        const { activeStep, utenlandsopphold, barn } = this.props;
+        if (activeStep === 1 && barn) {
+            return barn.terminbekreftelseDato !== undefined || (barn.fodselsdatoer && barn.fodselsdatoer.length > 0);
+        } else if (activeStep === 2 && utenlandsopphold) {
+            return utenlandsopphold.fodselINorge !== undefined;
         }
         return activeStep === 3;
     }
@@ -100,8 +100,8 @@ export class SoknadWrapper extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-    medlemsskap: state.soknadReducer.medlemsskap,
-    relasjonTilBarn: state.soknadReducer.relasjonTilBarn,
+    utenlandsopphold: state.soknadReducer.utenlandsopphold,
+    barn: state.soknadReducer.barn,
     soknadPostResponse: state.apiReducer.soknad,
     activeStep: state.stepReducer.activeStep
 });

@@ -1,76 +1,71 @@
 import { SoknadActionKeys, SoknadActionTypes } from '../actions/soknad/soknadActionDefinitions';
-import { Utenlandsopphold } from '../../types/domain/Medlemsskap';
 import EngangsstonadSoknad from '../../types/domain/EngangsstonadSoknad';
 
 const getDefaultState = () => {
     const engangsstonadSoknad: EngangsstonadSoknad = {
-        medlemsskap: {
-            utenlandsopphold: [] as Utenlandsopphold[]
+        barn: {
+            fodselsdatoer: []
+        },
+        utenlandsopphold: {
+            perioder: []
         }
     };
     return engangsstonadSoknad;
 };
 
 const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => {
-    let { medlemsskap, relasjonTilBarn } = state;
+    let { barn, utenlandsopphold } = state;
 
     switch (action.type) {
-        case SoknadActionKeys.SET_BARN_ER_FODT:
-            const { barnErFodt } = action;
+        case SoknadActionKeys.ADD_PERIODE:
+            const perioder = utenlandsopphold.perioder.concat([action.periode]);
+            return { ...state, utenlandsopphold: { ...utenlandsopphold, perioder } };
+        case SoknadActionKeys.EDIT_PERIODE:
+            utenlandsopphold.perioder[action.index] = action.periode;
+            return { ...state, utenlandsopphold };
+        case SoknadActionKeys.DELETE_PERIODE:
             return {
                 ...state,
-                barnErFodt: barnErFodt,
-                relasjonTilBarn: undefined
-            };
-        case SoknadActionKeys.ADD_UTENLANDSOPPHOLD:
-            const utenlandsopphold = medlemsskap.utenlandsopphold.concat([action.utenlandsopphold]);
-            return { ...state, medlemsskap: { ...medlemsskap, utenlandsopphold } };
-        case SoknadActionKeys.EDIT_UTENLANDSOPPHOLD:
-            medlemsskap.utenlandsopphold[action.index] = action.utenlandsopphold;
-            return { ...state, medlemsskap };
-        case SoknadActionKeys.DELETE_UTENLANDSOPPHOLD:
-            return {
-                ...state,
-                medlemsskap: {
-                    ...medlemsskap,
-                    utenlandsopphold: medlemsskap.utenlandsopphold.filter((opphold) => {
-                        return opphold.land !== action.utenlandsopphold.land;
+                utenlandsopphold: {
+                    ...utenlandsopphold,
+                    utenlandsopphold: utenlandsopphold.perioder.filter((opphold) => {
+                        return opphold.land !== action.periode.land;
                     })
                 }
             };
-        case SoknadActionKeys.SET_ARBEID_SISTE_12:
-            const { arbeidSiste12 } = action;
-            return { ...state, medlemsskap: { ...medlemsskap, arbeidSiste12 } };
+        case SoknadActionKeys.SET_JOBBET_I_NORGE_SISTE_12_MND:
+            const { jobbetINorgeSiste12Mnd } = action;
+            return { ...state, utenlandsopphold: { ...utenlandsopphold, jobbetINorgeSiste12Mnd } };
         case SoknadActionKeys.SET_FODSEL_I_NORGE:
             const { fodselINorge } = action;
-            return { ...state, medlemsskap: { ...medlemsskap, fodselINorge } };
-        case SoknadActionKeys.SET_I_NORGE_SISTE_12:
-            const { iNorgeSiste12 } = action;
-            return { ...state, medlemsskap: { ...getDefaultState().medlemsskap, iNorgeSiste12 } };
-        case SoknadActionKeys.SET_I_NORGE_NESTE_12:
-            const { iNorgeNeste12 } = action;
-            return { ...state, medlemsskap: { ...medlemsskap, iNorgeNeste12, fodselINorge: undefined } };
+            return { ...state, utenlandsopphold: { ...utenlandsopphold, fodselINorge } };
+        case SoknadActionKeys.SET_I_NORGE_SISTE_12_MND:
+            const { iNorgeSiste12Mnd } = action;
+            return { ...state, utenlandsopphold: { ...getDefaultState().utenlandsopphold, iNorgeSiste12Mnd } };
+        case SoknadActionKeys.SET_I_NORGE_NESTE_12_MND:
+            const { iNorgeNeste12Mnd } = action;
+            return { ...state, utenlandsopphold: { ...utenlandsopphold, iNorgeNeste12Mnd, fodselINorge: undefined } };
+        case SoknadActionKeys.SET_ER_BARNET_FODT:
+            const { erBarnetFodt } = action;
+            return { ...state, barn: { ...barn, erBarnetFodt } };
         case SoknadActionKeys.SET_ANTALL_BARN:
             const { antallBarn } = action;
-            return { ...state, relasjonTilBarn: { antallBarn } };
-        case SoknadActionKeys.SET_FODSELSDATO:
-            const { fodselsdato } = action;
+            return { ...state, barn: { ...barn, antallBarn } };
+        case SoknadActionKeys.ADD_FODSELSDATO:
+            const fodselsdatoer = [action.fodselsdato];
+            return { ...state, barn: { ...barn, fodselsdatoer }};
+        case SoknadActionKeys.SET_TERMINDATO:
+            const { termindato } = action;
             return {
                 ...state,
-                relasjonTilBarn: relasjonTilBarn ? { ...relasjonTilBarn, fodselsdato } : { fodselsdato }
+                barn: barn ?
+                    { ...barn, termindato } : { termindato }
             };
-        case SoknadActionKeys.SET_TERMIN_DATO:
-            const { terminDato } = action;
+        case SoknadActionKeys.SET_TERMINBEKREFTELSE_DATO:
+            const { terminbekreftelseDato } = action;
             return {
                 ...state,
-                relasjonTilBarn: relasjonTilBarn ?
-                    { ...relasjonTilBarn, terminDato } : { terminDato }
-            };
-        case SoknadActionKeys.SET_UTSTEDT_DATO:
-            const { utstedtDato } = action;
-            return {
-                ...state,
-                relasjonTilBarn: relasjonTilBarn ? { ...relasjonTilBarn, utstedtDato } : { utstedtDato }
+                barn: barn ? { ...barn, terminbekreftelseDato } : { terminbekreftelseDato }
             };
     }
     return state;

@@ -1,9 +1,9 @@
-import Medlemsskap from './../domain/Medlemsskap';
-import { RelasjonTilFodtBarn, RelasjonTilUfodtBarn } from './../domain/RelasjonTilBarn';
+import Utenlandsopphold from '../domain/Utenlandsopphold';
+import { FodtBarn, UfodtBarn } from '../domain/Barn';
 
 type EngangsstonadSoknad = {
-    medlemsskap: Medlemsskap;
-    relasjonTilBarn: RelasjonTilFodtBarn | RelasjonTilUfodtBarn;
+    utenlandsopphold: Utenlandsopphold;
+    barn: FodtBarn | UfodtBarn;
 };
 
 export default EngangsstonadSoknad;

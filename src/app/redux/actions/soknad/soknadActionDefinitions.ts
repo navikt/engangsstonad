@@ -1,69 +1,69 @@
-import { ArbeidSiste12, Utenlandsopphold } from '../../../types/domain/Medlemsskap';
+import { Periode } from '../../../types/domain/Utenlandsopphold';
 
 export enum SoknadActionKeys {
     // RelasjonTilBarn
+    'ADD_FODSELSDATO' = 'addFodselsdato',
     'SET_ANTALL_BARN' = 'setAntallBarn',
-    'SET_BARN_ER_FODT' = 'setBarnErFodt',
-    'SET_FODSELSDATO' = 'setFodselsdato',
-    'SET_TERMIN_DATO' = 'setTerminDato',
-    'SET_UTSTEDT_DATO' = 'setUtstedtDato',
+    'SET_ER_BARNET_FODT' = 'setErBarnetFodt',
+    'SET_TERMINDATO' = 'setTermindato',
+    'SET_TERMINBEKREFTELSE_DATO' = 'setTerminbekreftelseDato',
 
     // Medlemsskap
-    'ADD_UTENLANDSOPPHOLD' = 'addUtelandsopphold',
-    'EDIT_UTENLANDSOPPHOLD' = 'editUtenlandsopphold',
-    'DELETE_UTENLANDSOPPHOLD' = 'deleteUtenlandsopphold',
-    'SET_ARBEID_SISTE_12' = 'setArbeidSiste12',
-    'SET_I_NORGE_SISTE_12' = 'setINorgeSiste12',
-    'SET_I_NORGE_NESTE_12' = 'setINorgeNeste12',
+    'ADD_PERIODE' = 'addPeriode',
+    'EDIT_PERIODE' = 'editPeriode',
+    'DELETE_PERIODE' = 'deletePeriode',
+    'SET_JOBBET_I_NORGE_SISTE_12_MND' = 'setJobbetINorgeSiste12Mnd',
+    'SET_I_NORGE_SISTE_12_MND' = 'setINorgeSiste12Mnd',
+    'SET_I_NORGE_NESTE_12_MND' = 'setINorgeNeste12Mnd',
     'SET_FODSEL_I_NORGE' = 'setFodselINorge'
 }
 
-// RelasjonTilBarn
+// Barn
+interface AddFodselsdato {
+    type: SoknadActionKeys.ADD_FODSELSDATO;
+    fodselsdato: string;
+}
+
 interface SetAntallBarn {
     type: SoknadActionKeys.SET_ANTALL_BARN;
     antallBarn: number;
 }
 
-interface SetBarnErFodt {
-    type: SoknadActionKeys.SET_BARN_ER_FODT;
-    barnErFodt?: boolean;
+interface SetErBarnetFodt {
+    type: SoknadActionKeys.SET_ER_BARNET_FODT;
+    erBarnetFodt?: boolean;
 }
 
-interface SetFodselsdato {
-    type: SoknadActionKeys.SET_FODSELSDATO;
-    fodselsdato: string;
+interface SetTermindato {
+    type: SoknadActionKeys.SET_TERMINDATO;
+    termindato: string;
 }
 
-interface SetTerminDato {
-    type: SoknadActionKeys.SET_TERMIN_DATO;
-    terminDato: string;
-}
-
-interface SetUtstedtDato {
-    type: SoknadActionKeys.SET_UTSTEDT_DATO;
-    utstedtDato: string;
+interface SetTerminbekreftelseDato {
+    type: SoknadActionKeys.SET_TERMINBEKREFTELSE_DATO;
+    terminbekreftelseDato: string;
 }
 
 // Medlemsskap
-interface AddUtenlandsopphold {
-    type: SoknadActionKeys.ADD_UTENLANDSOPPHOLD;
-    utenlandsopphold: Utenlandsopphold;
+interface AddPeriode {
+    type: SoknadActionKeys.ADD_PERIODE;
+    periode: Periode;
 }
 
-interface EditUtenlandsopphold {
-    type: SoknadActionKeys.EDIT_UTENLANDSOPPHOLD;
-    utenlandsopphold: Utenlandsopphold;
+interface EditPeriode {
+    type: SoknadActionKeys.EDIT_PERIODE;
+    periode: Periode;
     index: number;
 }
 
-interface DeleteUtenlandsopphold {
-    type: SoknadActionKeys.DELETE_UTENLANDSOPPHOLD;
-    utenlandsopphold: Utenlandsopphold;
+interface DeletePeriode {
+    type: SoknadActionKeys.DELETE_PERIODE;
+    periode: Periode;
 }
 
-interface SetArbeidSiste12 {
-    type: SoknadActionKeys.SET_ARBEID_SISTE_12;
-    arbeidSiste12: ArbeidSiste12;
+interface SetJobbetINorgeSiste12Mnd {
+    type: SoknadActionKeys.SET_JOBBET_I_NORGE_SISTE_12_MND;
+    jobbetINorgeSiste12Mnd: boolean;
 }
 
 interface SetFodselINorge {
@@ -71,26 +71,26 @@ interface SetFodselINorge {
     fodselINorge: boolean;
 }
 
-interface SetINorgeSiste12 {
-    type: SoknadActionKeys.SET_I_NORGE_SISTE_12;
-    iNorgeSiste12: boolean;
+interface SetINorgeSiste12Mnd {
+    type: SoknadActionKeys.SET_I_NORGE_SISTE_12_MND;
+    iNorgeSiste12Mnd: boolean;
 }
 
-interface SetINorgeNeste12 {
-    type: SoknadActionKeys.SET_I_NORGE_NESTE_12;
-    iNorgeNeste12: boolean;
+interface SetINorgeNeste12Mnd {
+    type: SoknadActionKeys.SET_I_NORGE_NESTE_12_MND;
+    iNorgeNeste12Mnd: boolean;
 }
 
 export type SoknadActionTypes =
-    | AddUtenlandsopphold
-    | EditUtenlandsopphold
-    | DeleteUtenlandsopphold
+    | AddPeriode
+    | AddFodselsdato
+    | EditPeriode
+    | DeletePeriode
     | SetAntallBarn
-    | SetBarnErFodt
-    | SetFodselsdato
+    | SetErBarnetFodt
     | SetFodselINorge
-    | SetTerminDato
-    | SetUtstedtDato
-    | SetArbeidSiste12
-    | SetINorgeSiste12
-    | SetINorgeNeste12;
+    | SetTermindato
+    | SetTerminbekreftelseDato
+    | SetJobbetINorgeSiste12Mnd
+    | SetINorgeSiste12Mnd
+    | SetINorgeNeste12Mnd;

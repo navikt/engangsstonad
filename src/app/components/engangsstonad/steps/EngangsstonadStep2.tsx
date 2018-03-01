@@ -4,14 +4,14 @@ import DocumentTitle from 'react-document-title';
 const { RadioPanelGruppe } = require('nav-frontend-skjema');
 import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../../redux/actions';
-import { default as Medlemsskap, Utenlandsopphold } from '../../../types/domain/Medlemsskap';
+import Utenlandsopphold, { Periode } from '../../../types/domain/Utenlandsopphold';
 import { connect } from 'react-redux';
 import { DispatchProps } from '../../../redux/types/index';
 import CountryPicker from './../../shared/country-picker/CountryPicker';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 
 interface StateProps {
-    medlemsskap: Medlemsskap;
+    utenlandsopphold: Utenlandsopphold;
     language: string;
 }
 
@@ -19,10 +19,10 @@ type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 export class EngangsstonadStep2 extends React.Component<Props> {
     getINorgeSiste12SelectedValue() {
-        const { iNorgeSiste12 } = this.props.medlemsskap;
-        if (iNorgeSiste12 === true) {
+        const { iNorgeSiste12Mnd } = this.props.utenlandsopphold;
+        if (iNorgeSiste12Mnd === true) {
             return 'norway';
-        } else if (iNorgeSiste12 === false) {
+        } else if (iNorgeSiste12Mnd === false) {
             return 'abroad';
         } else {
             return undefined;
@@ -30,10 +30,10 @@ export class EngangsstonadStep2 extends React.Component<Props> {
     }
     
     getINorgeNeste12SelectedValue() {
-        const { iNorgeNeste12 } = this.props.medlemsskap;
-        if (iNorgeNeste12 === true) {
+        const { iNorgeNeste12Mnd } = this.props.utenlandsopphold;
+        if (iNorgeNeste12Mnd === true) {
             return 'norway';
-        } else if (iNorgeNeste12 === false) {
+        } else if (iNorgeNeste12Mnd === false) {
             return 'abroad';
         } else {
             return undefined;
@@ -41,7 +41,7 @@ export class EngangsstonadStep2 extends React.Component<Props> {
     }
 
     getFodselINorgeSelectedValue() {
-        const { fodselINorge } = this.props.medlemsskap;
+        const { fodselINorge } = this.props.utenlandsopphold;
         if (fodselINorge === true) {
             return 'norway';
         } else if (fodselINorge === false) {
@@ -52,8 +52,8 @@ export class EngangsstonadStep2 extends React.Component<Props> {
     }
 
     render() {
-        const { dispatch, intl, medlemsskap, language } = this.props;
-        const { iNorgeSiste12, iNorgeNeste12, utenlandsopphold } = medlemsskap;
+        const { dispatch, intl, utenlandsopphold, language } = this.props;
+        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, perioder } = utenlandsopphold;
 
         return (
             <div className="engangsstonad__step">
@@ -61,28 +61,28 @@ export class EngangsstonadStep2 extends React.Component<Props> {
                 <RadioPanelGruppe
                     legend={getMessage(intl, 'medlemmskap.text.siste12mnd')}
                     name="iNorgeSiste12"
-                    onChange={(event: any, value: string) => dispatch(soknad.setINorgeSiste12(value))}
+                    onChange={(event: any, value: string) => dispatch(soknad.setINorgeSiste12Mnd(value))}
                     checked={this.getINorgeSiste12SelectedValue()}
                     radios={[
                         {label: getMessage(intl, 'medlemmskap.radiobutton.boddNorge'), value: 'norway'},
                         {label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'), value: 'abroad'}
                     ]}
                 />
-                {medlemsskap.iNorgeSiste12 === false && (
+                {utenlandsopphold.iNorgeSiste12Mnd === false && (
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegBodde')}
                         language={language}
-                        utenlandsoppholdListe={medlemsskap.utenlandsopphold}
-                        addVisit={(u: Utenlandsopphold) => dispatch(soknad.addUtenlandsopphold(u))}
-                        editVisit={(u: Utenlandsopphold, i: number) => dispatch(soknad.editUtenlandsopphold(u, i))}
-                        deleteVisit={(u: Utenlandsopphold) => dispatch(soknad.deleteUtenlandsopphold(u))}
+                        utenlandsoppholdListe={perioder}
+                        addVisit={(periode: Periode) => dispatch(soknad.addPeriode(periode))}
+                        editVisit={(periode: Periode, i: number) => dispatch(soknad.editPeriode(periode, i))}
+                        deleteVisit={(periode: Periode) => dispatch(soknad.deletePeriode(periode))}
                     />
                 )}
-                {(iNorgeSiste12 || utenlandsopphold.length > 0) && (
+                {(iNorgeSiste12Mnd || perioder.length > 0) && (
                     <RadioPanelGruppe
                         legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
                         name="iNorgeNeste12"
-                        onChange={(event: any, value: string) => dispatch(soknad.setINorgeNeste12(value))}
+                        onChange={(event: any, value: string) => dispatch(soknad.setINorgeNeste12Mnd(value))}
                         checked={this.getINorgeNeste12SelectedValue()}
                         radios={[
                             {label: getMessage(intl, 'medlemmskap.radiobutton.boNorge'), value: 'norway'},
@@ -90,7 +90,7 @@ export class EngangsstonadStep2 extends React.Component<Props> {
                         ]}
                     />
                 )}
-                {iNorgeNeste12 !== undefined && (
+                {iNorgeNeste12Mnd !== undefined && (
                     <RadioPanelGruppe
                         legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
                         name="fodselINorge"
@@ -108,7 +108,7 @@ export class EngangsstonadStep2 extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-    medlemsskap: state.soknadReducer.medlemsskap,
+    utenlandsopphold: state.soknadReducer.utenlandsopphold,
     language: state.commonReducer.language
 });
 

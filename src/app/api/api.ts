@@ -32,7 +32,7 @@ function getPerson(params: PersonRequest = defaultParams) {
 
 function sendSoknad(soknad: EngangsstonadSoknadRequest) {
     // tslint:disable-next-line no-any
-    const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub?'?stub=true':''}`;
+    const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub ? '?stub=true' : ''}`;
     return axios.post(url, soknad);
 }
 
