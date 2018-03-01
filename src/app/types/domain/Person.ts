@@ -3,8 +3,8 @@ type Person = {
     mellomnavn: string;
     etternavn: string;
     adresse: string;
-    kjonn: string;
-    fodselsdato: string;
+    kjønn: string;
+    fødselsdato: string;
 };
 
 export default Person;

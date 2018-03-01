@@ -21,6 +21,8 @@ import { DispatchProps } from '../../redux/types';
 import BackStep from 'shared/back-step/BackStep';
 import getStepConfig from './steps/steps.conf';
 
+const { ValidForm } = require('./../../lib') as any;
+
 interface OwnProps {
     soknadPostResponse: EngangsstonadSoknadResponse;
     medlemsskap: Medlemsskap;
@@ -31,15 +33,15 @@ interface OwnProps {
 type Props = OwnProps & DispatchProps & InjectedIntlProps & History & RouteComponentProps<{}>;
 
 export class SoknadWrapper extends React.Component<Props> {
+    componentWillMount() {
+        this.handleNextClicked = this.handleNextClicked.bind(this);
+    }
+
     componentWillReceiveProps(props: OwnProps) {
         if (props.soknadPostResponse) {
             const { history } = this.props;
             history.push('/engangsstonad/completed');
         }
-    }
-
-    formIsValid() {
-        return true;
     }
 
     hasToWaitForResponse() {
@@ -49,15 +51,11 @@ export class SoknadWrapper extends React.Component<Props> {
 
     handleNextClicked() {
         const { dispatch, medlemsskap, relasjonTilBarn } = this.props;
-
         if (this.hasToWaitForResponse()) {
             return dispatch(api.sendSoknad({ medlemsskap, relasjonTilBarn }));
         }
-
-        if (this.formIsValid()) {
-            const { activeStep } = this.props;
-            dispatch(stepActions.setActiveStep(activeStep + 1));
-        }
+        const { activeStep } = this.props;
+        dispatch(stepActions.setActiveStep(activeStep + 1));
     }
 
     handleBackClicked() {
@@ -88,22 +86,28 @@ export class SoknadWrapper extends React.Component<Props> {
 
         return (
             <div className="engangsstonad">
-                <Sidetittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
-                <div className="topContent">
-                    <BackStep onClick={() => this.handleBackClicked()} />
-                    <StepIndicator stepTitles={titles} activeStep={activeStep} />
-                    <div className="buffer" />
-                </div>
+                <ValidForm
+                    summaryTitle="Du må rette opp i følgende feil:"
+                    noSummary={activeStep === 3}
+                    onSubmit={this.handleNextClicked}
+                >
+                    <Sidetittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
+                    <div className="topContent">
+                        <BackStep onClick={() => this.handleBackClicked()} />
+                        <StepIndicator stepTitles={titles} activeStep={activeStep} />
+                        <div className="buffer" />
+                    </div>
 
-                {activeStep === 1 && <EngangsstonadStep1 />}
-                {activeStep === 2 && <EngangsstonadStep2 />}
-                {activeStep === 3 && <EngangsstonadStep3 />}
+                    {activeStep === 1 && <EngangsstonadStep1 />}
+                    {activeStep === 2 && <EngangsstonadStep2 />}
+                    {activeStep === 3 && <EngangsstonadStep3 />}
 
-                {this.shouldRenderFortsettKnapp() === true && (
-                    <Hovedknapp className="fortsettKnapp" onClick={() => this.handleNextClicked()}>
-                        {fortsettKnappLabel}
-                    </Hovedknapp>
-                )}
+                    {this.shouldRenderFortsettKnapp() === true && (
+                        <Hovedknapp className="fortsettKnapp">
+                            {fortsettKnappLabel}
+                        </Hovedknapp>
+                    )}
+                </ValidForm>
             </div>
         );
     }

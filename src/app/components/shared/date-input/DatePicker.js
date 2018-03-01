@@ -1,4 +1,4 @@
-/* eslint-env browser */
+/* eslint-disable */
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import classnames from 'classnames';
@@ -173,3 +173,4 @@ DayPickerComponent.defaultProps = {
 };
 
 export default DayPickerComponent;
+/* eslint-enable */

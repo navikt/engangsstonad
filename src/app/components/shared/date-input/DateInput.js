@@ -1,17 +1,11 @@
-/* eslint-disable max-len */
+/* eslint-disable */
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import MaskedInput from 'react-maskedinput';
 import Icon from 'nav-frontend-ikoner-assets';
 import classnames from 'classnames';
-
 import DatePicker from './DatePicker';
-import {
-    dateToISODate,
-    isValidISODate,
-    ISODateToMaskedInput,
-    datePickerToISODate
-} from './dateInputUtil';
+import { dateToISODate, isValidISODate, ISODateToMaskedInput, datePickerToISODate } from './dateInputUtil';
 import './dayPicker.less';
 
 const stopEvent = (event) => {
@@ -48,7 +42,7 @@ class DateInput extends Component {
 
     onFocusOut(e) {
         const { relatedTarget } = e;
-        if (relatedTarget) {
+        if (relatedTarget && this.container) {
             const targetIsChildNode = this.container.contains(relatedTarget);
             if (!targetIsChildNode) {
                 this.close(false);
@@ -102,22 +96,11 @@ class DateInput extends Component {
     }
 
     render() {
-        const {
-            id,
-            inputProps,
-            label,
-            disabled,
-            fromDate,
-            toDate,
-            errorMessage,
-            selectedDate
-        } = this.props;
+        const { id, inputProps, label, disabled, fromDate, toDate, errorMessage, selectedDate } = this.props;
 
         const maskedInputProps = {
             ...inputProps,
-            value: isValidISODate(selectedDate)
-                ? ISODateToMaskedInput(selectedDate)
-                : selectedDate
+            value: isValidISODate(selectedDate) ? ISODateToMaskedInput(selectedDate) : selectedDate
         };
 
         return (
@@ -150,11 +133,7 @@ class DateInput extends Component {
                         />
                         <button
                             className="js-toggle datovelger__toggleDayPicker"
-                            aria-label={
-                                this.state.isOpen
-                                    ? 'Skjul datovelger'
-                                    : 'Vis datovelger'
-                            }
+                            aria-label={this.state.isOpen ? 'Skjul datovelger' : 'Vis datovelger'}
                             ref={(toggle) => {
                                 this.toggleButton = toggle;
                             }}
@@ -183,10 +162,7 @@ class DateInput extends Component {
                         />
                     )}
                 </div>
-                <div
-                    role="alert"
-                    aria-live="assertive"
-                    className="skjemaelement__feilmelding">
+                <div role="alert" aria-live="assertive" className="skjemaelement__feilmelding">
                     {errorMessage}
                 </div>
             </div>
@@ -197,7 +173,7 @@ class DateInput extends Component {
 DateInput.propTypes = {
     id: PT.string.isRequired,
     label: PT.oneOfType([PT.string, PT.node]).isRequired,
-    inputProps: PT.object, // eslint-disable-line react/forbid-prop-types
+    inputProps: PT.shape({}),
     selectedDate: PT.string,
     disabled: PT.bool,
     fromDate: PT.instanceOf(Date),
@@ -226,3 +202,4 @@ DateInput.defaultProps = {
     fullscreen: false
 };
 export default DateInput;
+/* eslint-enable */
