@@ -29,3 +29,9 @@ export const idagEllerTidligere = (dato: string) => {
     const tomorrow = moment().add(1, 'day').startOf('day');
     return moment.max(utstedtDato, tomorrow) === tomorrow;
 };
+
+export const erOver18ÅrSiden = (dato: string) => {
+    const now = moment();
+    const momentDate = moment(dato);
+    return now.diff(momentDate, 'years') > 18;
+};
