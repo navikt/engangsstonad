@@ -13,14 +13,13 @@ import Person from '../../types/domain/Person';
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
 
 import '../../styles/engangsstonad.less';
-import { RouteComponentProps } from 'react-router';
 
 interface StateProps {
     person: Person;
     soknad: EngangsstonadSoknadResponse;
 }
 
-type Props = StateProps & InjectedIntlProps & History & RouteComponentProps<{}>;
+type Props = StateProps & InjectedIntlProps;
 
 export class EngangsstonadCompleted extends React.Component<Props> {
     receiptText() {

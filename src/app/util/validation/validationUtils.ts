@@ -33,7 +33,7 @@ export const idagEllerTidligere = (dato: string) => {
 
 export const erMyndig = (person: Person) => {
     const now = moment();
-    const momentDate = moment(person.fødselsdato, 'DD-MM-YYYY');
+    const momentDate = moment(person.fødselsdato);
     return now.diff(momentDate, 'years') > 18;
 };
 
