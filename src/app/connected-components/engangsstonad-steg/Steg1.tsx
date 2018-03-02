@@ -13,7 +13,6 @@ import Person from '../../types/domain/Person';
 import { DispatchProps } from '../../redux/types';
 import getMessage from 'util/i18n/i18nUtils';
 import DialogBox from 'components/dialog-box/DialogBox';
-import LinkWithIcon from 'components/link-with-icon/LinkWithIcon';
 import OmTerminbekreftelsen from 'components/modal-content/OmTerminbekreftelsen';
 import {
     erIUke26Pluss3, erMindreEnn3UkerSiden, idagEllerTidligere,
@@ -137,7 +136,7 @@ export class Steg1 extends React.Component<Props, State> {
                 {barn.erBarnetFødt === true && (
                     <ValidDateInput
                         id="fødselsdato"
-                        label={getMessage(intl, 'relasjonBarn.text.fødselsdato')}
+                        label={getMessage(intl, 'relasjonBarn.text.fodselsdato')}
                         selectedDate={barn && (barn as FodtBarn).fødselsdatoer.length > 0 ? (barn as any).fødselsdatoer[0] : ''}
                         onChange={(e: string) => dispatch(soknad.addFødselsdato(e))}
                         name="fødselsdato"
@@ -173,13 +172,6 @@ export class Steg1 extends React.Component<Props, State> {
                 {terminDato && ([
                     <DialogBox type="warning" overflow={true} key="dialog">
                         <Normaltekst>{getMessage(intl, 'relasjonBarn.text.terminbekreftelse')}</Normaltekst>
-                        <LinkWithIcon
-                            iconKind="info-sirkel-fylt"
-                            iconSize={24}
-                            href="#"
-                            linkText={getMessage(intl, 'relasjonBarn.link.lesTerminbekreftelse')}
-                            onClick={() => this.openTerminbekreftelseModal()}
-                        />
                     </DialogBox>,
                     <ValidDateInput
                         id="terminbekreftelse"
