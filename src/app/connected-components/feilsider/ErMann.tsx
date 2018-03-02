@@ -13,6 +13,8 @@ import '../../styles/engangsstonad.less';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Person from '../../types/domain/Person';
 import { ExternalProps } from '../../types/index';
+import handleErrors from 'util/error-handling';
+import { personFinnes } from 'util/validation/validationUtils';
 
 interface StateProps {
     person: Person;
@@ -23,8 +25,8 @@ type Props = StateProps & InjectedIntlProps & ExternalProps;
 export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
     const { history, intl, person } = props;
 
-    if (person && person.kjønn === 'K') {
-        history.goBack();
+    if (person && person.kjønn === 'K' || !personFinnes(person)) {
+        handleErrors(person, history);
     } else if (person) {
         return (
             <div className="engangsstonad">

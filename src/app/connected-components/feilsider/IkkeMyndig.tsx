@@ -12,8 +12,9 @@ import getMessage from '../../util/i18n/i18nUtils';
 import '../../styles/engangsstonad.less';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Person from '../../types/domain/Person';
-import { erOver18ÅrSiden } from 'util/validation/validationUtils';
+import { erOver18ÅrSiden, erMann, personFinnes } from 'util/validation/validationUtils';
 import { ExternalProps } from '../../types/index';
+import handleErrors from 'util/error-handling';
 
 interface StateProps {
     person: Person;
@@ -24,8 +25,8 @@ type Props = StateProps & InjectedIntlProps & ExternalProps;
 export const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
     const { history, intl, person } = props;
 
-    if (person && erOver18ÅrSiden(person.fødselsdato)) {
-        history.goBack();
+    if (person && (erOver18ÅrSiden(person.fødselsdato) || erMann(person) || !personFinnes(person))) {
+        handleErrors(person, history);
     } else if (person) {
         return (
             <div className="engangsstonad">

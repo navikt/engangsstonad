@@ -11,7 +11,6 @@ const VelkommenIllustration = require('assets/svg/frontpage.svg').default;
 
 import Person from '../../types/domain/Person';
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
-import handleErrors from 'util/error-handling';
 
 import '../../styles/engangsstonad.less';
 import { RouteComponentProps } from 'react-router';
@@ -43,8 +42,7 @@ export class EngangsstonadCompleted extends React.Component<Props> {
     }
 
     render() {
-        const { intl, person, history } = this.props;
-        handleErrors(person, history);
+        const { intl, person } = this.props;
 
         return (
             <div className="engangsstonad">

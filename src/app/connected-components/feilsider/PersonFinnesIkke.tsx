@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Person from '../../types/domain/Person';
 import { ExternalProps } from '../../types';
 import { personFinnes } from 'util/validation/validationUtils';
+import handleErrors from 'util/error-handling';
 
 interface StateProps {
     person: Person;
@@ -14,9 +15,9 @@ class PersonFinnesIkke extends React.Component<Props> {
     render() {
         const { person, history } = this.props;
         if (personFinnes(person)) {
-            history.goBack();
+            handleErrors(person, history);
         }
-        return (<div>Personen finnes ikke</div>);
+        return (<p>Personen finnes ikke</p>);
     }
 }
 

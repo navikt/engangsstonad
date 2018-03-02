@@ -12,6 +12,6 @@ export default (person: Person, history: History) => {
     }
 
     if (!erOver18ÅrSiden(person.fødselsdato) && person.kjønn !== 'M') {
-        history.push('/engangsstonad/underAge');
+        return history.push('/engangsstonad/underAge');
     }
 };

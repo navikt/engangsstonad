@@ -36,14 +36,14 @@ class CountryModal extends React.Component<Props, State> {
         const { intl, utenlandsopphold } = props;
         if (utenlandsopphold) {
             this.state = {
-                titleText: getMessage(intl, 'medlemmskap.landvelger.endre'),
-                submitButtonText: getMessage(intl, 'medlemmskap.landvelger.lagre'),
+                titleText: getMessage(intl, 'medlemmskap.modal.overskrift'),
+                submitButtonText: getMessage(intl, 'medlemmskap.modal.lagreEndringer'),
                 utenlandsopphold
             };
         } else {
             this.state = {
-                titleText: getMessage(intl, 'medlemmskap.landvelger.leggTil'),
-                submitButtonText: getMessage(intl, 'medlemmskap.landvelger.leggTilLand')
+                titleText: getMessage(intl, 'medlemmskap.modal.overskrift'),
+                submitButtonText: getMessage(intl, 'medlemmskap.knapp.leggTilLand')
             };
         }
     }
@@ -107,7 +107,7 @@ class CountryModal extends React.Component<Props, State> {
                         id="boddFraDato"
                         inputProps={{ value: fomValue }}
                         selectedDate={fomValue}
-                        label="fra"
+                        label={getMessage(intl, 'standard.text.fra')}
                         onChange={(date: string) => {
                             this.setState({
                                 utenlandsopphold: {
@@ -120,7 +120,7 @@ class CountryModal extends React.Component<Props, State> {
                     />
                     <DateInput
                         id="boddTilDato"
-                        label="til"
+                        label={getMessage(intl, 'standard.text.til')}
                         inputProps={{ value: tomValue }}
                         selectedDate={tomValue}
                         onChange={(date: string) => {
@@ -134,7 +134,7 @@ class CountryModal extends React.Component<Props, State> {
                         }}
                     />
                     <Knapp onClick={() => this.props.closeModal()} htmlType="button">
-                        {getMessage(intl, 'medlemmskap.landvelger.avbryt')}
+                        {getMessage(intl, 'medlemmskap.modal.avbryt')}
                     </Knapp>
                     <Knapp onClick={() => utenlandsopphold && this.onSubmit()} htmlType="button">
                         {this.state.submitButtonText}

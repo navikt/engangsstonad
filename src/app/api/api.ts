@@ -11,7 +11,9 @@ const defaultParams: PersonRequest = {
 const stub = () => ({
     data: {
         fornavn: 'Test',
-        etternavn: 'Testesen'
+        etternavn: 'Testesen',
+        fødselsdato: '15-09-1988',
+        kjønn: 'K'
     }
 });
 
@@ -22,7 +24,7 @@ declare const __ENV__: any;
 
 function getPerson(params: PersonRequest = defaultParams) {
     useStub = params.stub;
-    if (__ENV__ === 'heroku') {
+    if (__ENV__ === 'heroku' || useStub) {
         return stub();
     }
     // tslint:disable-next-line no-any
