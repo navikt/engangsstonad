@@ -19,8 +19,6 @@ import Utenlandsopphold from '../types/domain/Utenlandsopphold';
 import { FodtBarn, UfodtBarn } from '../types/domain/Barn';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../redux/types';
-import Person from '../types/domain/Person';
-import handleErrors from 'util/error-handling';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -28,7 +26,6 @@ interface OwnProps {
     utenlandsopphold: Utenlandsopphold;
     barn: FodtBarn & UfodtBarn;
     activeStep: number;
-    person: Person;
 }
 
 type Props = OwnProps & DispatchProps & InjectedIntlProps & History & RouteComponentProps<{}>;
@@ -70,10 +67,7 @@ export class SøknadContainer extends React.Component<Props> {
     }
 
     render() {
-        const { intl, activeStep, history, person } = this.props;
-
-        handleErrors(person, history);
-
+        const { intl, activeStep } = this.props;
         const stepsConfig = getStepConfig(intl);
         const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
@@ -107,7 +101,6 @@ export class SøknadContainer extends React.Component<Props> {
 const mapStateToProps = (state: any) => ({
     utenlandsopphold: state.soknadReducer.utenlandsopphold,
     barn: state.soknadReducer.barn,
-    person: state.apiReducer.person,
     soknadPostResponse: state.apiReducer.soknad,
     activeStep: state.stepReducer.activeStep
 });

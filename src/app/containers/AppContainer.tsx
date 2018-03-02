@@ -17,6 +17,7 @@ import { DispatchProps } from '../redux/types';
 import Person from '../types/domain/Person';
 
 import '../styles/engangsstonad.less';
+import { erMann, erMyndig, harPersonData } from 'util/validation/validationUtils';
 
 interface StateProps {
     person: Person;
@@ -48,26 +49,56 @@ export class AppContainer extends React.Component<Props> {
         return queryStringParser.parse(this.props.location.search);
     }
 
-    renderContent(content: React.ReactNode) {
+    renderContent(children: React.ReactNode) {
         return (
             <div className="engangsstonad">
-                {content}
+                <Switch>
+                    {children}
+                </Switch>
             </div>
         );
     }
 
+    getInvalidPersonRoutes(personErMann: boolean, personFinnes: boolean) {
+        let route: any = {};
+        if (personErMann) {
+            route = { component: ErMann, subpath: 'erMann'};
+        } else if (!personFinnes) {
+            route = { component: PersonFinnesIkke, subpath: 'personFinnesIkke'};
+        } else {
+            route = { component: IkkeMyndig, subpath: 'underAge'};
+        }
+        return [
+            <Route path={`/engangsstonad/${route.subpath}`} component={route.component} key={route.subpath} />,
+            <Redirect to={`/engangsstonad/${route.subpath}`} key={`redirect${route.subpath}`} />
+        ];
+    }
+
+    getValidPersonRoutes() {
+        return [
+            <Route path="/engangsstonad/confirmation" component={Intro} key="confirmation" />,
+            <Route path="/engangsstonad/completed" component={SøknadSendt} key="completed" />,
+            <Route path="/engangsstonad/soknad" component={SøknadContainer} key="soknad" />,
+            <Redirect to="/engangsstonad/confirmation" key="confirmation" />
+        ];
+    }
+
     render() {
-        return this.renderContent(
-            <Switch>
-            <Route path="/engangsstonad/confirmation" component={Intro} />
-            <Route path="/engangsstonad/underAge" component={IkkeMyndig} />
-            <Route path="/engangsstonad/erMann" component={ErMann} />
-            <Route path="/engangsstonad/personFinnesIkke" component={PersonFinnesIkke} />
-            <Route path="/engangsstonad/completed" component={SøknadSendt} />
-            <Route path="/engangsstonad/soknad" component={SøknadContainer} />
-            <Redirect to="/engangsstonad/confirmation" />
-        </Switch>
-        );
+        const { person } = this.props;
+
+        if (person) {
+            const personFinnes = harPersonData(person);
+            const personErMyndig = erMyndig(person);
+            const personErMann = erMann(person);
+
+            const personStateIsValid = personFinnes && personErMyndig && !personErMann;
+
+            if (personStateIsValid) {
+                return this.renderContent(this.getValidPersonRoutes());
+            }
+            return this.renderContent(this.getInvalidPersonRoutes(personErMann, personFinnes));
+        }
+        return this.renderContent(this.getInvalidPersonRoutes(false, false));
     }
 }
 

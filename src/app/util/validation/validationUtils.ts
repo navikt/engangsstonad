@@ -31,12 +31,12 @@ export const idagEllerTidligere = (dato: string) => {
     return moment.max(utstedtDato, tomorrow) === tomorrow;
 };
 
-export const erOver18ÅrSiden = (dato: string) => {
+export const erMyndig = (person: Person) => {
     const now = moment();
-    const momentDate = moment(dato, 'DD-MM-YYYY');
+    const momentDate = moment(person.fødselsdato, 'DD-MM-YYYY');
     return now.diff(momentDate, 'years') > 18;
 };
 
 export const erMann = (person: Person) => (person.kjønn === 'M');
 
-export const personFinnes = (person?: Person) => (person && person.fødselsdato);
+export const harPersonData = (person?: Person) => (person !== undefined && person.fødselsdato !== undefined);
