@@ -99,5 +99,19 @@
 	"standard.text.fromTo": "fra: {from} - til: {to}",
 	"standard.text.fra": "frå",
 	"standard.text.til": "til",
-	"standard.sectionheading.sendSoknad": "Send inn søknad"
+	"standard.sectionheading.sendSoknad": "Send inn søknad",
+
+    "valideringsfeil.godkjentVilkar": "Du må stadfeste at du har lest og forstått",
+    "valideringsfeil.bekreftOpplysninger": "Du må stadfeste at opplysningane stemmer",
+
+    "valideringsfeil.fodselsdato.duMåOppgi": "Du må oppgje fødselsdato",
+    "valideringsfeil.fodselsdato.måVæreIdagEllerTidligere": "Fødselsdato må vere idag eller tidlegare",
+
+    "valideringsfeil.termindato.duMåOppgi": "Du må oppgje termindato",
+    "valideringsfeil.termindato.duMåVæreIUke26": "Du kan tidlegst søkje når du er i 26. svangerskapsveke",
+    "valideringsfeil.termindato.termindatoKanIkkeVære3UkerFraIdag": "Termindatoen kan ikke være tidlegare enn 3 veker frå i dag",
+
+    "valideringsfeil.terminbekreftelseDato.duMåOppgi": "Du må oppgje når stadfesting på termindato er datert",
+    "valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere": "Datoen på stadfesting av termindato kan ikkje vere frem i tid.",
+    "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26": "Stadfesting på termindato må vise at du er i 26. svangerskapsveke eller seinare"
 }

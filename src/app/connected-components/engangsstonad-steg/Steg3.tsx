@@ -52,7 +52,10 @@ export class Steg3 extends React.Component<Props> {
 
                 <ValidGroup
                     validators={[
-                        {test: () => (bekreftetInformasjon === true), failText: 'Du må bekrefte at informasjonen stemmer'}
+                        {
+                            test: () => (bekreftetInformasjon === true),
+                            failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger')
+                        }
                     ]}
                     name="bekreftOpplysninger"
                 >

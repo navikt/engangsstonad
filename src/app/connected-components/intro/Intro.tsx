@@ -80,9 +80,9 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
     }
 
     getGodkjentVilkarValidators() {
-        const { godkjentVilkar } = this.props;
+        const { godkjentVilkar, intl } = this.props;
         return [
-            { test: () => godkjentVilkar === true, failText: 'Du må bekrefte at du har lest og forstått'}
+            { test: () => godkjentVilkar === true, failText: getMessage(intl, 'valideringsfeil.godkjentVilkar') }
         ];
     }
 

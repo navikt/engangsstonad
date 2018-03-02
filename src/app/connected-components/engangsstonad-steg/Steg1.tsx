@@ -79,37 +79,45 @@ export class Steg1 extends React.Component<Props, State> {
     }
 
     getFødselsdatoValidators() {
+        const { intl } = this.props;
         const barn = this.props.barn as any;
         return [
-            { test: () => (barn.fødselsdatoer[0]), failText: 'Du må oppgi en fødselsdato' },
-            { test: () => (barn.fødselsdatoer[0] !== ''), failText: 'Du må oppgi en fødselsdato' },
-            { test: () => (new Date(barn.fødselsdatoer[0]) <= new Date()), failText: 'Fødselsdatoen kan ikke være fram i tid' }
+            { test: () => (barn.fødselsdatoer[0]), failText: getMessage(intl, 'valideringsfeil.fodselsdato.duMåOppgi') },
+            { test: () => (barn.fødselsdatoer[0] !== ''), failText: getMessage(intl, 'valideringsfeil.fodselsdato.duMåOppgi') },
+            {
+                test: () => (new Date(barn.fødselsdatoer[0]) <= new Date()),
+                failText: getMessage(intl, 'valideringsfeil.fodselsdato.måVæreIdagEllerTidligere')
+            }
         ];
     }
 
     getTermindatoValidators() {
+        const { intl } = this.props;
         const barn = this.props.barn as any;
         return [
-            { test: () => (barn.termindato), failText: 'Du må oppgi en termindato' },
-            { test: () => (barn.termindato !== ''), failText: 'Du må oppgi en termindato' },
-            { test: () => (erIUke26Pluss3(barn.termindato)), failText: 'Du må være i uke 26 eller senere' },
-            { test: () => (erMindreEnn3UkerSiden(barn.termindato)), failText: 'Du kan ikke søke mer enn 3 uker etter termindato'}
+            { test: () => (barn.termindato), failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi') },
+            { test: () => (barn.termindato !== ''), failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi') },
+            { test: () => (erIUke26Pluss3(barn.termindato)), failText: getMessage(intl, 'valideringsfeil.termindato.duMåVæreIUke26') },
+            {
+                test: () => (erMindreEnn3UkerSiden(barn.termindato)),
+                failText: getMessage(intl, 'valideringsfeil.termindato.termindatoKanIkkeVære3UkerFraIdag')
+            }
         ];
     }
 
     getTerminbekreftelseDatoValidators() {
+        const { intl } = this.props;
         const barn = this.props.barn as any;
         return [
-            { test: () => (barn.terminbekreftelseDato), failText: 'Du må oppgi en terminbekreftelsesdato' },
-            { test: () => (barn.terminbekreftelseDato !== ''), failText: 'Du må oppgi en terminbekreftelsesdato' },
-            { test: () => (idagEllerTidligere(barn.terminbekreftelseDato)), failText: 'Terminbekreftelsesdatoen må være idag eller tidligere' },
+            { test: () => (barn.terminbekreftelseDato), failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåOppgi') },
+            { test: () => (barn.terminbekreftelseDato !== ''), failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåOppgi') },
             {
-                test: () => (new Date(barn.terminbekreftelseDato) < new Date(barn.termindato)),
-                failText: 'Terminbekreftelsesdatoen må være før termindato'
+                test: () => (idagEllerTidligere(barn.terminbekreftelseDato)),
+                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere')
             },
             {
                 test: () => (utstedtDatoErIUke26(barn.terminbekreftelseDato, barn.termindato)),
-                failText: 'Terminbekreftelsesdatoen må ha passert 26 uker i svangerskapet'
+                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåVæreIUke26')
             }
         ];
     }
