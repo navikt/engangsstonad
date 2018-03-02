@@ -10,7 +10,8 @@ import './headerIllustration.less';
 export enum Theme {
     purple = 'purple',
     green = 'green',
-    orange = 'orange'
+    orange = 'orange',
+    red = 'red'
 }
 
 type Dialog = {

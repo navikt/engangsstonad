@@ -12,7 +12,6 @@ import getMessage from '../../util/i18n/i18nUtils';
 import '../../styles/engangsstonad.less';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Person from '../../types/domain/Person';
-import { erOver18ÅrSiden } from 'util/validation/validationUtils';
 import { ExternalProps } from '../../types/index';
 
 interface StateProps {
@@ -21,10 +20,10 @@ interface StateProps {
 
 type Props = StateProps & InjectedIntlProps & ExternalProps;
 
-export const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
+export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
     const { history, intl, person } = props;
 
-    if (person && erOver18ÅrSiden(person.fødselsdato)) {
+    if (person && person.kjønn === 'K') {
         history.goBack();
     } else if (person) {
         return (
@@ -32,22 +31,15 @@ export const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
                 <DocumentTitle title="Kvittering - NAV Engangsstønad" />
                 <HeaderIllustration
                     dialog={{
-                        title: getMessage(intl, 'kvittering.snakkeboble.overskrift', {
-                            name: props.person.fornavn
-                        }),
-                        text: getMessage(intl, 'intro.text.under18')
+                        title: getMessage(intl, 'intro.snakkeboble.overskrift', { name: props.person.fornavn }),
+                        text: getMessage(intl, 'intro.text.erMann')
                     }}
                     title={getMessage(intl, 'intro.pageheading.soknadES')}
                     svg={VelkommenIllustration}
-                    theme={Theme.orange}
+                    theme={Theme.red}
                 />
                 <Ingress>{intl.formatMessage({ id: 'intro.text.omES' })}</Ingress>
-                <a
-                    className="paperVersionLink"
-                    href="#"
-                >
-                    {getMessage(intl, 'intro.text.lastNedPapirsoknad')}
-                </a>
+                <a className="paperVersionLink" href="#">{getMessage(intl, 'intro.text.lastNedPapirsoknad')}</a>
                 <div className="engangsstonad__centerButton">
                     <Hovedknapp>
                         {intl.formatMessage({ id: 'kvittering.text.lukkVinduet' })}
@@ -64,4 +56,4 @@ const mapStateToProps = (state: any) => ({
     person: state.apiReducer.person,
 });
 
-export default connect(mapStateToProps)(injectIntl(IkkeMyndig));
+export default connect(mapStateToProps)(injectIntl(ErMann));

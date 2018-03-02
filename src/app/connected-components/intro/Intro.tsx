@@ -19,6 +19,7 @@ import { DispatchProps } from '../../redux/types/index';
 import '../../styles/engangsstonad.less';
 import Person from '../../types/domain/Person';
 import { ExternalProps } from '../../types/index';
+import handleErrors from 'util/error-handling';
 
 interface OwnProps {
     isModalOpen: boolean;
@@ -87,7 +88,8 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
     }
 
     render() {
-        const { godkjentVilkar, intl } = this.props;
+        const { godkjentVilkar, intl, person, history } = this.props;
+        handleErrors(person, history);
 
         return (
             <ValidForm noSummary={true} onSubmit={this.startSoknad}>

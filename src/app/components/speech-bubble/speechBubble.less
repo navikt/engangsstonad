@@ -33,6 +33,14 @@
 		}
 	}
 
+    &--red {
+      background-color: @c-red;
+
+      &:before {
+        border-right: @arrow-size solid @c-red;
+      }
+    }
+
 	&__content {
 		position: relative;
 		z-index: 2;

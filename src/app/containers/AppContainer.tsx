@@ -6,6 +6,8 @@ import * as queryStringParser from 'query-string';
 import Intro from './../connected-components/intro/Intro';
 import SøknadSendt from './../connected-components/soknad-sendt/SøknadSendt';
 import IkkeMyndig from './../connected-components/feilsider/IkkeMyndig';
+import ErMann from '../connected-components/feilsider/ErMann';
+import PersonFinnesIkke from '../connected-components/feilsider/PersonFinnesIkke';
 import SøknadContainer from './SøknadContainer';
 
 import { apiActionCreators as api } from '../redux/actions';
@@ -13,7 +15,6 @@ import { ExternalProps } from '../types';
 
 import { DispatchProps } from '../redux/types';
 import Person from '../types/domain/Person';
-import { erOver18ÅrSiden } from 'util/validation/validationUtils';
 
 import '../styles/engangsstonad.less';
 
@@ -31,13 +32,15 @@ export class AppContainer extends React.Component<Props> {
     }
 
     componentWillMount() {
-        const { dispatch } = this.props;
-        const queryParams = this.getQueryParams();
+        const { dispatch, person } = this.props;
+        if (!person) {
+            const queryParams = this.getQueryParams();
 
-        if (Object.keys(queryParams).length > 0) {
-            dispatch(api.getPerson(queryParams));
-        } else {
-            dispatch(api.getPerson());
+            if (Object.keys(queryParams).length > 0) {
+                dispatch(api.getPerson(queryParams));
+            } else {
+                dispatch(api.getPerson());
+            }
         }
     }
 
@@ -54,24 +57,12 @@ export class AppContainer extends React.Component<Props> {
     }
 
     render() {
-        const { person } = this.props;
-
-        if (!person || !person.fødselsdato) {
-            return this.renderContent(<div>No person found</div>);
-        }
-
-        if (person.kjønn === 'M') {
-            return this.renderContent(<div>Fordi du er mann må du bla bla bla</div>);
-        }
-
-        if (!erOver18ÅrSiden(person.fødselsdato)) {
-            this.props.history.push('/engangsstonad/underAge');
-        }
-
         return this.renderContent(
             <Switch>
             <Route path="/engangsstonad/confirmation" component={Intro} />
             <Route path="/engangsstonad/underAge" component={IkkeMyndig} />
+            <Route path="/engangsstonad/erMann" component={ErMann} />
+            <Route path="/engangsstonad/personFinnesIkke" component={PersonFinnesIkke} />
             <Route path="/engangsstonad/completed" component={SøknadSendt} />
             <Route path="/engangsstonad/soknad" component={SøknadContainer} />
             <Redirect to="/engangsstonad/confirmation" />

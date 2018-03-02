@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import Person from '../../types/domain/Person';
 
 const todaysDate = moment();
 
@@ -35,3 +36,7 @@ export const erOver18ÅrSiden = (dato: string) => {
     const momentDate = moment(dato);
     return now.diff(momentDate, 'years') > 18;
 };
+
+export const erMann = (person: Person) => (person.kjønn === 'M');
+
+export const personFinnes = (person?: Person) => (person && person.fødselsdato);

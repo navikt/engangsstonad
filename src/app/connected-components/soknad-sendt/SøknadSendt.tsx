@@ -11,15 +11,18 @@ const VelkommenIllustration = require('assets/svg/frontpage.svg').default;
 
 import Person from '../../types/domain/Person';
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
+import handleErrors from 'util/error-handling';
 
 import '../../styles/engangsstonad.less';
+import { RouteComponentProps } from 'react-router';
 
 interface StateProps {
     person: Person;
     soknad: EngangsstonadSoknadResponse;
 }
 
-type Props = StateProps & InjectedIntlProps;
+type Props = StateProps & InjectedIntlProps & History & RouteComponentProps<{}>;
+
 export class EngangsstonadCompleted extends React.Component<Props> {
     receiptText() {
         const { soknad } = this.props;
@@ -40,10 +43,8 @@ export class EngangsstonadCompleted extends React.Component<Props> {
     }
 
     render() {
-        const { intl, person } = this.props;
-        if (!person) {
-            return null;
-        }
+        const { intl, person, history } = this.props;
+        handleErrors(person, history);
 
         return (
             <div className="engangsstonad">
@@ -77,4 +78,4 @@ const mapStateToProps = (state: any) => ({
     soknad: state.apiReducer.soknad
 });
 
-export default connect(mapStateToProps, null)(injectIntl(EngangsstonadCompleted));
+export default connect<StateProps>(mapStateToProps)(injectIntl(EngangsstonadCompleted));
