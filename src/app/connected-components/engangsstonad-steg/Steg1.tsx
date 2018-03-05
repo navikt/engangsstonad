@@ -3,22 +3,14 @@ import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { injectIntl } from 'react-intl';
 const { RadioPanelGruppe } = require('nav-frontend-skjema');
-const Modal = require('nav-frontend-modal').default;
 import { soknadActionCreators as soknad } from '../../redux/actions';
-import { default as Barn, FodtBarn, UfodtBarn } from '../../types/domain/Barn';
-import { Normaltekst } from 'nav-frontend-typografi';
-const { ValidDateInput } = require('./../../lib') as any;
+import { default as Barn } from '../../types/domain/Barn';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Person from '../../types/domain/Person';
 import { DispatchProps } from '../../redux/types';
 import getMessage from 'util/i18n/i18nUtils';
-import DialogBox from 'components/dialog-box/DialogBox';
-import OmTerminbekreftelsen from 'components/modal-content/OmTerminbekreftelsen';
-import {
-    erIUke26Pluss3, erMindreEnn3UkerSiden, idagEllerTidligere,
-    utstedtDatoErIUke26
-} from 'util/validation/validationUtils';
 import '../../styles/engangsstonad.less';
+import Partials from './partials/steg1';
 
 interface StateProps {
     barn: Barn;
@@ -32,23 +24,6 @@ interface State {
 }
 
 export class Steg1 extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-    }
-
-    componentWillMount() {
-        this.setState({ ...this.state, isModalOpen: false });
-        Modal.setAppElement('#app');
-    }
-
-    openTerminbekreftelseModal() {
-        this.setState({ isModalOpen: true });
-    }
-
-    closeTerminbekreftelseModal() {
-        this.setState({ isModalOpen: false });
-    }
-
     getFodselsTidspunktSelectedValue() {
         const { barn } = this.props;
         if (barn) {
@@ -78,54 +53,18 @@ export class Steg1 extends React.Component<Props, State> {
         return undefined;
     }
 
-    getFødselsdatoValidators() {
-        const { intl } = this.props;
-        const barn = this.props.barn as any;
-        return [
-            { test: () => (barn.fødselsdatoer[0]), failText: getMessage(intl, 'valideringsfeil.fodselsdato.duMåOppgi') },
-            { test: () => (barn.fødselsdatoer[0] !== ''), failText: getMessage(intl, 'valideringsfeil.fodselsdato.duMåOppgi') },
-            {
-                test: () => (new Date(barn.fødselsdatoer[0]) <= new Date()),
-                failText: getMessage(intl, 'valideringsfeil.fodselsdato.måVæreIdagEllerTidligere')
-            }
-        ];
-    }
-
-    getTermindatoValidators() {
-        const { intl } = this.props;
-        const barn = this.props.barn as any;
-        return [
-            { test: () => (barn.termindato), failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi') },
-            { test: () => (barn.termindato !== ''), failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi') },
-            { test: () => (erIUke26Pluss3(barn.termindato)), failText: getMessage(intl, 'valideringsfeil.termindato.duMåVæreIUke26') },
-            {
-                test: () => (erMindreEnn3UkerSiden(barn.termindato)),
-                failText: getMessage(intl, 'valideringsfeil.termindato.termindatoKanIkkeVære3UkerFraIdag')
-            }
-        ];
-    }
-
-    getTerminbekreftelseDatoValidators() {
-        const { intl } = this.props;
-        const barn = this.props.barn as any;
-        return [
-            { test: () => (barn.terminbekreftelseDato), failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåOppgi') },
-            { test: () => (barn.terminbekreftelseDato !== ''), failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåOppgi') },
-            {
-                test: () => (idagEllerTidligere(barn.terminbekreftelseDato)),
-                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere')
-            },
-            {
-                test: () => (utstedtDatoErIUke26(barn.terminbekreftelseDato, barn.termindato)),
-                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåVæreIUke26')
-            }
-        ];
+    renderPartial() {
+        const { barn, intl, dispatch } = this.props;
+        if (barn.erBarnetFødt === true) {
+            return <Partials.FødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
+        } else if (barn.erBarnetFødt === false) {
+            return <Partials.UfødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
+        }
+        return null;
     }
 
     render() {
         const { barn, dispatch, intl } = this.props;
-        const antallBarn = barn && barn.antallBarn;
-        const terminDato = barn && (barn as UfodtBarn).termindato;
 
         return (
             <div className="engangsstonad__step">
@@ -141,20 +80,9 @@ export class Steg1 extends React.Component<Props, State> {
                     ]}
                 />
 
-                {barn.erBarnetFødt === true && (
-                    <ValidDateInput
-                        id="fødselsdato"
-                        label={getMessage(intl, 'relasjonBarn.text.fodselsdato')}
-                        selectedDate={barn && (barn as FodtBarn).fødselsdatoer.length > 0 ? (barn as any).fødselsdatoer[0] : ''}
-                        onChange={(e: string) => dispatch(soknad.addFødselsdato(e))}
-                        name="fødselsdato"
-                        validators={this.getFødselsdatoValidators()}
-                    />
-                )}
-
-                {barn.erBarnetFødt === false && (
+                {barn.erBarnetFødt !== undefined && (
                     <RadioPanelGruppe
-                        legend={getMessage(intl, 'relasjonBarn.text.antallBarn')}
+                        legend={getMessage(intl, `relasjonBarn.text.antallBarn${barn.erBarnetFødt ? 'Født' : 'Ventet'}`)}
                         name="antallBarn"
                         onChange={(event: any, value: string) => dispatch(soknad.setAntallBarn(value))}
                         checked={this.getAntallBarnSelectedValue()}
@@ -166,40 +94,7 @@ export class Steg1 extends React.Component<Props, State> {
                     />
                 )}
 
-                {barn.erBarnetFødt === false && antallBarn &&  (
-                    <ValidDateInput
-                        id="termindato"
-                        name="termindato"
-                        label={getMessage(intl, 'relasjonBarn.text.termindato')}
-                        selectedDate={barn && (barn as UfodtBarn).termindato}
-                        onChange={(e: string) => dispatch(soknad.setTermindato(e))}
-                        validators={this.getTermindatoValidators()}
-                    />
-                )}
-
-                {terminDato && ([
-                    <DialogBox type="warning" overflow={true} key="dialog">
-                        <Normaltekst>{getMessage(intl, 'relasjonBarn.text.terminbekreftelse')}</Normaltekst>
-                    </DialogBox>,
-                    <ValidDateInput
-                        id="terminbekreftelse"
-                        name="terminbekreftelse"
-                        key="dateInputTerminBekreftelse"
-                        selectedDate={barn && (barn as UfodtBarn).terminbekreftelseDato}
-                        label={getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}
-                        onChange={(e: string) => dispatch(soknad.setTerminbekreftelseDato(e))}
-                        validators={this.getTerminbekreftelseDatoValidators()}
-                    />
-                ])}
-
-                <Modal
-                    isOpen={this.state.isModalOpen}
-                    closeButton={true}
-                    onRequestClose={() => this.closeTerminbekreftelseModal()}
-                    contentLabel="Om terminbekreftelsen"
-                >
-                    <OmTerminbekreftelsen />
-                </Modal>
+                {this.renderPartial()}
             </div>
         );
     }

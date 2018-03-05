@@ -9,8 +9,10 @@ import { connect } from 'react-redux';
 import { DispatchProps } from '../../redux/types/index';
 import CountryPicker from '../../components/country-picker/CountryPicker';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
+import Barn, { FodtBarn } from '../../types/domain/Barn';
 
 interface StateProps {
+    barn: Barn;
     utenlandsopphold: Utenlandsopphold;
     language: string;
 }
@@ -52,8 +54,9 @@ export class Steg2 extends React.Component<Props> {
     }
 
     render() {
-        const { dispatch, intl, utenlandsopphold, language } = this.props;
+        const { dispatch, intl, utenlandsopphold, barn, language } = this.props;
         const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, perioder } = utenlandsopphold;
+        const fødselsdatoIsSet = (barn as FodtBarn).fødselsdatoer && (barn as FodtBarn).fødselsdatoer.length > 0;
 
         return (
             <div className="engangsstonad__step">
@@ -90,7 +93,7 @@ export class Steg2 extends React.Component<Props> {
                         ]}
                     />
                 )}
-                {iNorgeNeste12Mnd !== undefined && (
+                {iNorgeNeste12Mnd !== undefined && !fødselsdatoIsSet && (
                     <RadioPanelGruppe
                         legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
                         name="fødselINorge"
@@ -109,6 +112,7 @@ export class Steg2 extends React.Component<Props> {
 
 const mapStateToProps = (state: any) => ({
     utenlandsopphold: state.soknadReducer.utenlandsopphold,
+    barn: state.soknadReducer.barn,
     language: state.commonReducer.language
 });
 
