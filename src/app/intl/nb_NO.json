@@ -22,7 +22,7 @@
 	"relasjonBarn.text.velgantallBarn": "velg antall barn",
 	"relasjonBarn.text.termindato": "med termindato den…",
 	"relasjonBarn.link.velgeDato": "Klikk her for å velge dato",
-	"relasjonBarn.text.terminbekreftelse": "Siden barnet ikke er født må du legge ved terminbekreftelse. Denne må være datert og signert av jordmor eller lege når du er i 26. svangerskapsuke eller senere.",
+	"relasjonBarn.text.terminbekreftelse": "Siden barnet ikke er født må du legge ved terminbekreftelse fra jordmor eller lege.",
 	"relasjonBarn.text.datoTerminbekreftelse": "Terminbekreftelsen er datert den...",
 	"relasjonBarn.text.tenkPa": "Husk terminbekreftelsen",
 	"relasjonBarn.text.ettersendvedlegg":
