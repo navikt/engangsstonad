@@ -24,7 +24,7 @@ interface EditableCountryListProps extends CountryListProps {
 }
 
 export const CountryList: React.StatelessComponent<EditableCountryListProps> = (props) => (
-    <ul>
+    <ul className="countryList">
         {props.utenlandsoppholdListe.map((utenlandsopphold, index) => (
             <CountryListElement
                 key={index}
