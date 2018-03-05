@@ -42,7 +42,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (p
                 </Ingress>
 
                 <DisplayTextWithLabel
-                    label={getMessage(intl, 'relasjonBarn.radiobutton.tvillinger')}
+                    label={getMessage(intl, 'oppsummering.text.soknadenGjelder')}
                     text={antallBarnSummaryText}
                 />
                 <DisplayTextWithLabel
