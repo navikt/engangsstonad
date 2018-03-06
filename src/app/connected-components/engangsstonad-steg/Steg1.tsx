@@ -10,7 +10,7 @@ import Person from '../../types/domain/Person';
 import { DispatchProps } from '../../redux/types';
 import getMessage from 'util/i18n/i18nUtils';
 import '../../styles/engangsstonad.less';
-import Partials from './partials/steg1';
+import { steg1Partials } from './partials';
 
 interface StateProps {
     barn: Barn;
@@ -56,9 +56,9 @@ export class Steg1 extends React.Component<Props, State> {
     renderPartial() {
         const { barn, intl, dispatch } = this.props;
         if (barn.erBarnetFødt === true) {
-            return <Partials.FødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
+            return <steg1Partials.FødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
         } else if (barn.erBarnetFødt === false) {
-            return <Partials.UfødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
+            return <steg1Partials.UfødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
         }
         return null;
     }
