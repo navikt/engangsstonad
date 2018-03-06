@@ -15,6 +15,20 @@
         margin-bottom: @paddingLarge;
         text-align: center;
     }
+
+    &__buttonBar {
+      display: flex;
+      padding-left: 24px;
+      padding-right: 24px;
+
+      .knapp {
+        font-size: 0.75rem;
+      }
+
+      .knapp:not(:first-child) {
+        margin-left: 0.5rem;
+      }
+    }
 }
 
 .countryElement {

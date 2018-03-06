@@ -7,7 +7,7 @@ const nynorskCountryList = require('i18n-iso-countries/langs/nn.json');
 const { Select } = require('nav-frontend-skjema');
 const { Undertittel, Element } = require('nav-frontend-typografi');
 const Modal = require('nav-frontend-modal').default;
-const { Knapp } = require('nav-frontend-knapper');
+const { Knapp, Hovedknapp } = require('nav-frontend-knapper');
 
 import DateInput from 'components/date-input/DateInput';
 import getMessage from 'util/i18n/i18nUtils';
@@ -133,12 +133,14 @@ class CountryModal extends React.Component<Props, State> {
                             });
                         }}
                     />
-                    <Knapp onClick={() => this.props.closeModal()} htmlType="button">
-                        {getMessage(intl, 'medlemmskap.modal.avbryt')}
-                    </Knapp>
-                    <Knapp onClick={() => utenlandsopphold && this.onSubmit()} htmlType="button">
-                        {this.state.submitButtonText}
-                    </Knapp>
+                    <div className="countryModal__buttonBar">
+                        <Knapp onClick={() => this.props.closeModal()} htmlType="button">
+                            {getMessage(intl, 'medlemmskap.modal.avbryt')}
+                        </Knapp>
+                        <Hovedknapp onClick={() => utenlandsopphold && this.onSubmit()} htmlType="button">
+                            {this.state.submitButtonText}
+                        </Hovedknapp>
+                    </div>
                 </div>
             </Modal>
         );
