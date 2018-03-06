@@ -109,6 +109,8 @@
 		"nav-frontend-paneler-style": "0.3.7",
 		"nav-frontend-skjema": "0.1.26",
 		"nav-frontend-skjema-style": "0.3.12",
+		"nav-frontend-spinner": "^1.0.5",
+		"nav-frontend-spinner-style": "^0.2.4",
 		"nav-frontend-stegindikator-style": "0.3.22",
 		"nav-frontend-typografi": "2.0.2",
 		"nav-frontend-typografi-style": "1.0.7",

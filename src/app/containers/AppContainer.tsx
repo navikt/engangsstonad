@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect, withRouter, RouteComponentProps } from 'react-router-dom';
 import * as queryStringParser from 'query-string';
+import Spinner from 'nav-frontend-spinner';
 
 import Intro from './../connected-components/intro/Intro';
 import SøknadSendt from './../connected-components/soknad-sendt/SøknadSendt';
@@ -21,6 +22,7 @@ import { erMann, erMyndig, harPersonData } from 'util/validation/validationUtils
 
 interface StateProps {
     person: Person;
+    isLoadingPerson: boolean;
 }
 
 type Props = StateProps & ExternalProps & DispatchProps & RouteComponentProps<{}>;
@@ -52,39 +54,44 @@ export class AppContainer extends React.Component<Props> {
     renderContent(children: React.ReactNode) {
         return (
             <div className="engangsstonad">
-                <Switch>
-                    {children}
-                </Switch>
+                {children}
             </div>
         );
     }
 
     getInvalidPersonRoutes(personErMann: boolean, personFinnes: boolean) {
-        let route: any = {};
+        let component: any = IkkeMyndig;
         if (personErMann) {
-            route = { component: ErMann, subpath: 'erMann'};
+            component = ErMann;
         } else if (!personFinnes) {
-            route = { component: PersonFinnesIkke, subpath: 'personFinnesIkke'};
-        } else {
-            route = { component: IkkeMyndig, subpath: 'underAge'};
+            component = PersonFinnesIkke;
         }
-        return [
-            <Route path={`/engangsstonad/${route.subpath}`} component={route.component} key={route.subpath} />,
-            <Redirect to={`/engangsstonad/${route.subpath}`} key={`redirect${route.subpath}`} />
-        ];
+
+        return (
+            <Switch>
+                <Route path="/engangsstonad" component={component} />,
+                <Redirect to="/engangsstonad" />
+            </Switch>
+        );
     }
 
     getValidPersonRoutes() {
-        return [
-            <Route path="/engangsstonad/confirmation" component={Intro} key="confirmation" />,
-            <Route path="/engangsstonad/completed" component={SøknadSendt} key="completed" />,
-            <Route path="/engangsstonad/soknad" component={SøknadContainer} key="soknad" />,
-            <Redirect to="/engangsstonad/confirmation" key="confirmation" />
-        ];
+        return (
+            <Switch>
+                <Route path="/engangsstonad" component={Intro} exact={true} />,
+                <Route path="/engangsstonad/completed" component={SøknadSendt} />,
+                <Route path="/engangsstonad/soknad" component={SøknadContainer} />,
+                <Redirect to="/engangsstonad" />
+            </Switch>
+        );
     }
 
     render() {
-        const { person } = this.props;
+        const { person, isLoadingPerson } = this.props;
+
+        if (isLoadingPerson) {
+            return this.renderContent(<Spinner type="XXL"/>);
+        }
 
         if (person) {
             const personFinnes = harPersonData(person);
@@ -103,7 +110,8 @@ export class AppContainer extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-    person: state.apiReducer.person
+    person: state.apiReducer.person,
+    isLoadingPerson: state.apiReducer.isLoadingPerson
 });
 
 export default withRouter(connect<StateProps, {}, {}>(mapStateToProps)(AppContainer));

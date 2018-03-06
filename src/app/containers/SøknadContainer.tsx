@@ -28,7 +28,7 @@ interface OwnProps {
     activeStep: number;
 }
 
-type Props = OwnProps & DispatchProps & InjectedIntlProps & History & RouteComponentProps<{}>;
+type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps<{}>;
 
 export class SøknadContainer extends React.Component<Props> {
     componentWillMount() {
