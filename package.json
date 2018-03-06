@@ -28,7 +28,7 @@
 		"chai": "4.1.2",
 		"cross-env": "5.1.1",
 		"css-loader": "0.28.7",
-		"cypress": "2.0.3",
+		"cypress": "2.1.0",
 		"enzyme": "3.2.0",
 		"enzyme-adapter-react-16": "1.1.0",
 		"extract-text-webpack-plugin": "3.0.2",
