@@ -18,7 +18,24 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
         <ul>
             <li>
                 <Normaltekst>
-                    {getMessage(intl, 'rettigheter.text.sammeBarnet')}
+                    {getMessage(intl, 'rettigheter.text.uretteOpplysninger')}
+                </Normaltekst>
+            </li>
+            <li>
+                <Normaltekst>
+                    <FormattedMessage
+                        id="rettigheter.text.lestOgForstått"
+                        values={{
+                            link: (
+                                <a
+                                    href="https://nav.no/rettOgPlikt"
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    <FormattedMessage id="rettigheter.text.lestOgForstått.link" />
+                                </a>
+                            )
+                        }}
+                    />
                 </Normaltekst>
             </li>
             <li>
@@ -55,40 +72,18 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
             </li>
             <li>
                 <Normaltekst>
-                    {getMessage(intl, 'rettigheter.text.uretteOpplysninger')}
-                </Normaltekst>
-            </li>
-            <li>
-                <Normaltekst>
-                    <FormattedMessage
-                        id="rettigheter.text.lestOgForstått"
-                        values={{
-                            link: (
-                                <a
-                                    href="https://nav.no/rettOgPlikt"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <FormattedMessage id="rettigheter.text.lestOgForstått.link" />
-                                </a>
-                            )
-                        }}
-                    />
-                </Normaltekst>
-            </li>
-            <li>
-                <Normaltekst>
                     <FormattedMessage
                         id="rettigheter.text.personvernerklering"
                         values={{
                             link: (
                                 <a
-                                    href={'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/' +
-                                    'Teknisk+brukerstotte/Snarveier/' +
-                                    'personvernerkl%C3%A6ring-for-arbeids-og-velferdsetaten'}
+                                    href={
+                                        'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/' +
+                                        'Teknisk+brukerstotte/Snarveier/' +
+                                        'personvernerkl%C3%A6ring-for-arbeids-og-velferdsetaten'
+                                    }
                                     target="_blank"
-                                    rel="noopener noreferrer"
-                                >
+                                    rel="noopener noreferrer">
                                     <FormattedMessage id="rettigheter.text.personvernerklering.link" />
                                 </a>
                             )

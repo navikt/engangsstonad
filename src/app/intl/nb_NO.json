@@ -70,22 +70,19 @@
 	"kvittering.text.innsendtInfo.linkText": "Ditt Nav",
 	"kvittering.text.lukkVinduet": "Lukk dette vinduet",
 
-	"rettigheter.sectionheading.rettigheterOgPlikter": "Rettigheter og plikter",
-	"rettigheter.text.sammeBarnet":
-	"Jeg forstår at jeg kan få engangsstønad hvis jeg ikke har rett til foreldrepenger, eller velger engangsstønad fremfor foreldrepenger. Jeg forstår at jeg ikke senere kan gjøre om dette valget.",
-	"rettigheter.text.innhenteOpplysninger":
-	"Jeg samtykker til at NAV kan innhente opplysninger som er nødvendig for å behandle søknaden min.",
+    "rettigheter.sectionheading.rettigheterOgPlikter": "Rettigheter og plikter",
+    "rettigheter.text.lestOgForstått": "Jeg har lest og forstått det som står på {link}",
+	"rettigheter.text.lestOgForstått.link": "nav.no/rettogplikt",
+	"rettigheter.text.innhenteOpplysninger": "Jeg forstår at NAV kan innhente informasjon om:",
 	"rettigheter.text.innhenteOpplysninger.1": "Arbeidsforhold",
 	"rettigheter.text.innhenteOpplysninger.2": "Inntekt",
 	"rettigheter.text.innhenteOpplysninger.3": "Tillknytning til Norge",
 	"rettigheter.text.innhenteOpplysninger.4": "Opplysninger om barnet",
 	"rettigheter.text.innhenteOpplysninger.5": "Opplysninger om den andre forelderen",
 	"rettigheter.text.uretteOpplysninger":
-	"Jeg forstår at hvis jeg gir uriktige opplysninger kan det få konsekvenser for retten til engangsstønaden.",
-	"rettigheter.text.lestOgForstått": "Jeg har lest og forstått det som står på {link}",
-	"rettigheter.text.lestOgForstått.link": "nav.no/rettogplikt",
-	"rettigheter.text.personvernerklering": "Jeg kan lese mer om NAV sin personvernerklæring her {link}",
-	"rettigheter.text.personvernerklering.link": "NAVs personvernerklæring",
+	"Jeg forstår at hvis jeg gir uriktige eller holder tilbake opplysninger kan det få konsekvenser for retten min til engangsstønaden",
+	"rettigheter.text.personvernerklering": "Jeg er kjent med rettighetene mine som står i {link}",
+	"rettigheter.text.personvernerklering.link": "personvernerklæringen til NAV",
 
 	"terminbekreftelsen.sectionheading.terminbekreftelsen": "Om terminbekreftelsen",
 	"terminbekreftelsen.text.terminbekreftelsen":
