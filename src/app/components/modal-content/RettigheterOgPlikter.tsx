@@ -30,7 +30,8 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                                 <a
                                     href="https://nav.no/rettOgPlikt"
                                     target="_blank"
-                                    rel="noopener noreferrer">
+                                    rel="noopener noreferrer"
+                                >
                                     <FormattedMessage id="rettigheter.text.lestOgForstått.link" />
                                 </a>
                             )
@@ -83,7 +84,8 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                                         'personvernerkl%C3%A6ring-for-arbeids-og-velferdsetaten'
                                     }
                                     target="_blank"
-                                    rel="noopener noreferrer">
+                                    rel="noopener noreferrer"
+                                >
                                     <FormattedMessage id="rettigheter.text.personvernerklering.link" />
                                 </a>
                             )
