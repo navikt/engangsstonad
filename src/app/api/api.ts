@@ -32,25 +32,9 @@ function getPerson(params: PersonRequest = defaultParams) {
     return axios.get(`${endpoint}/personinfo?${queryStringParser.stringify(params)}`);
 }
 
-function sendSoknad(soknad: EngangsstonadSoknad, vedlegg: File[]) {
-    const config  = {
-        headers: {
-            'content-type': 'multipart/form-data;'
-        }
-    };
-
-    const formData = new FormData();
-    formData.append('soknad', new Blob([JSON.stringify(soknad)], {
-        type: 'application/json'
-    }));
-
-    vedlegg.forEach((file) => {
-        formData.append('vedlegg', file);
-    });
-
-    // tslint:disable-next-line no-any
+function sendSoknad(soknad: EngangsstonadSoknad) {
     const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub ? '?stub=true' : ''}`;
-    return axios.post(url, formData, config);
+    return axios.post(url, {fnr: fnr, ...soknad});
 }
 
 const Api = { getPerson, sendSoknad };

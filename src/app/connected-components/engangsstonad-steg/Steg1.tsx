@@ -19,6 +19,7 @@ interface StateProps {
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
+
 interface State {
     isModalOpen: boolean;
 }
@@ -59,6 +60,7 @@ export class Steg1 extends React.Component<Props, State> {
             return <steg1Partials.FødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
         } else if (barn.erBarnetFødt === false) {
             return <steg1Partials.UfødtBarnPartial barn={barn} vedlegg={vedlegg} intl={intl} dispatch={dispatch} />;
+
         }
         return null;
     }

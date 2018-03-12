@@ -56,6 +56,7 @@ export class SøknadContainer extends React.Component<Props> {
         const { dispatch, annenForelder, barn, utenlandsopphold, vedlegg } = this.props;
         if (this.hasToWaitForResponse()) {
             return dispatch(api.sendSoknad({ annenForelder, barn, utenlandsopphold }, vedlegg));
+
         }
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
@@ -114,5 +115,4 @@ const mapStateToProps = (state: any) => ({
     soknadPostResponse: state.apiReducer.soknad,
     activeStep: state.stepReducer.activeStep
 });
-
 export default connect<OwnProps>(mapStateToProps)(injectIntl(SøknadContainer));
