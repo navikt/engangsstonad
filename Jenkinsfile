@@ -6,7 +6,7 @@ def deployLib = new deploy()
 node {
     def commitHash, commitHashShort, commitUrl
     def project = "navikt"
-    def repo = "p2-selvbetjening-frontend"
+    def repo = "engangsstonad"
     def app = "engangsstonad"
     def committer, committerEmail, changelog, releaseVersion
     def appConfig = "nais.yaml"
