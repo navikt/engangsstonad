@@ -7,7 +7,7 @@ const { Select } = require('nav-frontend-skjema');
 interface StateProps {
     defaultValue?: string;
     language: string;
-    label: string;
+    label: React.ReactNode;
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 

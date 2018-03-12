@@ -25,38 +25,42 @@ export class Steg2 extends React.Component<Props> {
         const { dispatch, intl, annenForelder, language } = this.props;
 
         return (
-            <div>
-                <Input
-                    label={getMessage(intl, 'annenForelder.label.navn')}
-                    placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
-                    disabled={annenForelder.kanIkkeOppgis || false}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderNavn(e.target.value))}
-                    value={annenForelder.navn || ''}
-                />
-                <Checkbox
-                    checked={annenForelder.kanIkkeOppgis || false}
-                    label={getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}
-                    onChange={() => dispatch(setAnnenForelderKanIkkeOppgis(!annenForelder.kanIkkeOppgis))}
-                />
-                {annenForelder.navn && [
+            <div className="step2">
+                <div className="section">
                     <Input
-                        label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
-                        placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
-                        key="fnr"
-                    />,
+                        label={<b>{getMessage(intl, 'annenForelder.label.navn')}</b>}
+                        placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
+                        disabled={annenForelder.kanIkkeOppgis || false}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderNavn(e.target.value))}
+                        value={annenForelder.navn || ''}
+                    />
                     <Checkbox
-                        label={getMessage(intl, 'annenForelder.label.utenlandskFødselsnummer')}
-                        onChange={() => dispatch(setAnnenForelderUtenlandskFnr(!annenForelder.utenlandskFnr))}
-                        key="utenlandskFnr"
+                        checked={annenForelder.kanIkkeOppgis || false}
+                        label={getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}
+                        onChange={() => dispatch(setAnnenForelderKanIkkeOppgis(!annenForelder.kanIkkeOppgis))}
                     />
-                ]}
+                </div>
+                {annenForelder.navn && (
+                    <div className="section">
+                        <Input
+                            label={<b>{getMessage(intl, 'annenForelder.label.fødselsnummer')}</b>}
+                            placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
+                        />
+                        <Checkbox
+                            label={getMessage(intl, 'annenForelder.label.utenlandskFødselsnummer')}
+                            onChange={() => dispatch(setAnnenForelderUtenlandskFnr(!annenForelder.utenlandskFnr))}
+                        />
+                    </div>
+                )}
                 {annenForelder.utenlandskFnr === true && (
-                    <CountrySelect
-                        label={getMessage(intl, 'annenForelder.label.bostedsland')}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => dispatch(setAnnenForelderBostedsland(e.target.value))}
-                        language={language}
-                    />
+                    <div className="section">
+                        <CountrySelect
+                            label={<b>{getMessage(intl, 'annenForelder.label.bostedsland')}</b>}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => dispatch(setAnnenForelderBostedsland(e.target.value))}
+                            language={language}
+                        />
+                    </div>
                 )}
             </div>
         );

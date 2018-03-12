@@ -28,7 +28,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
     return (
         <div>
             <Ingress className="engangsstonadOppsumering__underTitle">
-                {getMessage(intl, 'medlemmskap.sectionheading.medlemmskap')}
+                {getMessage(intl, 'medlemmskap.sectionheading')}
             </Ingress>
 
             {iNorgeSiste12Mnd ? (

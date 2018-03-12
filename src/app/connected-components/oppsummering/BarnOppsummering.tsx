@@ -38,7 +38,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (p
         return (
             <div>
                 <Ingress className="engangsstonadOppsumering__underTitle">
-                    {getMessage(intl, 'relasjonBarn.sectionheading.relasjonBarn')}
+                    {getMessage(intl, 'relasjonBarn.sectionheading')}
                 </Ingress>
 
                 <DisplayTextWithLabel

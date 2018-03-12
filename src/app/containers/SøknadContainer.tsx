@@ -48,7 +48,7 @@ export class SøknadContainer extends React.Component<Props> {
 
     hasToWaitForResponse() {
         const { activeStep } = this.props;
-        return activeStep === 3;
+        return activeStep === 4;
     }
 
     handleNextClicked() {
