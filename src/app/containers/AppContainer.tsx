@@ -23,6 +23,7 @@ import { erMann, erMyndig, harPersonData } from 'util/validation/validationUtils
 interface StateProps {
     person: Person;
     isLoadingPerson: boolean;
+    godkjentVilkar: boolean;
 }
 
 type Props = StateProps & ExternalProps & DispatchProps & RouteComponentProps<{}>;
@@ -59,7 +60,7 @@ export class AppContainer extends React.Component<Props> {
         );
     }
 
-    getInvalidPersonRoutes(personErMann: boolean, personFinnes: boolean) {
+    getErrorRoutes(personErMann: boolean, personFinnes: boolean) {
         let component: any = IkkeMyndig;
         if (personErMann) {
             component = ErMann;
@@ -75,12 +76,13 @@ export class AppContainer extends React.Component<Props> {
         );
     }
 
-    getValidPersonRoutes() {
+    getSøknadRoutes() {
+        const { godkjentVilkar } = this.props;
         return (
             <Switch>
-                <Route path="/engangsstonad" component={Intro} exact={true} />,
-                <Route path="/engangsstonad/completed" component={SøknadSendt} />,
-                <Route path="/engangsstonad/soknad" component={SøknadContainer} />,
+                <Route path="/engangsstonad" component={Intro} exact={true} />
+                <Route path="/engangsstonad/completed" component={SøknadSendt} />
+                {godkjentVilkar === true && <Route path="/engangsstonad/soknad" component={SøknadContainer} />}
                 <Redirect to="/engangsstonad" />
             </Switch>
         );
@@ -101,17 +103,18 @@ export class AppContainer extends React.Component<Props> {
             const personStateIsValid = personFinnes && personErMyndig && !personErMann;
 
             if (personStateIsValid) {
-                return this.renderContent(this.getValidPersonRoutes());
+                return this.renderContent(this.getSøknadRoutes());
             }
-            return this.renderContent(this.getInvalidPersonRoutes(personErMann, personFinnes));
+            return this.renderContent(this.getErrorRoutes(personErMann, personFinnes));
         }
-        return this.renderContent(this.getInvalidPersonRoutes(false, false));
+        return this.renderContent(this.getErrorRoutes(false, false));
     }
 }
 
 const mapStateToProps = (state: any) => ({
     person: state.apiReducer.person,
-    isLoadingPerson: state.apiReducer.isLoadingPerson
+    isLoadingPerson: state.apiReducer.isLoadingPerson,
+    godkjentVilkar: state.commonReducer.godkjentVilkar
 });
 
 export default withRouter(connect<StateProps, {}, {}>(mapStateToProps)(AppContainer));
