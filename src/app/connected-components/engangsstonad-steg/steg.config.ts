@@ -4,15 +4,15 @@ import InjectedIntl = ReactIntl.InjectedIntl;
 const stepIntlIds = [
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
-        stegIndikatorLabelIntlId: 'relasjonBarn.sectionheading.relasjonBarn'
+        stegIndikatorLabelIntlId: 'relasjonBarn.sectionheading'
     },
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
-        stegIndikatorLabelIntlId: 'medlemmskap.sectionheading.medlemmskap'
+        stegIndikatorLabelIntlId: 'medlemmskap.sectionheading'
     },
     {
-        fortsettKnappLabelIntlId: 'standard.sectionheading.sendSoknad',
-        stegIndikatorLabelIntlId: 'oppsummering.sectionheading.oppsummering'
+        fortsettKnappLabelIntlId: 'standard.sectionheading',
+        stegIndikatorLabelIntlId: 'oppsummering.sectionheading'
     }
 ];
 

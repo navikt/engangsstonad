@@ -13,7 +13,7 @@ interface Props {
 const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
     <div className="modalContent">
         <Undertittel className="modalContent__header">
-            {getMessage(intl, 'rettigheter.sectionheading.rettigheterOgPlikter')}
+            {getMessage(intl, 'rettigheter.sectionheading')}
         </Undertittel>
         <ul>
             <li>

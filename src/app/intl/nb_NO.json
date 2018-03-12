@@ -11,7 +11,8 @@
 	"intro.pageheading.samtykke": "Rettigheter og plikter.",
 	"intro.button.startSoknad": "Begynn med søknaden",
     "intro.text.lastNedPapirsoknad": "Her kan du laste ned papirsøknaden",
-	"relasjonBarn.sectionheading.relasjonBarn": "Informasjon om barnet",
+
+	"relasjonBarn.sectionheading": "Informasjon om barnet",
 	"relasjonBarn.text.fodselTidspunkt": "Søknaden min gjelder en fødsel som er…",
 	"relasjonBarn.radiobutton.fremtid": "frem i tid",
 	"relasjonBarn.radiobutton.fortid": "tilbake i tid",
@@ -31,7 +32,7 @@
 	"relasjonBarn.text.fortsette": "Vil du fortsette med søknaden?",
 	"relasjonBarn.text.fodselsdato": "med fødseldato...",
 
-	"medlemmskap.sectionheading.medlemmskap": "Tilknytning til Norge",
+	"medlemmskap.sectionheading": "Tilknytning til Norge",
 	"medlemmskap.text.siste12mnd": "De siste 12 månedene har jeg…",
 	"medlemmskap.radiobutton.boddNorge": "kun bodd i Norge",
 	"medlemmskap.radiobutton.utlandet": "bodd i utlandet helt eller delvis",
@@ -51,7 +52,7 @@
 	"medlemmskap.modal.lagreEndringer": "Lagre endringer",
 	"medlemmskap.modal.avbryt": "Avbryt",
 
-	"oppsummering.sectionheading.oppsummering": "Oppsummering",
+	"oppsummering.sectionheading": "Oppsummering",
 	"oppsummering.text.lesNoye":
 	"Les gjennom oppsummeringen før du sender inn søknaden. Hvis du trenger å gjøre endringer kan du gå tilbake.",
 	"oppsummering.text.vedlagtTerminbekreftelse": "Det er vedlagt en terminbekreftelse…",
@@ -63,14 +64,14 @@
 	"De opplysninger jeg har oppgitt er riktige og jeg har ikke holdt tilbake opplysninger som har betydning for min rett til engangsstønad.",
 	"oppsummering.text.soknadenGjelder": "Søknaden gjelder...",
 
-	"kvittering.sectionheading.navdame": "Illustrasjon av NAV ansatt som takk for mottatt søknad!",
+	"kvittering.sectionheading": "Illustrasjon av NAV ansatt som takk for mottatt søknad!",
 	"kvittering.snakkeboble.overskrift": "Bra jobbet, {name}!",
 	"kvittering.text.soknadMottatt": "Vi tar kontakt med deg hvis vi trenger noe mer.",
 	"kvittering.text.innsendtInfo": "Vi mottok søknaden din {1} kl. {0}. Du kan følge med på søknaden på {linkText}.",
 	"kvittering.text.innsendtInfo.linkText": "Ditt Nav",
 	"kvittering.text.lukkVinduet": "Lukk dette vinduet",
 
-    "rettigheter.sectionheading.rettigheterOgPlikter": "Rettigheter og plikter",
+    "rettigheter.sectionheading": "Rettigheter og plikter",
     "rettigheter.text.lestOgForstått": "Jeg har lest og forstått det som står på {link}",
 	"rettigheter.text.lestOgForstått.link": "nav.no/rettogplikt",
 	"rettigheter.text.innhenteOpplysninger": "Jeg forstår at NAV kan innhente informasjon om:",
@@ -84,7 +85,7 @@
 	"rettigheter.text.personvernerklering": "Jeg er kjent med rettighetene mine som står i {link}",
 	"rettigheter.text.personvernerklering.link": "personvernerklæringen til NAV",
 
-	"terminbekreftelsen.sectionheading.terminbekreftelsen": "Om terminbekreftelsen",
+	"terminbekreftelsen.sectionheading": "Om terminbekreftelsen",
 	"terminbekreftelsen.text.terminbekreftelsen":
 	"Du må legge ved en bekreftelse på termin. Denne må være datert og signert av lege eller jordmor når du er i 26. svangerskapsuke eller senere.",
 
@@ -97,7 +98,7 @@
 	"standard.text.fromTo": "fra: {from} - til: {to}",
 	"standard.text.fra": "fra",
 	"standard.text.til": "til",
-	"standard.sectionheading.sendSoknad": "Send inn søknad",
+	"standard.sectionheading": "Send inn søknad",
 
     "valideringsfeil.godkjentVilkar": "Du må bekrefte at du har lest og forstått",
     "valideringsfeil.bekreftOpplysninger": "Du må bekrefte at opplysningene stemmer",

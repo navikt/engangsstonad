@@ -14,7 +14,7 @@ interface Props {
 const OmTerminbekreftelsen: React.StatelessComponent<Props> = ({ intl }) => (
     <div className="modalContent">
         <Undertittel className="modalContent__header">
-            {getMessage(intl, 'terminbekreftelsen.sectionheading.terminbekreftelsen')}
+            {getMessage(intl, 'terminbekreftelsen.sectionheading')}
         </Undertittel>
         <Normaltekst className="modalContent__paragraph">
             {getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}
