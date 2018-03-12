@@ -8,7 +8,8 @@ const getDefaultState = () => {
         },
         utenlandsopphold: {
             perioder: []
-        }
+        },
+        annenForelder: {}
     };
     return engangsstonadSoknad;
 };
@@ -67,6 +68,21 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
                 ...state,
                 barn: barn ? { ...barn, terminbekreftelseDato } : { terminbekreftelseDato }
             };
+        case SoknadActionKeys.SET_ANNEN_FORELDER_NAVN:
+            const { navn } = action;
+            return { ...state, annenForelder: { ...state.annenForelder, navn } };
+        case SoknadActionKeys.SET_ANNEN_FORELDER_FNR:
+            const { fnr } = action;
+            return { ...state, annenForelder: { ...state.annenForelder, fnr } };
+        case SoknadActionKeys.SET_ANNEN_FORELDER_UTENLANDSK_FNR:
+            const { utenlandskFnr } = action;
+            return { ...state, annenForelder: { ...state.annenForelder, utenlandskFnr } };
+        case SoknadActionKeys.SET_ANNEN_FORELDER_BOSTEDSLAND:
+            const { bostedsland } = action;
+            return { ...state, annenForelder: { ...state.annenForelder, bostedsland } };
+        case SoknadActionKeys.SET_ANNEN_FORELDER_KAN_IKKE_OPPGIS:
+            const { kanIkkeOppgis } = action;
+            return { ...state, annenForelder: { kanIkkeOppgis } };
     }
     return state;
 };

@@ -1,80 +1,119 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 import DocumentTitle from 'react-document-title';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
-
-import BekreftCheckbox from 'components/bekreft-checkbox/BekreftCheckbox';
-import DialogBox from 'components/dialog-box/DialogBox';
-import PersonaliaLabel from 'components/personalia-label/PersonaliaLabel';
-
-import { fullNameFormat } from 'util/formats/formatUtils';
-import { commonActionCreators as common } from '../../redux/actions';
-import getMessage from '../../util/i18n/i18nUtils';
-
-import Person from '../../types/domain/Person';
-import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
-import { DispatchProps } from 'app/redux/types';
-import Utenlandsopphold from '../../types/domain/Utenlandsopphold';
-import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
-import OppsummeringBarn from './../oppsummering/BarnOppsummering';
-import OppsummeringUtenlandsopphold from './../oppsummering/UtenlandsoppholdOppsummering';
-const { ValidGroup } = require('./../../lib') as any;
-import '../../styles/engangsstonad.less';
+const { RadioPanelGruppe } = require('nav-frontend-skjema');
+import getMessage from 'util/i18n/i18nUtils';
+import { soknadActionCreators as soknad } from '../../redux/actions';
+import Utenlandsopphold, { Periode } from '../../types/domain/Utenlandsopphold';
+import { connect } from 'react-redux';
+import { DispatchProps } from '../../redux/types/index';
+import CountryPicker from '../../components/country-picker/CountryPicker';
+import InjectedIntlProps = ReactIntl.InjectedIntlProps;
+import Barn, { FodtBarn } from '../../types/domain/Barn';
 
 interface StateProps {
-    bekreftetInformasjon: boolean;
-    person: Person;
+    barn: Barn;
     utenlandsopphold: Utenlandsopphold;
-    barn: FodtBarn & UfodtBarn;
-    soknadPostResponse: EngangsstonadSoknadResponse;
+    language: string;
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
-export class Steg3 extends React.Component<Props> {
-    render() {
-        const { person, intl, dispatch, bekreftetInformasjon } = this.props;
-        if (!person) {
-            return null;
-        }
-        return (
-            <div>
-                <DocumentTitle title="NAV Engangsstønad - Oppsummering" />
-                <DialogBox type="info" overflow={false}>
-                    <Normaltekst>{getMessage(intl, 'oppsummering.text.lesNoye')}</Normaltekst>
-                </DialogBox>
-                <PersonaliaLabel
-                    navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn)}
-                    personnummer="XXXXXXXXXXX"
-                />
-                <OppsummeringBarn barn={this.props.barn} />
-                <OppsummeringUtenlandsopphold utenlandsopphold={this.props.utenlandsopphold} />
 
-                <ValidGroup
-                    validators={[
-                        {
-                            test: () => (bekreftetInformasjon === true),
-                            failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger')
-                        }
+export class Steg3 extends React.Component<Props> {
+    getINorgeSiste12SelectedValue() {
+        const { iNorgeSiste12Mnd } = this.props.utenlandsopphold;
+        if (iNorgeSiste12Mnd === true) {
+            return 'norway';
+        } else if (iNorgeSiste12Mnd === false) {
+            return 'abroad';
+        } else {
+            return undefined;
+        }
+    }
+    
+    getINorgeNeste12SelectedValue() {
+        const { iNorgeNeste12Mnd } = this.props.utenlandsopphold;
+        if (iNorgeNeste12Mnd === true) {
+            return 'norway';
+        } else if (iNorgeNeste12Mnd === false) {
+            return 'abroad';
+        } else {
+            return undefined;
+        }
+    }
+
+    getFødselINorgeSelectedValue() {
+        const { fødselINorge } = this.props.utenlandsopphold;
+        if (fødselINorge === true) {
+            return 'norway';
+        } else if (fødselINorge === false) {
+            return 'abroad';
+        } else {
+            return undefined;
+        }
+    }
+
+    render() {
+        const { dispatch, intl, utenlandsopphold, barn, language } = this.props;
+        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, perioder } = utenlandsopphold;
+        const fødselsdatoIsSet = (barn as FodtBarn).fødselsdatoer && (barn as FodtBarn).fødselsdatoer.length > 0;
+
+        return (
+            <div className="engangsstonad__step">
+                <DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
+                <RadioPanelGruppe
+                    legend={getMessage(intl, 'medlemmskap.text.siste12mnd')}
+                    name="iNorgeSiste12"
+                    onChange={(event: any, value: string) => dispatch(soknad.setINorgeSiste12Mnd(value))}
+                    checked={this.getINorgeSiste12SelectedValue()}
+                    radios={[
+                        {label: getMessage(intl, 'medlemmskap.radiobutton.boddNorge'), value: 'norway'},
+                        {label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'), value: 'abroad'}
                     ]}
-                    name="bekreftOpplysninger"
-                >
-                <BekreftCheckbox
-                    name="bekreftOpplysninger"
-                    checked={bekreftetInformasjon}
-                    onChange={() => dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))}
-                    label={getMessage(intl, 'oppsummering.text.samtykke')}
                 />
-                </ValidGroup>
+                {utenlandsopphold.iNorgeSiste12Mnd === false && (
+                    <CountryPicker
+                        label={getMessage(intl, 'medlemmskap.text.jegBodde')}
+                        language={language}
+                        utenlandsoppholdListe={perioder}
+                        addVisit={(periode: Periode) => dispatch(soknad.addPeriode(periode))}
+                        editVisit={(periode: Periode, i: number) => dispatch(soknad.editPeriode(periode, i))}
+                        deleteVisit={(periode: Periode) => dispatch(soknad.deletePeriode(periode))}
+                    />
+                )}
+                {(iNorgeSiste12Mnd || perioder.length > 0) && (
+                    <RadioPanelGruppe
+                        legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
+                        name="iNorgeNeste12"
+                        onChange={(event: any, value: string) => dispatch(soknad.setINorgeNeste12Mnd(value))}
+                        checked={this.getINorgeNeste12SelectedValue()}
+                        radios={[
+                            {label: getMessage(intl, 'medlemmskap.radiobutton.boNorge'), value: 'norway'},
+                            {label: getMessage(intl, 'medlemmskap.radiobutton.boUtlandet'), value: 'abroad'}
+                        ]}
+                    />
+                )}
+                {iNorgeNeste12Mnd !== undefined && !fødselsdatoIsSet && (
+                    <RadioPanelGruppe
+                        legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
+                        name="fødselINorge"
+                        onChange={(event: any, value: string) => dispatch(soknad.setFødselINorge(value))}
+                        checked={this.getFødselINorgeSelectedValue()}
+                        radios={[
+                            {label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'), value: 'norway'},
+                            {label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'), value: 'abroad'}
+                        ]}
+                    />
+                )}
             </div>
         );
     }
 }
+
 const mapStateToProps = (state: any) => ({
-    bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
-    person: state.apiReducer.person,
-    barn: state.soknadReducer.barn,
     utenlandsopphold: state.soknadReducer.utenlandsopphold,
-    soknadPostResponse: state.apiReducer.soknad
+    barn: state.soknadReducer.barn,
+    language: state.commonReducer.language
 });
-export default connect<StateProps>(mapStateToProps)(injectIntl(Steg3));
+
+export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg3));

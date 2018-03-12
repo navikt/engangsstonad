@@ -1,108 +1,61 @@
 import * as React from 'react';
-import { injectIntl } from 'react-intl';
-import DocumentTitle from 'react-document-title';
-const { RadioPanelGruppe } = require('nav-frontend-skjema');
-import getMessage from 'util/i18n/i18nUtils';
-import { soknadActionCreators as soknad } from '../../redux/actions';
-import Utenlandsopphold, { Periode } from '../../types/domain/Utenlandsopphold';
 import { connect } from 'react-redux';
-import { DispatchProps } from '../../redux/types/index';
-import CountryPicker from '../../components/country-picker/CountryPicker';
+const { Checkbox, Input } = require('nav-frontend-skjema');
+import { DispatchProps } from '../../redux/types';
+import { injectIntl } from 'react-intl';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import Barn, { FodtBarn } from '../../types/domain/Barn';
+import AnnenForelder from '../../types/domain/AnnenForelder';
+import getMessage from 'util/i18n/i18nUtils';
+import {
+    setAnnenForelderBostedsland,
+    setAnnenForelderFnr, setAnnenForelderKanIkkeOppgis,
+    setAnnenForelderNavn, setAnnenForelderUtenlandskFnr
+} from 'actions/soknad/soknadActionCreators';
+import CountrySelect from 'components/country-select/CountrySelect';
 
 interface StateProps {
-    barn: Barn;
-    utenlandsopphold: Utenlandsopphold;
+    annenForelder: AnnenForelder;
     language: string;
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 export class Steg2 extends React.Component<Props> {
-    getINorgeSiste12SelectedValue() {
-        const { iNorgeSiste12Mnd } = this.props.utenlandsopphold;
-        if (iNorgeSiste12Mnd === true) {
-            return 'norway';
-        } else if (iNorgeSiste12Mnd === false) {
-            return 'abroad';
-        } else {
-            return undefined;
-        }
-    }
-    
-    getINorgeNeste12SelectedValue() {
-        const { iNorgeNeste12Mnd } = this.props.utenlandsopphold;
-        if (iNorgeNeste12Mnd === true) {
-            return 'norway';
-        } else if (iNorgeNeste12Mnd === false) {
-            return 'abroad';
-        } else {
-            return undefined;
-        }
-    }
-
-    getFødselINorgeSelectedValue() {
-        const { fødselINorge } = this.props.utenlandsopphold;
-        if (fødselINorge === true) {
-            return 'norway';
-        } else if (fødselINorge === false) {
-            return 'abroad';
-        } else {
-            return undefined;
-        }
-    }
-
     render() {
-        const { dispatch, intl, utenlandsopphold, barn, language } = this.props;
-        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, perioder } = utenlandsopphold;
-        const fødselsdatoIsSet = (barn as FodtBarn).fødselsdatoer && (barn as FodtBarn).fødselsdatoer.length > 0;
+        const { dispatch, intl, annenForelder, language } = this.props;
 
         return (
-            <div className="engangsstonad__step">
-                <DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
-                <RadioPanelGruppe
-                    legend={getMessage(intl, 'medlemmskap.text.siste12mnd')}
-                    name="iNorgeSiste12"
-                    onChange={(event: any, value: string) => dispatch(soknad.setINorgeSiste12Mnd(value))}
-                    checked={this.getINorgeSiste12SelectedValue()}
-                    radios={[
-                        {label: getMessage(intl, 'medlemmskap.radiobutton.boddNorge'), value: 'norway'},
-                        {label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'), value: 'abroad'}
-                    ]}
+            <div>
+                <Input
+                    label={getMessage(intl, 'annenForelder.label.navn')}
+                    placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
+                    disabled={annenForelder.kanIkkeOppgis || false}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderNavn(e.target.value))}
+                    value={annenForelder.navn || ''}
                 />
-                {utenlandsopphold.iNorgeSiste12Mnd === false && (
-                    <CountryPicker
-                        label={getMessage(intl, 'medlemmskap.text.jegBodde')}
+                <Checkbox
+                    checked={annenForelder.kanIkkeOppgis || false}
+                    label={getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}
+                    onChange={() => dispatch(setAnnenForelderKanIkkeOppgis(!annenForelder.kanIkkeOppgis))}
+                />
+                {annenForelder.navn && [
+                    <Input
+                        label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
+                        placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
+                        key="fnr"
+                    />,
+                    <Checkbox
+                        label={getMessage(intl, 'annenForelder.label.utenlandskFødselsnummer')}
+                        onChange={() => dispatch(setAnnenForelderUtenlandskFnr(!annenForelder.utenlandskFnr))}
+                        key="utenlandskFnr"
+                    />
+                ]}
+                {annenForelder.utenlandskFnr === true && (
+                    <CountrySelect
+                        label={getMessage(intl, 'annenForelder.label.bostedsland')}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => dispatch(setAnnenForelderBostedsland(e.target.value))}
                         language={language}
-                        utenlandsoppholdListe={perioder}
-                        addVisit={(periode: Periode) => dispatch(soknad.addPeriode(periode))}
-                        editVisit={(periode: Periode, i: number) => dispatch(soknad.editPeriode(periode, i))}
-                        deleteVisit={(periode: Periode) => dispatch(soknad.deletePeriode(periode))}
-                    />
-                )}
-                {(iNorgeSiste12Mnd || perioder.length > 0) && (
-                    <RadioPanelGruppe
-                        legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
-                        name="iNorgeNeste12"
-                        onChange={(event: any, value: string) => dispatch(soknad.setINorgeNeste12Mnd(value))}
-                        checked={this.getINorgeNeste12SelectedValue()}
-                        radios={[
-                            {label: getMessage(intl, 'medlemmskap.radiobutton.boNorge'), value: 'norway'},
-                            {label: getMessage(intl, 'medlemmskap.radiobutton.boUtlandet'), value: 'abroad'}
-                        ]}
-                    />
-                )}
-                {iNorgeNeste12Mnd !== undefined && !fødselsdatoIsSet && (
-                    <RadioPanelGruppe
-                        legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
-                        name="fødselINorge"
-                        onChange={(event: any, value: string) => dispatch(soknad.setFødselINorge(value))}
-                        checked={this.getFødselINorgeSelectedValue()}
-                        radios={[
-                            {label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'), value: 'norway'},
-                            {label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'), value: 'abroad'}
-                        ]}
                     />
                 )}
             </div>
@@ -111,8 +64,7 @@ export class Steg2 extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-    utenlandsopphold: state.soknadReducer.utenlandsopphold,
-    barn: state.soknadReducer.barn,
+    annenForelder: state.soknadReducer.annenForelder,
     language: state.commonReducer.language
 });
 

@@ -8,6 +8,10 @@ const stepIntlIds = [
     },
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
+        stegIndikatorLabelIntlId: 'annenForelder.sectionheading'
+    },
+    {
+        fortsettKnappLabelIntlId: 'standard.button.neste',
         stegIndikatorLabelIntlId: 'medlemmskap.sectionheading'
     },
     {
