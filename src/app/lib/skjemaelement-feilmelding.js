@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PT from 'prop-types';
 
@@ -37,4 +36,3 @@ SkjemaelementFeilmelding.defaultProps = {
 };
 
 export default SkjemaelementFeilmelding;
-/* eslint-enable */

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import PersonRequest from '../types/services/PersonRequest';
-import EngangsstonadSoknadRequest from '../types/services/EngangsstonadSoknadRequest';
+import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 const queryStringParser = require('query-string');
 
 const defaultParams: PersonRequest = {
@@ -16,11 +16,13 @@ const stub = () => ({
 });
 
 let useStub = defaultParams.stub;
+let fnr: any;
 
 // tslint:disable-next-line no-any
 declare const __ENV__: any;
 
 function getPerson(params: PersonRequest = defaultParams) {
+    fnr = new URL(window.location.href).searchParams.get('fnr');
     useStub = params.stub;
     if (__ENV__ === 'heroku') {
         return stub();
@@ -30,10 +32,25 @@ function getPerson(params: PersonRequest = defaultParams) {
     return axios.get(`${endpoint}/personinfo?${queryStringParser.stringify(params)}`);
 }
 
-function sendSoknad(soknad: EngangsstonadSoknadRequest) {
+function sendSoknad(soknad: EngangsstonadSoknad, vedlegg: File[]) {
+    const config  = {
+        headers: {
+            'content-type': 'multipart/form-data;'
+        }
+    };
+
+    const formData = new FormData();
+    formData.append('soknad', new Blob([JSON.stringify(soknad)], {
+        type: 'application/json'
+    }));
+
+    vedlegg.forEach((file) => {
+        formData.append('vedlegg', file);
+    });
+
     // tslint:disable-next-line no-any
     const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub ? '?stub=true' : ''}`;
-    return axios.post(url, soknad);
+    return axios.post(url, formData, config);
 }
 
 const Api = { getPerson, sendSoknad };

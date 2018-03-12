@@ -26,10 +26,11 @@ export function getPersonFailed(reason: any): ApiActionTypes {
     };
 }
 
-export function sendSoknad(soknad: EngangsstonadSoknad): ApiActionTypes {
+export function sendSoknad(soknad: EngangsstonadSoknad, vedlegg: any): ApiActionTypes {
     return {
         type: ApiActionKeys.SEND_SOKNAD,
-        soknad
+        soknad,
+        vedlegg
     };
 }
 

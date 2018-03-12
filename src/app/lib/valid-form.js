@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PT from 'prop-types';
 
@@ -119,7 +118,7 @@ class ValidForm extends Component {
     }
 
     render() {
-        const { onSubmit, noSummary, summaryTitle, ...other } = this.props; // eslint-disable-line no-unused-vars
+        const { onSubmit, noSummary, summaryTitle, ...other } = this.props;
         let summaryBox;
         if (this.state.failedSubmit && !this.state.valid && !noSummary) {
             summaryBox = (
@@ -167,4 +166,3 @@ ValidForm.defaultProps = {
 };
 
 export default ValidForm;
-/* eslint-enable */

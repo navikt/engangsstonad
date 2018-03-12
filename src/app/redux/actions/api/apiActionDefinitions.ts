@@ -31,6 +31,7 @@ interface GetPersonFailed {
 interface SendSoknad {
     type: ApiActionKeys.SEND_SOKNAD;
     soknad: EngangsstonadSoknad;
+    vedlegg: any;
 }
 
 interface SendSoknadSuccess {

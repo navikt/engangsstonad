@@ -6,7 +6,7 @@ def deployLib = new deploy()
 node {
     def commitHash, commitHashShort, commitUrl
     def project = "navikt"
-    def repo = "p2-selvbetjening-frontend"
+    def repo = "engangsstonad"
     def app = "engangsstonad"
     def committer, committerEmail, changelog, releaseVersion
     def appConfig = "nais.yaml"
@@ -19,8 +19,10 @@ node {
 
     stage("Checkout") {
         cleanWs()
-        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
-            sh(script: "git clone https://github.com/${project}/${repo}.git -b ${branch} .")
+        withCredentials([string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
+            withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
+                sh(script: "git clone https://${token}:x-oauth-basic@github.com/${project}/${repo}.git -b ${branch} .")
+            }
         }
         commitHash = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
         commitHashShort = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()

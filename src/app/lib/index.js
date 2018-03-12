@@ -1,9 +1,8 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PT from 'prop-types';
 
 import { Input, Textarea, Select, SkjemaGruppe } from 'nav-frontend-skjema';
-import DateInput from './../components/shared/date-input/DateInput';
+import DateInput from '../components/date-input/DateInput';
 
 class ValidBase extends Component {
     constructor(props) {
@@ -101,7 +100,6 @@ class ValidBase extends Component {
             valid
         });
 
-        // eslint-disable-next-line consistent-return
         return {
             name: this.props.name,
             tests: testsCopy.slice(),
@@ -111,13 +109,12 @@ class ValidBase extends Component {
 
     render() {
         const {
-            // eslint-disable-next-line no-unused-vars
             component, onChange, onBlur, onValidate, validateOnChange, validateOnBlur, feil, optional, ...other
         } = this.props;
         const failedVerdict = (!this.state.valid) ? { feilmelding: this.getFirstFailedVerdict().failText } : undefined;
 
         const elementRef = {};
-        switch (component) { // eslint-disable-line default-case
+        switch (component) {
             case Input: elementRef.inputRef = (node) => { this.element = node; }; break;
             case Select: elementRef.selectRef = (node) => { this.element = node; }; break;
             case Textarea: elementRef.textareaRef = (node) => { this.element = node; }; break;
@@ -185,4 +182,3 @@ export { default as ValidInput } from './valid-input';
 export { default as ValidGroup } from './valid-group';
 export { default as ValidDateInput } from './valid-date-input';
 export { default as FeilOppsummeringBoks } from './feil-oppsummering-boks';
-/* eslint-enable */

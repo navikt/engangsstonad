@@ -17,7 +17,7 @@ function* getPerson(action: any) {
 // tslint:disable-next-line:no-any
 function* sendSoknad(action: any) {
     try {
-        const response = yield call(Api.sendSoknad, action.soknad);
+        const response = yield call(Api.sendSoknad, action.soknad, action.vedlegg);
         const soknad: EngangsstonadSoknadResponse = response.data;
         yield put({ type: ApiActionKeys.SEND_SOKNAD_SUCCESS, soknad });
     } catch (reason) {

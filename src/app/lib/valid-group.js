@@ -1,9 +1,8 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import ValidBase from './';
 
-class ValidGroup extends Component { // eslint-disable-line react/prefer-stateless-function
+class ValidGroup extends Component {
   render() {
     const { ...other } = this.props;
     return (
@@ -13,4 +12,3 @@ class ValidGroup extends Component { // eslint-disable-line react/prefer-statele
 }
 
 export default ValidGroup;
-/* eslint-enable */
