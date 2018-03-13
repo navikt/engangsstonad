@@ -7,6 +7,8 @@ export enum SoknadActionKeys {
     'SET_ER_BARNET_FODT' = 'setErBarnetFødt',
     'SET_TERMINDATO' = 'setTermindato',
     'SET_TERMINBEKREFTELSE_DATO' = 'setTerminbekreftelseDato',
+    'ADD_VEDLEGG' = 'addVedlegg',
+    'DELETE_VEDLEGG' = 'deleteVedlegg',
 
     // Medlemsskap
     'ADD_PERIODE' = 'addPeriode',
@@ -29,6 +31,17 @@ export enum SoknadActionKeys {
 interface AddFødselsdato {
     type: SoknadActionKeys.ADD_FØDSELSDATO;
     fødselsdato: string;
+}
+
+// RelasjonTilBarn
+interface AddVedlegg {
+    type: SoknadActionKeys.ADD_VEDLEGG;
+    vedlegg: File[];
+}
+
+interface DeleteVedlegg {
+    type: SoknadActionKeys.DELETE_VEDLEGG;
+    vedlegg: File;
 }
 
 interface SetAntallBarn {
@@ -119,6 +132,8 @@ export type SoknadActionTypes =
     | AddFødselsdato
     | EditPeriode
     | DeletePeriode
+    | AddVedlegg
+    | DeleteVedlegg
     | SetAntallBarn
     | SetErBarnetFødt
     | SetFødselINorge

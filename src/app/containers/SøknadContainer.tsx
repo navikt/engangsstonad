@@ -29,6 +29,7 @@ interface OwnProps {
     annenForelder: AnnenForelder;
     utenlandsopphold: Utenlandsopphold;
     barn: FodtBarn & UfodtBarn;
+    vedlegg: File[];
     activeStep: number;
 }
 
@@ -52,14 +53,13 @@ export class SøknadContainer extends React.Component<Props> {
     }
 
     handleNextClicked() {
-        const { dispatch, annenForelder, barn, utenlandsopphold } = this.props;
+        const { dispatch, annenForelder, barn, utenlandsopphold, vedlegg } = this.props;
         if (this.hasToWaitForResponse()) {
-            return dispatch(api.sendSoknad({ annenForelder, barn, utenlandsopphold }));
+            return dispatch(api.sendSoknad({ annenForelder, barn, utenlandsopphold, vedlegg }));
         }
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
     }
-
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, annenForelder, utenlandsopphold, barn } = this.props;
         const fødselsdatoIsSet = (barn.fødselsdatoer && barn.fødselsdatoer.length > 0);
@@ -109,9 +109,9 @@ export class SøknadContainer extends React.Component<Props> {
 const mapStateToProps = (state: any) => ({
     utenlandsopphold: state.soknadReducer.utenlandsopphold,
     barn: state.soknadReducer.barn,
+    vedlegg: state.soknadReducer.vedlegg,
     annenForelder: state.soknadReducer.annenForelder,
     soknadPostResponse: state.apiReducer.soknad,
     activeStep: state.stepReducer.activeStep
 });
-
 export default connect<OwnProps>(mapStateToProps)(injectIntl(SøknadContainer));

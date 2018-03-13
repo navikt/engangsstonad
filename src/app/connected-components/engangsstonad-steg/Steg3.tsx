@@ -14,6 +14,7 @@ import Barn, { FodtBarn } from '../../types/domain/Barn';
 interface StateProps {
     barn: Barn;
     utenlandsopphold: Utenlandsopphold;
+    vedlegg: File[];
     language: string;
 }
 
@@ -113,6 +114,7 @@ export class Steg3 extends React.Component<Props> {
 const mapStateToProps = (state: any) => ({
     utenlandsopphold: state.soknadReducer.utenlandsopphold,
     barn: state.soknadReducer.barn,
+    vedlegg: state.soknadReducer.vedlegg,
     language: state.commonReducer.language
 });
 

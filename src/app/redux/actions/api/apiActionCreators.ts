@@ -29,7 +29,7 @@ export function getPersonFailed(reason: any): ApiActionTypes {
 export function sendSoknad(soknad: EngangsstonadSoknad): ApiActionTypes {
     return {
         type: ApiActionKeys.SEND_SOKNAD,
-        soknad
+        soknad,
     };
 }
 

@@ -1,6 +1,20 @@
 import { SoknadActionKeys, SoknadActionTypes } from './soknadActionDefinitions';
 import { Periode } from '../../../types/domain/Utenlandsopphold';
 
+export function addVedlegg( vedlegg: File[]) {
+    return {
+        type: SoknadActionKeys.ADD_VEDLEGG,
+        vedlegg
+    };
+}
+
+export function deleteVedlegg( vedlegg: File) {
+    return {
+        type: SoknadActionKeys.DELETE_VEDLEGG,
+        vedlegg
+    };
+}
+
 export function addPeriode(periode: Periode): SoknadActionTypes {
     return {
         type: SoknadActionKeys.ADD_PERIODE,
@@ -132,6 +146,8 @@ export default {
     addPeriode,
     editPeriode,
     deletePeriode,
+    addVedlegg,
+    deleteVedlegg,
     setAntallBarn,
     setErBarnetFødt,
     addFødselsdato,

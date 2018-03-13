@@ -5,19 +5,19 @@ import Icon from 'nav-frontend-ikoner-assets';
 import classnames from 'classnames';
 import DatePicker from './DatePicker';
 import {
-	dateToISODate,
-	isValidISODate,
-	ISODateToMaskedInput,
-	datePickerToISODate
+    dateToISODate,
+    isValidISODate,
+    ISODateToMaskedInput,
+    datePickerToISODate
 } from './dateInputUtil';
 import './dayPicker.less';
 
 const stopEvent = (event) => {
-	try {
-		event.nativeEvent.stopImmediatePropagation();
-	} catch (e) {
-		event.stopPropagation();
-	}
+    try {
+        event.nativeEvent.stopImmediatePropagation();
+    } catch (e) {
+        event.stopPropagation();
+    }
 };
 
 class DateInput extends Component {
@@ -212,14 +212,14 @@ DateInput.propTypes = {
 };
 
 DateInput.defaultProps = {
-	disabled: false,
-	fromDate: undefined,
-	toDate: undefined,
-	errorMessage: undefined,
-	selectedDate: undefined,
-	inputProps: undefined,
-	disableWeekends: false,
-	disabledRanges: undefined,
-	fullscreen: false
+    disabled: false,
+    fromDate: undefined,
+    toDate: undefined,
+    errorMessage: undefined,
+    selectedDate: undefined,
+    inputProps: undefined,
+    disableWeekends: false,
+    disabledRanges: undefined,
+    fullscreen: false
 };
 export default DateInput;

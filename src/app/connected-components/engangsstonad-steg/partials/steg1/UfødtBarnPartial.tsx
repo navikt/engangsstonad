@@ -12,10 +12,13 @@ import {
     erIUke26Pluss3, erMindreEnn3UkerSiden, idagEllerTidligere,
     utstedtDatoErIUke26
 } from 'util/validation/validationUtils';
+import AttachmentButton from 'components/attachment/AttachmentButton';
+import AttachmentList from 'components/attachment/AttachmentList';
 const Modal = require('nav-frontend-modal').default;
 
 interface StateProps {
     barn: Barn;
+    vedlegg: File[];
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
@@ -66,9 +69,10 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
     }
 
     render() {
-        const { barn, dispatch, intl } = this.props;
+        const { barn, vedlegg, dispatch, intl } = this.props;
         const { antallBarn } = barn;
         const termindato = barn && (barn as UfodtBarn).termindato;
+        const dialogBoxType = vedlegg.length > 0 ? 'success' : 'warning';
 
         return (
             <div>
@@ -84,9 +88,22 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 )}
 
                 {termindato && ([
-                    <DialogBox type="warning" overflow={true} key="dialog">
+                    <DialogBox type={dialogBoxType} overflow={true} key="dialog">
                         <Normaltekst>{getMessage(intl, 'relasjonBarn.text.terminbekreftelse')}</Normaltekst>
                     </DialogBox>,
+                    <AttachmentButton
+                        key="vedlegg"
+                        id="vedlegg"
+                        onFileSelected={(files: File[]) => dispatch(soknad.addVedlegg(files))}
+                    />,
+                    <AttachmentList
+                        key="vedleggListe"
+                        vedlegg={vedlegg}
+                        onDeleteClick={(file: File) => dispatch(soknad.deleteVedlegg(file))}
+                    />
+                ])}
+
+                {vedlegg.length > 0 && (
                     <ValidDateInput
                         id="terminbekreftelse"
                         name="terminbekreftelse"
@@ -96,7 +113,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         onChange={(e: string) => dispatch(soknad.setTerminbekreftelseDato(e))}
                         validators={this.getTerminbekreftelseDatoValidators()}
                     />
-                ])}
+                )}
 
                 <Modal
                     isOpen={this.state.isModalOpen}

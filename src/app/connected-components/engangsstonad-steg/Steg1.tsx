@@ -15,6 +15,7 @@ import { steg1Partials } from './partials';
 interface StateProps {
     barn: Barn;
     person: Person;
+    vedlegg: File[];
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
@@ -54,11 +55,12 @@ export class Steg1 extends React.Component<Props, State> {
     }
 
     renderPartial() {
-        const { barn, intl, dispatch } = this.props;
+        const { barn, vedlegg, intl, dispatch } = this.props;
         if (barn.erBarnetFødt === true) {
             return <steg1Partials.FødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
         } else if (barn.erBarnetFødt === false) {
-            return <steg1Partials.UfødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
+            return <steg1Partials.UfødtBarnPartial barn={barn} vedlegg={vedlegg} intl={intl} dispatch={dispatch} />;
+
         }
         return null;
     }
@@ -93,7 +95,6 @@ export class Steg1 extends React.Component<Props, State> {
                         ]}
                     />
                 )}
-
                 {this.renderPartial()}
             </div>
         );
@@ -102,7 +103,8 @@ export class Steg1 extends React.Component<Props, State> {
 
 const mapStateToProps = (state: any) => ({
     barn: state.soknadReducer.barn,
-    person: state.commonReducer.person
+    person: state.commonReducer.person,
+    vedlegg: state.soknadReducer.vedlegg
 });
 
 export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg1));

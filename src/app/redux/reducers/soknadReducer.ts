@@ -9,15 +9,41 @@ const getDefaultState = () => {
         utenlandsopphold: {
             perioder: []
         },
+        vedlegg: [] as File[],
         annenForelder: {}
     };
     return engangsstonadSoknad;
 };
 
 const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => {
-    let { barn, utenlandsopphold } = state;
-
+    let { barn, utenlandsopphold, vedlegg } = state;
     switch (action.type) {
+        case SoknadActionKeys.ADD_VEDLEGG:
+            const vedleggMetaData = vedlegg.map((file: File) => (
+                JSON.stringify({
+                    name: file.name,
+                    size: file.size
+                })
+            ));
+
+            const newVedlegg = action.vedlegg.filter((file: File) => {
+                return(!vedleggMetaData.includes(JSON.stringify({
+                    name: file.name,
+                    size: file.size })
+                ));
+            });
+
+            return {
+                ...state,
+                vedlegg: vedlegg.concat(newVedlegg)
+            };
+        case SoknadActionKeys.DELETE_VEDLEGG:
+            return {
+                ...state,
+                vedlegg: vedlegg.filter((file: File) => {
+                    return file !== action.vedlegg;
+                })
+            };
         case SoknadActionKeys.ADD_PERIODE:
             const perioder = utenlandsopphold.perioder.concat([action.periode]);
             return { ...state, utenlandsopphold: { ...utenlandsopphold, perioder } };
@@ -34,6 +60,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
                     })
                 }
             };
+
         case SoknadActionKeys.SET_JOBBET_I_NORGE_SISTE_12_MND:
             const { jobbetINorgeSiste12Mnd } = action;
             return { ...state, utenlandsopphold: { ...utenlandsopphold, jobbetINorgeSiste12Mnd } };
@@ -48,7 +75,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             return { ...state, utenlandsopphold: { ...utenlandsopphold, iNorgeNeste12Mnd, fødselINorge: undefined } };
         case SoknadActionKeys.SET_ER_BARNET_FODT:
             const { erBarnetFødt } = action;
-            return { ...state, barn: { fødselsdatoer: [], erBarnetFødt } };
+            return { ...state, barn: { fødselsdatoer: [], erBarnetFødt }, vedlegg: [] };
         case SoknadActionKeys.SET_ANTALL_BARN:
             const { antallBarn } = action;
             return { ...state, barn: { ...barn, antallBarn } };

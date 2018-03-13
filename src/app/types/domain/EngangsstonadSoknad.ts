@@ -5,6 +5,7 @@ import AnnenForelder from './AnnenForelder';
 type EngangsstonadSoknad = {
     utenlandsopphold: Utenlandsopphold;
     barn: FodtBarn | UfodtBarn;
+    vedlegg: File[];
     annenForelder: AnnenForelder;
 };
 
