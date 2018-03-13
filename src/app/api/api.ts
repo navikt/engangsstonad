@@ -1,6 +1,6 @@
 import axios from 'axios';
 import PersonRequest from '../types/services/PersonRequest';
-import EngangsstonadSoknadRequest from '../types/services/EngangsstonadSoknadRequest';
+import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 const queryStringParser = require('query-string');
 
 const defaultParams: PersonRequest = {
@@ -16,11 +16,13 @@ const stub = () => ({
 });
 
 let useStub = defaultParams.stub;
+let fnr: any;
 
 // tslint:disable-next-line no-any
 declare const __ENV__: any;
 
 function getPerson(params: PersonRequest = defaultParams) {
+    fnr = new URL(window.location.href).searchParams.get('fnr');
     useStub = params.stub;
     if (__ENV__ === 'heroku') {
         return stub();
@@ -30,10 +32,9 @@ function getPerson(params: PersonRequest = defaultParams) {
     return axios.get(`${endpoint}/personinfo?${queryStringParser.stringify(params)}`);
 }
 
-function sendSoknad(soknad: EngangsstonadSoknadRequest) {
-    // tslint:disable-next-line no-any
+function sendSoknad(soknad: EngangsstonadSoknad) {
     const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub ? '?stub=true' : ''}`;
-    return axios.post(url, soknad);
+    return axios.post(url, {fnr: fnr, ...soknad});
 }
 
 const Api = { getPerson, sendSoknad };

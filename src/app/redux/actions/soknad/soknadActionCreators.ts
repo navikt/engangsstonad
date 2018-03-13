@@ -1,6 +1,20 @@
 import { SoknadActionKeys, SoknadActionTypes } from './soknadActionDefinitions';
 import { Periode } from '../../../types/domain/Utenlandsopphold';
 
+export function addVedlegg( vedlegg: File[]) {
+    return {
+        type: SoknadActionKeys.ADD_VEDLEGG,
+        vedlegg
+    };
+}
+
+export function deleteVedlegg( vedlegg: File) {
+    return {
+        type: SoknadActionKeys.DELETE_VEDLEGG,
+        vedlegg
+    };
+}
+
 export function addPeriode(periode: Periode): SoknadActionTypes {
     return {
         type: SoknadActionKeys.ADD_PERIODE,
@@ -93,10 +107,47 @@ export function setINorgeNeste12Mnd(iNorgeNeste12Mnd: string): SoknadActionTypes
     };
 }
 
+export function setAnnenForelderNavn(navn: string): SoknadActionTypes {
+    return {
+        type: SoknadActionKeys.SET_ANNEN_FORELDER_NAVN,
+        navn
+    };
+}
+
+export function setAnnenForelderFnr(fnr: string): SoknadActionTypes {
+    return {
+        type: SoknadActionKeys.SET_ANNEN_FORELDER_FNR,
+        fnr
+    };
+}
+
+export function setAnnenForelderUtenlandskFnr(utenlandskFnr: boolean) {
+    return {
+        type: SoknadActionKeys.SET_ANNEN_FORELDER_UTENLANDSK_FNR,
+        utenlandskFnr
+    };
+}
+
+export function setAnnenForelderBostedsland(bostedsland: string) {
+    return {
+        type: SoknadActionKeys.SET_ANNEN_FORELDER_BOSTEDSLAND,
+        bostedsland
+    };
+}
+
+export function setAnnenForelderKanIkkeOppgis(kanIkkeOppgis: boolean) {
+    return {
+        type: SoknadActionKeys.SET_ANNEN_FORELDER_KAN_IKKE_OPPGIS,
+        kanIkkeOppgis
+    };
+}
+
 export default {
     addPeriode,
     editPeriode,
     deletePeriode,
+    addVedlegg,
+    deleteVedlegg,
     setAntallBarn,
     setErBarnetFødt,
     addFødselsdato,

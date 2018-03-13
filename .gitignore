@@ -6,3 +6,4 @@ dist
 *.log
 cypress/videos
 cypress/screenshots
+yarm.lock

@@ -3,8 +3,8 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import EngangsstonadIndex from 'components/engangsstonad/EngangsstonadIndex';
-import IntlProvider from './../app/components/intl/IntlProvider';
+import AppContainer from './containers/AppContainer';
+import IntlProvider from './intl/IntlProvider';
 import store from './redux/index';
 
 const root = document.getElementById('app');
@@ -13,7 +13,7 @@ render(
         <IntlProvider>
             <Router>
                 <div className="app">
-                    <EngangsstonadIndex />
+                    <AppContainer />
                 </div>
             </Router>
         </IntlProvider>

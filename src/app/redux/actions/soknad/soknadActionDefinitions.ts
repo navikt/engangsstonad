@@ -7,6 +7,8 @@ export enum SoknadActionKeys {
     'SET_ER_BARNET_FODT' = 'setErBarnetFødt',
     'SET_TERMINDATO' = 'setTermindato',
     'SET_TERMINBEKREFTELSE_DATO' = 'setTerminbekreftelseDato',
+    'ADD_VEDLEGG' = 'addVedlegg',
+    'DELETE_VEDLEGG' = 'deleteVedlegg',
 
     // Medlemsskap
     'ADD_PERIODE' = 'addPeriode',
@@ -15,13 +17,31 @@ export enum SoknadActionKeys {
     'SET_JOBBET_I_NORGE_SISTE_12_MND' = 'setJobbetINorgeSiste12Mnd',
     'SET_I_NORGE_SISTE_12_MND' = 'setINorgeSiste12Mnd',
     'SET_I_NORGE_NESTE_12_MND' = 'setINorgeNeste12Mnd',
-    'SET_FODSEL_I_NORGE' = 'setFødselINorge'
+    'SET_FODSEL_I_NORGE' = 'setFødselINorge',
+
+    // AnnenForelder
+    'SET_ANNEN_FORELDER_NAVN' = 'setAnnenForelderNavn',
+    'SET_ANNEN_FORELDER_FNR' = 'setAnnenForelderFnr',
+    'SET_ANNEN_FORELDER_UTENLANDSK_FNR' = 'setAnnenForelderUtenlandskFnr',
+    'SET_ANNEN_FORELDER_BOSTEDSLAND' = 'setAnnenForelderBostedsland',
+    'SET_ANNEN_FORELDER_KAN_IKKE_OPPGIS' = 'setAnnenForelderKanIkkeOppgis'
 }
 
 // Barn
 interface AddFødselsdato {
     type: SoknadActionKeys.ADD_FØDSELSDATO;
     fødselsdato: string;
+}
+
+// RelasjonTilBarn
+interface AddVedlegg {
+    type: SoknadActionKeys.ADD_VEDLEGG;
+    vedlegg: File[];
+}
+
+interface DeleteVedlegg {
+    type: SoknadActionKeys.DELETE_VEDLEGG;
+    vedlegg: File;
 }
 
 interface SetAntallBarn {
@@ -81,11 +101,39 @@ interface SetINorgeNeste12Mnd {
     iNorgeNeste12Mnd: boolean;
 }
 
+// AnnenForelder
+interface SetAnnenForelderNavn {
+    type: SoknadActionKeys.SET_ANNEN_FORELDER_NAVN;
+    navn: string;
+}
+
+interface SetAnnenForelderFnr {
+    type: SoknadActionKeys.SET_ANNEN_FORELDER_FNR;
+    fnr: string;
+}
+
+interface SetAnnenForelderUtenlandskFnr {
+    type: SoknadActionKeys.SET_ANNEN_FORELDER_UTENLANDSK_FNR;
+    utenlandskFnr: boolean;
+}
+
+interface SetAnnenForelderBostedsland {
+    type: SoknadActionKeys.SET_ANNEN_FORELDER_BOSTEDSLAND;
+    bostedsland: string;
+}
+
+interface SetAnnenForelderKanIkkeOppgis {
+    type: SoknadActionKeys.SET_ANNEN_FORELDER_KAN_IKKE_OPPGIS;
+    kanIkkeOppgis: boolean;
+}
+
 export type SoknadActionTypes =
     | AddPeriode
     | AddFødselsdato
     | EditPeriode
     | DeletePeriode
+    | AddVedlegg
+    | DeleteVedlegg
     | SetAntallBarn
     | SetErBarnetFødt
     | SetFødselINorge
@@ -93,4 +141,9 @@ export type SoknadActionTypes =
     | SetTerminbekreftelseDato
     | SetJobbetINorgeSiste12Mnd
     | SetINorgeSiste12Mnd
-    | SetINorgeNeste12Mnd;
+    | SetINorgeNeste12Mnd
+    | SetAnnenForelderNavn
+    | SetAnnenForelderFnr
+    | SetAnnenForelderUtenlandskFnr
+    | SetAnnenForelderBostedsland
+    | SetAnnenForelderKanIkkeOppgis;
