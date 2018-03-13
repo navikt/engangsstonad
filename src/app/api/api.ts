@@ -32,9 +32,31 @@ function getPerson(params: PersonRequest = defaultParams) {
     return axios.get(`${endpoint}/personinfo?${queryStringParser.stringify(params)}`);
 }
 
+/*
 function sendSoknad(soknad: EngangsstonadSoknad) {
     const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub ? '?stub=true' : ''}`;
     return axios.post(url, {fnr: fnr, ...soknad});
+} */
+
+function sendSoknad(soknad: EngangsstonadSoknad) {
+    const { vedlegg, ...other } = soknad;
+    const config  = {
+        headers: {
+            'content-type': 'multipart/form-data;'
+        }
+    };
+
+    const formData = new FormData();
+    formData.append('soknad', new Blob([JSON.stringify({fnr: fnr, ...other})], {
+        type: 'application/json'
+    }));
+    
+    formData.append('vedlegg', vedlegg[0]);
+
+    // tslint:disable-next-line no-any
+    const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub ? '?stub=true' : ''}`;
+    return axios.post(url, formData, config);
+
 }
 
 const Api = { getPerson, sendSoknad };
