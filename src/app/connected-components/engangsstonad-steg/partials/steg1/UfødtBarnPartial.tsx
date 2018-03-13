@@ -104,7 +104,6 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 ])}
 
                 {vedlegg.length > 0 && (
-
                     <ValidDateInput
                         id="terminbekreftelse"
                         name="terminbekreftelse"
@@ -115,6 +114,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         validators={this.getTerminbekreftelseDatoValidators()}
                     />
                 )}
+
                 <Modal
                     isOpen={this.state.isModalOpen}
                     closeButton={true}
