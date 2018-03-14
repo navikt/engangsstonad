@@ -6,7 +6,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import getMessage from '../util/i18n/i18nUtils';
 import StepIndicator from 'components/progress-indicator/StepIndicator';
-import { Sidetittel } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 
 import Steg1 from './../connected-components//engangsstonad-steg/Steg1';
 import Steg2 from '../connected-components/engangsstonad-steg/Steg2';
@@ -80,13 +80,16 @@ export class SøknadContainer extends React.Component<Props> {
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
 
         return (
-            <div className="engangsstonad">
-                <ValidForm
-                    summaryTitle="Du må rette opp i følgende feil:"
-                    noSummary={activeStep === 3}
-                    onSubmit={this.handleNextClicked}
-                >
-                    <Sidetittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Sidetittel>
+            <ValidForm
+                summaryTitle="Du må rette opp i følgende feil:"
+                noSummary={activeStep === 3}
+                onSubmit={this.handleNextClicked}
+            >
+                <div className="engangsstonad__søknadstittel">
+                    <Innholdstittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Innholdstittel>
+                </div>
+
+                <div className="centeredContent">
                     <StepIndicator stepTitles={titles} activeStep={activeStep} />
 
                     {activeStep === 1 && <Steg1 />}
@@ -100,8 +103,8 @@ export class SøknadContainer extends React.Component<Props> {
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     }
-                </ValidForm>
-            </div>
+                </div>
+            </ValidForm>
         );
     }
 }

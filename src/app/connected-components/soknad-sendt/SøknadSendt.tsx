@@ -60,9 +60,11 @@ export class EngangsstonadCompleted extends React.Component<Props> {
                     svg={VelkommenIllustration}
                     theme={Theme.purple}
                 />
-                <Ingress>{this.receiptText()}</Ingress>
-                <div className="engangsstonad__centerButton">
-                    <Hovedknapp>{intl.formatMessage({ id: 'kvittering.text.lukkVinduet' })}</Hovedknapp>
+                <div className="centeredContent">
+                    <Ingress>{this.receiptText()}</Ingress>
+                    <div className="engangsstonad__centerButton">
+                        <Hovedknapp>{intl.formatMessage({ id: 'kvittering.text.lukkVinduet' })}</Hovedknapp>
+                    </div>
                 </div>
             </div>
         );

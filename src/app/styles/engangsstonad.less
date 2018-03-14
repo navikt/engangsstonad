@@ -1,97 +1,107 @@
 @import 'globals';
 @import 'variables.less';
 
-.engangsstonad {
-	max-width: 600px;
-	margin: 0 auto;
-	padding: @stepPadding;
+.app {
+  .centeredContent {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: @stepPadding;
+  }
 
-    .section {
-      margin-bottom: 2rem;
-    }
+  .engangsstonad {
+      &__søknadstittel {
+        background-color: #e0dae7;
+        padding: 1rem 1.25rem 1rem 1.25rem;
+        margin: -0.25rem;
+      }
 
-	.centerText {
-		text-align: center;
-	}
+      .section {
+        margin-bottom: 2rem;
+      }
 
-	.dialogBox {
-		margin-top: @marginLarge;
-		margin-bottom: @marginLarge;
-	}
+      .centerText {
+          text-align: center;
+      }
 
-	.alertstripe {
-		margin: @marginSmall 0;
-	}
+      .dialogBox {
+          margin-top: @marginLarge;
+          margin-bottom: @marginLarge;
+      }
 
-	.fortsettKnapp {
-        margin-top: 12px;
-        min-height: 46px;
-        width: 100%;
-	}
+      .alertstripe {
+          margin: @marginSmall 0;
+      }
 
-	.typo-element {
-		margin-top: @marginLarge;
-		margin-bottom: @marginMedium;
-	}
-
-	.typo-ingress {
-		margin-top: @marginLarge;
-		margin-bottom: @marginMedium;
-	}
-
-	.radioGroup {
-		margin: @marginSmall 0;
-	}
-
-	.bekreftCheckbox {
-		margin-top: @marginLarge;
-	}
-
-	.stegindikatorWrapper {
-		position: relative;
-		margin-bottom: 16px;
-	}
-
-	&__centerButton {
-		display: flex;
-		justify-content: center;
-        margin-top: 24px;
-
-        .knapp--hoved {
+      .fortsettKnapp {
+          margin-top: 12px;
           min-height: 46px;
           width: 100%;
-        }
-	}
+      }
 
-	.paperVersionLink {
-		display: inline-block;
-		margin-top: @marginMedium;
-		margin-bottom: @marginLarge;
-	}
+      .typo-element {
+          margin-top: @marginLarge;
+          margin-bottom: @marginMedium;
+      }
 
-  .datovelger__outer {
-    margin-top: 1rem;
-    .skjemaelement__label {
+      .typo-ingress {
+          margin-top: @marginLarge;
+          margin-bottom: @marginMedium;
+      }
+
+      .radioGroup {
+          margin: @marginSmall 0;
+      }
+
+      .bekreftCheckbox {
+          margin-top: @marginLarge;
+      }
+
+      .stegindikatorWrapper {
+          position: relative;
+          margin-bottom: 16px;
+      }
+
+      &__centerButton {
+          display: flex;
+          justify-content: center;
+          margin-top: 24px;
+
+          .knapp--hoved {
+            min-height: 46px;
+            width: 100%;
+          }
+      }
+
+      .paperVersionLink {
+          display: inline-block;
+          margin-top: @marginMedium;
+          margin-bottom: @marginLarge;
+      }
+
+    .datovelger__outer {
+      margin-top: 1rem;
+      .skjemaelement__label {
+        margin-top: 12px;
+        font-weight: bold;
+      }
+    }
+
+    .radioPanelGruppe {
+      .skjema__legend {
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+    }
+
+    .radioPanelGruppe:not(:first-child) {
       margin-top: 12px;
-      font-weight: bold;
     }
-  }
 
-  .radioPanelGruppe {
-    .skjema__legend {
-      font-size: 16px;
-      margin-bottom: 8px;
+    .spinner {
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
     }
-  }
-
-  .radioPanelGruppe:not(:first-child) {
-    margin-top: 12px;
-  }
-
-  .spinner {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
   }
 }
 

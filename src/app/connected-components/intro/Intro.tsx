@@ -90,7 +90,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
         const { godkjentVilkar, intl } = this.props;
 
         return (
-            <ValidForm noSummary={true} onSubmit={this.startSoknad}>
+            <ValidForm noSummary={true} onSubmit={this.startSoknad} className="centeredContent">
                 <DocumentTitle title="Samtykke - NAV Engangsstønad" />
                 <LanguageToggle
                     language={this.props.language}
