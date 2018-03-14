@@ -79,17 +79,20 @@ export class SøknadContainer extends React.Component<Props> {
         const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
 
-        return (
-            <ValidForm
-                summaryTitle="Du må rette opp i følgende feil:"
-                noSummary={activeStep === 3}
-                onSubmit={this.handleNextClicked}
-            >
-                <div className="engangsstonad__søknadstittel">
-                    <Innholdstittel className="centerText">{getMessage(intl, 'intro.pageheading.soknadES')}</Innholdstittel>
+        return ([
+            (
+                <div className="engangsstonad__søknadstittel" key="title">
+                    <Innholdstittel>{getMessage(intl, 'søknad.pageheading')}</Innholdstittel>
                 </div>
-
-                <div className="centeredContent">
+            ),
+            (
+                <ValidForm
+                    summaryTitle="Du må rette opp i følgende feil:"
+                    noSummary={activeStep === 3}
+                    onSubmit={this.handleNextClicked}
+                    key="form"
+                    className="centeredContent"
+                >
                     <StepIndicator stepTitles={titles} activeStep={activeStep} />
 
                     {activeStep === 1 && <Steg1 />}
@@ -103,9 +106,9 @@ export class SøknadContainer extends React.Component<Props> {
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     }
-                </div>
-            </ValidForm>
-        );
+                </ValidForm>
+            )
+        ]);
     }
 }
 

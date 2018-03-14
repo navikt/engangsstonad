@@ -9,9 +9,8 @@ const Modal = require('nav-frontend-modal').default;
 
 import RettigheterOgPlikter from 'components/modal-content/RettigheterOgPlikter';
 import BekreftCheckbox from 'components/bekreft-checkbox/BekreftCheckbox';
-import HeaderIllustration, { Theme } from 'components/header-illustration/HeaderIllustration';
 
-const VelkommenIllustration = require('assets/svg/frontpage.svg').default;
+const VeilederIllustration = require('assets/svg/veileder.svg').default;
 import { commonActionCreators as common } from '../../redux/actions';
 import LanguageToggle from '../../intl/LanguageToggle';
 import getMessage from '../../util/i18n/i18nUtils';
@@ -19,6 +18,8 @@ import { DispatchProps } from '../../redux/types/index';
 import '../../styles/engangsstonad.less';
 import Person from '../../types/domain/Person';
 import { ExternalProps } from '../../types/index';
+import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
+import { Innholdstittel } from 'nav-frontend-typografi';
 
 interface OwnProps {
     isModalOpen: boolean;
@@ -90,44 +91,42 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
         const { godkjentVilkar, intl } = this.props;
 
         return (
-            <ValidForm noSummary={true} onSubmit={this.startSoknad} className="centeredContent">
+            <ValidForm noSummary={true} onSubmit={this.startSoknad}>
                 <DocumentTitle title="Samtykke - NAV Engangsstønad" />
                 <LanguageToggle
                     language={this.props.language}
                     toggleLanguage={(languageCode: string) => this.toggleLanguage(languageCode)}
                 />
-                <HeaderIllustration
-                    dialog={{
-                        title: getMessage(intl, 'intro.snakkeboble.overskrift', { name: this.props.person.fornavn }),
-                        text: getMessage(intl, 'intro.text.hjelpedeg')
-                    }}
-                    svg={VelkommenIllustration}
-                    theme={Theme.purple}
-                    title={getMessage(intl, 'intro.pageheading.soknadES')}
-                />
-                <Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
-                <ValidGroup validators={this.getGodkjentVilkarValidators()}>
-                    <BekreftCheckbox
-                        name="egenerklaring"
-                        text={this.confirmBoxLabelHeaderText()}
-                        label={getMessage(intl, 'intro.text.samtykke')}
-                        onChange={this.bekreftetVilkarChange}
-                        checked={godkjentVilkar}
-                    />
-                </ValidGroup>
-                <div className="engangsstonad__centerButton">
-                    <Hovedknapp>
-                        {getMessage(intl, 'intro.button.startSoknad')}
-                    </Hovedknapp>
+                <SimpleIllustration svg={VeilederIllustration} />
+
+                <div className="centeredContent">
+                    <Innholdstittel>
+                        {getMessage(intl, 'intro.pageheading.soknadES')}
+                    </Innholdstittel>
+                    <Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
+                    <ValidGroup validators={this.getGodkjentVilkarValidators()}>
+                        <BekreftCheckbox
+                            name="egenerklaring"
+                            text={this.confirmBoxLabelHeaderText()}
+                            label={getMessage(intl, 'intro.text.samtykke')}
+                            onChange={this.bekreftetVilkarChange}
+                            checked={godkjentVilkar}
+                        />
+                    </ValidGroup>
+                    <div className="engangsstonad__centerButton">
+                        <Hovedknapp>
+                            {getMessage(intl, 'intro.button.startSoknad')}
+                        </Hovedknapp>
+                    </div>
+                    <Modal
+                        isOpen={this.state.isModalOpen}
+                        closeButton={true}
+                        onRequestClose={() => this.closeRettigheterOgPlikterModal()}
+                        contentLabel="rettigheter og plikter"
+                    >
+                        <RettigheterOgPlikter />
+                    </Modal>
                 </div>
-                <Modal
-                    isOpen={this.state.isModalOpen}
-                    closeButton={true}
-                    onRequestClose={() => this.closeRettigheterOgPlikterModal()}
-                    contentLabel="rettigheter og plikter"
-                >
-                    <RettigheterOgPlikter />
-                </Modal>
             </ValidForm>
         );
     }

@@ -24,6 +24,7 @@ interface StateProps {
     person: Person;
     isLoadingPerson: boolean;
     godkjentVilkar: boolean;
+    language: string;
 }
 
 type Props = StateProps & ExternalProps & DispatchProps & RouteComponentProps<{}>;
@@ -114,7 +115,8 @@ export class AppContainer extends React.Component<Props> {
 const mapStateToProps = (state: any) => ({
     person: state.apiReducer.person,
     isLoadingPerson: state.apiReducer.isLoadingPerson,
-    godkjentVilkar: state.commonReducer.godkjentVilkar
+    godkjentVilkar: state.commonReducer.godkjentVilkar,
+    language: state.commonReducer.language
 });
 
 export default withRouter(connect<StateProps, {}, {}>(mapStateToProps)(AppContainer));

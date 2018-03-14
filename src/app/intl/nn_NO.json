@@ -1,5 +1,5 @@
 {
-    "intro.pageheading.soknadES": "Søknad om eingongsstønad",
+    "intro.pageheading.soknadES": "Velkommen til søknad om eingongsstønad",
     "intro.text.under18": "Sidan du er under 18 år, må ein av foreldra dine eller ein verje skrive under på søknaden saman med deg. Du må difor fylle ut søknaden på papir og sende den i posten. ",
     "intro.text.erMann": "Fordi du er registrert som mann...",
     "intro.snakkeboble.overskrift": "Hei {name}!",
@@ -110,6 +110,8 @@
 	"standard.text.fra": "frå",
 	"standard.text.til": "til",
 	"standard.sectionheading": "Send inn søknad",
+
+    "søknad.pageheading": "Søknad om eingongsstønad",
 
     "valideringsfeil.godkjentVilkar": "Du må stadfeste at du har lest og forstått",
     "valideringsfeil.bekreftOpplysninger": "Du må stadfeste at opplysningane stemmer",
