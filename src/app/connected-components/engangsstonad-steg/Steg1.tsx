@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { injectIntl } from 'react-intl';
-const { RadioPanelGruppe } = require('nav-frontend-skjema');
+import RadioPanelGruppeResponsive from './../../components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { soknadActionCreators as soknad } from '../../redux/actions';
 import { default as Barn } from '../../types/domain/Barn';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
@@ -71,7 +71,7 @@ export class Steg1 extends React.Component<Props, State> {
         return (
             <div className="engangsstonad__step">
                 <DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
-                <RadioPanelGruppe
+                <RadioPanelGruppeResponsive
                     legend={getMessage(intl, 'relasjonBarn.text.fodselTidspunkt')}
                     name="fodselsTidspunkt"
                     onChange={(event: any, value: string) => dispatch(soknad.setErBarnetFødt(value))}
@@ -83,7 +83,7 @@ export class Steg1 extends React.Component<Props, State> {
                 />
 
                 {barn.erBarnetFødt !== undefined && (
-                    <RadioPanelGruppe
+                    <RadioPanelGruppeResponsive
                         legend={getMessage(intl, `relasjonBarn.text.antallBarn${barn.erBarnetFødt ? 'Født' : 'Ventet'}`)}
                         name="antallBarn"
                         onChange={(event: any, value: string) => dispatch(soknad.setAntallBarn(value))}

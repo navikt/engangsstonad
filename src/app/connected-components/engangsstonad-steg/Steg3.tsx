@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import DocumentTitle from 'react-document-title';
-const { RadioPanelGruppe } = require('nav-frontend-skjema');
 import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../redux/actions';
 import Utenlandsopphold, { Periode } from '../../types/domain/Utenlandsopphold';
@@ -10,6 +9,7 @@ import { DispatchProps } from '../../redux/types/index';
 import CountryPicker from '../../components/country-picker/CountryPicker';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Barn, { FodtBarn } from '../../types/domain/Barn';
+import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 
 interface StateProps {
     barn: Barn;
@@ -62,7 +62,7 @@ export class Steg3 extends React.Component<Props> {
         return (
             <div className="engangsstonad__step">
                 <DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
-                <RadioPanelGruppe
+                <RadioPanelGruppeResponsive
                     legend={getMessage(intl, 'medlemmskap.text.siste12mnd')}
                     name="iNorgeSiste12"
                     onChange={(event: any, value: string) => dispatch(soknad.setINorgeSiste12Mnd(value))}
@@ -83,7 +83,7 @@ export class Steg3 extends React.Component<Props> {
                     />
                 )}
                 {(iNorgeSiste12Mnd || perioder.length > 0) && (
-                    <RadioPanelGruppe
+                    <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
                         name="iNorgeNeste12"
                         onChange={(event: any, value: string) => dispatch(soknad.setINorgeNeste12Mnd(value))}
@@ -95,7 +95,7 @@ export class Steg3 extends React.Component<Props> {
                     />
                 )}
                 {iNorgeNeste12Mnd !== undefined && !fødselsdatoIsSet && (
-                    <RadioPanelGruppe
+                    <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
                         name="fødselINorge"
                         onChange={(event: any, value: string) => dispatch(soknad.setFødselINorge(value))}
