@@ -73,12 +73,10 @@
 	"De opplysninger jeg har oppgitt er riktige og jeg har ikke holdt tilbake opplysninger som har betydning for min rett til engangsstønad.",
 	"oppsummering.text.soknadenGjelder": "Søknaden gjelder...",
 
-	"kvittering.sectionheading": "Illustrasjon av NAV ansatt som takk for mottatt søknad!",
-	"kvittering.snakkeboble.overskrift": "Bra jobbet, {name}!",
-	"kvittering.text.soknadMottatt": "Vi tar kontakt med deg hvis vi trenger noe mer.",
-	"kvittering.text.innsendtInfo": "Vi mottok søknaden din {1} kl. {0}. Du kan følge med på søknaden på {linkText}.",
-	"kvittering.text.innsendtInfo.linkText": "Ditt Nav",
-	"kvittering.text.lukkVinduet": "Lukk dette vinduet",
+    "kvittering.sectionheading": "Illustrasjon av NAV ansatt som takk for mottatt søknad!",
+    "kvittering.text.takk": "Takk for søknaden {navn}!",
+    "kvittering.text.soknadMottatt": "Vi mottok søknaden med referensenummer {referansenr} den {1} kl. {0}. Du kan følge med på søknaden på {linkText}.",
+    "kvittering.text.soknadMottatt.linkText": "Ditt NAV",
 
     "rettigheter.sectionheading": "Rettigheter og plikter",
     "rettigheter.text.lestOgForstått": "Jeg har lest og forstått det som står på {link}",

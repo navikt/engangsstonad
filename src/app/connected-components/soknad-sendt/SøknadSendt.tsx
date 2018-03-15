@@ -2,16 +2,19 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-const { Ingress } = require('nav-frontend-typografi');
-import { Hovedknapp } from 'nav-frontend-knapper';
 import * as moment from 'moment';
+import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
+import CustomSVG from './../../components/custom-svg/CustomSVG';
 
-import HeaderIllustration, { Theme } from 'components/header-illustration/HeaderIllustration';
-const VelkommenIllustration = require('assets/svg/frontpage.svg').default;
+const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
 
 import Person from '../../types/domain/Person';
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
 
+import Søknadstittel from 'components/søknadstittel/Søknadstittel';
+import getMessage from 'util/i18n/i18nUtils';
+
+import 'nav-frontend-lenker-style';
 import '../../styles/engangsstonad.less';
 
 interface StateProps {
@@ -26,13 +29,14 @@ export class EngangsstonadCompleted extends React.Component<Props> {
         const { soknad } = this.props;
         return (
             <FormattedMessage
-                id="kvittering.text.innsendtInfo"
+                id="kvittering.text.soknadMottatt"
                 values={{
+                    referansenr: 1,
                     0: moment(soknad.opprettet).format('HH:mm'),
                     1: moment(soknad.opprettet).format('DD. MMMM YYYY'),
                     linkText: (
-                        <a href="#">
-                            <FormattedMessage id="kvittering.text.innsendtInfo.linkText" />
+                        <a className="lenke" href="https://www.nav.no/no/Ditt+NAV">
+                            <FormattedMessage id="kvittering.text.soknadMottatt.linkText" />
                         </a>
                     )
                 }}
@@ -46,25 +50,11 @@ export class EngangsstonadCompleted extends React.Component<Props> {
         return (
             <div className="engangsstonad">
                 <DocumentTitle title="Kvittering - NAV Engangsstønad" />
-                <HeaderIllustration
-                    dialog={{
-                        title: intl.formatMessage(
-                            {
-                                id: 'kvittering.snakkeboble.overskrift'
-                            },
-                            { name: person.fornavn }
-                        ),
-                        text: intl.formatMessage({ id: 'kvittering.text.soknadMottatt' })
-                    }}
-                    title={intl.formatMessage({ id: 'intro.pageheading.soknadES' })}
-                    svg={VelkommenIllustration}
-                    theme={Theme.purple}
-                />
+                <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <div className="centeredContent">
+                    <CustomSVG iconRef={SpotlightLetter} className="spotlightLetter" />
+                    <Innholdstittel>{getMessage(intl, 'kvittering.text.takk', { navn: person.fornavn })}</Innholdstittel>
                     <Ingress>{this.receiptText()}</Ingress>
-                    <div className="engangsstonad__centerButton">
-                        <Hovedknapp>{intl.formatMessage({ id: 'kvittering.text.lukkVinduet' })}</Hovedknapp>
-                    </div>
                 </div>
             </div>
         );

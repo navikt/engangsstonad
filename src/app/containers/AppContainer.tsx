@@ -10,17 +10,19 @@ import IkkeMyndig from './../connected-components/feilsider/IkkeMyndig';
 import ErMann from '../connected-components/feilsider/ErMann';
 import PersonFinnesIkke from '../connected-components/feilsider/PersonFinnesIkke';
 import SøknadContainer from './SøknadContainer';
+import { erMann, erMyndig, harPersonData } from 'util/validation/validationUtils';
 
 import { apiActionCreators as api } from '../redux/actions';
 import { ExternalProps } from '../types';
 
 import { DispatchProps } from '../redux/types';
 import Person from '../types/domain/Person';
+import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSoknadResponse';
 
 import '../styles/engangsstonad.less';
-import { erMann, erMyndig, harPersonData } from 'util/validation/validationUtils';
 
 interface StateProps {
+    soknad: EngangsstonadSoknadResponse;
     person: Person;
     isLoadingPerson: boolean;
     godkjentVilkar: boolean;
@@ -78,11 +80,11 @@ export class AppContainer extends React.Component<Props> {
     }
 
     getSøknadRoutes() {
-        const { godkjentVilkar } = this.props;
+        const { godkjentVilkar, person, soknad } = this.props;
         return (
             <Switch>
                 <Route path="/engangsstonad" component={Intro} exact={true} />
-                <Route path="/engangsstonad/completed" component={SøknadSendt} />
+                {person && soknad && <Route path="/engangsstonad/completed" component={SøknadSendt} />}
                 {godkjentVilkar === true && <Route path="/engangsstonad/soknad" component={SøknadContainer} />}
                 <Redirect to="/engangsstonad" />
             </Switch>
@@ -114,6 +116,7 @@ export class AppContainer extends React.Component<Props> {
 
 const mapStateToProps = (state: any) => ({
     person: state.apiReducer.person,
+    soknad: state.apiReducer.soknad,
     isLoadingPerson: state.apiReducer.isLoadingPerson,
     godkjentVilkar: state.commonReducer.godkjentVilkar,
     language: state.commonReducer.language

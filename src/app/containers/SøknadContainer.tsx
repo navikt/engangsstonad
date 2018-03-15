@@ -6,7 +6,6 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import getMessage from '../util/i18n/i18nUtils';
 import StepIndicator from 'components/progress-indicator/StepIndicator';
-import { Innholdstittel } from 'nav-frontend-typografi';
 
 import Steg1 from './../connected-components//engangsstonad-steg/Steg1';
 import Steg2 from '../connected-components/engangsstonad-steg/Steg2';
@@ -22,6 +21,7 @@ import { FodtBarn, UfodtBarn } from '../types/domain/Barn';
 import AnnenForelder from '../types/domain/AnnenForelder';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../redux/types';
+import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -80,11 +80,7 @@ export class SøknadContainer extends React.Component<Props> {
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
 
         return ([
-            (
-                <div className="engangsstonad__søknadstittel" key="title">
-                    <Innholdstittel>{getMessage(intl, 'søknad.pageheading')}</Innholdstittel>
-                </div>
-            ),
+            (<Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} key="tittel" />),
             (
                 <ValidForm
                     summaryTitle="Du må rette opp i følgende feil:"
