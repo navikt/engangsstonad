@@ -4,7 +4,7 @@ describe('Frontpage', () => {
         cy.route('GET', '**/personinfo*', 'fixture:users/default.json');
 
         cy.visit('/engangsstonad');
-        cy.contains('Søknad om engangsstønad');
+        cy.contains('Velkommen til søknad om engangsstønad');
     });
 
     it('Should load underage-page for user under 18 years', () => {

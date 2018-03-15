@@ -31,7 +31,7 @@ export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
                         title: getMessage(intl, 'intro.snakkeboble.overskrift', { name: props.person.fornavn }),
                         text: getMessage(intl, 'intro.text.erMann')
                     }}
-                    title={getMessage(intl, 'intro.pageheading.soknadES')}
+                    title={getMessage(intl, 'søknad.pageheading')}
                     svg={VelkommenIllustration}
                     theme={Theme.red}
                 />

@@ -33,7 +33,7 @@ export const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
                         }),
                         text: getMessage(intl, 'intro.text.under18')
                     }}
-                    title={getMessage(intl, 'intro.pageheading.soknadES')}
+                    title={getMessage(intl, 'søknad.pageheading')}
                     svg={VelkommenIllustration}
                     theme={Theme.orange}
                 />
