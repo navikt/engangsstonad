@@ -12,6 +12,7 @@ import {
     setAnnenForelderNavn, setAnnenForelderUtenlandskFnr
 } from 'actions/soknad/soknadActionCreators';
 import CountrySelect from 'components/country-select/CountrySelect';
+import LabelMedHjelpetekst from 'components/label-med-hjelpetekst/LabelMedHjelpetekst';
 
 interface StateProps {
     annenForelder: AnnenForelder;
@@ -43,7 +44,12 @@ export class Steg2 extends React.Component<Props> {
                 {annenForelder.navn && (
                     <div className="section">
                         <Input
-                            label={<b>{getMessage(intl, 'annenForelder.label.fødselsnummer')}</b>}
+                            label={
+                                <LabelMedHjelpetekst
+                                    label={<b>{getMessage(intl, 'annenForelder.label.fødselsnummer')}</b>}
+                                    hjelpetekst={getMessage(intl, 'annenForelder.hjelpetekst.dNummer')}
+                                />
+                            }
                             placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
                         />

@@ -40,6 +40,7 @@
     "annenForelder.label.bostedsland": "og bor i...",
     "annenForelder.placeholder.navn": "Navn",
     "annenForelder.placeholder.fødselsnummer": "Fødselsnummer",
+    "annenForelder.hjelpetekst.dNummer": "Du kan også skrive D-nummeret til den andre forelderen.",
 
     "medlemmskap.sectionheading": "Tilknytning til Norge",
 	"medlemmskap.text.siste12mnd": "De siste 12 månedene har jeg…",
