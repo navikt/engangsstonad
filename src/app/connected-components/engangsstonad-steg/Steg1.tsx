@@ -77,8 +77,8 @@ export class Steg1 extends React.Component<Props, State> {
                     onChange={(event: any, value: string) => dispatch(soknad.setErBarnetFødt(value))}
                     checked={this.getFodselsTidspunktSelectedValue()}
                     radios={[
-                        {label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead'},
-                        {label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'), value: 'before'}
+                        {  inputProps: { id: 'js-fodselFremtid'}, label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead'},
+                        {  inputProps: { id: 'js-fodselFortid'}, label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'), value: 'before'}
                     ]}
                 />
 
@@ -89,9 +89,9 @@ export class Steg1 extends React.Component<Props, State> {
                         onChange={(event: any, value: string) => dispatch(soknad.setAntallBarn(value))}
                         checked={this.getAntallBarnSelectedValue()}
                         radios={[
-                            {label: getMessage(intl, 'relasjonBarn.radiobutton.ettbarn'), value: 'ett'},
-                            {label: getMessage(intl, 'relasjonBarn.radiobutton.tvillinger'), value: 'tvillinger'},
-                            {label: getMessage(intl, 'relasjonBarn.radiobutton.flere'), value: 'flere'}
+                            { inputProps: { id: 'js-ettBarn'}, label: getMessage(intl, 'relasjonBarn.radiobutton.ettbarn'), value: 'ett'},
+                            { inputProps: { id: 'js-tvillinger'}, label: getMessage(intl, 'relasjonBarn.radiobutton.tvillinger'), value: 'tvillinger'},
+                            { inputProps: { id: 'js-flereBarn'}, label: getMessage(intl, 'relasjonBarn.radiobutton.flere'), value: 'flere'}
                         ]}
                     />
                 )}

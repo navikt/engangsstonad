@@ -98,7 +98,7 @@ export class SøknadContainer extends React.Component<Props> {
 
                     {
                         this.shouldRenderFortsettKnapp() === true &&
-                        <Hovedknapp className="fortsettKnapp">
+                        <Hovedknapp className="fortsettKnapp js-fortsettKnapp">
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     }
