@@ -24,6 +24,7 @@ import '../styles/engangsstonad.less';
 interface StateProps {
     soknad: EngangsstonadSoknadResponse;
     person: Person;
+    reason: any;
     isLoadingPerson: boolean;
     godkjentVilkar: boolean;
     language: string;
@@ -48,6 +49,12 @@ export class AppContainer extends React.Component<Props> {
             } else {
                 dispatch(api.getPerson());
             }
+        }
+    }
+
+    componentWillReceiveProps(props: any) {
+        if (props.reason && props.reason.status) {
+            window.location.href = 'https://localhost:8888/login';
         }
     }
 
@@ -93,6 +100,7 @@ export class AppContainer extends React.Component<Props> {
 
     render() {
         const { person, isLoadingPerson } = this.props;
+        console.log(this.props.reason);
 
         if (isLoadingPerson) {
             return this.renderContent(<Spinner type="XXL"/>);
@@ -115,6 +123,7 @@ export class AppContainer extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
+    reason: state.apiReducer.reason,
     person: state.apiReducer.person,
     soknad: state.apiReducer.soknad,
     isLoadingPerson: state.apiReducer.isLoadingPerson,

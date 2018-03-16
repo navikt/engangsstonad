@@ -21,6 +21,7 @@ let fnr: any;
 // tslint:disable-next-line no-any
 declare const __ENV__: any;
 
+/*
 function getPerson(params: PersonRequest = defaultParams) {
     fnr = new URL(window.location.href).searchParams.get('fnr');
     useStub = params.stub;
@@ -30,6 +31,18 @@ function getPerson(params: PersonRequest = defaultParams) {
     // tslint:disable-next-line no-any
     const endpoint = (<any> window).REST_API_URL;
     return axios.get(`${endpoint}/personinfo?${queryStringParser.stringify(params)}`);
+}
+*/
+
+function getPerson(params: PersonRequest = defaultParams) {
+    fnr = new URL(window.location.href).searchParams.get('fnr');
+    useStub = params.stub;
+    if (__ENV__ === 'heroku') {
+        return stub();
+    }
+    // tslint:disable-next-line no-any
+    const endpoint = (<any> window).REST_API_URL;
+    return axios.get(`${endpoint}/personinfo/no`);
 }
 
 /*
