@@ -12,7 +12,6 @@ describe('Søknad', () => {
                     .not('[disabled]')
                     .check({ force: true })
                     .should('be.checked');
-    
                 cy.get('button').click();
             });
     
