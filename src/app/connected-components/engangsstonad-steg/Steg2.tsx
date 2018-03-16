@@ -28,6 +28,7 @@ export class Steg2 extends React.Component<Props> {
             <div className="step2">
                 <div className="section">
                     <Input
+                        id="js-annenForelder"
                         label={<b>{getMessage(intl, 'annenForelder.label.navn')}</b>}
                         placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
                         disabled={annenForelder.kanIkkeOppgis || false}
@@ -43,6 +44,7 @@ export class Steg2 extends React.Component<Props> {
                 {annenForelder.navn && (
                     <div className="section">
                         <Input
+                            id="js-fødselsnummer"
                             label={<b>{getMessage(intl, 'annenForelder.label.fødselsnummer')}</b>}
                             placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
