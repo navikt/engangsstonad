@@ -54,7 +54,7 @@ export class AppContainer extends React.Component<Props> {
 
     componentWillReceiveProps(props: any) {
         if (props.reason && props.reason.status) {
-            window.location.href = 'http://localhost:7000/login?redirect=http://localhost:8080/engangsstonad';
+            window.location.href = (window as any).LOGIN_URL + '?redirect=' + window.location.href;
         }
     }
 

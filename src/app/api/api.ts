@@ -8,18 +8,8 @@ const defaultParams: PersonRequest = {
     stub: true
 };
 
-const stub = () => ({
-    data: {
-        fornavn: 'Test',
-        etternavn: 'Testesen'
-    }
-});
-
 let useStub = defaultParams.stub;
 let fnr: any;
-
-// tslint:disable-next-line no-any
-declare const __ENV__: any;
 
 /*
 function getPerson(params: PersonRequest = defaultParams) {
@@ -37,10 +27,7 @@ function getPerson(params: PersonRequest = defaultParams) {
 function getPerson(params: PersonRequest = defaultParams) {
     fnr = new URL(window.location.href).searchParams.get('fnr');
     useStub = params.stub;
-    if (__ENV__ === 'heroku') {
-        return stub();
-    }
-    // tslint:disable-next-line no-any
+
     const endpoint = (<any> window).REST_API_URL;
     return axios.get(`${endpoint}/personinfo?${queryStringParser.stringify(params)}`, { withCredentials: true } );
 }
@@ -67,7 +54,6 @@ function sendSoknad(soknad: EngangsstonadSoknad) {
     
     formData.append('vedlegg', vedlegg[0]);
 
-    // tslint:disable-next-line no-any
     const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub ? '?stub=true' : ''}`;
     return axios.post(url, formData, config);
 
