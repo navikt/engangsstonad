@@ -68,8 +68,8 @@ export class Steg3 extends React.Component<Props> {
                     onChange={(event: any, value: string) => dispatch(soknad.setINorgeSiste12Mnd(value))}
                     checked={this.getINorgeSiste12SelectedValue()}
                     radios={[
-                        {label: getMessage(intl, 'medlemmskap.radiobutton.boddNorge'), value: 'norway'},
-                        {label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'), value: 'abroad'}
+                        {inputProps: { id: 'js-iNorgeSiste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.boddNorge'), value: 'norway'},
+                        {inputProps: { id: 'js-iUtlandetSiste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'), value: 'abroad'}
                     ]}
                 />
                 {utenlandsopphold.iNorgeSiste12Mnd === false && (
@@ -89,8 +89,8 @@ export class Steg3 extends React.Component<Props> {
                         onChange={(event: any, value: string) => dispatch(soknad.setINorgeNeste12Mnd(value))}
                         checked={this.getINorgeNeste12SelectedValue()}
                         radios={[
-                            {label: getMessage(intl, 'medlemmskap.radiobutton.boNorge'), value: 'norway'},
-                            {label: getMessage(intl, 'medlemmskap.radiobutton.boUtlandet'), value: 'abroad'}
+                            {inputProps: { id: 'js-iNorgeNeste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.boNorge'), value: 'norway'},
+                            {inputProps: { id: 'js-iUtlandetNeste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.boUtlandet'), value: 'abroad'}
                         ]}
                     />
                 )}
@@ -101,8 +101,9 @@ export class Steg3 extends React.Component<Props> {
                         onChange={(event: any, value: string) => dispatch(soknad.setFødselINorge(value))}
                         checked={this.getFødselINorgeSelectedValue()}
                         radios={[
-                            {label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'), value: 'norway'},
-                            {label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'), value: 'abroad'}
+                            {inputProps: { id: 'js-fodselINorge'}, label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'), value: 'norway'},
+                            {inputProps: { id: 'js-fodselIUtlandet'}, 
+                                label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'), value: 'abroad'}
                         ]}
                     />
                 )}
