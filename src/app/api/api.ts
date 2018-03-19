@@ -42,7 +42,7 @@ function getPerson(params: PersonRequest = defaultParams) {
     }
     // tslint:disable-next-line no-any
     const endpoint = (<any> window).REST_API_URL;
-    return axios.get(`${endpoint}/personinfo/no`);
+    return axios.get(`${endpoint}/personinfo?${queryStringParser.stringify(params)}`, { withCredentials: true } );
 }
 
 /*
@@ -54,8 +54,9 @@ function sendSoknad(soknad: EngangsstonadSoknad) {
 function sendSoknad(soknad: EngangsstonadSoknad) {
     const { vedlegg, ...other } = soknad;
     const config  = {
+        withCredentials: true,
         headers: {
-            'content-type': 'multipart/form-data;'
+            'content-type': 'multipart/form-data;',
         }
     };
 

@@ -54,7 +54,7 @@ export class AppContainer extends React.Component<Props> {
 
     componentWillReceiveProps(props: any) {
         if (props.reason && props.reason.status) {
-            window.location.href = 'https://localhost:8888/login';
+            window.location.href = 'http://localhost:7000/login?redirect=http://localhost:8080/engangsstonad';
         }
     }
 
@@ -100,7 +100,6 @@ export class AppContainer extends React.Component<Props> {
 
     render() {
         const { person, isLoadingPerson } = this.props;
-        console.log(this.props.reason);
 
         if (isLoadingPerson) {
             return this.renderContent(<Spinner type="XXL"/>);
