@@ -70,7 +70,7 @@ export class SøknadContainer extends React.Component<Props> {
             return annenForelder.fnr !== undefined || annenForelder.kanIkkeOppgis === true;
         } else if (activeStep === 3 && utenlandsopphold) {
             if (utenlandsopphold.iNorgeNeste12Mnd === false) {
-                return utenlandsopphold.senerePerioder.length > 0 && utenlandsopphold.fødselINorge !== undefined;
+                return utenlandsopphold.senerePerioder.length > 0 && (fødselsdatoIsSet || utenlandsopphold.fødselINorge !== undefined);
             }
             return utenlandsopphold.fødselINorge !== undefined || (fødselsdatoIsSet && utenlandsopphold.iNorgeNeste12Mnd !== undefined);
         }
