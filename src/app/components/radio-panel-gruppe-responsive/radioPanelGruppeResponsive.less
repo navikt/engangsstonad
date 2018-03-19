@@ -1,44 +1,33 @@
 @import './../../../../node_modules/nav-frontend-core/less/_variabler';
 
-.radioPanelGruppeResponsive {
-  .radioPanelGruppe {
-    padding: 0.2rem;
+.radioPanelGruppe--responsive {
+  padding: 0.2rem;
+  display: flex;
 
-    .radioPanel {
-      display: inline-flex;
-      margin: 0.2rem;
+  .radioPanel {
+    margin: 0.2rem;
 
-      &__label {
-        flex-grow: 1;
-        flex-shrink: 0;
-      }
+    &__label {
+      flex-grow: 1;
+      flex-shrink: 0;
     }
   }
 
   @media screen and (max-width: @screen-sm) {
-    .radioPanelGruppe {
-      .radioPanel {
-        flex-basis: 100%;
-        min-width: 100%;
-      }
-    }
+    display: block;
   }
 
   @media screen and (min-width: @screen-sm) and (max-width: @screen-desktop) {
-    .radioPanelGruppe {
-      .radioPanel {
-        flex-basis: 48%;
-        min-width: 48%;
-      }
+    .radioPanelWrapper {
+      flex-basis: 50%;
+      width: 50%;
     }
   }
 
   @media screen and (min-width: @screen-desktop) {
-    .radioPanelGruppe {
-      .radioPanel {
-        flex-basis: 32%;
-        min-width: 32%;
-      }
+    .radioPanelWrapper {
+      flex-basis: 33%;
+      width: 33%;
     }
   }
 }
