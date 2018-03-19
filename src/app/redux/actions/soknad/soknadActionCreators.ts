@@ -15,24 +15,46 @@ export function deleteVedlegg( vedlegg: File) {
     };
 }
 
-export function addPeriode(periode: Periode): SoknadActionTypes {
+export function addTidligereUtenlandsoppholdPeriode(periode: Periode): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.ADD_PERIODE,
+        type: SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE,
         periode
     };
 }
 
-export function editPeriode(periode: Periode, index: number): SoknadActionTypes {
+export function editTidligereUtenlandsoppholdPeriode(periode: Periode, index: number): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.EDIT_PERIODE,
+        type: SoknadActionKeys.EDIT_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE,
         periode,
         index
     };
 }
 
-export function deletePeriode(periode: Periode): SoknadActionTypes {
+export function deleteTidligereUtenlandsoppholdPeriode(periode: Periode): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.DELETE_PERIODE,
+        type: SoknadActionKeys.DELETE_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE,
+        periode
+    };
+}
+
+export function addSenereUtenlandsoppholdPeriode(periode: Periode): SoknadActionTypes {
+    return {
+        type: SoknadActionKeys.ADD_SENERE_UTENLANDSOPPHOLD_PERIODE,
+        periode
+    };
+}
+
+export function editSenereUtenlandsoppholdPeriode(periode: Periode, index: number): SoknadActionTypes {
+    return {
+        type: SoknadActionKeys.EDIT_SENERE_UTENLANDSOPPHOLD_PERIODE,
+        periode,
+        index
+    };
+}
+
+export function deleteSenereUtenlandsoppholdPeriode(periode: Periode): SoknadActionTypes {
+    return {
+        type: SoknadActionKeys.DELETE_SENERE_UTENLANDSOPPHOLD_PERIODE,
         periode
     };
 }
@@ -143,9 +165,12 @@ export function setAnnenForelderKanIkkeOppgis(kanIkkeOppgis: boolean) {
 }
 
 export default {
-    addPeriode,
-    editPeriode,
-    deletePeriode,
+    addTidligereUtenlandsoppholdPeriode,
+    editTidligereUtenlandsoppholdPeriode,
+    deleteTidligereUtenlandsoppholdPeriode,
+    addSenereUtenlandsoppholdPeriode,
+    editSenereUtenlandsoppholdPeriode,
+    deleteSenereUtenlandsoppholdPeriode,
     addVedlegg,
     deleteVedlegg,
     setAntallBarn,

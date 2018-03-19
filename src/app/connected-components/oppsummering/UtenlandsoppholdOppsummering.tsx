@@ -15,7 +15,7 @@ interface Props {
 
 const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl } = props;
-    const { fødselINorge, iNorgeNeste12Mnd, iNorgeSiste12Mnd, perioder } = props.utenlandsopphold;
+    const { fødselINorge, iNorgeNeste12Mnd, iNorgeSiste12Mnd, tidligerePerioder } = props.utenlandsopphold;
 
     const iNorgeNeste12MndText = iNorgeNeste12Mnd
         ? getMessage(intl, 'medlemmskap.radiobutton.boNorge')
@@ -38,7 +38,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                     <EtikettLiten className="textWithLabel__label">
                         {getMessage(intl, 'oppsummering.text.boddSisteTolv')}
                     </EtikettLiten>
-                    <CountrySummaryList utenlandsoppholdListe={perioder} />
+                    <CountrySummaryList utenlandsoppholdListe={tidligerePerioder} />
                 </div>
             )}
             <DisplayTextWithLabel

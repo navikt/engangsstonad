@@ -11,9 +11,12 @@ export enum SoknadActionKeys {
     'DELETE_VEDLEGG' = 'deleteVedlegg',
 
     // Medlemsskap
-    'ADD_PERIODE' = 'addPeriode',
-    'EDIT_PERIODE' = 'editPeriode',
-    'DELETE_PERIODE' = 'deletePeriode',
+    'ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE' = 'addTidligereUtenlandsoppholdPeriode',
+    'EDIT_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE' = 'editTidligereUtenlandsoppholdPeriode',
+    'DELETE_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE' = 'deleteTidligereUtenlandsoppholdPeriode',
+    'ADD_SENERE_UTENLANDSOPPHOLD_PERIODE' = 'addSenereUtenlandsoppholdPeriode',
+    'EDIT_SENERE_UTENLANDSOPPHOLD_PERIODE' = 'editSenereUtenlandsoppholdPeriode',
+    'DELETE_SENERE_UTENLANDSOPPHOLD_PERIODE' = 'deleteSenereUtenlandsoppholdPeriode',
     'SET_JOBBET_I_NORGE_SISTE_12_MND' = 'setJobbetINorgeSiste12Mnd',
     'SET_I_NORGE_SISTE_12_MND' = 'setINorgeSiste12Mnd',
     'SET_I_NORGE_NESTE_12_MND' = 'setINorgeNeste12Mnd',
@@ -65,19 +68,35 @@ interface SetTerminbekreftelseDato {
 }
 
 // Medlemsskap
-interface AddPeriode {
-    type: SoknadActionKeys.ADD_PERIODE;
+interface AddTidligereUtenlandsoppholdPeriode {
+    type: SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE;
     periode: Periode;
 }
 
-interface EditPeriode {
-    type: SoknadActionKeys.EDIT_PERIODE;
+interface EditTidligereUtenlandsoppholdPeriode {
+    type: SoknadActionKeys.EDIT_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE;
     periode: Periode;
     index: number;
 }
 
-interface DeletePeriode {
-    type: SoknadActionKeys.DELETE_PERIODE;
+interface DeleteTidligereUtenlandsoppholdPeriode {
+    type: SoknadActionKeys.DELETE_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE;
+    periode: Periode;
+}
+
+interface AddSenereUtenlandsoppholdPeriode {
+    type: SoknadActionKeys.ADD_SENERE_UTENLANDSOPPHOLD_PERIODE;
+    periode: Periode;
+}
+
+interface EditSenereUtenlandsoppholdPeriode {
+    type: SoknadActionKeys.EDIT_SENERE_UTENLANDSOPPHOLD_PERIODE;
+    periode: Periode;
+    index: number;
+}
+
+interface DeleteSenereUtenlandsoppholdPeriode {
+    type: SoknadActionKeys.DELETE_SENERE_UTENLANDSOPPHOLD_PERIODE;
     periode: Periode;
 }
 
@@ -128,10 +147,13 @@ interface SetAnnenForelderKanIkkeOppgis {
 }
 
 export type SoknadActionTypes =
-    | AddPeriode
     | AddFødselsdato
-    | EditPeriode
-    | DeletePeriode
+    | AddTidligereUtenlandsoppholdPeriode
+    | EditTidligereUtenlandsoppholdPeriode
+    | DeleteTidligereUtenlandsoppholdPeriode
+    | AddSenereUtenlandsoppholdPeriode
+    | EditSenereUtenlandsoppholdPeriode
+    | DeleteSenereUtenlandsoppholdPeriode
     | AddVedlegg
     | DeleteVedlegg
     | SetAntallBarn

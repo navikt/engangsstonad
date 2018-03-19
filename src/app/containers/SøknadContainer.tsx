@@ -60,6 +60,7 @@ export class SøknadContainer extends React.Component<Props> {
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
     }
+
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, annenForelder, utenlandsopphold, barn } = this.props;
         const fødselsdatoIsSet = (barn.fødselsdatoer && barn.fødselsdatoer.length > 0);
@@ -68,6 +69,9 @@ export class SøknadContainer extends React.Component<Props> {
         } else if (activeStep === 2 && annenForelder) {
             return annenForelder.fnr !== undefined || annenForelder.kanIkkeOppgis === true;
         } else if (activeStep === 3 && utenlandsopphold) {
+            if (utenlandsopphold.iNorgeNeste12Mnd === false) {
+                return utenlandsopphold.senerePerioder.length > 0 && utenlandsopphold.fødselINorge !== undefined;
+            }
             return utenlandsopphold.fødselINorge !== undefined || (fødselsdatoIsSet && utenlandsopphold.iNorgeNeste12Mnd !== undefined);
         }
         return activeStep === 4;

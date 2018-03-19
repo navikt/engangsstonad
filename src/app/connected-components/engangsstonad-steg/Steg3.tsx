@@ -56,7 +56,7 @@ export class Steg3 extends React.Component<Props> {
 
     render() {
         const { dispatch, intl, utenlandsopphold, barn, language } = this.props;
-        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, perioder } = utenlandsopphold;
+        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligerePerioder, senerePerioder } = utenlandsopphold;
         const fødselsdatoIsSet = (barn as FodtBarn).fødselsdatoer && (barn as FodtBarn).fødselsdatoer.length > 0;
 
         return (
@@ -72,17 +72,17 @@ export class Steg3 extends React.Component<Props> {
                         {inputProps: { id: 'js-iUtlandetSiste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'), value: 'abroad'}
                     ]}
                 />
-                {utenlandsopphold.iNorgeSiste12Mnd === false && (
+                {iNorgeSiste12Mnd === false && (
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegBodde')}
                         language={language}
-                        utenlandsoppholdListe={perioder}
-                        addVisit={(periode: Periode) => dispatch(soknad.addPeriode(periode))}
-                        editVisit={(periode: Periode, i: number) => dispatch(soknad.editPeriode(periode, i))}
-                        deleteVisit={(periode: Periode) => dispatch(soknad.deletePeriode(periode))}
+                        utenlandsoppholdListe={tidligerePerioder}
+                        addVisit={(periode: Periode) => dispatch(soknad.addTidligereUtenlandsoppholdPeriode(periode))}
+                        editVisit={(periode: Periode, i: number) => dispatch(soknad.editTidligereUtenlandsoppholdPeriode(periode, i))}
+                        deleteVisit={(periode: Periode) => dispatch(soknad.deleteTidligereUtenlandsoppholdPeriode(periode))}
                     />
                 )}
-                {(iNorgeSiste12Mnd || perioder.length > 0) && (
+                {(iNorgeSiste12Mnd || tidligerePerioder.length > 0) && (
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
                         name="iNorgeNeste12"
@@ -94,7 +94,17 @@ export class Steg3 extends React.Component<Props> {
                         ]}
                     />
                 )}
-                {iNorgeNeste12Mnd !== undefined && !fødselsdatoIsSet && (
+                {iNorgeNeste12Mnd === false && (
+                    <CountryPicker
+                        label={getMessage(intl, 'medlemmskap.text.jegSkalBo')}
+                        language={language}
+                        utenlandsoppholdListe={senerePerioder}
+                        addVisit={(periode: Periode) => dispatch(soknad.addSenereUtenlandsoppholdPeriode(periode))}
+                        editVisit={(periode: Periode, i: number) => dispatch(soknad.editSenereUtenlandsoppholdPeriode(periode, i))}
+                        deleteVisit={(periode: Periode) => dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))}
+                    />
+                )}
+                {(senerePerioder.length > 0 || iNorgeNeste12Mnd === true) && !fødselsdatoIsSet && (
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
                         name="fødselINorge"

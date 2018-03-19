@@ -13,12 +13,11 @@ export default class RadioPanelGruppeResponsive extends React.Component<RadioPan
                     <SkjemaGruppe className="radioPanelGruppe--responsive" feil={feil}>
                             {
                                 radios.map((radio) => (
-                                    <div className="radioPanelWrapper">
+                                    <div className="radioPanelWrapper" key={radio.value}>
                                         <RadioPanel
                                             checked={checked === radio.value}
                                             name={name}
                                             onChange={(event: any) => onChange(event, radio.value)}
-                                            key={radio.value}
                                             {...radio}
                                         />
                                     </div>

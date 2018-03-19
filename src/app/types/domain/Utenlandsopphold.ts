@@ -9,7 +9,8 @@ type Utenlandsopphold = {
     fødselINorge?: boolean;
     iNorgeSiste12Mnd?: boolean;
     iNorgeNeste12Mnd?: boolean;
-    perioder: Periode[];
+    tidligerePerioder: Periode[];
+    senerePerioder: Periode[];
 };
 
 export default Utenlandsopphold;

@@ -13,6 +13,7 @@ import CountrySelect from 'components/country-select/CountrySelect';
 interface OwnProps {
     language: string;
     utenlandsopphold?: Periode;
+    label: string;
     onSubmit: (periode: Periode) => void;
     closeModal: () => void;
 }
@@ -69,7 +70,7 @@ class CountryModal extends React.Component<Props, State> {
             >
                 <div>
                     <Undertittel className="countryModal__title">{this.state.titleText}</Undertittel>
-                    <Element>{getMessage(intl, 'medlemmskap.text.jegBodde')}</Element>
+                    <Element>{this.props.label}</Element>
                     <CountrySelect
                         label=""
                         onChange={
