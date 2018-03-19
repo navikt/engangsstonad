@@ -9,8 +9,8 @@ function* getPerson(action: any) {
         const response = yield call(Api.getPerson, action.params);
         const person: GetPersonActionType = response.data;
         yield put({ type: ApiActionKeys.GET_PERSON_SUCCESS, person });
-    } catch (reason) {
-        yield put({ type: ApiActionKeys.GET_PERSON_FAILED, reason });
+    } catch (error) {
+        yield put({ type: ApiActionKeys.GET_PERSON_FAILED, reason: error.response });
     }
 }
 
