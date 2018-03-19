@@ -46,7 +46,7 @@ export class Steg2 extends React.Component<Props> {
                         <Input
                             label={
                                 <LabelMedHjelpetekst
-                                    label={<b>{getMessage(intl, 'annenForelder.label.fødselsnummer')}</b>}
+                                    label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
                                     hjelpetekst={getMessage(intl, 'annenForelder.hjelpetekst.dNummer')}
                                 />
                             }

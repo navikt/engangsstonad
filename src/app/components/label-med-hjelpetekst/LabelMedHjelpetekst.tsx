@@ -1,5 +1,5 @@
 import * as React from 'react';
-import IconSwitcher from './../icon-switcher/IconSwitcher';
+import * as classnames from 'classnames';
 import CustomSVG from './../custom-svg/CustomSVG';
 const { Collapse } = require('react-collapse');
 const InfoIkon = require('./../../assets/svg/info_ikon.svg').default;
@@ -9,9 +9,10 @@ const InfoIkonSVG = <CustomSVG iconRef={InfoIkon} size={14} />;
 const LukkInfoIkonSVG = <CustomSVG iconRef={LukkInfoIkon} size={14} />;
 
 import './labelMedHjelpetekst.less';
+import Sirkelknapp from 'components/sirkelknapp/Sirkelknapp';
 
 type Props = {
-    label: React.ReactNode;
+    label: string;
     hjelpetekst: string;
 };
 
@@ -38,23 +39,23 @@ export default class LabelMedHjelpetekst extends React.Component<Props, State> {
 
         return (
             <span className="labelMedHjelpetekst">
-                {label}
-                <IconSwitcher
-                    icons={[InfoIkonSVG, LukkInfoIkonSVG]}
+                <b>{label}</b>
+                <Sirkelknapp
+                    stil="info"
+                    label="testlabel"
+                    ikon={showHjelpetekst ? LukkInfoIkonSVG : InfoIkonSVG}
+                    toggle={{ pressed: showHjelpetekst }}
                     onClick={this.toggleHjelpetekst}
                 />
-
-                {
-                    showHjelpetekst &&
-                    <Collapse
-                        className="hjelpetekst"
-                        isOpened={showHjelpetekst}
-                        springConfig={{ stiffness: 250, damping: 30 }}
-                        style={{height: 'auto'}}
-                    >
+                <Collapse
+                    className={classnames('hjelpetekst', { 'hjelpetekst--open': showHjelpetekst })}
+                    isOpened={showHjelpetekst}
+                    springConfig={{ stiffness: 250, damping: 30 }}
+                >
+                    <div className="hjelpetekst__wrapper">
                         {hjelpetekst}
-                    </Collapse>
-                }
+                    </div>
+                </Collapse>
             </span>
         );
     }
