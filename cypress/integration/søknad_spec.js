@@ -67,6 +67,14 @@ describe('Søknad', () => {
                 cy.get('#js-fødselsnummer').type('32543211563');
             });
 
+            it('Should display hjelpetekst when hjelpetekst-button is clicked', () => {
+                cy.get('.hjelpetekst').should('not.have.class', 'hjelpetekst--open');
+                cy.get('#fnrHjelpetekstBtn').click();
+                cy.get('.hjelpetekst').should('have.class', 'hjelpetekst--open');
+                cy.get('#fnrHjelpetekstBtn').click();
+                cy.get('.hjelpetekst').should('not.have.class', 'hjelpetekst--open');
+            });
+
             it('Should navigate to steg3', () => {
                 cy.get('button.js-fortsettKnapp').click();
             });

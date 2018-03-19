@@ -26,6 +26,7 @@ export interface Props {
     stil?: Stil;
     /** Størrelse - default normal */
     size?: 'normal' | 'stor';
+    buttonProps?: React.InputHTMLAttributes<HTMLButtonElement>;
 }
 
 const Sirkelknapp: React.StatelessComponent<Props> = ({
@@ -34,6 +35,7 @@ const Sirkelknapp: React.StatelessComponent<Props> = ({
   ikon,
   toggle,
   disabled,
+  buttonProps,
   stil = 'info',
   size = 'normal'
 }) => {
@@ -54,6 +56,7 @@ const Sirkelknapp: React.StatelessComponent<Props> = ({
             )}
             disabled={disabled}
             aria-pressed={toggle ? toggle.pressed : undefined}
+            {...buttonProps}
         >
             <span className="sirkelknapp__ikon" role="presentation">
                 {ikon}

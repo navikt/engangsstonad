@@ -14,6 +14,7 @@ import Sirkelknapp from 'components/sirkelknapp/Sirkelknapp';
 type Props = {
     label: string;
     hjelpetekst: string;
+    buttonProps?: React.InputHTMLAttributes<HTMLButtonElement>
 };
 
 type State = {
@@ -34,7 +35,7 @@ export default class LabelMedHjelpetekst extends React.Component<Props, State> {
     }
 
     render() {
-        const { label, hjelpetekst } = this.props;
+        const { label, hjelpetekst, buttonProps } = this.props;
         const { showHjelpetekst } = this.state;
 
         return (
@@ -43,6 +44,7 @@ export default class LabelMedHjelpetekst extends React.Component<Props, State> {
                 <Sirkelknapp
                     stil="info"
                     label="testlabel"
+                    buttonProps={buttonProps}
                     ikon={showHjelpetekst ? LukkInfoIkonSVG : InfoIkonSVG}
                     toggle={{ pressed: showHjelpetekst }}
                     onClick={this.toggleHjelpetekst}
