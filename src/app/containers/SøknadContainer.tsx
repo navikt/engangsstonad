@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import getMessage from '../util/i18n/i18nUtils';
-import StepIndicator from 'components/progress-indicator/StepIndicator';
+import StepIndicator from 'components/step-indicator/StepIndicator';
 
 import Steg1 from './../connected-components//engangsstonad-steg/Steg1';
 import Steg2 from '../connected-components/engangsstonad-steg/Steg2';
@@ -22,6 +22,7 @@ import AnnenForelder from '../types/domain/AnnenForelder';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../redux/types';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
+import BackButton from 'components/back-button/BackButton';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -38,6 +39,7 @@ type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps<
 export class SøknadContainer extends React.Component<Props> {
     componentWillMount() {
         this.handleNextClicked = this.handleNextClicked.bind(this);
+        this.handleBackClicked = this.handleBackClicked.bind(this);
     }
 
     componentWillReceiveProps(props: OwnProps) {
@@ -60,6 +62,14 @@ export class SøknadContainer extends React.Component<Props> {
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
     }
+    
+    handleBackClicked() {
+        const { dispatch, activeStep } = this.props;
+        if (activeStep > 1) {
+            dispatch(stepActions.setActiveStep(activeStep - 1));
+        }
+    }
+
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, annenForelder, utenlandsopphold, barn } = this.props;
         const fødselsdatoIsSet = (barn.fødselsdatoer && barn.fødselsdatoer.length > 0);
@@ -89,6 +99,7 @@ export class SøknadContainer extends React.Component<Props> {
                     key="form"
                     className="centeredContent"
                 >
+                    <BackButton onClick={this.handleBackClicked} hidden={activeStep === 1} />
                     <StepIndicator stepTitles={titles} activeStep={activeStep} />
 
                     {activeStep === 1 && <Steg1 />}
