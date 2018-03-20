@@ -1,5 +1,5 @@
-describe('Frontpage', () => {
-    it('Should load without errors', () => {
+describe('Inngangsvilkår', () => {
+    it('Kvinne over 18 år kommer inn', () => {
         cy.server();
         cy.route('GET', '**/personinfo*', 'fixture:users/default.json');
 
@@ -7,7 +7,7 @@ describe('Frontpage', () => {
         cy.contains('Velkommen til søknad om engangsstønad');
     });
 
-    it('Should load underage-page for user under 18 years', () => {
+    it('Bruker under 18 år får info om hvordan de under 18 søker', () => {
         cy.server();
         cy.route('GET', '**/personinfo*', 'fixture:users/under18.json');
 
@@ -16,7 +16,7 @@ describe('Frontpage', () => {
         cy.contains('under 18 år') // TODO: Burde bruke en hook (klasse e.l.) i stedet for tekst
     });
 
-    it('Should load male-page for male users', () => {
+    it('Mannlig bruker får info om hvorfor de ikke kan søke', () => {
         cy.server();
         cy.route('GET', '**/personinfo*', 'fixture:users/male.json');
 
