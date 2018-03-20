@@ -60,13 +60,16 @@ export class SøknadContainer extends React.Component<Props> {
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
     }
+
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, annenForelder, utenlandsopphold, barn } = this.props;
         const fødselsdatoIsSet = (barn.fødselsdatoer && barn.fødselsdatoer.length > 0);
         if (activeStep === 1 && barn) {
             return barn.terminbekreftelseDato !== undefined || fødselsdatoIsSet;
         } else if (activeStep === 2 && annenForelder) {
-            return annenForelder.fnr !== undefined || annenForelder.kanIkkeOppgis === true;
+            return annenForelder.kanIkkeOppgis === true 
+                    || annenForelder.fnr !== undefined 
+                    || (annenForelder.utenlandskFnr === true && annenForelder.bostedsland !== undefined && annenForelder.bostedsland.length > 0 );
         } else if (activeStep === 3 && utenlandsopphold) {
             return utenlandsopphold.fødselINorge !== undefined || (fødselsdatoIsSet && utenlandsopphold.iNorgeNeste12Mnd !== undefined);
         }

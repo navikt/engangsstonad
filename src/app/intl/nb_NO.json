@@ -72,7 +72,9 @@
 	"oppsummering.text.ogKommerPåFødselstidspunktet": "og kommer på fødselstidspunktet til å…",
 	"oppsummering.text.samtykke":
 	"De opplysninger jeg har oppgitt er riktige og jeg har ikke holdt tilbake opplysninger som har betydning for min rett til engangsstønad.",
-	"oppsummering.text.soknadenGjelder": "Søknaden gjelder...",
+    "oppsummering.text.soknadenGjelder": "Søknaden gjelder...",
+    "oppsummering.text.fødselsnummer": "Og har fødselsnummer...",
+    "oppsummering.text.utenlandskfødselsnummer": "Og har utenlandsk fødselsnummer...",
 
     "kvittering.sectionheading": "Illustrasjon av NAV ansatt som takk for mottatt søknad!",
     "kvittering.text.takk": "Takk for søknaden {navn}!",

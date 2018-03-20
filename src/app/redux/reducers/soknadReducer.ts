@@ -99,7 +99,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             const { navn } = action;
             return { ...state, annenForelder: { ...state.annenForelder, navn } };
         case SoknadActionKeys.SET_ANNEN_FORELDER_FNR:
-            const { fnr } = action;
+            const fnr = action.fnr.length > 0 ? action.fnr : undefined;
             return { ...state, annenForelder: { ...state.annenForelder, fnr } };
         case SoknadActionKeys.SET_ANNEN_FORELDER_UTENLANDSK_FNR:
             const { utenlandskFnr } = action;
