@@ -1,0 +1,29 @@
+@import '../../../../node_modules/nav-frontend-core/less/_variabler';
+
+.backButton {
+    cursor: pointer;
+    color: @navMorkGra;
+    font-weight: bold;
+    position: relative;
+    align-items: center;
+        align-self: flex-end;
+    background: none;
+    color: inherit;
+    border: none;
+    z-index: 10;
+    margin: 5px 0px 0px 0px;
+    &__hidden {
+        visibility: hidden;
+    }
+    &:hover,
+    &:active {
+        color: @navBla;
+    }
+}
+
+@media screen and (min-width: @screen-desktop) {
+    .backButton {
+        top: 50px;
+        padding: 0;
+    }
+}
