@@ -76,7 +76,9 @@ export class SøknadContainer extends React.Component<Props> {
         if (activeStep === 1 && barn) {
             return barn.terminbekreftelseDato !== undefined || fødselsdatoIsSet;
         } else if (activeStep === 2 && annenForelder) {
-            return annenForelder.fnr !== undefined || annenForelder.kanIkkeOppgis === true;
+            return annenForelder.kanIkkeOppgis === true 
+                    || annenForelder.fnr !== undefined 
+                    || (annenForelder.utenlandskFnr === true && annenForelder.bostedsland !== undefined && annenForelder.bostedsland.length > 0 );
         } else if (activeStep === 3 && utenlandsopphold) {
             return utenlandsopphold.fødselINorge !== undefined || (fødselsdatoIsSet && utenlandsopphold.iNorgeNeste12Mnd !== undefined);
         }
