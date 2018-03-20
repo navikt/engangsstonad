@@ -19,8 +19,8 @@
         "start": "node ./src/build/scripts/start-dev.js",
         "test": "cross-env NODE_ENV=test jest",
         "lint": "tslint src/**",
-        "cypress": "npm run start-express & wait-on -v -t 15000 http://localhost:8080 && cypress run",
-        "cy": "cypress open & npm run build && npm run start-express"
+        "cypress": "export PORT=8081 && npm run start-express & wait-on -v -t 15000 http://localhost:8081 && cypress run",
+        "cy": "cypress open & npm run build && export PORT=8081 && npm run start-express"
     },
     "dependencies": {
         "axios": "0.17.1",
