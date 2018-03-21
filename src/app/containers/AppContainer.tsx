@@ -53,7 +53,7 @@ export class AppContainer extends React.Component<Props> {
     }
 
     componentWillReceiveProps(props: any) {
-        if (props.reason && props.reason.status) {
+        if (props.reason && props.reason.status === 401) {
             window.location.href = (window as any).LOGIN_URL + '?redirect=' + window.location.href;
         }
     }
@@ -101,7 +101,7 @@ export class AppContainer extends React.Component<Props> {
     render() {
         const { person, isLoadingPerson } = this.props;
 
-        if (isLoadingPerson) {
+        if (isLoadingPerson || person === undefined) {
             return this.renderContent(<Spinner type="XXL"/>);
         }
 
