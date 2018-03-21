@@ -2,12 +2,14 @@ import * as React from 'react';
 import * as countries from 'i18n-iso-countries';
 const bokmalCountryList = require('i18n-iso-countries/langs/nb.json');
 const nynorskCountryList = require('i18n-iso-countries/langs/nn.json');
-const { Select } = require('nav-frontend-skjema');
+const { ValidSelect } = require('./../../lib') as any;
 
 interface StateProps {
     defaultValue?: string;
     language: string;
     label: React.ReactNode;
+    validators?: any;
+    name?: string;
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -30,10 +32,10 @@ export default class CountrySelect extends React.Component<StateProps> {
 
     render() {
         return (
-            <Select {...this.props}>
+            <ValidSelect {...this.props}>
                 <option value="" />
                 {this.renderCountryOptions()}
-            </Select>
+            </ValidSelect>
         );
     }
 }

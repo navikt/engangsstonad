@@ -181,4 +181,5 @@ export { default as ValidForm } from './valid-form';
 export { default as ValidInput } from './valid-input';
 export { default as ValidGroup } from './valid-group';
 export { default as ValidDateInput } from './valid-date-input';
+export { default as ValidSelect } from './valid-select';
 export { default as FeilOppsummeringBoks } from './feil-oppsummering-boks';
