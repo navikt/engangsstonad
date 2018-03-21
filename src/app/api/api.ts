@@ -1,42 +1,10 @@
 import axios from 'axios';
-import PersonRequest from '../types/services/PersonRequest';
 import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
-const queryStringParser = require('query-string');
 
-const defaultParams: PersonRequest = {
-    fnr: '12341234',
-    stub: true
-};
-
-let useStub = defaultParams.stub;
-let fnr: any;
-
-/*
-function getPerson(params: PersonRequest = defaultParams) {
-    fnr = new URL(window.location.href).searchParams.get('fnr');
-    useStub = params.stub;
-    if (__ENV__ === 'heroku') {
-        return stub();
-    }
-    // tslint:disable-next-line no-any
+function getPerson() {
     const endpoint = (<any> window).REST_API_URL;
-    return axios.get(`${endpoint}/personinfo?${queryStringParser.stringify(params)}`);
+    return axios.get(`${endpoint}/personinfo`, { withCredentials: true } );
 }
-*/
-
-function getPerson(params: PersonRequest = defaultParams) {
-    fnr = new URL(window.location.href).searchParams.get('fnr');
-    useStub = params.stub;
-
-    const endpoint = (<any> window).REST_API_URL;
-    return axios.get(`${endpoint}/personinfo?${queryStringParser.stringify(params)}`, { withCredentials: true } );
-}
-
-/*
-function sendSoknad(soknad: EngangsstonadSoknad) {
-    const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub ? '?stub=true' : ''}`;
-    return axios.post(url, {fnr: fnr, ...soknad});
-} */
 
 function sendSoknad(soknad: EngangsstonadSoknad) {
     const { vedlegg, ...other } = soknad;
@@ -48,15 +16,14 @@ function sendSoknad(soknad: EngangsstonadSoknad) {
     };
 
     const formData = new FormData();
-    formData.append('soknad', new Blob([JSON.stringify({fnr: fnr, ...other})], {
+    formData.append('soknad', new Blob([JSON.stringify({...other})], {
         type: 'application/json'
     }));
     
     formData.append('vedlegg', vedlegg[0]);
 
-    const url = `${(<any> window).REST_API_URL}/engangsstonad${useStub ? '?stub=true' : ''}`;
+    const url = `${(<any> window).REST_API_URL}/engangsstonad`;
     return axios.post(url, formData, config);
-
 }
 
 const Api = { getPerson, sendSoknad };
