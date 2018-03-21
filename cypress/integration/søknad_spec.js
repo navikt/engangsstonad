@@ -71,6 +71,17 @@ describe('Søknad', () => {
             cy.get('#js-fødselsnummer').type('32543211563');
         });
 
+        it('should toggle utenlandskFnr', () => {
+            cy.get('#utenlandskFnr')
+              .not('[disabled]')
+              .check({force: true})
+              .should('be.checked');
+        });
+
+        it('should set bostedsland', () => {
+            cy.get('select[name="bostedsland"]').select('Sverige');
+        });
+
         it('Vis hjelpetekst', () => {
             cy.get('.hjelpetekst').should('not.have.class', 'hjelpetekst--open');
             cy.get('#fnrHjelpetekstBtn').click();

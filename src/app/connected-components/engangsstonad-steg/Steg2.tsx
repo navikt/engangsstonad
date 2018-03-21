@@ -106,6 +106,7 @@ export class Steg2 extends React.Component<Props> {
                         <Checkbox
                             checked={annenForelder.utenlandskFnr || false}
                             label={getMessage(intl, 'annenForelder.label.utenlandskFødselsnummer')}
+                            id="utenlandskFnr"
                             onChange={() => dispatch(setAnnenForelderUtenlandskFnr(!annenForelder.utenlandskFnr))}
                         />
                     </div>
