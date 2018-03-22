@@ -2,10 +2,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
 
 import BekreftCheckbox from 'components/bekreft-checkbox/BekreftCheckbox';
-import DialogBox from 'components/dialog-box/DialogBox';
+import Veilederinfo from 'components/veileder-info/Veilederinfo';
 import PersonaliaLabel from 'components/personalia-label/PersonaliaLabel';
 
 import { fullNameFormat } from 'util/formats/formatUtils';
@@ -44,9 +43,7 @@ export class Steg4 extends React.Component<Props> {
         return (
             <div>
                 <DocumentTitle title="NAV Engangsstønad - Oppsummering" />
-                <DialogBox type="info" overflow={false}>
-                    <Normaltekst>{getMessage(intl, 'oppsummering.text.lesNoye')}</Normaltekst>
-                </DialogBox>
+                <Veilederinfo>{getMessage(intl, 'oppsummering.text.lesNoye')}</Veilederinfo>
                 <PersonaliaLabel
                     navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn)}
                     personnummer="XXXXXXXXXXX"

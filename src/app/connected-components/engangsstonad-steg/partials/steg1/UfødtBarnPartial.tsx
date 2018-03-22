@@ -6,8 +6,6 @@ import { default as Barn, UfodtBarn } from '../../../../types/domain/Barn';
 import getMessage from 'util/i18n/i18nUtils';
 import { DispatchProps } from '../../../../redux/types/index';
 import OmTerminbekreftelsen from 'components/modal-content/OmTerminbekreftelsen';
-import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
-import DialogBox from 'components/dialog-box/DialogBox';
 import {
     erIUke26Pluss3, erMindreEnn3UkerSiden, idagEllerTidligere,
     utstedtDatoErIUke26
@@ -15,6 +13,9 @@ import {
 import AttachmentButton from 'components/attachment/AttachmentButton';
 import AttachmentList from 'components/attachment/AttachmentList';
 const Modal = require('nav-frontend-modal').default;
+import Veilederinfo from './../../../../components/veileder-info/Veilederinfo';
+import LinkWithIcon from 'components/link-with-icon/LinkWithIcon';
+const InfoSirkelIcon = require('assets/svg/info-sirkel-fylt.svg').default;
 
 interface StateProps {
     barn: Barn;
@@ -72,7 +73,6 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
         const { barn, vedlegg, dispatch, intl } = this.props;
         const { antallBarn } = barn;
         const termindato = barn && (barn as UfodtBarn).termindato;
-        const dialogBoxType = vedlegg.length > 0 ? 'success' : 'warning';
 
         return (
             <div>
@@ -88,9 +88,15 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 )}
 
                 {termindato && ([
-                    <DialogBox type={dialogBoxType} overflow={true} key="dialog">
-                        <Normaltekst>{getMessage(intl, 'relasjonBarn.text.terminbekreftelse')}</Normaltekst>
-                    </DialogBox>,
+                    <Veilederinfo key="veileder">
+                        {getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}
+                        <LinkWithIcon
+                            linkText={getMessage(intl, 'terminbekreftelsen.sectionheading')}
+                            href="#"
+                            iconRef={InfoSirkelIcon}
+                            onClick={() => this.setState({isModalOpen: true})}
+                        />
+                    </Veilederinfo>,
                     <AttachmentButton
                         key="vedlegg"
                         id="vedlegg"
