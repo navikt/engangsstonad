@@ -24,7 +24,7 @@ export const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
 
     if (person) {
         return (
-            <div className="engangsstonad">
+            <div className="centeredContent">
                 <DocumentTitle title="Kvittering - NAV Engangsstønad" />
                 <HeaderIllustration
                     dialog={{
