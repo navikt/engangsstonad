@@ -58,7 +58,7 @@ describe('Søknad', () => {
         });
 
         it('Går videre til neste side', () => {
-            cy.get('button.js-fortsettKnapp').click();
+            cy.get('button.responsiveButton').click();
         });
     });
 
@@ -91,7 +91,7 @@ describe('Søknad', () => {
         });
 
         it('Gå videre til neste side', () => {
-            cy.get('button.js-fortsettKnapp').click();
+            cy.get('button.responsiveButton').click();
         });
     });
 
@@ -109,7 +109,7 @@ describe('Søknad', () => {
         });
 
         it('Går videre til neste side', () => {
-            cy.get('button.js-fortsettKnapp').click();
+            cy.get('button.responsiveButton').click();
         });
     });
 
