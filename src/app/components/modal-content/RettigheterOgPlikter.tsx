@@ -28,6 +28,7 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                         values={{
                             link: (
                                 <a
+                                    className="lenke"
                                     href="https://nav.no/rettOgPlikt"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -78,6 +79,7 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                         values={{
                             link: (
                                 <a
+                                    className="lenke"
                                     href={
                                         'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/' +
                                         'Teknisk+brukerstotte/Snarveier/' +
