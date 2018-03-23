@@ -99,7 +99,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                 />
                 <SimpleIllustration svg={VeilederIllustration} />
 
-                <div className="centeredContent">
+                <div className="responsiveContainer">
                     <Innholdstittel>
                         {getMessage(intl, 'intro.pageheading.soknadES')}
                     </Innholdstittel>
@@ -113,11 +113,9 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                             checked={godkjentVilkar}
                         />
                     </ValidGroup>
-                    <div className="engangsstonad__centerButton">
-                        <Hovedknapp>
-                            {getMessage(intl, 'intro.button.startSoknad')}
-                        </Hovedknapp>
-                    </div>
+                    <Hovedknapp className="responsiveButton">
+                        {getMessage(intl, 'intro.button.startSoknad')}
+                    </Hovedknapp>
                     <Modal
                         isOpen={this.state.isModalOpen}
                         closeButton={true}

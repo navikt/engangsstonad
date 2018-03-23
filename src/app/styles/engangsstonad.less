@@ -2,26 +2,52 @@
 @import 'variables.less';
 
 .app {
+  .knapp--hoved {
+    min-height: 46px;
+  }
+
   .simpleIllustration {
     margin-bottom: 6em;
   }
 
-  .centeredContent {
-    max-width: 600px;
+  .responsiveContainer {
+    max-width: 704px;
     margin: 0 auto;
-    padding: @stepPadding;
+    padding: 2rem;
+
+    @media (max-width: @tablet-breakpoint) {
+      max-width: 100%;
+    }
+
+    @media (max-width: @mobile-breakpoint) {
+      padding: 1rem;
+    }
 
     .typo-innholdstittel {
       text-align: center;
     }
 
     .spotlightLetter {
-      margin: 0.25rem auto 1.5rem auto;
+      margin: 1.5rem auto 1.5rem auto;
       display: block;
+    }
+
+    .responsiveButton {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+
+      @media (max-width: @mobile-breakpoint) {
+        width: 100%;
+      }
     }
   }
 
   .engangsstonad {
+      .responsiveButton {
+        margin-top: 1.5rem;
+      }
+
       .attachmentButton {
         margin-top: 1rem;
       }
@@ -38,21 +64,6 @@
         margin-bottom: 2rem;
       }
 
-      .dialogBox {
-          margin-top: @marginLarge;
-          margin-bottom: @marginLarge;
-      }
-
-      .alertstripe {
-          margin: @marginSmall 0;
-      }
-
-      .fortsettKnapp {
-          margin-top: 12px;
-          min-height: 46px;
-          width: 100%;
-      }
-
       .typo-element {
           margin-top: @marginLarge;
           margin-bottom: @marginMedium;
@@ -63,10 +74,6 @@
           margin-bottom: @marginMedium;
       }
 
-      .radioGroup {
-          margin: @marginSmall 0;
-      }
-
       .bekreftCheckbox {
           margin-top: @marginLarge;
       }
@@ -74,17 +81,6 @@
       .stegindikatorWrapper {
           position: relative;
           margin-bottom: 16px;
-      }
-
-      &__centerButton {
-          display: flex;
-          justify-content: center;
-          margin-top: 24px;
-
-          .knapp--hoved {
-            min-height: 46px;
-            width: 100%;
-          }
       }
 
       .paperVersionLink {

@@ -102,7 +102,7 @@ export class SøknadContainer extends React.Component<Props> {
                     noSummary={activeStep === 3}
                     onSubmit={this.handleNextClicked}
                     key="form"
-                    className="centeredContent"
+                    className="responsiveContainer"
                 >
                     <BackButton onClick={this.handleBackClicked} hidden={activeStep === 1} />
                     <StepIndicator stepTitles={titles} activeStep={activeStep} />
@@ -114,7 +114,7 @@ export class SøknadContainer extends React.Component<Props> {
 
                     {
                         this.shouldRenderFortsettKnapp() === true &&
-                        <Hovedknapp className="fortsettKnapp js-fortsettKnapp">
+                        <Hovedknapp className="responsiveButton">
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     }

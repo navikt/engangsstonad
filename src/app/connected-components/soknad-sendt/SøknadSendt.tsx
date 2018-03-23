@@ -51,7 +51,7 @@ export class EngangsstonadCompleted extends React.Component<Props> {
             <div className="engangsstonad">
                 <DocumentTitle title="Kvittering - NAV Engangsstønad" />
                 <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
-                <div className="centeredContent">
+                <div className="responsiveContainer">
                     <CustomSVG iconRef={SpotlightLetter} className="spotlightLetter" />
                     <Innholdstittel>{getMessage(intl, 'kvittering.text.takk', { navn: person.fornavn })}</Innholdstittel>
                     <Ingress>{this.receiptText()}</Ingress>
