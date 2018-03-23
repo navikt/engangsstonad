@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, Prompt } from 'react-router';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -95,6 +95,12 @@ export class SøknadContainer extends React.Component<Props> {
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
 
         return ([
+            (
+                <Prompt
+                    message="Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?"
+                    key="prompt"
+                />
+            ),
             (<Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} key="tittel" />),
             (
                 <ValidForm
