@@ -36,7 +36,13 @@ export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
                     theme={Theme.red}
                 />
                 <Ingress>{intl.formatMessage({ id: 'intro.text.omES' })}</Ingress>
-                <a className="paperVersionLink" href="#">{getMessage(intl, 'intro.text.lastNedPapirsoknad')}</a>
+                <a
+                    className="paperVersionLink"
+                    href="https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/skjemaveileder/vedlegg?key=267390&veiledertype=privatperson&method=mail"
+                    target="_blank"
+                >
+                    {getMessage(intl, 'intro.text.lastNedPapirsoknad')}
+                </a>
                 <div className="engangsstonad__centerButton">
                     <Hovedknapp>
                         {intl.formatMessage({ id: 'kvittering.text.lukkVinduet' })}
