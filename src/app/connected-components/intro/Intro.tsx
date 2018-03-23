@@ -71,7 +71,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                 id="intro.text.samtykkeIntro"
                 values={{
                     link: (
-                        <a href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
+                        <a className="lenke" href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
                             <FormattedMessage id="intro.text.samtykke.link" />
                         </a>
                     )
