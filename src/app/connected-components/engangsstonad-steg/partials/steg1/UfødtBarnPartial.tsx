@@ -92,9 +92,15 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         {getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}
                         <LinkWithIcon
                             linkText={getMessage(intl, 'terminbekreftelsen.sectionheading')}
-                            href="#"
+                            href=""
                             iconRef={InfoSirkelIcon}
-                            onClick={() => this.setState({isModalOpen: true})}
+                            onClick={
+                                (e: React.SyntheticEvent<HTMLAnchorElement>) => {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    this.setState({isModalOpen: true});
+                                }
+                            }
                         />
                     </Veilederinfo>,
                     <AttachmentButton

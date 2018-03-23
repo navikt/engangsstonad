@@ -99,6 +99,7 @@ export class SøknadContainer extends React.Component<Props> {
                 <Prompt
                     message="Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?"
                     key="prompt"
+                    when={activeStep !== 4}
                 />
             ),
             (<Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} key="tittel" />),
