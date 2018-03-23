@@ -14,19 +14,25 @@ interface Props {
 
 const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl } = props;
-    const { erBarnetFødt, fødselsdatoer, termindato, terminbekreftelseDato } = props.barn;
+    const { antallBarn, erBarnetFødt, fødselsdatoer, termindato, terminbekreftelseDato } = props.barn;
+
+    let antallBarnText = `${antallBarn}`;
+    if (antallBarn === 1) {
+        antallBarnText = 'ett';
+    } else if (antallBarn === 2) {
+        antallBarnText = 'to';
+    }
 
     if (erBarnetFødt && fødselsdatoer && fødselsdatoer.length > 0) {
         return (
             <DisplayTextWithLabel
-                label="Søknaden gjelder bla bla..."
-                text={fødselsdatoer[0]}
+                label="Søknaden gjelder..."
+                text={`${antallBarnText} barn`}
             />
         );
     } else if (termindato && terminbekreftelseDato) {
 
         let antallBarnSummaryText;
-        const { antallBarn } = props.barn;
         if (antallBarn === 1) {
             antallBarnSummaryText = getMessage(intl, 'relasjonBarn.radiobutton.ettbarn');
         } else if (antallBarn === 2) {

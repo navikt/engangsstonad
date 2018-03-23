@@ -1,7 +1,7 @@
 {
 	"intro.pageheading.soknadES": "Velkommen til søknad om engangsstønad ",
 	"intro.text.under18": "Fordi du er under 18 år, må en av foreldrene dine eller en foresatt skrive under på søknaden sammen med deg. Du må derfor fylle ut søknaden på papir og sende den i posten. ",
-    "intro.text.erMann": "Fordi du er registrert som mann...",
+    "intro.text.erMann": "Du kan ikke søke elektronisk om engangsstønad til far eller medmor. Derfor må du sende søknaden i posten. Hvis det er mor som skal ha stønaden, må hun selv sende inn søknaden.",
 	"intro.snakkeboble.overskrift": "Hei, {name}!",
 	"intro.text.hjelpedeg": "Jeg skal hjelpe deg med å fylle ut søknaden. ",
 	"intro.text.omES": "Engangsstønad er en skattefri engangssum du kan få for hvert barn du føder eller adopterer.",
