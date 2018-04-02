@@ -3,10 +3,10 @@ import CustomSVG from 'components/custom-svg/CustomSVG';
 
 const { Undertittel } = require('nav-frontend-typografi');
 
-const alertIcon = require('assets/svg/employee_sad.svg');
-const infoIcon = require('assets/svg/employee_nautral.svg');
-const successIcon = require('assets/svg/employee_happy.svg');
-const warningIcon = require('assets/svg/employee_warning.svg');
+const alertIcon = require('assets/svg/employee_sad.svg').default;
+const infoIcon = require('assets/svg/employee_nautral.svg').default;
+const successIcon = require('assets/svg/employee_happy.svg').default;
+const warningIcon = require('assets/svg/employee_warning.svg').default;
 
 export enum AnsattType {
     'alarm' = 'alarm',
@@ -28,7 +28,7 @@ const getIcon = (type: AnsattType) => {
             return alertIcon;
         case AnsattType.advarsel:
             return warningIcon;
-        case AnsattType.info:
+        default:
             return infoIcon;
     }
 };

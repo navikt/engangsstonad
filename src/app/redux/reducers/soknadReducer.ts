@@ -28,9 +28,10 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             ));
 
             const newVedlegg = action.vedlegg.filter((file: File) => {
-                return(!vedleggMetaData.includes(JSON.stringify({
+                return (!vedleggMetaData.includes(JSON.stringify({
                     name: file.name,
-                    size: file.size })
+                    size: file.size
+                })
                 ));
             });
 
@@ -101,13 +102,29 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             };
         case SoknadActionKeys.SET_ER_BARNET_FODT:
             const { erBarnetFødt } = action;
-            return { ...state, barn: { fødselsdatoer: [], erBarnetFødt }, vedlegg: [] };
+            return { ...state, barn: { fødselsdatoer: [], erBarnetFødt }, vedlegg: [], utenlandsopphold: { ...utenlandsopphold, fødselINorge: undefined } };
         case SoknadActionKeys.SET_ANTALL_BARN:
-            const { antallBarn } = action;
-            return { ...state, barn: { ...barn, antallBarn } };
-        case SoknadActionKeys.ADD_FØDSELSDATO:
-            const fødselsdatoer = [action.fødselsdato];
-            return { ...state, barn: { ...barn, fødselsdatoer }};
+            return { ...state, barn: { ...barn, antallBarn: action.antallBarn } };
+        case SoknadActionKeys.EDIT_FØDSELSDATO:
+            const { index, fødselsdato } = action;
+            if (action.bornOnSameDate) {
+                return { ...state, barn: { ...barn, fødselsdatoer: state.barn.fødselsdatoer.slice().fill(fødselsdato) } };
+            } else if (index !== undefined) {
+                state.barn.fødselsdatoer[index] = fødselsdato;
+                return { ...state, barn: { ...barn, fødselsdatoer: state.barn.fødselsdatoer }};
+            }
+            break;
+        case SoknadActionKeys.UPDATE_FØDSELSDATOER:
+            const { fødselsdatoer, antallBarn } = state.barn;
+            let newFødselsdatoArray = [];
+            if (antallBarn && fødselsdatoer.length > antallBarn) {
+                newFødselsdatoArray = state.barn.fødselsdatoer.slice(0, antallBarn);
+            } else if (antallBarn && fødselsdatoer.length < antallBarn) {
+                newFødselsdatoArray = new Array(antallBarn - fødselsdatoer.length).fill(undefined);
+                newFødselsdatoArray.unshift(...fødselsdatoer);
+            }
+            newFødselsdatoArray = action.bornOnSameDate ? newFødselsdatoArray.fill(fødselsdatoer[0]) : newFødselsdatoArray;
+            return { ...state, barn: { ...barn, fødselsdatoer: newFødselsdatoArray }};
         case SoknadActionKeys.SET_TERMINDATO:
             const { termindato } = action;
             return {

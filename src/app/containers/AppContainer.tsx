@@ -88,7 +88,7 @@ export class AppContainer extends React.Component<Props> {
     render() {
         const { person, isLoadingPerson } = this.props;
 
-        if (isLoadingPerson || person === undefined) {
+        if (isLoadingPerson || person === undefined) {
             return this.renderContent(<Spinner type="XXL"/>);
         }
 

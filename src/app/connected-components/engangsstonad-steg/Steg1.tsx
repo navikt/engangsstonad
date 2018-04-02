@@ -47,7 +47,7 @@ export class Steg1 extends React.Component<Props, State> {
                 return 'ett';
             } else if (antallBarn === 2) {
                 return 'tvillinger';
-            } else if (antallBarn === 3) {
+            } else if (antallBarn && antallBarn >= 3) {
                 return 'flere';
             }
         }
@@ -65,9 +65,19 @@ export class Steg1 extends React.Component<Props, State> {
         return null;
     }
 
+    handleAntallBarnSelected(value: string) {
+        const { dispatch } = this.props;
+        if (value === 'ett') {
+            dispatch(soknad.setAntallBarn(1));
+        } else if (value === 'tvillinger') {
+            dispatch(soknad.setAntallBarn(2));
+        } else {
+            dispatch(soknad.setAntallBarn(3));
+        }
+    }
+
     render() {
         const { barn, dispatch, intl } = this.props;
-
         return (
             <div className="engangsstonad__step">
                 <DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
@@ -77,8 +87,8 @@ export class Steg1 extends React.Component<Props, State> {
                     onChange={(event: any, value: string) => dispatch(soknad.setErBarnetFødt(value))}
                     checked={this.getFodselsTidspunktSelectedValue()}
                     radios={[
-                        {  inputProps: { id: 'js-fodselFremtid'}, label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead'},
-                        {  inputProps: { id: 'js-fodselFortid'}, label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'), value: 'before'}
+                        { inputProps: { id: 'js-fodselFremtid' }, label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead' },
+                        { inputProps: { id: 'js-fodselFortid' }, label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'), value: 'before' }
                     ]}
                 />
 
@@ -86,12 +96,12 @@ export class Steg1 extends React.Component<Props, State> {
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, `relasjonBarn.text.antallBarn${barn.erBarnetFødt ? 'Født' : 'Ventet'}`)}
                         name="antallBarn"
-                        onChange={(event: any, value: string) => dispatch(soknad.setAntallBarn(value))}
+                        onChange={(event: any, value: string) => this.handleAntallBarnSelected(value)}
                         checked={this.getAntallBarnSelectedValue()}
                         radios={[
-                            { inputProps: { id: 'js-ettBarn'}, label: getMessage(intl, 'relasjonBarn.radiobutton.ettbarn'), value: 'ett'},
-                            { inputProps: { id: 'js-tvillinger'}, label: getMessage(intl, 'relasjonBarn.radiobutton.tvillinger'), value: 'tvillinger'},
-                            { inputProps: { id: 'js-flereBarn'}, label: getMessage(intl, 'relasjonBarn.radiobutton.flere'), value: 'flere'}
+                            { inputProps: { id: 'js-ettBarn' }, label: getMessage(intl, 'relasjonBarn.radiobutton.ettbarn'), value: 'ett' },
+                            { inputProps: { id: 'js-tvillinger' }, label: getMessage(intl, 'relasjonBarn.radiobutton.tvillinger'), value: 'tvillinger' },
+                            { inputProps: { id: 'js-flereBarn' }, label: getMessage(intl, 'relasjonBarn.radiobutton.flere'), value: 'flere' }
                         ]}
                     />
                 )}

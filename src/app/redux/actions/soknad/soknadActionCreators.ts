@@ -59,20 +59,6 @@ export function deleteSenereUtenlandsoppholdPeriode(periode: Periode): SoknadAct
     };
 }
 
-export function setAntallBarn(antallBarn: string): SoknadActionTypes {
-    let numerical = 1;
-    if (antallBarn === 'tvillinger') {
-        numerical = 2;
-    } else if (antallBarn === 'flere') {
-        numerical = 3;
-    }
-
-    return {
-        type: SoknadActionKeys.SET_ANTALL_BARN,
-        antallBarn: numerical
-    };
-}
-
 export function setErBarnetFødt(erBarnetFødt?: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_ER_BARNET_FODT,
@@ -80,10 +66,26 @@ export function setErBarnetFødt(erBarnetFødt?: string): SoknadActionTypes {
     };
 }
 
-export function addFødselsdato(fødselsdato: string): SoknadActionTypes {
+export function setAntallBarn(antallBarn: number): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.ADD_FØDSELSDATO,
-        fødselsdato
+        type: SoknadActionKeys.SET_ANTALL_BARN,
+        antallBarn: antallBarn
+    };
+}
+
+export function editFødselsdato(fødselsdato: string, bornOnSameDate: boolean, index?: number): SoknadActionTypes {
+    return {
+        type: SoknadActionKeys.EDIT_FØDSELSDATO,
+        fødselsdato,
+        bornOnSameDate,
+        index
+    };
+}
+
+export function updateFødselsdatoer(bornOnSameDate: boolean): SoknadActionTypes {
+    return {
+        type: SoknadActionKeys.UPDATE_FØDSELSDATOER,
+        bornOnSameDate
     };
 }
 
@@ -175,7 +177,8 @@ export default {
     deleteVedlegg,
     setAntallBarn,
     setErBarnetFødt,
-    addFødselsdato,
+    editFødselsdato,
+    updateFødselsdatoer,
     setTermindato,
     setTerminbekreftelseDato,
     setJobbetINorgeSiste12Mnd,

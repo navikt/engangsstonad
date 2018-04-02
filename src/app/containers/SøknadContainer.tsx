@@ -72,7 +72,7 @@ export class SøknadContainer extends React.Component<Props> {
 
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, annenForelder, utenlandsopphold, barn } = this.props;
-        const fødselsdatoIsSet = (barn.fødselsdatoer && barn.fødselsdatoer.length > 0);
+        const fødselsdatoIsSet = (barn.fødselsdatoer.length > 0 && !barn.fødselsdatoer.includes(undefined as any));
         if (activeStep === 1 && barn) {
             return barn.terminbekreftelseDato !== undefined || fødselsdatoIsSet;
         } else if (activeStep === 2 && annenForelder) {
