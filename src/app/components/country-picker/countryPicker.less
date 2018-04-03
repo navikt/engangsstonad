@@ -22,7 +22,7 @@
       padding-right: 24px;
 
       .knapp {
-        font-size: 0.75rem;
+        font-size: 1rem;
       }
 
       .knapp:not(:first-child) {
@@ -31,52 +31,50 @@
     }
 }
 
-.countryElement {
-    position: relative;
-    width: 100%;
-    list-style-type: none;
-    padding-bottom: @paddingLarge;
-    display: inline-block;
+.countryListElement {
+    display: flex;
+    padding-top: @paddingSmall;
+    padding-bottom: @paddingSmall;
 
-    &__country {
-        width: 72px;
-        display: inline-block;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    &__editable {
+        color: #0067C5;
+        p {
+            text-decoration: underline;
+        }
+    }
+
+    button {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        outline: inherit;
+        text-align: left;
+    }
+
+    &__flagIcon {
+        margin-right: 12px;
+        min-height: 20px;
+        min-width: 20px;
+        border: lightgrey;
     }
 
     &__date {
-        padding-left: 6px;
-        display: inline-block;
-        padding-right: 41px;
-        text-decoration: underline;
-        color: #0067C5;
-    }    
-    
+        white-space: nowrap;
+    }  
+
     &__deleteButton {
         display: block;
-        top: 0;
-        right: 0;
         width: 2rem;
         padding: 0;
         border: none;
         background: none;
         padding: 0;
-        position: absolute;
+        margin-left: auto;
 
         &:focus {
             outline: none;
             box-shadow: 0 0 0 3px orange;
         }
-    }
-}
-
-.countrySummaryElement {
-    display: flex;
-    padding-top: @paddingSmall;
-    padding-bottom: @paddingSmall;
-
-    &__flagIcon {
-        margin-right: 12px;
     }
 }

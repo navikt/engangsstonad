@@ -15,6 +15,8 @@ interface StateProps {
 }
 
 export default class CountrySelect extends React.Component<StateProps> {
+    static isoCodeIndex = 0;
+    static countryStringIndex = 1;
     componentWillMount() {
         const countriesLanguage = this.props.language === 'nb' ? bokmalCountryList : nynorskCountryList;
         countries.registerLocale(countriesLanguage);
@@ -22,11 +24,14 @@ export default class CountrySelect extends React.Component<StateProps> {
 
     renderCountryOptions() {
         const { language } = this.props;
+        const  isoCodeIndex = 0;
+        const countryNameIndex = 1;
         return Object.entries(countries.getNames(language))
             .sort((a: string[], b: string[]) => a[1].localeCompare(b[1], language))
-            .map((optionValue: string[]) => (
-                <option key={optionValue[0]} value={optionValue[0]}>
-                    {optionValue[1]}
+            .filter(countryOptionValue => countryOptionValue[isoCodeIndex] !== 'NO')
+            .map((countryOptionValue: string[]) => (
+                <option key={countryOptionValue[isoCodeIndex]} value={countryOptionValue[isoCodeIndex]}>
+                    {countryOptionValue[countryNameIndex]}
                 </option>
             ));
     }

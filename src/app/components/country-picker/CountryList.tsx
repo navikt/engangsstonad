@@ -1,6 +1,5 @@
 import * as React from 'react';
 import CountryListElement from './CountryListElement';
-import CountryListSummaryElement from './CountryListSummaryElement';
 import './countryPicker.less';
 import { Periode } from '../../types/domain/Utenlandsopphold';
 
@@ -10,7 +9,7 @@ interface CountryListProps {
 
 export const CountrySummaryList: React.StatelessComponent<CountryListProps> = (props) => (
     <ul className="countryList">{props.utenlandsoppholdListe.map((periode: Periode, index: number) => (
-        <CountryListSummaryElement
+        <CountryListElement
             key={index}
             utenlandsopphold={periode}
         />
