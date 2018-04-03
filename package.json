@@ -16,6 +16,7 @@
         "docker-stop": "docker stop engangsstonad",
         "docker-rmi": "npm run docker-kill && docker rmi engangsstonad",
         "start-express": "node ./server.js",
+        "start-api-mock": "node ./server-api.js",
         "start": "node ./src/build/scripts/start-dev.js",
         "test": "cross-env NODE_ENV=test jest",
         "lint": "tslint src/**",
