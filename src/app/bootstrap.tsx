@@ -7,6 +7,8 @@ import AppContainer from './containers/AppContainer';
 import IntlProvider from './intl/IntlProvider';
 import store from './redux/index';
 
+import './util/loginLinkOverride';
+
 const Modal = require('nav-frontend-modal').default;
 (Modal as any).setAppElement('#app');
 
