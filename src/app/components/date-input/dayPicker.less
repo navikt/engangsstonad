@@ -4,7 +4,6 @@
 @import '../../styles/variables.less';
 @import '../../../../node_modules/react-day-picker/lib/style.css';
 
-
 .DayPicker {
 	display: flex;
 	flex-wrap: wrap;
@@ -135,7 +134,7 @@
 }
 
 .DayPicker:not(.DayPicker--interactionDisabled)
-.DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+	.DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
 	background-color: @navLysGra;
 	border-radius: 0%;
 }
@@ -159,16 +158,15 @@
 	&__outer {
 		padding-left: 8px;
 		padding-right: 8px;
-		margin-bottom: 8px;
 		margin-left: -8px;
 		margin-right: -8px;
 
 		&--withError {
-            margin-left: 0;
-            margin-right: 0;
-            background-color: #f1d8d4;
-            padding-top: 8px;
-            padding-bottom: 8px;
+			margin-left: 0;
+			margin-right: 0;
+			background-color: #f1d8d4;
+			padding-top: 8px;
+			padding-bottom: 8px;
 
 			.skjemaelement__label {
 				margin-top: 0 !important;

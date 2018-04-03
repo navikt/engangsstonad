@@ -1,82 +1,80 @@
 @import '../../styles/variables.less';
 
 .countryPicker {
-    &__addButton {
-        margin-bottom: @paddingLarge;
-    }
+	&__addButton {
+		margin-bottom: @paddingLarge;
+	}
 }
 
 .countryList {
-  padding: 0;
+	padding: 0;
 }
 
 .countryModal {
-    &__title {
-        margin-bottom: @paddingLarge;
-        text-align: center;
-    }
+	&__title {
+		margin-bottom: @paddingLarge;
+		text-align: center;
+	}
+	.skjemaelement__label {
+		font-weight: 600;
+	}
 
-    &__buttonBar {
-      display: flex;
-      padding-left: 24px;
-      padding-right: 24px;
-
-      .knapp {
-        font-size: 0.75rem;
-      }
-
-      .knapp:not(:first-child) {
-        margin-left: 0.5rem;
-      }
-    }
+	&__buttonBar {
+		margin-top: 1.5rem;
+		margin-bottom: 0.5rem;
+		display: flex;
+		.knapp:first-child {
+			margin-right: 1rem;
+		}
+	}
 }
 
 .countryElement {
-    position: relative;
-    width: 100%;
-    list-style-type: none;
-    padding-bottom: @paddingLarge;
-    display: inline-block;
+	position: relative;
+	width: 100%;
+	list-style-type: none;
+	padding-bottom: @paddingLarge;
+	display: inline-block;
 
-    &__country {
-        width: 72px;
-        display: inline-block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+	&__country {
+		width: 72px;
+		display: inline-block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
-    &__date {
-        padding-left: 6px;
-        display: inline-block;
-        padding-right: 41px;
-        text-decoration: underline;
-        color: #0067C5;
-    }    
-    
-    &__deleteButton {
-        display: block;
-        top: 0;
-        right: 0;
-        width: 2rem;
-        padding: 0;
-        border: none;
-        background: none;
-        padding: 0;
-        position: absolute;
+	&__date {
+		padding-left: 6px;
+		display: inline-block;
+		padding-right: 41px;
+		text-decoration: underline;
+		color: #0067c5;
+	}
 
-        &:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px orange;
-        }
-    }
+	&__deleteButton {
+		display: block;
+		top: 0;
+		right: 0;
+		width: 2rem;
+		padding: 0;
+		border: none;
+		background: none;
+		padding: 0;
+		position: absolute;
+
+		&:focus {
+			outline: none;
+			box-shadow: 0 0 0 3px orange;
+		}
+	}
 }
 
 .countrySummaryElement {
-    display: flex;
-    padding-top: @paddingSmall;
-    padding-bottom: @paddingSmall;
+	display: flex;
+	padding-top: @paddingSmall;
+	padding-bottom: @paddingSmall;
 
-    &__flagIcon {
-        margin-right: 12px;
-    }
+	&__flagIcon {
+		margin-right: 12px;
+	}
 }
