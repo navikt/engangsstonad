@@ -5,13 +5,23 @@ import './displayTextWithLabel.less';
 
 interface Props {
     label: string;
-    text: string;
+    text: string | string[];
 }
 
 const DisplayTextWithLabel: React.StatelessComponent<Props> = (props) => (
     <div className="textWithLabel">
         {props.label && <EtikettLiten className="textWithLabel__label">{props.label}</EtikettLiten>}
-        <Element className="textWithLabel__text">{props.text} </Element>
+        {Array.isArray(props.text) &&
+            props.text.map((textElement, index) => (
+                <Element
+                    key={`${textElement}-${index}`}
+                    className="textWithLabel__text"
+                >
+                    {textElement}
+                </Element>
+            ))
+        }
+        {!Array.isArray(props.text) && <Element className="textWithLabel__text">{props.text}</Element>}
     </div>
 );
 export default DisplayTextWithLabel;

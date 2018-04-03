@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ModalHeader, { AnsattType } from './ModalHeader';
-const { Modal } = require('nav-frontend-modal').default;
+const Modal = require('nav-frontend-modal').default;
 
 import './modal.less';
 

@@ -4,7 +4,6 @@ import DocumentTitle from 'react-document-title';
 import { injectIntl } from 'react-intl';
 
 const { Ingress } = require('nav-frontend-typografi');
-import { Hovedknapp } from 'nav-frontend-knapper';
 import HeaderIllustration, { Theme } from 'components/header-illustration/HeaderIllustration';
 const VelkommenIllustration = require('assets/svg/frontpage.svg').default;
 import getMessage from '../../util/i18n/i18nUtils';
@@ -24,7 +23,7 @@ export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
 
     if (person) {
         return (
-            <div className="engangsstonad">
+            <div className="responsiveContainer">
                 <DocumentTitle title="Kvittering - NAV Engangsstønad" />
                 <HeaderIllustration
                     dialog={{
@@ -36,12 +35,13 @@ export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
                     theme={Theme.red}
                 />
                 <Ingress>{intl.formatMessage({ id: 'intro.text.omES' })}</Ingress>
-                <a className="paperVersionLink" href="#">{getMessage(intl, 'intro.text.lastNedPapirsoknad')}</a>
-                <div className="engangsstonad__centerButton">
-                    <Hovedknapp>
-                        {intl.formatMessage({ id: 'kvittering.text.lukkVinduet' })}
-                    </Hovedknapp>
-                </div>
+                <a
+                    className="paperVersionLink lenke"
+                    href="https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/skjemaveileder/vedlegg?key=267390&veiledertype=privatperson&method=mail"
+                    target="_blank"
+                >
+                    {getMessage(intl, 'intro.text.lastNedPapirsoknad')}
+                </a>
             </div>
         );
     }

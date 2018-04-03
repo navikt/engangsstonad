@@ -1,4 +1,4 @@
-@import './../../../../node_modules/nav-frontend-core/less/_variabler';
+@import './../../styles/variables.less';
 
 .radioPanelGruppe--responsive {
   padding: 0.2rem;
@@ -14,18 +14,18 @@
     }
   }
 
-  @media screen and (max-width: @screen-sm) {
+  @media screen and (max-width: 576px) {
     display: block;
   }
 
-  @media screen and (min-width: @screen-sm) and (max-width: @screen-desktop) {
+  @media screen and (min-width: 577px) and (max-width: @tablet-breakpoint) {
     .radioPanelWrapper {
       flex-basis: 50%;
       width: 50%;
     }
   }
 
-  @media screen and (min-width: @screen-desktop) {
+  @media screen and (min-width: (1 + @tablet-breakpoint)) {
     .radioPanelWrapper {
       flex-basis: 33%;
       width: 33%;

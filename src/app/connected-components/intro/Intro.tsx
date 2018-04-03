@@ -71,7 +71,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                 id="intro.text.samtykkeIntro"
                 values={{
                     link: (
-                        <a href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
+                        <a className="lenke" href="#" onClick={(e) => this.openRettigheterOgPlikterModal(e)}>
                             <FormattedMessage id="intro.text.samtykke.link" />
                         </a>
                     )
@@ -99,7 +99,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                 />
                 <SimpleIllustration svg={VeilederIllustration} />
 
-                <div className="centeredContent">
+                <div className="responsiveContainer">
                     <Innholdstittel>
                         {getMessage(intl, 'intro.pageheading.soknadES')}
                     </Innholdstittel>
@@ -113,11 +113,9 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                             checked={godkjentVilkar}
                         />
                     </ValidGroup>
-                    <div className="engangsstonad__centerButton">
-                        <Hovedknapp>
-                            {getMessage(intl, 'intro.button.startSoknad')}
-                        </Hovedknapp>
-                    </div>
+                    <Hovedknapp className="responsiveButton">
+                        {getMessage(intl, 'intro.button.startSoknad')}
+                    </Hovedknapp>
                     <Modal
                         isOpen={this.state.isModalOpen}
                         closeButton={true}

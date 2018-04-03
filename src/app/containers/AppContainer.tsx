@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect, withRouter, RouteComponentProps } from 'react-router-dom';
-import * as queryStringParser from 'query-string';
 import Spinner from 'nav-frontend-spinner';
 
 import Intro from './../connected-components/intro/Intro';
@@ -35,31 +34,19 @@ type Props = StateProps & ExternalProps & DispatchProps & RouteComponentProps<{}
 export class AppContainer extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
-
-        this.getQueryParams = this.getQueryParams.bind(this);
     }
 
     componentWillMount() {
         const { dispatch, person } = this.props;
         if (!person) {
-            const queryParams = this.getQueryParams();
-
-            if (Object.keys(queryParams).length > 0) {
-                dispatch(api.getPerson(queryParams));
-            } else {
                 dispatch(api.getPerson());
             }
         }
-    }
 
     componentWillReceiveProps(props: any) {
-        if (props.reason && props.reason.status) {
+        if (props.reason && props.reason.status === 401) {
             window.location.href = (window as any).LOGIN_URL + '?redirect=' + window.location.href;
         }
-    }
-
-    getQueryParams() {
-        return queryStringParser.parse(this.props.location.search);
     }
 
     renderContent(children: React.ReactNode) {

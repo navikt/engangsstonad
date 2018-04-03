@@ -1,22 +1,22 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-const Icon = require('nav-frontend-ikoner-assets').default;
+const Link = require('nav-frontend-lenker').default;
+import CustomSVG, { IconRef } from 'components/custom-svg/CustomSVG';
 import './linkWithIcon.less';
 
 interface Props {
-    iconKind: string;
+    iconRef: IconRef;
     href: string;
     linkText: string;
-    iconSize: number;
+    iconSize?: number;
     onClick: Function;
 }
 
 const LinkWithIcon: React.StatelessComponent<Props> = (
-    { onClick, iconKind, href, linkText, iconSize = 16, ...other }
+    { onClick, iconRef, href, linkText, iconSize = 16, ...other }
 ) => (
     <div className="linkWithIcon" onClick={(e) => onClick(e)}>
-        <Icon kind={iconKind} size={iconSize} />
-        <Link className="linkWithIcon__link" to={href} {...other}>
+        <CustomSVG size={iconSize} iconRef={iconRef} />
+        <Link className="linkWithIcon__link" href={href} {...other}>
             {linkText}
         </Link>
     </div>

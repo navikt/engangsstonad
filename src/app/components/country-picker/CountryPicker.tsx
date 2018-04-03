@@ -87,6 +87,7 @@ class CountryPicker extends React.Component<Props, State> {
                         onSubmit={(periode: Periode) => this.onModalSubmit(periode)}
                         closeModal={() => this.closeModal()}
                         language={this.props.language}
+                        label={this.props.label}
                     />
                 )}
                 <Knapp className="countryPicker__addButton" onClick={() => this.openModal()} htmlType="button">

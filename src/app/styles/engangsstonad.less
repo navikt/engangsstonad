@@ -1,119 +1,108 @@
 @import 'globals';
 @import 'variables.less';
-
 .app {
-  .simpleIllustration {
-    margin-bottom: 6em;
-  }
-
-  .centeredContent {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: @stepPadding;
-
-    .typo-innholdstittel {
-      text-align: center;
+    .knapp--hoved {
+        min-height: 46px;
     }
-
-    .spotlightLetter {
-      margin: 0.25rem auto 1.5rem auto;
-      display: block;
+    .simpleIllustration {
+        margin-bottom: 6em;
     }
-  }
-
-  .engangsstonad {
-      .søknadHeader {
-        margin: -0.25rem;
-      }
-
-      .section {
-        margin-bottom: 2rem;
-      }
-
-      .dialogBox {
-          margin-top: @marginLarge;
-          margin-bottom: @marginLarge;
-      }
-
-      .alertstripe {
-          margin: @marginSmall 0;
-      }
-
-      .fortsettKnapp {
-          margin-top: 12px;
-          min-height: 46px;
-          width: 100%;
-      }
-
-      .typo-element {
-          margin-top: @marginLarge;
-          margin-bottom: @marginMedium;
-      }
-
-      .typo-ingress {
-          margin-top: @marginLarge;
-          margin-bottom: @marginMedium;
-      }
-
-      .radioGroup {
-          margin: @marginSmall 0;
-      }
-
-      .bekreftCheckbox {
-          margin-top: @marginLarge;
-      }
-
-      .stegindikatorWrapper {
-          position: relative;
-          margin-bottom: 16px;
-      }
-
-      &__centerButton {
-          display: flex;
-          justify-content: center;
-          margin-top: 24px;
-
-          .knapp--hoved {
-            min-height: 46px;
-            width: 100%;
-          }
-      }
-
-      .paperVersionLink {
-          display: inline-block;
-          margin-top: @marginMedium;
-          margin-bottom: @marginLarge;
-      }
-
-    .datovelger__outer {
-      margin-top: 1rem;
-      .skjemaelement__label {
-        margin-top: 12px;
-        font-weight: bold;
-      }
+    .responsiveContainer {
+        max-width: 704px;
+        margin: 0 auto;
+        padding: 2rem;
+        @media (max-width: @tablet-breakpoint) {
+            max-width: 100%;
+        }
+        @media (max-width: @mobile-breakpoint) {
+            padding: 1rem;
+        }
+        .typo-innholdstittel {
+            text-align: center;
+        }
+        .spotlightLetter {
+            margin: 1.5rem auto 1.5rem auto;
+            display: block;
+        }
+        .responsiveButton {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            @media (max-width: @mobile-breakpoint) {
+                width: 100%;
+            }
+        }
     }
-
-    .radioPanelGruppe {
-      .skjema__legend {
-        font-size: 16px;
-        margin-bottom: 8px;
-      }
+    .engangsstonad {
+        .responsiveButton {
+            margin-top: 1.5rem;
+        }
+        .attachmentButton {
+            margin-top: 1rem;
+        }
+        .søknadHeader {
+            margin: -0.25rem;
+        }
+        .personaliaLabel {
+            margin-top: 1rem;
+        }
+        .section {
+            margin-bottom: 2rem;
+        }
+        .typo-element {
+            margin-top: @marginLarge;
+            margin-bottom: @marginMedium;
+        }
+        .typo-ingress {
+            margin-top: @marginLarge;
+            margin-bottom: @marginMedium;
+    
+        }
+        .bekreftCheckbox {
+            margin-top: @marginLarge;
+        }
+        .fødselsdatoCheckbox {
+            position: relative;
+            padding-top: 0.5rem;
+        }
+        .noOfChildrenSelect {
+            width: 20%;
+        }
+        .stegindikatorWrapper {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        .paperVersionLink {
+            display: inline-block;
+            margin-top: @marginMedium;
+            margin-bottom: @marginLarge;
+        }
+        .datovelger__outer {
+            margin-top: 1rem;
+            .skjemaelement__label {
+                margin-top: 12px;
+                font-weight: bold;
+            }
+        }
+        .radioPanelGruppe {
+            .skjema__legend {
+                font-size: 16px;
+                margin-bottom: 8px;
+            }
+        }
+        .radioPanelGruppe:not(:first-child) {
+            margin-top: 12px;
+        }
+        .spinner {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
     }
-
-    .radioPanelGruppe:not(:first-child) {
-      margin-top: 12px;
-    }
-
-    .spinner {
-      margin-left: auto;
-      margin-right: auto;
-      display: block;
-    }
-  }
 }
 
 .engangsstonadOppsumering {
-	&__underTitle {
-		border-bottom: 1px solid grey;
-	}
+    &__underTitle {
+        border-bottom: 1px solid grey;
+    }
 }

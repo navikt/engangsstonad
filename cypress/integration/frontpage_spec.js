@@ -22,6 +22,6 @@ describe('Inngangsvilkår', () => {
 
         cy.visit('/engangsstonad');
         cy.contains('Søknad om engangsstønad');
-        cy.contains('registrert som mann'); // TODO: Burde bruke en hook (klasse e.l.) i stedet for tekst
+        cy.contains('Du kan ikke søke elektronisk om engangsstønad til far eller medmor'); // TODO: Burde bruke en hook (klasse e.l.) i stedet for tekst
     });
 });

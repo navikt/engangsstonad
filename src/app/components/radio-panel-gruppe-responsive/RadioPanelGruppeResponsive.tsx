@@ -12,25 +12,19 @@ export default class RadioPanelGruppeResponsive extends React.Component<
         return (
             <div className="radioPanelGruppe">
                 <Fieldset legend={legend}>
-                    <SkjemaGruppe
-                        className="radioPanelGruppe--responsive"
-                        feil={feil}
-                    >
-                        {radios.map((radio) => (
-                            <div
-                                className="radioPanelWrapper"
-                                key={radio.value}
-                            >
-                                <RadioPanel
-                                    checked={checked === radio.value}
-                                    name={name}
-                                    onChange={(event: any) =>
-                                        onChange(event, radio.value)
-                                    }
-                                    {...radio}
-                                />
-                            </div>
-                        ))}
+                    <SkjemaGruppe className="radioPanelGruppe--responsive" feil={feil}>
+                            {
+                                radios.map((radio) => (
+                                    <div className="radioPanelWrapper" key={radio.value}>
+                                        <RadioPanel
+                                            checked={checked === radio.value}
+                                            name={name}
+                                            onChange={(event: any) => onChange(event, radio.value)}
+                                            {...radio}
+                                        />
+                                    </div>
+                                ))
+                            }
                     </SkjemaGruppe>
                 </Fieldset>
             </div>

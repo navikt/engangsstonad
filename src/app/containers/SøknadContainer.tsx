@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, Prompt } from 'react-router';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -62,7 +62,7 @@ export class SøknadContainer extends React.Component<Props> {
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
     }
-    
+
     handleBackClicked() {
         const { dispatch, activeStep } = this.props;
         if (activeStep > 1) {
@@ -72,12 +72,17 @@ export class SøknadContainer extends React.Component<Props> {
 
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, annenForelder, utenlandsopphold, barn } = this.props;
-        const fødselsdatoIsSet = (barn.fødselsdatoer && barn.fødselsdatoer.length > 0);
+        const fødselsdatoIsSet = (barn.fødselsdatoer.length > 0 && !barn.fødselsdatoer.includes(undefined as any));
         if (activeStep === 1 && barn) {
             return barn.terminbekreftelseDato !== undefined || fødselsdatoIsSet;
         } else if (activeStep === 2 && annenForelder) {
-            return annenForelder.fnr !== undefined || annenForelder.kanIkkeOppgis === true;
+            return annenForelder.kanIkkeOppgis === true 
+                    || annenForelder.fnr !== undefined 
+                    || (annenForelder.utenlandskFnr === true && annenForelder.bostedsland !== undefined && annenForelder.bostedsland.length > 0 );
         } else if (activeStep === 3 && utenlandsopphold) {
+            if (utenlandsopphold.iNorgeNeste12Mnd === false) {
+                return utenlandsopphold.senerePerioder.length > 0 && (fødselsdatoIsSet || utenlandsopphold.fødselINorge !== undefined);
+            }
             return utenlandsopphold.fødselINorge !== undefined || (fødselsdatoIsSet && utenlandsopphold.iNorgeNeste12Mnd !== undefined);
         }
         return activeStep === 4;
@@ -90,6 +95,13 @@ export class SøknadContainer extends React.Component<Props> {
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
 
         return ([
+            (
+                <Prompt
+                    message="Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?"
+                    key="prompt"
+                    when={activeStep !== 4}
+                />
+            ),
             (<Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} key="tittel" />),
             (
                 <ValidForm
@@ -97,7 +109,7 @@ export class SøknadContainer extends React.Component<Props> {
                     noSummary={activeStep === 3}
                     onSubmit={this.handleNextClicked}
                     key="form"
-                    className="centeredContent"
+                    className="responsiveContainer"
                 >
                     <BackButton onClick={this.handleBackClicked} hidden={activeStep === 1} />
                     <StepIndicator stepTitles={titles} activeStep={activeStep} />
@@ -109,7 +121,7 @@ export class SøknadContainer extends React.Component<Props> {
 
                     {
                         this.shouldRenderFortsettKnapp() === true &&
-                        <Hovedknapp className="fortsettKnapp js-fortsettKnapp">
+                        <Hovedknapp className="responsiveButton">
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     }
