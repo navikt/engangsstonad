@@ -15,7 +15,6 @@ import Steg4 from '../connected-components/engangsstonad-steg/Steg4';
 import getStepConfig from './../connected-components/engangsstonad-steg/steg.config';
 
 import '../styles/engangsstonad.less';
-import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSoknadResponse';
 import Utenlandsopphold from '../types/domain/Utenlandsopphold';
 import { FodtBarn, UfodtBarn } from '../types/domain/Barn';
 import AnnenForelder from '../types/domain/AnnenForelder';
@@ -26,12 +25,13 @@ import BackButton from 'components/back-button/BackButton';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
-    soknadPostResponse: EngangsstonadSoknadResponse;
     annenForelder: AnnenForelder;
     utenlandsopphold: Utenlandsopphold;
     barn: FodtBarn & UfodtBarn;
     vedlegg: File[];
     activeStep: number;
+    error: any;
+    søknadSendt: boolean;
 }
 
 type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps<{}>;
@@ -43,9 +43,14 @@ export class SøknadContainer extends React.Component<Props> {
     }
 
     componentWillReceiveProps(props: OwnProps) {
-        if (props.soknadPostResponse) {
-            const { history } = this.props;
-            history.push('/engangsstonad/completed');
+        const { history } = this.props;
+        const { error, søknadSendt } = props;
+        if (søknadSendt === true) {
+            if (!error) {
+                history.push('/engangsstonad/completed');
+            } else if (error.status >= 400 && error.status !== 401) {
+                history.push('/engangsstonad/innsendingsfeil');
+            }
         }
     }
 
@@ -136,7 +141,8 @@ const mapStateToProps = (state: any) => ({
     barn: state.soknadReducer.barn,
     vedlegg: state.soknadReducer.vedlegg,
     annenForelder: state.soknadReducer.annenForelder,
-    soknadPostResponse: state.apiReducer.soknad,
-    activeStep: state.stepReducer.activeStep
+    activeStep: state.stepReducer.activeStep,
+    error: state.apiReducer.error,
+    søknadSendt: state.apiReducer.søknadSendt
 });
 export default connect<OwnProps>(mapStateToProps)(injectIntl(SøknadContainer));

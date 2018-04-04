@@ -19,10 +19,10 @@ export function getPersonSuccess(person: Person): ApiActionTypes {
 }
 
 // tslint:disable-next-line:no-any
-export function getPersonFailed(reason: any): ApiActionTypes {
+export function getPersonFailed(error: any): ApiActionTypes {
     return {
         type: ApiActionKeys.GET_PERSON_FAILED,
-        reason
+        error
     };
 }
 
@@ -41,10 +41,10 @@ export function sendSoknadSuccess(soknad: EngangsstonadSoknadResponse): ApiActio
 }
 
 // tslint:disable-next-line:no-any
-export function sendSoknadFailed(reason: any): ApiActionTypes {
+export function sendSoknadFailed(error: any): ApiActionTypes {
     return {
         type: ApiActionKeys.SEND_SOKNAD_FAILED,
-        reason
+        error
     };
 }
 
