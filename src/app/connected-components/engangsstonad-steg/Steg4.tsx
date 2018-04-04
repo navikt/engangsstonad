@@ -62,7 +62,7 @@ export class Steg4 extends React.Component<Props> {
                     name="bekreftOpplysninger"
                 >
                 <BekreftCheckboksPanel
-                    name="bekreftOpplysninger"
+                    inputProps={{name: 'bekreftOpplysninger'}}
                     checked={bekreftetInformasjon}
                     onChange={() => dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))}
                     label={getMessage(intl, 'oppsummering.text.samtykke')}

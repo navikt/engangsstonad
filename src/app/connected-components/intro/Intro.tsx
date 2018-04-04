@@ -106,7 +106,7 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                     <Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
                     <ValidGroup validators={this.getGodkjentVilkarValidators()}>
                         <BekreftCheckboksPanel
-                            name="egenerklaring"
+                            inputProps={{name: 'egenerklaring'}}
                             label={getMessage(intl, 'intro.text.samtykke')}
                             onChange={this.bekreftetVilkarChange}
                             checked={godkjentVilkar}
