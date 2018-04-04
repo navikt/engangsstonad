@@ -17,10 +17,6 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
     const { intl } = props;
     const { fødselINorge, iNorgeNeste12Mnd, iNorgeSiste12Mnd, tidligerePerioder, senerePerioder } = props.utenlandsopphold;
 
-    const iNorgeNeste12MndText = iNorgeNeste12Mnd
-        ? getMessage(intl, 'medlemmskap.radiobutton.boNorge')
-        : getMessage(intl, 'medlemmskap.radiobutton.boUtlandet');
-
     const fødselINorgeMndText = fødselINorge
         ? getMessage(intl, 'medlemmskap.radiobutton.vareNorge')
         : getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet');
