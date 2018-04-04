@@ -15,7 +15,7 @@ interface Props {
 
 const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl } = props;
-    const { fødselINorge, iNorgeNeste12Mnd, iNorgeSiste12Mnd, tidligerePerioder } = props.utenlandsopphold;
+    const { fødselINorge, iNorgeNeste12Mnd, iNorgeSiste12Mnd, tidligerePerioder, senerePerioder } = props.utenlandsopphold;
 
     const iNorgeNeste12MndText = iNorgeNeste12Mnd
         ? getMessage(intl, 'medlemmskap.radiobutton.boNorge')
@@ -34,17 +34,26 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
             {iNorgeSiste12Mnd ? (
                 <DisplayTextWithLabel label={getMessage(intl, 'oppsummering.text.boddSisteTolv')} text="Norge" />
             ) : (
-                <div>
-                    <EtikettLiten className="textWithLabel__label">
-                        {getMessage(intl, 'oppsummering.text.boddSisteTolv')}
-                    </EtikettLiten>
-                    <CountrySummaryList utenlandsoppholdListe={tidligerePerioder} />
-                </div>
-            )}
-            <DisplayTextWithLabel
-                label={getMessage(intl, 'medlemmskap.text.neste12mnd')}
-                text={iNorgeNeste12MndText}
-            />
+                    <div>
+                        <EtikettLiten className="textWithLabel__label">
+                            {getMessage(intl, 'oppsummering.text.boddSisteTolv')}
+                        </EtikettLiten>
+                        <CountrySummaryList utenlandsoppholdListe={tidligerePerioder} />
+                    </div>
+                )}
+            {iNorgeNeste12Mnd ? (
+                <DisplayTextWithLabel
+                    label={getMessage(intl, 'medlemmskap.text.neste12mnd')}
+                    text={getMessage(intl, 'medlemmskap.radiobutton.boNorge')}
+                />
+            ) : (
+                    <div>
+                        <EtikettLiten className="textWithLabel__label">
+                            {getMessage(intl, 'medlemmskap.text.neste12mnd')}
+                        </EtikettLiten>
+                        <CountrySummaryList utenlandsoppholdListe={senerePerioder} />
+                    </div>
+                )}
             {fødselINorge &&
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.ogKommerPåFødselstidspunktet')}

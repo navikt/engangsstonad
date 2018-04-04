@@ -1,38 +1,65 @@
 import * as React from 'react';
-const { Normaltekst } = require('nav-frontend-typografi');
+import * as countries from 'i18n-iso-countries';
+import classnames from 'classnames';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+
 const Icon = require('nav-frontend-ikoner-assets').default;
+const { Normaltekst } = require('nav-frontend-typografi');
 
 import { ISODateToMaskedInput } from 'util/date/dateUtils';
+import getMessage from 'util/i18n/i18nUtils';
 import { Periode } from '../../types/domain/Utenlandsopphold';
 
 import './countryPicker.less';
 
-interface Props {
+interface OwnProps {
     utenlandsopphold: Periode;
-    onDeleteClick: (periode: Periode) => void;
-    onEditClick: (periode: Periode) => void;
+    onDeleteClick?: (periode: Periode) => void;
+    onEditClick?: (periode: Periode) => void;
 }
 
-const CountryListElement: React.StatelessComponent<Props> = (props) => {
+type Props = OwnProps & InjectedIntlProps;
+
+const CountryListSummaryElement: React.StatelessComponent<Props> = (props) => {
     const { fom, tom, land } = props.utenlandsopphold;
+    const { onDeleteClick, onEditClick } = props;
+    const onEditClickHandler = () => {
+        if (onEditClick !== undefined) {
+            onEditClick(props.utenlandsopphold);
+        }
+    };
 
     return (
-        <li id="helediv" className="countryElement" onClick={() => props.onEditClick(props.utenlandsopphold)}>
-            <span className={`flag-icon flag-icon-${land.toLowerCase()}`} />
-            <Normaltekst className="countryElement__date">
-                {ISODateToMaskedInput(fom)} - {ISODateToMaskedInput(tom)}
-            </Normaltekst>
-            <button
-                type="button"
-                className="js-toggle countryElement__deleteButton"
-                onClick={(e) => {
-                    e.stopPropagation();
-                    props.onDeleteClick(props.utenlandsopphold);
-                }}
-            >
-                <Icon kind="trashcan" size={20} />
-            </button>
+        <li className={classnames('countryListElement', { 'countryListElement__editable': onEditClick !== undefined })}>
+            <span
+                className={`countryListElement__flagIcon flag-icon flag-icon-${land.toLowerCase()}`}
+            />
+            <div className="countryListElement__textWrapper">
+                <button type="button" onClick={onEditClickHandler}>
+                    <Normaltekst className="countryListElement__country">
+                        {countries.getName(land, 'nb')}
+                    </Normaltekst>
+                    <Normaltekst className="countryListElement__date">
+                        {getMessage(props.intl, 'standard.text.fromTo', {
+                            from: ISODateToMaskedInput(fom),
+                            to: ISODateToMaskedInput(tom)
+                        })}
+                    </Normaltekst>
+                </button>
+            </div>
+            {onDeleteClick &&
+                <button
+                    type="button"
+                    className="js-toggle countryListElement__deleteButton"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onDeleteClick(props.utenlandsopphold);
+                    }}
+                >
+                    <Icon kind="trashcan" size={20} />
+                </button>
+            }
         </li>
     );
 };
-export default CountryListElement;
+export default injectIntl(CountryListSummaryElement);
