@@ -84,7 +84,7 @@ node {
         withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
             withCredentials([string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
                 sh ("git tag -a ${releaseVersion} -m ${releaseVersion}")
-                sh ("git push https://${token}:x-oauth-basic@github.com/${repo}/${app}.git --tags")
+                sh ("git push https://${token}:x-oauth-basic@github.com/${project}/${app}.git --tags")
             }
         }
         slackSend([
