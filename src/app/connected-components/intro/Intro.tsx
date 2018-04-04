@@ -6,9 +6,9 @@ const { ValidGroup, ValidForm } = require('../../lib') as any;
 const { Ingress } = require('nav-frontend-typografi');
 import { Hovedknapp } from 'nav-frontend-knapper';
 const Modal = require('nav-frontend-modal').default;
+const { BekreftCheckboksPanel } = require('nav-frontend-skjema');
 
 import RettigheterOgPlikter from 'components/modal-content/RettigheterOgPlikter';
-import BekreftCheckbox from 'components/bekreft-checkbox/BekreftCheckbox';
 
 const VeilederIllustration = require('assets/svg/veileder.svg').default;
 import { commonActionCreators as common } from '../../redux/actions';
@@ -105,13 +105,14 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
                     </Innholdstittel>
                     <Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
                     <ValidGroup validators={this.getGodkjentVilkarValidators()}>
-                        <BekreftCheckbox
+                        <BekreftCheckboksPanel
                             name="egenerklaring"
-                            text={this.confirmBoxLabelHeaderText()}
                             label={getMessage(intl, 'intro.text.samtykke')}
                             onChange={this.bekreftetVilkarChange}
                             checked={godkjentVilkar}
-                        />
+                        >
+                            <span>{this.confirmBoxLabelHeaderText()}</span>
+                        </BekreftCheckboksPanel>
                     </ValidGroup>
                     <Hovedknapp className="responsiveButton">
                         {getMessage(intl, 'intro.button.startSoknad')}
