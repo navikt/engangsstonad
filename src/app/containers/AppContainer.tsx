@@ -28,6 +28,7 @@ interface StateProps {
     error: any;
     søknadSendt: boolean;
     godkjentVilkar: boolean;
+    isLoadingPerson: boolean;
     language: string;
     søknadSendingInProgress: boolean;
 }
@@ -109,9 +110,9 @@ export class AppContainer extends React.Component<Props> {
     }
 
     render() {
-        const { person, søknadSendt, error } = this.props;
+        const { person, søknadSendt, error, isLoadingPerson } = this.props;
 
-        if (!person && !error) {
+        if (!person && !error && !isLoadingPerson) {
             return this.renderContent(this.getErrorRoutes({ personFinnes: false }));
         }
 
@@ -143,6 +144,7 @@ export class AppContainer extends React.Component<Props> {
 const mapStateToProps = (state: any) => ({
     error: state.apiReducer.error,
     person: state.apiReducer.person,
+    isLoadingPerson: state.apiReducer.isLoadingPerson,
     soknad: state.apiReducer.soknad,
     søknadSendt: state.apiReducer.søknadSendt,
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
