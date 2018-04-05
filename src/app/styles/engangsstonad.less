@@ -61,7 +61,6 @@
         .typo-ingress {
             margin-top: @marginLarge;
             margin-bottom: @marginMedium;
-    
         }
         .bekreftCheckbox {
             margin-top: @marginLarge;
@@ -93,7 +92,6 @@
 
           .skjemaelement__label {
                 margin-top: 12px;
-                font-weight: bold;
             }
         }
         .radioPanelGruppe {
@@ -110,6 +108,12 @@
             margin-right: auto;
             display: block;
         }
+    }
+}
+/** Settes utenfor .app på grunn av at den rendres i body */
+.datovelger__outer {
+    .skjemaelement__label {
+        font-weight: bold;
     }
 }
 

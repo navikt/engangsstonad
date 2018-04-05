@@ -7,7 +7,7 @@
 }
 
 .countryList {
-  padding: 0;
+    padding: 0;
 }
 
 .countryModal {
@@ -15,19 +15,17 @@
         margin-bottom: @paddingLarge;
         text-align: center;
     }
+    .skjemaelement__label {
+        font-weight: 600;
+    }
 
     &__buttonBar {
-      display: flex;
-      padding-left: 24px;
-      padding-right: 24px;
-
-      .knapp {
-        font-size: 1rem;
-      }
-
-      .knapp:not(:first-child) {
-        margin-left: 0.5rem;
-      }
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        .knapp:first-child {
+            margin-right: 1rem;
+        }
     }
 }
 
@@ -37,7 +35,7 @@
     padding-bottom: @paddingSmall;
 
     &__editable {
-        color: #0067C5;
+        color: #0067c5;
         p {
             text-decoration: underline;
         }
@@ -61,7 +59,7 @@
 
     &__date {
         white-space: nowrap;
-    }  
+    }
 
     &__deleteButton {
         display: block;
@@ -76,5 +74,15 @@
             outline: none;
             box-shadow: 0 0 0 3px orange;
         }
+    }
+}
+
+.countrySummaryElement {
+    display: flex;
+    padding-top: @paddingSmall;
+    padding-bottom: @paddingSmall;
+
+    &__flagIcon {
+        margin-right: 12px;
     }
 }
