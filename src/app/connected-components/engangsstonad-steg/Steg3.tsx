@@ -8,8 +8,9 @@ import { connect } from 'react-redux';
 import { DispatchProps } from '../../redux/types/index';
 import CountryPicker from '../../components/country-picker/CountryPicker';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import Barn, { FodtBarn } from '../../types/domain/Barn';
+import Barn from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
+import { fødselsdatoIsSet } from 'util/date/dateUtils';
 
 interface StateProps {
     barn: Barn;
@@ -57,7 +58,6 @@ export class Steg3 extends React.Component<Props> {
     render() {
         const { dispatch, intl, utenlandsopphold, barn, language } = this.props;
         const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligerePerioder, senerePerioder } = utenlandsopphold;
-        const fødselsdatoIsSet = (barn as FodtBarn).fødselsdatoer && (barn as FodtBarn).fødselsdatoer.length > 0;
 
         return (
             <div className="engangsstonad__step">
@@ -104,7 +104,7 @@ export class Steg3 extends React.Component<Props> {
                         deleteVisit={(periode: Periode) => dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))}
                     />
                 )}
-                {(senerePerioder.length > 0 || iNorgeNeste12Mnd === true) && !fødselsdatoIsSet && (
+                {(senerePerioder.length > 0 || iNorgeNeste12Mnd === true) && !fødselsdatoIsSet(barn) && (
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
                         name="fødselINorge"

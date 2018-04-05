@@ -71,7 +71,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
         const { barn, vedlegg, dispatch, intl } = this.props;
         const { antallBarn } = barn;
         const termindato = barn && (barn as UfodtBarn).termindato;
-
+        
         return (
             <div>
                 {antallBarn &&  (
@@ -85,7 +85,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                     />
                 )}
 
-                {termindato && ([
+                {termindato && termindato.length > 0 && ([
                     <Veilederinfo key="veileder">
                         {getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}
                     </Veilederinfo>,
@@ -112,7 +112,6 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         validators={this.getTerminbekreftelseDatoValidators()}
                     />
                 )}
-
                 <Modal
                     isOpen={this.state.isModalOpen}
                     closeButton={true}
