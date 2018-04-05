@@ -29,6 +29,7 @@ interface StateProps {
     person: Person;
     utenlandsopphold: Utenlandsopphold;
     barn: FodtBarn & UfodtBarn;
+    vedlegg: File[];
     annenForelder: AnnenForelder;
     soknadPostResponse: EngangsstonadSoknadResponse;
 }
@@ -40,6 +41,7 @@ export class Steg4 extends React.Component<Props> {
         if (!person) {
             return null;
         }
+
         return (
             <div>
                 <DocumentTitle title="NAV Engangsstønad - Oppsummering" />
@@ -48,7 +50,7 @@ export class Steg4 extends React.Component<Props> {
                     navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn)}
                     personnummer="XXXXXXXXXXX"
                 />
-                <OppsummeringBarn barn={this.props.barn} />
+                <OppsummeringBarn barn={this.props.barn} vedlegg={this.props.vedlegg} />
                 <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder}/>
                 <OppsummeringUtenlandsopphold utenlandsopphold={this.props.utenlandsopphold} />
 
@@ -76,6 +78,7 @@ const mapStateToProps = (state: any) => ({
     bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
     person: state.apiReducer.person,
     barn: state.soknadReducer.barn,
+    vedlegg: state.soknadReducer.vedlegg,
     annenForelder: state.soknadReducer.annenForelder,
     utenlandsopphold: state.soknadReducer.utenlandsopphold,
     soknadPostResponse: state.apiReducer.soknad
