@@ -1,12 +1,11 @@
 @import './../../styles/variables.less';
 
 .radioPanelGruppe--responsive {
-  padding: 0.2rem;
   display: flex;
   flex-wrap: wrap;
 
   .radioPanel {
-    margin: 0.2rem;
+    margin: 0.25rem 1rem 0.25rem 0;
 
     &__label {
       flex-grow: 1;
@@ -16,6 +15,10 @@
 
   @media screen and (max-width: 576px) {
     display: block;
+
+    .radioPanel {
+      margin-bottom: 0.5rem;
+    }
   }
 
   @media screen and (min-width: 577px) and (max-width: @tablet-breakpoint) {

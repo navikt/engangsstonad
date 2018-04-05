@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { injectIntl } from 'react-intl';
 const { Select } = require('nav-frontend-skjema');
-import { Element } from 'nav-frontend-typografi';
 
 import RadioPanelGruppeResponsive from './../../components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { soknadActionCreators as soknad } from '../../redux/actions';
@@ -109,10 +108,8 @@ export class Steg1 extends React.Component<Props, State> {
                     />
                 )}
                 {barn.antallBarn !== undefined && barn.antallBarn > 2 &&
-                    <div>
-                        <Element>{getMessage(intl, 'relasjonBarn.text.antallBarn')}</Element>
                         <Select
-                            label=""
+                            label={getMessage(intl, 'relasjonBarn.text.antallBarn')}
                             className="noOfChildrenSelect"
                             onChange={(e: any) => dispatch(soknad.setAntallBarn(e.target.value))}
                             value={barn.antallBarn}
@@ -125,7 +122,6 @@ export class Steg1 extends React.Component<Props, State> {
                             <option value={8}>8</option>
                             <option value={9}>9</option>
                         </Select>
-                    </div>
                 }
                 {this.renderPartial()}
             </div>

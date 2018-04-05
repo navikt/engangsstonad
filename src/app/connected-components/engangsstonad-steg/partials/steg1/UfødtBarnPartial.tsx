@@ -14,8 +14,6 @@ import AttachmentButton from 'components/attachment/AttachmentButton';
 import AttachmentList from 'components/attachment/AttachmentList';
 const Modal = require('nav-frontend-modal').default;
 import Veilederinfo from './../../../../components/veileder-info/Veilederinfo';
-import LinkWithIcon from 'components/link-with-icon/LinkWithIcon';
-const InfoSirkelIcon = require('assets/svg/info-sirkel-fylt.svg').default;
 
 interface StateProps {
     barn: Barn;
@@ -90,18 +88,6 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 {termindato && ([
                     <Veilederinfo key="veileder">
                         {getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}
-                        <LinkWithIcon
-                            linkText={getMessage(intl, 'terminbekreftelsen.sectionheading')}
-                            href=""
-                            iconRef={InfoSirkelIcon}
-                            onClick={
-                                (e: React.SyntheticEvent<HTMLAnchorElement>) => {
-                                    e.stopPropagation();
-                                    e.preventDefault();
-                                    this.setState({isModalOpen: true});
-                                }
-                            }
-                        />
                     </Veilederinfo>,
                     <AttachmentButton
                         key="vedlegg"
