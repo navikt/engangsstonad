@@ -21,7 +21,7 @@ interface OwnProps {
 type Props = OwnProps & InjectedIntlProps;
 
 const CountryListSummaryElement: React.StatelessComponent<Props> = (props) => {
-    const { fom, tom, land } = props.utenlandsopphold;
+    const { varighet, land } = props.utenlandsopphold;
     const { onDeleteClick, onEditClick } = props;
     const onEditClickHandler = () => {
         if (onEditClick !== undefined) {
@@ -41,8 +41,8 @@ const CountryListSummaryElement: React.StatelessComponent<Props> = (props) => {
                     </Normaltekst>
                     <Normaltekst className="countryListElement__date">
                         {getMessage(props.intl, 'standard.text.fromTo', {
-                            from: ISODateToMaskedInput(fom),
-                            to: ISODateToMaskedInput(tom)
+                            from: ISODateToMaskedInput(varighet.fom),
+                            to: ISODateToMaskedInput(varighet.tom)
                         })}
                     </Normaltekst>
                 </button>

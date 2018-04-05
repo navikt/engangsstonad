@@ -36,8 +36,10 @@ const getValidPeriode = (formData: PeriodeForm): Periode | undefined => {
     if (land && fom && tom) {
         return {
             land,
-            fom,
-            tom
+            varighet: {
+                fom,
+                tom
+            }
         };
     }
     return undefined;

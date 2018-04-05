@@ -114,7 +114,6 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         />
                     </div>
                 )}
-
                 <Modal
                     isOpen={this.state.isModalOpen}
                     closeButton={true}

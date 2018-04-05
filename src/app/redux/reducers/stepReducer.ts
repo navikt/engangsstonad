@@ -1,6 +1,6 @@
 import { StepActionKeys, StepActionTypes } from './../actions/step/stepActionDefinitions';
 
-const getDefaultState = () => ({
+export const getDefaultState = () => ({
     activeStep: 1
 });
 

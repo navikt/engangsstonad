@@ -1,7 +1,11 @@
 export type Periode = {
-    fom: string;
-    tom: string;
     land: string;
+    varighet: Varighet;
+};
+
+export type Varighet = {
+    tom: string;
+    fom: string;
 };
 
 type Utenlandsopphold = {
