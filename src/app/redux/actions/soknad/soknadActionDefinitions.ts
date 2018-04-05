@@ -28,7 +28,10 @@ export enum SoknadActionKeys {
     'SET_ANNEN_FORELDER_FNR' = 'setAnnenForelderFnr',
     'SET_ANNEN_FORELDER_UTENLANDSK_FNR' = 'setAnnenForelderUtenlandskFnr',
     'SET_ANNEN_FORELDER_BOSTEDSLAND' = 'setAnnenForelderBostedsland',
-    'SET_ANNEN_FORELDER_KAN_IKKE_OPPGIS' = 'setAnnenForelderKanIkkeOppgis'
+    'SET_ANNEN_FORELDER_KAN_IKKE_OPPGIS' = 'setAnnenForelderKanIkkeOppgis',
+
+    // Annet
+    'RESET_SØKNAD' = 'resetSøknad'
 }
 
 // Barn
@@ -154,6 +157,10 @@ interface SetAnnenForelderKanIkkeOppgis {
     kanIkkeOppgis: boolean;
 }
 
+interface ResetSøknad {
+    type: SoknadActionKeys.RESET_SØKNAD;
+}
+
 export type SoknadActionTypes =
     | AddFødselsdato
     | UpdateFødselsdatoer
@@ -177,4 +184,5 @@ export type SoknadActionTypes =
     | SetAnnenForelderFnr
     | SetAnnenForelderUtenlandskFnr
     | SetAnnenForelderBostedsland
-    | SetAnnenForelderKanIkkeOppgis;
+    | SetAnnenForelderKanIkkeOppgis
+    | ResetSøknad;

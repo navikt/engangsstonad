@@ -22,6 +22,7 @@ import { apiActionCreators as api, stepActionCreators as stepActions } from 'act
 import { DispatchProps } from '../redux/types';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import BackButton from 'components/back-button/BackButton';
+import { shouldDisplayNextButtonOnStep1, shouldDisplayNextButtonOnStep2, shouldDisplayNextButtonOnStep3 } from 'util/stepUtil';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -47,7 +48,7 @@ export class SøknadContainer extends React.Component<Props> {
         const { error, søknadSendt } = props;
         if (søknadSendt === true) {
             if (!error) {
-                history.push('/engangsstonad/completed');
+                history.push('/engangsstonad');
             } else if (error.status >= 400 && error.status !== 401) {
                 history.push('/engangsstonad/innsendingsfeil');
             }
@@ -77,20 +78,13 @@ export class SøknadContainer extends React.Component<Props> {
 
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, annenForelder, utenlandsopphold, barn } = this.props;
-        const fødselsdatoIsSet = (barn.fødselsdatoer.length > 0 && !barn.fødselsdatoer.includes(undefined as any));
-        if (activeStep === 1 && barn) {
-            return barn.terminbekreftelseDato !== undefined || fødselsdatoIsSet;
-        } else if (activeStep === 2 && annenForelder) {
-            return annenForelder.kanIkkeOppgis === true 
-                    || annenForelder.fnr !== undefined 
-                    || (annenForelder.utenlandskFnr === true && annenForelder.bostedsland !== undefined && annenForelder.bostedsland.length > 0 );
-        } else if (activeStep === 3 && utenlandsopphold) {
-            if (utenlandsopphold.iNorgeNeste12Mnd === false) {
-                return utenlandsopphold.senerePerioder.length > 0 && (fødselsdatoIsSet || utenlandsopphold.fødselINorge !== undefined);
-            }
-            return utenlandsopphold.fødselINorge !== undefined || (fødselsdatoIsSet && utenlandsopphold.iNorgeNeste12Mnd !== undefined);
+        switch (activeStep) {
+            case 1: return shouldDisplayNextButtonOnStep1(barn);
+            case 2: return shouldDisplayNextButtonOnStep2(annenForelder);
+            case 3: return shouldDisplayNextButtonOnStep3(barn, utenlandsopphold);
+            case 4:
+            default: return true;
         }
-        return activeStep === 4;
     }
 
     render() {
@@ -104,7 +98,6 @@ export class SøknadContainer extends React.Component<Props> {
                 <Prompt
                     message="Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?"
                     key="prompt"
-                    when={activeStep !== 4}
                 />
             ),
             (<Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} key="tittel" />),

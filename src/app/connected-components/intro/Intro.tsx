@@ -9,9 +9,13 @@ const Modal = require('nav-frontend-modal').default;
 const { BekreftCheckboksPanel } = require('nav-frontend-skjema');
 
 import RettigheterOgPlikter from 'components/modal-content/RettigheterOgPlikter';
-
 const VeilederIllustration = require('assets/svg/veileder.svg').default;
-import { commonActionCreators as common } from '../../redux/actions';
+import {
+    commonActionCreators as common,
+    soknadActionCreators as soknad,
+    stepActionCreators as step
+} from '../../redux/actions';
+import { getDefaultState } from 'reducers/stepReducer';
 import LanguageToggle from '../../intl/LanguageToggle';
 import getMessage from '../../util/i18n/i18nUtils';
 import { DispatchProps } from '../../redux/types/index';
@@ -32,7 +36,7 @@ interface StateProps {
 }
 
 type Props = StateProps & DispatchProps & InjectedIntlProps & ExternalProps;
-export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> {
+export class Intro extends React.Component<Props, OwnProps> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -41,6 +45,12 @@ export class EngangsstonadConfirmation extends React.Component<Props, OwnProps> 
 
         this.bekreftetVilkarChange = this.bekreftetVilkarChange.bind(this);
         this.startSoknad = this.startSoknad.bind(this);
+
+        const { dispatch } = this.props;
+        dispatch(step.setActiveStep(getDefaultState().activeStep));
+        dispatch(soknad.resetSøknad());
+        dispatch(common.setBekreftetInformasjon(false));
+        dispatch(common.setGodkjentVilkar(false));
     }
 
     openRettigheterOgPlikterModal(e: React.SyntheticEvent<HTMLElement>) {
@@ -136,4 +146,4 @@ const mapStateToProps = (state: any) => ({
     godkjentVilkar: state.commonReducer.godkjentVilkar,
     language: state.commonReducer.language
 });
-export default connect<StateProps>(mapStateToProps)(injectIntl(EngangsstonadConfirmation));
+export default connect<StateProps>(mapStateToProps)(injectIntl(Intro));

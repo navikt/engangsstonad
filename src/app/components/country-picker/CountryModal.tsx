@@ -36,8 +36,10 @@ const getValidPeriode = (formData: PeriodeForm): Periode | undefined => {
     if (land && fom && tom) {
         return {
             land,
-            fom,
-            tom
+            varighet: {
+                fom,
+                tom
+            }
         };
     }
     return undefined;
@@ -55,7 +57,7 @@ class CountryModal extends React.Component<Props, State> {
         this.oppdaterFormData = this.oppdaterFormData.bind(this);
         this.state = {
             erEndring: utenlandsopphold !== undefined,
-            formData: { ...utenlandsopphold }
+            formData: utenlandsopphold ? { land: utenlandsopphold.land, fom: utenlandsopphold.varighet.fom, tom: utenlandsopphold.varighet.tom } : {}
         };
     }
 
@@ -78,9 +80,7 @@ class CountryModal extends React.Component<Props, State> {
         const { intl, language } = this.props;
         const { formData, erEndring } = this.state;
 
-        const lagreKnappTekstId = erEndring
-            ? 'medlemmskap.modal.lagreEndringer'
-            : 'medlemmskap.knapp.leggTilLand';
+        const lagreKnappTekstId = erEndring ? 'medlemmskap.modal.lagreEndringer' : 'medlemmskap.knapp.leggTilLand';
 
         const idag = new Date();
         const fomMinDato = moment(idag)
@@ -114,43 +114,39 @@ class CountryModal extends React.Component<Props, State> {
                         language={language}
                         defaultValue={formData.land}
                     />
-                            <DateInput
-                                id="boddFraDato"
-                                label={getMessage(intl, 'standard.text.fra')}
-                                dato={getDateFromString(formData.fom)}
-                                onChange={dato =>
-                                    this.oppdaterFormData({
-                                        fom: dato.toISOString()
-                                    })
-                                }
-                                avgrensninger={{
-                                    minDato: fomMinDato,
-                                    maksDato: idag
-                                }}
-                                kalenderplassering="fullskjerm"
-                            />
-                            <DateInput
-                                id="boddTilDato"
-                                label={getMessage(intl, 'standard.text.til')}
-                                dato={getDateFromString(formData.tom)}
-                                onChange={dato =>
-                                    this.oppdaterFormData({
-                                        tom: dato.toISOString()
-                                    })
-                                }
-                                avgrensninger={{
-                                    minDato: idag,
-                                    maksDato: tomMaksDato
-                                }}
-                                kalenderplassering="fullskjerm"
-                            />
+                    <DateInput
+                        id="boddFraDato"
+                        label={getMessage(intl, 'standard.text.fra')}
+                        dato={getDateFromString(formData.fom)}
+                        onChange={dato =>
+                            this.oppdaterFormData({
+                                fom: dato.toISOString()
+                            })
+                        }
+                        avgrensninger={{
+                            minDato: fomMinDato,
+                            maksDato: idag
+                        }}
+                        kalenderplassering="fullskjerm"
+                    />
+                    <DateInput
+                        id="boddTilDato"
+                        label={getMessage(intl, 'standard.text.til')}
+                        dato={getDateFromString(formData.tom)}
+                        onChange={dato =>
+                            this.oppdaterFormData({
+                                tom: dato.toISOString()
+                            })
+                        }
+                        avgrensninger={{
+                            minDato: idag,
+                            maksDato: tomMaksDato
+                        }}
+                        kalenderplassering="fullskjerm"
+                    />
 
                     <div className="countryModal__buttonBar">
-                        <Knapp
-                            type="standard"
-                            onClick={() => this.props.closeModal()}
-                            htmlType="button"
-                        >
+                        <Knapp type="standard" onClick={() => this.props.closeModal()} htmlType="button">
                             <FormattedMessage id="medlemmskap.modal.avbryt" />
                         </Knapp>
                         <Hovedknapp onClick={() => formData && this.onSubmit()}>
