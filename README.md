@@ -1,7 +1,12 @@
-### Frontend-app for P2 Selvbetjening
+### Engangsstønad
 
-1. Run `yarn install`
-2. Run `yarn start` for development environment with watching, runs on webpack-dev-server
-3. ... Or run `yarn build` to build the app residing in `src/app` to the `/dist`-folder, 
-using the config in `/src/config/webpack.production.js`
+Repository for frontend-app for applying for [Engangsstønad](https://www.nav.no/no/Person/Familie/Venter+du+barn/engangsst%C3%B8nad-ved-f%C3%B8dsel-og-adopsjon).
 
+To run the app:
+1. Run `npm install`.
+2. Run `npm start`.
+
+To run cypress tests:
+1. Run `npm install`.
+2. Wait for `Build success` in your terminal.
+3. Click `Run all tests` in the Cypress popup.
