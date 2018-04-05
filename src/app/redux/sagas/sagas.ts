@@ -10,7 +10,7 @@ function* getPerson(action: any) {
         const person: GetPersonActionType = response.data;
         yield put({ type: ApiActionKeys.GET_PERSON_SUCCESS, person });
     } catch (error) {
-        yield put({ type: ApiActionKeys.GET_PERSON_FAILED, reason: error.response });
+        yield put({ type: ApiActionKeys.GET_PERSON_FAILED, error });
     }
 }
 
@@ -20,8 +20,8 @@ function* sendSoknad(action: any) {
         const response = yield call(Api.sendSoknad, action.soknad, action.vedlegg);
         const soknad: EngangsstonadSoknadResponse = response.data;
         yield put({ type: ApiActionKeys.SEND_SOKNAD_SUCCESS, soknad });
-    } catch (reason) {
-        yield put({ type: ApiActionKeys.SEND_SOKNAD_FAILED, reason });
+    } catch (error) {
+        yield put({ type: ApiActionKeys.SEND_SOKNAD_FAILED, error });
     }
 }
 

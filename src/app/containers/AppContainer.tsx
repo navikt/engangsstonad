@@ -8,6 +8,8 @@ import SøknadSendt from './../connected-components/soknad-sendt/SøknadSendt';
 import IkkeMyndig from './../connected-components/feilsider/IkkeMyndig';
 import ErMann from '../connected-components/feilsider/ErMann';
 import PersonFinnesIkke from '../connected-components/feilsider/PersonFinnesIkke';
+import InnsendingFeilet from '../connected-components/feilsider/InnsendingFeilet';
+
 import SøknadContainer from './SøknadContainer';
 import { erMann, erMyndig, harPersonData } from 'util/validation/validationUtils';
 
@@ -23,13 +25,22 @@ import '../styles/engangsstonad.less';
 interface StateProps {
     soknad: EngangsstonadSoknadResponse;
     person: Person;
-    reason: any;
-    isLoadingPerson: boolean;
+    error: any;
+    søknadSendt: boolean;
     godkjentVilkar: boolean;
+    isLoadingPerson: boolean;
     language: string;
+    søknadSendingInProgress: boolean;
 }
 
 type Props = StateProps & ExternalProps & DispatchProps & RouteComponentProps<{}>;
+
+type Error = {
+    personFinnes: boolean;
+    personErMann?: boolean;
+    personErMyndig?: boolean;
+    innsendingFeilet?: boolean;
+};
 
 export class AppContainer extends React.Component<Props> {
     constructor(props: Props) {
@@ -37,16 +48,25 @@ export class AppContainer extends React.Component<Props> {
     }
 
     componentWillMount() {
-        const { dispatch, person } = this.props;
+        const { dispatch, person, error } = this.props;
+
+        if (error && error.status === 401) {
+            return this.redirectToLogin();
+        }
         if (!person) {
-                dispatch(api.getPerson());
-            }
+            dispatch(api.getPerson());
         }
 
+    }
+
     componentWillReceiveProps(props: any) {
-        if (props.reason && props.reason.status === 401) {
-            window.location.href = (window as any).LOGIN_URL + '?redirect=' + window.location.href;
+        if (props.error && props.error.status === 401) {
+            return this.redirectToLogin();
         }
+    }
+
+    redirectToLogin() {
+        window.location.href = ((window as any).LOGIN_URL + '?redirect=' + window.location.href);
     }
 
     renderContent(children: React.ReactNode) {
@@ -57,12 +77,16 @@ export class AppContainer extends React.Component<Props> {
         );
     }
 
-    getErrorRoutes(personErMann: boolean, personFinnes: boolean) {
-        let component: any = IkkeMyndig;
-        if (personErMann) {
+    getErrorRoutes(error: Error) {
+        let component: any;
+        if (error.personErMann === true) {
             component = ErMann;
-        } else if (!personFinnes) {
+        } else if (error.personFinnes === false) {
             component = PersonFinnesIkke;
+        } else if (error.personErMyndig === false) {
+            component = IkkeMyndig;
+        } else if (error.innsendingFeilet === true) {
+            component = InnsendingFeilet;
         }
 
         return (
@@ -74,11 +98,11 @@ export class AppContainer extends React.Component<Props> {
     }
 
     getSøknadRoutes() {
-        const { godkjentVilkar, person, soknad } = this.props;
+        const { godkjentVilkar, person, søknadSendt } = this.props;
         return (
             <Switch>
                 <Route path="/engangsstonad" component={Intro} exact={true} />
-                {person && soknad && <Route path="/engangsstonad/completed" component={SøknadSendt} />}
+                {person && søknadSendt && <Route path="/engangsstonad/completed" component={SøknadSendt} />}
                 {godkjentVilkar === true && <Route path="/engangsstonad/soknad" component={SøknadContainer} />}
                 <Redirect to="/engangsstonad" />
             </Switch>
@@ -86,33 +110,44 @@ export class AppContainer extends React.Component<Props> {
     }
 
     render() {
-        const { person, isLoadingPerson } = this.props;
+        const { person, søknadSendt, error, isLoadingPerson } = this.props;
 
-        if (isLoadingPerson) {
-            return this.renderContent(<Spinner type="XXL"/>);
+        if (!person && !error && !isLoadingPerson) {
+            return this.renderContent(this.getErrorRoutes({ personFinnes: false }));
         }
 
         if (person) {
             const personFinnes = harPersonData(person);
             const personErMyndig = erMyndig(person);
             const personErMann = erMann(person);
+            const innsendingFeilet = søknadSendt && error && error.status !== 401 && error.status >= 400;
+            const applicationStateIsValid = personFinnes && personErMyndig && !personErMann && !innsendingFeilet;
 
-            const personStateIsValid = personFinnes && personErMyndig && !personErMann;
-
-            if (personStateIsValid) {
+            if (applicationStateIsValid) {
                 return this.renderContent(this.getSøknadRoutes());
             }
-            return this.renderContent(this.getErrorRoutes(personErMann, personFinnes));
+
+            return this.renderContent(
+                this.getErrorRoutes({
+                    personErMann,
+                    personFinnes,
+                    personErMyndig,
+                    innsendingFeilet
+                })
+            );
         }
-        return this.renderContent(this.getErrorRoutes(false, false));
+
+        return this.renderContent(<Spinner type="XXL"/>);
     }
 }
 
 const mapStateToProps = (state: any) => ({
-    reason: state.apiReducer.reason,
+    error: state.apiReducer.error,
     person: state.apiReducer.person,
-    soknad: state.apiReducer.soknad,
     isLoadingPerson: state.apiReducer.isLoadingPerson,
+    soknad: state.apiReducer.soknad,
+    søknadSendt: state.apiReducer.søknadSendt,
+    søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
     godkjentVilkar: state.commonReducer.godkjentVilkar,
     language: state.commonReducer.language
 });

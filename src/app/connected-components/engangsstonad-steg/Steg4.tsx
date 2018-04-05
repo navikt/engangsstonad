@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
-import BekreftCheckbox from 'components/bekreft-checkbox/BekreftCheckbox';
+const { BekreftCheckboksPanel } = require('nav-frontend-skjema');
 import Veilederinfo from 'components/veileder-info/Veilederinfo';
 import PersonaliaLabel from 'components/personalia-label/PersonaliaLabel';
 
@@ -61,8 +61,8 @@ export class Steg4 extends React.Component<Props> {
                     ]}
                     name="bekreftOpplysninger"
                 >
-                <BekreftCheckbox
-                    name="bekreftOpplysninger"
+                <BekreftCheckboksPanel
+                    inputProps={{name: 'bekreftOpplysninger'}}
                     checked={bekreftetInformasjon}
                     onChange={() => dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))}
                     label={getMessage(intl, 'oppsummering.text.samtykke')}

@@ -25,7 +25,7 @@ interface GetPersonSuccess {
 interface GetPersonFailed {
     type: ApiActionKeys.GET_PERSON_FAILED;
     // tslint:disable-next-line:no-any
-    reason: any;
+    error: any;
 }
 
 interface SendSoknad {
@@ -41,7 +41,7 @@ interface SendSoknadSuccess {
 interface SendSoknadFailed {
     type: ApiActionKeys.SEND_SOKNAD_FAILED;
     // tslint:disable-next-line:no-any
-    reason: any;
+    error: any;
 }
 
 export type GetPersonActionType = GetPersonSuccess | GetPersonFailed;

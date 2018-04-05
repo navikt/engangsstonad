@@ -1,7 +1,9 @@
 import { ApiActionKeys, ApiActionTypes } from '../actions/api/apiActionDefinitions';
 
 const getDefaultState = () => ({
-    isLoadingPerson: false
+    isLoadingPerson: false,
+    søknadSendt: false,
+    søknadSendingInProgress: false
 });
 
 const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
@@ -11,13 +13,13 @@ const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
         case ApiActionKeys.GET_PERSON_SUCCESS:
             return { ...state, person: action.person, isLoadingPerson: false };
         case ApiActionKeys.GET_PERSON_FAILED:
-            return { ...state, reason: action.reason, isLoadingPerson: false };
+            return { ...state, error: action.error.response, isLoadingPerson: false };
         case ApiActionKeys.SEND_SOKNAD:
-            return { ...state, soknad: action.soknad };
+            return { ...state, soknad: action.soknad, søknadSendingInProgress: true };
         case ApiActionKeys.SEND_SOKNAD_SUCCESS:
-            return { ...state, soknad: action.soknad };
+            return { ...state, soknad: action.soknad, søknadSendt: true, søknadSendingInProgress: false };
         case ApiActionKeys.SEND_SOKNAD_FAILED:
-            return { ...state, reason: action.reason };
+            return { ...state, error: action.error.response, søknadSendt: true, søknadSendingInProgress: false };
     }
     return state;
 };
