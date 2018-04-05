@@ -114,11 +114,12 @@ export class Steg2 extends React.Component<Props> {
                 {annenForelder.navn !== undefined && annenForelder.utenlandskFnr === true && (
                     <div className="section">
                         <CountrySelect
-                            label={<b>{getMessage(intl, 'annenForelder.label.bostedsland')}</b>}
-                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => dispatch(setAnnenForelderBostedsland(e.target.value))}
-                            language={language}
-                            validators={this.getBostedslandValidators()}
                             name="bostedsland"
+                            defaultValue={annenForelder.bostedsland}
+                            label={<b>{getMessage(intl, 'annenForelder.label.bostedsland')}</b>}
+                            language={language}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => dispatch(setAnnenForelderBostedsland(e.target.value))}
+                            validators={this.getBostedslandValidators()}
                         />
                     </div>
                 )}

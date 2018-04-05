@@ -146,7 +146,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             return { ...state, annenForelder: { ...state.annenForelder, fnr } };
         case SoknadActionKeys.SET_ANNEN_FORELDER_UTENLANDSK_FNR:
             const { utenlandskFnr } = action;
-            return { ...state, annenForelder: { ...state.annenForelder, utenlandskFnr } };
+            return { ...state, annenForelder: { ...state.annenForelder, utenlandskFnr, bostedsland: undefined } };
         case SoknadActionKeys.SET_ANNEN_FORELDER_BOSTEDSLAND:
             const { bostedsland } = action;
             return { ...state, annenForelder: { ...state.annenForelder, bostedsland } };
