@@ -45,9 +45,9 @@ class CountryModal extends React.Component<Props, State> {
     }
 
     onSubmit() {
-        const { fom, tom, land } = (this.state.utenlandsopphold as Periode);
-        if (land !== undefined && fom !== undefined && tom !== undefined) {
-            const visit: Periode = { land, fom, tom };
+        const { varighet, land } = (this.state.utenlandsopphold as Periode);
+        if (land !== undefined && varighet.fom !== undefined && varighet.tom !== undefined) {
+            const visit: Periode = { land, varighet };
             this.props.onSubmit(visit);
         }
     }
@@ -56,8 +56,8 @@ class CountryModal extends React.Component<Props, State> {
         const { intl, language } = this.props;
         const { utenlandsopphold } = this.state;
         const landValue = utenlandsopphold ? utenlandsopphold.land : '';
-        const fomValue = utenlandsopphold ? utenlandsopphold.fom : '';
-        const tomValue = utenlandsopphold ? utenlandsopphold.tom : '';
+        const fomValue = utenlandsopphold ? utenlandsopphold.varighet.fom : '';
+        const tomValue = utenlandsopphold ? utenlandsopphold.varighet.tom : '';
 
         return (
             <Modal
@@ -78,8 +78,10 @@ class CountryModal extends React.Component<Props, State> {
                                 this.setState({
                                     utenlandsopphold: {
                                         land: e.target.value,
-                                        fom: fomValue,
-                                        tom: tomValue
+                                        varighet: {
+                                            fom: fomValue,
+                                            tom: tomValue
+                                        }
                                     }
                                 })
                         }
@@ -95,8 +97,10 @@ class CountryModal extends React.Component<Props, State> {
                             this.setState({
                                 utenlandsopphold: {
                                     land: landValue,
-                                    tom: tomValue,
-                                    fom: date
+                                    varighet: {
+                                        fom: date,
+                                        tom: tomValue
+                                    }
                                 }
                             });
                         }}
@@ -110,8 +114,10 @@ class CountryModal extends React.Component<Props, State> {
                             this.setState({
                                 utenlandsopphold: {
                                     land: landValue,
-                                    tom: date,
-                                    fom: fomValue
+                                    varighet: {
+                                        fom: fomValue,
+                                        tom: date
+                                    }
                                 }
                             });
                         }}
