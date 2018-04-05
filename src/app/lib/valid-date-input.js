@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ValidBase from './';
-import DateInput from '../components/date-input/DateInput';
+import DateInput from '../components/dateInput/DateInput';
 
 class ValidDateInput extends Component {
   render() {
