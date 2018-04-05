@@ -31,9 +31,6 @@ const CountryListSummaryElement: React.StatelessComponent<Props> = (props) => {
 
     return (
         <li className={classnames('countryListElement', { 'countryListElement__editable': onEditClick !== undefined })}>
-            <span
-                className={`countryListElement__flagIcon flag-icon flag-icon-${land.toLowerCase()}`}
-            />
             <div className="countryListElement__textWrapper">
                 <button type="button" onClick={onEditClickHandler}>
                     <Normaltekst className="countryListElement__country">
