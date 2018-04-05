@@ -4,9 +4,7 @@ import { RadioPanelGruppeProps } from 'nav-frontend-skjema';
 import './radioPanelGruppeResponsive.less';
 import 'nav-frontend-skjema-style';
 
-export default class RadioPanelGruppeResponsive extends React.Component<
-    RadioPanelGruppeProps
-> {
+export default class RadioPanelGruppeResponsive extends React.Component<RadioPanelGruppeProps> {
     render() {
         const { feil, legend, checked, name, radios, onChange } = this.props;
         return (
