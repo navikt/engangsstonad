@@ -166,6 +166,12 @@ export function setAnnenForelderKanIkkeOppgis(kanIkkeOppgis: boolean) {
     };
 }
 
+export function resetSøknad() {
+    return {
+        type: SoknadActionKeys.RESET_SØKNAD
+    };
+}
+
 export default {
     addTidligereUtenlandsoppholdPeriode,
     editTidligereUtenlandsoppholdPeriode,
@@ -184,5 +190,6 @@ export default {
     setJobbetINorgeSiste12Mnd,
     setFødselINorge,
     setINorgeSiste12Mnd,
-    setINorgeNeste12Mnd
+    setINorgeNeste12Mnd,
+    resetSøknad
 };

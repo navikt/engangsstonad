@@ -13,7 +13,7 @@ import InnsendingFeilet from '../connected-components/feilsider/InnsendingFeilet
 import SøknadContainer from './SøknadContainer';
 import { erMann, erMyndig, harPersonData } from 'util/validation/validationUtils';
 
-import { apiActionCreators as api } from '../redux/actions';
+import { apiActionCreators as api, soknadActionCreators as soknad } from '../redux/actions';
 import { ExternalProps } from '../types';
 
 import { DispatchProps } from '../redux/types';
@@ -56,12 +56,15 @@ export class AppContainer extends React.Component<Props> {
         if (!person) {
             dispatch(api.getPerson());
         }
-
     }
 
     componentWillReceiveProps(props: any) {
+        const { dispatch, error, søknadSendt } = this.props;
         if (props.error && props.error.status === 401) {
             return this.redirectToLogin();
+        }
+        if (søknadSendt && !error) {
+            dispatch(soknad.resetSøknad());
         }
     }
 
@@ -77,6 +80,15 @@ export class AppContainer extends React.Component<Props> {
         );
     }
 
+    renderRoutes(routes: JSX.Element | JSX.Element[]) {
+        return (
+            <Switch>
+                {routes}
+                <Redirect to="/engangsstonad" />
+            </Switch>
+        );
+    }
+
     getErrorRoutes(error: Error) {
         let component: any;
         if (error.personErMann === true) {
@@ -88,25 +100,21 @@ export class AppContainer extends React.Component<Props> {
         } else if (error.innsendingFeilet === true) {
             component = InnsendingFeilet;
         }
-
-        return (
-            <Switch>
-                <Route path="/engangsstonad" component={component} />,
-                <Redirect to="/engangsstonad" />
-            </Switch>
-        );
+        return this.renderRoutes(<Route path="/engangsstonad" component={component} key="error" />);
     }
 
     getSøknadRoutes() {
-        const { godkjentVilkar, person, søknadSendt } = this.props;
-        return (
-            <Switch>
-                <Route path="/engangsstonad" component={Intro} exact={true} />
-                {person && søknadSendt && <Route path="/engangsstonad/completed" component={SøknadSendt} />}
-                {godkjentVilkar === true && <Route path="/engangsstonad/soknad" component={SøknadContainer} />}
-                <Redirect to="/engangsstonad" />
-            </Switch>
-        );
+        const { godkjentVilkar, søknadSendt } = this.props;
+        const routes = [];
+        if (!søknadSendt) {
+            routes.push(<Route path="/engangsstonad" component={Intro} exact={true} key="intro" />);
+            if (godkjentVilkar) {
+                routes.push(<Route path="/engangsstonad/soknad" component={SøknadContainer} key="søknad" />);
+            }
+        } else {
+            routes.push(<Route path="/engangsstonad" component={SøknadSendt} exact={true} key="completed" />);
+        }
+        return this.renderRoutes(routes);
     }
 
     render() {

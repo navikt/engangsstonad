@@ -48,7 +48,7 @@ export class SøknadContainer extends React.Component<Props> {
         const { error, søknadSendt } = props;
         if (søknadSendt === true) {
             if (!error) {
-                history.push('/engangsstonad/completed');
+                history.push('/engangsstonad');
             } else if (error.status >= 400 && error.status !== 401) {
                 history.push('/engangsstonad/innsendingsfeil');
             }
@@ -98,7 +98,6 @@ export class SøknadContainer extends React.Component<Props> {
                 <Prompt
                     message="Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?"
                     key="prompt"
-                    when={activeStep !== 4}
                 />
             ),
             (<Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} key="tittel" />),

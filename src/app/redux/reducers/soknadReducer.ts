@@ -153,6 +153,9 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
         case SoknadActionKeys.SET_ANNEN_FORELDER_KAN_IKKE_OPPGIS:
             const { kanIkkeOppgis } = action;
             return { ...state, annenForelder: { kanIkkeOppgis } };
+
+        case SoknadActionKeys.RESET_SØKNAD:
+            return getDefaultState();
     }
     return state;
 };
