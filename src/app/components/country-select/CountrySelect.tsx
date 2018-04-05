@@ -18,7 +18,6 @@ interface StateProps {
 }
 
 export default class CountrySelect extends React.Component<StateProps> {
-    static isoCodeIndex = 0;
 
     componentWillMount() {
         const countriesLanguage =
