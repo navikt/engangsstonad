@@ -4,7 +4,7 @@ Repository for frontend-app for applying for [Engangsstønad](https://www.nav.no
 
 To run the app:
 1. Run `npm install`.
-2. Run `npm start`.
+2. Run `npm run start`.
 
 To run cypress tests:
 1. Run `npm install`.
