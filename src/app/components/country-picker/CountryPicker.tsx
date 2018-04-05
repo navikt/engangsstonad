@@ -25,19 +25,15 @@ class CountryPicker extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         const state: State = {
-            isOpen: false,
+            isOpen: false
         };
-        this.state = {...state};
+        this.state = { ...state };
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.addVisit = this.addVisit.bind(this);
         this.onEditClick = this.onEditClick.bind(this);
         this.onDeleteClick = this.onDeleteClick.bind(this);
         this.onModalSubmit = this.onModalSubmit.bind(this);
-    }
-
-    componentDidMount() {
-        Modal.setAppElement('#app');
     }
 
     openModal() {
