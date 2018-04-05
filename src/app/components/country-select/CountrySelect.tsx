@@ -59,6 +59,7 @@ export default class CountrySelect extends React.Component<StateProps> {
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                     onChange(e.target.value, e)
                 }
+                validators={validators}
             >
                 <option value="" />
                 {this.renderCountryOptions()}
