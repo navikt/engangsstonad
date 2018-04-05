@@ -11,11 +11,13 @@ import { containsUnlikeValues } from 'util/arrayUtil';
 
 interface Props {
     barn: FodtBarn & UfodtBarn;
+    vedlegg: File[];
 }
 
 const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl } = props;
     const { antallBarn, erBarnetFødt, fødselsdatoer, termindato, terminbekreftelseDato } = props.barn;
+    const vedleggSummary = props.vedlegg.map( (vedleggElement) => (vedleggElement.name));
 
     const fødselsdatoerSummary = containsUnlikeValues(props.barn.fødselsdatoer) ?
         fødselsdatoer.map((fødselsdato) => (ISODateToMaskedInput(fødselsdato))) :
@@ -54,7 +56,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (p
                     />
                     <DisplayTextWithLabel
                         label={getMessage(intl, 'oppsummering.text.vedlagtTerminbekreftelse')}
-                        text="<link til vedlegg her>"
+                        text={vedleggSummary}
                     />
                     <DisplayTextWithLabel
                         label={getMessage(intl, 'oppsummering.text.vedlagtTerminbekreftelse')}
