@@ -1,7 +1,6 @@
-
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
-const { ValidDateInput } = require('./../../../../lib') as any;
+import ValidDateInput from '../../../../lib/valid-date-input';
 import { soknadActionCreators as soknad } from '../../../../redux/actions';
 import { default as Barn, FodtBarn } from '../../../../types/domain/Barn';
 import getMessage from 'util/i18n/i18nUtils';
@@ -19,6 +18,14 @@ interface OwnProps {
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
+const getFodselsdatoForBarn = (barn: FodtBarn, index: number): Date | undefined => {
+    if (barn && barn.fødselsdatoer.length > 0) {
+        const dato = barn.fødselsdatoer[index];
+        return dato ? new Date(dato) : undefined;
+    }
+    return undefined;
+};
+
 export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
     constructor(props: Props) {
         super(props);
@@ -32,10 +39,16 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
         const { intl } = this.props;
         const barn = this.props.barn as any;
         return [
-            { test: () => (barn.fødselsdatoer[index]), failText: getMessage(intl, 'valideringsfeil.fodselsdato.duMåOppgi') },
-            { test: () => (barn.fødselsdatoer[index] !== ''), failText: getMessage(intl, 'valideringsfeil.fodselsdato.duMåOppgi') },
             {
-                test: () => (new Date(barn.fødselsdatoer[index]) <= new Date()),
+                test: () => barn.fødselsdatoer[index],
+                failText: getMessage(intl, 'valideringsfeil.fodselsdato.duMåOppgi')
+            },
+            {
+                test: () => barn.fødselsdatoer[index] !== '',
+                failText: getMessage(intl, 'valideringsfeil.fodselsdato.duMåOppgi')
+            },
+            {
+                test: () => new Date(barn.fødselsdatoer[index]) <= new Date(),
                 failText: getMessage(intl, 'valideringsfeil.fodselsdato.måVæreIdagEllerTidligere')
             }
         ];
@@ -51,8 +64,9 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
 
     getDateInputLabels(): Array<String> {
         const { intl } = this.props;
-        const firstDateInputLabel = this.state.bornOnSameDate ?
-            getMessage(intl, 'relasjonBarn.text.fodselsdato') : getMessage(intl, 'relasjonBarn.text.fodselsdato.flere.1');
+        const firstDateInputLabel = this.state.bornOnSameDate
+            ? getMessage(intl, 'relasjonBarn.text.fodselsdato')
+            : getMessage(intl, 'relasjonBarn.text.fodselsdato.flere.1');
 
         const dateInputLabels = [
             firstDateInputLabel,
@@ -63,14 +77,14 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
             getMessage(intl, 'relasjonBarn.text.fodselsdato.flere.6'),
             getMessage(intl, 'relasjonBarn.text.fodselsdato.flere.7'),
             getMessage(intl, 'relasjonBarn.text.fodselsdato.flere.8'),
-            getMessage(intl, 'relasjonBarn.text.fodselsdato.flere.9'),
+            getMessage(intl, 'relasjonBarn.text.fodselsdato.flere.9')
         ];
         return dateInputLabels;
     }
 
-    onFødselsdatoInputChange(fødselsdato: string, index: number) {
+    onFødselsdatoInputChange(fødselsdato: Date, index: number) {
         const { dispatch } = this.props;
-        dispatch(soknad.editFødselsdato(fødselsdato, this.state.bornOnSameDate, index));
+        dispatch(soknad.editFødselsdato(fødselsdato ? fødselsdato.toISOString() : '', this.state.bornOnSameDate, index));
     }
 
     diffrentBirthDatesCheckboxHandler() {
@@ -89,24 +103,29 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
         }
 
         const dateInputLabels = this.getDateInputLabels();
+        const idag = new Date();
+
         return (
             <div>
                 <ValidDateInput
                     id="fødselsdato"
                     label={dateInputLabels[0]}
-                    selectedDate={barn && (barn as FodtBarn).fødselsdatoer.length > 0 ? (barn as any).fødselsdatoer[0] : ''}
-                    onChange={(e: string) => this.onFødselsdatoInputChange(e, 0)}
+                    dato={getFodselsdatoForBarn(barn, 0)}
+                    onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, 0)}
                     name="fødselsdato"
+                    avgrensninger={{
+                        maksDato: idag
+                    }}
                     validators={this.getFødselsdatoValidators(0)}
                 />
-                {barn.antallBarn > 1 &&
+                {barn.antallBarn > 1 && (
                     <Checkbox
                         className="fødselsdatoCheckbox"
                         label={getMessage(intl, 'relasjonBarn.text.fodselsdato.forskjelligeDager')}
                         onChange={this.diffrentBirthDatesCheckboxHandler}
                         checked={!this.state.bornOnSameDate}
                     />
-                }
+                )}
                 {!this.state.bornOnSameDate &&
                     barn.fødselsdatoer.slice(1).map((element, index) => {
                         const fødselsdatoArrayIndex = index + 1;
@@ -114,15 +133,14 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                             <ValidDateInput
                                 id="fødselsdato"
                                 label={dateInputLabels[fødselsdatoArrayIndex]}
-                                selectedDate={barn && (barn as FodtBarn).fødselsdatoer.length > 0 ? (barn as any).fødselsdatoer[fødselsdatoArrayIndex] : ''}
-                                onChange={(e: string) => this.onFødselsdatoInputChange(e, fødselsdatoArrayIndex)}
+                                dato={getFodselsdatoForBarn(barn, fødselsdatoArrayIndex)}
+                                onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, fødselsdatoArrayIndex)}
                                 name="fødselsdato"
                                 validators={this.getFødselsdatoValidators(fødselsdatoArrayIndex)}
                                 key={`fødselsdato` + fødselsdatoArrayIndex}
                             />
                         );
-                    })
-                }
+                    })}
             </div>
         );
     }
