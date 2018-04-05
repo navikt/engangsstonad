@@ -1,7 +1,6 @@
 import * as React from 'react';
 const { Knapp } = require('nav-frontend-knapper');
 const { Element } = require('nav-frontend-typografi');
-const Modal = require('nav-frontend-modal').default;
 import CountryModal from 'components/country-picker/CountryModal';
 import { CountryList } from 'components/country-picker/CountryList';
 import { Periode } from '../../types/domain/Utenlandsopphold';
