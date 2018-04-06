@@ -5,7 +5,7 @@ export interface Props {
     children: React.ReactNode;
     /** Default true */
     synlig?: boolean;
-    /** Default true */
+    /** Default false */
     animert?: boolean;
 }
 
