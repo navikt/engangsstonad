@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { injectIntl } from 'react-intl';
+import * as moment from 'moment';
 import DocumentTitle from 'react-document-title';
 import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../redux/actions';
@@ -12,6 +13,7 @@ import Barn from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { fødselsdatoIsSet } from 'util/date/dateUtils';
 import FormBlock from 'components/form-block/FormBlock';
+import { Tidsperiode } from 'datovelger';
 
 interface StateProps {
     barn: Barn;
@@ -60,6 +62,27 @@ export class Steg3 extends React.Component<Props> {
         const { dispatch, intl, utenlandsopphold, barn, language } = this.props;
         const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligerePerioder, senerePerioder } = utenlandsopphold;
 
+        const tidsperiodeForegående: Tidsperiode = {
+            startdato: moment()
+                .add(-1, 'years')
+                .startOf('day')
+                .toDate(),
+            sluttdato: moment()
+                .endOf('day')
+                .toDate()
+        };
+
+        const tidsperiodeKommende: Tidsperiode = {
+            startdato: moment()
+                .add(1, 'day')
+                .startOf('day')
+                .toDate(),
+            sluttdato: moment()
+                .add(1, 'years')
+                .endOf('day')
+                .toDate()
+        };
+
         return (
             <div className="engangsstonad__step">
                 <DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
@@ -85,6 +108,7 @@ export class Steg3 extends React.Component<Props> {
                         addVisit={(periode: Periode) => dispatch(soknad.addTidligereUtenlandsoppholdPeriode(periode))}
                         editVisit={(periode: Periode, i: number) => dispatch(soknad.editTidligereUtenlandsoppholdPeriode(periode, i))}
                         deleteVisit={(periode: Periode) => dispatch(soknad.deleteTidligereUtenlandsoppholdPeriode(periode))}
+                        tidsperiode={tidsperiodeForegående}
                     />
                 </FormBlock>
                 <FormBlock visible={iNorgeSiste12Mnd || tidligerePerioder.length > 0}>
@@ -108,6 +132,7 @@ export class Steg3 extends React.Component<Props> {
                         addVisit={(periode: Periode) => dispatch(soknad.addSenereUtenlandsoppholdPeriode(periode))}
                         editVisit={(periode: Periode, i: number) => dispatch(soknad.editSenereUtenlandsoppholdPeriode(periode, i))}
                         deleteVisit={(periode: Periode) => dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))}
+                        tidsperiode={tidsperiodeKommende}
                     />
                 </FormBlock>
                 <FormBlock visible={(senerePerioder.length > 0 || iNorgeNeste12Mnd === true) && !fødselsdatoIsSet(barn)}>
