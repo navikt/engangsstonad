@@ -1,10 +1,17 @@
 import * as React from 'react';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import './labeltext.less';
 
-export interface Props {
-    children: React.ReactNode;
+interface OwnProps {
+    children?: React.ReactNode;
+    key?: string;
+    intlValues?: any;
 }
 
-const LabelText: React.StatelessComponent<Props> = ({ children }) => <span className="labeltext">{children}</span>;
+export type Props = OwnProps & InjectedIntlProps;
 
-export default LabelText;
+const LabelText: React.StatelessComponent<Props> = ({ children, key, intlValues, intl }) => (
+    <span className="labeltext">{key ? intl.formatMessage({ id: key }, intlValues) : children}</span>
+);
+
+export default injectIntl(LabelText);

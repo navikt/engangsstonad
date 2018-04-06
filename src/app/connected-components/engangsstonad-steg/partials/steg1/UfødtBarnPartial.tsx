@@ -106,7 +106,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         id="termindato"
                         name="termindato"
                         dato={termindato}
-                        label={<LabelText>{getMessage(intl, 'relasjonBarn.text.termindato')}</LabelText>}
+                        label={<LabelText key="relasjonBarn.text.termindato" />}
                         onChange={(dato: Date) => dispatch(soknad.setTermindato(dato ? dato.toISOString() : ''))}
                         validators={this.getTermindatoValidators()}
                         avgrensninger={datoavgrensning}
@@ -127,7 +127,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                             id="terminbekreftelse"
                             name="terminbekreftelse"
                             dato={terminbekreftelseDato}
-                            label={<LabelText>{getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}</LabelText>}
+                            label={<LabelText key="relasjonBarn.text.datoTerminbekreftelse" />}
                             onChange={(dato: Date) => dispatch(soknad.setTerminbekreftelseDato(dato ? dato.toISOString() : ''))}
                             validators={this.getTerminbekreftelseDatoValidators()}
                             avgrensninger={datoavgrensning}

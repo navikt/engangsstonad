@@ -5,7 +5,7 @@ import { CountryList } from 'components/country-picker/CountryList';
 import { Periode } from '../../types/domain/Utenlandsopphold';
 import './countryPicker.less';
 import LabelText from 'components/labeltext/LabelText';
-import { Tidsperiode } from 'datovelger';
+import { Tidsperiode } from 'nav-datovelger';
 
 interface Props {
     label: string;
