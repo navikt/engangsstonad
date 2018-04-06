@@ -3,7 +3,7 @@
 @import '../../../node_modules/datovelger/dist/datovelger/styles/datovelger.css';
 
 #login {
-  display: none;
+    display: none;
 }
 
 .app {
@@ -43,17 +43,11 @@
         .responsiveButton {
             margin-top: 1.5rem;
         }
-        .attachmentButton {
-            margin-top: 1rem;
-        }
         .søknadHeader {
             margin: -0.25rem;
         }
         .personaliaLabel {
             margin-top: 1rem;
-        }
-        .section {
-            margin-bottom: 2rem;
         }
         .typo-element {
             margin-top: @marginLarge;
@@ -66,34 +60,17 @@
         .bekreftCheckbox {
             margin-top: @marginLarge;
         }
-        .fødselsdatoCheckbox {
-            position: relative;
-            padding-top: 0.5rem;
-        }
-        .noOfChildrenSelect {
-            margin-top: 1rem;
-            width: 20%;
-
-            .skjemaelement__label {
-                font-weight: bold;
-            }
-        }
         .stegindikatorWrapper {
             position: relative;
-            margin-bottom: 16px;
+            margin-bottom: 2rem;
+            p {
+                margin: 0;
+            }
         }
         .paperVersionLink {
             display: inline-block;
             margin-top: @marginMedium;
             margin-bottom: @marginLarge;
-        }
-        .datovelger__outer {
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-
-            .skjemaelement__label {
-                margin-top: 12px;
-            }
         }
         .radioPanelGruppe {
             .skjema__legend {
@@ -101,20 +78,11 @@
                 margin-bottom: 0.5rem;
             }
         }
-        .radioPanelGruppe:not(:first-child) {
-            margin-top: 12px;
-        }
         .spinner {
             margin-left: auto;
             margin-right: auto;
             display: block;
         }
-    }
-}
-/** Settes utenfor .app på grunn av at den rendres i body */
-.datovelger__outer {
-    .skjemaelement__label {
-        font-weight: bold;
     }
 }
 

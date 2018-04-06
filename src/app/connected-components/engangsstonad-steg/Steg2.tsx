@@ -9,11 +9,15 @@ import getMessage from 'util/i18n/i18nUtils';
 const isValidFødselsnummer = require('is-valid-fodselsnummer');
 import {
     setAnnenForelderBostedsland,
-    setAnnenForelderFnr, setAnnenForelderKanIkkeOppgis,
-    setAnnenForelderNavn, setAnnenForelderUtenlandskFnr
+    setAnnenForelderFnr,
+    setAnnenForelderKanIkkeOppgis,
+    setAnnenForelderNavn,
+    setAnnenForelderUtenlandskFnr
 } from 'actions/soknad/soknadActionCreators';
 import CountrySelect from 'components/country-select/CountrySelect';
 import LabelMedHjelpetekst from 'components/label-med-hjelpetekst/LabelMedHjelpetekst';
+import FormBlock from 'components/form-block/FormBlock';
+import LabelText from 'components/labeltext/LabelText';
 const { ValidInput } = require('./../../lib') as any;
 
 interface StateProps {
@@ -26,40 +30,46 @@ type Props = StateProps & InjectedIntlProps & DispatchProps;
 export class Steg2 extends React.Component<Props> {
     getFødselsnummerValidators() {
         const { annenForelder, intl } = this.props;
-        return [{
-            test: () => {
-                let result = true;
-                if (!annenForelder.utenlandskFnr) {
-                    try {
-                        result = isValidFødselsnummer(annenForelder.fnr);
-                    } catch (e) {
-                        result = false;
+        return [
+            {
+                test: () => {
+                    let result = true;
+                    if (!annenForelder.utenlandskFnr) {
+                        try {
+                            result = isValidFødselsnummer(annenForelder.fnr);
+                        } catch (e) {
+                            result = false;
+                        }
                     }
-                }
-                return result;
-            },
-            failText: getMessage(intl, 'annenForelder.ugyldigFødselsnummer')
-        }];
+                    return result;
+                },
+                failText: getMessage(intl, 'annenForelder.ugyldigFødselsnummer')
+            }
+        ];
     }
 
     getNavnValidators() {
         const { annenForelder, intl } = this.props;
-        return [{
-            test: () => {
-                return annenForelder && annenForelder.navn && annenForelder.navn.length > 0;
-            },
-            failText: getMessage(intl, 'annenForelder.ugyldigNavn')
-        }];
+        return [
+            {
+                test: () => {
+                    return annenForelder && annenForelder.navn && annenForelder.navn.length > 0;
+                },
+                failText: getMessage(intl, 'annenForelder.ugyldigNavn')
+            }
+        ];
     }
 
     getBostedslandValidators() {
         const { annenForelder, intl } = this.props;
-        return [{
-            test: () => {
-                return annenForelder && annenForelder.bostedsland;
-            },
-            failText: getMessage(intl, 'annenForelder.ugyldigBostedsland')
-        }];
+        return [
+            {
+                test: () => {
+                    return annenForelder && annenForelder.bostedsland;
+                },
+                failText: getMessage(intl, 'annenForelder.ugyldigBostedsland')
+            }
+        ];
     }
 
     render() {
@@ -69,7 +79,7 @@ export class Steg2 extends React.Component<Props> {
 
         return (
             <div className="step2">
-                <div className="section">
+                <FormBlock>
                     <NavnComponent
                         id="js-annenForelder"
                         name="navnfelt"
@@ -85,44 +95,40 @@ export class Steg2 extends React.Component<Props> {
                         label={getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}
                         onChange={() => dispatch(setAnnenForelderKanIkkeOppgis(!annenForelder.kanIkkeOppgis))}
                     />
-                </div>
-                {annenForelder.navn !== undefined && (
-                    <div className="section">
-                        <FnrComponent
-                            label={
-                                <LabelMedHjelpetekst
-                                    label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
-                                    hjelpetekst={getMessage(intl, 'annenForelder.hjelpetekst.dNummer')}
-                                    buttonProps={{id: 'fnrHjelpetekstBtn'}}
-                                />
-                            }
-                            id="js-fødselsnummer"
-                            placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
-                            name="fodselsnummerfelt"
-                            validators={this.getFødselsnummerValidators()}
-                            value={annenForelder.fnr || ''}
-                        />
-                        <Checkbox
-                            checked={annenForelder.utenlandskFnr || false}
-                            label={getMessage(intl, 'annenForelder.label.utenlandskFødselsnummer')}
-                            id="utenlandskFnr"
-                            onChange={() => dispatch(setAnnenForelderUtenlandskFnr(!annenForelder.utenlandskFnr))}
-                        />
-                    </div>
-                )}
-                {annenForelder.navn !== undefined && annenForelder.utenlandskFnr === true && (
-                    <div className="section">
-                        <CountrySelect
-                            name="bostedsland"
-                            defaultValue={annenForelder.bostedsland}
-                            label={getMessage(intl, 'annenForelder.label.bostedsland')}
-                            onChange={(land) => dispatch(setAnnenForelderBostedsland(land))}
-                            language={language}
-                            validators={this.getBostedslandValidators()}
-                        />
-                    </div>
-                )}
+                </FormBlock>
+                <FormBlock visible={annenForelder.navn !== undefined}>
+                    <FnrComponent
+                        label={
+                            <LabelMedHjelpetekst
+                                label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
+                                hjelpetekst={getMessage(intl, 'annenForelder.hjelpetekst.dNummer')}
+                                buttonProps={{ id: 'fnrHjelpetekstBtn' }}
+                            />
+                        }
+                        id="js-fødselsnummer"
+                        placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
+                        name="fodselsnummerfelt"
+                        validators={this.getFødselsnummerValidators()}
+                        value={annenForelder.fnr || ''}
+                    />
+                    <Checkbox
+                        checked={annenForelder.utenlandskFnr || false}
+                        label={getMessage(intl, 'annenForelder.label.utenlandskFødselsnummer')}
+                        id="utenlandskFnr"
+                        onChange={() => dispatch(setAnnenForelderUtenlandskFnr(!annenForelder.utenlandskFnr))}
+                    />
+                </FormBlock>
+                <FormBlock visible={annenForelder.navn !== undefined && annenForelder.utenlandskFnr === true}>
+                    <CountrySelect
+                        name="bostedsland"
+                        defaultValue={annenForelder.bostedsland}
+                        label={<LabelText>{getMessage(intl, 'annenForelder.label.bostedsland')}</LabelText>}
+                        onChange={land => dispatch(setAnnenForelderBostedsland(land))}
+                        language={language}
+                        validators={this.getBostedslandValidators()}
+                    />
+                </FormBlock>
             </div>
         );
     }

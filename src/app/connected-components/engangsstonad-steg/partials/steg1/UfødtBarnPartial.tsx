@@ -11,6 +11,7 @@ import AttachmentButton from 'components/attachment/AttachmentButton';
 import AttachmentList from 'components/attachment/AttachmentList';
 const Modal = require('nav-frontend-modal').default;
 import Veilederinfo from './../../../../components/veileder-info/Veilederinfo';
+import LabelText from 'components/labeltext/LabelText';
 
 interface StateProps {
     barn: Barn;
@@ -90,14 +91,16 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         id="termindato"
                         name="termindato"
                         dato={termindato}
-                        label={getMessage(intl, 'relasjonBarn.text.termindato')}
+                        label={<LabelText>{getMessage(intl, 'relasjonBarn.text.termindato')}</LabelText>}
                         onChange={(dato: Date) => dispatch(soknad.setTermindato(dato ? dato.toISOString() : ''))}
                         validators={this.getTermindatoValidators()}
                     />
                 )}
 
                 {termindato && [
-                    <Veilederinfo key="veileder">{getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}</Veilederinfo>,
+                    <div className="blokk-xs" key="veileder">
+                        <Veilederinfo>{getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}</Veilederinfo>
+                    </div>,
                     <AttachmentButton key="vedlegg" id="vedlegg" onFileSelected={(files: File[]) => dispatch(soknad.addVedlegg(files))} />,
                     <AttachmentList key="vedleggListe" vedlegg={vedlegg} onDeleteClick={(file: File) => dispatch(soknad.deleteVedlegg(file))} />
                 ]}
@@ -108,7 +111,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                             id="terminbekreftelse"
                             name="terminbekreftelse"
                             dato={terminbekreftelseDato}
-                            label={getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}
+                            label={<LabelText>{getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}</LabelText>}
                             onChange={(dato: Date) => dispatch(soknad.setTerminbekreftelseDato(dato ? dato.toISOString() : ''))}
                             validators={this.getTerminbekreftelseDatoValidators()}
                         />
