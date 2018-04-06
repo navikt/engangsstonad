@@ -1,4 +1,4 @@
-import { Props as DatovelgerProps } from 'datovelger';
+import { Props as DatovelgerProps } from 'nav-datovelger';
 
 interface ValidatorProps {
     name: string;
