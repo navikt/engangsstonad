@@ -9,10 +9,8 @@
     "scripts": {
         "build": "node src/build/scripts/production-build.js",
         "clean-build": "rimraf ./dist",
-        "docker-build":
-            "npm run clean-build && npm run build && docker build . -t engangsstonad",
-        "docker-start":
-            "docker run --name engangsstonad -p 8080:8080 -d engangsstonad",
+        "docker-build": "npm run clean-build && npm run build && docker build . -t engangsstonad",
+        "docker-start": "docker run --name engangsstonad -p 8080:8080 -d engangsstonad",
         "docker-kill": "npm run docker-stop && npm run docker-rm",
         "docker-rm": "docker rm engangsstonad",
         "docker-stop": "docker stop engangsstonad",
@@ -22,12 +20,11 @@
         "start": "node ./src/build/scripts/start-dev.js",
         "test": "cross-env NODE_ENV=test jest",
         "lint": "tslint src/**",
-        "cypress":
-            "export PORT=8081 && npm run start-express & wait-on -v -t 15000 http://localhost:8081 && cypress run",
-        "cy":
-            "cypress open & npm run build && export PORT=8081 && npm run start-express"
+        "cypress": "export PORT=8081 && npm run start-express & wait-on -v -t 15000 http://localhost:8081 && cypress run",
+        "cy": "cypress open & npm run build && export PORT=8081 && npm run start-express"
     },
     "dependencies": {
+        "@types/react-collapse": "^4.0.1",
         "axios": "0.17.1",
         "babel-polyfill": "6.26.0",
         "classnames": "2.2.5",
@@ -69,9 +66,8 @@
         "prop-types": "15.6.0",
         "query-string": "5.0.1",
         "react": "16.2.0",
-        "react-collapse": "4.0.3",
-        "react-day-picker":
-            "git+ssh://git@github.com:frodehansen2/react-day-picker.git",
+        "react-collapse": "^4.0.3",
+        "react-day-picker": "git+ssh://git@github.com:frodehansen2/react-day-picker.git",
         "react-document-title": "2.0.3",
         "react-dom": "16.1.1",
         "react-intl": "2.4.0",
