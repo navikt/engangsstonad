@@ -5,9 +5,9 @@ import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 
 import { Periode } from '../../types/domain/Utenlandsopphold';
 import CountrySelect from 'components/country-select/CountrySelect';
-import getMessage from 'util/i18n/i18nUtils';
 import { DateInput } from 'components/date-input/DateInput';
-import { Tidsperiode } from 'datovelger';
+import { Tidsperiode } from 'nav-datovelger';
+import LabelText from 'components/labeltext/LabelText';
 
 const Modal = require('nav-frontend-modal').default;
 
@@ -78,7 +78,7 @@ class CountryModal extends React.Component<Props, State> {
         });
     }
     render() {
-        const { intl, language, tidsperiode } = this.props;
+        const { language, tidsperiode } = this.props;
         const { formData, erEndring } = this.state;
         const fomDato = getDateFromString(formData.fom);
         const tomDato = getDateFromString(formData.fom);
@@ -106,7 +106,7 @@ class CountryModal extends React.Component<Props, State> {
                         <FormattedMessage id="medlemmskap.modal.overskrift" />
                     </Undertittel>
                     <CountrySelect
-                        label={this.props.label}
+                        label={<LabelText>{this.props.label}</LabelText>}
                         onChange={land =>
                             this.updateFormData({
                                 land
@@ -117,7 +117,7 @@ class CountryModal extends React.Component<Props, State> {
                     />
                     <DateInput
                         id="boddFraDato"
-                        label={getMessage(intl, 'standard.text.fra')}
+                        label={<LabelText key="standard.text.fra" />}
                         dato={fomDato}
                         onChange={dato =>
                             this.updateFormData({
@@ -132,7 +132,7 @@ class CountryModal extends React.Component<Props, State> {
                     />
                     <DateInput
                         id="boddTilDato"
-                        label={getMessage(intl, 'standard.text.til')}
+                        label={<LabelText key="standard.text.til" />}
                         dato={tomDato}
                         onChange={dato =>
                             this.updateFormData({

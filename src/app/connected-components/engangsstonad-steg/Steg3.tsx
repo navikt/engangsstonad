@@ -13,7 +13,7 @@ import Barn from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { fødselsdatoIsSet } from 'util/date/dateUtils';
 import FormBlock from 'components/form-block/FormBlock';
-import { Tidsperiode } from 'datovelger';
+import { Tidsperiode } from 'nav-datovelger';
 
 interface StateProps {
     barn: Barn;
