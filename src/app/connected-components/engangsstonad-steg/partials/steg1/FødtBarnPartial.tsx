@@ -7,6 +7,7 @@ import getMessage from 'util/i18n/i18nUtils';
 import { DispatchProps } from '../../../../redux/types/index';
 const { Checkbox } = require('nav-frontend-skjema');
 import { containsUnlikeValues } from 'util/arrayUtil';
+import Labeltekst from 'components/labeltekst/Labeltekst';
 
 interface StateProps {
     barn: Barn;
@@ -109,7 +110,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
             <div>
                 <ValidDateInput
                     id="fødselsdato"
-                    label={dateInputLabels[0]}
+                    label={<Labeltekst>{dateInputLabels[0]}</Labeltekst>}
                     dato={getFodselsdatoForBarn(barn, 0)}
                     onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, 0)}
                     name="fødselsdato"
@@ -119,12 +120,14 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                     validators={this.getFødselsdatoValidators(0)}
                 />
                 {barn.antallBarn > 1 && (
-                    <Checkbox
-                        className="fødselsdatoCheckbox"
-                        label={getMessage(intl, 'relasjonBarn.text.fodselsdato.forskjelligeDager')}
-                        onChange={this.diffrentBirthDatesCheckboxHandler}
-                        checked={!this.state.bornOnSameDate}
-                    />
+                    <div className="blokk-xs">
+                        <Checkbox
+                            className="fødselsdatoCheckbox"
+                            label={getMessage(intl, 'relasjonBarn.text.fodselsdato.forskjelligeDager')}
+                            onChange={this.diffrentBirthDatesCheckboxHandler}
+                            checked={!this.state.bornOnSameDate}
+                        />
+                    </div>
                 )}
                 {!this.state.bornOnSameDate &&
                     barn.fødselsdatoer.slice(1).map((element, index) => {

@@ -3,7 +3,7 @@
 @import '../../../node_modules/datovelger/dist/datovelger/styles/datovelger.css';
 
 #login {
-  display: none;
+    display: none;
 }
 
 .app {
@@ -66,17 +66,13 @@
         .bekreftCheckbox {
             margin-top: @marginLarge;
         }
-        .fødselsdatoCheckbox {
-            position: relative;
-            padding-top: 0.5rem;
-        }
+        // .fødselsdatoCheckbox {
+        //     position: relative;
+        //     padding-top: 0.5rem;
+        // }
         .noOfChildrenSelect {
             margin-top: 1rem;
             width: 20%;
-
-            .skjemaelement__label {
-                font-weight: bold;
-            }
         }
         .stegindikatorWrapper {
             position: relative;
@@ -87,34 +83,17 @@
             margin-top: @marginMedium;
             margin-bottom: @marginLarge;
         }
-        .datovelger__outer {
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-
-            .skjemaelement__label {
-                margin-top: 12px;
-            }
-        }
         .radioPanelGruppe {
             .skjema__legend {
                 font-size: 16px;
                 margin-bottom: 0.5rem;
             }
         }
-        .radioPanelGruppe:not(:first-child) {
-            margin-top: 12px;
-        }
         .spinner {
             margin-left: auto;
             margin-right: auto;
             display: block;
         }
-    }
-}
-/** Settes utenfor .app på grunn av at den rendres i body */
-.datovelger__outer {
-    .skjemaelement__label {
-        font-weight: bold;
     }
 }
 

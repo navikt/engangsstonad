@@ -13,6 +13,8 @@ import { DispatchProps } from '../../redux/types';
 import getMessage from 'util/i18n/i18nUtils';
 import '../../styles/engangsstonad.less';
 import { steg1Partials } from './partials';
+import Skjemaspørsmål from 'components/skjemasp\u00F8rsma\u030Al/Skjemasp\u00F8rsma\u030Al';
+import Labeltekst from 'components/labeltekst/Labeltekst';
 
 interface StateProps {
     barn: Barn;
@@ -38,7 +40,6 @@ export class Steg1 extends React.Component<Props, State> {
             }
         }
         return undefined;
-
     }
 
     getAntallBarnSelectedValue() {
@@ -62,7 +63,6 @@ export class Steg1 extends React.Component<Props, State> {
             return <steg1Partials.FødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
         } else if (barn.erBarnetFødt === false) {
             return <steg1Partials.UfødtBarnPartial barn={barn} vedlegg={vedlegg} intl={intl} dispatch={dispatch} />;
-
         }
         return null;
     }
@@ -83,18 +83,19 @@ export class Steg1 extends React.Component<Props, State> {
         return (
             <div className="engangsstonad__step">
                 <DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
-                <RadioPanelGruppeResponsive
-                    legend={getMessage(intl, 'relasjonBarn.text.fodselTidspunkt')}
-                    name="fodselsTidspunkt"
-                    onChange={(event: any, value: string) => dispatch(soknad.setErBarnetFødt(value))}
-                    checked={this.getFodselsTidspunktSelectedValue()}
-                    radios={[
-                        { inputProps: { id: 'js-fodselFremtid' }, label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead' },
-                        { inputProps: { id: 'js-fodselFortid' }, label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'), value: 'before' }
-                    ]}
-                />
-
-                {barn.erBarnetFødt !== undefined && (
+                <Skjemaspørsmål>
+                    <RadioPanelGruppeResponsive
+                        legend={getMessage(intl, 'relasjonBarn.text.fodselTidspunkt')}
+                        name="fodselsTidspunkt"
+                        onChange={(event: any, value: string) => dispatch(soknad.setErBarnetFødt(value))}
+                        checked={this.getFodselsTidspunktSelectedValue()}
+                        radios={[
+                            { inputProps: { id: 'js-fodselFremtid' }, label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead' },
+                            { inputProps: { id: 'js-fodselFortid' }, label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'), value: 'before' }
+                        ]}
+                    />
+                </Skjemaspørsmål>
+                <Skjemaspørsmål synlig={barn.erBarnetFødt !== undefined}>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, `relasjonBarn.text.antallBarn${barn.erBarnetFødt ? 'Født' : 'Ventet'}`)}
                         name="antallBarn"
@@ -106,23 +107,23 @@ export class Steg1 extends React.Component<Props, State> {
                             { inputProps: { id: 'js-flereBarn' }, label: getMessage(intl, 'relasjonBarn.radiobutton.flere'), value: 'flere' }
                         ]}
                     />
-                )}
-                {barn.antallBarn !== undefined && barn.antallBarn > 2 &&
-                        <Select
-                            label={getMessage(intl, 'relasjonBarn.text.antallBarn')}
-                            className="noOfChildrenSelect"
-                            onChange={(e: any) => dispatch(soknad.setAntallBarn(e.target.value))}
-                            value={barn.antallBarn}
-                        >
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                            <option value={5}>5</option>
-                            <option value={6}>6</option>
-                            <option value={7}>7</option>
-                            <option value={8}>8</option>
-                            <option value={9}>9</option>
-                        </Select>
-                }
+                </Skjemaspørsmål>
+                <Skjemaspørsmål synlig={barn.antallBarn !== undefined && barn.antallBarn > 2}>
+                    <Select
+                        label={<Labeltekst>{getMessage(intl, 'relasjonBarn.text.antallBarn')}</Labeltekst>}
+                        className="noOfChildrenSelect"
+                        onChange={(e: any) => dispatch(soknad.setAntallBarn(e.target.value))}
+                        value={barn.antallBarn}
+                    >
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
+                        <option value={6}>6</option>
+                        <option value={7}>7</option>
+                        <option value={8}>8</option>
+                        <option value={9}>9</option>
+                    </Select>
+                </Skjemaspørsmål>
                 {this.renderPartial()}
             </div>
         );

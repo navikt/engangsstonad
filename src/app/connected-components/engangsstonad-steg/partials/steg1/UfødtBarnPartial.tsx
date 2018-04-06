@@ -11,6 +11,7 @@ import AttachmentButton from 'components/attachment/AttachmentButton';
 import AttachmentList from 'components/attachment/AttachmentList';
 const Modal = require('nav-frontend-modal').default;
 import Veilederinfo from './../../../../components/veileder-info/Veilederinfo';
+import Labeltekst from 'components/labeltekst/Labeltekst';
 
 interface StateProps {
     barn: Barn;
@@ -90,7 +91,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         id="termindato"
                         name="termindato"
                         dato={termindato}
-                        label={getMessage(intl, 'relasjonBarn.text.termindato')}
+                        label={<Labeltekst>{getMessage(intl, 'relasjonBarn.text.termindato')}</Labeltekst>}
                         onChange={(dato: Date) => dispatch(soknad.setTermindato(dato ? dato.toISOString() : ''))}
                         validators={this.getTermindatoValidators()}
                     />
@@ -108,7 +109,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                             id="terminbekreftelse"
                             name="terminbekreftelse"
                             dato={terminbekreftelseDato}
-                            label={getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}
+                            label={<Labeltekst>{getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}</Labeltekst>}
                             onChange={(dato: Date) => dispatch(soknad.setTerminbekreftelseDato(dato ? dato.toISOString() : ''))}
                             validators={this.getTerminbekreftelseDatoValidators()}
                         />
