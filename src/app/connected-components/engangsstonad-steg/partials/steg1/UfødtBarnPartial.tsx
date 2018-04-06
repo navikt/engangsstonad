@@ -98,7 +98,9 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 )}
 
                 {termindato && [
-                    <Veilederinfo key="veileder">{getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}</Veilederinfo>,
+                    <div className="blokk-xs" key="veileder">
+                        <Veilederinfo>{getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}</Veilederinfo>
+                    </div>,
                     <AttachmentButton key="vedlegg" id="vedlegg" onFileSelected={(files: File[]) => dispatch(soknad.addVedlegg(files))} />,
                     <AttachmentList key="vedleggListe" vedlegg={vedlegg} onDeleteClick={(file: File) => dispatch(soknad.deleteVedlegg(file))} />
                 ]}
