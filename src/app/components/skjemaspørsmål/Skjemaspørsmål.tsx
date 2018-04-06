@@ -10,7 +10,7 @@ export interface Props {
 }
 
 const Skjemaspørsmål: React.StatelessComponent<Props> = ({ synlig = true, animert = false, children }) => {
-    const getContent = () => <div className="skjemasporsmal blokk-xs">{children}</div>;
+    const getContent = () => <div className="skjemasporsmal blokk-s">{children}</div>;
 
     if (animert === true) {
         return <Collapse isOpened={synlig === true}>{getContent()}</Collapse>;
