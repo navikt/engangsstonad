@@ -13,8 +13,8 @@ import { DispatchProps } from '../../redux/types';
 import getMessage from 'util/i18n/i18nUtils';
 import '../../styles/engangsstonad.less';
 import { steg1Partials } from './partials';
-import Skjemaspørsmål from 'components/skjemasp\u00F8rsma\u030Al/Skjemasp\u00F8rsma\u030Al';
-import Labeltekst from 'components/labeltekst/Labeltekst';
+import FormBlock from 'components/form-block/FormBlock';
+import LabelText from 'components/labeltext/LabelText';
 
 interface StateProps {
     barn: Barn;
@@ -83,7 +83,7 @@ export class Steg1 extends React.Component<Props, State> {
         return (
             <div className="engangsstonad__step">
                 <DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
-                <Skjemaspørsmål>
+                <FormBlock>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'relasjonBarn.text.fodselTidspunkt')}
                         name="fodselsTidspunkt"
@@ -94,8 +94,8 @@ export class Steg1 extends React.Component<Props, State> {
                             { inputProps: { id: 'js-fodselFortid' }, label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'), value: 'before' }
                         ]}
                     />
-                </Skjemaspørsmål>
-                <Skjemaspørsmål synlig={barn.erBarnetFødt !== undefined}>
+                </FormBlock>
+                <FormBlock visible={barn.erBarnetFødt !== undefined}>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, `relasjonBarn.text.antallBarn${barn.erBarnetFødt ? 'Født' : 'Ventet'}`)}
                         name="antallBarn"
@@ -107,11 +107,11 @@ export class Steg1 extends React.Component<Props, State> {
                             { inputProps: { id: 'js-flereBarn' }, label: getMessage(intl, 'relasjonBarn.radiobutton.flere'), value: 'flere' }
                         ]}
                     />
-                </Skjemaspørsmål>
-                <Skjemaspørsmål synlig={barn.antallBarn !== undefined && barn.antallBarn > 2}>
+                </FormBlock>
+                <FormBlock visible={barn.antallBarn !== undefined && barn.antallBarn > 2}>
                     <Select
-                        label={<Labeltekst>{getMessage(intl, 'relasjonBarn.text.antallBarn')}</Labeltekst>}
-                        className="noOfChildrenSelect"
+                        bredde="xs"
+                        label={<LabelText>{getMessage(intl, 'relasjonBarn.text.antallBarn')}</LabelText>}
                         onChange={(e: any) => dispatch(soknad.setAntallBarn(e.target.value))}
                         value={barn.antallBarn}
                     >
@@ -123,7 +123,7 @@ export class Steg1 extends React.Component<Props, State> {
                         <option value={8}>8</option>
                         <option value={9}>9</option>
                     </Select>
-                </Skjemaspørsmål>
+                </FormBlock>
                 {this.renderPartial()}
             </div>
         );

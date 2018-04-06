@@ -20,7 +20,9 @@ function sendSoknad(soknad: EngangsstonadSoknad) {
         type: 'application/json'
     }));
     
-    formData.append('vedlegg', vedlegg[0]);
+    vedlegg.forEach((vedleggElement) => {
+        formData.append('vedlegg', vedleggElement);
+    });
 
     const url = `${(<any> window).REST_API_URL}/engangsstonad`;
     return axios.post(url, formData, config);

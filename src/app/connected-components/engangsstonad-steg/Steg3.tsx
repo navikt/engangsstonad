@@ -11,7 +11,7 @@ import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Barn from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { fødselsdatoIsSet } from 'util/date/dateUtils';
-import Skjemaspørsmål from 'components/skjemasp\u00F8rsma\u030Al/Skjemasp\u00F8rsma\u030Al';
+import FormBlock from 'components/form-block/FormBlock';
 
 interface StateProps {
     barn: Barn;
@@ -63,7 +63,7 @@ export class Steg3 extends React.Component<Props> {
         return (
             <div className="engangsstonad__step">
                 <DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
-                <Skjemaspørsmål>
+                <FormBlock>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.siste12mnd')}
                         name="iNorgeSiste12"
@@ -75,9 +75,9 @@ export class Steg3 extends React.Component<Props> {
                         ]}
                         twoColumns={true}
                     />
-                </Skjemaspørsmål>
+                </FormBlock>
 
-                <Skjemaspørsmål synlig={iNorgeSiste12Mnd === false}>
+                <FormBlock visible={iNorgeSiste12Mnd === false}>
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegBodde')}
                         language={language}
@@ -86,8 +86,8 @@ export class Steg3 extends React.Component<Props> {
                         editVisit={(periode: Periode, i: number) => dispatch(soknad.editTidligereUtenlandsoppholdPeriode(periode, i))}
                         deleteVisit={(periode: Periode) => dispatch(soknad.deleteTidligereUtenlandsoppholdPeriode(periode))}
                     />
-                </Skjemaspørsmål>
-                <Skjemaspørsmål synlig={iNorgeSiste12Mnd || tidligerePerioder.length > 0}>
+                </FormBlock>
+                <FormBlock visible={iNorgeSiste12Mnd || tidligerePerioder.length > 0}>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
                         name="iNorgeNeste12"
@@ -99,8 +99,8 @@ export class Steg3 extends React.Component<Props> {
                         ]}
                         twoColumns={true}
                     />
-                </Skjemaspørsmål>
-                <Skjemaspørsmål synlig={iNorgeNeste12Mnd === false}>
+                </FormBlock>
+                <FormBlock visible={iNorgeNeste12Mnd === false}>
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegSkalBo')}
                         language={language}
@@ -109,8 +109,8 @@ export class Steg3 extends React.Component<Props> {
                         editVisit={(periode: Periode, i: number) => dispatch(soknad.editSenereUtenlandsoppholdPeriode(periode, i))}
                         deleteVisit={(periode: Periode) => dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))}
                     />
-                </Skjemaspørsmål>
-                <Skjemaspørsmål synlig={(senerePerioder.length > 0 || iNorgeNeste12Mnd === true) && !fødselsdatoIsSet(barn)}>
+                </FormBlock>
+                <FormBlock visible={(senerePerioder.length > 0 || iNorgeNeste12Mnd === true) && !fødselsdatoIsSet(barn)}>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
                         name="fødselINorge"
@@ -126,7 +126,7 @@ export class Steg3 extends React.Component<Props> {
                         ]}
                         twoColumns={true}
                     />
-                </Skjemaspørsmål>
+                </FormBlock>
             </div>
         );
     }
