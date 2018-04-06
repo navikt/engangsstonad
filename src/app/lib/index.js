@@ -33,16 +33,16 @@ class ValidBase extends Component {
 
     onChange(e) {
         if (this.state.hasBlurred) {
-          setTimeout(() => {
-              this.validate();
-          })
+            setTimeout(() => {
+                this.validate();
+            });
         }
         if (this.context.validForm) {
-          this.context.validForm.onChange(e, this);
+            this.context.validForm.onChange(e, this);
         }
 
         if (this.props.onChange) {
-          this.props.onChange(e);
+            this.props.onChange(e);
         }
     }
 
@@ -52,21 +52,20 @@ class ValidBase extends Component {
         });
 
         setTimeout(() => {
-          this.validate();
+            this.validate();
         });
 
-
         if (this.context.validForm) {
-          this.context.validForm.onBlur(e, this);
+            this.context.validForm.onBlur(e, this);
         }
 
         if (this.props.onBlur) {
-          this.props.onBlur(e);
+            this.props.onBlur(e);
         }
     }
 
     getFirstFailedVerdict() {
-        return this.state.tests.find((test) => !test.verdict);
+        return this.state.tests.find(test => !test.verdict);
     }
 
     validate() {
@@ -83,7 +82,7 @@ class ValidBase extends Component {
         if (!this.props.validators || !this.props.validators.length) return;
 
         let valid = true;
-        const testsCopy = this.props.validators.map((validator) => {
+        const testsCopy = this.props.validators.map(validator => {
             let validatorResult = {
                 verdict: validator.test(this.element),
                 failText: validator.failText
@@ -108,38 +107,38 @@ class ValidBase extends Component {
     }
 
     render() {
-        const {
-            component, onChange, onBlur, onValidate, validateOnChange, validateOnBlur, feil, optional, ...other
-        } = this.props;
-        const failedVerdict = (!this.state.valid) ? { feilmelding: this.getFirstFailedVerdict().failText } : undefined;
+        const { component, onChange, onBlur, onValidate, validateOnChange, validateOnBlur, feil, optional, ...other } = this.props;
+        const failedVerdict = !this.state.valid ? { feilmelding: this.getFirstFailedVerdict().failText } : undefined;
 
         const elementRef = {};
         switch (component) {
-            case Input: elementRef.inputRef = (node) => { this.element = node; }; break;
-            case Select: elementRef.selectRef = (node) => { this.element = node; }; break;
-            case Textarea: elementRef.textareaRef = (node) => { this.element = node; }; break;
-            case DateInput: elementRef.ref = (node) => { this.element = node; }; break;
+            case Input:
+                elementRef.inputRef = node => {
+                    this.element = node;
+                };
+                break;
+            case Select:
+                elementRef.selectRef = node => {
+                    this.element = node;
+                };
+                break;
+            case Textarea:
+                elementRef.textareaRef = node => {
+                    this.element = node;
+                };
+                break;
+            case DateInput:
+                elementRef.ref = node => {
+                    this.element = node;
+                };
+                break;
         }
 
         if (component === DateInput) {
-          return (
-            <this.props.component
-              onChange={this.onChange}
-              onBlur={this.onBlur}
-              errorMessage={failedVerdict && failedVerdict.feilmelding}
-              {...other}
-            />
-          )
+            return <this.props.component onChange={this.onChange} onBlur={this.onBlur} errorMessage={failedVerdict && failedVerdict.feilmelding} {...other} />;
         }
 
-        return (
-            <this.props.component
-                onChange={this.onChange}
-                onBlur={this.onBlur}
-                feil={feil || failedVerdict}
-                {...other}
-            />
-        );
+        return <this.props.component onChange={this.onChange} onBlur={this.onBlur} feil={feil || failedVerdict} {...other} />;
     }
 }
 
@@ -157,10 +156,12 @@ ValidBase.propTypes = {
     validateOnChange: PT.bool,
     validateOnBlur: PT.bool,
     feil: PT.shape(),
-    validators: PT.arrayOf(PT.shape({
-        test: PT.func.isRequired,
-        failText: PT.string.isRequired
-    })).isRequired,
+    validators: PT.arrayOf(
+        PT.shape({
+            test: PT.func.isRequired,
+            failText: PT.string.isRequired
+        })
+    ).isRequired,
     optional: PT.bool
 };
 

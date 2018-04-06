@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import * as moment from 'moment';
+import { Undertittel } from 'nav-frontend-typografi';
+import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 
-const { Undertittel, Element } = require('nav-frontend-typografi');
-const Modal = require('nav-frontend-modal').default;
-const { Knapp, Hovedknapp } = require('nav-frontend-knapper');
-
-import DateInput from 'components/date-input/DateInput';
-import getMessage from 'util/i18n/i18nUtils';
 import { Periode } from '../../types/domain/Utenlandsopphold';
 import CountrySelect from 'components/country-select/CountrySelect';
+import getMessage from 'util/i18n/i18nUtils';
+import { DateInput } from 'components/date-input/DateInput';
+
+const Modal = require('nav-frontend-modal').default;
 
 interface OwnProps {
     language: string;
@@ -19,48 +20,79 @@ interface OwnProps {
 }
 type Props = OwnProps & InjectedIntlProps;
 
-interface State {
-    titleText?: string;
-    submitButtonText?: string;
-    utenlandsopphold?: Periode;
+interface PeriodeForm {
+    fom?: string;
+    tom?: string;
+    land?: string;
 }
+
+interface State {
+    erEndring: boolean;
+    formData: PeriodeForm;
+}
+
+const getValidPeriode = (formData: PeriodeForm): Periode | undefined => {
+    const { land, fom, tom } = formData;
+    if (land && fom && tom) {
+        return {
+            land,
+            varighet: {
+                fom,
+                tom
+            }
+        };
+    }
+    return undefined;
+};
+
+const getDateFromString = (dato?: string): Date => {
+    return dato ? new Date(dato) : new Date();
+};
 
 class CountryModal extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
-
-        const { intl, utenlandsopphold } = props;
-        if (utenlandsopphold) {
-            this.state = {
-                titleText: getMessage(intl, 'medlemmskap.modal.overskrift'),
-                submitButtonText: getMessage(intl, 'medlemmskap.modal.lagreEndringer'),
-                utenlandsopphold
-            };
-        } else {
-            this.state = {
-                titleText: getMessage(intl, 'medlemmskap.modal.overskrift'),
-                submitButtonText: getMessage(intl, 'medlemmskap.knapp.leggTilLand')
-            };
-        }
+        const { utenlandsopphold } = this.props;
+        this.onSubmit = this.onSubmit.bind(this);
+        this.updateFormData = this.updateFormData.bind(this);
+        this.state = {
+            erEndring: utenlandsopphold !== undefined,
+            formData: utenlandsopphold ? { land: utenlandsopphold.land, fom: utenlandsopphold.varighet.fom, tom: utenlandsopphold.varighet.tom } : {}
+        };
     }
 
     onSubmit() {
-        const { varighet, land } = (this.state.utenlandsopphold as Periode);
-        if (land !== undefined && varighet.fom !== undefined && varighet.tom !== undefined) {
-            const visit: Periode = { land, varighet };
-            this.props.onSubmit(visit);
+        const validPeriode = getValidPeriode(this.state.formData);
+        if (validPeriode) {
+            this.props.onSubmit(validPeriode);
         }
     }
 
+    updateFormData(data: PeriodeForm) {
+        this.setState({
+            formData: {
+                ...this.state.formData,
+                ...data
+            }
+        });
+    }
     render() {
         const { intl, language } = this.props;
-        const { utenlandsopphold } = this.state;
-        const landValue = utenlandsopphold ? utenlandsopphold.land : '';
-        const fomValue = utenlandsopphold ? utenlandsopphold.varighet.fom : '';
-        const tomValue = utenlandsopphold ? utenlandsopphold.varighet.tom : '';
+        const { formData, erEndring } = this.state;
+
+        const lagreKnappTekstId = erEndring ? 'medlemmskap.modal.lagreEndringer' : 'medlemmskap.knapp.leggTilLand';
+
+        const idag = new Date();
+        const fomMinDato = moment(idag)
+            .add(-1, 'year')
+            .toDate();
+        const tomMaksDato = moment(idag)
+            .add(1, 'year')
+            .toDate();
 
         return (
             <Modal
+                className="countryModal"
                 isOpen={true}
                 contentLabel="landvelger"
                 closeButton={true}
@@ -69,65 +101,56 @@ class CountryModal extends React.Component<Props, State> {
                 }}
             >
                 <div>
-                    <Undertittel className="countryModal__title">{this.state.titleText}</Undertittel>
-                    <Element>{this.props.label}</Element>
+                    <Undertittel className="countryModal__title">
+                        <FormattedMessage id="medlemmskap.modal.overskrift" />
+                    </Undertittel>
                     <CountrySelect
-                        label=""
-                        onChange={
-                            (e: React.ChangeEvent<HTMLSelectElement>) =>
-                                this.setState({
-                                    utenlandsopphold: {
-                                        land: e.target.value,
-                                        varighet: {
-                                            fom: fomValue,
-                                            tom: tomValue
-                                        }
-                                    }
-                                })
+                        label={this.props.label}
+                        onChange={land =>
+                            this.updateFormData({
+                                land
+                            })
                         }
                         language={language}
-                        defaultValue={landValue}
+                        defaultValue={formData.land}
                     />
                     <DateInput
                         id="boddFraDato"
-                        inputProps={{ value: fomValue }}
-                        selectedDate={fomValue}
                         label={getMessage(intl, 'standard.text.fra')}
-                        onChange={(date: string) => {
-                            this.setState({
-                                utenlandsopphold: {
-                                    land: landValue,
-                                    varighet: {
-                                        fom: date,
-                                        tom: tomValue
-                                    }
-                                }
-                            });
+                        dato={getDateFromString(formData.fom)}
+                        onChange={dato =>
+                            this.updateFormData({
+                                fom: dato.toISOString()
+                            })
+                        }
+                        avgrensninger={{
+                            minDato: fomMinDato,
+                            maksDato: idag
                         }}
+                        kalenderplassering="fullskjerm"
                     />
                     <DateInput
                         id="boddTilDato"
                         label={getMessage(intl, 'standard.text.til')}
-                        inputProps={{ value: tomValue }}
-                        selectedDate={tomValue}
-                        onChange={(date: string) => {
-                            this.setState({
-                                utenlandsopphold: {
-                                    land: landValue,
-                                    varighet: {
-                                        fom: fomValue,
-                                        tom: date
-                                    }
-                                }
-                            });
+                        dato={getDateFromString(formData.tom)}
+                        onChange={dato =>
+                            this.updateFormData({
+                                tom: dato.toISOString()
+                            })
+                        }
+                        avgrensninger={{
+                            minDato: idag,
+                            maksDato: tomMaksDato
                         }}
+                        kalenderplassering="fullskjerm"
                     />
+
                     <div className="countryModal__buttonBar">
-                        <Knapp onClick={() => this.props.closeModal()} htmlType="button">
-                            {getMessage(intl, 'medlemmskap.modal.avbryt')}
+                        <Knapp type="standard" onClick={() => this.props.closeModal()} htmlType="button">
+                            <FormattedMessage id="medlemmskap.modal.avbryt" />
                         </Knapp>
-                        <Hovedknapp onClick={() => utenlandsopphold && this.onSubmit()} htmlType="button">
-                            {this.state.submitButtonText}
+                        <Hovedknapp onClick={() => formData && this.onSubmit()}>
+                            <FormattedMessage id={lagreKnappTekstId} />
                         </Hovedknapp>
                     </div>
                 </div>
