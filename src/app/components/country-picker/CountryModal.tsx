@@ -117,7 +117,7 @@ class CountryModal extends React.Component<Props, State> {
                     />
                     <DateInput
                         id="boddFraDato"
-                        label={<LabelText key="standard.text.fra" />}
+                        label={<LabelText intlId="standard.text.fra" />}
                         dato={fomDato}
                         onChange={dato =>
                             this.updateFormData({
@@ -132,7 +132,7 @@ class CountryModal extends React.Component<Props, State> {
                     />
                     <DateInput
                         id="boddTilDato"
-                        label={<LabelText key="standard.text.til" />}
+                        label={<LabelText intlId="standard.text.til" />}
                         dato={tomDato}
                         onChange={dato =>
                             this.updateFormData({
