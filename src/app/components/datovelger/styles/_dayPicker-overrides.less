@@ -1,0 +1,110 @@
+.dayZindexFix() {
+    z-index: 2;
+    position: relative;
+    border-radius: 2px !important;
+}
+
+.DayPicker() {
+    .DayPicker:not(.DayPicker--interactionDisabled) {
+        .DayPicker-Day {
+            &:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+                &:active {
+                    background-color: @navBla !important;
+                    color: @white;
+                }
+                &:hover {
+                    .hoverOutline();
+                    .dayZindexFix();
+                    &:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside) {
+                        background-color: inherit;
+                    }
+                }
+                &:active,
+                &:focus {
+                    .focusOutline();
+                    .dayZindexFix();
+                    background: @white;
+                    z-index: 3;
+                }
+            }
+            &.DayPicker-Day--disabled,
+            .DayPicker-Day--outside {
+                &:focus {
+                    .focusOutline--disabled();
+                    .dayZindexFix();
+                }
+            }
+        }
+    }
+    .DayPicker {
+        background: @white;
+        &-wrapper:focus {
+            .focusOutline();
+        }
+        &-Day {
+            border-radius: 0;
+            border-radius: 0 !important;
+            padding-left: 0.6em;
+            padding-right: 0.6em;
+            &--selected:not(.DayPicker-Day--disabled) {
+                color: @white;
+                background-color: @navBla !important;
+            }
+            &--disabled  {
+                color: @navGra40;
+                background-color: @c-blockedDays;
+                font-weight: normal !important;
+            }
+            &--outside {
+                background-color: transparent;
+            }
+            &--today {
+                color: @navBla;
+                &.DayPicker-Day--disabled {
+                    color: @navBlaLighten40;
+                }
+            }
+            &:last-child {
+                color: @navRodLighten60 !important;
+            }
+        }
+        &-Weekday {
+            text-transform: capitalize;
+        }
+        &-Caption  {
+            padding: 0 2rem;
+            text-align: center;
+            text-transform: capitalize;
+        }
+        &-WeekNumber {
+            border-right: none;
+            position: relative;
+            padding-left: 0;
+            padding-right: 1rem;
+            font-size: 0.8rem;
+            &:focus {
+                outline: none;
+                position: relative;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 2px;
+                    left: -0.5rem;
+                    bottom: 2px;
+                    right: 0.55rem;
+                    border: 1px solid @orangeFocus;
+                    border-radius: 2px;
+                }
+            }
+            &:before {
+                content: '';
+                width: 1px;
+                height: 100%;
+                top: 0;
+                right: 0.5rem;
+                background-color: @navGra20;
+                position: absolute;
+            }
+        }
+    }
+}
