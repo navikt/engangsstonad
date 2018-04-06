@@ -116,9 +116,9 @@ export class Steg2 extends React.Component<Props> {
                         <CountrySelect
                             name="bostedsland"
                             defaultValue={annenForelder.bostedsland}
-                            label={<b>{getMessage(intl, 'annenForelder.label.bostedsland')}</b>}
+                            label={getMessage(intl, 'annenForelder.label.bostedsland')}
+                            onChange={(land) => dispatch(setAnnenForelderBostedsland(land))}
                             language={language}
-                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => dispatch(setAnnenForelderBostedsland(e.target.value))}
                             validators={this.getBostedslandValidators()}
                         />
                     </div>

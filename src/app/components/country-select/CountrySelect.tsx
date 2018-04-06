@@ -11,36 +11,55 @@ interface StateProps {
     label: React.ReactNode;
     validators?: any;
     name?: string;
-    onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+    onChange: (
+        value: string,
+        event?: React.ChangeEvent<HTMLSelectElement>
+    ) => void;
 }
 
 export default class CountrySelect extends React.Component<StateProps> {
-    static isoCodeIndex = 0;
-    static countryStringIndex = 1;
+
     componentWillMount() {
-        const countriesLanguage = this.props.language === 'nb' ? bokmalCountryList : nynorskCountryList;
+        const countriesLanguage =
+            this.props.language === 'nb'
+                ? bokmalCountryList
+                : nynorskCountryList;
         countries.registerLocale(countriesLanguage);
     }
 
     renderCountryOptions() {
         const { language } = this.props;
-        const  isoCodeIndex = 0;
+        const isoCodeIndex = 0;
         const countryNameIndex = 1;
         return Object.entries(countries.getNames(language))
-            .sort((a: string[], b: string[]) => a[1].localeCompare(b[1], language))
-            .filter(countryOptionValue => countryOptionValue[isoCodeIndex] !== 'NO')
+            .sort((a: string[], b: string[]) =>
+                a[1].localeCompare(b[1], language)
+            )
+            .filter(
+                countryOptionValue => countryOptionValue[isoCodeIndex] !== 'NO'
+            )
             .map((countryOptionValue: string[]) => (
-                <option key={countryOptionValue[isoCodeIndex]} value={countryOptionValue[isoCodeIndex]}>
+                <option
+                    key={countryOptionValue[isoCodeIndex]}
+                    value={countryOptionValue[isoCodeIndex]}
+                >
                     {countryOptionValue[countryNameIndex]}
                 </option>
             ));
     }
 
     render() {
-        const { validators } = this.props;
-        const SelectComponent = validators && validators.length > 0 ? ValidSelect : Select;
+        const { validators, onChange, ...restProps } = this.props;
+        const SelectComponent =
+            validators && validators.length > 0 ? ValidSelect : Select;
         return (
-            <SelectComponent {...this.props}>
+            <SelectComponent
+                {...restProps}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                    onChange(e.target.value, e)
+                }
+                validators={validators}
+            >
                 <option value="" />
                 {this.renderCountryOptions()}
             </SelectComponent>

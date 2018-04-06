@@ -35,7 +35,7 @@ describe('Søknad', () => {
         });
 
         it('Termindato', () => {
-            cy.get('#termindato').type(moment().add(1, 'days').format('DDMMYYYY'));
+            cy.get('#termindato').type(moment().add(1, 'days').format('DD.MM.YYYY')).blur();
         });
 
         it('Laster opp vedlegg (terminbekreftelse)', () => {
@@ -54,7 +54,7 @@ describe('Søknad', () => {
         });
 
         it('Terminbekreftelsesdato', () => {
-            cy.get('#terminbekreftelse').type(moment().subtract(10, 'days').format('DDMMYYYY'));
+            cy.get('#terminbekreftelse').type(moment().subtract(10, 'days').format('DD.MM.YYYY')).blur();
         });
 
         it('Går videre til neste side', () => {
