@@ -9,16 +9,16 @@ interface Props {
 
 const LangaugeToggle: React.StatelessComponent<Props> = ({ language, toggleLanguage }) => (
     <div className="languageToggle">
-        { language === 'nn' &&
+        {language === 'nn' && (
             <a className="lenke" href="#" onClick={() => toggleLanguage('nb')}>
                 Endre målform til bokmål
             </a>
-        }
-        { language === 'nb' &&
+        )}
+        {language === 'nb' && (
             <a className="lenke" onClick={() => toggleLanguage('nn')}>
                 Endre målform til nynorsk
             </a>
-        }
+        )}
     </div>
 );
 export default LangaugeToggle;

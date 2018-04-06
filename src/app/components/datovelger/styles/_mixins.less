@@ -1,0 +1,45 @@
+.focusOutline() {
+    outline: none;
+    box-shadow: 0 0 0 3px @orangeFocus;
+    border-radius: 3px;
+}
+.focusOutline--disabled() {
+    outline: none;
+    box-shadow: 0 0 0 1px @orangeFocus;
+    border-radius: 2px;
+}
+
+.hoverOutline() {
+    outline: none;
+    box-shadow: 0 0 0 1px @navBla;
+}
+
+.mixin-transition(@varighet: 150ms, @type: all) {
+    transition: @type @varighet cubic-bezier(0.465, 0.183, 0.153, 0.946);
+}
+
+.inputStyling() {
+    padding: 0.45rem;
+    background-color: @white;
+    border-radius: @border-radius-base;
+    border: 1px solid @grayIcon;
+    box-sizing: border-box;
+
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 3px @orangeFocus;
+    }
+
+    &:hover {
+        border-color: @navBla;
+        .mixin-transition(200ms, border-color);
+    }
+
+    &:disabled {
+        background-color: @navLysGra;
+        border-color: @navGra40;
+        box-shadow: none;
+        color: @navMorkGra !important;
+        font-style: normal;
+    }
+}

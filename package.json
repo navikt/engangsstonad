@@ -29,7 +29,6 @@
         "babel-polyfill": "6.26.0",
         "classnames": "2.2.5",
         "date-fns": "1.29.0",
-        "datovelger": "git+ssh://git@github.com:navikt/datovelger.git",
         "dotenv": "4.0.0",
         "ejs": "2.5.7",
         "express": "4.16.2",
