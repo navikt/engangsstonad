@@ -11,7 +11,7 @@ import AttachmentButton from 'components/attachment/AttachmentButton';
 import AttachmentList from 'components/attachment/AttachmentList';
 const Modal = require('nav-frontend-modal').default;
 import Veilederinfo from './../../../../components/veileder-info/Veilederinfo';
-import Labeltekst from 'components/labeltekst/Labeltekst';
+import Labeltekst from 'components/labeltext/LabelText';
 
 interface StateProps {
     barn: Barn;

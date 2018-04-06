@@ -7,7 +7,7 @@ import getMessage from 'util/i18n/i18nUtils';
 import { DispatchProps } from '../../../../redux/types/index';
 const { Checkbox } = require('nav-frontend-skjema');
 import { containsUnlikeValues } from 'util/arrayUtil';
-import Labeltekst from 'components/labeltekst/Labeltekst';
+import Labeltekst from 'components/labeltext/LabelText';
 
 interface StateProps {
     barn: Barn;

@@ -1,0 +1,24 @@
+import * as React from 'react';
+import { Collapse } from 'react-collapse';
+
+export interface Props {
+    children: React.ReactNode;
+    /** Default true */
+    visible?: boolean;
+    /** Default false */
+    animated?: boolean;
+}
+
+const FormBlock: React.StatelessComponent<Props> = ({ visible = true, animated = false, children }) => {
+    const getContent = () => <div className="formblock">{children}</div>;
+
+    if (animated === true) {
+        return <Collapse isOpened={visible === true}>{getContent()}</Collapse>;
+    }
+    if (!visible) {
+        return null;
+    }
+    return getContent();
+};
+
+export default FormBlock;

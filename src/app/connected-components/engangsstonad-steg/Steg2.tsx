@@ -16,8 +16,8 @@ import {
 } from 'actions/soknad/soknadActionCreators';
 import CountrySelect from 'components/country-select/CountrySelect';
 import LabelMedHjelpetekst from 'components/label-med-hjelpetekst/LabelMedHjelpetekst';
-import Skjemaspørsmål from 'components/skjemasp\u00F8rsma\u030Al/Skjemasp\u00F8rsma\u030Al';
-import Labeltekst from 'components/labeltekst/Labeltekst';
+import FormBlock from 'components/form-block/FormBlock';
+import Labeltekst from 'components/labeltext/LabelText';
 const { ValidInput } = require('./../../lib') as any;
 
 interface StateProps {
@@ -79,7 +79,7 @@ export class Steg2 extends React.Component<Props> {
 
         return (
             <div className="step2">
-                <Skjemaspørsmål>
+                <FormBlock>
                     <NavnComponent
                         id="js-annenForelder"
                         name="navnfelt"
@@ -95,8 +95,8 @@ export class Steg2 extends React.Component<Props> {
                         label={getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}
                         onChange={() => dispatch(setAnnenForelderKanIkkeOppgis(!annenForelder.kanIkkeOppgis))}
                     />
-                </Skjemaspørsmål>
-                <Skjemaspørsmål synlig={annenForelder.navn !== undefined}>
+                </FormBlock>
+                <FormBlock visible={annenForelder.navn !== undefined}>
                     <FnrComponent
                         label={
                             <LabelMedHjelpetekst
@@ -118,8 +118,8 @@ export class Steg2 extends React.Component<Props> {
                         id="utenlandskFnr"
                         onChange={() => dispatch(setAnnenForelderUtenlandskFnr(!annenForelder.utenlandskFnr))}
                     />
-                </Skjemaspørsmål>
-                <Skjemaspørsmål synlig={annenForelder.navn !== undefined && annenForelder.utenlandskFnr === true}>
+                </FormBlock>
+                <FormBlock visible={annenForelder.navn !== undefined && annenForelder.utenlandskFnr === true}>
                     <CountrySelect
                         name="bostedsland"
                         defaultValue={annenForelder.bostedsland}
@@ -128,7 +128,7 @@ export class Steg2 extends React.Component<Props> {
                         language={language}
                         validators={this.getBostedslandValidators()}
                     />
-                </Skjemaspørsmål>
+                </FormBlock>
             </div>
         );
     }
