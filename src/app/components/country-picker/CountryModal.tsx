@@ -63,7 +63,7 @@ class CountryModal extends React.Component<Props, State> {
             <Modal
                 isOpen={true}
                 contentLabel="landvelger"
-                closeButton={false}
+                closeButton={true}
                 onRequestClose={() => {
                     this.props.closeModal();
                 }}
