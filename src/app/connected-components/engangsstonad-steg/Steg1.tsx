@@ -110,8 +110,8 @@ export class Steg1 extends React.Component<Props, State> {
                 </FormBlock>
                 <FormBlock visible={barn.antallBarn !== undefined && barn.antallBarn > 2}>
                     <Select
+                        bredde="xs"
                         label={<LabelText>{getMessage(intl, 'relasjonBarn.text.antallBarn')}</LabelText>}
-                        className="noOfChildrenSelect"
                         onChange={(e: any) => dispatch(soknad.setAntallBarn(e.target.value))}
                         value={barn.antallBarn}
                     >
