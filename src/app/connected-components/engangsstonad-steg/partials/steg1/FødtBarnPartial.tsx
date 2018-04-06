@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
+import * as moment from 'moment';
 import ValidDateInput from '../../../../lib/valid-date-input';
 import { soknadActionCreators as soknad } from '../../../../redux/actions';
 import { default as Barn, FodtBarn } from '../../../../types/domain/Barn';
@@ -104,7 +105,18 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
         }
 
         const dateInputLabels = this.getDateInputLabels();
-        const idag = new Date();
+        const sisteGyldigeFødselsdato = moment()
+            .endOf('day')
+            .toDate();
+        const førsteGyldigeFødselsdato = moment()
+            .add(-1, 'years')
+            .startOf('day')
+            .toDate();
+
+        const datoavgrensning = {
+            minDato: førsteGyldigeFødselsdato,
+            maksDato: sisteGyldigeFødselsdato
+        };
 
         return (
             <div>
@@ -114,9 +126,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                     dato={getFodselsdatoForBarn(barn, 0)}
                     onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, 0)}
                     name="fødselsdato"
-                    avgrensninger={{
-                        maksDato: idag
-                    }}
+                    avgrensninger={datoavgrensning}
                     validators={this.getFødselsdatoValidators(0)}
                 />
                 {barn.antallBarn > 1 && (
@@ -141,6 +151,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                                 name="fødselsdato"
                                 validators={this.getFødselsdatoValidators(fødselsdatoArrayIndex)}
                                 key={`fødselsdato` + fødselsdatoArrayIndex}
+                                avgrensninger={datoavgrensning}
                             />
                         );
                     })}
