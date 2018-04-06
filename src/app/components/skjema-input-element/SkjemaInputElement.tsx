@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { guid } from 'nav-frontend-js-utils';
 import SkjemaelementFeilmelding from './SkjemaelementFeilmelding';
-import { Feil } from 'components/skjemaInputElement/types';
+import { Feil } from 'components/skjema-input-element/types';
 
 export interface Props {
     label: string | React.ReactNode;

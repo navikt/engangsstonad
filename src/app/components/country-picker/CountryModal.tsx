@@ -7,7 +7,7 @@ import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Periode } from '../../types/domain/Utenlandsopphold';
 import CountrySelect from 'components/country-select/CountrySelect';
 import getMessage from 'util/i18n/i18nUtils';
-import { DateInput } from 'components/dateInput/DateInput';
+import { DateInput } from 'components/date-input/DateInput';
 
 const Modal = require('nav-frontend-modal').default;
 
@@ -54,7 +54,7 @@ class CountryModal extends React.Component<Props, State> {
         super(props);
         const { utenlandsopphold } = this.props;
         this.onSubmit = this.onSubmit.bind(this);
-        this.oppdaterFormData = this.oppdaterFormData.bind(this);
+        this.updateFormData = this.updateFormData.bind(this);
         this.state = {
             erEndring: utenlandsopphold !== undefined,
             formData: utenlandsopphold ? { land: utenlandsopphold.land, fom: utenlandsopphold.varighet.fom, tom: utenlandsopphold.varighet.tom } : {}
@@ -68,7 +68,7 @@ class CountryModal extends React.Component<Props, State> {
         }
     }
 
-    oppdaterFormData(data: PeriodeForm) {
+    updateFormData(data: PeriodeForm) {
         this.setState({
             formData: {
                 ...this.state.formData,
@@ -107,7 +107,7 @@ class CountryModal extends React.Component<Props, State> {
                     <CountrySelect
                         label={this.props.label}
                         onChange={land =>
-                            this.oppdaterFormData({
+                            this.updateFormData({
                                 land
                             })
                         }
@@ -119,7 +119,7 @@ class CountryModal extends React.Component<Props, State> {
                         label={getMessage(intl, 'standard.text.fra')}
                         dato={getDateFromString(formData.fom)}
                         onChange={dato =>
-                            this.oppdaterFormData({
+                            this.updateFormData({
                                 fom: dato.toISOString()
                             })
                         }
@@ -134,7 +134,7 @@ class CountryModal extends React.Component<Props, State> {
                         label={getMessage(intl, 'standard.text.til')}
                         dato={getDateFromString(formData.tom)}
                         onChange={dato =>
-                            this.oppdaterFormData({
+                            this.updateFormData({
                                 tom: dato.toISOString()
                             })
                         }

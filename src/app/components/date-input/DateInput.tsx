@@ -1,6 +1,6 @@
 import * as React from 'react';
-import SkjemaInputElement from 'components/skjemaInputElement/SkjemaInputElement';
-import { Feil } from 'components/skjemaInputElement/types';
+import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
+import { Feil } from 'components/skjema-input-element/types';
 import Datovelger, { Props as DatovelgerProps } from 'datovelger';
 
 export interface Props extends DatovelgerProps {
