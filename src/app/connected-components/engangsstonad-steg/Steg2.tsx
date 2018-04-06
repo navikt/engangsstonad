@@ -17,7 +17,7 @@ import {
 import CountrySelect from 'components/country-select/CountrySelect';
 import LabelMedHjelpetekst from 'components/label-med-hjelpetekst/LabelMedHjelpetekst';
 import FormBlock from 'components/form-block/FormBlock';
-import Labeltekst from 'components/labeltext/LabelText';
+import LabelText from 'components/labeltext/LabelText';
 const { ValidInput } = require('./../../lib') as any;
 
 interface StateProps {
@@ -123,7 +123,7 @@ export class Steg2 extends React.Component<Props> {
                     <CountrySelect
                         name="bostedsland"
                         defaultValue={annenForelder.bostedsland}
-                        label={<Labeltekst>{getMessage(intl, 'annenForelder.label.bostedsland')}</Labeltekst>}
+                        label={<LabelText>{getMessage(intl, 'annenForelder.label.bostedsland')}</LabelText>}
                         onChange={land => dispatch(setAnnenForelderBostedsland(land))}
                         language={language}
                         validators={this.getBostedslandValidators()}

@@ -14,7 +14,7 @@ import getMessage from 'util/i18n/i18nUtils';
 import '../../styles/engangsstonad.less';
 import { steg1Partials } from './partials';
 import FormBlock from 'components/form-block/FormBlock';
-import Labeltekst from 'components/labeltext/LabelText';
+import LabelText from 'components/labeltext/LabelText';
 
 interface StateProps {
     barn: Barn;
@@ -110,7 +110,7 @@ export class Steg1 extends React.Component<Props, State> {
                 </FormBlock>
                 <FormBlock visible={barn.antallBarn !== undefined && barn.antallBarn > 2}>
                     <Select
-                        label={<Labeltekst>{getMessage(intl, 'relasjonBarn.text.antallBarn')}</Labeltekst>}
+                        label={<LabelText>{getMessage(intl, 'relasjonBarn.text.antallBarn')}</LabelText>}
                         className="noOfChildrenSelect"
                         onChange={(e: any) => dispatch(soknad.setAntallBarn(e.target.value))}
                         value={barn.antallBarn}

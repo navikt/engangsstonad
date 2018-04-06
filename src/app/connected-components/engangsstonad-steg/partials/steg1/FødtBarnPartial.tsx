@@ -7,7 +7,7 @@ import getMessage from 'util/i18n/i18nUtils';
 import { DispatchProps } from '../../../../redux/types/index';
 const { Checkbox } = require('nav-frontend-skjema');
 import { containsUnlikeValues } from 'util/arrayUtil';
-import Labeltekst from 'components/labeltext/LabelText';
+import LabelText from 'components/labeltext/LabelText';
 
 interface StateProps {
     barn: Barn;
@@ -110,7 +110,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
             <div>
                 <ValidDateInput
                     id="fødselsdato"
-                    label={<Labeltekst>{dateInputLabels[0]}</Labeltekst>}
+                    label={<LabelText>{dateInputLabels[0]}</LabelText>}
                     dato={getFodselsdatoForBarn(barn, 0)}
                     onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, 0)}
                     name="fødselsdato"
