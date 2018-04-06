@@ -96,7 +96,13 @@ export class SøknadContainer extends React.Component<Props> {
         return ([
             (
                 <Prompt
-                    message="Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?"
+                    message={(nextLocation) => {
+                        const { location } = this.props;
+                        if (location.pathname === nextLocation.pathname && nextLocation.hash !== location.hash) {
+                            return true;
+                        }
+                        return 'Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?';
+                    }}
                     key="prompt"
                 />
             ),

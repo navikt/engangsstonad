@@ -71,6 +71,7 @@ export class Steg3 extends React.Component<Props> {
                         {inputProps: { id: 'js-iNorgeSiste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.boddNorge'), value: 'norway'},
                         {inputProps: { id: 'js-iUtlandetSiste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'), value: 'abroad'}
                     ]}
+                    twoColumns={true}
                 />
                 {iNorgeSiste12Mnd === false && (
                     <CountryPicker
@@ -92,6 +93,7 @@ export class Steg3 extends React.Component<Props> {
                             {inputProps: { id: 'js-iNorgeNeste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.boNorge'), value: 'norway'},
                             {inputProps: { id: 'js-iUtlandetNeste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.boUtlandet'), value: 'abroad'}
                         ]}
+                        twoColumns={true}
                     />
                 )}
                 {iNorgeNeste12Mnd === false && (
@@ -115,6 +117,7 @@ export class Steg3 extends React.Component<Props> {
                             {inputProps: { id: 'js-fodselIUtlandet'}, 
                                 label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'), value: 'abroad'}
                         ]}
+                        twoColumns={true}
                     />
                 )}
             </div>
