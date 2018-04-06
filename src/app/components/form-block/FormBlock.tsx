@@ -9,6 +9,8 @@ export interface Props {
     animated?: boolean;
 }
 
+import './formblock.less';
+
 const FormBlock: React.StatelessComponent<Props> = ({ visible = true, animated = false, children }) => {
     const getContent = () => <div className="formblock">{children}</div>;
 
