@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
+import * as moment from 'moment';
 const { ValidDateInput } = require('./../../../../lib') as any;
 import { soknadActionCreators as soknad } from '../../../../redux/actions';
 import { default as Barn, UfodtBarn } from '../../../../types/domain/Barn';
@@ -84,6 +85,20 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
         const termindato = getTermindato(barn);
         const terminbekreftelseDato = getTerminbekreftelseDato(barn);
 
+        const sisteGyldigeFødselsdato = moment()
+            .add(1, 'years')
+            .endOf('day')
+            .toDate();
+        const førsteGyldigeFødselsdato = moment()
+            .add(1, 'days')
+            .startOf('day')
+            .toDate();
+
+        const datoavgrensning = {
+            minDato: førsteGyldigeFødselsdato,
+            maksDato: sisteGyldigeFødselsdato
+        };
+
         return (
             <div>
                 {antallBarn && (
@@ -94,6 +109,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         label={<LabelText>{getMessage(intl, 'relasjonBarn.text.termindato')}</LabelText>}
                         onChange={(dato: Date) => dispatch(soknad.setTermindato(dato ? dato.toISOString() : ''))}
                         validators={this.getTermindatoValidators()}
+                        avgrensninger={datoavgrensning}
                     />
                 )}
 
@@ -114,6 +130,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                             label={<LabelText>{getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}</LabelText>}
                             onChange={(dato: Date) => dispatch(soknad.setTerminbekreftelseDato(dato ? dato.toISOString() : ''))}
                             validators={this.getTerminbekreftelseDatoValidators()}
+                            avgrensninger={datoavgrensning}
                         />
                     </div>
                 )}
