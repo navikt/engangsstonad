@@ -4,7 +4,7 @@ import CountryModal from 'components/country-picker/CountryModal';
 import { CountryList } from 'components/country-picker/CountryList';
 import { Periode } from '../../types/domain/Utenlandsopphold';
 import './countryPicker.less';
-import Labeltekst from 'components/labeltekst/Labeltekst';
+import LabelText from 'components/labeltext/LabelText';
 import { Tidsperiode } from 'datovelger';
 
 interface Props {
@@ -72,7 +72,7 @@ class CountryPicker extends React.Component<Props, State> {
     render() {
         return (
             <div>
-                {this.props.label && <Labeltekst>{this.props.label}</Labeltekst>}
+                {this.props.label && <LabelText>{this.props.label}</LabelText>}
                 <CountryList
                     utenlandsoppholdListe={this.props.utenlandsoppholdListe}
                     onEditClick={(periode: Periode) => this.onEditClick(periode)}
