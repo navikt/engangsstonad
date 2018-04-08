@@ -49,6 +49,11 @@ node {
             sh "docker login -u ${env.USERNAME} -p ${env.PASSWORD} ${dockerRepo} && docker push ${dockerRepo}/${app}:${releaseVersion}"
             sh "curl --fail -v -u ${env.USERNAME}:${env.PASSWORD} --upload-file ${appConfig} https://repo.adeo.no/repository/raw/${groupId}/${app}/${releaseVersion}/nais.yaml"
         }
+
+        slackSend([
+            color: 'good',
+            message: "Build <${env.BUILD_URL}|#${env.BUILD_NUMBER}> (<${commitUrl}|${commitHashShort}>) of ${repo}/${app}@master by ${committer} passed  (${changelog})"
+         ])
     }
 
     stage('Deploy to preprod') {
@@ -58,38 +63,18 @@ node {
             timeout(time: 15, unit: 'MINUTES') {
                 input id: 'deploy', message: "Check status here:  https://jira.adeo.no/browse/${deploy}"
             }
-        } catch (Exception e) {
-            throw new Exception("Deploy feilet :( \n Se https://jira.adeo.no/browse/" + deploy + " for detaljer", e)
-
-        }
-    }
-
-    stage("Deploy to prod") {
-        timeout(time: 5, unit: 'MINUTES') {
-            input id: 'prod', message: "Deploy to prod?"
-        }
-
-        callback = "${env.BUILD_URL}input/Deploy/"
-        def deploy = deployLib.deployNaisApp(app, releaseVersion, 'p', zone, namespace, callback, committer, false).key
-        try {
-            timeout(time: 15, unit: 'MINUTES') {
-                input id: 'deploy', message: "Check status here:  https://jira.adeo.no/browse/${deploy}"
-            }
-        } catch (Exception e) {
-            throw new Exception("Deploy feilet :( \n Se https://jira.adeo.no/browse/" + deploy + " for detaljer", e)
-        }
-
-
-        //Tag only releases that go to production
-        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
-            withCredentials([string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
-                sh ("git tag -a ${releaseVersion} -m ${releaseVersion}")
-                sh ("git push https://${token}:x-oauth-basic@github.com/${project}/${app}.git --tags")
-            }
-        }
-        slackSend([
+            slackSend([
                 color: 'good',
-                message: "Build <${env.BUILD_URL}|#${env.BUILD_NUMBER}> (<${commitUrl}|${commitHashShort}>) of ${repo}/${app}@master by ${committer} passed  (${changelog})"
-        ])
+                message: "${app} version ${releaseVersion} has been deployed to pre-prod."
+            ])
+        } catch (Exception e) {
+            slackSend([
+                color: 'danger',
+                message: "Unable to deploy ${app} version ${releaseVersion} to pre-prod. See https://jira.adeo.no/browse/${deploy} for details"
+            ])
+            throw new Exception("Deploy feilet :( \n Se https://jira.adeo.no/browse/" + deploy + " for detaljer", e)
+
+        }
     }
+
 }
