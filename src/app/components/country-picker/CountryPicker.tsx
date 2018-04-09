@@ -1,15 +1,17 @@
 import * as React from 'react';
 const { Knapp } = require('nav-frontend-knapper');
-const { Element } = require('nav-frontend-typografi');
 import CountryModal from 'components/country-picker/CountryModal';
 import { CountryList } from 'components/country-picker/CountryList';
 import { Periode } from '../../types/domain/Utenlandsopphold';
 import './countryPicker.less';
+import LabelText from 'components/labeltext/LabelText';
+import { Tidsperiode } from 'nav-datovelger';
 
 interface Props {
     label: string;
     language: string;
     utenlandsoppholdListe: Periode[];
+    tidsperiode?: Tidsperiode;
     addVisit: (periode: Periode) => void;
     deleteVisit: (periode: Periode) => void;
     editVisit: (periode: Periode, index: number) => void;
@@ -70,7 +72,7 @@ class CountryPicker extends React.Component<Props, State> {
     render() {
         return (
             <div>
-                {this.props.label && <Element>{this.props.label}</Element>}
+                {this.props.label && <LabelText>{this.props.label}</LabelText>}
                 <CountryList
                     utenlandsoppholdListe={this.props.utenlandsoppholdListe}
                     onEditClick={(periode: Periode) => this.onEditClick(periode)}
@@ -83,6 +85,7 @@ class CountryPicker extends React.Component<Props, State> {
                         closeModal={() => this.closeModal()}
                         language={this.props.language}
                         label={this.props.label}
+                        tidsperiode={this.props.tidsperiode}
                     />
                 )}
                 <Knapp className="countryPicker__addButton" onClick={() => this.openModal()} htmlType="button">

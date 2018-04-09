@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
-import * as moment from 'moment';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 
 import { Periode } from '../../types/domain/Utenlandsopphold';
 import CountrySelect from 'components/country-select/CountrySelect';
-import getMessage from 'util/i18n/i18nUtils';
 import { DateInput } from 'components/date-input/DateInput';
+import { Tidsperiode } from 'nav-datovelger';
+import LabelText from 'components/labeltext/LabelText';
 
 const Modal = require('nav-frontend-modal').default;
 
@@ -15,6 +15,7 @@ interface OwnProps {
     language: string;
     utenlandsopphold?: Periode;
     label: string;
+    tidsperiode?: Tidsperiode;
     onSubmit: (periode: Periode) => void;
     closeModal: () => void;
 }
@@ -77,18 +78,18 @@ class CountryModal extends React.Component<Props, State> {
         });
     }
     render() {
-        const { intl, language } = this.props;
+        const { language, tidsperiode } = this.props;
         const { formData, erEndring } = this.state;
+        const fomDato = getDateFromString(formData.fom);
+        const tomDato = getDateFromString(formData.fom);
 
         const lagreKnappTekstId = erEndring ? 'medlemmskap.modal.lagreEndringer' : 'medlemmskap.knapp.leggTilLand';
 
-        const idag = new Date();
-        const fomMinDato = moment(idag)
-            .add(-1, 'year')
-            .toDate();
-        const tomMaksDato = moment(idag)
-            .add(1, 'year')
-            .toDate();
+        const fomMinDato = tidsperiode ? tidsperiode.startdato : undefined;
+        const fomMaksDato = tidsperiode ? tidsperiode.sluttdato : undefined;
+
+        const tomMinDato = fomDato || (tidsperiode ? tidsperiode.startdato : undefined);
+        const tomMaksDato = tidsperiode ? tidsperiode.sluttdato : undefined;
 
         return (
             <Modal
@@ -105,7 +106,7 @@ class CountryModal extends React.Component<Props, State> {
                         <FormattedMessage id="medlemmskap.modal.overskrift" />
                     </Undertittel>
                     <CountrySelect
-                        label={this.props.label}
+                        label={<LabelText>{this.props.label}</LabelText>}
                         onChange={land =>
                             this.updateFormData({
                                 land
@@ -116,8 +117,8 @@ class CountryModal extends React.Component<Props, State> {
                     />
                     <DateInput
                         id="boddFraDato"
-                        label={getMessage(intl, 'standard.text.fra')}
-                        dato={getDateFromString(formData.fom)}
+                        label={<LabelText intlId="standard.text.fra" />}
+                        dato={fomDato}
                         onChange={dato =>
                             this.updateFormData({
                                 fom: dato.toISOString()
@@ -125,21 +126,21 @@ class CountryModal extends React.Component<Props, State> {
                         }
                         avgrensninger={{
                             minDato: fomMinDato,
-                            maksDato: idag
+                            maksDato: fomMaksDato
                         }}
                         kalenderplassering="fullskjerm"
                     />
                     <DateInput
                         id="boddTilDato"
-                        label={getMessage(intl, 'standard.text.til')}
-                        dato={getDateFromString(formData.tom)}
+                        label={<LabelText intlId="standard.text.til" />}
+                        dato={tomDato}
                         onChange={dato =>
                             this.updateFormData({
                                 tom: dato.toISOString()
                             })
                         }
                         avgrensninger={{
-                            minDato: idag,
+                            minDato: tomMinDato,
                             maksDato: tomMaksDato
                         }}
                         kalenderplassering="fullskjerm"

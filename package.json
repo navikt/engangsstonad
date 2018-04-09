@@ -9,10 +9,8 @@
     "scripts": {
         "build": "node src/build/scripts/production-build.js",
         "clean-build": "rimraf ./dist",
-        "docker-build":
-            "npm run clean-build && npm run build && docker build . -t engangsstonad",
-        "docker-start":
-            "docker run --name engangsstonad -p 8080:8080 -d engangsstonad",
+        "docker-build": "npm run clean-build && npm run build && docker build . -t engangsstonad",
+        "docker-start": "docker run --name engangsstonad -p 8080:8080 -d engangsstonad",
         "docker-kill": "npm run docker-stop && npm run docker-rm",
         "docker-rm": "docker rm engangsstonad",
         "docker-stop": "docker stop engangsstonad",
@@ -22,17 +20,15 @@
         "start": "node ./src/build/scripts/start-dev.js",
         "test": "cross-env NODE_ENV=test jest",
         "lint": "tslint src/**",
-        "cypress":
-            "export PORT=8081 && npm run start-express & wait-on -v -t 15000 http://localhost:8081 && cypress run",
-        "cy":
-            "cypress open & npm run build && export PORT=8081 && npm run start-express"
+        "cypress": "export PORT=8081 && npm run start-express & wait-on -v -t 15000 http://localhost:8081 && cypress run",
+        "cy": "cypress open & npm run build && export PORT=8081 && npm run start-express"
     },
     "dependencies": {
+        "@types/react-collapse": "^4.0.1",
         "axios": "0.17.1",
         "babel-polyfill": "6.26.0",
         "classnames": "2.2.5",
         "date-fns": "1.29.0",
-        "datovelger": "git+ssh://git@github.com:navikt/datovelger.git",
         "dotenv": "4.0.0",
         "ejs": "2.5.7",
         "express": "4.16.2",
@@ -41,6 +37,7 @@
         "is-valid-fodselsnummer": "3.0.0",
         "lodash.throttle": "4.1.1",
         "moment": "2.20.1",
+        "nav-datovelger": "^1.0.0",
         "nav-frontend-alertstriper": "0.2.16",
         "nav-frontend-alertstriper-style": "0.2.22",
         "nav-frontend-chevron": "0.1.10",
@@ -70,8 +67,7 @@
         "query-string": "5.0.1",
         "react": "16.2.0",
         "react-collapse": "4.0.3",
-        "react-day-picker":
-            "git+ssh://git@github.com:frodehansen2/react-day-picker.git",
+        "react-day-picker": "7.1.4",
         "react-document-title": "2.0.3",
         "react-dom": "16.1.1",
         "react-intl": "2.4.0",

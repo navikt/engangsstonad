@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
+import * as moment from 'moment';
 const { ValidDateInput } = require('./../../../../lib') as any;
 import { soknadActionCreators as soknad } from '../../../../redux/actions';
 import { default as Barn, UfodtBarn } from '../../../../types/domain/Barn';
@@ -11,6 +12,7 @@ import AttachmentButton from 'components/attachment/AttachmentButton';
 import AttachmentList from 'components/attachment/AttachmentList';
 const Modal = require('nav-frontend-modal').default;
 import Veilederinfo from './../../../../components/veileder-info/Veilederinfo';
+import LabelText from 'components/labeltext/LabelText';
 
 interface StateProps {
     barn: Barn;
@@ -83,6 +85,20 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
         const termindato = getTermindato(barn);
         const terminbekreftelseDato = getTerminbekreftelseDato(barn);
 
+        const sisteGyldigeFødselsdato = moment()
+            .add(1, 'years')
+            .endOf('day')
+            .toDate();
+        const førsteGyldigeFødselsdato = moment()
+            .add(1, 'days')
+            .startOf('day')
+            .toDate();
+
+        const datoavgrensning = {
+            minDato: førsteGyldigeFødselsdato,
+            maksDato: sisteGyldigeFødselsdato
+        };
+
         return (
             <div>
                 {antallBarn && (
@@ -90,14 +106,17 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         id="termindato"
                         name="termindato"
                         dato={termindato}
-                        label={getMessage(intl, 'relasjonBarn.text.termindato')}
+                        label={<LabelText intlId="relasjonBarn.text.termindato" />}
                         onChange={(dato: Date) => dispatch(soknad.setTermindato(dato ? dato.toISOString() : ''))}
                         validators={this.getTermindatoValidators()}
+                        avgrensninger={datoavgrensning}
                     />
                 )}
 
                 {termindato && [
-                    <Veilederinfo key="veileder">{getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}</Veilederinfo>,
+                    <div className="blokk-xs" key="veileder">
+                        <Veilederinfo>{getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}</Veilederinfo>
+                    </div>,
                     <AttachmentButton key="vedlegg" id="vedlegg" onFileSelected={(files: File[]) => dispatch(soknad.addVedlegg(files))} />,
                     <AttachmentList key="vedleggListe" vedlegg={vedlegg} onDeleteClick={(file: File) => dispatch(soknad.deleteVedlegg(file))} />
                 ]}
@@ -108,9 +127,10 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                             id="terminbekreftelse"
                             name="terminbekreftelse"
                             dato={terminbekreftelseDato}
-                            label={getMessage(intl, 'relasjonBarn.text.datoTerminbekreftelse')}
+                            label={<LabelText intlId="relasjonBarn.text.datoTerminbekreftelse" />}
                             onChange={(dato: Date) => dispatch(soknad.setTerminbekreftelseDato(dato ? dato.toISOString() : ''))}
                             validators={this.getTerminbekreftelseDatoValidators()}
+                            avgrensninger={datoavgrensning}
                         />
                     </div>
                 )}

@@ -86,7 +86,7 @@ class AttachmentButton extends React.Component<Props> {
                 <input
                     id={id}
                     type="file"
-                    accept="application/pdf,image/jpeg,image/png"
+                    accept="application/pdf,image/jpg,image/jpeg,image/png"
                     onChange={(e) => this.onFileSelect(e)}
                     multiple={true}
                 />

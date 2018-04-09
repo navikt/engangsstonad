@@ -70,6 +70,11 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                             {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.5')}
                         </Normaltekst>
                     </li>
+                    <li>
+                        <Normaltekst>
+                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.6')}
+                        </Normaltekst>
+                    </li>
                 </ul>
             </li>
             <li>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
 import { Feil } from 'components/skjema-input-element/types';
-import Datovelger, { Props as DatovelgerProps } from 'datovelger';
+import Datovelger, { Props as DatovelgerProps } from 'nav-datovelger';
 
 export interface Props extends DatovelgerProps {
     label: string | React.ReactNode;

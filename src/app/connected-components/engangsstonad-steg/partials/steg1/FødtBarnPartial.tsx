@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
+import * as moment from 'moment';
 import ValidDateInput from '../../../../lib/valid-date-input';
 import { soknadActionCreators as soknad } from '../../../../redux/actions';
 import { default as Barn, FodtBarn } from '../../../../types/domain/Barn';
@@ -7,6 +8,7 @@ import getMessage from 'util/i18n/i18nUtils';
 import { DispatchProps } from '../../../../redux/types/index';
 const { Checkbox } = require('nav-frontend-skjema');
 import { containsUnlikeValues } from 'util/arrayUtil';
+import LabelText from 'components/labeltext/LabelText';
 
 interface StateProps {
     barn: Barn;
@@ -103,28 +105,39 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
         }
 
         const dateInputLabels = this.getDateInputLabels();
-        const idag = new Date();
+        const sisteGyldigeFødselsdato = moment()
+            .endOf('day')
+            .toDate();
+        const førsteGyldigeFødselsdato = moment()
+            .add(-1, 'years')
+            .startOf('day')
+            .toDate();
+
+        const datoavgrensning = {
+            minDato: førsteGyldigeFødselsdato,
+            maksDato: sisteGyldigeFødselsdato
+        };
 
         return (
             <div>
                 <ValidDateInput
                     id="fødselsdato"
-                    label={dateInputLabels[0]}
+                    label={<LabelText>{dateInputLabels[0]}</LabelText>}
                     dato={getFodselsdatoForBarn(barn, 0)}
                     onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, 0)}
                     name="fødselsdato"
-                    avgrensninger={{
-                        maksDato: idag
-                    }}
+                    avgrensninger={datoavgrensning}
                     validators={this.getFødselsdatoValidators(0)}
                 />
                 {barn.antallBarn > 1 && (
-                    <Checkbox
-                        className="fødselsdatoCheckbox"
-                        label={getMessage(intl, 'relasjonBarn.text.fodselsdato.forskjelligeDager')}
-                        onChange={this.diffrentBirthDatesCheckboxHandler}
-                        checked={!this.state.bornOnSameDate}
-                    />
+                    <div className="blokk-xs">
+                        <Checkbox
+                            className="fødselsdatoCheckbox"
+                            label={getMessage(intl, 'relasjonBarn.text.fodselsdato.forskjelligeDager')}
+                            onChange={this.diffrentBirthDatesCheckboxHandler}
+                            checked={!this.state.bornOnSameDate}
+                        />
+                    </div>
                 )}
                 {!this.state.bornOnSameDate &&
                     barn.fødselsdatoer.slice(1).map((element, index) => {
@@ -138,6 +151,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                                 name="fødselsdato"
                                 validators={this.getFødselsdatoValidators(fødselsdatoArrayIndex)}
                                 key={`fødselsdato` + fødselsdatoArrayIndex}
+                                avgrensninger={datoavgrensning}
                             />
                         );
                     })}

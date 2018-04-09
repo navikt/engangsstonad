@@ -113,7 +113,8 @@
 	"rettigheter.text.innhenteOpplysninger.2": "Inntekt",
 	"rettigheter.text.innhenteOpplysninger.3": "Tilknyting til Noreg",
 	"rettigheter.text.innhenteOpplysninger.4": "Opplysningar om barnet",
-	"rettigheter.text.innhenteOpplysninger.5": "Opplysningar om den andre forelderen",
+    "rettigheter.text.innhenteOpplysninger.5": "Opplysningar om den andre forelderen",
+    "rettigheter.text.innhenteOpplysninger.6": "Opplysninger fra andre lands trygdeordninger",
 	"rettigheter.text.uretteOpplysninger":
 	"Eg forstår at om eg gjev urette opplysningar kan det få konsekvens for retten til eingongsstønaden",
 	"rettigheter.text.lestOgForstått": "Eg har lest og forstått det som står på {link}",

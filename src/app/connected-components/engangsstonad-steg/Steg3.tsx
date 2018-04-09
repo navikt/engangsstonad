@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { injectIntl } from 'react-intl';
+import * as moment from 'moment';
 import DocumentTitle from 'react-document-title';
 import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../redux/actions';
@@ -11,6 +12,8 @@ import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Barn from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { fødselsdatoIsSet } from 'util/date/dateUtils';
+import FormBlock from 'components/form-block/FormBlock';
+import { Tidsperiode } from 'nav-datovelger';
 
 interface StateProps {
     barn: Barn;
@@ -32,7 +35,7 @@ export class Steg3 extends React.Component<Props> {
             return undefined;
         }
     }
-    
+
     getINorgeNeste12SelectedValue() {
         const { iNorgeNeste12Mnd } = this.props.utenlandsopphold;
         if (iNorgeNeste12Mnd === true) {
@@ -59,21 +62,45 @@ export class Steg3 extends React.Component<Props> {
         const { dispatch, intl, utenlandsopphold, barn, language } = this.props;
         const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligerePerioder, senerePerioder } = utenlandsopphold;
 
+        const tidsperiodeForegående: Tidsperiode = {
+            startdato: moment()
+                .add(-1, 'years')
+                .startOf('day')
+                .toDate(),
+            sluttdato: moment()
+                .endOf('day')
+                .toDate()
+        };
+
+        const tidsperiodeKommende: Tidsperiode = {
+            startdato: moment()
+                .add(1, 'day')
+                .startOf('day')
+                .toDate(),
+            sluttdato: moment()
+                .add(1, 'years')
+                .endOf('day')
+                .toDate()
+        };
+
         return (
             <div className="engangsstonad__step">
                 <DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
-                <RadioPanelGruppeResponsive
-                    legend={getMessage(intl, 'medlemmskap.text.siste12mnd')}
-                    name="iNorgeSiste12"
-                    onChange={(event: any, value: string) => dispatch(soknad.setINorgeSiste12Mnd(value))}
-                    checked={this.getINorgeSiste12SelectedValue()}
-                    radios={[
-                        {inputProps: { id: 'js-iNorgeSiste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.boddNorge'), value: 'norway'},
-                        {inputProps: { id: 'js-iUtlandetSiste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'), value: 'abroad'}
-                    ]}
-                    twoColumns={true}
-                />
-                {iNorgeSiste12Mnd === false && (
+                <FormBlock>
+                    <RadioPanelGruppeResponsive
+                        legend={getMessage(intl, 'medlemmskap.text.siste12mnd')}
+                        name="iNorgeSiste12"
+                        onChange={(event: any, value: string) => dispatch(soknad.setINorgeSiste12Mnd(value))}
+                        checked={this.getINorgeSiste12SelectedValue()}
+                        radios={[
+                            { inputProps: { id: 'js-iNorgeSiste12' }, label: getMessage(intl, 'medlemmskap.radiobutton.boddNorge'), value: 'norway' },
+                            { inputProps: { id: 'js-iUtlandetSiste12' }, label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'), value: 'abroad' }
+                        ]}
+                        twoColumns={true}
+                    />
+                </FormBlock>
+
+                <FormBlock visible={iNorgeSiste12Mnd === false}>
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegBodde')}
                         language={language}
@@ -81,22 +108,23 @@ export class Steg3 extends React.Component<Props> {
                         addVisit={(periode: Periode) => dispatch(soknad.addTidligereUtenlandsoppholdPeriode(periode))}
                         editVisit={(periode: Periode, i: number) => dispatch(soknad.editTidligereUtenlandsoppholdPeriode(periode, i))}
                         deleteVisit={(periode: Periode) => dispatch(soknad.deleteTidligereUtenlandsoppholdPeriode(periode))}
+                        tidsperiode={tidsperiodeForegående}
                     />
-                )}
-                {(iNorgeSiste12Mnd || tidligerePerioder.length > 0) && (
+                </FormBlock>
+                <FormBlock visible={iNorgeSiste12Mnd || tidligerePerioder.length > 0}>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
                         name="iNorgeNeste12"
                         onChange={(event: any, value: string) => dispatch(soknad.setINorgeNeste12Mnd(value))}
                         checked={this.getINorgeNeste12SelectedValue()}
                         radios={[
-                            {inputProps: { id: 'js-iNorgeNeste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.boNorge'), value: 'norway'},
-                            {inputProps: { id: 'js-iUtlandetNeste12'}, label: getMessage(intl, 'medlemmskap.radiobutton.boUtlandet'), value: 'abroad'}
+                            { inputProps: { id: 'js-iNorgeNeste12' }, label: getMessage(intl, 'medlemmskap.radiobutton.boNorge'), value: 'norway' },
+                            { inputProps: { id: 'js-iUtlandetNeste12' }, label: getMessage(intl, 'medlemmskap.radiobutton.boUtlandet'), value: 'abroad' }
                         ]}
                         twoColumns={true}
                     />
-                )}
-                {iNorgeNeste12Mnd === false && (
+                </FormBlock>
+                <FormBlock visible={iNorgeNeste12Mnd === false}>
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegSkalBo')}
                         language={language}
@@ -104,22 +132,26 @@ export class Steg3 extends React.Component<Props> {
                         addVisit={(periode: Periode) => dispatch(soknad.addSenereUtenlandsoppholdPeriode(periode))}
                         editVisit={(periode: Periode, i: number) => dispatch(soknad.editSenereUtenlandsoppholdPeriode(periode, i))}
                         deleteVisit={(periode: Periode) => dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))}
+                        tidsperiode={tidsperiodeKommende}
                     />
-                )}
-                {(senerePerioder.length > 0 || iNorgeNeste12Mnd === true) && !fødselsdatoIsSet(barn) && (
+                </FormBlock>
+                <FormBlock visible={(senerePerioder.length > 0 || iNorgeNeste12Mnd === true) && !fødselsdatoIsSet(barn)}>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
                         name="fødselINorge"
                         onChange={(event: any, value: string) => dispatch(soknad.setFødselINorge(value))}
                         checked={this.getFødselINorgeSelectedValue()}
                         radios={[
-                            {inputProps: { id: 'js-fodselINorge'}, label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'), value: 'norway'},
-                            {inputProps: { id: 'js-fodselIUtlandet'}, 
-                                label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'), value: 'abroad'}
+                            { inputProps: { id: 'js-fodselINorge' }, label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'), value: 'norway' },
+                            {
+                                inputProps: { id: 'js-fodselIUtlandet' },
+                                label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'),
+                                value: 'abroad'
+                            }
                         ]}
                         twoColumns={true}
                     />
-                )}
+                </FormBlock>
             </div>
         );
     }
