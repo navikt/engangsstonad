@@ -115,11 +115,12 @@
 	"rettigheter.text.innhenteOpplysninger.2": "Inntekt",
 	"rettigheter.text.innhenteOpplysninger.3": "Tillknytning til Norge",
 	"rettigheter.text.innhenteOpplysninger.4": "Opplysninger om barnet",
-	"rettigheter.text.innhenteOpplysninger.5": "Opplysninger om den andre forelderen",
+    "rettigheter.text.innhenteOpplysninger.5": "Opplysninger om den andre forelderen",
+    "rettigheter.text.innhenteOpplysninger.6": "Opplysninger fra andre lands trygdeordninger",
 	"rettigheter.text.uretteOpplysninger":
-	"Jeg forstår at hvis jeg gir uriktige eller holder tilbake opplysninger kan det få konsekvenser for retten min til engangsstønaden",
+	"Jeg forstår at hvis jeg gir uriktige eller holder yarntilbake opplysninger kan det få konsekvenser for retten min til engangsstønaden",
 	"rettigheter.text.personvernerklering": "Jeg er kjent med rettighetene mine som står i {link}",
-	"rettigheter.text.personvernerklering.link": "personvernerklæringen til NAV",
+    "rettigheter.text.personvernerklering.link": "personvernerklæringen til NAV",
 
 	"terminbekreftelsen.sectionheading": "Om terminbekreftelsen",
 	"terminbekreftelsen.text.terminbekreftelsen":
