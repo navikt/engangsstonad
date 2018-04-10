@@ -80,7 +80,7 @@ export class Steg2 extends React.Component<Props> {
         return (
             <div className="step2">
                 <FormBlock>
-                    <div className="blokk-xxs">
+                    <FormBlock margin="xxs">
                         <NavnComponent
                             id="js-annenForelder"
                             name="navnfelt"
@@ -91,7 +91,7 @@ export class Steg2 extends React.Component<Props> {
                             value={annenForelder.navn || ''}
                             validators={this.getNavnValidators()}
                         />
-                    </div>
+                    </FormBlock>
                     <Checkbox
                         checked={annenForelder.kanIkkeOppgis || false}
                         label={getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}
@@ -99,7 +99,7 @@ export class Steg2 extends React.Component<Props> {
                     />
                 </FormBlock>
                 <FormBlock visible={annenForelder.navn !== undefined}>
-                    <div className="blokk-xxs">
+                    <FormBlock margin="xxs">
                         <FnrComponent
                             label={
                                 <LabelMedHjelpetekst
@@ -115,7 +115,7 @@ export class Steg2 extends React.Component<Props> {
                             validators={this.getFødselsnummerValidators()}
                             value={annenForelder.fnr || ''}
                         />
-                    </div>
+                    </FormBlock>
                     <Checkbox
                         checked={annenForelder.utenlandskFnr || false}
                         label={getMessage(intl, 'annenForelder.label.utenlandskFødselsnummer')}

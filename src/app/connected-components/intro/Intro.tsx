@@ -101,7 +101,9 @@ export class Intro extends React.Component<Props, OwnProps> {
                 <SimpleIllustration svg={VeilederIllustration} />
 
                 <div className="responsiveContainer">
-                    <Innholdstittel>{getMessage(intl, 'intro.pageheading.soknadES')}</Innholdstittel>
+                    <div className="blokk-s">
+                        <Innholdstittel>{getMessage(intl, 'intro.pageheading.soknadES')}</Innholdstittel>
+                    </div>
                     <div className="blokk-m">
                         <Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
                     </div>

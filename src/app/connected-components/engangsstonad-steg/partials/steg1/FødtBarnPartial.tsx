@@ -121,7 +121,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
 
         return (
             <FormBlock>
-                <div className="blokk-xxs">
+                <FormBlock margin="xxs">
                     <ValidDateInput
                         id="fødselsdato"
                         label={<LabelText>{dateInputLabels[0]}</LabelText>}
@@ -131,22 +131,20 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                         avgrensninger={datoavgrensning}
                         validators={this.getFødselsdatoValidators(0)}
                     />
-                </div>
-                {barn.antallBarn > 1 && (
-                    <div className="blokk-xs">
-                        <Checkbox
-                            className="fødselsdatoCheckbox"
-                            label={getMessage(intl, 'relasjonBarn.text.fodselsdato.forskjelligeDager')}
-                            onChange={this.diffrentBirthDatesCheckboxHandler}
-                            checked={!this.state.bornOnSameDate}
-                        />
-                    </div>
-                )}
+                </FormBlock>
+                <FormBlock visible={barn.antallBarn > 1} margin="xs">
+                    <Checkbox
+                        className="fødselsdatoCheckbox"
+                        label={getMessage(intl, 'relasjonBarn.text.fodselsdato.forskjelligeDager')}
+                        onChange={this.diffrentBirthDatesCheckboxHandler}
+                        checked={!this.state.bornOnSameDate}
+                    />
+                </FormBlock>
                 {!this.state.bornOnSameDate &&
                     barn.fødselsdatoer.slice(1).map((element, index) => {
                         const fødselsdatoArrayIndex = index + 1;
                         return (
-                            <div className="blokk-xs" key={`fødselsdato` + fødselsdatoArrayIndex}>
+                            <FormBlock margin="xs" key={`fødselsdato` + fødselsdatoArrayIndex}>
                                 <ValidDateInput
                                     id="fødselsdato"
                                     label={dateInputLabels[fødselsdatoArrayIndex]}
@@ -156,7 +154,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                                     validators={this.getFødselsdatoValidators(fødselsdatoArrayIndex)}
                                     avgrensninger={datoavgrensning}
                                 />
-                            </div>
+                            </FormBlock>
                         );
                     })}
             </FormBlock>

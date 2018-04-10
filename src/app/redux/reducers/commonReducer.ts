@@ -2,7 +2,7 @@ import { CommonActionKeys, CommonActionTypes } from '../actions/common/commonAct
 
 const getDefaultState = () => ({
     language: 'nb',
-    godkjentVilkar: true,
+    godkjentVilkar: false,
     bekreftetInformasjon: false,
     barnErFodt: null
 });

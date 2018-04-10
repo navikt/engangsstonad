@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { Collapse } from 'react-collapse';
+import * as classnames from 'classnames';
+
+export type BottomMargin = 'm' | 's' | 'xs' | 'xxs';
 
 export interface Props {
     children: React.ReactNode;
@@ -7,12 +10,14 @@ export interface Props {
     visible?: boolean;
     /** Default true */
     animated?: boolean;
+    /** Size - default m */
+    margin?: BottomMargin;
 }
 
 import './formblock.less';
 
-const FormBlock: React.StatelessComponent<Props> = ({ visible = true, animated = true, children }) => {
-    const getContent = () => <div className="formblock">{children}</div>;
+const FormBlock: React.StatelessComponent<Props> = ({ visible = true, animated = true, margin = 'm', children }) => {
+    const getContent = () => <div className={classnames('formblock', `formblock--${margin}`)}>{children}</div>;
 
     if (animated === true) {
         return <Collapse isOpened={visible === true}>{visible ? getContent() : <div />}</Collapse>;

@@ -23,6 +23,7 @@ import OppsummeringDenAndreForeldren from './../oppsummering/AndreForeldrenOppsu
 import OppsummeringUtenlandsopphold from './../oppsummering/UtenlandsoppholdOppsummering';
 const { ValidGroup } = require('./../../lib') as any;
 import '../../styles/engangsstonad.less';
+import FormBlock from 'components/form-block/FormBlock';
 
 interface StateProps {
     bekreftetInformasjon: boolean;
@@ -51,7 +52,7 @@ export class Steg4 extends React.Component<Props> {
                 <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />
                 <OppsummeringUtenlandsopphold utenlandsopphold={this.props.utenlandsopphold} />
 
-                <div className="blokk-m">
+                <FormBlock>
                     <ValidGroup
                         validators={[
                             {
@@ -68,7 +69,7 @@ export class Steg4 extends React.Component<Props> {
                             label={getMessage(intl, 'oppsummering.text.samtykke')}
                         />
                     </ValidGroup>
-                </div>
+                </FormBlock>
             </div>
         );
     }
