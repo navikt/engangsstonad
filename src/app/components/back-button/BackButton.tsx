@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 const { VenstreChevron } = require('nav-frontend-chevron');
+const { Knapp } = require('nav-frontend-knapper');
 
 import './backButton.less';
 
@@ -11,10 +12,10 @@ interface Props {
 }
 
 const BackButton: React.StatelessComponent<Props> = ({ onClick, hidden, text = 'Tilbake' }) => (
-    <button className={classnames('backButton', {'backButton__hidden': hidden })} onClick={onClick} type="button">
+    <Knapp className={classnames('backButton', {'backButton__hidden': hidden })} onClick={onClick} mini={true} htmlType="button">
         <VenstreChevron />
         {text}
-    </button>
+    </Knapp>
 );
 
 export default BackButton;
