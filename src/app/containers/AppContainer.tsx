@@ -104,7 +104,6 @@ export class AppContainer extends React.Component<Props> {
         const { godkjentVilkar, søknadSendt } = this.props;
         const routes = [];
         if (!søknadSendt) {
-            routes.push(<Route path="/engangsstonad/workbench" component={Workbench} exact={true} key="workbench" />);
             routes.push(<Route path="/engangsstonad" component={Intro} exact={true} key="intro" />);
             if (godkjentVilkar) {
                 routes.push(<Route path="/engangsstonad/soknad" component={SøknadContainer} key="søknad" />);

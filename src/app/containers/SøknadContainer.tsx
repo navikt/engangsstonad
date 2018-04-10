@@ -17,18 +17,11 @@ import '../styles/engangsstonad.less';
 import Utenlandsopphold from '../types/domain/Utenlandsopphold';
 import { FodtBarn, UfodtBarn } from '../types/domain/Barn';
 import AnnenForelder from '../types/domain/AnnenForelder';
-import {
-    apiActionCreators as api,
-    stepActionCreators as stepActions
-} from 'actions';
+import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../redux/types';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
-import {
-    shouldDisplayNextButtonOnStep1,
-    shouldDisplayNextButtonOnStep2,
-    shouldDisplayNextButtonOnStep3
-} from 'util/stepUtil';
+import { shouldDisplayNextButtonOnStep1, shouldDisplayNextButtonOnStep2, shouldDisplayNextButtonOnStep3 } from 'util/stepUtil';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -42,10 +35,7 @@ interface OwnProps {
     søknadSendingInProgress: boolean;
 }
 
-type Props = OwnProps &
-    DispatchProps &
-    InjectedIntlProps &
-    RouteComponentProps<{}>;
+type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps<{}>;
 
 export class SøknadContainer extends React.Component<Props> {
     constructor(props: Props) {
@@ -72,13 +62,7 @@ export class SøknadContainer extends React.Component<Props> {
     }
 
     handleNextClicked() {
-        const {
-            dispatch,
-            annenForelder,
-            barn,
-            utenlandsopphold,
-            vedlegg
-        } = this.props;
+        const { dispatch, annenForelder, barn, utenlandsopphold, vedlegg } = this.props;
         if (this.hasToWaitForResponse()) {
             return dispatch(
                 api.sendSoknad({
@@ -101,12 +85,7 @@ export class SøknadContainer extends React.Component<Props> {
     }
 
     shouldRenderFortsettKnapp(): boolean {
-        const {
-            activeStep,
-            annenForelder,
-            utenlandsopphold,
-            barn
-        } = this.props;
+        const { activeStep, annenForelder, utenlandsopphold, barn } = this.props;
         switch (activeStep) {
             case 1:
                 return shouldDisplayNextButtonOnStep1(barn);
@@ -124,37 +103,27 @@ export class SøknadContainer extends React.Component<Props> {
         const { intl, activeStep, søknadSendingInProgress } = this.props;
         const stepsConfig = getStepConfig(intl);
         const titles = stepsConfig.map(stepConf => stepConf.stegIndikatorLabel);
-        const fortsettKnappLabel =
-            stepsConfig[activeStep - 1].fortsettKnappLabel;
+        const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
 
         return (
             <div>
                 <Prompt
                     message={nextLocation => {
                         const { location } = this.props;
-                        if (
-                            location.pathname === nextLocation.pathname &&
-                            nextLocation.hash !== location.hash
-                        ) {
+                        if (location.pathname === nextLocation.pathname && nextLocation.hash !== location.hash) {
                             return true;
                         }
                         return 'Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?';
                     }}
                 />
-                <Søknadstittel
-                    tittel={getMessage(intl, 'søknad.pageheading')}
-                />
+                <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <ValidForm
                     summaryTitle="Du må rette opp i følgende feil:"
                     noSummary={activeStep === 3}
                     onSubmit={this.handleNextClicked}
                     className="responsiveContainer"
                 >
-                    <SkjemaHeader
-                        onPrevious={() => this.handleBackClicked()}
-                        activeStep={activeStep}
-                        stepTitles={titles}
-                    />
+                    <SkjemaHeader onPrevious={() => this.handleBackClicked()} activeStep={activeStep} stepTitles={titles} />
 
                     {activeStep === 1 && <Steg1 />}
                     {activeStep === 2 && <Steg2 />}
@@ -162,11 +131,7 @@ export class SøknadContainer extends React.Component<Props> {
                     {activeStep === 4 && <Steg4 />}
 
                     {this.shouldRenderFortsettKnapp() === true && (
-                        <Hovedknapp
-                            className="responsiveButton"
-                            disabled={søknadSendingInProgress}
-                            spinner={søknadSendingInProgress}
-                        >
+                        <Hovedknapp className="responsiveButton" disabled={søknadSendingInProgress} spinner={søknadSendingInProgress}>
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     )}
