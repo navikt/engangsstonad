@@ -1,8 +1,27 @@
+@import '../../styles/variables.less';
 .skjemaHeader {
     margin-bottom: 2rem;
-    .backButton {
-        position: absolute;
+    position: relative;
+    &__backButton {
+        margin-bottom: 0.5rem;
     }
-    .steps  {
+    @media screen and (min-width: @screen-tablet) {
+        &__backButton {
+            margin-bottom: 1.5rem;
+        }
     }
+    //     display: flex;
+    //     flex-direction: row;
+    //     flex-wrap: wrap;
+    //     justify-content: stretch;
+    //     &__backButton {
+    //         flex: 0 0 5rem;
+    //         margin: 1rem 0 0 0;
+    //     }
+    //     &__steps {
+    //         flex: 1 1 70%;
+    //         min-width: 20rem;
+    //         margin-right: 5rem;
+    //     }
+    // }
 }

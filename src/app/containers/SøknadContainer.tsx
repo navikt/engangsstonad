@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import getMessage from '../util/i18n/i18nUtils';
-// import StepIndicator from 'components/step-indicator/StepIndicator';
 
 import Steg1 from './../connected-components//engangsstonad-steg/Steg1';
 import Steg2 from '../connected-components/engangsstonad-steg/Steg2';
@@ -21,9 +20,8 @@ import AnnenForelder from '../types/domain/AnnenForelder';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../redux/types';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
-// import BackButton from 'components/back-button/BackButton';
-import { shouldDisplayNextButtonOnStep1, shouldDisplayNextButtonOnStep2, shouldDisplayNextButtonOnStep3 } from 'util/stepUtil';
 import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
+import { shouldDisplayNextButtonOnStep1, shouldDisplayNextButtonOnStep2, shouldDisplayNextButtonOnStep3 } from 'util/stepUtil';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -39,7 +37,8 @@ interface OwnProps {
 type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps<{}>;
 
 export class SøknadContainer extends React.Component<Props> {
-    componentWillMount() {
+    constructor(props: Props) {
+        super(props);
         this.handleNextClicked = this.handleNextClicked.bind(this);
         this.handleBackClicked = this.handleBackClicked.bind(this);
     }
@@ -108,14 +107,12 @@ export class SøknadContainer extends React.Component<Props> {
                         }
                         return 'Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?';
                     }}
-                    key="prompt"
                 />
                 <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <ValidForm
                     summaryTitle="Du må rette opp i følgende feil:"
                     noSummary={activeStep === 3}
                     onSubmit={this.handleNextClicked}
-                    key="form"
                     className="responsiveContainer"
                 >
                     <SkjemaHeader onPrevious={() => this.handleBackClicked()} activeStep={activeStep} stepTitles={titles} />

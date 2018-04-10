@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Step from './Step';
+import Stegindikator from 'nav-frontend-stegindikator';
 import 'nav-frontend-stegindikator-style';
 import './stepIndicator.less';
 import { Innholdstittel } from 'nav-frontend-typografi';
@@ -9,13 +9,40 @@ interface Props {
     activeStep: number;
 }
 
-const StepIndicator: React.StatelessComponent<Props> = ({ stepTitles, activeStep }) => (
-    <div className="stegindikatorWrapper" role="progressbar" aria-valuenow={activeStep} aria-valuemin="1" aria-valuemax={stepTitles.length}>
-        <div className="stegindikatortittel">
-            <Innholdstittel>{stepTitles[activeStep - 1]}</Innholdstittel>
-        </div>
-        <ul className="stegindikator">{stepTitles.map((step, index) => <Step activeStep={activeStep} key={step} title={step} step={index + 1} />)}</ul>
-    </div>
-);
+class StepIndicator extends React.Component<Props> {
+    title: HTMLElement | null;
+    componentDidMount() {
+        if (this.title != null) {
+            this.title.focus();
+        }
+    }
+    componentDidUpdate(prevProps: Props) {
+        if (this.title != null && prevProps.activeStep !== this.props.activeStep) {
+            this.title.focus();
+        }
+    }
+    render() {
+        const { activeStep, stepTitles } = this.props;
+        return (
+            <div className="stegindicator" role="progressbar" aria-valuenow={activeStep} aria-valuemin="1" aria-valuemax={stepTitles.length}>
+                <Innholdstittel className="stegindicator__title">
+                    <span className="m_no-focusOutline" ref={c => (this.title = c)} tabIndex={-1}>
+                        {stepTitles[activeStep - 1]}
+                    </span>
+                </Innholdstittel>
+                <Stegindikator
+                    visLabel={false}
+                    kompakt={true}
+                    autoResponsiv={true}
+                    aktivtSteg={activeStep - 1}
+                    steg={stepTitles.map((s, i) => ({
+                        index: i + 1,
+                        label: stepTitles[i]
+                    }))}
+                />
+            </div>
+        );
+    }
+}
 
 export default StepIndicator;

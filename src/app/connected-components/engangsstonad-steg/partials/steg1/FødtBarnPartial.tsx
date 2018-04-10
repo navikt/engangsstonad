@@ -9,6 +9,7 @@ import { DispatchProps } from '../../../../redux/types/index';
 const { Checkbox } = require('nav-frontend-skjema');
 import { containsUnlikeValues } from 'util/arrayUtil';
 import LabelText from 'components/labeltext/LabelText';
+import FormBlock from 'components/form-block/FormBlock';
 
 interface StateProps {
     barn: Barn;
@@ -119,18 +120,20 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
         };
 
         return (
-            <div>
-                <ValidDateInput
-                    id="fødselsdato"
-                    label={<LabelText>{dateInputLabels[0]}</LabelText>}
-                    dato={getFodselsdatoForBarn(barn, 0)}
-                    onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, 0)}
-                    name="fødselsdato"
-                    avgrensninger={datoavgrensning}
-                    validators={this.getFødselsdatoValidators(0)}
-                />
+            <FormBlock>
+                <div className="blokk-xxs">
+                    <ValidDateInput
+                        id="fødselsdato"
+                        label={<LabelText>{dateInputLabels[0]}</LabelText>}
+                        dato={getFodselsdatoForBarn(barn, 0)}
+                        onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, 0)}
+                        name="fødselsdato"
+                        avgrensninger={datoavgrensning}
+                        validators={this.getFødselsdatoValidators(0)}
+                    />
+                </div>
                 {barn.antallBarn > 1 && (
-                    <div className="blokk-xs">
+                    <div className="blokk-m">
                         <Checkbox
                             className="fødselsdatoCheckbox"
                             label={getMessage(intl, 'relasjonBarn.text.fodselsdato.forskjelligeDager')}
@@ -143,19 +146,20 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                     barn.fødselsdatoer.slice(1).map((element, index) => {
                         const fødselsdatoArrayIndex = index + 1;
                         return (
-                            <ValidDateInput
-                                id="fødselsdato"
-                                label={dateInputLabels[fødselsdatoArrayIndex]}
-                                dato={getFodselsdatoForBarn(barn, fødselsdatoArrayIndex)}
-                                onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, fødselsdatoArrayIndex)}
-                                name="fødselsdato"
-                                validators={this.getFødselsdatoValidators(fødselsdatoArrayIndex)}
-                                key={`fødselsdato` + fødselsdatoArrayIndex}
-                                avgrensninger={datoavgrensning}
-                            />
+                            <div className="blokk-xxs" key={`fødselsdato` + fødselsdatoArrayIndex}>
+                                <ValidDateInput
+                                    id="fødselsdato"
+                                    label={dateInputLabels[fødselsdatoArrayIndex]}
+                                    dato={getFodselsdatoForBarn(barn, fødselsdatoArrayIndex)}
+                                    onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, fødselsdatoArrayIndex)}
+                                    name="fødselsdato"
+                                    validators={this.getFødselsdatoValidators(fødselsdatoArrayIndex)}
+                                    avgrensninger={datoavgrensning}
+                                />
+                            </div>
                         );
                     })}
-            </div>
+            </FormBlock>
         );
     }
 }
