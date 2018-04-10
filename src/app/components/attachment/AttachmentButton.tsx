@@ -24,7 +24,7 @@ class AttachmentButton extends React.Component<Props> {
         const validExtensions = ['pdf', 'jpeg', 'jpg', 'png'];
         const extension = file.name.split('.').pop();
         if (extension) {
-            return validExtensions.includes(extension);
+            return validExtensions.includes(extension.toLowerCase());
         }
         return false;
     }
@@ -77,19 +77,13 @@ class AttachmentButton extends React.Component<Props> {
                 tabIndex={0}
                 htmlFor={id}
                 className="attachmentButton"
-                onDragOver={(e) => this.onFileDragOverHandler(e)}
-                onDrop={(e) => this.onFileDropHandler(e)}
-                onKeyPress={(e) => this.onKeyPress(e)}
+                onDragOver={e => this.onFileDragOverHandler(e)}
+                onDrop={e => this.onFileDropHandler(e)}
+                onKeyPress={e => this.onKeyPress(e)}
             >
-                <CustomSVG iconRef={uploadIcon}  size={22} />
+                <CustomSVG iconRef={uploadIcon} size={22} />
                 <Element className="attachmentButton__label">Last opp vedlegg...</Element>
-                <input
-                    id={id}
-                    type="file"
-                    accept="application/pdf,image/jpg,image/jpeg,image/png"
-                    onChange={(e) => this.onFileSelect(e)}
-                    multiple={true}
-                />
+                <input id={id} type="file" accept="application/pdf,image/jpg,image/jpeg,image/png" onChange={e => this.onFileSelect(e)} multiple={true} />
             </label>
         );
     }
