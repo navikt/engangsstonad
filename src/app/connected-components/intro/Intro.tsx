@@ -10,7 +10,11 @@ const { BekreftCheckboksPanel } = require('nav-frontend-skjema');
 
 import RettigheterOgPlikter from 'components/modal-content/RettigheterOgPlikter';
 const VeilederIllustration = require('assets/svg/veileder.svg').default;
-import { commonActionCreators as common, soknadActionCreators as soknad, stepActionCreators as step } from '../../redux/actions';
+import {
+    commonActionCreators as common,
+    soknadActionCreators as soknad,
+    stepActionCreators as step
+} from '../../redux/actions';
 import { getDefaultState } from 'reducers/stepReducer';
 import LanguageToggle from '../../intl/LanguageToggle';
 import getMessage from '../../util/i18n/i18nUtils';
@@ -77,7 +81,11 @@ export class Intro extends React.Component<Props, OwnProps> {
                 id="intro.text.samtykkeIntro"
                 values={{
                     link: (
-                        <a className="lenke" href="#" onClick={e => this.openRettigheterOgPlikterModal(e)}>
+                        <a
+                            className="lenke"
+                            href="#"
+                            onClick={e => this.openRettigheterOgPlikterModal(e)}
+                        >
                             <FormattedMessage id="intro.text.samtykke.link" />
                         </a>
                     )
@@ -88,7 +96,12 @@ export class Intro extends React.Component<Props, OwnProps> {
 
     getGodkjentVilkarValidators() {
         const { godkjentVilkar, intl } = this.props;
-        return [{ test: () => godkjentVilkar === true, failText: getMessage(intl, 'valideringsfeil.godkjentVilkar') }];
+        return [
+            {
+                test: () => godkjentVilkar === true,
+                failText: getMessage(intl, 'valideringsfeil.godkjentVilkar')
+            }
+        ];
     }
 
     render() {
@@ -97,18 +110,27 @@ export class Intro extends React.Component<Props, OwnProps> {
         return (
             <ValidForm noSummary={true} onSubmit={this.startSoknad}>
                 <DocumentTitle title="Samtykke - NAV Engangsstønad" />
-                <LanguageToggle language={this.props.language} toggleLanguage={(languageCode: string) => this.toggleLanguage(languageCode)} />
+                <LanguageToggle
+                    language={this.props.language}
+                    toggleLanguage={(languageCode: string) =>
+                        this.toggleLanguage(languageCode)
+                    }
+                />
                 <SimpleIllustration svg={VeilederIllustration} />
 
                 <div className="responsiveContainer">
                     <div className="blokk-s">
-                        <Innholdstittel>{getMessage(intl, 'intro.pageheading.soknadES')}</Innholdstittel>
+                        <Innholdstittel>
+                            {getMessage(intl, 'intro.pageheading.soknadES')}
+                        </Innholdstittel>
                     </div>
                     <div className="blokk-m">
                         <Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
                     </div>
                     <div className="blokk-m">
-                        <ValidGroup validators={this.getGodkjentVilkarValidators()}>
+                        <ValidGroup
+                            validators={this.getGodkjentVilkarValidators()}
+                        >
                             <BekreftCheckboksPanel
                                 inputProps={{ name: 'egenerklaring' }}
                                 label={getMessage(intl, 'intro.text.samtykke')}
@@ -119,11 +141,15 @@ export class Intro extends React.Component<Props, OwnProps> {
                             </BekreftCheckboksPanel>
                         </ValidGroup>
                     </div>
-                    <Hovedknapp className="responsiveButton">{getMessage(intl, 'intro.button.startSoknad')}</Hovedknapp>
+                    <Hovedknapp className="responsiveButton">
+                        {getMessage(intl, 'intro.button.startSoknad')}
+                    </Hovedknapp>
                     <Modal
                         isOpen={this.state.isModalOpen}
                         closeButton={true}
-                        onRequestClose={() => this.closeRettigheterOgPlikterModal()}
+                        onRequestClose={() =>
+                            this.closeRettigheterOgPlikterModal()
+                        }
                         contentLabel="rettigheter og plikter"
                     >
                         <RettigheterOgPlikter />

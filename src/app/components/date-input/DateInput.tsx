@@ -13,7 +13,7 @@ export class DateInput extends React.Component<Props, {}> {
         const { label, feil, ...rest } = this.props;
         return (
             <SkjemaInputElement id={this.props.id} feil={feil} label={label}>
-                <Datovelger {...rest} />
+                <Datovelger {...rest} inputProps={{ placeholder: 'DD.MM.YYYY' }} />
             </SkjemaInputElement>
         );
     }

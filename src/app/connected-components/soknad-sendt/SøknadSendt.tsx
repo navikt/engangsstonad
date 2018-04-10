@@ -5,6 +5,7 @@ import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import * as moment from 'moment';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import CustomSVG from './../../components/custom-svg/CustomSVG';
+import Lenke from 'nav-frontend-lenker';
 
 const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
 
@@ -35,9 +36,9 @@ export class EngangsstonadCompleted extends React.Component<Props> {
                     0: moment(soknad.opprettet).format('HH:mm'),
                     1: moment(soknad.opprettet).format('DD. MMMM YYYY'),
                     linkText: (
-                        <a className="lenke" href="https://www.nav.no/no/Ditt+NAV">
+                        <Lenke href="https://www.nav.no/no/Ditt+NAV">
                             <FormattedMessage id="kvittering.text.soknadMottatt.linkText" />
-                        </a>
+                        </Lenke>
                     )
                 }}
             />
@@ -50,15 +51,23 @@ export class EngangsstonadCompleted extends React.Component<Props> {
         return (
             <div className="engangsstonad">
                 <DocumentTitle title="Kvittering - NAV Engangsstønad" />
-                <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
+                <Søknadstittel
+                    tittel={getMessage(intl, 'søknad.pageheading')}
+                />
                 <div className="responsiveContainer">
-                    <CustomSVG iconRef={SpotlightLetter} className="spotlightLetter" />
-                    <Innholdstittel>{getMessage(intl, 'kvittering.text.takk', { navn: person.fornavn })}</Innholdstittel>
+                    <CustomSVG
+                        iconRef={SpotlightLetter}
+                        className="spotlightLetter"
+                    />
+                    <Innholdstittel className="blokk-s">
+                        {getMessage(intl, 'kvittering.text.takk', {
+                            navn: person.fornavn
+                        })}
+                    </Innholdstittel>
                     <Ingress>{this.receiptText()}</Ingress>
                 </div>
             </div>
         );
-
     }
 }
 
@@ -67,4 +76,6 @@ const mapStateToProps = (state: any) => ({
     soknad: state.apiReducer.soknad
 });
 
-export default connect<StateProps>(mapStateToProps)(injectIntl(EngangsstonadCompleted));
+export default connect<StateProps>(mapStateToProps)(
+    injectIntl(EngangsstonadCompleted)
+);

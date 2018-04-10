@@ -10,10 +10,8 @@ interface Props {
 
 const PersonaliaLabel: React.StatelessComponent<Props> = ({ navn, personnummer }) => (
     <div className="personaliaLabel">
-        <div className="personaliaLabel__right">
-            <Undertittel className="personaliaLabel__name">{navn}</Undertittel>
-            <Normaltekst className="personaliaLabel__person">{personnummer}</Normaltekst>
-        </div>
+        <Undertittel className="personaliaLabel__name">{navn}</Undertittel>
+        <Normaltekst className="personaliaLabel__person">{personnummer}</Normaltekst>
     </div>
 );
 export default PersonaliaLabel;

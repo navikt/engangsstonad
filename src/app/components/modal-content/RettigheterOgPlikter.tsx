@@ -2,6 +2,7 @@ import * as React from 'react';
 const { FormattedMessage, injectIntl } = require('react-intl');
 const { Undertittel, Normaltekst } = require('nav-frontend-typografi');
 import getMessage from '../../util/i18n/i18nUtils';
+import Lenke from 'nav-frontend-lenker';
 
 import './modalContent.less';
 import InjectedIntl = ReactIntl.InjectedIntl;
@@ -27,14 +28,12 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                         id="rettigheter.text.lestOgForstått"
                         values={{
                             link: (
-                                <a
-                                    className="lenke"
+                                <Lenke
                                     href="https://nav.no/rettOgPlikt"
                                     target="_blank"
-                                    rel="noopener noreferrer"
                                 >
                                     <FormattedMessage id="rettigheter.text.lestOgForstått.link" />
-                                </a>
+                                </Lenke>
                             )
                         }}
                     />
@@ -47,32 +46,50 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                 <ul className="modalContent__sublist">
                     <li>
                         <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.1')}
+                            {getMessage(
+                                intl,
+                                'rettigheter.text.innhenteOpplysninger.1'
+                            )}
                         </Normaltekst>
                     </li>
                     <li>
                         <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.2')}
+                            {getMessage(
+                                intl,
+                                'rettigheter.text.innhenteOpplysninger.2'
+                            )}
                         </Normaltekst>
                     </li>
                     <li>
                         <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.3')}
+                            {getMessage(
+                                intl,
+                                'rettigheter.text.innhenteOpplysninger.3'
+                            )}
                         </Normaltekst>
                     </li>
                     <li>
                         <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.4')}
+                            {getMessage(
+                                intl,
+                                'rettigheter.text.innhenteOpplysninger.4'
+                            )}
                         </Normaltekst>
                     </li>
                     <li>
                         <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.5')}
+                            {getMessage(
+                                intl,
+                                'rettigheter.text.innhenteOpplysninger.5'
+                            )}
                         </Normaltekst>
                     </li>
                     <li>
                         <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.6')}
+                            {getMessage(
+                                intl,
+                                'rettigheter.text.innhenteOpplysninger.6'
+                            )}
                         </Normaltekst>
                     </li>
                 </ul>
@@ -83,18 +100,16 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                         id="rettigheter.text.personvernerklering"
                         values={{
                             link: (
-                                <a
-                                    className="lenke"
+                                <Lenke
                                     href={
                                         'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/' +
                                         'Teknisk+brukerstotte/Snarveier/' +
                                         'personvernerkl%C3%A6ring-for-arbeids-og-velferdsetaten'
                                     }
                                     target="_blank"
-                                    rel="noopener noreferrer"
                                 >
                                     <FormattedMessage id="rettigheter.text.personvernerklering.link" />
-                                </a>
+                                </Lenke>
                             )
                         }}
                     />
