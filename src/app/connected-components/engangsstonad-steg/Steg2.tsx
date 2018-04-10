@@ -99,21 +99,23 @@ export class Steg2 extends React.Component<Props> {
                     />
                 </FormBlock>
                 <FormBlock visible={annenForelder.navn !== undefined}>
-                    <FnrComponent
-                        label={
-                            <LabelMedHjelpetekst
-                                label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
-                                hjelpetekst={getMessage(intl, 'annenForelder.hjelpetekst.dNummer')}
-                                buttonProps={{ id: 'fnrHjelpetekstBtn' }}
-                            />
-                        }
-                        id="js-fødselsnummer"
-                        placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
-                        name="fodselsnummerfelt"
-                        validators={this.getFødselsnummerValidators()}
-                        value={annenForelder.fnr || ''}
-                    />
+                    <div className="blokk-xxs">
+                        <FnrComponent
+                            label={
+                                <LabelMedHjelpetekst
+                                    label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
+                                    hjelpetekst={getMessage(intl, 'annenForelder.hjelpetekst.dNummer')}
+                                    buttonProps={{ id: 'fnrHjelpetekstBtn' }}
+                                />
+                            }
+                            id="js-fødselsnummer"
+                            placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
+                            name="fodselsnummerfelt"
+                            validators={this.getFødselsnummerValidators()}
+                            value={annenForelder.fnr || ''}
+                        />
+                    </div>
                     <Checkbox
                         checked={annenForelder.utenlandskFnr || false}
                         label={getMessage(intl, 'annenForelder.label.utenlandskFødselsnummer')}

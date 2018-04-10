@@ -133,7 +133,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                     />
                 </div>
                 {barn.antallBarn > 1 && (
-                    <div className="blokk-m">
+                    <div className="blokk-xs">
                         <Checkbox
                             className="fødselsdatoCheckbox"
                             label={getMessage(intl, 'relasjonBarn.text.fodselsdato.forskjelligeDager')}
@@ -146,7 +146,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                     barn.fødselsdatoer.slice(1).map((element, index) => {
                         const fødselsdatoArrayIndex = index + 1;
                         return (
-                            <div className="blokk-xxs" key={`fødselsdato` + fødselsdatoArrayIndex}>
+                            <div className="blokk-xs" key={`fødselsdato` + fødselsdatoArrayIndex}>
                                 <ValidDateInput
                                     id="fødselsdato"
                                     label={dateInputLabels[fødselsdatoArrayIndex]}
