@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import * as moment from 'moment';
-const { ValidDateInput } = require('./../../../../lib') as any;
 import { soknadActionCreators as soknad } from '../../../../redux/actions';
 import { default as Barn, UfodtBarn } from '../../../../types/domain/Barn';
 import getMessage from 'util/i18n/i18nUtils';
@@ -13,6 +12,7 @@ import AttachmentList from 'components/attachment/AttachmentList';
 const Modal = require('nav-frontend-modal').default;
 import Veilederinfo from './../../../../components/veileder-info/Veilederinfo';
 import LabelText from 'components/labeltext/LabelText';
+import ValidDateInput from '../../../../lib/valid-date-input';
 
 interface StateProps {
     barn: Barn;
@@ -94,9 +94,19 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
             .startOf('day')
             .toDate();
 
-        const datoavgrensning = {
+        const datoavgrensningTermindato = {
             minDato: førsteGyldigeFødselsdato,
             maksDato: sisteGyldigeFødselsdato
+        };
+
+        const datoavgrensningTerminbekreftelse = {
+            minDato: moment()
+                .add(-1, 'years')
+                .startOf('day')
+                .toDate(),
+            maksDato: moment()
+                .endOf('day')
+                .toDate()
         };
 
         return (
@@ -109,7 +119,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         label={<LabelText intlId="relasjonBarn.text.termindato" />}
                         onChange={(dato: Date) => dispatch(soknad.setTermindato(dato ? dato.toISOString() : ''))}
                         validators={this.getTermindatoValidators()}
-                        avgrensninger={datoavgrensning}
+                        avgrensninger={datoavgrensningTermindato}
                     />
                 )}
 
@@ -130,7 +140,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                             label={<LabelText intlId="relasjonBarn.text.datoTerminbekreftelse" />}
                             onChange={(dato: Date) => dispatch(soknad.setTerminbekreftelseDato(dato ? dato.toISOString() : ''))}
                             validators={this.getTerminbekreftelseDatoValidators()}
-                            avgrensninger={datoavgrensning}
+                            avgrensninger={datoavgrensningTerminbekreftelse}
                         />
                     </div>
                 )}
