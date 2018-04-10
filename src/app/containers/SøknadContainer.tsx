@@ -33,6 +33,7 @@ interface OwnProps {
     activeStep: number;
     error: any;
     søknadSendt: boolean;
+    søknadSendingInProgress: boolean;
 }
 
 type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps<{}>;
@@ -88,7 +89,7 @@ export class SøknadContainer extends React.Component<Props> {
     }
 
     render() {
-        const { intl, activeStep } = this.props;
+        const { intl, activeStep, søknadSendingInProgress } = this.props;
         const stepsConfig = getStepConfig(intl);
         const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
@@ -125,7 +126,11 @@ export class SøknadContainer extends React.Component<Props> {
 
                     {
                         this.shouldRenderFortsettKnapp() === true &&
-                        <Hovedknapp className="responsiveButton">
+                        <Hovedknapp 
+                            className="responsiveButton"
+                            disabled={søknadSendingInProgress}
+                            spinner={søknadSendingInProgress}
+                        >
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     }
@@ -142,6 +147,7 @@ const mapStateToProps = (state: any) => ({
     annenForelder: state.soknadReducer.annenForelder,
     activeStep: state.stepReducer.activeStep,
     error: state.apiReducer.error,
-    søknadSendt: state.apiReducer.søknadSendt
+    søknadSendt: state.apiReducer.søknadSendt,
+    søknadSendingInProgress: state.apiReducer.søknadSendingInProgress
 });
 export default connect<OwnProps>(mapStateToProps)(injectIntl(SøknadContainer));
