@@ -13,55 +13,20 @@ interface Props {
     annenForelder: AnnenForelder;
 }
 
-const AndreForeldrenOppsummering: React.StatelessComponent<
-    Props & InjectedIntlProps
-> = props => {
+const AndreForeldrenOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = props => {
     const { intl } = props;
-    const {
-        navn,
-        fnr,
-        utenlandskFnr,
-        bostedsland,
-        kanIkkeOppgis
-    } = props.annenForelder;
+    const { navn, fnr, utenlandskFnr, bostedsland, kanIkkeOppgis } = props.annenForelder;
 
-    const fnrLabel = utenlandskFnr
-        ? getMessage(intl, 'oppsummering.text.utenlandskfødselsnummer')
-        : getMessage(intl, 'oppsummering.text.fødselsnummer');
+    const fnrLabel = utenlandskFnr ? getMessage(intl, 'oppsummering.text.utenlandskfødselsnummer') : getMessage(intl, 'oppsummering.text.fødselsnummer');
     const fnrText = fnr ? fnr : 'som ikke er oppgitt';
 
     return (
         <SummaryBlock title={getMessage(intl, 'annenForelder.sectionheading')}>
-            {kanIkkeOppgis && (
-                <Element>
-                    {getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}
-                </Element>
-            )}
-            {!kanIkkeOppgis &&
-                navn && (
-                    <DisplayTextWithLabel
-                        key="annenForelderNavn"
-                        label={getMessage(intl, 'annenForelder.label.navn')}
-                        text={navn}
-                    />
-                )}
-            {(fnr || utenlandskFnr) && (
-                <DisplayTextWithLabel
-                    key="annenForelderFødselsnummer"
-                    label={fnrLabel}
-                    text={fnrText}
-                />
-            )}
+            {kanIkkeOppgis && <Element>{getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}</Element>}
+            {!kanIkkeOppgis && navn && <DisplayTextWithLabel key="annenForelderNavn" label={getMessage(intl, 'annenForelder.label.navn')} text={navn} />}
+            {(fnr || utenlandskFnr) && <DisplayTextWithLabel key="annenForelderFødselsnummer" label={fnrLabel} text={fnrText} />}
             {utenlandskFnr &&
-                bostedsland && (
-                    <DisplayTextWithLabel
-                        label={getMessage(
-                            intl,
-                            'annenForelder.label.bostedsland'
-                        )}
-                        text={countries.getName(bostedsland, 'nb')}
-                    />
-                )}
+                bostedsland && <DisplayTextWithLabel label={getMessage(intl, 'annenForelder.label.bostedsland')} text={countries.getName(bostedsland, 'nb')} />}
         </SummaryBlock>
     );
 };

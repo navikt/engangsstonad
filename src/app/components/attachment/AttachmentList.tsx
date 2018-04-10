@@ -14,10 +14,15 @@ interface AttachmentProps {
     onDelete?: (file: File) => void;
 }
 
-const Attachment: React.StatelessComponent<AttachmentProps> = ({ vedlegg, onDelete }) => (
+const Attachment: React.StatelessComponent<AttachmentProps> = ({
+    vedlegg,
+    onDelete
+}) => (
     <div className="attachment">
         <Icon className="attachment__icon" kind="vedlegg" size={20} />
-        <Normaltekst className="attachment__fileName">{vedlegg.name}</Normaltekst>
+        <Normaltekst className="attachment__fileName">
+            {vedlegg.name}
+        </Normaltekst>
         {onDelete && (
             <button
                 type="button"
@@ -40,7 +45,7 @@ const AttachmentList: React.StatelessComponent<Props> = props => {
         <ul className="attachmentList">
             {vedlegg.map((vedleggFile, index) => (
                 <li key={index}>
-                    <Attachment vedlegg={vedleggFile} onDelete={onDelete ? file => onDelete(file) : undefined} />
+                    <Attachment vedlegg={vedleggFile} onDelete={onDelete} />
                 </li>
             ))}
         </ul>

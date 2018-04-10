@@ -51,14 +51,9 @@ export class EngangsstonadCompleted extends React.Component<Props> {
         return (
             <div className="engangsstonad">
                 <DocumentTitle title="Kvittering - NAV Engangsstønad" />
-                <Søknadstittel
-                    tittel={getMessage(intl, 'søknad.pageheading')}
-                />
+                <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <div className="responsiveContainer">
-                    <CustomSVG
-                        iconRef={SpotlightLetter}
-                        className="spotlightLetter"
-                    />
+                    <CustomSVG iconRef={SpotlightLetter} className="spotlightLetter" />
                     <Innholdstittel className="blokk-s">
                         {getMessage(intl, 'kvittering.text.takk', {
                             navn: person.fornavn
@@ -76,6 +71,4 @@ const mapStateToProps = (state: any) => ({
     soknad: state.apiReducer.soknad
 });
 
-export default connect<StateProps>(mapStateToProps)(
-    injectIntl(EngangsstonadCompleted)
-);
+export default connect<StateProps>(mapStateToProps)(injectIntl(EngangsstonadCompleted));

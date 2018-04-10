@@ -13,14 +13,10 @@ interface Props {
 
 const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
     <div className="modalContent">
-        <Undertittel className="modalContent__header">
-            {getMessage(intl, 'rettigheter.sectionheading')}
-        </Undertittel>
+        <Undertittel className="modalContent__header">{getMessage(intl, 'rettigheter.sectionheading')}</Undertittel>
         <ul>
             <li>
-                <Normaltekst>
-                    {getMessage(intl, 'rettigheter.text.uretteOpplysninger')}
-                </Normaltekst>
+                <Normaltekst>{getMessage(intl, 'rettigheter.text.uretteOpplysninger')}</Normaltekst>
             </li>
             <li>
                 <Normaltekst>
@@ -28,10 +24,7 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                         id="rettigheter.text.lestOgForstått"
                         values={{
                             link: (
-                                <Lenke
-                                    href="https://nav.no/rettOgPlikt"
-                                    target="_blank"
-                                >
+                                <Lenke href="https://nav.no/rettOgPlikt" target="_blank">
                                     <FormattedMessage id="rettigheter.text.lestOgForstått.link" />
                                 </Lenke>
                             )
@@ -40,57 +33,25 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                 </Normaltekst>
             </li>
             <li>
-                <Normaltekst>
-                    {getMessage(intl, 'rettigheter.text.innhenteOpplysninger')}
-                </Normaltekst>
+                <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger')}</Normaltekst>
                 <ul className="modalContent__sublist">
                     <li>
-                        <Normaltekst>
-                            {getMessage(
-                                intl,
-                                'rettigheter.text.innhenteOpplysninger.1'
-                            )}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.1')}</Normaltekst>
                     </li>
                     <li>
-                        <Normaltekst>
-                            {getMessage(
-                                intl,
-                                'rettigheter.text.innhenteOpplysninger.2'
-                            )}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.2')}</Normaltekst>
                     </li>
                     <li>
-                        <Normaltekst>
-                            {getMessage(
-                                intl,
-                                'rettigheter.text.innhenteOpplysninger.3'
-                            )}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.3')}</Normaltekst>
                     </li>
                     <li>
-                        <Normaltekst>
-                            {getMessage(
-                                intl,
-                                'rettigheter.text.innhenteOpplysninger.4'
-                            )}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.4')}</Normaltekst>
                     </li>
                     <li>
-                        <Normaltekst>
-                            {getMessage(
-                                intl,
-                                'rettigheter.text.innhenteOpplysninger.5'
-                            )}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.5')}</Normaltekst>
                     </li>
                     <li>
-                        <Normaltekst>
-                            {getMessage(
-                                intl,
-                                'rettigheter.text.innhenteOpplysninger.6'
-                            )}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.6')}</Normaltekst>
                     </li>
                 </ul>
             </li>
