@@ -135,7 +135,7 @@ class ValidBase extends Component {
         }
 
         if (component === DateInput) {
-            return <this.props.component onChange={this.onChange} onBlur={this.onBlur} errorMessage={failedVerdict && failedVerdict.feilmelding} {...other} />;
+            return <this.props.component onChange={this.onChange} onBlur={this.onBlur} feil={feil || failedVerdict} {...other} />;
         }
 
         return <this.props.component onChange={this.onChange} onBlur={this.onBlur} feil={feil || failedVerdict} {...other} />;
