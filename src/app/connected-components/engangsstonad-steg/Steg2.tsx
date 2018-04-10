@@ -80,16 +80,18 @@ export class Steg2 extends React.Component<Props> {
         return (
             <div className="step2">
                 <FormBlock>
-                    <NavnComponent
-                        id="js-annenForelder"
-                        name="navnfelt"
-                        label={<b>{getMessage(intl, 'annenForelder.label.navn')}</b>}
-                        placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
-                        disabled={annenForelder.kanIkkeOppgis || false}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderNavn(e.target.value))}
-                        value={annenForelder.navn || ''}
-                        validators={this.getNavnValidators()}
-                    />
+                    <div className="blokk-xxs">
+                        <NavnComponent
+                            id="js-annenForelder"
+                            name="navnfelt"
+                            label={<b>{getMessage(intl, 'annenForelder.label.navn')}</b>}
+                            placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
+                            disabled={annenForelder.kanIkkeOppgis || false}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderNavn(e.target.value))}
+                            value={annenForelder.navn || ''}
+                            validators={this.getNavnValidators()}
+                        />
+                    </div>
                     <Checkbox
                         checked={annenForelder.kanIkkeOppgis || false}
                         label={getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}

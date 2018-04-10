@@ -7,12 +7,11 @@ import getMessage from 'util/i18n/i18nUtils';
 import { DispatchProps } from '../../../../redux/types/index';
 import OmTerminbekreftelsen from 'components/modal-content/OmTerminbekreftelsen';
 import { erIUke26Pluss3, erMindreEnn3UkerSiden, idagEllerTidligere, utstedtDatoErIUke26 } from 'util/validation/validationUtils';
-import AttachmentButton from 'components/attachment/AttachmentButton';
-import AttachmentList from 'components/attachment/AttachmentList';
 const Modal = require('nav-frontend-modal').default;
-import Veilederinfo from './../../../../components/veileder-info/Veilederinfo';
 import LabelText from 'components/labeltext/LabelText';
 import ValidDateInput from '../../../../lib/valid-date-input';
+import FormBlock from 'components/form-block/FormBlock';
+import Terminbekreftelse from './Terminbekreftelse';
 
 interface StateProps {
     barn: Barn;
@@ -80,7 +79,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
     }
 
     render() {
-        const { barn, vedlegg, dispatch, intl } = this.props;
+        const { barn, vedlegg, dispatch } = this.props;
         const { antallBarn } = barn;
         const termindato = getTermindato(barn);
         const terminbekreftelseDato = getTerminbekreftelseDato(barn);
@@ -112,26 +111,28 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
         return (
             <div>
                 {antallBarn && (
-                    <ValidDateInput
-                        id="termindato"
-                        name="termindato"
-                        dato={termindato}
-                        label={<LabelText intlId="relasjonBarn.text.termindato" />}
-                        onChange={(dato: Date) => dispatch(soknad.setTermindato(dato ? dato.toISOString() : ''))}
-                        validators={this.getTermindatoValidators()}
-                        avgrensninger={datoavgrensningTermindato}
-                    />
+                    <FormBlock>
+                        <ValidDateInput
+                            id="termindato"
+                            name="termindato"
+                            dato={termindato}
+                            label={<LabelText intlId="relasjonBarn.text.termindato" />}
+                            onChange={(dato: Date) => dispatch(soknad.setTermindato(dato ? dato.toISOString() : ''))}
+                            validators={this.getTermindatoValidators()}
+                            avgrensninger={datoavgrensningTermindato}
+                        />
+                    </FormBlock>
                 )}
 
-                {termindato && [
-                    <div className="blokk-xs" key="veileder">
-                        <Veilederinfo>{getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}</Veilederinfo>
-                    </div>,
-                    <AttachmentButton key="vedlegg" id="vedlegg" onFileSelected={(files: File[]) => dispatch(soknad.addVedlegg(files))} />,
-                    <AttachmentList key="vedleggListe" vedlegg={vedlegg} onDeleteClick={(file: File) => dispatch(soknad.deleteVedlegg(file))} />
-                ]}
+                <FormBlock visible={termindato !== undefined}>
+                    <Terminbekreftelse
+                        vedlegg={vedlegg}
+                        onFileSelect={(files: File[]) => dispatch(soknad.addVedlegg(files))}
+                        onFileDelete={(file: File) => dispatch(soknad.deleteVedlegg(file))}
+                    />
+                </FormBlock>
 
-                {vedlegg.length > 0 && (
+                <FormBlock visible={vedlegg.length > 0}>
                     <div key="dateInputTerminBekreftelse">
                         <ValidDateInput
                             id="terminbekreftelse"
@@ -143,7 +144,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                             avgrensninger={datoavgrensningTerminbekreftelse}
                         />
                     </div>
-                )}
+                </FormBlock>
                 <Modal
                     isOpen={this.state.isModalOpen}
                     closeButton={true}

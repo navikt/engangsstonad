@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import getMessage from '../util/i18n/i18nUtils';
-import StepIndicator from 'components/step-indicator/StepIndicator';
+// import StepIndicator from 'components/step-indicator/StepIndicator';
 
 import Steg1 from './../connected-components//engangsstonad-steg/Steg1';
 import Steg2 from '../connected-components/engangsstonad-steg/Steg2';
@@ -21,8 +21,9 @@ import AnnenForelder from '../types/domain/AnnenForelder';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../redux/types';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
-import BackButton from 'components/back-button/BackButton';
+// import BackButton from 'components/back-button/BackButton';
 import { shouldDisplayNextButtonOnStep1, shouldDisplayNextButtonOnStep2, shouldDisplayNextButtonOnStep3 } from 'util/stepUtil';
+import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -79,24 +80,28 @@ export class SøknadContainer extends React.Component<Props> {
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, annenForelder, utenlandsopphold, barn } = this.props;
         switch (activeStep) {
-            case 1: return shouldDisplayNextButtonOnStep1(barn);
-            case 2: return shouldDisplayNextButtonOnStep2(annenForelder);
-            case 3: return shouldDisplayNextButtonOnStep3(barn, utenlandsopphold);
+            case 1:
+                return shouldDisplayNextButtonOnStep1(barn);
+            case 2:
+                return shouldDisplayNextButtonOnStep2(annenForelder);
+            case 3:
+                return shouldDisplayNextButtonOnStep3(barn, utenlandsopphold);
             case 4:
-            default: return true;
+            default:
+                return true;
         }
     }
 
     render() {
         const { intl, activeStep } = this.props;
         const stepsConfig = getStepConfig(intl);
-        const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
+        const titles = stepsConfig.map(stepConf => stepConf.stegIndikatorLabel);
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
 
-        return ([
-            (
+        return (
+            <div>
                 <Prompt
-                    message={(nextLocation) => {
+                    message={nextLocation => {
                         const { location } = this.props;
                         if (location.pathname === nextLocation.pathname && nextLocation.hash !== location.hash) {
                             return true;
@@ -105,9 +110,7 @@ export class SøknadContainer extends React.Component<Props> {
                     }}
                     key="prompt"
                 />
-            ),
-            (<Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} key="tittel" />),
-            (
+                <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <ValidForm
                     summaryTitle="Du må rette opp i følgende feil:"
                     noSummary={activeStep === 3}
@@ -115,23 +118,17 @@ export class SøknadContainer extends React.Component<Props> {
                     key="form"
                     className="responsiveContainer"
                 >
-                    <BackButton onClick={this.handleBackClicked} hidden={activeStep === 1} />
-                    <StepIndicator stepTitles={titles} activeStep={activeStep} />
+                    <SkjemaHeader onPrevious={() => this.handleBackClicked()} activeStep={activeStep} stepTitles={titles} />
 
                     {activeStep === 1 && <Steg1 />}
                     {activeStep === 2 && <Steg2 />}
                     {activeStep === 3 && <Steg3 />}
                     {activeStep === 4 && <Steg4 />}
 
-                    {
-                        this.shouldRenderFortsettKnapp() === true &&
-                        <Hovedknapp className="responsiveButton">
-                            {fortsettKnappLabel}
-                        </Hovedknapp>
-                    }
+                    {this.shouldRenderFortsettKnapp() === true && <Hovedknapp className="responsiveButton">{fortsettKnappLabel}</Hovedknapp>}
                 </ValidForm>
-            )
-        ]);
+            </div>
+        );
     }
 }
 

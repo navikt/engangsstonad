@@ -21,6 +21,7 @@ import Person from '../types/domain/Person';
 import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSoknadResponse';
 
 import '../styles/engangsstonad.less';
+import Workbench from './Workbench';
 
 interface StateProps {
     soknad: EngangsstonadSoknadResponse;
@@ -69,15 +70,11 @@ export class AppContainer extends React.Component<Props> {
     }
 
     redirectToLogin() {
-        window.location.href = ((window as any).LOGIN_URL + '?redirect=' + window.location.href);
+        window.location.href = (window as any).LOGIN_URL + '?redirect=' + window.location.href;
     }
 
     renderContent(children: React.ReactNode) {
-        return (
-            <div className="engangsstonad">
-                {children}
-            </div>
-        );
+        return <div className="engangsstonad">{children}</div>;
     }
 
     renderRoutes(routes: JSX.Element | JSX.Element[]) {
@@ -107,6 +104,7 @@ export class AppContainer extends React.Component<Props> {
         const { godkjentVilkar, søknadSendt } = this.props;
         const routes = [];
         if (!søknadSendt) {
+            routes.push(<Route path="/engangsstonad/workbench" component={Workbench} exact={true} key="workbench" />);
             routes.push(<Route path="/engangsstonad" component={Intro} exact={true} key="intro" />);
             if (godkjentVilkar) {
                 routes.push(<Route path="/engangsstonad/soknad" component={SøknadContainer} key="søknad" />);
@@ -145,7 +143,7 @@ export class AppContainer extends React.Component<Props> {
             );
         }
 
-        return this.renderContent(<Spinner type="XXL"/>);
+        return this.renderContent(<Spinner type="XXL" />);
     }
 }
 

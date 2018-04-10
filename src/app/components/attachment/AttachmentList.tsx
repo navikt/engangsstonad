@@ -6,36 +6,44 @@ import './attachment.less';
 
 interface Props {
     vedlegg: File[];
-    onDeleteClick?: (file: File) => void;
+    onDelete?: (file: File) => void;
 }
 
-const AttachmentList: React.StatelessComponent<Props> = (props) => {
-    const { vedlegg, onDeleteClick } = props;
+interface AttachmentProps {
+    vedlegg: File;
+    onDelete?: (file: File) => void;
+}
 
+const Attachment: React.StatelessComponent<AttachmentProps> = ({ vedlegg, onDelete }) => (
+    <div className="attachment">
+        <Icon className="attachment__icon" kind="vedlegg" size={20} />
+        <Normaltekst className="attachment__fileName">{vedlegg.name}</Normaltekst>
+        {onDelete && (
+            <button
+                type="button"
+                className="js-toggle attachment__trashIcon"
+                aria-label="Slett vedlegg"
+                onClick={e => {
+                    e.stopPropagation();
+                    onDelete(vedlegg);
+                }}
+            >
+                <Icon kind="trashcan" size={20} />
+            </button>
+        )}
+    </div>
+);
+
+const AttachmentList: React.StatelessComponent<Props> = props => {
+    const { vedlegg, onDelete } = props;
     return (
-            <ul className="attachmentList">
-                {
-                    vedlegg.map((vedleggFile, index) => (
-                        <li className="attachmentList__Element" key={index}>
-                            <Icon className="attachmentList__attachmentIcon" kind="vedlegg" size={20}/>
-                            <Normaltekst className="attachmentList__fileName">{vedleggFile.name}</Normaltekst>
-                            {onDeleteClick &&
-                                <button
-                                    type="button"
-                                    className="js-toggle attachmentList__trashIcon"
-                                    aria-label="Slett vedlegg"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        onDeleteClick(vedleggFile);
-                                    }}
-                                >
-                                    <Icon kind="trashcan" size={20}/>
-                                </button>
-                            }
-                        </li>
-                    ))
-                }
-            </ul>
+        <ul className="attachmentList">
+            {vedlegg.map((vedleggFile, index) => (
+                <li key={index}>
+                    <Attachment vedlegg={vedleggFile} onDelete={onDelete ? file => onDelete(file) : undefined} />
+                </li>
+            ))}
+        </ul>
     );
 };
 export default AttachmentList;
