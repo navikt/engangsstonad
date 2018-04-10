@@ -1,4 +1,5 @@
 type Person = {
+    fnr: string;
     fornavn: string;
     mellomnavn: string;
     etternavn: string;

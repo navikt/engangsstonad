@@ -53,11 +53,12 @@
     "annenForelder.placeholder.fødselsnummer": "Fødselsnummer",
     "annenForelder.hjelpetekst.dNummer": "Du kan også skrive D-nummeret til den andre forelderen.",
     "annenForelder.ugyldigFødselsnummer": "Du må skrive et gyldig nummer (11 sifre)",
+    "annenForelder.ugyldigEgetFødselsnummer": "Du kan ikke oppgi ditt eget fødselsnummer",
     "annenForelder.ugyldigNavn": "Du må skrive navnet på den andre forelderen",
     "annenForelder.ugyldigBostedsland": "Du må oppgi hvor den andre forelderen bor",
 
 
-  "medlemmskap.sectionheading": "Tilknytning til Norge",
+    "medlemmskap.sectionheading": "Tilknytning til Norge",
 	"medlemmskap.text.siste12mnd": "De siste 12 månedene har jeg…",
 	"medlemmskap.radiobutton.boddNorge": "kun bodd i Norge",
 	"medlemmskap.radiobutton.utlandet": "bodd i utlandet helt eller delvis",
