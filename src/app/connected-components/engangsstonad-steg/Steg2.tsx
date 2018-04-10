@@ -18,18 +18,20 @@ import CountrySelect from 'components/country-select/CountrySelect';
 import LabelMedHjelpetekst from 'components/label-med-hjelpetekst/LabelMedHjelpetekst';
 import FormBlock from 'components/form-block/FormBlock';
 import LabelText from 'components/labeltext/LabelText';
+import Person from '../../types/domain/Person';
 const { ValidInput } = require('./../../lib') as any;
 
 interface StateProps {
     annenForelder: AnnenForelder;
     language: string;
+    person: Person;
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 export class Steg2 extends React.Component<Props> {
     getFødselsnummerValidators() {
-        const { annenForelder, intl } = this.props;
+        const { annenForelder, intl, person } = this.props;
         return [
             {
                 test: () => {
@@ -44,6 +46,10 @@ export class Steg2 extends React.Component<Props> {
                     return result;
                 },
                 failText: getMessage(intl, 'annenForelder.ugyldigFødselsnummer')
+            },
+            {
+                test: () => (person.fnr !== annenForelder.fnr),
+                failText: getMessage(intl, 'annenForelder.ugyldigEgetFødselsnummer')
             }
         ];
     }
@@ -140,7 +146,8 @@ export class Steg2 extends React.Component<Props> {
 
 const mapStateToProps = (state: any) => ({
     annenForelder: state.soknadReducer.annenForelder,
-    language: state.commonReducer.language
+    language: state.commonReducer.language,
+    person: state.apiReducer.person
 });
 
 export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg2));
