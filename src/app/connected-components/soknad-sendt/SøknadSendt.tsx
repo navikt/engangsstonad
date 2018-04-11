@@ -19,21 +19,21 @@ import '../../styles/engangsstonad.less';
 
 interface StateProps {
     person: Person;
-    soknad: EngangsstonadSoknadResponse;
+    kvittering: EngangsstonadSoknadResponse;
 }
 
 type Props = StateProps & InjectedIntlProps;
 
 export class EngangsstonadCompleted extends React.Component<Props> {
     receiptText() {
-        const { soknad } = this.props;
+        const { kvittering } = this.props;
         return (
             <FormattedMessage
                 id="kvittering.text.soknadMottatt"
                 values={{
-                    referansenr: 1,
-                    0: moment(soknad.opprettet).format('HH:mm'),
-                    1: moment(soknad.opprettet).format('DD. MMMM YYYY'),
+                    referansenr: kvittering.referanseId,
+                    0: moment(kvittering.mottattDato).format('HH:mm'),
+                    1: moment(kvittering.mottattDato).format('DD. MMMM YYYY'),
                     linkText: (
                         <a className="lenke" href="https://www.nav.no/no/Ditt+NAV">
                             <FormattedMessage id="kvittering.text.soknadMottatt.linkText" />
@@ -58,13 +58,12 @@ export class EngangsstonadCompleted extends React.Component<Props> {
                 </div>
             </div>
         );
-
     }
 }
 
 const mapStateToProps = (state: any) => ({
     person: state.apiReducer.person,
-    soknad: state.apiReducer.soknad
+    kvittering: state.apiReducer.kvittering
 });
 
 export default connect<StateProps>(mapStateToProps)(injectIntl(EngangsstonadCompleted));

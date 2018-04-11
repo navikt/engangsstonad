@@ -1,6 +1,7 @@
 import EngangsstonadSoknad from '../domain/EngangsstonadSoknad';
 
 export interface EngangsstonadSoknadResponse extends EngangsstonadSoknad {
-    opprettet: string;
+    referanseId: string;
+    mottattDato: string;
     sistEndret: string;
 }

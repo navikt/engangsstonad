@@ -18,8 +18,8 @@ function* getPerson(action: any) {
 function* sendSoknad(action: any) {
     try {
         const response = yield call(Api.sendSoknad, action.soknad, action.vedlegg);
-        const soknad: EngangsstonadSoknadResponse = response.data;
-        yield put({ type: ApiActionKeys.SEND_SOKNAD_SUCCESS, soknad });
+        const kvittering: EngangsstonadSoknadResponse = response.data;
+        yield put({ type: ApiActionKeys.SEND_SOKNAD_SUCCESS, kvittering });
     } catch (error) {
         yield put({ type: ApiActionKeys.SEND_SOKNAD_FAILED, error });
     }
