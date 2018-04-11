@@ -83,7 +83,7 @@ class AttachmentButton extends React.Component<Props> {
             >
                 <CustomSVG iconRef={uploadIcon} size={22} />
                 <Element className="attachmentButton__label">Last opp vedlegg...</Element>
-                <input id={id} type="file" accept="application/pdf,image/jpg,image/jpeg,image/png" onChange={e => this.onFileSelect(e)} multiple={true} />
+                <input id={id} type="file" accept=".pdf, .jpg, .jpeg, .png" onChange={e => this.onFileSelect(e)} multiple={true} />
             </label>
         );
     }
