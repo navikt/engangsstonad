@@ -1,9 +1,7 @@
 import * as React from 'react';
-
-const { Sidetittel } = require('nav-frontend-typografi');
-
 import CustomSVG, { IconRef } from '../custom-svg/CustomSVG';
 import SpeechBubble from '../speech-bubble/SpeechBubble';
+import { Systemtittel } from 'nav-frontend-typografi';
 
 import './headerIllustration.less';
 
@@ -15,8 +13,8 @@ export enum Theme {
 }
 
 type Dialog = {
-    title: string,
-    text: string
+    title: string;
+    text: string;
 };
 
 interface Props {
@@ -29,18 +27,18 @@ interface Props {
 const HeaderIllustration: React.StatelessComponent<Props> = ({ title, dialog, svg, theme }) => {
     return (
         <div className={`headerIllustration headerIllustration--${theme}`}>
-        <div className="headerIllustration__title">
-            <Sidetittel>{title}</Sidetittel>
-        </div>
-        {dialog && (
-            <div className="headerIllustration__speechBubble">
-                <SpeechBubble title={dialog.title} text={dialog.text} theme={theme} />
+            <div className="headerIllustration__title">
+                <Systemtittel>{title}</Systemtittel>
             </div>
-        )}
-        <div className="headerIllustration__illustration">
-            <CustomSVG iconRef={svg} />
+            {dialog && (
+                <div className="headerIllustration__speechBubble">
+                    <SpeechBubble title={dialog.title} text={dialog.text} theme={theme} />
+                </div>
+            )}
+            <div className="headerIllustration__illustration">
+                <CustomSVG iconRef={svg} />
+            </div>
         </div>
-    </div>
     );
 };
 

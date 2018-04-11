@@ -69,15 +69,11 @@ export class AppContainer extends React.Component<Props> {
     }
 
     redirectToLogin() {
-        window.location.href = ((window as any).LOGIN_URL + '?redirect=' + window.location.href);
+        window.location.href = (window as any).LOGIN_URL + '?redirect=' + window.location.href;
     }
 
     renderContent(children: React.ReactNode) {
-        return (
-            <div className="engangsstonad">
-                {children}
-            </div>
-        );
+        return <div className="engangsstonad">{children}</div>;
     }
 
     renderRoutes(routes: JSX.Element | JSX.Element[]) {
@@ -145,7 +141,7 @@ export class AppContainer extends React.Component<Props> {
             );
         }
 
-        return this.renderContent(<Spinner type="XXL"/>);
+        return this.renderContent(<Spinner type="XXL" />);
     }
 }
 

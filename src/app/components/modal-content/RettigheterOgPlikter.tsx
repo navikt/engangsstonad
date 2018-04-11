@@ -2,6 +2,7 @@ import * as React from 'react';
 const { FormattedMessage, injectIntl } = require('react-intl');
 const { Undertittel, Normaltekst } = require('nav-frontend-typografi');
 import getMessage from '../../util/i18n/i18nUtils';
+import Lenke from 'nav-frontend-lenker';
 
 import './modalContent.less';
 import InjectedIntl = ReactIntl.InjectedIntl;
@@ -12,14 +13,10 @@ interface Props {
 
 const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
     <div className="modalContent">
-        <Undertittel className="modalContent__header">
-            {getMessage(intl, 'rettigheter.sectionheading')}
-        </Undertittel>
+        <Undertittel className="modalContent__header">{getMessage(intl, 'rettigheter.sectionheading')}</Undertittel>
         <ul>
             <li>
-                <Normaltekst>
-                    {getMessage(intl, 'rettigheter.text.uretteOpplysninger')}
-                </Normaltekst>
+                <Normaltekst>{getMessage(intl, 'rettigheter.text.uretteOpplysninger')}</Normaltekst>
             </li>
             <li>
                 <Normaltekst>
@@ -27,53 +24,34 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                         id="rettigheter.text.lestOgForstått"
                         values={{
                             link: (
-                                <a
-                                    className="lenke"
-                                    href="https://nav.no/rettOgPlikt"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
+                                <Lenke href="https://nav.no/rettOgPlikt" target="_blank">
                                     <FormattedMessage id="rettigheter.text.lestOgForstått.link" />
-                                </a>
+                                </Lenke>
                             )
                         }}
                     />
                 </Normaltekst>
             </li>
             <li>
-                <Normaltekst>
-                    {getMessage(intl, 'rettigheter.text.innhenteOpplysninger')}
-                </Normaltekst>
+                <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger')}</Normaltekst>
                 <ul className="modalContent__sublist">
                     <li>
-                        <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.1')}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.1')}</Normaltekst>
                     </li>
                     <li>
-                        <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.2')}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.2')}</Normaltekst>
                     </li>
                     <li>
-                        <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.3')}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.3')}</Normaltekst>
                     </li>
                     <li>
-                        <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.4')}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.4')}</Normaltekst>
                     </li>
                     <li>
-                        <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.5')}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.5')}</Normaltekst>
                     </li>
                     <li>
-                        <Normaltekst>
-                            {getMessage(intl, 'rettigheter.text.innhenteOpplysninger.6')}
-                        </Normaltekst>
+                        <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.6')}</Normaltekst>
                     </li>
                 </ul>
             </li>
@@ -83,18 +61,16 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                         id="rettigheter.text.personvernerklering"
                         values={{
                             link: (
-                                <a
-                                    className="lenke"
+                                <Lenke
                                     href={
                                         'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/' +
                                         'Teknisk+brukerstotte/Snarveier/' +
                                         'personvernerkl%C3%A6ring-for-arbeids-og-velferdsetaten'
                                     }
                                     target="_blank"
-                                    rel="noopener noreferrer"
                                 >
                                     <FormattedMessage id="rettigheter.text.personvernerklering.link" />
-                                </a>
+                                </Lenke>
                             )
                         }}
                     />

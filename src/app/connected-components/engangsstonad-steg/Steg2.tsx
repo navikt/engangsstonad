@@ -86,16 +86,18 @@ export class Steg2 extends React.Component<Props> {
         return (
             <div className="step2">
                 <FormBlock>
-                    <NavnComponent
-                        id="js-annenForelder"
-                        name="navnfelt"
-                        label={<b>{getMessage(intl, 'annenForelder.label.navn')}</b>}
-                        placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
-                        disabled={annenForelder.kanIkkeOppgis || false}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderNavn(e.target.value))}
-                        value={annenForelder.navn || ''}
-                        validators={this.getNavnValidators()}
-                    />
+                    <FormBlock margin="xxs">
+                        <NavnComponent
+                            id="js-annenForelder"
+                            name="navnfelt"
+                            label={<b>{getMessage(intl, 'annenForelder.label.navn')}</b>}
+                            placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
+                            disabled={annenForelder.kanIkkeOppgis || false}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderNavn(e.target.value))}
+                            value={annenForelder.navn || ''}
+                            validators={this.getNavnValidators()}
+                        />
+                    </FormBlock>
                     <Checkbox
                         checked={annenForelder.kanIkkeOppgis || false}
                         label={getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}
@@ -103,21 +105,23 @@ export class Steg2 extends React.Component<Props> {
                     />
                 </FormBlock>
                 <FormBlock visible={annenForelder.navn !== undefined}>
-                    <FnrComponent
-                        label={
-                            <LabelMedHjelpetekst
-                                label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
-                                hjelpetekst={getMessage(intl, 'annenForelder.hjelpetekst.dNummer')}
-                                buttonProps={{ id: 'fnrHjelpetekstBtn' }}
-                            />
-                        }
-                        id="js-fødselsnummer"
-                        placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
-                        name="fodselsnummerfelt"
-                        validators={this.getFødselsnummerValidators()}
-                        value={annenForelder.fnr || ''}
-                    />
+                    <FormBlock margin="xxs">
+                        <FnrComponent
+                            label={
+                                <LabelMedHjelpetekst
+                                    label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
+                                    hjelpetekst={getMessage(intl, 'annenForelder.hjelpetekst.dNummer')}
+                                    buttonProps={{ id: 'fnrHjelpetekstBtn' }}
+                                />
+                            }
+                            id="js-fødselsnummer"
+                            placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
+                            name="fodselsnummerfelt"
+                            validators={this.getFødselsnummerValidators()}
+                            value={annenForelder.fnr || ''}
+                        />
+                    </FormBlock>
                     <Checkbox
                         checked={annenForelder.utenlandskFnr || false}
                         label={getMessage(intl, 'annenForelder.label.utenlandskFødselsnummer')}

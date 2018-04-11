@@ -8,6 +8,7 @@ import CountrySelect from 'components/country-select/CountrySelect';
 import { DateInput } from 'components/date-input/DateInput';
 import { Tidsperiode } from 'nav-datovelger';
 import LabelText from 'components/labeltext/LabelText';
+import FormBlock from 'components/form-block/FormBlock';
 
 const Modal = require('nav-frontend-modal').default;
 
@@ -105,57 +106,62 @@ class CountryModal extends React.Component<Props, State> {
                     <Undertittel className="countryModal__title">
                         <FormattedMessage id="medlemmskap.modal.overskrift" />
                     </Undertittel>
-                    <CountrySelect
-                        label={<LabelText>{this.props.label}</LabelText>}
-                        onChange={land =>
-                            this.updateFormData({
-                                land
-                            })
-                        }
-                        language={language}
-                        defaultValue={formData.land}
-                    />
-                    <DateInput
-                        id="boddFraDato"
-                        label={<LabelText intlId="standard.text.fra" />}
-                        dato={fomDato}
-                        inputProps={{placeholder: 'dd.mm.åååå'}}
-                        onChange={dato =>
-                            this.updateFormData({
-                                fom: dato.toISOString()
-                            })
-                        }
-                        avgrensninger={{
-                            minDato: fomMinDato,
-                            maksDato: fomMaksDato
-                        }}
-                        kalenderplassering="fullskjerm"
-                    />
-                    <DateInput
-                        id="boddTilDato"
-                        label={<LabelText intlId="standard.text.til" />}
-                        dato={tomDato}
-                        inputProps={{placeholder: 'dd.mm.åååå'}}
-                        onChange={dato =>
-                            this.updateFormData({
-                                tom: dato.toISOString()
-                            })
-                        }
-                        avgrensninger={{
-                            minDato: tomMinDato,
-                            maksDato: tomMaksDato
-                        }}
-                        kalenderplassering="fullskjerm"
-                    />
-
-                    <div className="countryModal__buttonBar">
-                        <Knapp type="standard" onClick={() => this.props.closeModal()} htmlType="button">
-                            <FormattedMessage id="medlemmskap.modal.avbryt" />
-                        </Knapp>
-                        <Hovedknapp onClick={() => formData && this.onSubmit()}>
-                            <FormattedMessage id={lagreKnappTekstId} />
-                        </Hovedknapp>
-                    </div>
+                    <FormBlock margin="xs">
+                        <CountrySelect
+                            label={<LabelText>{this.props.label}</LabelText>}
+                            onChange={land =>
+                                this.updateFormData({
+                                    land
+                                })
+                            }
+                            language={language}
+                            defaultValue={formData.land}
+                        />
+                    </FormBlock>
+                    <FormBlock margin="xs">
+                        <DateInput
+                            id="boddFraDato"
+                            label={<LabelText intlId="standard.text.fra" />}
+                            dato={fomDato}
+                            onChange={dato =>
+                                this.updateFormData({
+                                    fom: dato.toISOString()
+                                })
+                            }
+                            avgrensninger={{
+                                minDato: fomMinDato,
+                                maksDato: fomMaksDato
+                            }}
+                            kalenderplassering="fullskjerm"
+                        />
+                    </FormBlock>
+                    <FormBlock margin="m">
+                        <DateInput
+                            id="boddTilDato"
+                            label={<LabelText intlId="standard.text.til" />}
+                            dato={tomDato}
+                            onChange={dato =>
+                                this.updateFormData({
+                                    tom: dato.toISOString()
+                                })
+                            }
+                            avgrensninger={{
+                                minDato: tomMinDato,
+                                maksDato: tomMaksDato
+                            }}
+                            kalenderplassering="fullskjerm"
+                        />
+                    </FormBlock>
+                    <FormBlock margin="xxs">
+                        <div className="countryModal__buttonBar">
+                            <Knapp type="standard" onClick={() => this.props.closeModal()} htmlType="button">
+                                <FormattedMessage id="medlemmskap.modal.avbryt" />
+                            </Knapp>
+                            <Hovedknapp onClick={() => formData && this.onSubmit()}>
+                                <FormattedMessage id={lagreKnappTekstId} />
+                            </Hovedknapp>
+                        </div>
+                    </FormBlock>
                 </div>
             </Modal>
         );

@@ -1,14 +1,23 @@
 @import '../../styles/variables.less';
+
+.attachments {
+    &__addButton {
+        margin-bottom: 1rem;
+    }
+    &__list {
+        margin-bottom: 1rem;
+    }
+}
+
 .attachmentButton {
     display: flex;
     height: 4rem;
-    border: 2px dashed #C6C2BF;
+    border: 2px dashed #c6c2bf;
     border-radius: 8px;
     justify-content: center;
     align-items: center;
     padding-left: 0;
     &__label {
-        width: 200px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -20,28 +29,28 @@
         display: none;
     }
     &:focus {
-		outline: none;
-		box-shadow: 0 0 0 3px @orangeFocus;
-	}
+        outline: none;
+        box-shadow: 0 0 0 3px @orangeFocus;
+    }
 }
 
 .attachmentList {
-    padding-left: 0;
-    &__element {
-        position: relative;
-        width: 100%;
+    margin: 0;
+    padding: 0;
+    li  {
+        padding: 0;
+        margin: 0;
         list-style-type: none;
-        padding-top: @paddingLarge;
-        display: flex;
-        align-items: center;
-        height: 3rem;
     }
+}
+.attachment {
+    position: relative;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
     &__fileName {
-        display: inline-block;
         margin-left: 1rem;
-        color: #0067C5;
-        text-decoration: underline;
-        width: 75%;
+        margin-right: 3rem;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
