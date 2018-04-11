@@ -35,7 +35,7 @@ interface SendSoknad {
 
 interface SendSoknadSuccess {
     type: ApiActionKeys.SEND_SOKNAD_SUCCESS;
-    soknad: EngangsstonadSoknadResponse;
+    kvittering: EngangsstonadSoknadResponse;
 }
 
 interface SendSoknadFailed {
