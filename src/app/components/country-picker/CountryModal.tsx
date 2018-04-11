@@ -119,6 +119,7 @@ class CountryModal extends React.Component<Props, State> {
                         id="boddFraDato"
                         label={<LabelText intlId="standard.text.fra" />}
                         dato={fomDato}
+                        inputProps={{placeholder: 'dd.mm.åååå'}}
                         onChange={dato =>
                             this.updateFormData({
                                 fom: dato.toISOString()
@@ -134,6 +135,7 @@ class CountryModal extends React.Component<Props, State> {
                         id="boddTilDato"
                         label={<LabelText intlId="standard.text.til" />}
                         dato={tomDato}
+                        inputProps={{placeholder: 'dd.mm.åååå'}}
                         onChange={dato =>
                             this.updateFormData({
                                 tom: dato.toISOString()
