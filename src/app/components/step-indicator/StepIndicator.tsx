@@ -24,8 +24,8 @@ class StepIndicator extends React.Component<Props> {
     render() {
         const { activeStep, stepTitles } = this.props;
         return (
-            <div className="stegindicator" role="progressbar" aria-valuenow={activeStep} aria-valuemin="1" aria-valuemax={stepTitles.length}>
-                <Innholdstittel className="stegindicator__title">
+            <div className="stepindicator" role="progressbar" aria-valuenow={activeStep} aria-valuemin="1" aria-valuemax={stepTitles.length}>
+                <Innholdstittel className="stepindicator__title">
                     <span className="m_no-focusOutline" ref={c => (this.title = c)} tabIndex={-1}>
                         {stepTitles[activeStep - 1]}
                     </span>
