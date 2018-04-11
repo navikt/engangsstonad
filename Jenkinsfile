@@ -72,7 +72,15 @@ node {
                 message: "Unable to deploy ${app} version ${releaseVersion} to pre-prod. See https://jira.adeo.no/browse/${deploy} for details"
             ])
             throw new Exception("Deploy feilet :( \n Se https://jira.adeo.no/browse/" + deploy + " for detaljer", e)
+        }
+    }
 
+    stage("Tag") {
+        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
+            withCredentials([string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
+                sh ("git tag -a ${releaseVersion} -m ${releaseVersion}")
+                sh ("git push https://${token}:x-oauth-basic@github.com/${project}/${app}.git --tags")
+            }
         }
     }
 
