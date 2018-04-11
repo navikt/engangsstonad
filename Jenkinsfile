@@ -6,7 +6,6 @@ def deployLib = new deploy()
 node {
     def commitHash, commitHashShort, commitUrl
     def project = "navikt"
-    def repo = "engangsstonad"
     def app = "engangsstonad"
     def committer, committerEmail, changelog, releaseVersion
     def appConfig = "nais.yaml"
@@ -21,12 +20,12 @@ node {
         cleanWs()
         withCredentials([string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
             withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
-                sh(script: "git clone https://${token}:x-oauth-basic@github.com/${project}/${repo}.git -b ${branch} .")
+                sh(script: "git clone https://${token}:x-oauth-basic@github.com/${project}/${app}.git -b ${branch} .")
             }
         }
         commitHash = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
         commitHashShort = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-        commitUrl = "https://github.com/${project}/${repo}/commit/${commitHash}"
+        commitUrl = "https://github.com/${project}/${app}/commit/${commitHash}"
         committer = sh(script: 'git log -1 --pretty=format:"%an"', returnStdout: true).trim()
         committerEmail = sh(script: 'git log -1 --pretty=format:"%ae"', returnStdout: true).trim()
         changelog = sh(script: 'git log `git describe --tags --abbrev=0`..HEAD --oneline', returnStdout: true)
@@ -52,7 +51,7 @@ node {
 
         slackSend([
             color: 'good',
-            message: "Build <${env.BUILD_URL}|#${env.BUILD_NUMBER}> (<${commitUrl}|${commitHashShort}>) of ${repo}/${app}@master by ${committer} passed  (${changelog})"
+            message: "Build <${env.BUILD_URL}|#${env.BUILD_NUMBER}> (<${commitUrl}|${commitHashShort}>) of ${project}/${app}@master by ${committer} passed  (${changelog})"
          ])
     }
 
