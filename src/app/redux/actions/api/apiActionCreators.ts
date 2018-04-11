@@ -33,10 +33,10 @@ export function sendSoknad(soknad: EngangsstonadSoknad): ApiActionTypes {
     };
 }
 
-export function sendSoknadSuccess(soknad: EngangsstonadSoknadResponse): ApiActionTypes {
+export function sendSoknadSuccess(kvittering: EngangsstonadSoknadResponse): ApiActionTypes {
     return {
         type: ApiActionKeys.SEND_SOKNAD_SUCCESS,
-        soknad
+        kvittering
     };
 }
 

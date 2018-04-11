@@ -53,7 +53,7 @@ export class Steg4 extends React.Component<Props> {
                 <div className="blokk-m">
                     <PersonaliaLabel
                         navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn)}
-                        personnummer="XXXXXXXXXXX"
+                        personnummer={person.fnr}
                     />
                 </div>
                 <OppsummeringBarn barn={this.props.barn} vedlegg={this.props.vedlegg} />

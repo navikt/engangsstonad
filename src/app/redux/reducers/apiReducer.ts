@@ -17,7 +17,7 @@ const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
         case ApiActionKeys.SEND_SOKNAD:
             return { ...state, soknad: action.soknad, søknadSendingInProgress: true };
         case ApiActionKeys.SEND_SOKNAD_SUCCESS:
-            return { ...state, soknad: action.soknad, søknadSendt: true, søknadSendingInProgress: false };
+            return { ...state, kvittering: action.kvittering, søknadSendt: true, søknadSendingInProgress: false };
         case ApiActionKeys.SEND_SOKNAD_FAILED:
             return { ...state, error: action.error.response, søknadSendt: true, søknadSendingInProgress: false };
     }

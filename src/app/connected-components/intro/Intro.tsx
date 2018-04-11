@@ -64,7 +64,10 @@ export class Intro extends React.Component<Props, OwnProps> {
     }
 
     startSoknad() {
-        this.props.history.push('/engangsstonad/soknad');
+        const { godkjentVilkar } = this.props;
+        if (godkjentVilkar) {
+            this.props.history.push('/engangsstonad/soknad');
+        }
     }
 
     toggleLanguage(languageCode: string) {
