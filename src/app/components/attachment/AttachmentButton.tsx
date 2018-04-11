@@ -6,7 +6,7 @@ import './attachment.less';
 
 interface Props {
     id: string;
-    onFileSelected: (files: File[]) => File[];
+    onFileSelected: (files: File[]) => void;
 }
 
 class AttachmentButton extends React.Component<Props> {

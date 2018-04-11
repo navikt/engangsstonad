@@ -4,28 +4,20 @@
     cursor: pointer;
     color: @navMorkGra;
     font-weight: bold;
-    position: relative;
-    align-items: center;
-    align-self: flex-end;
-    background: none;
+    background: transparent;
     color: inherit;
+    position: relative;
     border: none;
-    z-index: 10;
-    margin: 5px 0px 0px 0px;
-    padding: 0;
-
-    &__hidden {
-        visibility: hidden;
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    margin-left: -0.5rem;
+    &__chevron {
+        left: 0;
+        position: absolute;
+        top: 0.7rem;
     }
     &:hover,
     &:active {
+        background: transparent;
         color: @navBla;
-    }
-}
-
-@media screen and (min-width: @screen-desktop) {
-    .backButton {
-        top: 50px;
-        padding: 0;
     }
 }

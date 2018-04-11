@@ -21,7 +21,9 @@ import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadS
 import OppsummeringBarn from './../oppsummering/BarnOppsummering';
 import OppsummeringDenAndreForeldren from './../oppsummering/AndreForeldrenOppsummering';
 import OppsummeringUtenlandsopphold from './../oppsummering/UtenlandsoppholdOppsummering';
+
 const { ValidGroup } = require('./../../lib') as any;
+
 import '../../styles/engangsstonad.less';
 
 interface StateProps {
@@ -45,31 +47,38 @@ export class Steg4 extends React.Component<Props> {
         return (
             <div>
                 <DocumentTitle title="NAV Engangsstønad - Oppsummering" />
-                <Veilederinfo>{getMessage(intl, 'oppsummering.text.lesNoye')}</Veilederinfo>
-                <PersonaliaLabel
-                    navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn)}
-                    personnummer={person.fnr}
-                />
+                <div className="blokk-m">
+                    <Veilederinfo>{getMessage(intl, 'oppsummering.text.lesNoye')}</Veilederinfo>
+                </div>
+                <div className="blokk-m">
+                    <PersonaliaLabel
+                        navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn)}
+                        personnummer={person.fnr}
+                    />
+                </div>
                 <OppsummeringBarn barn={this.props.barn} vedlegg={this.props.vedlegg} />
-                <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder}/>
+                <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />
                 <OppsummeringUtenlandsopphold utenlandsopphold={this.props.utenlandsopphold} />
-
-                <ValidGroup
-                    validators={[
-                        {
-                            test: () => (bekreftetInformasjon === true),
-                            failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger')
-                        }
-                    ]}
-                    name="bekreftOpplysninger"
-                >
-                <BekreftCheckboksPanel
-                    inputProps={{name: 'bekreftOpplysninger'}}
-                    checked={bekreftetInformasjon}
-                    onChange={() => dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))}
-                    label={getMessage(intl, 'oppsummering.text.samtykke')}
-                />
-                </ValidGroup>
+                <div className="blokk-m">
+                    <ValidGroup
+                        validators={[
+                            {
+                                test: () => bekreftetInformasjon === true,
+                                failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger')
+                            }
+                        ]}
+                        name="bekreftOpplysninger"
+                    >
+                        <BekreftCheckboksPanel
+                            inputProps={{ name: 'bekreftOpplysninger' }}
+                            checked={bekreftetInformasjon}
+                            onChange={() =>
+                                dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))
+                            }
+                            label={getMessage(intl, 'oppsummering.text.samtykke')}
+                        />
+                    </ValidGroup>
+                </div>
             </div>
         );
     }

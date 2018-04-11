@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import getMessage from '../util/i18n/i18nUtils';
-import StepIndicator from 'components/step-indicator/StepIndicator';
 
 import Steg1 from './../connected-components//engangsstonad-steg/Steg1';
 import Steg2 from '../connected-components/engangsstonad-steg/Steg2';
@@ -21,7 +20,7 @@ import AnnenForelder from '../types/domain/AnnenForelder';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../redux/types';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
-import BackButton from 'components/back-button/BackButton';
+import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import { shouldDisplayNextButtonOnStep1, shouldDisplayNextButtonOnStep2, shouldDisplayNextButtonOnStep3 } from 'util/stepUtil';
 const { ValidForm } = require('./../lib') as any;
 
@@ -39,7 +38,8 @@ interface OwnProps {
 type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps<{}>;
 
 export class SøknadContainer extends React.Component<Props> {
-    componentWillMount() {
+    constructor(props: Props) {
+        super(props);
         this.handleNextClicked = this.handleNextClicked.bind(this);
         this.handleBackClicked = this.handleBackClicked.bind(this);
     }
@@ -64,7 +64,14 @@ export class SøknadContainer extends React.Component<Props> {
     handleNextClicked() {
         const { dispatch, annenForelder, barn, utenlandsopphold, vedlegg } = this.props;
         if (this.hasToWaitForResponse()) {
-            return dispatch(api.sendSoknad({ annenForelder, barn, utenlandsopphold, vedlegg }));
+            return dispatch(
+                api.sendSoknad({
+                    annenForelder,
+                    barn,
+                    utenlandsopphold,
+                    vedlegg
+                })
+            );
         }
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
@@ -80,63 +87,57 @@ export class SøknadContainer extends React.Component<Props> {
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, annenForelder, utenlandsopphold, barn } = this.props;
         switch (activeStep) {
-            case 1: return shouldDisplayNextButtonOnStep1(barn);
-            case 2: return shouldDisplayNextButtonOnStep2(annenForelder);
-            case 3: return shouldDisplayNextButtonOnStep3(barn, utenlandsopphold);
+            case 1:
+                return shouldDisplayNextButtonOnStep1(barn);
+            case 2:
+                return shouldDisplayNextButtonOnStep2(annenForelder);
+            case 3:
+                return shouldDisplayNextButtonOnStep3(barn, utenlandsopphold);
             case 4:
-            default: return true;
+            default:
+                return true;
         }
     }
 
     render() {
         const { intl, activeStep, søknadSendingInProgress } = this.props;
         const stepsConfig = getStepConfig(intl);
-        const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
+        const titles = stepsConfig.map(stepConf => stepConf.stegIndikatorLabel);
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
 
-        return ([
-            (
+        return (
+            <div>
                 <Prompt
-                    message={(nextLocation) => {
+                    message={nextLocation => {
                         const { location } = this.props;
                         if (location.pathname === nextLocation.pathname && nextLocation.hash !== location.hash) {
                             return true;
                         }
                         return 'Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?';
                     }}
-                    key="prompt"
                 />
-            ),
-            (<Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} key="tittel" />),
-            (
+                <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <ValidForm
                     summaryTitle="Du må rette opp i følgende feil:"
                     noSummary={activeStep === 3}
                     onSubmit={this.handleNextClicked}
-                    key="form"
                     className="responsiveContainer"
                 >
-                    <BackButton onClick={this.handleBackClicked} hidden={activeStep === 1} />
-                    <StepIndicator stepTitles={titles} activeStep={activeStep} />
+                    <SkjemaHeader onPrevious={() => this.handleBackClicked()} activeStep={activeStep} stepTitles={titles} />
 
                     {activeStep === 1 && <Steg1 />}
                     {activeStep === 2 && <Steg2 />}
                     {activeStep === 3 && <Steg3 />}
                     {activeStep === 4 && <Steg4 />}
 
-                    {
-                        this.shouldRenderFortsettKnapp() === true &&
-                        <Hovedknapp 
-                            className="responsiveButton"
-                            disabled={søknadSendingInProgress}
-                            spinner={søknadSendingInProgress}
-                        >
+                    {this.shouldRenderFortsettKnapp() === true && (
+                        <Hovedknapp className="responsiveButton" disabled={søknadSendingInProgress} spinner={søknadSendingInProgress}>
                             {fortsettKnappLabel}
                         </Hovedknapp>
-                    }
+                    )}
                 </ValidForm>
-            )
-        ]);
+            </div>
+        );
     }
 }
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Systemtittel } from 'nav-frontend-typografi';
 import './søknadstittel.less';
 
 type Props = { tittel: string };
@@ -10,7 +10,7 @@ export default class Søknadstittel extends React.Component<Props> {
 
         return (
             <div className="søknadstittel">
-                <Innholdstittel>{tittel}</Innholdstittel>
+                <Systemtittel>{tittel}</Systemtittel>
             </div>
         );
     }

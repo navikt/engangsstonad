@@ -72,7 +72,11 @@ class CountryPicker extends React.Component<Props, State> {
     render() {
         return (
             <div>
-                {this.props.label && <LabelText>{this.props.label}</LabelText>}
+                {this.props.label && (
+                    <div className="blokk-xxs">
+                        <LabelText>{this.props.label}</LabelText>
+                    </div>
+                )}
                 <CountryList
                     utenlandsoppholdListe={this.props.utenlandsoppholdListe}
                     onEditClick={(periode: Periode) => this.onEditClick(periode)}
