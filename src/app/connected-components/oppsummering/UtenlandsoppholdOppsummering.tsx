@@ -56,7 +56,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                     <CountrySummaryList utenlandsoppholdListe={senerePerioder} />
                 </div>
             )}
-            {fødselINorge && (
+            {fødselINorge !== undefined && (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.ogKommerPåFødselstidspunktet')}
                     text={fødselINorgeMndText}

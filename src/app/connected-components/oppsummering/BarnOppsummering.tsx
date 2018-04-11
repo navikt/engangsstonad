@@ -62,7 +62,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
                             text={vedleggSummary}
                         />
                         <DisplayTextWithLabel
-                            label={getMessage(intl, 'oppsummering.text.vedlagtTerminbekreftelse')}
+                            label={getMessage(intl, 'oppsummering.text.somErDatert')}
                             text={ISODateToMaskedInput(terminbekreftelseDato)}
                         />
                     </div>
