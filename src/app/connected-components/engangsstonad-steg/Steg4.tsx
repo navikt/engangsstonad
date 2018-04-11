@@ -48,7 +48,7 @@ export class Steg4 extends React.Component<Props> {
                 <Veilederinfo>{getMessage(intl, 'oppsummering.text.lesNoye')}</Veilederinfo>
                 <PersonaliaLabel
                     navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn)}
-                    personnummer="XXXXXXXXXXX"
+                    personnummer={person.fnr}
                 />
                 <OppsummeringBarn barn={this.props.barn} vedlegg={this.props.vedlegg} />
                 <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder}/>
