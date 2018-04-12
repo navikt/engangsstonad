@@ -15,7 +15,7 @@ import LabelText from 'components/labeltext/LabelText';
 type Props = {
     label: string;
     hjelpetekst: string;
-    buttonProps?: React.InputHTMLAttributes<HTMLButtonElement>
+    buttonProps?: React.InputHTMLAttributes<HTMLButtonElement>;
 };
 
 type State = {
@@ -41,7 +41,7 @@ export default class LabelMedHjelpetekst extends React.Component<Props, State> {
 
         return (
             <div className="labelMedHjelpetekst">
-                <LabelText>{label}s</LabelText>
+                <LabelText>{label}</LabelText>
                 <Sirkelknapp
                     stil="info"
                     label="Hjelpetekst"
@@ -55,9 +55,7 @@ export default class LabelMedHjelpetekst extends React.Component<Props, State> {
                     isOpened={showHjelpetekst}
                     springConfig={{ stiffness: 250, damping: 30 }}
                 >
-                    <div className="hjelpetekst__wrapper">
-                        {hjelpetekst}
-                    </div>
+                    <div className="hjelpetekst__wrapper">{hjelpetekst}</div>
                 </Collapse>
             </div>
         );

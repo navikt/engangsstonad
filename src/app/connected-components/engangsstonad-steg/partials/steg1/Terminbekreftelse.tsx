@@ -11,7 +11,7 @@ export interface OwnProps {
 
 const Terminbekreftelse: React.StatelessComponent<OwnProps> = props => (
     <div className="terminbekreftelse">
-        <div className="blokk-xs">
+        <div className="blokk-m">
             <Veilederinfo>
                 <FormattedMessage id="terminbekreftelsen.text.terminbekreftelsen" />
             </Veilederinfo>

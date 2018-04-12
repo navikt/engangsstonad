@@ -1,13 +1,5 @@
 @import '../../styles/variables.less';
-
-.attachments {
-    &__addButton {
-        margin-bottom: 1rem;
-    }
-    &__list {
-        margin-bottom: 1rem;
-    }
-}
+@import '../../../../node_modules/nav-frontend-knapper-style/src/mixins.less';
 
 .attachmentButton {
     display: flex;
@@ -39,15 +31,22 @@
     padding: 0;
     li  {
         padding: 0;
-        margin: 0;
+        margin: 0 0 1.5rem 0;
         list-style-type: none;
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 }
 .attachment {
     position: relative;
-    padding: 1rem 0;
     display: flex;
     align-items: center;
+    &__icon {
+        * {
+            fill: @navMorkGra;
+        }
+    }
     &__fileName {
         margin-left: 1rem;
         margin-right: 3rem;
@@ -55,18 +54,16 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    &__trashIcon {
+    &__trashcan {
+        .knappbase-mixin(inherit);
+        position: absolute;
         right: 0;
         width: 2rem;
-        height: 100%;
-        padding: 0;
+        padding: 0.3em;
         border: none;
         background: none;
-        padding: 0;
-        position: absolute;
-        &:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px orange;
+        svg * {
+            stroke: @c-buttonBlue;
         }
     }
 }
