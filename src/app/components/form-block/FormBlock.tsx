@@ -23,14 +23,12 @@ const FormBlock: React.StatelessComponent<Props> = ({
     children
 }) => {
     const getContent = () => (
-        <div className={classnames('formblock', `formblock--${margin}`)}>
-            {children}
-        </div>
+        <div className={classnames('formblock', `formblock--${margin}`)}>{children}</div>
     );
 
     if (animated === true && margin === 'm') {
         return (
-            <Collapse isOpened={visible === true}>
+            <Collapse isOpened={visible === true} className="formblock__collapse">
                 {visible ? getContent() : <div />}
             </Collapse>
         );
