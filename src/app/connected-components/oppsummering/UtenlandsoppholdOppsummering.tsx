@@ -51,7 +51,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
             ) : (
                 <div>
                     <EtikettLiten className="textWithLabel__label">
-                        {getMessage(intl, 'medlemmskap.text.neste12mnd')}
+                        {getMessage(intl, 'medlemmskap.text.oppsummering.neste12mnd')}
                     </EtikettLiten>
                     <CountrySummaryList utenlandsoppholdListe={senerePerioder} />
                 </div>
