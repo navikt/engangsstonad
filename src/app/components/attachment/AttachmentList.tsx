@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
 const Icon = require('nav-frontend-ikoner-assets').default;
 
 import './attachment.less';
@@ -14,20 +13,15 @@ interface AttachmentProps {
     onDelete?: (file: File) => void;
 }
 
-const Attachment: React.StatelessComponent<AttachmentProps> = ({
-    vedlegg,
-    onDelete
-}) => (
+const Attachment: React.StatelessComponent<AttachmentProps> = ({ vedlegg, onDelete }) => (
     <div className="attachment">
         <Icon className="attachment__icon" kind="vedlegg" size={20} />
-        <Normaltekst className="attachment__fileName">
-            {vedlegg.name}
-        </Normaltekst>
+        <span className="attachment__fileName">{vedlegg.name}</span>
         {onDelete && (
             <button
                 type="button"
-                className="js-toggle attachment__trashIcon"
-                aria-label="Slett vedlegg"
+                className="js-toggle attachment__trashcan"
+                aria-label={`Slett vedlegg (${vedlegg.name})`}
                 onClick={e => {
                     e.stopPropagation();
                     onDelete(vedlegg);

@@ -132,7 +132,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                         validators={this.getFødselsdatoValidators(0)}
                     />
                 </FormBlock>
-                <FormBlock visible={barn.antallBarn > 1} margin="xs">
+                <FormBlock visible={barn.antallBarn > 1} margin="s">
                     <Checkbox
                         className="fødselsdatoCheckbox"
                         label={getMessage(intl, 'relasjonBarn.text.fodselsdato.forskjelligeDager')}
@@ -147,7 +147,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                             <FormBlock margin="xs" key={`fødselsdato` + fødselsdatoArrayIndex}>
                                 <ValidDateInput
                                     id="fødselsdato"
-                                    label={dateInputLabels[fødselsdatoArrayIndex]}
+                                    label={<LabelText>{dateInputLabels[fødselsdatoArrayIndex]}</LabelText>}
                                     dato={getFodselsdatoForBarn(barn, fødselsdatoArrayIndex)}
                                     onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, fødselsdatoArrayIndex)}
                                     name="fødselsdato"

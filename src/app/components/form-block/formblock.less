@@ -1,4 +1,15 @@
 .formblock {
+    /** Motvirke at outline på elementer blir klippet på grunn av overflow:hidden */
+    @outlineSize: 2px;
+
+    &__collapse {
+        padding-left: @outlineSize;
+        padding-right: @outlineSize;
+        margin-left: -1 * @outlineSize;
+        margin-right: -1 * @outlineSize;
+    }
+
+    /** Variasjoner på luft under. --m er default */
     &--m {
         padding-bottom: 2rem;
     }
