@@ -49,7 +49,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                     text={getMessage(intl, 'medlemmskap.radiobutton.boNorge')}
                 />
             ) : (
-                <div>
+                <div className="textWithLabel">
                     <EtikettLiten className="textWithLabel__label">
                         {getMessage(intl, 'medlemmskap.text.oppsummering.neste12mnd')}
                     </EtikettLiten>
