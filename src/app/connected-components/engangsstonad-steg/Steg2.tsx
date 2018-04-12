@@ -90,7 +90,7 @@ export class Steg2 extends React.Component<Props> {
                         <NavnComponent
                             id="js-annenForelder"
                             name="navnfelt"
-                            label={<b>{getMessage(intl, 'annenForelder.label.navn')}</b>}
+                            label={<LabelText>{getMessage(intl, 'annenForelder.label.navn')}</LabelText>}
                             placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
                             disabled={annenForelder.kanIkkeOppgis || false}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderNavn(e.target.value))}

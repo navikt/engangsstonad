@@ -10,6 +10,7 @@ const LukkInfoIkonSVG = <CustomSVG iconRef={LukkInfoIkon} size={14} />;
 
 import './labelMedHjelpetekst.less';
 import Sirkelknapp from 'components/sirkelknapp/Sirkelknapp';
+import LabelText from 'components/labeltext/LabelText';
 
 type Props = {
     label: string;
@@ -39,11 +40,11 @@ export default class LabelMedHjelpetekst extends React.Component<Props, State> {
         const { showHjelpetekst } = this.state;
 
         return (
-            <span className="labelMedHjelpetekst">
-                <b>{label}</b>
+            <div className="labelMedHjelpetekst">
+                <LabelText>{label}s</LabelText>
                 <Sirkelknapp
                     stil="info"
-                    label="testlabel"
+                    label="Hjelpetekst"
                     buttonProps={buttonProps}
                     ikon={showHjelpetekst ? LukkInfoIkonSVG : InfoIkonSVG}
                     toggle={{ pressed: showHjelpetekst }}
@@ -58,7 +59,7 @@ export default class LabelMedHjelpetekst extends React.Component<Props, State> {
                         {hjelpetekst}
                     </div>
                 </Collapse>
-            </span>
+            </div>
         );
     }
 }
