@@ -72,13 +72,16 @@
     "medlemmskap.radiobutton.boNorge": "kun bo i Norge",
     "medlemmskap.radiobutton.boUtlandet": "bo i utlandet helt eller delvis",
     "medlemmskap.text.jegSkalBo": "Jeg skal bo i...",
-    "medlemmskap.text.bostedFodsel": "og når barnet blir født skal jeg...",
+    "medlemmskap.text.bostedFodsel": "og når { antallBarn } blir født skal jeg…",
+    "medlemmskap.text.barnEntall": "barnet",
+    "medlemmskap.text.barnFlertall": "barna",
     "medlemmskap.radiobutton.vareNorge": "være i Norge",
     "medlemmskap.radiobutton.vareUtlandet": "være i et annet land",
     "medlemmskap.knapp.leggTilLand": "Legg til Land",
     "medlemmskap.modal.overskrift": "Legg til land",
     "medlemmskap.modal.lagreEndringer": "Lagre endringer",
     "medlemmskap.modal.avbryt": "Avbryt",
+
 
     "oppsummering.sectionheading": "Oppsummering",
     "oppsummering.text.lesNoye": "Les gjennom oppsummeringen før du sender inn søknaden. Hvis du trenger å gjøre endringer kan du gå tilbake.",
