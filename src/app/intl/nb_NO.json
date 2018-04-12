@@ -1,5 +1,7 @@
 {
     "intro.pageheading.soknadES": "Velkommen til søknad om engangsstønad ",
+    "intro.text.endreMålformTilBokmål": "Endre målform til bokmål",
+    "intro.text.endreMålformTilNynorsk": "Endre målform til nynorsk",
     "intro.text.under18": "Fordi du er under 18 år, må en av foreldrene dine eller en foresatt skrive under på søknaden sammen med deg. Du må derfor fylle ut søknaden på papir og sende den i posten. ",
     "intro.text.erMann": "Du kan ikke søke elektronisk om engangsstønad til far eller medmor. Derfor må du sende søknaden i posten. Hvis det er mor som skal ha stønaden, må hun selv sende inn søknaden.",
     "intro.snakkeboble.overskrift": "Hei, {name}!",
