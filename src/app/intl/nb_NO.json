@@ -1,15 +1,11 @@
 {
     "intro.pageheading.soknadES": "Velkommen til søknad om engangsstønad ",
-    "intro.text.under18":
-        "Fordi du er under 18 år, må en av foreldrene dine eller en foresatt skrive under på søknaden sammen med deg. Du må derfor fylle ut søknaden på papir og sende den i posten. ",
-    "intro.text.erMann":
-        "Du kan ikke søke elektronisk om engangsstønad til far eller medmor. Derfor må du sende søknaden i posten. Hvis det er mor som skal ha stønaden, må hun selv sende inn søknaden.",
+    "intro.text.under18": "Fordi du er under 18 år, må en av foreldrene dine eller en foresatt skrive under på søknaden sammen med deg. Du må derfor fylle ut søknaden på papir og sende den i posten. ",
+    "intro.text.erMann": "Du kan ikke søke elektronisk om engangsstønad til far eller medmor. Derfor må du sende søknaden i posten. Hvis det er mor som skal ha stønaden, må hun selv sende inn søknaden.",
     "intro.snakkeboble.overskrift": "Hei, {name}!",
     "intro.text.hjelpedeg": "Jeg skal hjelpe deg med å fylle ut søknaden. ",
-    "intro.text.omES":
-        "Engangsstønad er en skattefri engangssum du kan få for hvert barn du føder eller adopterer.",
-    "intro.text.samtykkeIntro":
-        "For å begynne med søknaden så må du bekrefte at du har lest og forstått dine {link}",
+    "intro.text.omES": "Engangsstønad er en skattefri engangssum du kan få for hvert barn du føder eller adopterer.",
+    "intro.text.samtykkeIntro": "For å begynne med søknaden så må du bekrefte at du har lest og forstått dine {link}",
     "intro.text.samtykke": "Jeg bekrefter at jeg har lest og forstått",
     "intro.text.samtykke.link": "rettigheter og plikter",
     "intro.pageheading.samtykke": "Rettigheter og plikter.",
@@ -17,7 +13,7 @@
     "intro.text.lastNedPapirsoknad": "Her kan du laste ned papirsøknaden",
 
     "relasjonBarn.sectionheading": "Informasjon om barnet",
-    "relasjonBarn.text.fodselTidspunkt": "Søknaden min gjelder en fødsel som er...",
+    "relasjonBarn.text.fodselTids@punkt": "Søknaden min gjelder en fødsel som er...",
     "relasjonBarn.radiobutton.fremtid": "frem i tid",
     "relasjonBarn.radiobutton.fortid": "tilbake i tid",
     "relasjonBarn.text.antallBarnVentet": "og jeg venter...",
@@ -28,12 +24,10 @@
     "relasjonBarn.text.velgantallBarn": "velg antall barn",
     "relasjonBarn.text.termindato": "med termindato den...",
     "relasjonBarn.link.velgeDato": "Klikk her for å velge dato",
-    "relasjonBarn.text.terminbekreftelse":
-        "Siden barnet ikke er født må du legge ved terminbekreftelse fra jordmor eller lege.",
+    "relasjonBarn.text.terminbekreftelse": "Siden barnet ikke er født må du legge ved terminbekreftelse fra jordmor eller lege.",
     "relasjonBarn.text.datoTerminbekreftelse": "Terminbekreftelsen er datert den...",
     "relasjonBarn.text.tenkPa": "Husk terminbekreftelsen",
-    "relasjonBarn.text.ettersendvedlegg":
-        "Vi kan ikke behandle søknaden din før du sender oss terminbekreftelsen. Denne må du sende oss innen 14 dager.",
+    "relasjonBarn.text.ettersendvedlegg": "Vi kan ikke behandle søknaden din før du sender oss terminbekreftelsen. Denne må du sende oss innen 14 dager.",
     "relasjonBarn.text.fortsette": "Vil du fortsette med søknaden?",
     "relasjonBarn.text.fodselsdato": "med fødseldato...",
     "relasjonBarn.text.antallBarn": "Antall barn...",
@@ -85,14 +79,12 @@
     "medlemmskap.modal.avbryt": "Avbryt",
 
     "oppsummering.sectionheading": "Oppsummering",
-    "oppsummering.text.lesNoye":
-        "Les gjennom oppsummeringen før du sender inn søknaden. Hvis du trenger å gjøre endringer kan du gå tilbake.",
+    "oppsummering.text.lesNoye": "Les gjennom oppsummeringen før du sender inn søknaden. Hvis du trenger å gjøre endringer kan du gå tilbake.",
     "oppsummering.text.vedlagtTerminbekreftelse": "Det er vedlagt en terminbekreftelse...",
     "oppsummering.text.somErDatert": "Som er datert den...",
     "oppsummering.text.boddSisteTolv": "De siste 12 månedene har jeg bodd i...",
     "oppsummering.text.ogKommerPåFødselstidspunktet": "og kommer på fødselstidspunktet til å...",
-    "oppsummering.text.samtykke":
-        "De opplysninger jeg har oppgitt er riktige og jeg har ikke holdt tilbake opplysninger som har betydning for min rett til engangsstønad.",
+    "oppsummering.text.samtykke": "De opplysninger jeg har oppgitt er riktige og jeg har ikke holdt tilbake opplysninger som har betydning for min rett til engangsstønad.",
     "oppsummering.text.soknadenGjelder": "Søknaden gjelder...",
     "oppsummering.text.fødselsnummer": "Og har fødselsnummer...",
     "oppsummering.text.utenlandskfødselsnummer": "Og har utenlandsk fødselsnummer...",
@@ -110,8 +102,7 @@
 
     "kvittering.sectionheading": "Illustrasjon av NAV ansatt som takk for mottatt søknad!",
     "kvittering.text.takk": "Takk for søknaden {navn}!",
-    "kvittering.text.soknadMottatt":
-        "Vi mottok søknaden med referensenummer {referansenr} den {1} kl. {0}. Du kan følge med på søknaden på {linkText}.",
+    "kvittering.text.soknadMottatt": "Vi mottok søknaden med referensenummer {referansenr} den {1} kl. {0}. Du kan følge med på søknaden på {linkText}.",
     "kvittering.text.soknadMottatt.linkText": "Ditt NAV",
 
     "rettigheter.sectionheading": "Rettigheter og plikter",
@@ -124,14 +115,12 @@
     "rettigheter.text.innhenteOpplysninger.4": "Opplysninger om barnet",
     "rettigheter.text.innhenteOpplysninger.5": "Opplysninger om den andre forelderen",
     "rettigheter.text.innhenteOpplysninger.6": "Opplysninger fra andre lands trygdeordninger",
-    "rettigheter.text.uretteOpplysninger":
-        "Jeg forstår at hvis jeg gir uriktige eller holder yarntilbake opplysninger kan det få konsekvenser for retten min til engangsstønaden",
+    "rettigheter.text.uretteOpplysninger": "Jeg forstår at hvis jeg gir uriktige eller holder yarntilbake opplysninger kan det få konsekvenser for retten min til engangsstønaden",
     "rettigheter.text.personvernerklering": "Jeg er kjent med rettighetene mine som står i {link}",
     "rettigheter.text.personvernerklering.link": "personvernerklæringen til NAV",
 
     "terminbekreftelsen.sectionheading": "Om terminbekreftelsen",
-    "terminbekreftelsen.text.terminbekreftelsen":
-        "Du må legge ved en bekreftelse på termin. Denne må være datert og signert av lege eller jordmor når du er i 26. svangerskapsuke eller senere.",
+    "terminbekreftelsen.text.terminbekreftelsen": "Du må legge ved en bekreftelse på termin. Denne må være datert og signert av lege eller jordmor når du er i 26. svangerskapsuke eller senere.",
 
     "standard.button.foto": "Ta bilde",
     "standard.button.fil": "Velg fil",
@@ -150,19 +139,13 @@
     "valideringsfeil.bekreftOpplysninger": "Du må bekrefte at opplysningene stemmer",
 
     "valideringsfeil.fodselsdato.duMåOppgi": "Du må oppgi fødselsdato",
-    "valideringsfeil.fodselsdato.måVæreIdagEllerTidligere":
-        "Fødselsdato må være idag eller tidligere",
+    "valideringsfeil.fodselsdato.måVæreIdagEllerTidligere": "Fødselsdato må være idag eller tidligere",
 
     "valideringsfeil.termindato.duMåOppgi": "Du må oppgi termindato",
-    "valideringsfeil.termindato.duMåVæreIUke26":
-        "Du kan tidligst søke når du er i 26. svangerskapsuke",
-    "valideringsfeil.termindato.termindatoKanIkkeVære3UkerFraIdag":
-        "Termindatoen kan ikke være tidligere enn 3 uker fra i dag",
+    "valideringsfeil.termindato.duMåVæreIUke26": "Du kan tidligst søke når du er i 26. svangerskapsuke",
+    "valideringsfeil.termindato.termindatoKanIkkeVære3UkerFraIdag": "Termindatoen kan ikke være tidligere enn 3 uker fra i dag",
 
-    "valideringsfeil.terminbekreftelseDato.duMåOppgi":
-        "Du må oppgi når terminbekreftelsen er datert",
-    "valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere":
-        "Datoen på terminbekreftelsen kan ikke være frem i tid.",
-    "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26":
-        "Terminbekreftelsen må vise at du er i 26. svangerskapsuke eller senere"
+    "valideringsfeil.terminbekreftelseDato.duMåOppgi": "Du må oppgi når terminbekreftelsen er datert",
+    "valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere": "Datoen på terminbekreftelsen kan ikke være frem i tid.",
+    "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26": "Terminbekreftelsen må vise at du er i 26. svangerskapsuke eller senere"
 }
