@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+const { Knapp } = require('nav-frontend-knapper');
+import getMessage from 'util/i18n/i18nUtils';
 import 'nav-frontend-lenker-style';
 import './languageToggle.less';
 
@@ -7,21 +10,28 @@ interface Props {
     toggleLanguage: (langaugeCode: string) => void;
 }
 
-const LangaugeToggle: React.StatelessComponent<Props> = ({
-    language,
-    toggleLanguage
-}) => (
-    <div className="languageToggle">
-        {language === 'nn' && (
-            <a className="lenke" href="#" onClick={() => toggleLanguage('nb')}>
-                Endre målform til bokmål
+const stopEvent = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+    evt.stopPropagation();
+    evt.preventDefault();
+};
+
+const LangaugeToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({ intl, language, toggleLanguage }) => {
+    const languageButtonText = language === 'nb' ?
+        getMessage(intl, 'intro.text.endreMålformTilBokmål') : getMessage(intl, 'intro.text.endreMålformTilNynorsk');
+
+    return (
+        <div className="languageToggle">
+            <a
+                className="lenke"
+                onClick={(e) => {
+                    stopEvent(e); 
+                    language === 'nb' ? toggleLanguage('nn') : toggleLanguage('nb'); 
+                }}
+                href="#"
+            >   
+                {languageButtonText}
             </a>
-        )}
-        {language === 'nb' && (
-            <a className="lenke" onClick={() => toggleLanguage('nn')}>
-                Endre målform til nynorsk
-            </a>
-        )}
-    </div>
-);
-export default LangaugeToggle;
+        </div>
+    );
+};
+export default injectIntl(LangaugeToggle);
