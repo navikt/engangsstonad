@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-const { Knapp } = require('nav-frontend-knapper');
 import getMessage from 'util/i18n/i18nUtils';
 import 'nav-frontend-lenker-style';
 import './languageToggle.less';
@@ -16,19 +15,18 @@ const stopEvent = (evt: React.MouseEvent<HTMLAnchorElement>) => {
 };
 
 const LangaugeToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({ intl, language, toggleLanguage }) => {
-    const languageButtonText = language === 'nb' ?
-        getMessage(intl, 'intro.text.endreMålformTilBokmål') : getMessage(intl, 'intro.text.endreMålformTilNynorsk');
+    const languageButtonText = language === 'nb' ? getMessage(intl, 'intro.text.endreMålformTilBokmål') : getMessage(intl, 'intro.text.endreMålformTilNynorsk');
 
     return (
         <div className="languageToggle">
             <a
                 className="lenke"
-                onClick={(e) => {
-                    stopEvent(e); 
-                    language === 'nb' ? toggleLanguage('nn') : toggleLanguage('nb'); 
+                onClick={e => {
+                    stopEvent(e);
+                    language === 'nb' ? toggleLanguage('nn') : toggleLanguage('nb');
                 }}
                 href="#"
-            >   
+            >
                 {languageButtonText}
             </a>
         </div>
