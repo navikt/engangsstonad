@@ -9,7 +9,7 @@ interface CountryListProps {
 }
 
 export const CountrySummaryList: React.StatelessComponent<CountryListProps> = props => (
-    <ul className="countryList">
+    <ul className="countryList countryList--summary">
         {props.utenlandsoppholdListe.map((periode: Periode, index: number) => (
             <CountryListElement key={index} utenlandsopphold={periode} />
         ))}
