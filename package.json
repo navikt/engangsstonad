@@ -9,8 +9,10 @@
     "scripts": {
         "build": "node src/build/scripts/production-build.js",
         "clean-build": "rimraf ./dist",
-        "docker-build": "npm run clean-build && npm run build && docker build . -t engangsstonad",
-        "docker-start": "docker run --name engangsstonad -p 8080:8080 -d engangsstonad",
+        "docker-build":
+            "npm run clean-build && npm run build && docker build . -t engangsstonad",
+        "docker-start":
+            "docker run --name engangsstonad -p 8080:8080 -d engangsstonad",
         "docker-kill": "npm run docker-stop && npm run docker-rm",
         "docker-rm": "docker rm engangsstonad",
         "docker-stop": "docker stop engangsstonad",
@@ -20,13 +22,15 @@
         "start": "node ./src/build/scripts/start-dev.js",
         "test": "cross-env NODE_ENV=test jest",
         "lint": "tslint src/**",
-        "cypress": "export PORT=8081 && npm run start-express & wait-on -v -t 15000 http://localhost:8081 && echo $(npm config get prefix)/bin/cypress run",
-        "cy": "cypress open & npm run build && export PORT=8081 && npm run start-express"
+        "cypress":
+            "export PORT=8081 && npm run start-express & wait-on -v -t 15000 http://localhost:8081 && echo $(npm config get prefix)/bin/cypress run",
+        "cy":
+            "cypress open & npm run build && export PORT=8081 && npm run start-express"
     },
     "dependencies": {
-        "@types/react-collapse": "^4.0.1",
         "axios": "0.17.1",
         "babel-polyfill": "6.26.0",
+        "bytes": "^3.0.0",
         "classnames": "2.2.5",
         "date-fns": "1.29.0",
         "dotenv": "4.0.0",
@@ -83,12 +87,14 @@
         "request": "2.83.0"
     },
     "devDependencies": {
+        "@types/bytes": "^3.0.0",
         "@types/classnames": "2.2.3",
         "@types/date-fns": "2.6.0",
         "@types/enzyme": "3.1.9",
         "@types/jest": "22.1.3",
         "@types/query-string": "5.1.0",
         "@types/react": "16.0.34",
+        "@types/react-collapse": "^4.0.1",
         "@types/react-document-title": "2.0.2",
         "@types/react-dom": "16.0.3",
         "@types/react-intl": "2.3.5",
