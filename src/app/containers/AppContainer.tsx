@@ -21,6 +21,7 @@ import Person from '../types/domain/Person';
 import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSoknadResponse';
 
 import '../styles/engangsstonad.less';
+import Workbench from './Workbench';
 
 interface StateProps {
     soknad: EngangsstonadSoknadResponse;
@@ -103,12 +104,24 @@ export class AppContainer extends React.Component<Props> {
         const { godkjentVilkar, søknadSendt } = this.props;
         const routes = [];
         if (!søknadSendt) {
+            routes.push(
+                <Route
+                    path="/engangsstonad/workbench"
+                    component={Workbench}
+                    exact={true}
+                    key="wb"
+                />
+            );
             routes.push(<Route path="/engangsstonad" component={Intro} exact={true} key="intro" />);
             if (godkjentVilkar) {
-                routes.push(<Route path="/engangsstonad/soknad" component={SøknadContainer} key="søknad" />);
+                routes.push(
+                    <Route path="/engangsstonad/soknad" component={SøknadContainer} key="søknad" />
+                );
             }
         } else {
-            routes.push(<Route path="/engangsstonad" component={SøknadSendt} exact={true} key="completed" />);
+            routes.push(
+                <Route path="/engangsstonad" component={SøknadSendt} exact={true} key="completed" />
+            );
         }
         return this.renderRoutes(routes);
     }
@@ -124,8 +137,10 @@ export class AppContainer extends React.Component<Props> {
             const personFinnes = harPersonData(person);
             const personErMyndig = erMyndig(person);
             const personErMann = erMann(person);
-            const innsendingFeilet = søknadSendt && error && error.status !== 401 && error.status >= 400;
-            const applicationStateIsValid = personFinnes && personErMyndig && !personErMann && !innsendingFeilet;
+            const innsendingFeilet =
+                søknadSendt && error && error.status !== 401 && error.status >= 400;
+            const applicationStateIsValid =
+                personFinnes && personErMyndig && !personErMann && !innsendingFeilet;
 
             if (applicationStateIsValid) {
                 return this.renderContent(this.getSøknadRoutes());

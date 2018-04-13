@@ -2,21 +2,31 @@ import * as React from 'react';
 const Icon = require('nav-frontend-ikoner-assets').default;
 
 import './attachment.less';
+import { bytesString } from 'components/attachment/utils';
 
 interface Props {
     vedlegg: File[];
+    visFilstørrelse?: boolean;
     onDelete?: (file: File) => void;
 }
 
 interface AttachmentProps {
     vedlegg: File;
+    visFilstørrelse?: Boolean;
     onDelete?: (file: File) => void;
 }
 
-const Attachment: React.StatelessComponent<AttachmentProps> = ({ vedlegg, onDelete }) => (
+const Attachment: React.StatelessComponent<AttachmentProps> = ({
+    vedlegg,
+    visFilstørrelse,
+    onDelete
+}) => (
     <div className="attachment">
         <Icon className="attachment__icon" kind="vedlegg" size={20} />
-        <span className="attachment__fileName">{vedlegg.name}</span>
+        <div className="attachment__fileName">
+            {vedlegg.name}
+            {visFilstørrelse && <div>{bytesString(vedlegg.size)}</div>}
+        </div>
         {onDelete && (
             <button
                 type="button"
@@ -34,12 +44,16 @@ const Attachment: React.StatelessComponent<AttachmentProps> = ({ vedlegg, onDele
 );
 
 const AttachmentList: React.StatelessComponent<Props> = props => {
-    const { vedlegg, onDelete } = props;
+    const { vedlegg, visFilstørrelse, onDelete } = props;
     return (
         <ul className="attachmentList">
             {vedlegg.map((vedleggFile, index) => (
                 <li key={index}>
-                    <Attachment vedlegg={vedleggFile} onDelete={onDelete} />
+                    <Attachment
+                        vedlegg={vedleggFile}
+                        onDelete={onDelete}
+                        visFilstørrelse={visFilstørrelse}
+                    />
                 </li>
             ))}
         </ul>

@@ -51,12 +51,13 @@ class ValidBase extends Component {
             hasBlurred: true
         });
 
-        setTimeout(() => {
-            this.validate();
-        });
-
         if (this.context.validForm) {
             this.context.validForm.onBlur(e, this);
+        } else {
+            /** Skal ikke trigge validering selv dersom en ligger inne i validForm (antagelse FH) */
+            setTimeout(() => {
+                this.validate();
+            });
         }
 
         if (this.props.onBlur) {
@@ -107,8 +108,20 @@ class ValidBase extends Component {
     }
 
     render() {
-        const { component, onChange, onBlur, onValidate, validateOnChange, validateOnBlur, feil, optional, ...other } = this.props;
-        const failedVerdict = !this.state.valid ? { feilmelding: this.getFirstFailedVerdict().failText } : undefined;
+        const {
+            component,
+            onChange,
+            onBlur,
+            onValidate,
+            validateOnChange,
+            validateOnBlur,
+            feil,
+            optional,
+            ...other
+        } = this.props;
+        const failedVerdict = !this.state.valid
+            ? { feilmelding: this.getFirstFailedVerdict().failText }
+            : undefined;
 
         const elementRef = {};
         switch (component) {
@@ -135,10 +148,24 @@ class ValidBase extends Component {
         }
 
         if (component === DateInput) {
-            return <this.props.component onChange={this.onChange} onBlur={this.onBlur} feil={feil || failedVerdict} {...other} />;
+            return (
+                <this.props.component
+                    onChange={this.onChange}
+                    onBlur={this.onBlur}
+                    feil={feil || failedVerdict}
+                    {...other}
+                />
+            );
         }
 
-        return <this.props.component onChange={this.onChange} onBlur={this.onBlur} feil={feil || failedVerdict} {...other} />;
+        return (
+            <this.props.component
+                onChange={this.onChange}
+                onBlur={this.onBlur}
+                feil={feil || failedVerdict}
+                {...other}
+            />
+        );
     }
 }
 
@@ -147,7 +174,8 @@ ValidBase.contextTypes = {
 };
 
 ValidBase.propTypes = {
-    component: PT.oneOf([Input, Textarea, Select, DateInput, SkjemaGruppe]).isRequired,
+    component: PT.oneOf([Input, Textarea, Select, DateInput, SkjemaGruppe])
+        .isRequired,
     name: PT.string,
     onChange: PT.func,
     onBlur: PT.func,

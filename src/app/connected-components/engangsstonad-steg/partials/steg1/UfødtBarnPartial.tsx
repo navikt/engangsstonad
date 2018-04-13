@@ -183,7 +183,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 <FormBlock visible={termindato !== undefined}>
                     <Terminbekreftelse
                         vedlegg={vedlegg}
-                        onFileSelect={(files: File[]) =>
+                        onFilesSelect={(files: File[]) =>
                             dispatch(soknad.addVedlegg(files))
                         }
                         onFileDelete={(file: File) =>
