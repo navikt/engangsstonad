@@ -4,7 +4,7 @@ describe('Inngangsvilkår', () => {
         cy.route('GET', '**/personinfo*', 'fixture:users/default.json');
 
         cy.visit('/engangsstonad');
-        cy.contains('Velkommen til søknad om engangsstønad');
+        cy.get('#js-intro').should('exist');
     });
 
     it('Bruker under 18 år får info om hvordan de under 18 søker', () => {
@@ -12,8 +12,7 @@ describe('Inngangsvilkår', () => {
         cy.route('GET', '**/personinfo*', 'fixture:users/under18.json');
 
         cy.visit('/engangsstonad');
-        cy.contains('Søknad om engangsstønad');
-        cy.contains('under 18 år') // TODO: Burde bruke en hook (klasse e.l.) i stedet for tekst
+        cy.get('#js-ikkeMyndig').should('exist');
     });
 
     it('Mannlig bruker får info om hvorfor de ikke kan søke', () => {
@@ -21,7 +20,6 @@ describe('Inngangsvilkår', () => {
         cy.route('GET', '**/personinfo*', 'fixture:users/male.json');
 
         cy.visit('/engangsstonad');
-        cy.contains('Søknad om engangsstønad');
-        cy.contains('Du kan ikke søke elektronisk om engangsstønad til far eller medmor'); // TODO: Burde bruke en hook (klasse e.l.) i stedet for tekst
+        cy.get('#js-erMann').should('exist');
     });
 });
