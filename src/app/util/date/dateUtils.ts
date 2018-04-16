@@ -1,5 +1,4 @@
 import * as moment from 'moment';
-import Barn from 'app/types/domain/Barn';
 
 export const isValidISODate = (isoDato: string) =>
     !!(isoDato && moment(isoDato, moment.ISO_8601).isValid());
@@ -19,6 +18,10 @@ export const datePickerToISODate = (dato: string) => {
     return parsetDato.isValid() ? parsetDato.toISOString() : '';
 };
 
-export const fødselsdatoIsSet = (barn: Barn) => {
-    return barn.fødselsdatoer.length > 0 && !barn.fødselsdatoer.includes(undefined as any);
+export const datoIsSet = (datoer: (string | undefined)[]) => {
+    return (
+        datoer.length > 0 &&
+        !datoer.includes(undefined as any) &&
+        !datoer.includes('' as any)
+    );
 };
