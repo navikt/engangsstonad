@@ -47,7 +47,7 @@ export class EngangsstonadCompleted extends React.Component<Props> {
 
     render() {
         const { intl, person } = this.props;
-
+        
         return (
             <div className="engangsstonad">
                 <DocumentTitle title="Kvittering - NAV Engangsstønad" />

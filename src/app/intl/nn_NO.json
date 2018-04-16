@@ -1,8 +1,7 @@
 {
     "intro.pageheading.soknadES": "Søknad om eingongsstønad",
     "intro.pageheading.velkommen": "Velkommen til søknad om eingongsstønad",
-    "intro.text.endreMålformTilBokmål": "Endre målform til bokmål",
-    "intro.text.endreMålformTilNynorsk": "Endre målform til nynorsk",
+    "intro.text.endreMålform": "Endre målform til bokmål",
     "intro.text.under18": "Sidan du er under 18 år, må ein av foreldra dine eller ein verje skrive under på søknaden saman med deg. Du må difor fylle ut søknaden på papir og sende den i posten. ",
     "intro.text.erMann": "Du kan ikke søke for mor. Er det du som skal ha engangsstønaden, må du velge «Jeg søker engangsstønad som far». { link }",
     "intro.text.erMann.link": "Du finner søknaden for far her.",
@@ -15,6 +14,7 @@
     "intro.pageheading.samtykke": "Rettar og pliktar.",
     "intro.button.startSoknad": "Start søknaden",
     "intro.text.lastNedPapirsoknad": "Her kan du laste ned papirsøknaden",
+    
     "relasjonBarn.sectionheading": "Informasjon om barnet",
     "relasjonBarn.text.fodselTidspunkt": "Søknaden min gjeld ein fødsel som er...",
     "relasjonBarn.radiobutton.fremtid": "fram i tid",
