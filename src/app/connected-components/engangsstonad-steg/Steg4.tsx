@@ -7,7 +7,7 @@ const { BekreftCheckboksPanel } = require('nav-frontend-skjema');
 import Veilederinfo from 'components/veileder-info/Veilederinfo';
 import PersonaliaLabel from 'components/personalia-label/PersonaliaLabel';
 
-import { fullNameFormat } from 'util/formats/formatUtils';
+import { prettyNameFormat } from 'util/formats/formatUtils';
 import { commonActionCreators as common } from '../../redux/actions';
 import getMessage from '../../util/i18n/i18nUtils';
 
@@ -52,7 +52,7 @@ export class Steg4 extends React.Component<Props> {
                 </div>
                 <div className="blokk-m">
                     <PersonaliaLabel
-                        navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn)}
+                        navn={prettyNameFormat(person.fornavn, person.mellomnavn, person.etternavn)}
                         personnummer={person.fnr}
                     />
                 </div>

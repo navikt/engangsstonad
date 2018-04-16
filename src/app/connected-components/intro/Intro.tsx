@@ -20,6 +20,7 @@ import Person from '../../types/domain/Person';
 import { ExternalProps } from '../../types/index';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
 import { Innholdstittel } from 'nav-frontend-typografi';
+import { prettyNameFormat } from 'util/formats/formatUtils';
 
 interface OwnProps {
     isModalOpen: boolean;
@@ -110,7 +111,7 @@ export class Intro extends React.Component<Props, OwnProps> {
                     <SimpleIllustration
                         svg={VeilederIllustration}
                         dialog={{
-                            title: getMessage(intl, 'intro.snakkeboble.overskrift', { name: person.fornavn }),
+                            title: getMessage(intl, 'intro.snakkeboble.overskrift', { name: prettyNameFormat(person.fornavn) }),
                             text: getMessage(intl, 'intro.pageheading.velkommen')
                         }}
                     />

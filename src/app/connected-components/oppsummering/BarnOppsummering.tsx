@@ -41,9 +41,15 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
     }
 
     return (
-        <SummaryBlock title={getMessage(intl, 'relasjonBarn.sectionheading')}>
+        // tslint:disable-next-line:jsx-alignment
+        <SummaryBlock title={getMessage(intl, 'oppsummering.text.informasjonOmBarnet', {
+            antallBarn: antallBarn && antallBarn > 1 ? 
+                getMessage(intl, 'medlemmskap.text.barnFlertall') : 
+                getMessage(intl, 'medlemmskap.text.barnEntall') }
+            )}
+        >
             <DisplayTextWithLabel
-                label={getMessage(intl, 'oppsummering.text.soknadenGjelder')}
+                label={getMessage(intl, 'oppsummering.text.soknadenGjelder', )}
                 text={antallBarnSummaryText}
             />
             {erBarnetFødt && (

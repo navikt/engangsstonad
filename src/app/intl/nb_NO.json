@@ -85,6 +85,7 @@
 
 
     "oppsummering.sectionheading": "Oppsummering",
+    "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }",
     "oppsummering.text.lesNoye": "Les gjennom oppsummeringen før du sender inn søknaden. Hvis du trenger å gjøre endringer kan du gå tilbake.",
     "oppsummering.text.vedlagtTerminbekreftelse": "Det er vedlagt en terminbekreftelse",
     "oppsummering.text.somErDatert": "Som er datert den",
@@ -127,8 +128,8 @@
     "rettigheter.text.innhenteOpplysninger.6": "Opplysninger fra andre lands trygdeordninger",
     "rettigheter.text.5": "Jeg forstår at NAV kan behandle søknaden min automatisk.",
     "rettigheter.text.6": "NAV kan sende informasjon om meg til andre lands trygdeordninger.",
-    "rettigheter.text.personvernerklering": "Jeg er kjent med rettighetene mine som står i {link}",
-    "rettigheter.text.personvernerklering.link": "personvernerklæringen til NAV",
+    "rettigheter.text.personvernerklering": "Jeg kan lese mer om hvordan NAV behandler personopplysninger i {link}",
+    "rettigheter.text.personvernerklering.link": "personvernerklæringen",
 
     "terminbekreftelsen.sectionheading": "Om terminbekreftelsen",
     "terminbekreftelsen.text.terminbekreftelsen": "Du må legge ved en bekreftelse på termin. Denne må være datert og signert av lege eller jordmor når du er i 26. svangerskapsuke eller senere.",
