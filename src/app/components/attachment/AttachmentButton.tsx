@@ -7,6 +7,7 @@ import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 
 interface OwnProps {
     id: string;
+    labelId: string;
     onFileSelected: (files: File[]) => void;
 }
 
@@ -72,11 +73,14 @@ class AttachmentButton extends React.Component<Props> {
     }
 
     render() {
-        const { id, intl } = this.props;
+        const { id, labelId, intl } = this.props;
         return (
             <label
                 role="button"
-                aria-label={intl.formatMessage({id: 'vedlegg.lastoppknapp.arialabel'})}
+                aria-label={intl.formatMessage({
+                    id: 'vedlegg.lastoppknapp.arialabel'
+                })}
+                id={labelId}
                 tabIndex={0}
                 htmlFor={id}
                 className="attachmentButton"

@@ -12,8 +12,14 @@ export interface Props {
     visFilstørrelse?: boolean;
     onFilesSelect: (files: File[]) => void;
     onFileDelete: (file: File) => void;
-    validators?: Validator[];
-    listValidators?: Validator[];
+    uploadValidation: {
+        name: string;
+        validators: Validator[];
+    };
+    listValidation: {
+        name: string;
+        validators: Validator[];
+    };
 }
 
 class AttachmentInput extends React.Component<Props> {
@@ -23,8 +29,8 @@ class AttachmentInput extends React.Component<Props> {
             visFilstørrelse,
             onFileDelete,
             onFilesSelect,
-            validators,
-            listValidators
+            uploadValidation,
+            listValidation
         } = this.props;
 
         const totalSize = getTotalFileSize(vedlegg);
@@ -32,9 +38,13 @@ class AttachmentInput extends React.Component<Props> {
         return (
             <div className="attachments">
                 <div className="blokk-m">
-                    <ValidGroup validators={validators} name="vedleggKnapp">
+                    <ValidGroup
+                        validators={uploadValidation.validators}
+                        name={uploadValidation.name}
+                    >
                         <AttachmentButton
                             id="vedlegg"
+                            labelId={uploadValidation.name}
                             onFileSelected={(files: File[]) => {
                                 onFilesSelect(files);
                             }}
@@ -42,8 +52,11 @@ class AttachmentInput extends React.Component<Props> {
                     </ValidGroup>
                 </div>
                 {vedlegg.length > 0 && (
-                    <ValidGroup validators={listValidators} name="vedlegg">
-                        <div className="blokk-xs">
+                    <ValidGroup
+                        validators={listValidation.validators}
+                        name={listValidation.name}
+                    >
+                        <div className="blokk-xs" id={listValidation.name}>
                             <LabelText>
                                 <FormattedMessage
                                     id="vedlegg.liste.tittel"

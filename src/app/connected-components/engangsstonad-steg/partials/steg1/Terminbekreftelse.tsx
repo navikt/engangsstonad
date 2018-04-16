@@ -27,32 +27,40 @@ const Terminbekreftelse: React.StatelessComponent<
             onFileDelete={props.onFileDelete}
             onFilesSelect={props.onFilesSelect}
             visFilstørrelse={true}
-            validators={[
-                {
-                    test: () => props.vedlegg.length > 0,
-                    failText: props.intl.formatMessage({
-                        id: 'relasjonBarn.vedlegg.feilmelding.vedleggMangler'
-                    })
-                }
-            ]}
-            listValidators={[
-                {
-                    test: () =>
-                        validerSamletFilstørrelse(
-                            props.vedlegg,
-                            MAX_TOTAL_SIZE
-                        ),
-                    failText: props.intl.formatMessage(
-                        {
-                            id: 'relasjonBarn.vedlegg.feilmelding.forstorefiler'
-                        },
-                        {
-                            antall: props.vedlegg.length,
-                            maks: bytesString(MAX_TOTAL_SIZE)
-                        }
-                    )
-                }
-            ]}
+            uploadValidation={{
+                name: 'vedleggInput',
+                validators: [
+                    {
+                        test: () => props.vedlegg.length > 0,
+                        failText: props.intl.formatMessage({
+                            id:
+                                'relasjonBarn.vedlegg.feilmelding.vedleggMangler'
+                        })
+                    }
+                ]
+            }}
+            listValidation={{
+                name: 'vedleggListe',
+                validators: [
+                    {
+                        test: () =>
+                            validerSamletFilstørrelse(
+                                props.vedlegg,
+                                MAX_TOTAL_SIZE
+                            ),
+                        failText: props.intl.formatMessage(
+                            {
+                                id:
+                                    'relasjonBarn.vedlegg.feilmelding.forstorefiler'
+                            },
+                            {
+                                antall: props.vedlegg.length,
+                                maks: bytesString(MAX_TOTAL_SIZE)
+                            }
+                        )
+                    }
+                ]
+            }}
         />
     </div>
 );
