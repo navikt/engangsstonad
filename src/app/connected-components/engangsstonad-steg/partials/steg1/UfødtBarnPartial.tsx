@@ -192,7 +192,11 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                     />
                 </FormBlock>
 
-                <FormBlock visible={vedlegg.length > 0}>
+                <FormBlock
+                    visible={
+                        vedlegg.length > 0 && getTermindato(barn) !== undefined
+                    }
+                >
                     <div key="dateInputTerminBekreftelse">
                         <ValidDateInput
                             id="terminbekreftelse"
