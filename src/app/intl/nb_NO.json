@@ -44,6 +44,8 @@
     "relasjonBarn.text.fodselsdato.flere.8": "Det åttende barnet ble født den...",
     "relasjonBarn.text.fodselsdato.flere.9": "Det niende barnet ble født den...",
     "relasjonBarn.text.fodselsdato.forskjelligeDager": "Barna ble født på forskjellige dager",
+    "relasjonBarn.vedlegg.feilmelding.forstorefiler": "{antall, plural, one {Vedlegget} other {Vedleggene}} er for {antall, plural, one {stort} other {store}}. Maks samlet størrelse er {maks}.",
+    "relasjonBarn.vedlegg.feilmelding.vedleggMangler": "Terminbekreftelse er ikke lastet opp",
 
     "annenForelder.sectionheading": "Informasjon om den andre forelderen",
     "annenForelder.label.navn": "Den andre forelderen heter...",
@@ -82,7 +84,6 @@
     "medlemmskap.modal.overskrift": "Legg til land",
     "medlemmskap.modal.lagreEndringer": "Lagre endringer",
     "medlemmskap.modal.avbryt": "Avbryt",
-
 
     "oppsummering.sectionheading": "Oppsummering",
     "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }",
@@ -159,5 +160,10 @@
 
     "valideringsfeil.terminbekreftelseDato.duMåOppgi": "Du må oppgi når terminbekreftelsen er datert",
     "valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere": "Datoen på terminbekreftelsen kan ikke være frem i tid.",
-    "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26": "Terminbekreftelsen må vise at du er i 26. svangerskapsuke eller senere"
+    "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26": "Terminbekreftelsen må vise at du er i 26. svangerskapsuke eller senere",
+
+    "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
+    "vedlegg.liste.tittel": "Valgte vedlegg ({størrelse})",
+    "vedlegg.lastoppknapp.label": "Last opp vedlegg...",
+    "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg"
 }

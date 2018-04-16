@@ -1,13 +1,18 @@
 import * as React from 'react';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import CustomSVG from 'components/custom-svg/CustomSVG';
+
 const uploadIcon = require('../../assets/svg/upload.svg').default;
+
 import './attachment.less';
 
-interface Props {
+interface OwnProps {
     id: string;
     onFileSelected: (files: File[]) => void;
 }
+
+type Props = OwnProps & InjectedIntlProps;
 
 class AttachmentButton extends React.Component<Props> {
     constructor(props: Props) {
@@ -69,23 +74,35 @@ class AttachmentButton extends React.Component<Props> {
     }
 
     render() {
-        const { id } = this.props;
+        const { id, intl } = this.props;
+        const inputId = `${id}-input`;
         return (
             <label
                 role="button"
-                aria-label="Trykk for å laste opp vedlegg"
+                aria-label={intl.formatMessage({
+                    id: 'vedlegg.lastoppknapp.arialabel'
+                })}
+                id={id}
                 tabIndex={0}
-                htmlFor={id}
+                htmlFor={inputId}
                 className="attachmentButton"
                 onDragOver={e => this.onFileDragOverHandler(e)}
                 onDrop={e => this.onFileDropHandler(e)}
                 onKeyPress={e => this.onKeyPress(e)}
             >
                 <CustomSVG iconRef={uploadIcon} size={22} />
-                <Element className="attachmentButton__label">Last opp vedlegg...</Element>
-                <input id={id} type="file" accept=".pdf, .jpg, .jpeg, .png" onChange={e => this.onFileSelect(e)} multiple={true} />
+                <Element className="attachmentButton__label">
+                    <FormattedMessage id="vedlegg.lastoppknapp.label" />
+                </Element>
+                <input
+                    id={inputId}
+                    type="file"
+                    accept=".pdf, .jpg, .jpeg, .png"
+                    onChange={e => this.onFileSelect(e)}
+                    multiple={true}
+                />
             </label>
         );
     }
 }
-export default AttachmentButton;
+export default injectIntl(AttachmentButton);

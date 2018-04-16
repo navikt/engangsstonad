@@ -1,16 +1,11 @@
 import { Props as DatovelgerProps } from 'nav-datovelger';
+import { ValidComponentProps } from './types';
 
-interface ValidatorProps {
-    name: string;
-    validators: any[];
-}
-interface InputProps {
-    feil?: Feil;
-    label: string | React.ReactNode;
-}
+export type ValidateInputProps = ValidComponentProps & DatovelgerProps;
 
-export type ValidateInputProps = InputProps & ValidatorProps & DatovelgerProps;
-
-const ValidDateInput: new (props: Props) => React.Component<ValidDateInputProps, any>;
+const ValidDateInput: new (props: Props) => React.Component<
+    ValidDateInputProps,
+    any
+>;
 
 export default ValidDateInput;
