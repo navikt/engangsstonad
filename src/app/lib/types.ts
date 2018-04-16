@@ -1,5 +1,3 @@
-import { Feil } from 'components/skjema-input-element/types';
-
 export interface ValidatorProps {
     name?: string;
     validators?: any[];

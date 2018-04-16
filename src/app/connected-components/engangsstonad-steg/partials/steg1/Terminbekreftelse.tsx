@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Veilederinfo from 'components/veileder-info/Veilederinfo';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import { Feil } from 'components/skjema-input-element/types';
 import AttachmentInput from 'components/attachment-input/AttachmentInput';
 import { validerSamletFilstørrelse } from 'components/attachment-input/utils';
 import { bytesString } from 'components/attachment/utils';
@@ -12,7 +11,6 @@ export interface OwnProps {
     vedlegg: File[];
     onFilesSelect: (files: File[]) => void;
     onFileDelete: (file: File) => void;
-    feil?: Feil;
 }
 
 const Terminbekreftelse: React.StatelessComponent<
