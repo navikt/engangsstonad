@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
-
 import { Input, Textarea, Select, SkjemaGruppe } from 'nav-frontend-skjema';
 import DateInput from '../components/date-input/DateInput';
 
@@ -14,7 +13,6 @@ class ValidBase extends Component {
             hasBlurred: false,
             optional: this.props.optional
         };
-
         this.onChange = this.onChange.bind(this);
         this.onBlur = this.onBlur.bind(this);
     }
@@ -146,17 +144,6 @@ class ValidBase extends Component {
                     this.element = node;
                 };
                 break;
-        }
-
-        if (component === DateInput) {
-            return (
-                <this.props.component
-                    onChange={this.onChange}
-                    onBlur={this.onBlur}
-                    feil={feil || failedVerdict}
-                    {...other}
-                />
-            );
         }
 
         return (

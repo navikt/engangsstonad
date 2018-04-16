@@ -18,4 +18,15 @@ export interface Feil {
     feilmelding: string;
 }
 
+export interface SummaryError {
+    name: string;
+    text: string;
+}
+
+export interface ValidationResult {
+    name: string;
+    tests: any[];
+    valid: boolean;
+}
+
 export type ValidComponentProps = ValidatorProps & InputProps;

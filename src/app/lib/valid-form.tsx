@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PT from 'prop-types';
 import FeilOppsummeringBoks from './feil-oppsummering-boks';
+import { ValidationResult, SummaryError } from './types';
 
 type FormSubmitEvent = React.FormEvent<HTMLFormElement>;
 
@@ -12,7 +13,7 @@ export interface Props {
 }
 
 interface State {
-    results: any[];
+    results: ValidationResult[];
     valid: boolean;
     failedSubmit: boolean;
 }
@@ -128,7 +129,7 @@ class ValidForm extends React.Component<Props, State> {
         });
     }
 
-    mapResultsToErrorSummary() {
+    mapResultsToErrorSummary(): SummaryError[] {
         return this.state.results
             .filter(result => !result.valid)
             .map(result => ({

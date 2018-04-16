@@ -2,16 +2,13 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { Systemtittel } from 'nav-frontend-typografi';
 import './validering-style.less';
+import { SummaryError } from './types';
 
-export interface Error {
-    name: string;
-    text: string;
-}
 interface Props {
     title: string;
     show: boolean;
     className?: string;
-    errors: Error[];
+    errors: SummaryError[];
 }
 
 const cls = (show: boolean, className?: string) =>
