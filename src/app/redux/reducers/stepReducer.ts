@@ -1,7 +1,7 @@
 import { StepActionKeys, StepActionTypes } from './../actions/step/stepActionDefinitions';
 
 export const getDefaultState = () => ({
-    activeStep: 3
+    activeStep: 1
 });
 
 const stepReducer = (state = getDefaultState(), action: StepActionTypes) => {

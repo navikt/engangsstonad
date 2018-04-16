@@ -5,10 +5,11 @@ const path = require("path");
 
 const server = express();
 const mockResponse = {
-  fornavn: "Henriette",
-  etternavn: "Ibsen",
-  kjønn: "K",
-  fødselsdato: "1997-03-20"
+    fornavn: "Henriette",
+    etternavn: "Ibsen",
+    kjønn: "K",
+    fødselsdato: "1997-03-20",
+    fnr: "11111111111"
 };
 
 const startServer = html => {
