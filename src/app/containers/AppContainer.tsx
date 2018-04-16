@@ -34,7 +34,6 @@ import Person from '../types/domain/Person';
 import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSoknadResponse';
 
 import '../styles/engangsstonad.less';
-import Workbench from './Workbench';
 
 interface StateProps {
     soknad: EngangsstonadSoknadResponse;
