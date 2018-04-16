@@ -7,8 +7,8 @@ export const shouldDisplayNextButtonOnStep1 = (barn: Barn, vedlegg: File[]) => {
     if (!barn.erBarnetFødt) {
         const b = barn as UfodtBarn;
         return (
-            b.terminbekreftelseDato !== undefined &&
-            b.terminbekreftelseDato !== '' &&
+            datoIsSet([b.terminbekreftelseDato]) &&
+            datoIsSet([b.termindato]) &&
             barn.antallBarn !== undefined &&
             vedlegg.length > 0
         );
