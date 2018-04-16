@@ -1,7 +1,6 @@
 import moment from 'moment';
 
 describe('Søknad', () => {
-
     before(() => {
         cy.server();
         cy.route('GET', '**/personinfo*', 'fixture:users/default.json');
@@ -10,9 +9,10 @@ describe('Søknad', () => {
 
     describe('Egenerklæring', () => {
         it('Huker av egenerklæring og går videre', () => {
-            cy.get('input[name="egenerklaring"]')
+            cy
+                .get('input[name="egenerklaring"]')
                 .not('[disabled]')
-                .check({force: true})
+                .check({ force: true })
                 .should('be.checked');
             cy.get('button').click();
         });
@@ -20,33 +20,48 @@ describe('Søknad', () => {
 
     describe('Informasjon om barnet', () => {
         it('Fremtidig fødsel', () => {
-            cy.get('#js-fodselFremtid')
+            cy
+                .get('#js-fodselFremtid')
                 .not('[disabled]')
-                .check({force: true})
+                .check({ force: true })
                 .should('be.checked');
-
         });
 
         it('Ett barn', () => {
-            cy.get('#js-ettBarn')
+            cy
+                .get('#js-ettBarn')
                 .not('[disabled]')
-                .check({force: true})
+                .check({ force: true })
                 .should('be.checked');
         });
 
         it('Termindato', () => {
-            cy.get('#termindato').type(moment().add(1, 'days').format('DD.MM.YYYY')).blur();
+            cy
+                .get('#termindato')
+                .type(
+                    moment()
+                        .add(1, 'days')
+                        .format('DD.MM.YYYY')
+                )
+                .blur();
         });
 
         it('Laster opp vedlegg (terminbekreftelse)', () => {
             const dropEvent = {
                 dataTransfer: {
-                    files: [],
-                },
+                    files: []
+                }
             };
-            cy.fixture('terminbekreftelse.pdf', 'base64').then((pdf) => {
-                return Cypress.Blob.base64StringToBlob(pdf, 'application/pdf').then((blob) => {
-                    dropEvent.dataTransfer.files.push(new File([blob], 'terminbekreftelse.pdf', {type: "application/pdf"}));
+            cy.fixture('terminbekreftelse.pdf', 'base64').then(pdf => {
+                return Cypress.Blob.base64StringToBlob(
+                    pdf,
+                    'application/pdf'
+                ).then(blob => {
+                    dropEvent.dataTransfer.files.push(
+                        new File([blob], 'terminbekreftelse.pdf', {
+                            type: 'application/pdf'
+                        })
+                    );
                 });
             });
             cy.get('.attachmentButton').trigger('drop', dropEvent);
@@ -54,7 +69,14 @@ describe('Søknad', () => {
         });
 
         it('Terminbekreftelsesdato', () => {
-            cy.get('#terminbekreftelse').type(moment().subtract(10, 'days').format('DD.MM.YYYY')).blur();
+            cy
+                .get('#terminbekreftelse')
+                .type(
+                    moment()
+                        .subtract(10, 'days')
+                        .format('DD.MM.YYYY')
+                )
+                .blur();
         });
 
         it('Går videre til neste side', () => {
@@ -72,22 +94,15 @@ describe('Søknad', () => {
         });
 
         it('should toggle utenlandskFnr', () => {
-            cy.get('#utenlandskFnr')
-              .not('[disabled]')
-              .check({force: true})
-              .should('be.checked');
+            cy
+                .get('#utenlandskFnr')
+                .not('[disabled]')
+                .check({ force: true })
+                .should('be.checked');
         });
 
         it('should set bostedsland', () => {
             cy.get('select[name="bostedsland"]').select('Sverige');
-        });
-
-        it('Vis hjelpetekst', () => {
-            cy.get('.hjelpetekst').should('not.have.class', 'hjelpetekst--open');
-            cy.get('#fnrHjelpetekstBtn').click();
-            cy.get('.hjelpetekst').should('have.class', 'hjelpetekst--open');
-            cy.get('#fnrHjelpetekstBtn').click();
-            cy.get('.hjelpetekst').should('not.have.class', 'hjelpetekst--open');
         });
 
         it('Gå videre til neste side', () => {
@@ -115,9 +130,10 @@ describe('Søknad', () => {
 
     describe('Oppsummering', () => {
         it('Bekreft opplysninger og send inn søknad', () => {
-            cy.get('input[name="bekreftOpplysninger"]')
+            cy
+                .get('input[name="bekreftOpplysninger"]')
                 .not('[disabled]')
-                .check({force: true})
+                .check({ force: true })
                 .should('be.checked');
 
             cy.get('button[type=submit]').click();
