@@ -2,7 +2,6 @@ import * as React from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
-import * as moment from 'moment';
 import { Periode } from '../../types/domain/Utenlandsopphold';
 import CountrySelect from 'components/country-select/CountrySelect';
 import { DateInput } from 'components/date-input/DateInput';
@@ -20,6 +19,9 @@ interface OwnProps {
     tidsperiode?: Tidsperiode;
     onSubmit: (periode: Periode) => void;
     closeModal: () => void;
+    validateLand?: (data: any) => Feil | undefined;
+    validateFom?: (data: any) => Feil | undefined;
+    validateTom?: (data: any) => Feil | undefined;
 }
 type Props = OwnProps & InjectedIntlProps;
 
@@ -109,47 +111,16 @@ class CountryModal extends React.Component<Props, State> {
         });
     }
 
-    validateLand(land: string): Feil | undefined {
-        if (land) {
-            return;
-        }
-        return { feilmelding: 'Du må oppgi et land' };
-    }
-
-    validateFomDato(fom: string, tom: string) {
-        if (fom) {
-            const momentFom = moment(fom), momentTom = moment(tom);
-            if (momentFom.isAfter(momentTom)) {
-                return { feilmelding: 'Fra-dato kan ikke være etter til-dato' };
-            } else if (momentFom.isBefore(moment().subtract(1, 'years'))) {
-                return { feilmelding: 'Fra-dato er satt til en dato som er mer enn ett år tilbake i tid, men må være satt innenfor de siste 12 månedene.' };
-            }
-            return;
-        }
-        return { feilmelding: 'Du må oppgi en fra-dato' };
-    }
-
-    validateTomDato(tom: string, fom: string) {
-        if (tom) {
-            const momentFom = moment(fom), momentTom = moment(tom);
-            if (momentTom.isBefore(momentFom)) {
-                return { feilmelding: 'Til-dato kan ikke være tidligere enn fra-dato' };
-            } else if (momentTom.isSameOrAfter(moment().add(1, 'days'))) {
-                return { feilmelding: 'Til-datoen er satt til en dato frem i tid, men kan tidligst være satt til dagens dato' };
-            }
-            return;
-        }
-        return { feilmelding: 'Du må oppgi en til-dato' };
-    }
-
     updateFormState({ formData, hasSubmitted }: State) {
+        const { validateLand, validateFom, validateTom, utenlandsopphold } = this.props;
+
         const land = formData.land && formData.land.value;
         const fom = formData.fom && formData.fom.value;
         const tom = formData.tom && formData.tom.value;
 
-        const landFeil = this.validateLand(formData.land && formData.land.value);
-        const fomFeil = this.validateFomDato(fom, tom);
-        const tomFeil = this.validateTomDato(tom, fom);
+        const landFeil = validateLand && validateLand({ land: formData.land && formData.land.value });
+        const fomFeil = validateFom && validateFom({ fom, tom, utenlandsoppholdInEditMode: utenlandsopphold });
+        const tomFeil = validateTom && validateTom({ tom, fom, utenlandsoppholdInEditMode: utenlandsopphold });
 
         this.setState({
             formData: {

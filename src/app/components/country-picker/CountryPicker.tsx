@@ -6,6 +6,13 @@ import { Periode } from '../../types/domain/Utenlandsopphold';
 import './countryPicker.less';
 import LabelText from 'components/labeltext/LabelText';
 import { Tidsperiode } from 'nav-datovelger';
+import { Feil } from 'components/skjema-input-element/types';
+
+interface Validators {
+    validateLand: (data: any) => Feil | undefined;
+    validateFom: (data: any) => Feil | undefined;
+    validateTom: (data: any) => Feil | undefined;
+}
 
 interface Props {
     label: string;
@@ -15,6 +22,7 @@ interface Props {
     addVisit: (periode: Periode) => void;
     deleteVisit: (periode: Periode) => void;
     editVisit: (periode: Periode, index: number) => void;
+    validators?: Validators;
 }
 
 interface State {
@@ -70,6 +78,7 @@ class CountryPicker extends React.Component<Props, State> {
     }
 
     render() {
+        const { validators } = this.props;
         return (
             <div>
                 {this.props.label && (
@@ -90,6 +99,7 @@ class CountryPicker extends React.Component<Props, State> {
                         language={this.props.language}
                         label={this.props.label}
                         tidsperiode={this.props.tidsperiode}
+                        {...validators}
                     />
                 )}
                 <Knapp className="countryPicker__addButton" onClick={() => this.openModal()} htmlType="button">

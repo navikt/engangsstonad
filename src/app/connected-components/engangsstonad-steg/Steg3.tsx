@@ -14,6 +14,7 @@ import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive
 import { fødselsdatoIsSet } from 'util/date/dateUtils';
 import FormBlock from 'components/form-block/FormBlock';
 import { Tidsperiode } from 'nav-datovelger';
+import { Feil } from 'components/skjema-input-element/types';
 
 interface StateProps {
     barn: Barn;
@@ -25,6 +26,118 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 export class Steg3 extends React.Component<Props> {
+
+    componentWillMount() {
+        this.overlapsWithOtherUtenlandsopphold = this.overlapsWithOtherUtenlandsopphold.bind(this);
+        this.validateFomDatoSiste12Mnd = this.validateFomDatoSiste12Mnd.bind(this);
+        this.validateTomDatoSiste12Mnd = this.validateTomDatoSiste12Mnd.bind(this);
+        this.validateFomDatoNeste12Mnd = this.validateFomDatoNeste12Mnd.bind(this);
+        this.validateTomDatoNeste12Mnd = this.validateTomDatoNeste12Mnd.bind(this);
+    }
+
+    validateLand({ land }: any): Feil | undefined {
+        if (land) {
+            return;
+        }
+        return { feilmelding: 'Du må oppgi et land' };
+    }
+
+    overlapsWithOtherUtenlandsopphold(momentFom: any, momentTom: any, utenlandsoppholdInEditMode: any) {
+        const { tidligerePerioder, senerePerioder } = this.props.utenlandsopphold;
+        const perioder = [...tidligerePerioder, ...senerePerioder];
+        const overlappendePeriode = perioder.find((periode) => {
+            if (periode !== utenlandsoppholdInEditMode) {
+                const { varighet } = periode;
+                const varighetFom = moment(varighet.fom),
+                      varighetTom = moment(varighet.tom);
+                return (
+                    momentFom.isBetween(
+                        varighetFom.subtract(1, 'seconds'),
+                        varighetTom.add(1, 'seconds')
+                    ) ||
+                    momentTom.isBetween(
+                        varighetFom.subtract(1, 'seconds'),
+                        varighetTom.add(1, 'seconds'))
+                    ) ||
+                    (varighetFom.isBetween(
+                        momentFom.subtract(1, 'seconds'),
+                        momentTom.add(1, 'seconds')
+                    ) ||
+                    varighetTom.isBetween(
+                        momentFom.subtract(1, 'seconds'),
+                        momentTom.add(1, 'seconds')
+                    ));
+            }
+        });
+        return overlappendePeriode;
+    }
+
+    validateFomDatoSiste12Mnd({ fom, tom, utenlandsoppholdInEditMode }: any): Feil | undefined {
+        if (fom) {
+            const momentFom = moment(fom), momentTom = moment(tom);
+            if (momentFom.isAfter(momentTom)) {
+                return { feilmelding: 'Fra-dato kan ikke være etter til-dato' };
+            } else if (momentFom.isBefore(moment().subtract(1, 'years'))) {
+                return { feilmelding: 'Fra-dato er satt til en dato som er mer enn ett år tilbake i tid, men må være satt innenfor de siste 12 månedene.' };
+            } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
+                return { feilmelding: 'Du kan ikke legge til en periode som overlapper med andre utenlandsopphold' };
+            }
+            return;
+        }
+        return { feilmelding: 'Du må oppgi en fra-dato' };
+    }
+
+    validateTomDatoSiste12Mnd({ tom, fom, utenlandsoppholdInEditMode }: any): Feil | undefined {
+        if (tom) {
+            const momentFom = moment(fom), momentTom = moment(tom);
+            if (momentTom.isBefore(momentFom)) {
+                return { feilmelding: 'Til-dato kan ikke være tidligere enn fra-dato' };
+            } else if (momentTom.isBefore(moment().subtract(1, 'years'))) {
+                return { feilmelding: 'Til-dato er satt til en dato som er mer enn ett år tilbake i tid, men må være satt innenfor de siste 12 månedene.' };
+            } else if (momentTom.isSameOrAfter(moment().add(1, 'days'))) {
+                return { feilmelding: 'Til-datoen er satt til en dato frem i tid, men kan tidligst være satt til dagens dato' };
+            } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
+                return { feilmelding: 'Du kan ikke legge til en periode som overlapper med andre utenlandsopphold' };
+            }
+            return;
+        }
+        return { feilmelding: 'Du må oppgi en til-dato' };
+    }
+
+    validateFomDatoNeste12Mnd({ fom, tom, utenlandsoppholdInEditMode }: any): Feil | undefined {
+        if (fom) {
+            const momentFom = moment(fom), momentTom = moment(tom);
+            if (momentFom.isAfter(momentTom)) {
+                return { feilmelding: 'Fra-dato kan ikke være etter til-dato' };
+            } else if (momentFom.isBefore(moment().startOf('day'))) {
+                return { feilmelding: 'Fra-datoen er satt til en dato tilbake i tid, men må være satt til dagens dato eller senere' };
+            }  else if (momentFom.isAfter(moment().add(1, 'years'))) {
+                return { feilmelding: 'Fra-dato er satt til en dato som er mer enn ett år frem i tid, men må være satt innenfor de neste 12 månedene.' };
+            } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
+                return { feilmelding: 'Du kan ikke legge til en periode som overlapper med andre utenlandsopphold' };
+            }
+            return;
+        }
+        return { feilmelding: 'Du må oppgi en fra-dato' };
+    }
+
+    validateTomDatoNeste12Mnd({ tom, fom, utenlandsoppholdInEditMode }: any): Feil | undefined {
+        if (tom) {
+            const momentFom = moment(fom), momentTom = moment(tom);
+            if (momentTom.isBefore(momentFom)) {
+                return { feilmelding: 'Til-dato kan ikke være tidligere enn fra-dato' };
+            } else if (momentTom.isAfter(moment().add(1, 'years'))) {
+                return { feilmelding: 'Til-dato er satt til en dato som er mer enn ett år frem i tid, men må være satt innenfor de neste 12 månedene.' };
+            } else if (momentTom.isBefore(moment().startOf('day'))) {
+                return { feilmelding: 'Til-datoen er satt til en dato tilbake i tid, men må være satt til dagens dato eller senere' };
+            } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
+                return { feilmelding: 'Du kan ikke legge til en periode som overlapper med andre utenlandsopphold' };
+            }
+            return;
+        }
+        return { feilmelding: 'Du må oppgi en til-dato' };
+    }
+
     getINorgeSiste12SelectedValue() {
         const { iNorgeSiste12Mnd } = this.props.utenlandsopphold;
         if (iNorgeSiste12Mnd === true) {
@@ -74,7 +187,6 @@ export class Steg3 extends React.Component<Props> {
 
         const tidsperiodeKommende: Tidsperiode = {
             startdato: moment()
-                .add(1, 'day')
                 .startOf('day')
                 .toDate(),
             sluttdato: moment()
@@ -109,6 +221,7 @@ export class Steg3 extends React.Component<Props> {
                         editVisit={(periode: Periode, i: number) => dispatch(soknad.editTidligereUtenlandsoppholdPeriode(periode, i))}
                         deleteVisit={(periode: Periode) => dispatch(soknad.deleteTidligereUtenlandsoppholdPeriode(periode))}
                         tidsperiode={tidsperiodeForegående}
+                        validators={{validateLand: this.validateLand, validateFom: this.validateFomDatoSiste12Mnd, validateTom: this.validateTomDatoSiste12Mnd}}
                     />
                 </FormBlock>
                 <FormBlock visible={iNorgeSiste12Mnd || tidligerePerioder.length > 0}>
@@ -133,6 +246,7 @@ export class Steg3 extends React.Component<Props> {
                         editVisit={(periode: Periode, i: number) => dispatch(soknad.editSenereUtenlandsoppholdPeriode(periode, i))}
                         deleteVisit={(periode: Periode) => dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))}
                         tidsperiode={tidsperiodeKommende}
+                        validators={{validateLand: this.validateLand, validateFom: this.validateFomDatoNeste12Mnd, validateTom: this.validateTomDatoNeste12Mnd}}
                     />
                 </FormBlock>
                 <FormBlock visible={(senerePerioder.length > 0 || iNorgeNeste12Mnd === true) && !fødselsdatoIsSet(barn)}>
