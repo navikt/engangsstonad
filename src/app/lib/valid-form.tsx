@@ -103,24 +103,6 @@ class ValidForm extends React.Component<Props, State> {
         return valid;
     }
 
-    // validateByName(name: string) {
-    //     const index = this.components.findIndex(c => c.props.name === name);
-    //     if (index !== -1) {
-    //         setTimeout(() => {
-    //             const results = this.state.results.slice();
-    //             const fieldResult = this.components[index].validate();
-    //             results[index] = fieldResult;
-    //             const valid = results.every(result => result.valid === true);
-
-    //             this.setState({
-    //                 results,
-    //                 valid,
-    //                 failedSubmit: this.state.failedSubmit && !valid
-    //             });
-    //         });
-    //     }
-    // }
-
     registerComponent(component: React.Component) {
         if (this.components.indexOf(component) === -1) {
             this.components.push(component);
