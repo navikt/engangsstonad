@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Feil } from 'components/skjema-input-element/types';
 import AttachmentInput from 'components/attachment-input/AttachmentInput';
 import { validerSamletFilstørrelse } from 'components/attachment-input/utils';
+import { bytesString } from 'components/attachment/utils';
 
 const MAX_TOTAL_SIZE = 1024 * 1024 * 2;
 
@@ -31,7 +32,9 @@ const Terminbekreftelse: React.StatelessComponent<OwnProps> = props => (
                             props.vedlegg,
                             MAX_TOTAL_SIZE
                         ),
-                    failText: 'Maks størrelse på filene er toooo much'
+                    failText: `Filene må være under ${bytesString(
+                        MAX_TOTAL_SIZE
+                    )} til sammen`
                 }
             ]}
         />

@@ -3,10 +3,10 @@ import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import Terminbekreftelse from '../connected-components/engangsstonad-steg/partials/steg1/Terminbekreftelse';
 import FormBlock from 'components/form-block/FormBlock';
 import { ValidDateInput } from '../lib';
-const ValidForm = require('../lib/valid-form').default;
 import LabelText from 'components/labeltext/LabelText';
 import { Feil } from 'components/skjema-input-element/types';
 import { getTotalFileSize, bytesString } from 'components/attachment/utils';
+import ValidForm from '../lib/valid-form';
 
 const MAX_TOTAL_SIZE = 1024 * 1024 * 2;
 
@@ -30,6 +30,9 @@ class Workbench extends React.Component<Props, State> {
         this.setState({
             vedlegg: [...this.state.vedlegg, ...files]
         });
+        // setTimeout(() => {
+        //     this.validForm.validateByName('vedlegg');
+        // }, 0);
     }
     removeVedlegg(file: File) {
         this.setState({
@@ -56,7 +59,11 @@ class Workbench extends React.Component<Props, State> {
             <div>
                 <Søknadstittel tittel="Workbench" />
                 <div className="responsiveContainer">
-                    <ValidForm noSummary={true} onSubmit={() => null}>
+                    <ValidForm
+                        summaryTitle="Det er feil i skjemaet"
+                        noSummary={true}
+                        onSubmit={() => null}
+                    >
                         <FormBlock>
                             <Terminbekreftelse
                                 vedlegg={this.state.vedlegg}
