@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Veilederinfo from 'components/veileder-info/Veilederinfo';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Feil } from 'components/skjema-input-element/types';
 import AttachmentInput from 'components/attachment-input/AttachmentInput';
 import { validerSamletFilstørrelse } from 'components/attachment-input/utils';
 import { bytesString } from 'components/attachment/utils';
 
-const MAX_TOTAL_SIZE = 1024 * 1024 * 2;
+const MAX_TOTAL_SIZE = 1024 * 1024 * 1;
 
 export interface OwnProps {
     vedlegg: File[];
@@ -15,7 +15,9 @@ export interface OwnProps {
     feil?: Feil;
 }
 
-const Terminbekreftelse: React.StatelessComponent<OwnProps> = props => (
+const Terminbekreftelse: React.StatelessComponent<
+    OwnProps & InjectedIntlProps
+> = props => (
     <div className="terminbekreftelse">
         <div className="blokk-m">
             <Veilederinfo>
@@ -32,13 +34,19 @@ const Terminbekreftelse: React.StatelessComponent<OwnProps> = props => (
                             props.vedlegg,
                             MAX_TOTAL_SIZE
                         ),
-                    failText: `Filene må være under ${bytesString(
-                        MAX_TOTAL_SIZE
-                    )} til sammen`
+                    failText: props.intl.formatMessage(
+                        {
+                            id: 'relasjonBarn.vedlegg.feilmelding.forstorefiler'
+                        },
+                        {
+                            antall: props.vedlegg.length,
+                            maks: bytesString(MAX_TOTAL_SIZE)
+                        }
+                    )
                 }
             ]}
         />
     </div>
 );
 
-export default Terminbekreftelse;
+export default injectIntl(Terminbekreftelse);

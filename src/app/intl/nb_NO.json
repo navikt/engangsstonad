@@ -44,6 +44,7 @@
     "relasjonBarn.text.fodselsdato.flere.8": "Det åttende barnet ble født den...",
     "relasjonBarn.text.fodselsdato.flere.9": "Det niende barnet ble født den...",
     "relasjonBarn.text.fodselsdato.forskjelligeDager": "Barna ble født på forskjellige dager",
+    "relasjonBarn.vedlegg.feilmelding.forstorefiler": "{antall, plural, one {Vedlegget} other {Vedleggene}} er for {antall, plural, one {stort} other {store}}. Maks samlet størrelse er {maks}.",
 
     "annenForelder.sectionheading": "Informasjon om den andre forelderen",
     "annenForelder.label.navn": "Den andre forelderen heter...",
@@ -82,7 +83,6 @@
     "medlemmskap.modal.overskrift": "Legg til land",
     "medlemmskap.modal.lagreEndringer": "Lagre endringer",
     "medlemmskap.modal.avbryt": "Avbryt",
-
 
     "oppsummering.sectionheading": "Oppsummering",
     "oppsummering.text.lesNoye": "Les gjennom oppsummeringen før du sender inn søknaden. Hvis du trenger å gjøre endringer kan du gå tilbake.",
