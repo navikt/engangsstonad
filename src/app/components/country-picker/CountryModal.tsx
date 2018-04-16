@@ -26,6 +26,7 @@ type Props = OwnProps & InjectedIntlProps;
 type Field = {
     value: any;
     feil?: Feil;
+    visFeil?: boolean;
 };
 
 interface PeriodeForm {
@@ -35,7 +36,8 @@ interface PeriodeForm {
 }
 
 interface State {
-    erEndring: boolean;
+    erEndring?: boolean;
+    hasSubmitted?: boolean;
     formData: PeriodeForm;
 }
 
@@ -100,6 +102,11 @@ class CountryModal extends React.Component<Props, State> {
                 this.props.onSubmit(validPeriode);
             }
         }
+
+        this.updateFormState({
+            formData: this.state.formData,
+            hasSubmitted: true
+        });
     }
 
     validateLand(land: string): Feil | undefined {
@@ -117,32 +124,40 @@ class CountryModal extends React.Component<Props, State> {
     }
 
     validateTomDato(tom: string, fom: string) {
-        if (fom) {
+        if (tom) {
             return;
         }
         return { feilmelding: 'Du må oppgi en til-dato' };
     }
 
-    updateFormState(data: PeriodeForm) {
-        const land = data.land && data.land.value;
-        const fom = data.fom && data.fom.value;
-        const tom = data.tom && data.tom.value;
+    updateFormState({ formData, hasSubmitted }: State) {
+        const land = formData.land && formData.land.value;
+        const fom = formData.fom && formData.fom.value;
+        const tom = formData.tom && formData.tom.value;
+
+        const landFeil = this.validateLand(formData.land && formData.land.value);
+        const fomFeil = this.validateFomDato(fom, tom);
+        const tomFeil = this.validateTomDato(tom, fom);
 
         this.setState({
             formData: {
                 land: {
                     value: land,
-                    feil: this.validateLand(data.land && data.land.value)
+                    feil: landFeil,
+                    visFeil: landFeil && (hasSubmitted || this.state.hasSubmitted)
                 },
                 fom: {
                     value: fom,
-                    feil: this.validateFomDato(fom, tom)
+                    feil: fomFeil,
+                    visFeil: fomFeil && (hasSubmitted || this.state.hasSubmitted)
                 },
                 tom: {
                     value: tom,
-                    feil: this.validateTomDato(tom, fom)
+                    feil: tomFeil,
+                    visFeil: tomFeil && (hasSubmitted || this.state.hasSubmitted)
                 }
-            }
+            },
+            hasSubmitted:  (hasSubmitted || this.state.hasSubmitted)
         });
     }
 
@@ -174,9 +189,19 @@ class CountryModal extends React.Component<Props, State> {
             };
         }
 
-        const landFeil = formData && formData.land && formData.land.feil;
-        const fomFeil = formData && formData.fom && formData.fom.feil;
-        const tomFeil = formData && formData.tom && formData.tom.feil;
+        let landFeil;
+        let fomFeil;
+        let tomFeil;
+        
+        if (formData && formData.land && formData.land.visFeil === true) {
+            landFeil = formData.land.feil;
+        }
+        if (formData && formData.fom && formData.fom.visFeil === true) {
+            fomFeil = formData.fom.feil;
+        }
+        if (formData && formData.tom && formData.tom.visFeil === true) {
+            tomFeil = formData.tom.feil;
+        }
 
         return (
             <Modal className="countryModal" isOpen={true} contentLabel="landvelger" closeButton={true} onRequestClose={() => { this.props.closeModal(); }}>
@@ -188,7 +213,7 @@ class CountryModal extends React.Component<Props, State> {
                         <CountrySelect
                             label={<LabelText>{this.props.label}</LabelText>}
                             feil={landFeil}
-                            onChange={land => this.updateFormState({ land: { value: land } })}
+                            onChange={land => this.updateFormState({ formData: { ...formData, land: { value: land } } })}
                             language={language}
                             defaultValue={formData && formData.land && formData.land.value}
                         />
@@ -199,7 +224,7 @@ class CountryModal extends React.Component<Props, State> {
                             label={<LabelText intlId="standard.text.fra" />}
                             dato={fomDato}
                             feil={fomFeil}
-                            onChange={dato => this.updateFormState({ fom: { value: dato.toISOString() } })}
+                            onChange={dato => this.updateFormState({ formData: { ...formData, fom: { value: dato ? dato.toISOString() : undefined } } })}
                             avgrensninger={fomAvgrensning}
                             kalenderplassering="fullskjerm"
                         />
@@ -210,7 +235,7 @@ class CountryModal extends React.Component<Props, State> {
                             label={<LabelText intlId="standard.text.til" />}
                             dato={tomDato}
                             feil={tomFeil}
-                            onChange={dato => this.updateFormState({ tom: { value: dato.toISOString() } })}
+                            onChange={dato => this.updateFormState({ formData: { ...formData,  tom: { value: dato ? dato.toISOString() : undefined } } })}
                             avgrensninger={tomAvgrensning}
                             kalenderplassering="fullskjerm"
                         />
