@@ -25,9 +25,19 @@ const Terminbekreftelse: React.StatelessComponent<
             </Veilederinfo>
         </div>
         <AttachmentInput
-            {...props}
+            vedlegg={props.vedlegg}
+            onFileDelete={props.onFileDelete}
+            onFilesSelect={props.onFilesSelect}
             visFilstørrelse={true}
             validators={[
+                {
+                    test: () => props.vedlegg.length > 0,
+                    failText: props.intl.formatMessage({
+                        id: 'relasjonBarn.vedlegg.feilmelding.vedleggMangler'
+                    })
+                }
+            ]}
+            listValidators={[
                 {
                     test: () =>
                         validerSamletFilstørrelse(

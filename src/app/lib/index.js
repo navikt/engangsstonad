@@ -117,6 +117,7 @@ class ValidBase extends Component {
             validateOnBlur,
             feil,
             optional,
+            validators,
             ...other
         } = this.props;
         const failedVerdict = !this.state.valid
