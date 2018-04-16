@@ -82,8 +82,8 @@ export class SøknadContainer extends React.Component<Props> {
     }
 
     shouldRenderFortsettKnapp(): boolean {
-        const { activeStep, annenForelder, utenlandsopphold, barn, person, intl } = this.props;
-        return getStepConfig(intl, person)[activeStep - 1].nextStepCondition({ barn, annenForelder, utenlandsopphold });
+        const { activeStep, annenForelder, utenlandsopphold, barn, person, vedlegg, intl } = this.props;
+        return getStepConfig(intl, person)[activeStep - 1].nextStepCondition({ barn, annenForelder, utenlandsopphold, vedlegg });
     }
 
     render() {
