@@ -1,13 +1,11 @@
-import Barn, { UfodtBarn } from 'app/types/domain/Barn';
-import AnnenForelder from 'app/types/domain/AnnenForelder';
-import Utenlandsopphold from 'app/types/domain/Utenlandsopphold';
+import { UfodtBarn } from 'app/types/domain/Barn';
 import { fødselsdatoIsSet } from 'util/date/dateUtils';
 
-export const shouldDisplayNextButtonOnStep1 = (barn: Barn) => {
+export const shouldDisplayNextButtonOnStep1 = ({ barn }: any) => {
     return (barn as UfodtBarn).terminbekreftelseDato !== undefined || fødselsdatoIsSet(barn);
 };
 
-export const shouldDisplayNextButtonOnStep2 = (annenForelder: AnnenForelder) => {
+export const shouldDisplayNextButtonOnStep2 = ({ annenForelder }: any) => {
     if (annenForelder.kanIkkeOppgis === true || annenForelder.fnr !== undefined) {
         return true;
     } else {
@@ -15,7 +13,7 @@ export const shouldDisplayNextButtonOnStep2 = (annenForelder: AnnenForelder) => 
     }
 };
 
-export const shouldDisplayNextButtonOnStep3 = (barn: Barn,  utenlandsopphold: Utenlandsopphold) => {
+export const shouldDisplayNextButtonOnStep3 = ({ barn, utenlandsopphold }: any) => {
     if (utenlandsopphold.iNorgeNeste12Mnd === false) {
         return utenlandsopphold.senerePerioder.length > 0 && (fødselsdatoIsSet(barn) || utenlandsopphold.fødselINorge !== undefined);
     } else {

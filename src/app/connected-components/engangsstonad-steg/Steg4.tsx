@@ -57,7 +57,7 @@ export class Steg4 extends React.Component<Props> {
                     />
                 </div>
                 <OppsummeringBarn barn={this.props.barn} vedlegg={this.props.vedlegg} />
-                <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />
+                {Object.keys(this.props.annenForelder).length > 0 && <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />}
                 <OppsummeringUtenlandsopphold utenlandsopphold={this.props.utenlandsopphold} />
                 <div className="blokk-m">
                     <ValidGroup

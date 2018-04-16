@@ -6,6 +6,7 @@ type Person = {
     adresse: string;
     kjønn: string;
     fødselsdato: string;
+    ikkeNordiskEøsLand: boolean;
 };
 
 export default Person;
