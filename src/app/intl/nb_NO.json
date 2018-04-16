@@ -158,5 +158,10 @@
 
     "valideringsfeil.terminbekreftelseDato.duMåOppgi": "Du må oppgi når terminbekreftelsen er datert",
     "valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere": "Datoen på terminbekreftelsen kan ikke være frem i tid.",
-    "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26": "Terminbekreftelsen må vise at du er i 26. svangerskapsuke eller senere"
+    "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26": "Terminbekreftelsen må vise at du er i 26. svangerskapsuke eller senere",
+
+    "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
+    "vedlegg.liste.tittel": "Valgte vedlegg",
+    "vedlegg.lastoppknapp.label": "Last opp vedlegg...",
+    "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg"
 }

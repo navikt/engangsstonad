@@ -4,6 +4,7 @@ import AttachmentList from 'components/attachment/AttachmentList';
 import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
 import { Feil } from 'components/skjema-input-element/types';
 import LabelText from 'components/labeltext/LabelText';
+import { FormattedMessage } from 'react-intl';
 
 export interface Props {
     vedlegg: File[];
@@ -30,7 +31,9 @@ const Attachments: React.StatelessComponent<Props> = ({
                 <SkjemaInputElement
                     label={
                         <div className="blokk-xs">
-                            <LabelText>Valgte vedlegg</LabelText>
+                            <LabelText>
+                                <FormattedMessage id="vedlegg.liste.tittel" />
+                            </LabelText>
                         </div>
                     }
                     feil={feil}

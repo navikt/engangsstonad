@@ -3,11 +3,14 @@ import { Element } from 'nav-frontend-typografi';
 import CustomSVG from 'components/custom-svg/CustomSVG';
 const uploadIcon = require('../../assets/svg/upload.svg').default;
 import './attachment.less';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 
-interface Props {
+interface OwnProps {
     id: string;
     onFileSelected: (files: File[]) => void;
 }
+
+type Props = OwnProps & InjectedIntlProps;
 
 class AttachmentButton extends React.Component<Props> {
     constructor(props: Props) {
@@ -69,11 +72,11 @@ class AttachmentButton extends React.Component<Props> {
     }
 
     render() {
-        const { id } = this.props;
+        const { id, intl } = this.props;
         return (
             <label
                 role="button"
-                aria-label="Trykk for å laste opp vedlegg"
+                aria-label={intl.formatMessage({id: 'vedlegg.lastoppknapp.arialabel'})}
                 tabIndex={0}
                 htmlFor={id}
                 className="attachmentButton"
@@ -82,10 +85,18 @@ class AttachmentButton extends React.Component<Props> {
                 onKeyPress={e => this.onKeyPress(e)}
             >
                 <CustomSVG iconRef={uploadIcon} size={22} />
-                <Element className="attachmentButton__label">Last opp vedlegg...</Element>
-                <input id={id} type="file" accept=".pdf, .jpg, .jpeg, .png" onChange={e => this.onFileSelect(e)} multiple={true} />
+                <Element className="attachmentButton__label">
+                    <FormattedMessage id="vedlegg.lastoppknapp.label" />
+                </Element>
+                <input
+                    id={id}
+                    type="file"
+                    accept=".pdf, .jpg, .jpeg, .png"
+                    onChange={e => this.onFileSelect(e)}
+                    multiple={true}
+                />
             </label>
         );
     }
 }
-export default AttachmentButton;
+export default injectIntl(AttachmentButton);
