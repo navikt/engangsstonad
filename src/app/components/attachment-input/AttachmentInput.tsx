@@ -43,8 +43,7 @@ class AttachmentInput extends React.Component<Props> {
                         name={uploadValidation.name}
                     >
                         <AttachmentButton
-                            id="vedlegg"
-                            labelId={uploadValidation.name}
+                            id={uploadValidation.name}
                             onFileSelected={(files: File[]) => {
                                 onFilesSelect(files);
                             }}

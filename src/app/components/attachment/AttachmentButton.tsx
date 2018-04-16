@@ -7,7 +7,6 @@ import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 
 interface OwnProps {
     id: string;
-    labelId: string;
     onFileSelected: (files: File[]) => void;
 }
 
@@ -73,16 +72,17 @@ class AttachmentButton extends React.Component<Props> {
     }
 
     render() {
-        const { id, labelId, intl } = this.props;
+        const { id, intl } = this.props;
+        const inputId = `${id}-input`;
         return (
             <label
                 role="button"
                 aria-label={intl.formatMessage({
                     id: 'vedlegg.lastoppknapp.arialabel'
                 })}
-                id={labelId}
+                id={id}
                 tabIndex={0}
-                htmlFor={id}
+                htmlFor={inputId}
                 className="attachmentButton"
                 onDragOver={e => this.onFileDragOverHandler(e)}
                 onDrop={e => this.onFileDropHandler(e)}
@@ -93,7 +93,7 @@ class AttachmentButton extends React.Component<Props> {
                     <FormattedMessage id="vedlegg.lastoppknapp.label" />
                 </Element>
                 <input
-                    id={id}
+                    id={inputId}
                     type="file"
                     accept=".pdf, .jpg, .jpeg, .png"
                     onChange={e => this.onFileSelect(e)}
