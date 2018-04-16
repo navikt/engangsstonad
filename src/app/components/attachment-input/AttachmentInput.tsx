@@ -2,10 +2,10 @@ import * as React from 'react';
 import AttachmentButton from 'components/attachment/AttachmentButton';
 import AttachmentList from 'components/attachment/AttachmentList';
 import LabelText from 'components/labeltext/LabelText';
-import { bytesString, getTotalFileSize } from 'components/attachment/utils';
 import { ValidGroup } from '../../lib';
 import { Validator } from '../../lib/types';
 import { FormattedMessage } from 'react-intl';
+import { bytesString, getTotalFileSize } from 'util/attachment/utils';
 
 export interface Props {
     vedlegg: File[];

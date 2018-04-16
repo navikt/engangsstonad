@@ -1,4 +1,4 @@
-import { getTotalFileSize } from 'components/attachment/utils';
+import { getTotalFileSize } from 'util/attachment/utils';
 
 export const validerSamletFilstørrelse = (
     vedlegg: File[],

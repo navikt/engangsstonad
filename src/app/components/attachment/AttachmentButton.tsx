@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import CustomSVG from 'components/custom-svg/CustomSVG';
+
 const uploadIcon = require('../../assets/svg/upload.svg').default;
+
 import './attachment.less';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 
 interface OwnProps {
     id: string;

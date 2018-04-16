@@ -2,8 +2,8 @@ import * as React from 'react';
 const Icon = require('nav-frontend-ikoner-assets').default;
 
 import './attachment.less';
-import { bytesString } from 'components/attachment/utils';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { bytesString } from 'util/attachment/utils';
 
 interface OwnProps {
     vedlegg: File;
