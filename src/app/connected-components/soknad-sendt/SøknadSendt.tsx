@@ -17,7 +17,6 @@ import getMessage from 'util/i18n/i18nUtils';
 
 import 'nav-frontend-lenker-style';
 import '../../styles/engangsstonad.less';
-import { prettyNameFormat } from 'util/formats/formatUtils';
 
 interface StateProps {
     person: Person;
@@ -56,9 +55,8 @@ export class EngangsstonadCompleted extends React.Component<Props> {
                 <div className="responsiveContainer">
                     <CustomSVG iconRef={SpotlightLetter} className="spotlightLetter" />
                     <Innholdstittel className="blokk-s">
-                        {getMessage(intl, 'kvittering.text.takk', {
-                            navn: prettyNameFormat(person.fornavn)
-                        })}
+                        {getMessage(intl, 'kvittering.text.takk')}
+                        <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
                     <Ingress>{this.receiptText()}</Ingress>
                 </div>

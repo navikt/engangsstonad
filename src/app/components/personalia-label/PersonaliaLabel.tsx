@@ -10,7 +10,7 @@ interface Props {
 
 const PersonaliaLabel: React.StatelessComponent<Props> = ({ navn, personnummer }) => (
     <div className="personaliaLabel">
-        <Undertittel className="personaliaLabel__name">{navn}</Undertittel>
+        <Undertittel className="personaliaLabel__name capitalizeName">{navn}</Undertittel>
         <Normaltekst className="personaliaLabel__person">{personnummer}</Normaltekst>
     </div>
 );
