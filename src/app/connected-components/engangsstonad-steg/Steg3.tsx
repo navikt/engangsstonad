@@ -251,12 +251,20 @@ export class Steg3 extends React.Component<Props> {
                 </FormBlock>
                 <FormBlock visible={(senerePerioder.length > 0 || iNorgeNeste12Mnd === true) && !fødselsdatoIsSet(barn)}>
                     <RadioPanelGruppeResponsive
-                        legend={getMessage(intl, 'medlemmskap.text.bostedFodsel')}
+                        legend={getMessage(intl, 'medlemmskap.text.bostedFodsel', {
+                            antallBarn: barn.antallBarn && barn.antallBarn > 1 ? 
+                                getMessage(intl, 'medlemmskap.text.barnFlertall') : 
+                                getMessage(intl, 'medlemmskap.text.barnEntall')
+                        })}
                         name="fødselINorge"
                         onChange={(event: any, value: string) => dispatch(soknad.setFødselINorge(value))}
                         checked={this.getFødselINorgeSelectedValue()}
                         radios={[
-                            { inputProps: { id: 'js-fodselINorge' }, label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'), value: 'norway' },
+                            { 
+                                inputProps: { id: 'js-fodselINorge' }, 
+                                label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'), 
+                                value: 'norway' 
+                            },
                             {
                                 inputProps: { id: 'js-fodselIUtlandet' },
                                 label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'),

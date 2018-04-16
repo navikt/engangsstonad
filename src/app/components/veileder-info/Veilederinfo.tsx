@@ -25,27 +25,19 @@ const getAnsiktFromType = (type: Infotype): Ansiktstype => {
 };
 
 const Veilederinfo: React.StatelessComponent<VeilederInfoProps> = ({
-   utvidetInfo,
-   visVeileder = true,
-   stil = 'normal',
-   type = 'info',
-   children
+    utvidetInfo,
+    visVeileder = true,
+    stil = 'normal',
+    type = 'info',
+    children
 }) => {
     return (
         <div
-            className={classnames(
-                'veilederinfo',
-                `veilederinfo--${stil}`,
-                `veilederinfo--${type}`
-            )}
+            className={classnames('veilederinfo', `veilederinfo--${stil}`, `veilederinfo--${type}`)}
         >
             {visVeileder && (
-                <span className="veilederinfo__veileder">
-                    <Veileder
-                        farge="lilla"
-                        ansikt={getAnsiktFromType(type)}
-                        stil="kompakt"
-                    />
+                <span className="veilederinfo__veileder" role="presentation" aria-hidden={true}>
+                    <Veileder farge="lilla" ansikt={getAnsiktFromType(type)} stil="kompakt" />
                 </span>
             )}
 

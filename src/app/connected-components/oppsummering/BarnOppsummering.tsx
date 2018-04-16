@@ -41,20 +41,26 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
     }
 
     return (
-        <SummaryBlock title={getMessage(intl, 'relasjonBarn.sectionheading')}>
+        // tslint:disable-next-line:jsx-alignment
+        <SummaryBlock title={getMessage(intl, 'oppsummering.text.informasjonOmBarnet', {
+            antallBarn: antallBarn && antallBarn > 1 ? 
+                getMessage(intl, 'medlemmskap.text.barnFlertall') : 
+                getMessage(intl, 'medlemmskap.text.barnEntall') }
+            )}
+        >
             <DisplayTextWithLabel
-                label={getMessage(intl, 'oppsummering.text.soknadenGjelder')}
+                label={getMessage(intl, 'oppsummering.text.soknadenGjelder', )}
                 text={antallBarnSummaryText}
             />
             {erBarnetFødt && (
-                <DisplayTextWithLabel label={'Med fødselsdato...'} text={fødselsdatoerSummary} />
+                <DisplayTextWithLabel label={getMessage(intl, 'oppsummering.text.medFødselsdato')} text={fødselsdatoerSummary} />
             )}
             {!erBarnetFødt &&
                 termindato &&
                 terminbekreftelseDato && (
                     <div>
                         <DisplayTextWithLabel
-                            label={getMessage(intl, 'relasjonBarn.text.termindato')}
+                            label={getMessage(intl, 'oppsummering.text.medTermindato')}
                             text={ISODateToMaskedInput(termindato)}
                         />
                         <DisplayTextWithLabel

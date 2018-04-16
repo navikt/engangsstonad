@@ -17,6 +17,7 @@ import getMessage from 'util/i18n/i18nUtils';
 
 import 'nav-frontend-lenker-style';
 import '../../styles/engangsstonad.less';
+import { prettyNameFormat } from 'util/formats/formatUtils';
 
 interface StateProps {
     person: Person;
@@ -47,7 +48,7 @@ export class EngangsstonadCompleted extends React.Component<Props> {
 
     render() {
         const { intl, person } = this.props;
-
+        
         return (
             <div className="engangsstonad">
                 <DocumentTitle title="Kvittering - NAV Engangsstønad" />
@@ -56,7 +57,7 @@ export class EngangsstonadCompleted extends React.Component<Props> {
                     <CustomSVG iconRef={SpotlightLetter} className="spotlightLetter" />
                     <Innholdstittel className="blokk-s">
                         {getMessage(intl, 'kvittering.text.takk', {
-                            navn: person.fornavn
+                            navn: prettyNameFormat(person.fornavn)
                         })}
                     </Innholdstittel>
                     <Ingress>{this.receiptText()}</Ingress>

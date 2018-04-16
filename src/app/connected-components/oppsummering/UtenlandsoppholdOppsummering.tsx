@@ -45,13 +45,13 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
             )}
             {iNorgeNeste12Mnd ? (
                 <DisplayTextWithLabel
-                    label={getMessage(intl, 'medlemmskap.text.neste12mnd')}
+                    label={getMessage(intl, 'oppsummering.text.neste12mnd')}
                     text={getMessage(intl, 'medlemmskap.radiobutton.boNorge')}
                 />
             ) : (
-                <div>
+                <div className="textWithLabel">
                     <EtikettLiten className="textWithLabel__label">
-                        {getMessage(intl, 'medlemmskap.text.neste12mnd')}
+                        {getMessage(intl, 'medlemmskap.text.oppsummering.neste12mnd')}
                     </EtikettLiten>
                     <CountrySummaryList utenlandsoppholdListe={senerePerioder} />
                 </div>

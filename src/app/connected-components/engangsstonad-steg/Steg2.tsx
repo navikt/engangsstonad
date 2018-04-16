@@ -15,7 +15,6 @@ import {
     setAnnenForelderUtenlandskFnr
 } from 'actions/soknad/soknadActionCreators';
 import CountrySelect from 'components/country-select/CountrySelect';
-import LabelMedHjelpetekst from 'components/label-med-hjelpetekst/LabelMedHjelpetekst';
 import FormBlock from 'components/form-block/FormBlock';
 import LabelText from 'components/labeltext/LabelText';
 import Person from '../../types/domain/Person';
@@ -90,7 +89,7 @@ export class Steg2 extends React.Component<Props> {
                         <NavnComponent
                             id="js-annenForelder"
                             name="navnfelt"
-                            label={<b>{getMessage(intl, 'annenForelder.label.navn')}</b>}
+                            label={<LabelText>{getMessage(intl, 'annenForelder.label.navn')}</LabelText>}
                             placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
                             disabled={annenForelder.kanIkkeOppgis || false}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderNavn(e.target.value))}
@@ -107,13 +106,7 @@ export class Steg2 extends React.Component<Props> {
                 <FormBlock visible={annenForelder.navn !== undefined}>
                     <FormBlock margin="xxs">
                         <FnrComponent
-                            label={
-                                <LabelMedHjelpetekst
-                                    label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
-                                    hjelpetekst={getMessage(intl, 'annenForelder.hjelpetekst.dNummer')}
-                                    buttonProps={{ id: 'fnrHjelpetekstBtn' }}
-                                />
-                            }
+                            label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
                             id="js-fødselsnummer"
                             placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}

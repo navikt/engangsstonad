@@ -35,7 +35,7 @@ node {
     }
 
     stage("Build & publish") {
-        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088', 'HTTP_PROXY=http://webproxy-utvikler.nav.no:8088', 'NO_PROXY=localhost,127.0.0.1', 'NODE_TLS_REJECT_UNAUTHORIZED=0', 'PORT=8081']) {
+        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088', 'HTTP_PROXY=http://webproxy-utvikler.nav.no:8088', 'NO_PROXY=localhost,127.0.0.1', 'NODE_TLS_REJECT_UNAUTHORIZED=0', 'PORT=8081', 'CYPRESS_SKIP_BINARY_INSTALL=1']) {
             sh "npm install"
             //sh "npm run test"
             sh "npm run build"
@@ -82,6 +82,37 @@ node {
                 sh ("git push https://${token}:x-oauth-basic@github.com/${project}/${app}.git --tags")
             }
         }
+    }
+
+    stage("Deploy to prod") {
+        try {
+            timeout(time: 5, unit: 'MINUTES') {
+                input id: 'prod', message: "Deploy to prod?"
+            }
+        } catch (Exception ex) {
+            echo "Timeout, will not deploy to prod"
+            currentBuild.result = 'SUCCESS'
+            return
+        }
+
+        callback = "${env.BUILD_URL}input/Deploy/"
+        def deploy = deployLib.deployNaisApp(app, releaseVersion, 'p', zone, namespace, callback, committer, false).key
+        try {
+            timeout(time: 15, unit: 'MINUTES') {
+                input id: 'deploy', message: "Check status here:  https://jira.adeo.no/browse/${deploy}"
+            }
+            slackSend([
+                color: 'good',
+                message: "${app} version ${releaseVersion} has been deployed to production."
+            ])
+        } catch (Exception e) {
+            slackSend([
+               color: 'danger',
+               message: "Unable to deploy ${app} version ${releaseVersion} to production. See https://jira.adeo.no/browse/${deploy} for details"
+           ])
+            throw new Exception("Deploy feilet :( \n Se https://jira.adeo.no/browse/" + deploy + " for detaljer", e)
+        }
+
     }
 
 }
