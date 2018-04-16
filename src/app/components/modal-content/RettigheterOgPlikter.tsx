@@ -16,7 +16,10 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
         <Undertittel className="modalContent__header">{getMessage(intl, 'rettigheter.sectionheading')}</Undertittel>
         <ul>
             <li>
-                <Normaltekst>{getMessage(intl, 'rettigheter.text.uretteOpplysninger')}</Normaltekst>
+                <Normaltekst>{getMessage(intl, 'rettigheter.text.1')}</Normaltekst>
+            </li>
+            <li>
+                <Normaltekst>{getMessage(intl, 'rettigheter.text.2')}</Normaltekst>
             </li>
             <li>
                 <Normaltekst>
@@ -54,6 +57,12 @@ const RettigheterOgPlikter: React.StatelessComponent<Props> = ({ intl }) => (
                         <Normaltekst>{getMessage(intl, 'rettigheter.text.innhenteOpplysninger.6')}</Normaltekst>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <Normaltekst>{getMessage(intl, 'rettigheter.text.5')}</Normaltekst>
+            </li>
+            <li>
+                <Normaltekst>{getMessage(intl, 'rettigheter.text.6')}</Normaltekst>
             </li>
             <li>
                 <Normaltekst>

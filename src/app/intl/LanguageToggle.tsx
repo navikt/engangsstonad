@@ -15,8 +15,6 @@ const stopEvent = (evt: React.MouseEvent<HTMLAnchorElement>) => {
 };
 
 const LangaugeToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({ intl, language, toggleLanguage }) => {
-    const languageButtonText = language === 'nb' ? getMessage(intl, 'intro.text.endreMålformTilBokmål') : getMessage(intl, 'intro.text.endreMålformTilNynorsk');
-
     return (
         <div className="languageToggle">
             <a
@@ -27,7 +25,7 @@ const LangaugeToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({ i
                 }}
                 href="#"
             >
-                {languageButtonText}
+                {getMessage(intl, 'intro.text.endreMålform')}
             </a>
         </div>
     );

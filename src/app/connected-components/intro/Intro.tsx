@@ -100,44 +100,52 @@ export class Intro extends React.Component<Props, OwnProps> {
     }
 
     render() {
-        const { godkjentVilkar, intl } = this.props;
+        const { godkjentVilkar, intl, person } = this.props;
 
         return (
-            <ValidForm noSummary={true} onSubmit={this.startSoknad}>
-                <DocumentTitle title="Samtykke - NAV Engangsstønad" />
-                <LanguageToggle language={this.props.language} toggleLanguage={(languageCode: string) => this.toggleLanguage(languageCode)} />
-                <SimpleIllustration svg={VeilederIllustration} />
+            <div id="js-intro">
+                <ValidForm noSummary={true} onSubmit={this.startSoknad}>
+                    <DocumentTitle title="Samtykke - NAV Engangsstønad" />
+                    <LanguageToggle language={this.props.language} toggleLanguage={(languageCode: string) => this.toggleLanguage(languageCode)} />
+                    <SimpleIllustration
+                        svg={VeilederIllustration}
+                        dialog={{
+                            title: getMessage(intl, 'intro.snakkeboble.overskrift', { name: person.fornavn }),
+                            text: getMessage(intl, 'intro.pageheading.velkommen')
+                        }}
+                    />
 
-                <div className="responsiveContainer">
-                    <div className="blokk-s">
-                        <Innholdstittel>{getMessage(intl, 'intro.pageheading.soknadES')}</Innholdstittel>
+                    <div className="responsiveContainer">
+                        <div className="blokk-s">
+                            <Innholdstittel>{getMessage(intl, 'intro.pageheading.soknadES')}</Innholdstittel>
+                        </div>
+                        <div className="blokk-m">
+                            <Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
+                        </div>
+                        <div className="blokk-m">
+                            <ValidGroup validators={this.getGodkjentVilkarValidators()}>
+                                <BekreftCheckboksPanel
+                                    inputProps={{ name: 'egenerklaring' }}
+                                    label={getMessage(intl, 'intro.text.samtykke')}
+                                    onChange={this.bekreftetVilkarChange}
+                                    checked={godkjentVilkar}
+                                >
+                                    <span>{this.confirmBoxLabelHeaderText()}</span>
+                                </BekreftCheckboksPanel>
+                            </ValidGroup>
+                        </div>
+                        <Hovedknapp className="responsiveButton">{getMessage(intl, 'intro.button.startSoknad')}</Hovedknapp>
+                        <Modal
+                            isOpen={this.state.isModalOpen}
+                            closeButton={true}
+                            onRequestClose={() => this.closeRettigheterOgPlikterModal()}
+                            contentLabel="rettigheter og plikter"
+                        >
+                            <RettigheterOgPlikter />
+                        </Modal>
                     </div>
-                    <div className="blokk-m">
-                        <Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
-                    </div>
-                    <div className="blokk-m">
-                        <ValidGroup validators={this.getGodkjentVilkarValidators()}>
-                            <BekreftCheckboksPanel
-                                inputProps={{ name: 'egenerklaring' }}
-                                label={getMessage(intl, 'intro.text.samtykke')}
-                                onChange={this.bekreftetVilkarChange}
-                                checked={godkjentVilkar}
-                            >
-                                <span>{this.confirmBoxLabelHeaderText()}</span>
-                            </BekreftCheckboksPanel>
-                        </ValidGroup>
-                    </div>
-                    <Hovedknapp className="responsiveButton">{getMessage(intl, 'intro.button.startSoknad')}</Hovedknapp>
-                    <Modal
-                        isOpen={this.state.isModalOpen}
-                        closeButton={true}
-                        onRequestClose={() => this.closeRettigheterOgPlikterModal()}
-                        contentLabel="rettigheter og plikter"
-                    >
-                        <RettigheterOgPlikter />
-                    </Modal>
-                </div>
-            </ValidForm>
+                </ValidForm>
+            </div>
         );
     }
 }

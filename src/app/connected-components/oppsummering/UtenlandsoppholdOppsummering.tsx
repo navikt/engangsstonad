@@ -45,7 +45,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
             )}
             {iNorgeNeste12Mnd ? (
                 <DisplayTextWithLabel
-                    label={getMessage(intl, 'medlemmskap.text.neste12mnd')}
+                    label={getMessage(intl, 'oppsummering.text.neste12mnd')}
                     text={getMessage(intl, 'medlemmskap.radiobutton.boNorge')}
                 />
             ) : (
