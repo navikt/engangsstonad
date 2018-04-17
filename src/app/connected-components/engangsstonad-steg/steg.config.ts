@@ -13,8 +13,9 @@ import Person from 'app/types/domain/Person';
 import Barn from '../../types/domain/Barn';
 import Utenlandsopphold from '../../types/domain/Utenlandsopphold';
 import AnnenForelder from '../../types/domain/AnnenForelder';
+import { StepConfig } from 'app/types/StepConfig';
 
-interface NextStepCondition {
+export interface NextStepCondition {
     barn: Barn;
     annenForelder: AnnenForelder;
     utenlandsopphold: Utenlandsopphold;
@@ -49,9 +50,9 @@ const stepConfig = [
         component: Steg4,
         nextStepCondition: () => true
     }
-] as any;
+];
 
-export default (intl: InjectedIntl, person: Person) =>
+export default (intl: InjectedIntl, person: Person): StepConfig[] => 
     stepConfig
         .filter((step: any, index: number) => {
             if (index === 1) {
