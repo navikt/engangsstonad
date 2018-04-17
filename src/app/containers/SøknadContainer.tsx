@@ -84,13 +84,14 @@ export class SøknadContainer extends React.Component<Props> {
 
     shouldRenderFortsettKnapp(): boolean {
         const { activeStep, annenForelder, utenlandsopphold, barn, person, vedlegg, intl } = this.props;
-        return getStepConfig(intl, person)[activeStep - 1].nextStepCondition({ barn, annenForelder, utenlandsopphold, vedlegg });
+        const stepConfig = getStepConfig(intl, person);
+        return stepConfig[activeStep - 1].nextStepCondition({ barn, annenForelder, utenlandsopphold, vedlegg });
     }
 
     render() {
         const { intl, activeStep, søknadSendingInProgress, person } = this.props;
         const stepsConfig = getStepConfig(intl, person);
-        const titles = stepsConfig.map((stepConf: any) => stepConf.stegIndikatorLabel);
+        const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
 
         const ActiveStep = stepsConfig[activeStep - 1].component;
