@@ -21,16 +21,13 @@ interface StateProps {
     language: string;
 }
 
+const URL_SØKNADSVALG =
+    'https://tjenester.nav.no/soknadforeldrepenger/app/start#/soknadsvalg';
+
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
 export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
     const { intl, person } = props;
-
-    const oldApplicationLink = (
-        <Lenke href={'https://tjenester.nav.no/soknadforeldrepenger/app/start#/soknadsvalg'} >
-            {getMessage(intl, 'intro.text.erMann.link')}
-        </Lenke>
-    );
 
     if (person) {
         return (
@@ -38,22 +35,43 @@ export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
                 <DocumentTitle title="Kvittering - NAV Engangsstønad" />
                 <LanguageToggle
                     language={props.language}
-                    toggleLanguage={(languageCode: string) => props.dispatch(common.setLanguage(languageCode))}
+                    toggleLanguage={(languageCode: string) =>
+                        props.dispatch(common.setLanguage(languageCode))
+                    }
                 />
                 <SimpleIllustration
                     svg={VeilederIllustration}
                     dialog={{
-                        title: getMessage(intl, 'intro.snakkeboble.overskrift', { name: person.fornavn }),
-                        text: <FormattedMessage id="intro.text.erMann" values={{link: oldApplicationLink}} />
+                        title: getMessage(
+                            intl,
+                            'intro.snakkeboble.overskrift',
+                            { name: person.fornavn }
+                        ),
+                        text: (
+                            <div>
+                                <FormattedMessage id="intro.text.erMann" />
+                                <br />
+                                <Lenke
+                                    className="intro-snakkelenke"
+                                    href={URL_SØKNADSVALG}
+                                >
+                                    {getMessage(intl, 'intro.text.erMann.link')}
+                                </Lenke>
+                            </div>
+                        )
                     }}
                 />
                 <div className="responsiveContainer">
                     <div className="blokk-s">
-                        <Innholdstittel>{getMessage(intl, 'intro.pageheading.soknadES')}</Innholdstittel>
+                        <Innholdstittel>
+                            {getMessage(intl, 'intro.pageheading.erMann')}
+                        </Innholdstittel>
                     </div>
-                    <Ingress>
-                        {intl.formatMessage({ id: 'intro.text.omES' })}
-                    </Ingress>
+                    <div className="blokk-l">
+                        <Ingress>
+                            {intl.formatMessage({ id: 'intro.text.omES' })}
+                        </Ingress>
+                    </div>
                 </div>
             </div>
         );

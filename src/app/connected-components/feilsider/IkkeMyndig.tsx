@@ -16,6 +16,9 @@ import { commonActionCreators as common } from '../../redux/actions';
 import '../../styles/engangsstonad.less';
 import { DispatchProps } from 'app/redux/types';
 
+const URL_PAPIRSØKNAD =
+    'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/skjemaveileder/vedlegg?key=267390&veiledertype=privatperson&method=mail';
+
 interface StateProps {
     person: Person;
     language: string;
@@ -32,29 +35,47 @@ export const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
                 <DocumentTitle title="Kvittering - NAV Engangsstønad" />
                 <LanguageToggle
                     language={props.language}
-                    toggleLanguage={(languageCode: string) => props.dispatch(common.setLanguage(languageCode))}
+                    toggleLanguage={(languageCode: string) =>
+                        props.dispatch(common.setLanguage(languageCode))
+                    }
                 />
                 <SimpleIllustration
                     svg={VeilederIllustration}
                     dialog={{
-                        title: getMessage(intl, 'intro.snakkeboble.overskrift', {name: person.fornavn}),
-                        text: getMessage(intl, 'intro.text.under18')
+                        title: getMessage(
+                            intl,
+                            'intro.snakkeboble.overskrift',
+                            { name: person.fornavn }
+                        ),
+                        text: (
+                            <div>
+                                {getMessage(intl, 'intro.text.under18')}
+                                <br />
+                                <Lenke
+                                    className="intro-snakkelenke"
+                                    href={URL_PAPIRSØKNAD}
+                                    target="_blank"
+                                >
+                                    {getMessage(
+                                        intl,
+                                        'intro.text.lastNedPapirsoknad'
+                                    )}
+                                </Lenke>
+                            </div>
+                        )
                     }}
                 />
                 <div className="responsiveContainer">
                     <div className="blokk-m">
-                        <Innholdstittel>{getMessage(intl, 'intro.pageheading.soknadES')}</Innholdstittel>
+                        <Innholdstittel>
+                            {getMessage(intl, 'intro.pageheading.ikkeMyndig')}
+                        </Innholdstittel>
                     </div>
-                    <Ingress>
-                        {intl.formatMessage({ id: 'intro.text.omES' })}
-                    </Ingress>
-                    <Lenke
-                        className="paperVersionLink"
-                        href="https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/skjemaveileder/vedlegg?key=267390&veiledertype=privatperson&method=mail"
-                        target="_blank"
-                    >
-                        {getMessage(intl, 'intro.text.lastNedPapirsoknad')}
-                    </Lenke>
+                    <div className="blokk-l">
+                        <Ingress>
+                            {intl.formatMessage({ id: 'intro.text.omES' })}
+                        </Ingress>
+                    </div>
                 </div>
             </div>
         );
