@@ -2,6 +2,7 @@ import { all, put, call, takeEvery } from 'redux-saga/effects';
 import Api from '../../api/api';
 import { ApiActionKeys, GetPersonActionType } from '../actions/api/apiActionDefinitions';
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
+import apiUtils from './../../util/apiUtils';
 
 // tslint:disable-next-line:no-any
 function* getPerson(action: any) {
@@ -17,7 +18,7 @@ function* getPerson(action: any) {
 // tslint:disable-next-line:no-any
 function* sendSoknad(action: any) {
     try {
-        const response = yield call(Api.sendSoknad, action.soknad, action.vedlegg);
+        const response = yield call(Api.sendSoknad, apiUtils.cleanupSøknad(action.soknad), action.vedlegg);
         const kvittering: EngangsstonadSoknadResponse = response.data;
         yield put({ type: ApiActionKeys.SEND_SOKNAD_SUCCESS, kvittering });
     } catch (error) {
