@@ -20,6 +20,9 @@ import LabelText from 'components/labeltext/LabelText';
 import Person from '../../types/domain/Person';
 const { ValidInput } = require('./../../lib') as any;
 
+const MAKS_NAVN_LENGTH = 100;
+const MAKS_FNR_LENGTH = 30;
+
 interface StateProps {
     annenForelder: AnnenForelder;
     language: string;
@@ -41,14 +44,22 @@ export class Steg2 extends React.Component<Props> {
                         } catch (e) {
                             result = false;
                         }
+                    } else {
+                        result =
+                            annenForelder.fnr !== undefined &&
+                            annenForelder.fnr !== '' &&
+                            annenForelder.fnr.length <= MAKS_FNR_LENGTH;
                     }
                     return result;
                 },
                 failText: getMessage(intl, 'annenForelder.ugyldigFødselsnummer')
             },
             {
-                test: () => (person.fnr !== annenForelder.fnr),
-                failText: getMessage(intl, 'annenForelder.ugyldigEgetFødselsnummer')
+                test: () => person.fnr !== annenForelder.fnr,
+                failText: getMessage(
+                    intl,
+                    'annenForelder.ugyldigEgetFødselsnummer'
+                )
             }
         ];
     }
@@ -58,7 +69,12 @@ export class Steg2 extends React.Component<Props> {
         return [
             {
                 test: () => {
-                    return annenForelder && annenForelder.navn && annenForelder.navn.length > 0;
+                    return (
+                        annenForelder &&
+                        annenForelder.navn &&
+                        annenForelder.navn.length > 0 &&
+                        annenForelder.navn.length <= MAKS_NAVN_LENGTH
+                    );
                 },
                 failText: getMessage(intl, 'annenForelder.ugyldigNavn')
             }
@@ -89,45 +105,91 @@ export class Steg2 extends React.Component<Props> {
                         <NavnComponent
                             id="js-annenForelder"
                             name="navnfelt"
-                            label={<LabelText>{getMessage(intl, 'annenForelder.label.navn')}</LabelText>}
-                            placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
+                            label={
+                                <LabelText>
+                                    {getMessage(intl, 'annenForelder.label.navn')}
+                                </LabelText>
+                            }
+                            placeholder={getMessage(
+                                intl,
+                                'annenForelder.placeholder.navn'
+                            )}
                             disabled={annenForelder.kanIkkeOppgis || false}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderNavn(e.target.value))}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                dispatch(setAnnenForelderNavn(e.target.value))
+                            }
                             value={annenForelder.navn || ''}
                             validators={this.getNavnValidators()}
+                            maxlength={MAKS_NAVN_LENGTH}
                         />
                     </FormBlock>
                     <Checkbox
                         checked={annenForelder.kanIkkeOppgis || false}
-                        label={getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}
-                        onChange={() => dispatch(setAnnenForelderKanIkkeOppgis(!annenForelder.kanIkkeOppgis))}
+                        label={getMessage(
+                            intl,
+                            'annenForelder.label.kanIkkeOppgiNavn'
+                        )}
+                        onChange={() =>
+                            dispatch(
+                                setAnnenForelderKanIkkeOppgis(
+                                    !annenForelder.kanIkkeOppgis
+                                )
+                            )
+                        }
                     />
                 </FormBlock>
                 <FormBlock visible={annenForelder.navn !== undefined}>
                     <FormBlock margin="xxs">
                         <FnrComponent
-                            label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
+                            label={getMessage(
+                                intl,
+                                'annenForelder.label.fødselsnummer'
+                            )}
                             id="js-fødselsnummer"
-                            placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
+                            placeholder={getMessage(
+                                intl,
+                                'annenForelder.placeholder.fødselsnummer'
+                            )}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                dispatch(setAnnenForelderFnr(e.target.value))
+                            }
                             name="fodselsnummerfelt"
                             validators={this.getFødselsnummerValidators()}
                             value={annenForelder.fnr || ''}
+                            maxlength={MAKS_FNR_LENGTH}
                         />
                     </FormBlock>
                     <Checkbox
                         checked={annenForelder.utenlandskFnr || false}
-                        label={getMessage(intl, 'annenForelder.label.utenlandskFødselsnummer')}
+                        label={getMessage(
+                            intl,
+                            'annenForelder.label.utenlandskFødselsnummer'
+                        )}
                         id="utenlandskFnr"
-                        onChange={() => dispatch(setAnnenForelderUtenlandskFnr(!annenForelder.utenlandskFnr))}
+                        onChange={() =>
+                            dispatch(
+                                setAnnenForelderUtenlandskFnr(
+                                    !annenForelder.utenlandskFnr
+                                )
+                            )
+                        }
                     />
                 </FormBlock>
-                <FormBlock visible={annenForelder.navn !== undefined && annenForelder.utenlandskFnr === true}>
+                <FormBlock
+                    visible={
+                        annenForelder.navn !== undefined &&
+                        annenForelder.utenlandskFnr === true
+                    }
+                >
                     <CountrySelect
                         name="bostedsland"
                         defaultValue={annenForelder.bostedsland}
-                        label={<LabelText intlId="annenForelder.label.bostedsland" />}
-                        onChange={land => dispatch(setAnnenForelderBostedsland(land))}
+                        label={
+                            <LabelText intlId="annenForelder.label.bostedsland" />
+                        }
+                        onChange={land =>
+                            dispatch(setAnnenForelderBostedsland(land))
+                        }
                         language={language}
                         validators={this.getBostedslandValidators()}
                     />
