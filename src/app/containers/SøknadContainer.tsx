@@ -17,6 +17,7 @@ import { DispatchProps } from '../redux/types';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import Person from 'app/types/domain/Person';
+import CancelButton from 'components/cancel-button/CancelButton';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -120,6 +121,7 @@ export class SøknadContainer extends React.Component<Props> {
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     )}
+                    <CancelButton redirect="https://www.nav.no"/>
                 </ValidForm>
             </div>
         );
