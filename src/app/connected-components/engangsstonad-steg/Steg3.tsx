@@ -89,21 +89,15 @@ export class Steg3 extends React.Component<Props> {
         return overlappendePeriode;
     }
 
-    validateFomDatoSiste12Mnd({
-        fom,
-        tom,
-        utenlandsoppholdInEditMode
-    }: any): Feil | undefined {
+    validateFomDatoSiste12Mnd({fom, tom, utenlandsoppholdInEditMode}: any): Feil | undefined {
+        const { intl } = this.props;
         if (fom) {
             const momentFom = moment(fom),
                 momentTom = moment(tom);
             if (momentFom.isAfter(momentTom)) {
-                return { feilmelding: 'Fra-dato kan ikke være etter til-dato' };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato' ) };
             } else if (momentFom.isBefore(moment().subtract(1, 'years'))) {
-                return {
-                    feilmelding:
-                        'Fra-dato er satt til en dato som er mer enn ett år tilbake i tid, men må være satt innenfor de siste 12 månedene.'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12') };
             } else if (
                 this.overlapsWithOtherUtenlandsopphold(
                     momentFom,
@@ -112,37 +106,25 @@ export class Steg3 extends React.Component<Props> {
                 )
             ) {
                 return {
-                    feilmelding:
-                        'Du kan ikke legge til en periode som overlapper med andre utenlandsopphold'
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper')
                 };
             }
             return;
         }
-        return { feilmelding: 'Du må oppgi en fra-dato' };
+        return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12') };
     }
 
-    validateTomDatoSiste12Mnd({
-        tom,
-        fom,
-        utenlandsoppholdInEditMode
-    }: any): Feil | undefined {
+    validateTomDatoSiste12Mnd({tom, fom, utenlandsoppholdInEditMode}: any): Feil | undefined {
+        const { intl } = this.props;
         if (tom) {
             const momentFom = moment(fom),
                 momentTom = moment(tom);
             if (momentTom.isBefore(momentFom)) {
-                return {
-                    feilmelding: 'Til-dato kan ikke være tidligere enn fra-dato'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato') };
             } else if (momentTom.isBefore(moment().subtract(1, 'years'))) {
-                return {
-                    feilmelding:
-                        'Til-dato er satt til en dato som er mer enn ett år tilbake i tid, men må være satt innenfor de siste 12 månedene.'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12') };
             } else if (momentTom.isSameOrAfter(moment().add(1, 'days'))) {
-                return {
-                    feilmelding:
-                        'Til-datoen er satt til en dato frem i tid, men kan tidligst være satt til dagens dato'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12') };
             } else if (
                 this.overlapsWithOtherUtenlandsopphold(
                     momentFom,
@@ -150,36 +132,24 @@ export class Steg3 extends React.Component<Props> {
                     utenlandsoppholdInEditMode
                 )
             ) {
-                return {
-                    feilmelding:
-                        'Du kan ikke legge til en periode som overlapper med andre utenlandsopphold'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper') };
             }
             return;
         }
-        return { feilmelding: 'Du må oppgi en til-dato' };
+        return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12') };
     }
 
-    validateFomDatoNeste12Mnd({
-        fom,
-        tom,
-        utenlandsoppholdInEditMode
-    }: any): Feil | undefined {
+    validateFomDatoNeste12Mnd({fom, tom, utenlandsoppholdInEditMode}: any): Feil | undefined {
+        const { intl } = this.props;
         if (fom) {
             const momentFom = moment(fom),
                 momentTom = moment(tom);
             if (momentFom.isAfter(momentTom)) {
-                return { feilmelding: 'Fra-dato kan ikke være etter til-dato' };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato' ) };
             } else if (momentFom.isBefore(moment().startOf('day'))) {
-                return {
-                    feilmelding:
-                        'Fra-datoen er satt til en dato tilbake i tid, men må være satt til dagens dato eller senere'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12') };
             } else if (momentFom.startOf('day').isAfter(moment().add(1, 'years'))) {
-                return {
-                    feilmelding:
-                        'Fra-dato er satt til en dato som er mer enn ett år frem i tid, men må være satt innenfor de neste 12 månedene.'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12') };
             } else if (
                 this.overlapsWithOtherUtenlandsopphold(
                     momentFom,
@@ -187,38 +157,24 @@ export class Steg3 extends React.Component<Props> {
                     utenlandsoppholdInEditMode
                 )
             ) {
-                return {
-                    feilmelding:
-                        'Du kan ikke legge til en periode som overlapper med andre utenlandsopphold'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper') };
             }
             return;
         }
-        return { feilmelding: 'Du må oppgi en fra-dato' };
+        return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12') };
     }
 
-    validateTomDatoNeste12Mnd({
-        tom,
-        fom,
-        utenlandsoppholdInEditMode
-    }: any): Feil | undefined {
+    validateTomDatoNeste12Mnd({tom, fom, utenlandsoppholdInEditMode}: any): Feil | undefined {
+        const { intl } = this.props;
         if (tom) {
             const momentFom = moment(fom),
                 momentTom = moment(tom);
             if (momentTom.isBefore(momentFom)) {
-                return {
-                    feilmelding: 'Til-dato kan ikke være tidligere enn fra-dato'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato') };
             } else if (momentTom.startOf('day').isAfter(moment().add(1, 'years'))) {
-                return {
-                    feilmelding:
-                        'Til-dato er satt til en dato som er mer enn ett år frem i tid, men må være satt innenfor de neste 12 månedene.'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12') };
             } else if (momentTom.isBefore(moment().startOf('day'))) {
-                return {
-                    feilmelding:
-                        'Til-datoen er satt til en dato tilbake i tid, men må være satt til dagens dato eller senere'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.dagensEllerSenere') };
             } else if (
                 this.overlapsWithOtherUtenlandsopphold(
                     momentFom,
@@ -226,14 +182,12 @@ export class Steg3 extends React.Component<Props> {
                     utenlandsoppholdInEditMode
                 )
             ) {
-                return {
-                    feilmelding:
-                        'Du kan ikke legge til en periode som overlapper med andre utenlandsopphold'
-                };
+                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper') };
             }
             return;
         }
-        return { feilmelding: 'Du må oppgi en til-dato' };
+        return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12') };
+
     }
 
     getINorgeSiste12SelectedValue() {

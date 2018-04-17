@@ -83,6 +83,13 @@
     "medlemmskap.modal.lagreEndringer": "Lagre endringar",
     "medlemmskap.modal.avbryt": "Avbryt",
 
+    "medlemsskap.modal.feil.innenforSiste12": "Du må leggje inn ein dato som er innanfor dei siste tolv månadene.",
+    "medlemsskap.modal.feil.innenforNeste12": "Du må leggje inn ein dato som er innanfor dei neste tolv månadene.",
+    "medlemsskap.modal.feil.dagensEllerSenere": "Du må leggje inn datoen i dag eller seinare.",
+    "medlemsskap.modal.feil.førTilDato": "Du må leggje inn ein dato som er før til-datoen.",
+    "medlemsskap.modal.feil.etterFraDato": "Du må leggje inn ein dato som er etter frå-datoen",
+    "medlemsskap.modal.feil.overlapper": "Du har allereie lagt inn opphald i utlandet i denne perioden",
+
     "oppsummering.sectionheading": "Samandrag",
     "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }",
     "oppsummering.text.lesNoye": "Les gjennom oppsummeringa før du sender inn søknaden. Om du må gjere endringar kan du gå tilbake.",
