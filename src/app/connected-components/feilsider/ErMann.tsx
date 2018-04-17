@@ -1,68 +1,56 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import DocumentTitle from 'react-document-title';
-import { injectIntl, FormattedMessage } from 'react-intl';
-import Lenke from 'nav-frontend-lenker';
-const { Ingress } = require('nav-frontend-typografi');
-import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
-const VeilederIllustration = require('assets/svg/veileder.svg').default;
-import LanguageToggle from '../../intl/LanguageToggle';
-import getMessage from '../../util/i18n/i18nUtils';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import { commonActionCreators as common } from '../../redux/actions';
-
-import '../../styles/engangsstonad.less';
+import { injectIntl } from 'react-intl';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
+import getMessage from '../../util/i18n/i18nUtils';
 import Person from '../../types/domain/Person';
 import { DispatchProps } from 'app/redux/types';
+import { ApiReducerState } from 'reducers/apiReducer';
+import { CommonState } from 'reducers/commonReducer';
+import Feilside from 'components/feilside/Feilside';
+import { setLanguage } from 'actions/common/commonActionCreators';
+
+import '../../styles/engangsstonad.less';
 
 interface StateProps {
     person: Person;
     language: string;
 }
 
+const URL_SØKNADSVALG = 'https://tjenester.nav.no/soknadforeldrepenger/app/start#/soknadsvalg';
+
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
 export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
     const { intl, person } = props;
 
-    const oldApplicationLink = (
-        <Lenke href={'https://tjenester.nav.no/soknadforeldrepenger/app/start#/soknadsvalg'} >
-            {getMessage(intl, 'intro.text.erMann.link')}
-        </Lenke>
-    );
-
     if (person) {
         return (
-            <div id="js-erMann">
-                <DocumentTitle title="Kvittering - NAV Engangsstønad" />
-                <LanguageToggle
-                    language={props.language}
-                    toggleLanguage={(languageCode: string) => props.dispatch(common.setLanguage(languageCode))}
-                />
-                <SimpleIllustration
-                    svg={VeilederIllustration}
-                    dialog={{
-                        title: getMessage(intl, 'intro.snakkeboble.overskrift', { name: person.fornavn }),
-                        text: <FormattedMessage id="intro.text.erMann" values={{link: oldApplicationLink}} />
-                    }}
-                />
-                <div className="responsiveContainer">
-                    <div className="blokk-s">
-                        <Innholdstittel>{getMessage(intl, 'intro.pageheading.soknadES')}</Innholdstittel>
-                    </div>
-                    <Ingress>
-                        {intl.formatMessage({ id: 'intro.text.omES' })}
-                    </Ingress>
-                </div>
-            </div>
+            <Feilside
+                containerId="js-erMann"
+                dokumenttittel={getMessage(intl, 'intro.standard.dokumenttittel')}
+                tittel={getMessage(intl, 'intro.standard.tittel')}
+                ingress={getMessage(intl, 'intro.standard.ingress')}
+                illustrasjon={{
+                    tittel: getMessage(intl, 'intro.standard.bobletittel', {
+                        name: person.fornavn
+                    }),
+                    tekst: getMessage(intl, 'intro.erMann.bobletekst'),
+                    lenke: {
+                        url: URL_SØKNADSVALG,
+                        tekst: getMessage(intl, 'intro.erMann.boblelenketekst')
+                    }
+                }}
+                language={props.language}
+                setLanguage={(languageCode: string) => props.dispatch(setLanguage(languageCode))}
+            />
         );
     }
+
     return null;
 };
 
-// tslint:disable-next-line no-any
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: { apiReducer: ApiReducerState; commonReducer: CommonState }) => ({
     person: state.apiReducer.person,
     language: state.commonReducer.language
 });

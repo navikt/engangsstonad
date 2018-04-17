@@ -1,12 +1,12 @@
 import * as React from 'react';
-import CustomSVG, { IconRef } from '../custom-svg/CustomSVG';
 import SpeechBubble from '../speech-bubble/SpeechBubble';
 
 import './simpleIllustration.less';
+import Veileder, { VeilederProps } from 'components/veileder/Veileder';
 
 interface Props {
-    svg: IconRef;
     dialog?: Dialog;
+    veileder?: VeilederProps;
 }
 
 type Dialog = {
@@ -14,7 +14,10 @@ type Dialog = {
     text: string | React.ReactNode;
 };
 
-const SimpleIllustration: React.StatelessComponent<Props> = ({ svg, dialog }) => {
+const SimpleIllustration: React.StatelessComponent<Props> = ({
+    dialog,
+    veileder
+}) => {
     return (
         <div className="simpleIllustration">
             {dialog && (
@@ -22,7 +25,7 @@ const SimpleIllustration: React.StatelessComponent<Props> = ({ svg, dialog }) =>
                     <SpeechBubble title={dialog.title} text={dialog.text} />
                 </div>
             )}
-            <CustomSVG iconRef={svg} />
+            <Veileder {...veileder} />
         </div>
     );
 };

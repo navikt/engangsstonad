@@ -1,10 +1,22 @@
-import { ApiActionKeys, ApiActionTypes } from '../actions/api/apiActionDefinitions';
+import {
+    ApiActionKeys,
+    ApiActionTypes
+} from '../actions/api/apiActionDefinitions';
+import Person from '../../types/domain/Person';
 
-const getDefaultState = () => ({
+const getDefaultState = (): ApiReducerState => ({
     isLoadingPerson: false,
     søknadSendt: false,
-    søknadSendingInProgress: false
+    søknadSendingInProgress: false,
+    person: undefined
 });
+
+export interface ApiReducerState {
+    isLoadingPerson: boolean;
+    søknadSendt: boolean;
+    søknadSendingInProgress: boolean;
+    person?: Person;
+}
 
 const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
     switch (action.type) {
@@ -13,13 +25,31 @@ const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
         case ApiActionKeys.GET_PERSON_SUCCESS:
             return { ...state, person: action.person, isLoadingPerson: false };
         case ApiActionKeys.GET_PERSON_FAILED:
-            return { ...state, error: action.error.response, isLoadingPerson: false };
+            return {
+                ...state,
+                error: action.error.response,
+                isLoadingPerson: false
+            };
         case ApiActionKeys.SEND_SOKNAD:
-            return { ...state, soknad: action.soknad, søknadSendingInProgress: true };
+            return {
+                ...state,
+                soknad: action.soknad,
+                søknadSendingInProgress: true
+            };
         case ApiActionKeys.SEND_SOKNAD_SUCCESS:
-            return { ...state, kvittering: action.kvittering, søknadSendt: true, søknadSendingInProgress: false };
+            return {
+                ...state,
+                kvittering: action.kvittering,
+                søknadSendt: true,
+                søknadSendingInProgress: false
+            };
         case ApiActionKeys.SEND_SOKNAD_FAILED:
-            return { ...state, error: action.error.response, søknadSendt: true, søknadSendingInProgress: false };
+            return {
+                ...state,
+                error: action.error.response,
+                søknadSendt: true,
+                søknadSendingInProgress: false
+            };
     }
     return state;
 };
