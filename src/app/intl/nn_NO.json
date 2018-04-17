@@ -1,20 +1,36 @@
 {
-    "intro.pageheading.soknadES": "Søknad om eingongsstønad",
-    "intro.pageheading.velkommen": "Velkommen til søknad om eingongsstønad",
     "intro.text.endreMålform": "Endre målform til bokmål",
-    "intro.text.under18": "Sidan du er under 18 år, må ein av foreldra dine eller ein verje skrive under på søknaden saman med deg. Du må difor fylle ut søknaden på papir og sende den i posten. ",
-    "intro.text.erMann": "Du kan ikke søke for mor. Er det du som skal ha engangsstønaden, må du velge «Jeg søker engangsstønad som far». { link }",
-    "intro.text.erMann.link": "Du finner søknaden for far her.",
-    "intro.snakkeboble.overskrift": "Hei, {name}!",
+
+    "intro.standard.dokumenttittel": "NAV eingongsstønad",
+    "intro.standard.velkommentittel": "Velkommen til søknad om eingongsstønad",
+    "intro.standard.tittel": "Søknad om eingongsstønad",
+    "intro.standard.ingress": "Eingongsstønad er ein skattefri eingongsum du kan få for kvart barn du føder eller adopterer.",
+    "intro.standard.bobletittel": "Hei, {name}!",
+    "intro.standard.bobletekst": "Husk at dersom barnet ikkje er født endå, må du leggje ved leggje ved stadfesting på termin.",
+
+    "intro.under18.bobletekst": "Sidan du er under 18 år, må ein av foreldra dine eller ein verje skrive under på søknaden saman med deg. Du må difor fylle ut søknaden på papir og sende den i posten.",
+    "intro.under18.boblelenketekst": "Her kan du laste ned papirsøknaden",
+
+    "intro.erMann.bobletekst": "Du kan ikke søke for mor. Er det du som skal ha engangsstønaden, må du velge «Jeg søker engangsstønad som far».",
+    "intro.erMann.boblelenketekst": "Du finner søknaden for far her.",
+
+    "intro.innsendingFeilet.tittel": "Det oppstod ein feil under innsending",
+    "intro.innsendingFeilet.ingress": "Noe gikk dessverre ikke helt som det skulle ved innsending av søknaden din. Vennligst prøv igjen senere. Skulle veilen vedvare, ta kontakt med ditt lokale NAV kontor",
+    "intro.innsendingFeilet.bobletittel": "Oops",
+    "intro.innsendingFeilet.bobletekst": "Det gikk ikke helt som det skulle",
+    "intro.innsendingFeilet.boblelenketekst": "Kontaktinformasjon NAV",
+
+    "intro.personIkkeFunnet.bobletittel": "Beklager!",
+    "intro.personIkkeFunnet.bobletekst": "Det skjedde desverre en feil i visningen av søknadsskjemaet",
+    "intro.personIkkeFunnet.boblelenketekst": "Kontaktinformasjon NAV",
+
     "intro.text.hjelpedeg": "Eg skal hjelpe deg med å fylle ut søknaden. ",
-    "intro.text.omES": "Eingongsstønad er ein skattefri eingongsum du kan få for kvart barn du føder eller adopterer.",
     "intro.text.samtykkeIntro": "For å begynne med søknaden må du bekrefte at du har lest og forstått dine { link }",
     "intro.text.samtykke": "Eg bekreftar at eg har lest og forstått",
     "intro.text.samtykke.link": "rettar og pliktar",
     "intro.pageheading.samtykke": "Rettar og pliktar.",
     "intro.button.startSoknad": "Start søknaden",
-    "intro.text.lastNedPapirsoknad": "Her kan du laste ned papirsøknaden",
-    
+
     "relasjonBarn.sectionheading": "Informasjon om barnet",
     "relasjonBarn.text.fodselTidspunkt": "Søknaden min gjeld ein fødsel som er...",
     "relasjonBarn.radiobutton.fremtid": "fram i tid",
@@ -44,6 +60,8 @@
     "relasjonBarn.text.fodselsdato.flere.8": "Det åttende barnet ble født den...",
     "relasjonBarn.text.fodselsdato.flere.9": "Det niende barnet ble født den...",
     "relasjonBarn.text.fodselsdato.forskjelligeDager": "barna ble født på forskjellige dager",
+    "relasjonBarn.vedlegg.feilmelding.forstorefiler": "{antall, plural, one {Vedlegget} other {Vedleggene}} er for {antall, plural, one {stort} other {store}}. Maks samlet størrelse er {maks}.",
+    "relasjonBarn.vedlegg.feilmelding.vedleggMangler": "Terminbekreftelse er ikkje last opp",
 
     "annenForelder.sectionheading": "Informasjon om den andre forelderen",
     "annenForelder.label.navn": "Den andre forelderen heter...",
@@ -159,5 +177,10 @@
 
     "valideringsfeil.terminbekreftelseDato.duMåOppgi": "Du må oppgje når stadfesting på termindato er datert",
     "valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere": "Datoen på stadfesting av termindato kan ikkje vere frem i tid.",
-    "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26": "Stadfesting på termindato må vise at du er i 26. svangerskapsveke eller seinare"
+    "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26": "Stadfesting på termindato må vise at du er i 26. svangerskapsveke eller seinare",
+
+    "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
+    "vedlegg.liste.tittel": "Valgte vedlegg ({størrelse})",
+    "vedlegg.lastoppknapp.label": "Last opp vedlegg...",
+    "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg"
 }

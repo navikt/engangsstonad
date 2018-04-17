@@ -1,21 +1,35 @@
 {
-    "intro.pageheading.soknadES": "Velkommen til søknad om engangsstønad",
-    "intro.pageheading.erMann": "Søknad om engangsstønad",
-    "intro.pageheading.ikkeMyndig": "Søknad om engangsstønad",
-    "intro.pageheading.velkommen": "Husk at hvis barnet ikke er født enda, må du legge ved en terminbekreftelse.",
     "intro.text.endreMålform": "Endre målform til nynorsk",
-    "intro.text.under18": "Fordi du er under 18 år, må en av foreldrene dine eller en foresatt skrive under på søknaden sammen med deg. Du må derfor fylle ut søknaden på papir og sende den i posten. ",
-    "intro.text.erMann": "Du kan ikke søke for mor. Er det du som skal ha engangsstønaden, må du velge «Jeg søker engangsstønad som far».",
-    "intro.text.erMann.link": "Du finner søknaden for far her.",
-    "intro.snakkeboble.overskrift": "Hei, {name}!",
+
+    "intro.standard.dokumenttittel": "NAV engangsstønad",
+    "intro.standard.velkommentittel": "Velkommen til søknad om engangsstønad",
+    "intro.standard.tittel": "Søknad om engangsstønad",
+    "intro.standard.ingress": "Engangsstønad er en skattefri engangssum du kan få for hvert barn du føder eller adopterer.",
+    "intro.standard.bobletittel": "Hei, {name}!",
+    "intro.standard.bobletekst": "Husk at hvis barnet ikke er født enda, må du legge ved en terminbekreftelse.",
+
+    "intro.under18.bobletekst": "Fordi du er under 18 år, må en av foreldrene dine eller en foresatt skrive under på søknaden sammen med deg. Du må derfor fylle ut søknaden på papir og sende den i posten. ",
+    "intro.under18.boblelenketekst": "Her kan du laste ned papirsøknaden",
+
+    "intro.erMann.bobletekst": "Du kan ikke søke for mor. Er det du som skal ha engangsstønaden, må du velge «Jeg søker engangsstønad som far».",
+    "intro.erMann.boblelenketekst": "Du finner søknaden for far her.",
+
+    "intro.innsendingFeilet.tittel": "Det oppstod en feil under innsending",
+    "intro.innsendingFeilet.ingress": "Noe gikk dessverre ikke helt som det skulle ved innsending av søknaden din. Vennligst prøv igjen senere. Skulle veilen vedvare, ta kontakt med ditt lokale NAV kontor",
+    "intro.innsendingFeilet.bobletittel": "Oops",
+    "intro.innsendingFeilet.bobletekst": "Det gikk ikke helt som det skulle",
+    "intro.innsendingFeilet.boblelenketekst": "Kontaktinformasjon NAV",
+
+    "intro.personIkkeFunnet.bobletittel": "Beklager!",
+    "intro.personIkkeFunnet.bobletekst": "Det skjedde desverre en feil i visningen av søknadsskjemaet",
+    "intro.personIkkeFunnet.boblelenketekst": "Kontaktinformasjon NAV",
+
     "intro.text.hjelpedeg": "Jeg skal hjelpe deg med å fylle ut søknaden. ",
-    "intro.text.omES": "Engangsstønad er en skattefri engangssum du kan få for hvert barn du føder eller adopterer.",
     "intro.text.samtykkeIntro": "For å gå videre med søknaden må du bekrefte at du har lest og forstått { link }.",
     "intro.text.samtykke": "Jeg bekrefter at jeg har lest og forstått",
     "intro.text.samtykke.link": "dine plikter, og hvordan NAV behandler personopplysningene dine",
     "intro.pageheading.samtykke": "Rettigheter og plikter.",
     "intro.button.startSoknad": "Begynn med søknaden",
-    "intro.text.lastNedPapirsoknad": "Her kan du laste ned papirsøknaden",
 
     "relasjonBarn.sectionheading": "Informasjon om barnet",
     "relasjonBarn.text.fodselTidspunkt": "Søknaden min gjelder en fødsel som er...",

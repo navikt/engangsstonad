@@ -4,8 +4,7 @@ import Lenke from 'nav-frontend-lenker';
 import LanguageToggle from '../../intl/LanguageToggle';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
-
-const VeilederIllustration = require('assets/svg/veileder.svg').default;
+import { VeilederProps } from 'components/veileder/Veileder';
 
 export interface Props {
     containerId?: string;
@@ -17,6 +16,7 @@ export interface Props {
             url: string;
             tekst: string;
         };
+        veileder?: VeilederProps;
     };
     tittel: React.ReactNode;
     ingress: React.ReactNode;
@@ -45,12 +45,12 @@ const Feilside: React.StatelessComponent<Props> = ({
                 )}
             {illustrasjon && (
                 <SimpleIllustration
-                    svg={VeilederIllustration}
+                    veileder={illustrasjon.veileder}
                     dialog={{
                         title: illustrasjon.tittel,
                         text: (
                             <div>
-                                {illustrasjon.tekst}
+                                <div>{illustrasjon.tekst}</div>
                                 {illustrasjon.lenke && (
                                     <Lenke
                                         className="intro-snakkelenke"

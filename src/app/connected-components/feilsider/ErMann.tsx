@@ -17,8 +17,7 @@ interface StateProps {
     language: string;
 }
 
-const URL_SØKNADSVALG =
-    'https://tjenester.nav.no/soknadforeldrepenger/app/start#/soknadsvalg';
+const URL_SØKNADSVALG = 'https://tjenester.nav.no/soknadforeldrepenger/app/start#/soknadsvalg';
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
@@ -28,24 +27,22 @@ export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
     if (person) {
         return (
             <Feilside
-                dokumenttittel="NAV Engangsstønad"
                 containerId="js-erMann"
-                tittel={getMessage(intl, 'intro.pageheading.erMann')}
-                ingress={getMessage(intl, 'intro.text.omES')}
+                dokumenttittel={getMessage(intl, 'intro.standard.dokumenttittel')}
+                tittel={getMessage(intl, 'intro.standard.tittel')}
+                ingress={getMessage(intl, 'intro.standard.ingress')}
                 illustrasjon={{
-                    tittel: getMessage(intl, 'intro.snakkeboble.overskrift', {
+                    tittel: getMessage(intl, 'intro.standard.bobletittel', {
                         name: person.fornavn
                     }),
-                    tekst: getMessage(intl, 'intro.text.erMann'),
+                    tekst: getMessage(intl, 'intro.erMann.bobletekst'),
                     lenke: {
                         url: URL_SØKNADSVALG,
-                        tekst: getMessage(intl, 'intro.text.erMann.link')
+                        tekst: getMessage(intl, 'intro.erMann.boblelenketekst')
                     }
                 }}
                 language={props.language}
-                setLanguage={(languageCode: string) =>
-                    props.dispatch(setLanguage(languageCode))
-                }
+                setLanguage={(languageCode: string) => props.dispatch(setLanguage(languageCode))}
             />
         );
     }
@@ -53,10 +50,7 @@ export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
     return null;
 };
 
-const mapStateToProps = (state: {
-    apiReducer: ApiReducerState;
-    commonReducer: CommonState;
-}) => ({
+const mapStateToProps = (state: { apiReducer: ApiReducerState; commonReducer: CommonState }) => ({
     person: state.apiReducer.person,
     language: state.commonReducer.language
 });

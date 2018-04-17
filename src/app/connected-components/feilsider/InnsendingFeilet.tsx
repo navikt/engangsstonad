@@ -1,19 +1,38 @@
 import * as React from 'react';
-import DocumentTitle from 'react-document-title';
-
-const { Ingress } = require('nav-frontend-typografi');
-
 import '../../styles/engangsstonad.less';
+import Feilside from 'components/feilside/Feilside';
+import getMessage from 'util/i18n/i18nUtils';
+import { connect } from 'react-redux';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { CommonState } from 'reducers/commonReducer';
+import { DispatchProps } from '../../redux/types';
 
-export const InnsendingFeilet: React.StatelessComponent = () => {
+interface StateProps {
+    language: string;
+}
+
+type Props = StateProps & DispatchProps & InjectedIntlProps;
+
+export const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
+    const { intl } = props;
     return (
-        <div className="responsiveContainer">
-            <DocumentTitle title="Feil - NAV Engangsstønad" />
-            <Ingress>
-                Noe gikk dessverre galt under innsending av søknaden din. Vennligst prøv igjen senere
-            </Ingress>
-        </div>
+        <Feilside
+            dokumenttittel={getMessage(intl, 'intro.standard.dokumenttittel')}
+            tittel={getMessage(intl, 'intro.innsendingFeilet.tittel')}
+            ingress={getMessage(intl, 'intro.innsendingFeilet.ingress')}
+            illustrasjon={{
+                tittel: getMessage(intl, 'intro.innsendingFeilet.bobletittel'),
+                tekst: getMessage(intl, 'intro.innsendingFeilet.bobletekst'),
+                veileder: {
+                    ansikt: 'skeptisk'
+                }
+            }}
+        />
     );
 };
 
-export default InnsendingFeilet;
+const mapStateToProps = (state: { commonReducer: CommonState }) => ({
+    language: state.commonReducer.language
+});
+
+export default connect(mapStateToProps)(injectIntl(InnsendingFeilet));

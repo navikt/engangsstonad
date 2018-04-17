@@ -29,34 +29,29 @@ export const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
     if (person) {
         return (
             <Feilside
-                dokumenttittel="NAV Engangsstønad"
                 containerId="js-ikkeMyndig"
-                tittel={getMessage(intl, 'intro.pageheading.ikkeMyndig')}
-                ingress={getMessage(intl, 'intro.text.omES')}
+                dokumenttittel={getMessage(intl, 'intro.standard.dokumenttittel')}
+                tittel={getMessage(intl, 'intro.standard.tittel')}
+                ingress={getMessage(intl, 'intro.standard.ingress')}
                 illustrasjon={{
-                    tittel: getMessage(intl, 'intro.snakkeboble.overskrift', {
+                    tittel: getMessage(intl, 'intro.standard.bobletittel', {
                         name: person.fornavn
                     }),
-                    tekst: getMessage(intl, 'intro.text.under18'),
+                    tekst: getMessage(intl, 'intro.under18.bobletekst'),
                     lenke: {
                         url: URL_PAPIRSØKNAD,
-                        tekst: getMessage(intl, 'intro.text.lastNedPapirsoknad')
+                        tekst: getMessage(intl, 'intro.under18.boblelenketekst')
                     }
                 }}
                 language={props.language}
-                setLanguage={(languageCode: string) =>
-                    props.dispatch(setLanguage(languageCode))
-                }
+                setLanguage={(languageCode: string) => props.dispatch(setLanguage(languageCode))}
             />
         );
     }
     return null;
 };
 
-const mapStateToProps = (state: {
-    apiReducer: ApiReducerState;
-    commonReducer: CommonState;
-}) => ({
+const mapStateToProps = (state: { apiReducer: ApiReducerState; commonReducer: CommonState }) => ({
     person: state.apiReducer.person,
     language: state.commonReducer.language
 });

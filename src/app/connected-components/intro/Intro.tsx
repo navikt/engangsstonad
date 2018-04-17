@@ -9,17 +9,17 @@ const Modal = require('nav-frontend-modal').default;
 const { BekreftCheckboksPanel } = require('nav-frontend-skjema');
 
 import RettigheterOgPlikter from 'components/modal-content/RettigheterOgPlikter';
-const VeilederIllustration = require('assets/svg/veileder.svg').default;
 import { commonActionCreators as common, soknadActionCreators as soknad, stepActionCreators as step } from '../../redux/actions';
 import { getDefaultState } from 'reducers/stepReducer';
 import LanguageToggle from '../../intl/LanguageToggle';
 import getMessage from '../../util/i18n/i18nUtils';
 import { DispatchProps } from '../../redux/types/index';
-import '../../styles/engangsstonad.less';
 import Person from '../../types/domain/Person';
 import { ExternalProps } from '../../types/index';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
 import { Innholdstittel } from 'nav-frontend-typografi';
+
+import '../../styles/engangsstonad.less';
 
 interface OwnProps {
     isModalOpen: boolean;
@@ -108,19 +108,18 @@ export class Intro extends React.Component<Props, OwnProps> {
                     <DocumentTitle title="Samtykke - NAV Engangsstønad" />
                     <LanguageToggle language={this.props.language} toggleLanguage={(languageCode: string) => this.toggleLanguage(languageCode)} />
                     <SimpleIllustration
-                        svg={VeilederIllustration}
                         dialog={{
-                            title: getMessage(intl, 'intro.snakkeboble.overskrift', { name: person.fornavn.toLowerCase() }),
-                            text: getMessage(intl, 'intro.pageheading.velkommen')
+                            title: getMessage(intl, 'intro.standard.bobletittel', { name: person.fornavn.toLowerCase() }),
+                            text: getMessage(intl, 'intro.standard.bobletekst')
                         }}
                     />
 
                     <div className="responsiveContainer">
                         <div className="blokk-s">
-                            <Innholdstittel>{getMessage(intl, 'intro.pageheading.soknadES')}</Innholdstittel>
+                            <Innholdstittel>{getMessage(intl, 'intro.standard.velkommentittel')}</Innholdstittel>
                         </div>
                         <div className="blokk-m">
-                            <Ingress>{getMessage(intl, 'intro.text.omES')}</Ingress>
+                            <Ingress>{getMessage(intl, 'intro.standard.ingress')}</Ingress>
                         </div>
                         <div className="blokk-m">
                             <ValidGroup validators={this.getGodkjentVilkarValidators()}>
