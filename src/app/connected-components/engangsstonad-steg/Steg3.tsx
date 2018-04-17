@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { DispatchProps } from '../../redux/types/index';
 import CountryPicker from '../../components/country-picker/CountryPicker';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import Barn from '../../types/domain/Barn';
+import Barn, { FodtBarn } from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import FormBlock from 'components/form-block/FormBlock';
 import { Tidsperiode } from 'nav-datovelger';
@@ -388,7 +388,7 @@ export class Steg3 extends React.Component<Props> {
                     visible={
                         (senerePerioder.length > 0 ||
                             iNorgeNeste12Mnd === true) &&
-                        !datoIsSet(barn.fødselsdatoer)
+                        !datoIsSet((barn as FodtBarn).fødselsdatoer)
                     }
                 >
                     <RadioPanelGruppeResponsive

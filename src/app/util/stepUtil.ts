@@ -1,4 +1,4 @@
-import Barn, { UfodtBarn } from 'app/types/domain/Barn';
+import Barn, { UfodtBarn, FodtBarn } from 'app/types/domain/Barn';
 import { datoIsSet } from 'util/date/dateUtils';
 import Utenlandsopphold from '../types/domain/Utenlandsopphold';
 import AnnenForelder from '../types/domain/AnnenForelder';
@@ -13,7 +13,7 @@ export const shouldDisplayNextButtonOnStep1 = (barn: Barn, vedlegg: File[]) => {
             vedlegg.length > 0
         );
     }
-    return barn.antallBarn !== undefined && datoIsSet(barn.fødselsdatoer);
+    return barn.antallBarn !== undefined && datoIsSet((barn as FodtBarn).fødselsdatoer);
 };
 
 export const shouldDisplayNextButtonOnStep2 = (
@@ -46,11 +46,11 @@ export const shouldDisplayNextButtonOnStep3 = (
     utenlandsopphold: Utenlandsopphold
 ) => {
     if (utenlandsopphold.iNorgeNeste12Mnd === false) {
-        return ((datoIsSet(barn.fødselsdatoer) || utenlandsopphold.fødselINorge !== undefined)) &&
+        return ((datoIsSet((barn as FodtBarn).fødselsdatoer) || utenlandsopphold.fødselINorge !== undefined)) &&
             iNorgeNeste12MndIsValid(utenlandsopphold) && iNorgeSiste12MndIsValid(utenlandsopphold);
     } else {
         return (
-            utenlandsopphold.fødselINorge !== undefined || (datoIsSet(barn.fødselsdatoer) && utenlandsopphold.iNorgeNeste12Mnd !== undefined) &&
+            utenlandsopphold.fødselINorge !== undefined || (datoIsSet((barn as FodtBarn).fødselsdatoer) && utenlandsopphold.iNorgeNeste12Mnd !== undefined) &&
             iNorgeNeste12MndIsValid(utenlandsopphold) && iNorgeSiste12MndIsValid(utenlandsopphold)
         );
     }

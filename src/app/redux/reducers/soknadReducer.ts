@@ -1,5 +1,6 @@
 import { SoknadActionKeys, SoknadActionTypes } from '../actions/soknad/soknadActionDefinitions';
 import EngangsstonadSoknad from '../../types/domain/EngangsstonadSoknad';
+import { FodtBarn } from 'app/types/domain/Barn';
 
 const getDefaultState = () => {
     const engangsstonadSoknad: EngangsstonadSoknad = {
@@ -119,17 +120,17 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
         case SoknadActionKeys.EDIT_FØDSELSDATO:
             const { index, fødselsdato } = action;
             if (action.bornOnSameDate) {
-                return { ...state, barn: { ...barn, fødselsdatoer: state.barn.fødselsdatoer.slice().fill(fødselsdato) } };
+                return { ...state, barn: { ...barn, fødselsdatoer: (state.barn as FodtBarn).fødselsdatoer.slice().fill(fødselsdato) } };
             } else if (index !== undefined) {
-                state.barn.fødselsdatoer[index] = fødselsdato;
-                return { ...state, barn: { ...barn, fødselsdatoer: state.barn.fødselsdatoer }};
+                (state.barn as FodtBarn).fødselsdatoer[index] = fødselsdato;
+                return { ...state, barn: { ...barn, fødselsdatoer: (state.barn as FodtBarn).fødselsdatoer }};
             }
             break;
         case SoknadActionKeys.UPDATE_FØDSELSDATOER:
-            const { fødselsdatoer, antallBarn } = state.barn;
+            const { fødselsdatoer, antallBarn } = (state.barn as FodtBarn);
             let newFødselsdatoArray = [];
             if (antallBarn && fødselsdatoer.length > antallBarn) {
-                newFødselsdatoArray = state.barn.fødselsdatoer.slice(0, antallBarn);
+                newFødselsdatoArray = (state.barn as FodtBarn).fødselsdatoer.slice(0, antallBarn);
             } else if (antallBarn && fødselsdatoer.length < antallBarn) {
                 newFødselsdatoArray = new Array(antallBarn - fødselsdatoer.length).fill(undefined);
                 newFødselsdatoArray.unshift(...fødselsdatoer);

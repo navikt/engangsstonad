@@ -36,7 +36,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            bornOnSameDate: !containsUnlikeValues(props.barn.fødselsdatoer)
+            bornOnSameDate: !containsUnlikeValues((props.barn as FodtBarn).fødselsdatoer)
         };
         this.diffrentBirthDatesCheckboxHandler = this.diffrentBirthDatesCheckboxHandler.bind(
             this
@@ -78,7 +78,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
     componentDidUpdate(nextProps: Props, prevState: any) {
         const { dispatch, barn } = this.props;
         // tslint:disable-next-line:triple-equals
-        if (barn.antallBarn != barn.fødselsdatoer.length) {
+        if (barn.antallBarn != (barn as FodtBarn).fødselsdatoer.length) {
             dispatch(soknad.updateFødselsdatoer(this.state.bornOnSameDate));
         }
     }
@@ -120,7 +120,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
             if (this.state.bornOnSameDate) {
                 dispatch(
                     soknad.editFødselsdato(
-                        barn.fødselsdatoer[0],
+                        (barn as FodtBarn).fødselsdatoer[0],
                         this.state.bornOnSameDate
                     )
                 );
@@ -154,7 +154,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                     <ValidDateInput
                         id="fødselsdato"
                         label={<LabelText>{dateInputLabels[0]}</LabelText>}
-                        dato={getFodselsdatoForBarn(barn, 0)}
+                        dato={getFodselsdatoForBarn((barn as FodtBarn), 0)}
                         onChange={(dato: Date) =>
                             this.onFødselsdatoInputChange(dato, 0)
                         }
@@ -175,7 +175,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                     />
                 </FormBlock>
                 {!this.state.bornOnSameDate &&
-                    barn.fødselsdatoer.slice(1).map((element, index) => {
+                    (barn as FodtBarn).fødselsdatoer.slice(1).map((element, index) => {
                         const fødselsdatoArrayIndex = index + 1;
                         return (
                             <FormBlock
@@ -194,7 +194,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                                         </LabelText>
                                     }
                                     dato={getFodselsdatoForBarn(
-                                        barn,
+                                        (barn as FodtBarn),
                                         fødselsdatoArrayIndex
                                     )}
                                     onChange={(dato: Date) =>
