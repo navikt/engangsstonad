@@ -397,7 +397,7 @@ export class Steg3 extends React.Component<Props> {
                         twoColumns={true}
                     />
                 </FormBlock>
-                <FormBlock visible={iNorgeNeste12Mnd === false}>
+                <FormBlock visible={iNorgeNeste12Mnd === false && (iNorgeSiste12Mnd === true || (iNorgeSiste12Mnd === false && tidligerePerioder.length > 0))}>
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegSkalBo')}
                         language={language}

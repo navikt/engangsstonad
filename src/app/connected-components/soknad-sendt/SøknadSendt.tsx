@@ -25,7 +25,7 @@ interface StateProps {
 
 type Props = StateProps & InjectedIntlProps;
 
-export class EngangsstonadCompleted extends React.Component<Props> {
+export class SøknadSendt extends React.Component<Props> {
     receiptText() {
         const { kvittering } = this.props;
         return (
@@ -70,4 +70,4 @@ const mapStateToProps = (state: any) => ({
     kvittering: state.apiReducer.kvittering
 });
 
-export default connect<StateProps>(mapStateToProps)(injectIntl(EngangsstonadCompleted));
+export default connect<StateProps>(mapStateToProps)(injectIntl(SøknadSendt));

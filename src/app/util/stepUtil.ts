@@ -33,21 +33,25 @@ export const shouldDisplayNextButtonOnStep2 = (
     }
 };
 
+export const iNorgeSiste12MndIsValid = (u: Utenlandsopphold) => {
+    return u.iNorgeSiste12Mnd === true || (u.iNorgeSiste12Mnd === false && u.tidligerePerioder.length > 0); 
+};
+
+export const iNorgeNeste12MndIsValid = (u: Utenlandsopphold) => {
+    return u.iNorgeNeste12Mnd === true || (u.iNorgeNeste12Mnd === false && u.senerePerioder.length > 0);
+};
+
 export const shouldDisplayNextButtonOnStep3 = (
     barn: Barn,
     utenlandsopphold: Utenlandsopphold
 ) => {
     if (utenlandsopphold.iNorgeNeste12Mnd === false) {
-        return (
-            utenlandsopphold.senerePerioder.length > 0 &&
-            (datoIsSet(barn.fødselsdatoer) ||
-                utenlandsopphold.fødselINorge !== undefined)
-        );
+        return ((datoIsSet(barn.fødselsdatoer) || utenlandsopphold.fødselINorge !== undefined)) &&
+            iNorgeNeste12MndIsValid(utenlandsopphold) && iNorgeSiste12MndIsValid(utenlandsopphold);
     } else {
         return (
-            utenlandsopphold.fødselINorge !== undefined ||
-            (datoIsSet(barn.fødselsdatoer) &&
-                utenlandsopphold.iNorgeNeste12Mnd !== undefined)
+            utenlandsopphold.fødselINorge !== undefined || (datoIsSet(barn.fødselsdatoer) && utenlandsopphold.iNorgeNeste12Mnd !== undefined) &&
+            iNorgeNeste12MndIsValid(utenlandsopphold) && iNorgeSiste12MndIsValid(utenlandsopphold)
         );
     }
 };

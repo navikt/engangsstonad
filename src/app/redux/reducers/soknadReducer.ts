@@ -88,7 +88,16 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             return { ...state, utenlandsopphold: { ...utenlandsopphold, fødselINorge } };
         case SoknadActionKeys.SET_I_NORGE_SISTE_12_MND:
             const { iNorgeSiste12Mnd } = action;
-            return { ...state, utenlandsopphold: { ...getDefaultState().utenlandsopphold, iNorgeSiste12Mnd } };
+            return {
+                ...state, utenlandsopphold: {
+                    ...getDefaultState().utenlandsopphold,
+                    iNorgeSiste12Mnd,
+                    iNorgeNeste12Mnd: state.utenlandsopphold.iNorgeNeste12Mnd,
+                    fødselINorge: state.utenlandsopphold.fødselINorge,
+                    tidligerePerioder: state.utenlandsopphold.tidligerePerioder,
+                    senerePerioder: state.utenlandsopphold.senerePerioder
+                }
+            };
         case SoknadActionKeys.SET_I_NORGE_NESTE_12_MND:
             const { iNorgeNeste12Mnd } = action;
             return {
@@ -96,8 +105,10 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
                 utenlandsopphold: {
                     ...utenlandsopphold,
                     iNorgeNeste12Mnd,
-                    fødselINorge: undefined,
-                    senerePerioder: getDefaultState().utenlandsopphold.senerePerioder
+                    iNorgeSiste12Mnd: state.utenlandsopphold.iNorgeSiste12Mnd,
+                    fødselINorge: state.utenlandsopphold.fødselINorge,
+                    tidligerePerioder: state.utenlandsopphold.tidligerePerioder,
+                    senerePerioder: state.utenlandsopphold.senerePerioder
                 }
             };
         case SoknadActionKeys.SET_ER_BARNET_FODT:
