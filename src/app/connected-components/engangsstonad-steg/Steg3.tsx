@@ -175,7 +175,7 @@ export class Steg3 extends React.Component<Props> {
                     feilmelding:
                         'Fra-datoen er satt til en dato tilbake i tid, men må være satt til dagens dato eller senere'
                 };
-            } else if (momentFom.isAfter(moment().add(1, 'years'))) {
+            } else if (momentFom.startOf('day').isAfter(moment().add(1, 'years'))) {
                 return {
                     feilmelding:
                         'Fra-dato er satt til en dato som er mer enn ett år frem i tid, men må være satt innenfor de neste 12 månedene.'
@@ -209,7 +209,7 @@ export class Steg3 extends React.Component<Props> {
                 return {
                     feilmelding: 'Til-dato kan ikke være tidligere enn fra-dato'
                 };
-            } else if (momentTom.isAfter(moment().add(1, 'years'))) {
+            } else if (momentTom.startOf('day').isAfter(moment().add(1, 'years'))) {
                 return {
                     feilmelding:
                         'Til-dato er satt til en dato som er mer enn ett år frem i tid, men må være satt innenfor de neste 12 månedene.'
