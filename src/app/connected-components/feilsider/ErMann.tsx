@@ -1,20 +1,16 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import DocumentTitle from 'react-document-title';
-import { injectIntl, FormattedMessage } from 'react-intl';
-import Lenke from 'nav-frontend-lenker';
-const { Ingress } = require('nav-frontend-typografi');
-import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
-const VeilederIllustration = require('assets/svg/veileder.svg').default;
-import LanguageToggle from '../../intl/LanguageToggle';
-import getMessage from '../../util/i18n/i18nUtils';
-import { Innholdstittel } from 'nav-frontend-typografi';
-import { commonActionCreators as common } from '../../redux/actions';
-
-import '../../styles/engangsstonad.less';
+import { injectIntl } from 'react-intl';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
+import getMessage from '../../util/i18n/i18nUtils';
 import Person from '../../types/domain/Person';
 import { DispatchProps } from 'app/redux/types';
+import { ApiReducerState } from 'reducers/apiReducer';
+import { CommonState } from 'reducers/commonReducer';
+import Feilside from 'components/feilside/Feilside';
+import { setLanguage } from 'actions/common/commonActionCreators';
+
+import '../../styles/engangsstonad.less';
 
 interface StateProps {
     person: Person;
@@ -31,56 +27,36 @@ export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
 
     if (person) {
         return (
-            <div id="js-erMann">
-                <DocumentTitle title="Kvittering - NAV Engangsstønad" />
-                <LanguageToggle
-                    language={props.language}
-                    toggleLanguage={(languageCode: string) =>
-                        props.dispatch(common.setLanguage(languageCode))
+            <Feilside
+                dokumenttittel="NAV Engangsstønad"
+                containerId="js-erMann"
+                tittel={getMessage(intl, 'intro.pageheading.erMann')}
+                ingress={getMessage(intl, 'intro.text.omES')}
+                illustrasjon={{
+                    tittel: getMessage(intl, 'intro.snakkeboble.overskrift', {
+                        name: person.fornavn
+                    }),
+                    tekst: getMessage(intl, 'intro.text.erMann'),
+                    lenke: {
+                        url: URL_SØKNADSVALG,
+                        tekst: getMessage(intl, 'intro.text.erMann.link')
                     }
-                />
-                <SimpleIllustration
-                    svg={VeilederIllustration}
-                    dialog={{
-                        title: getMessage(
-                            intl,
-                            'intro.snakkeboble.overskrift',
-                            { name: person.fornavn }
-                        ),
-                        text: (
-                            <div>
-                                <FormattedMessage id="intro.text.erMann" />
-                                <br />
-                                <Lenke
-                                    className="intro-snakkelenke"
-                                    href={URL_SØKNADSVALG}
-                                >
-                                    {getMessage(intl, 'intro.text.erMann.link')}
-                                </Lenke>
-                            </div>
-                        )
-                    }}
-                />
-                <div className="responsiveContainer">
-                    <div className="blokk-s">
-                        <Innholdstittel>
-                            {getMessage(intl, 'intro.pageheading.erMann')}
-                        </Innholdstittel>
-                    </div>
-                    <div className="blokk-l">
-                        <Ingress>
-                            {intl.formatMessage({ id: 'intro.text.omES' })}
-                        </Ingress>
-                    </div>
-                </div>
-            </div>
+                }}
+                language={props.language}
+                setLanguage={(languageCode: string) =>
+                    props.dispatch(setLanguage(languageCode))
+                }
+            />
         );
     }
+
     return null;
 };
 
-// tslint:disable-next-line no-any
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: {
+    apiReducer: ApiReducerState;
+    commonReducer: CommonState;
+}) => ({
     person: state.apiReducer.person,
     language: state.commonReducer.language
 });

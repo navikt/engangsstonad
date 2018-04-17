@@ -1,16 +1,30 @@
-import { CommonActionKeys, CommonActionTypes } from '../actions/common/commonActionDefinitions';
+import {
+    CommonActionKeys,
+    CommonActionTypes
+} from '../actions/common/commonActionDefinitions';
 
-const getDefaultState = () => ({
+const getDefaultState = (): CommonState => ({
     language: 'nb',
     godkjentVilkar: false,
-    bekreftetInformasjon: false,
-    barnErFodt: null
+    bekreftetInformasjon: false
 });
 
-const commonReducer = (state = getDefaultState(), action: CommonActionTypes) => {
+export interface CommonState {
+    language: string;
+    godkjentVilkar: boolean;
+    bekreftetInformasjon: boolean;
+}
+
+const commonReducer = (
+    state = getDefaultState(),
+    action: CommonActionTypes
+) => {
     switch (action.type) {
         case CommonActionKeys.SET_BEKREFTET_INFORMASJON:
-            return { ...state, bekreftetInformasjon: action.bekreftetInformasjon };
+            return {
+                ...state,
+                bekreftetInformasjon: action.bekreftetInformasjon
+            };
         case CommonActionKeys.SET_LANGUAGE:
             return { ...state, language: action.language };
         case CommonActionKeys.SET_GODKJENT_VILKAR:
