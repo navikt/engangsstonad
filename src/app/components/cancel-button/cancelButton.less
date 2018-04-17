@@ -1,0 +1,35 @@
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+
+.cancelButtonWrapper {
+    margin-top: 2rem;
+    padding-top: 22px;
+    border-top: solid 1px #c6c2bf;
+    text-align: center;
+}
+
+.cancelButton {
+    cursor: pointer;
+    font-weight: bold;
+    color: @c-buttonBlue;
+    text-decoration: none;
+    padding: 0.5rem;
+    text-transform: inherit;
+    border: 2px solid transparent;
+    &:hover {
+        color: @c-buttonBlue;
+        background: transparent;
+        border: 2px solid @c-buttonBlue;
+    }
+    &:focus {
+        background-color: transparent;
+        outline: none;
+        box-shadow: 0 0 0 3px #FFBD66;
+        border: 2px solid @c-buttonBlue;
+    }
+    &:active {
+        border: 2px solid transparent;
+        background-color: #005B82;
+        color: #FFF;
+    }
+}
