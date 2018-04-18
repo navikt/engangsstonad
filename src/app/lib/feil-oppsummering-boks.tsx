@@ -1,6 +1,5 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import { Systemtittel } from 'nav-frontend-typografi';
 import './validering-style.less';
 import { SummaryError } from './types';
 
@@ -46,7 +45,7 @@ class FeilOppsummeringBoks extends React.Component<Props, {}> {
                 className={cls(show, className)}
                 {...other}
             >
-                <Systemtittel>{title}</Systemtittel>
+                <h1 className="typo-undertittel">{title}</h1>
                 <ul className="feil-oppsummering-boks__liste">{listItems}</ul>
             </article>
         );

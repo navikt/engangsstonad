@@ -2,7 +2,6 @@ import * as React from 'react';
 import Stegindikator from 'nav-frontend-stegindikator';
 import 'nav-frontend-stegindikator-style';
 import './stepIndicator.less';
-import { Innholdstittel } from 'nav-frontend-typografi';
 
 interface Props {
     stepTitles: string[];
@@ -25,11 +24,11 @@ class StepIndicator extends React.Component<Props> {
         const { activeStep, stepTitles } = this.props;
         return (
             <div className="stepindicator" role="progressbar" aria-valuenow={activeStep} aria-valuemin="1" aria-valuemax={stepTitles.length}>
-                <Innholdstittel className="stepindicator__title">
+                <h1 className="typo-systemtittel stepindicator__title">
                     <span className="m_no-focusOutline" ref={c => (this.title = c)} tabIndex={-1}>
                         {stepTitles[activeStep - 1]}
                     </span>
-                </Innholdstittel>
+                </h1>
                 <Stegindikator
                     visLabel={false}
                     kompakt={true}
