@@ -32,7 +32,7 @@ interface StateProps {
 }
 
 type Props = StateProps & DispatchProps & InjectedIntlProps & ExternalProps;
-export class Intro extends React.Component<Props, OwnProps> {
+class Intro extends React.Component<Props, OwnProps> {
     constructor(props: Props) {
         super(props);
         this.state = {

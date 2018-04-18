@@ -4,7 +4,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Periode } from '../../types/domain/Utenlandsopphold';
 import CountrySelect from 'components/country-select/CountrySelect';
-import { DateInput } from 'components/date-input/DateInput';
+import DateInput from 'components/date-input/DateInput';
 import { Tidsperiode } from 'nav-datovelger';
 import LabelText from 'components/labeltext/LabelText';
 import FormBlock from 'components/form-block/FormBlock';

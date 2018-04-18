@@ -25,7 +25,7 @@ interface StateProps {
 
 type Props = StateProps & InjectedIntlProps;
 
-export class SøknadSendt extends React.Component<Props> {
+class SøknadSendt extends React.Component<Props> {
     receiptText() {
         const { kvittering } = this.props;
         return (
