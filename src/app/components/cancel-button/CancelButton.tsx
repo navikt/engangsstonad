@@ -18,7 +18,6 @@ const CancelButton: React.StatelessComponent<Props & InjectedIntlProps> = ({ int
             />
             <Link
                 className="cancelButton"
-                tabIndex={-1}
                 to="/engangsstonad/soknad/cancel"
             >
                     {getMessage(intl, 'standard.avbrytSøknad')}
