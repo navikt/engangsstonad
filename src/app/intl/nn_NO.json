@@ -133,7 +133,7 @@
     "oppsummering.text.antall.8": "Åtte",
     "oppsummering.text.antall.9": "Ni",
 
-    "kvittering.sectionheading": "Illustrasjon av NAV ansatt som takk for mottatt søknad!",
+    "kvittering.sectionheading": "Søknad mottatt",
     "kvittering.text.takk": "Takk for søknaden {navn}!",
     "kvittering.text.soknadMottatt": "Vi fekk søknaden med referansenummer {referansenr} den {1} kl. {0}. Du kan følgje med på søknaden på {linkText}.",
     "kvittering.text.soknadMottatt.linkText": "Ditt NAV",
