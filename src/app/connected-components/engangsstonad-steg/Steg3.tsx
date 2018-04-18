@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import * as moment from 'moment';
-import DocumentTitle from 'react-document-title';
 import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../redux/actions';
 import Utenlandsopphold, { Periode } from '../../types/domain/Utenlandsopphold';
@@ -15,6 +14,7 @@ import FormBlock from 'components/form-block/FormBlock';
 import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
 import { datoIsSet } from 'util/date/dateUtils';
+import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
 interface StateProps {
     barn: Barn;
@@ -253,8 +253,7 @@ export class Steg3 extends React.Component<Props> {
         };
 
         return (
-            <div className="engangsstonad__step">
-                <DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
+            <Skjemasteg tittel={getMessage(intl, 'medlemmskap.sectionheading')}>
                 <FormBlock>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.siste12mnd')}
@@ -434,7 +433,7 @@ export class Steg3 extends React.Component<Props> {
                         twoColumns={true}
                     />
                 </FormBlock>
-            </div>
+            </Skjemasteg>
         );
     }
 }
@@ -447,3 +446,4 @@ const mapStateToProps = (state: any) => ({
 });
 
 export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg3));
+;

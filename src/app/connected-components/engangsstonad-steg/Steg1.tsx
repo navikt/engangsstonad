@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import DocumentTitle from 'react-document-title';
 import { injectIntl } from 'react-intl';
 const { Select } = require('nav-frontend-skjema');
 
@@ -15,6 +14,7 @@ import '../../styles/engangsstonad.less';
 import { steg1Partials } from './partials';
 import FormBlock from 'components/form-block/FormBlock';
 import LabelText from 'components/labeltext/LabelText';
+import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
 interface StateProps {
     barn: Barn;
@@ -81,8 +81,7 @@ export class Steg1 extends React.Component<Props, State> {
     render() {
         const { barn, dispatch, intl } = this.props;
         return (
-            <div className="engangsstonad__step">
-                <DocumentTitle title="NAV Engangsstønad - Relasjon til barn" />
+            <Skjemasteg tittel={getMessage(intl, 'relasjonBarn.sectionheading')}>
                 <FormBlock>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'relasjonBarn.text.fodselTidspunkt')}
@@ -125,7 +124,7 @@ export class Steg1 extends React.Component<Props, State> {
                     </Select>
                 </FormBlock>
                 {this.renderPartial()}
-            </div>
+            </Skjemasteg>
         );
     }
 }

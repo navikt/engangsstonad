@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import DocumentTitle from 'react-document-title';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 const { BekreftCheckboksPanel } = require('nav-frontend-skjema');
@@ -25,6 +24,7 @@ import OppsummeringUtenlandsopphold from './../oppsummering/UtenlandsoppholdOpps
 const { ValidGroup } = require('./../../lib') as any;
 
 import '../../styles/engangsstonad.less';
+import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
 interface StateProps {
     bekreftetInformasjon: boolean;
@@ -45,8 +45,7 @@ export class Steg4 extends React.Component<Props> {
         }
 
         return (
-            <div>
-                <DocumentTitle title="NAV Engangsstønad - Oppsummering" />
+            <Skjemasteg tittel={getMessage(intl, 'oppsummering.sectionheading')}>
                 <div className="blokk-m">
                     <Veilederinfo>{getMessage(intl, 'oppsummering.text.lesNoye')}</Veilederinfo>
                 </div>
@@ -79,7 +78,7 @@ export class Steg4 extends React.Component<Props> {
                         />
                     </ValidGroup>
                 </div>
-            </div>
+            </Skjemasteg>
         );
     }
 }
