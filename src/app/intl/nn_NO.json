@@ -1,17 +1,17 @@
 {
-    "intro.text.endreMålform": "Endre målform til nynorsk",
+    "intro.text.endreMålform": "Endre målform til bokmål",
 
     "intro.standard.dokumenttittel": "NAV engangsstønad",
     "intro.standard.velkommentittel": "Velkomen til søknad om eingongsstønad",
     "intro.standard.tittel": "Søknad om engangsstønad",
-    "intro.text.ingress": "Eingongsstønad er ein skattefri eingongssum du kan få for kvart barn du føder eller adopterer.",
+    "intro.standard.ingress": "Eingongsstønad er ein skattefri eingongssum du kan få for kvart barn du føder eller adopterer.",
     "intro.standard.bobletittel": "Hei, {name}!",
     "intro.standard.bobletekst": "Hugs at dersom barnet ikkje er født enno, må du leggje ved ei stadfesting på termin.",
 
     "intro.under18.bobletekst": "Sidan du er under 18 år, må ein av foreldra dine eller ein føresett skrive under på søknaden saman med deg. Du må derfor fylle ut søknaden på papir og sende han i posten. ",
     "intro.under18.boblelenketekst": "Her kan du laste ned papirsøknaden",
 
-    "intro.erMann.bobletekst": "Du kan ikkje søkje for mor. Er det du som skal ha eingongsstønaden, må du velje «Eg søkjer eingongsstønad som far». { link }",
+    "intro.erMann.bobletekst": "Du kan ikkje søkje for mor. Er det du som skal ha eingongsstønaden, må du velje «Eg søkjer eingongsstønad som far».",
     "intro.erMann.boblelenketekst": "Du finn søknaden for far her.",
 
     "intro.innsendingFeilet.tittel": "Det oppstod en feil under innsending",
