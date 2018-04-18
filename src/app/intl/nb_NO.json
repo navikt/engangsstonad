@@ -1,7 +1,7 @@
 {
     "intro.text.endreMålform": "Endre målform til nynorsk",
 
-    "intro.standard.dokumenttittel": "NAV engangsstønad",
+    "intro.standard.dokumenttittel": "NAV Engangsstønad",
     "intro.standard.velkommentittel": "Velkommen til søknad om engangsstønad",
     "intro.standard.tittel": "Søknad om engangsstønad",
     "intro.standard.ingress": "Engangsstønad er en skattefri engangssum du kan få for hvert barn du føder eller adopterer.",
@@ -133,7 +133,7 @@
     "oppsummering.text.antall.8": "Åtte",
     "oppsummering.text.antall.9": "Ni",
 
-    "kvittering.sectionheading": "Illustrasjon av NAV ansatt som takk for mottatt søknad!",
+    "kvittering.sectionheading": "Søknad mottatt",
     "kvittering.text.takk": "Takk for søknaden",
     "kvittering.text.soknadMottatt": "Vi mottok søknaden med referansenummer {referansenr} den {1} kl. {0}. Du kan følge med på søknaden på {linkText}.",
     "kvittering.text.soknadMottatt.linkText": "Ditt NAV",
@@ -189,5 +189,7 @@
     "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
     "vedlegg.liste.tittel": "Valgte vedlegg ({størrelse})",
     "vedlegg.lastoppknapp.label": "Last opp vedlegg...",
-    "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg"
+    "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
+
+    "label_med_hjelpetekst.label": "Hjelpetekst"
 }

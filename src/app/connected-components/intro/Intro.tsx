@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import DocumentTitle from 'react-document-title';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 const { ValidGroup, ValidForm } = require('../../lib') as any;
 const { Ingress } = require('nav-frontend-typografi');
@@ -20,6 +19,7 @@ import SimpleIllustration from 'components/simple-illustration/SimpleIllustratio
 import { Innholdstittel } from 'nav-frontend-typografi';
 
 import '../../styles/engangsstonad.less';
+import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
 interface OwnProps {
     isModalOpen: boolean;
@@ -104,46 +104,47 @@ export class Intro extends React.Component<Props, OwnProps> {
 
         return (
             <div id="js-intro">
-                <ValidForm noSummary={true} onSubmit={this.startSoknad}>
-                    <DocumentTitle title="Samtykke - NAV Engangsstønad" />
-                    <LanguageToggle language={this.props.language} toggleLanguage={(languageCode: string) => this.toggleLanguage(languageCode)} />
-                    <SimpleIllustration
-                        dialog={{
-                            title: getMessage(intl, 'intro.standard.bobletittel', { name: person.fornavn.toLowerCase() }),
-                            text: getMessage(intl, 'intro.standard.bobletekst')
-                        }}
-                    />
+                <Skjemasteg>
+                    <ValidForm noSummary={true} onSubmit={this.startSoknad}>
+                        <LanguageToggle language={this.props.language} toggleLanguage={(languageCode: string) => this.toggleLanguage(languageCode)} />
+                        <SimpleIllustration
+                            dialog={{
+                                title: getMessage(intl, 'intro.standard.bobletittel', { name: person.fornavn.toLowerCase() }),
+                                text: getMessage(intl, 'intro.standard.bobletekst')
+                            }}
+                        />
 
-                    <div className="responsiveContainer">
-                        <div className="blokk-s">
-                            <Innholdstittel>{getMessage(intl, 'intro.standard.velkommentittel')}</Innholdstittel>
+                        <div className="responsiveContainer">
+                            <div className="blokk-s">
+                                <Innholdstittel>{getMessage(intl, 'intro.standard.velkommentittel')}</Innholdstittel>
+                            </div>
+                            <div className="blokk-m">
+                                <Ingress>{getMessage(intl, 'intro.standard.ingress')}</Ingress>
+                            </div>
+                            <div className="blokk-m">
+                                <ValidGroup validators={this.getGodkjentVilkarValidators()}>
+                                    <BekreftCheckboksPanel
+                                        inputProps={{ name: 'egenerklaring' }}
+                                        label={getMessage(intl, 'intro.text.samtykke')}
+                                        onChange={this.bekreftetVilkarChange}
+                                        checked={godkjentVilkar}
+                                    >
+                                        <span>{this.confirmBoxLabelHeaderText()}</span>
+                                    </BekreftCheckboksPanel>
+                                </ValidGroup>
+                            </div>
+                            <Hovedknapp className="responsiveButton">{getMessage(intl, 'intro.button.startSoknad')}</Hovedknapp>
+                            <Modal
+                                isOpen={this.state.isModalOpen}
+                                closeButton={true}
+                                onRequestClose={() => this.closeRettigheterOgPlikterModal()}
+                                contentLabel="rettigheter og plikter"
+                            >
+                                <RettigheterOgPlikter />
+                            </Modal>
                         </div>
-                        <div className="blokk-m">
-                            <Ingress>{getMessage(intl, 'intro.standard.ingress')}</Ingress>
-                        </div>
-                        <div className="blokk-m">
-                            <ValidGroup validators={this.getGodkjentVilkarValidators()}>
-                                <BekreftCheckboksPanel
-                                    inputProps={{ name: 'egenerklaring' }}
-                                    label={getMessage(intl, 'intro.text.samtykke')}
-                                    onChange={this.bekreftetVilkarChange}
-                                    checked={godkjentVilkar}
-                                >
-                                    <span>{this.confirmBoxLabelHeaderText()}</span>
-                                </BekreftCheckboksPanel>
-                            </ValidGroup>
-                        </div>
-                        <Hovedknapp className="responsiveButton">{getMessage(intl, 'intro.button.startSoknad')}</Hovedknapp>
-                        <Modal
-                            isOpen={this.state.isModalOpen}
-                            closeButton={true}
-                            onRequestClose={() => this.closeRettigheterOgPlikterModal()}
-                            contentLabel="rettigheter og plikter"
-                        >
-                            <RettigheterOgPlikter />
-                        </Modal>
-                    </div>
-                </ValidForm>
+                    </ValidForm>
+                </Skjemasteg>
             </div>
         );
     }
