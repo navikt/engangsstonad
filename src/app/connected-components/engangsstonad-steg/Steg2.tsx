@@ -33,7 +33,7 @@ interface StateProps {
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
-export class Steg2 extends React.Component<Props> {
+class Steg2 extends React.Component<Props> {
     getFødselsnummerValidators() {
         const { annenForelder, intl, person } = this.props;
         return [

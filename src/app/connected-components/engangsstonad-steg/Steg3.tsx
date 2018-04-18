@@ -24,7 +24,7 @@ interface StateProps {
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
-export class Steg3 extends React.Component<Props> {
+class Steg3 extends React.Component<Props> {
     componentWillMount() {
         this.overlapsWithOtherUtenlandsopphold = this.overlapsWithOtherUtenlandsopphold.bind(this);
         this.validateFomDatoSiste12Mnd = this.validateFomDatoSiste12Mnd.bind(this);

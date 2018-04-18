@@ -37,7 +37,8 @@ interface StateProps {
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
-export class Steg4 extends React.Component<Props> {
+
+class Steg4 extends React.Component<Props> {
     render() {
         const { person, intl, dispatch, bekreftetInformasjon } = this.props;
         if (!person) {

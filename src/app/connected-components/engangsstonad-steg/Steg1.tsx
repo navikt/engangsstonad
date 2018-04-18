@@ -28,7 +28,7 @@ interface State {
     isModalOpen: boolean;
 }
 
-export class Steg1 extends React.Component<Props, State> {
+class Steg1 extends React.Component<Props, State> {
     getFodselsTidspunktSelectedValue() {
         const { barn } = this.props;
         if (barn) {
