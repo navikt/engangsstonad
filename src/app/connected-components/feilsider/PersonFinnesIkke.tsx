@@ -22,7 +22,7 @@ type Props = StateProps & DispatchProps & InjectedIntlProps;
 
 const URL_KONTAKT_NAV = 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Kontakt+oss';
 
-export const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
+const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
     const { intl, person } = props;
 
     if (person) {

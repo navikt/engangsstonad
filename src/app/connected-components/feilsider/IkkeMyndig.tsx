@@ -23,7 +23,7 @@ interface StateProps {
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
-export const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
+const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
     const { intl, person } = props;
 
     if (person) {
