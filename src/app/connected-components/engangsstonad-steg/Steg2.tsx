@@ -18,6 +18,8 @@ import CountrySelect from 'components/country-select/CountrySelect';
 import FormBlock from 'components/form-block/FormBlock';
 import LabelText from 'components/labeltext/LabelText';
 import Person from '../../types/domain/Person';
+import Skjemasteg from 'components/skjemasteg/Skjemasteg';
+
 const { ValidInput } = require('./../../lib') as any;
 
 const MAKS_NAVN_LENGTH = 100;
@@ -88,7 +90,7 @@ export class Steg2 extends React.Component<Props> {
         const FnrComponent = annenForelder.utenlandskFnr ? Input : ValidInput;
 
         return (
-            <div className="step2">
+            <Skjemasteg tittel={getMessage(intl, 'annenForelder.sectionheading')}>
                 <FormBlock>
                     <FormBlock margin="xxs">
                         <NavnComponent
@@ -139,7 +141,7 @@ export class Steg2 extends React.Component<Props> {
                         validators={this.getBostedslandValidators()}
                     />
                 </FormBlock>
-            </div>
+            </Skjemasteg>
         );
     }
 }

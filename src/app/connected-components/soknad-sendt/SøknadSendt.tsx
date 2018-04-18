@@ -50,7 +50,7 @@ export class SøknadSendt extends React.Component<Props> {
         
         return (
             <div className="engangsstonad">
-                <DocumentTitle title="Kvittering - NAV Engangsstønad" />
+                <DocumentTitle title={getMessage(intl, 'kvittering.sectionheading')} />
                 <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <div className="responsiveContainer">
                     <CustomSVG iconRef={SpotlightLetter} className="spotlightLetter" />

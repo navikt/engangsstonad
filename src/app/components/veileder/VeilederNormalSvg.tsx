@@ -11,7 +11,7 @@ const VeilederNormal: React.StatelessComponent<Props> = ({ svgProps }) => (
         xmlnsXlink="http://www.w3.org/1999/xlink"
         {...svgProps}
     >
-        <title>Veileder</title>
+        <title>NAV veileder</title>
         <defs>
             <circle id="path-1" cx="92" cy="92" r="92" />
             <path

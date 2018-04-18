@@ -11,7 +11,7 @@ const VeilederKompakt: React.StatelessComponent<Props> = ({ svgProps }) => (
         xmlnsXlink="http://www.w3.org/1999/xlink"
         {...svgProps}
     >
-        <title>Icons/employee/medium animation</title>
+        <title>NAV veileder</title>
         <defs>
             <path
                 d="M67.557 34.114h-.059c0-18.7-13.188-33.859-29.46-33.859-16.269 0-29.457 15.16-29.457 33.86v.016c-.006 15.97-8.058 25.1-8.058 25.1s7.952 9.976 37.516 9.976H38.097c29.567 0 37.519-9.975 37.519-9.975s-8.06-9.137-8.06-25.118"
