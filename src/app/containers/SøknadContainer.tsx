@@ -117,7 +117,7 @@ export class SøknadContainer extends React.Component<Props> {
 
                     <ActiveStep />
 
-                    {this.shouldRenderFortsettKnapp() === true && (
+                    {this.shouldRenderFortsettKnapp() && (
                         <Hovedknapp className="responsiveButton" disabled={søknadSendingInProgress} spinner={søknadSendingInProgress}>
                             {fortsettKnappLabel}
                         </Hovedknapp>

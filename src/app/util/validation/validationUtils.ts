@@ -62,7 +62,7 @@ export const getSisteMuligeTermindato = () =>
         .endOf('day')
         .toDate();
 
-export const getForsteMuligeTerminbekreftesesdato = (termindato?: Date): Date =>
+export const getForsteMuligeTerminbekreftesesdato = (termindato?: Date | string): Date =>
     termindato
         ? moment(termindato)
               .subtract(dagerForTerminbekreftelse, 'days')
@@ -72,7 +72,7 @@ export const getForsteMuligeTerminbekreftesesdato = (termindato?: Date): Date =>
               .startOf('day')
               .toDate();
 
-export const getSisteMuligeTerminbekreftesesdato = (termindato?: Date) =>
+export const getSisteMuligeTerminbekreftesesdato = (termindato?: Date | string) =>
     moment(new Date())
         .endOf('day')
         .toDate();

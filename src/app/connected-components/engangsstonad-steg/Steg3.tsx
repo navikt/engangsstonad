@@ -14,7 +14,7 @@ import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive
 import FormBlock from 'components/form-block/FormBlock';
 import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
-import { datoIsSet } from 'util/date/dateUtils';
+import { dateFormatsAreValid } from 'util/date/dateUtils';
 
 interface StateProps {
     barn: Barn;
@@ -388,7 +388,7 @@ export class Steg3 extends React.Component<Props> {
                     visible={
                         (senerePerioder.length > 0 ||
                             iNorgeNeste12Mnd === true) &&
-                        !datoIsSet((barn as FodtBarn).fødselsdatoer)
+                        !dateFormatsAreValid((barn as FodtBarn).fødselsdatoer)
                     }
                 >
                     <RadioPanelGruppeResponsive

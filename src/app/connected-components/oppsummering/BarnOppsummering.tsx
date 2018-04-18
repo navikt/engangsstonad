@@ -6,7 +6,7 @@ import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 import { ISODateToMaskedInput } from 'util/date/dateUtils';
 
 import '../../styles/engangsstonad.less';
-import { containsUnlikeValues } from 'util/arrayUtil';
+import { containsDifferentValues } from 'util/arrayUtil';
 import SummaryBlock from 'components/summary-block/SummaryBlock';
 
 interface Props {
@@ -25,7 +25,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
     } = props.barn;
     const vedleggSummary = props.vedlegg.map(vedleggElement => vedleggElement.name);
 
-    const fødselsdatoerSummary = containsUnlikeValues(props.barn.fødselsdatoer)
+    const fødselsdatoerSummary = containsDifferentValues(props.barn.fødselsdatoer)
         ? fødselsdatoer.map(fødselsdato => ISODateToMaskedInput(fødselsdato))
         : ISODateToMaskedInput(fødselsdatoer[0]);
 
