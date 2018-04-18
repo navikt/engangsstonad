@@ -20,7 +20,7 @@ interface OwnProps {
 
 type Props = OwnProps & InjectedIntlProps;
 
-const CountryListSummaryElement: React.StatelessComponent<Props> = (props) => {
+const CountryListSummaryElement: React.StatelessComponent<Props> = props => {
     const { varighet, land } = props.utenlandsopphold;
     const { onDeleteClick, onEditClick } = props;
     const onEditClickHandler = () => {
@@ -30,12 +30,10 @@ const CountryListSummaryElement: React.StatelessComponent<Props> = (props) => {
     };
 
     return (
-        <li className={classnames('countryListElement', { 'countryListElement__editable': onEditClick !== undefined })}>
+        <li className={classnames('countryListElement', { countryListElement__editable: onEditClick !== undefined })}>
             <div className="countryListElement__textWrapper">
                 <button type="button" onClick={onEditClickHandler}>
-                    <Normaltekst className="countryListElement__country">
-                        {countries.getName(land, 'nb')}
-                    </Normaltekst>
+                    <Normaltekst className="countryListElement__country">{countries.getName(land, 'nb')}</Normaltekst>
                     <Normaltekst className="countryListElement__date">
                         {getMessage(props.intl, 'standard.text.fromTo', {
                             from: ISODateToMaskedInput(varighet.fom),
@@ -44,18 +42,18 @@ const CountryListSummaryElement: React.StatelessComponent<Props> = (props) => {
                     </Normaltekst>
                 </button>
             </div>
-            {onDeleteClick &&
+            {onDeleteClick && (
                 <button
                     type="button"
                     className="js-toggle countryListElement__deleteButton"
-                    onClick={(e) => {
+                    onClick={e => {
                         e.stopPropagation();
                         onDeleteClick(props.utenlandsopphold);
                     }}
                 >
                     <Icon kind="trashcan" size={20} />
                 </button>
-            }
+            )}
         </li>
     );
 };
