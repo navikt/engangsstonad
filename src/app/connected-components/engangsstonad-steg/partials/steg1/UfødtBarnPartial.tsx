@@ -20,6 +20,7 @@ import LabelText from 'components/labeltext/LabelText';
 import ValidDateInput from '../../../../lib/valid-date-input';
 import FormBlock from 'components/form-block/FormBlock';
 import Terminbekreftelse from './Terminbekreftelse';
+import { buildDateObject } from 'util/date/dateUtils';
 
 interface StateProps {
     barn: Barn;
@@ -31,20 +32,6 @@ type Props = StateProps & InjectedIntlProps & DispatchProps;
 interface State {
     isModalOpen: boolean;
 }
-
-const getTermindato = (barn: UfodtBarn): Date | undefined => {
-    if (barn && barn.termindato) {
-        return new Date(barn.termindato);
-    }
-    return undefined;
-};
-
-const getTerminbekreftelseDato = (barn: UfodtBarn): Date | undefined => {
-    if (barn && barn.terminbekreftelseDato) {
-        return new Date(barn.terminbekreftelseDato);
-    }
-    return undefined;
-};
 
 export default class UfødtBarnPartial extends React.Component<Props, State> {
     componentWillMount() {
@@ -102,10 +89,10 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
     }
 
     render() {
-        const { barn, vedlegg, dispatch } = this.props;
+        const { vedlegg, dispatch } = this.props;
+        const barn = this.props.barn as UfodtBarn;
         const { antallBarn } = barn;
-        const termindato = getTermindato(barn);
-        const terminbekreftelseDato = getTerminbekreftelseDato(barn);
+        const { termindato, terminbekreftelseDato } = barn;
 
         const datoavgrensningTermindato = {
             minDato: getFørsteMuligeTermindato(),
@@ -113,8 +100,8 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
         };
 
         const datoavgrensningTerminbekreftelse = {
-            minDato: getForsteMuligeTerminbekreftesesdato(termindato),
-            maksDato: getSisteMuligeTerminbekreftesesdato(termindato)
+            minDato: getForsteMuligeTerminbekreftesesdato(barn.termindato),
+            maksDato: getSisteMuligeTerminbekreftesesdato(barn.termindato)
         };
 
         return (
@@ -124,16 +111,17 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         <ValidDateInput
                             id="termindato"
                             name="termindato"
-                            dato={termindato}
+                            dato={buildDateObject(termindato)}
                             label={<LabelText intlId="relasjonBarn.text.termindato" />}
-                            onChange={(dato: Date) => dispatch(soknad.setTermindato(dato ? dato.toISOString() : ''))}
+                            onChange={(dato: Date) => dato && dispatch(soknad.setTermindato(dato ? dato.toISOString() : ''))}
+                            onInputChange={(dato: string) => dato && dispatch(soknad.setTermindato(dato))}
                             validators={this.getTermindatoValidators()}
                             avgrensninger={datoavgrensningTermindato}
                         />
                     </FormBlock>
                 )}
 
-                <FormBlock visible={termindato !== undefined}>
+                <FormBlock visible={barn.termindato !== undefined}>
                     <Terminbekreftelse
                         vedlegg={vedlegg}
                         onFilesSelect={files => dispatch(soknad.addVedlegg(files))}
@@ -141,14 +129,15 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                     />
                 </FormBlock>
 
-                <FormBlock visible={vedlegg.length > 0 && getTermindato(barn) !== undefined}>
+                <FormBlock visible={vedlegg.length > 0 && barn.termindato !== undefined}>
                     <div key="dateInputTerminBekreftelse">
                         <ValidDateInput
                             id="terminbekreftelse"
                             name="terminbekreftelse"
-                            dato={terminbekreftelseDato}
+                            dato={buildDateObject(terminbekreftelseDato)}
                             label={<LabelText intlId="relasjonBarn.text.datoTerminbekreftelse" />}
-                            onChange={(dato: Date) => dispatch(soknad.setTerminbekreftelseDato(dato ? dato.toISOString() : ''))}
+                            onChange={(dato: Date) => dato && dispatch(soknad.setTerminbekreftelseDato(dato ? dato.toISOString() : ''))}
+                            onInputChange={(dato: string) => dato && dispatch(soknad.setTerminbekreftelseDato(dato))}
                             validators={this.getTerminbekreftelseDatoValidators()}
                             avgrensninger={datoavgrensningTerminbekreftelse}
                         />

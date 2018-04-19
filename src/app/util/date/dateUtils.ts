@@ -1,27 +1,23 @@
 import * as moment from 'moment';
 
-export const isValidISODate = (isoDato: string) =>
-    !!(isoDato && moment(isoDato, moment.ISO_8601).isValid());
-
-export const dateToISODate = (dato: string) => {
-    const parsetDato = moment(dato);
-    return dato && parsetDato.isValid() ? parsetDato.toISOString() : '';
-};
+export const isValidISODate = (date: string) =>
+    !!(date && moment(date, moment.ISO_8601).isValid());
 
 export const ISODateToMaskedInput = (dato: string) => {
     const parsetDato = moment(dato);
     return dato && parsetDato.isValid() ? parsetDato.format('DD.MM.YYYY') : '';
 };
 
-export const datePickerToISODate = (dato: string) => {
-    const parsetDato = moment.utc(dato, 'DD.MM.YYYY', true);
-    return parsetDato.isValid() ? parsetDato.toISOString() : '';
+export const dateFormatIsValid = (date: string) => {
+    return date && date !== '' && isValidISODate(date);
 };
 
-export const datoIsSet = (datoer: (string | undefined)[]) => {
-    return (
-        datoer.length > 0 &&
-        !datoer.includes(undefined as any) &&
-        !datoer.includes('' as any)
+export const dateFormatsAreValid = (dates: string[]) => {
+    const hasInvalidDates = dates.some((currentDate: string) =>
+        !dateFormatIsValid(currentDate) || currentDate === undefined
     );
+    return !hasInvalidDates;
 };
+
+export const buildDateObject = (date?: string) =>
+    date !== undefined && isValidISODate(date) ? new Date(date) : date;

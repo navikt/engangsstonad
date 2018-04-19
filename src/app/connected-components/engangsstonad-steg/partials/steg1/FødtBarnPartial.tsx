@@ -7,9 +7,10 @@ import { default as Barn, FodtBarn } from '../../../../types/domain/Barn';
 import getMessage from 'util/i18n/i18nUtils';
 import { DispatchProps } from '../../../../redux/types/index';
 const { Checkbox } = require('nav-frontend-skjema');
-import { containsUnlikeValues } from 'util/arrayUtil';
+import { containsDifferentValues } from 'util/arrayUtil';
 import LabelText from 'components/labeltext/LabelText';
 import FormBlock from 'components/form-block/FormBlock';
+import { buildDateObject } from 'util/date/dateUtils';
 
 interface StateProps {
     barn: Barn;
@@ -21,24 +22,13 @@ interface OwnProps {
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
-const getFodselsdatoForBarn = (
-    barn: FodtBarn,
-    index: number
-): Date | undefined => {
-    if (barn && barn.fødselsdatoer.length > 0) {
-        const dato = barn.fødselsdatoer[index];
-        return dato ? new Date(dato) : undefined;
-    }
-    return undefined;
-};
-
 export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            bornOnSameDate: !containsUnlikeValues((props.barn as FodtBarn).fødselsdatoer)
+            bornOnSameDate: !containsDifferentValues((props.barn as FodtBarn).fødselsdatoer)
         };
-        this.diffrentBirthDatesCheckboxHandler = this.diffrentBirthDatesCheckboxHandler.bind(
+        this.differentBirthDatesCheckboxHandler = this.differentBirthDatesCheckboxHandler.bind(
             this
         );
     }
@@ -103,18 +93,20 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
         return dateInputLabels;
     }
 
-    onFødselsdatoInputChange(fødselsdato: Date, index: number) {
-        const { dispatch } = this.props;
-        dispatch(
-            soknad.editFødselsdato(
-                fødselsdato ? fødselsdato.toISOString() : '',
-                this.state.bornOnSameDate,
-                index
-            )
-        );
+    onFødselsdatoInputChange(fødselsdato: Date | string, index: number) {
+        if (fødselsdato) {
+            const { dispatch } = this.props;
+            dispatch(
+                soknad.editFødselsdato(
+                    fødselsdato && fødselsdato instanceof Date ? fødselsdato.toISOString() : fødselsdato,
+                    this.state.bornOnSameDate,
+                    index
+                )
+            );
+        }
     }
 
-    diffrentBirthDatesCheckboxHandler() {
+    differentBirthDatesCheckboxHandler() {
         const { dispatch, barn } = this.props;
         this.setState({ bornOnSameDate: !this.state.bornOnSameDate }, () => {
             if (this.state.bornOnSameDate) {
@@ -129,7 +121,8 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
     }
 
     render() {
-        const { barn, intl } = this.props;
+        const { intl } = this.props;
+        const barn = this.props.barn as FodtBarn;
         if (barn.antallBarn === undefined) {
             return null;
         }
@@ -154,10 +147,9 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                     <ValidDateInput
                         id="fødselsdato"
                         label={<LabelText>{dateInputLabels[0]}</LabelText>}
-                        dato={getFodselsdatoForBarn((barn as FodtBarn), 0)}
-                        onChange={(dato: Date) =>
-                            this.onFødselsdatoInputChange(dato, 0)
-                        }
+                        dato={buildDateObject(barn.fødselsdatoer[0])}
+                        onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, 0)}
+                        onInputChange={(dato: string) => this.onFødselsdatoInputChange(dato, 0)}
                         name="fødselsdato"
                         avgrensninger={datoavgrensning}
                         validators={this.getFødselsdatoValidators(0)}
@@ -170,7 +162,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                             intl,
                             'relasjonBarn.text.fodselsdato.forskjelligeDager'
                         )}
-                        onChange={this.diffrentBirthDatesCheckboxHandler}
+                        onChange={this.differentBirthDatesCheckboxHandler}
                         checked={!this.state.bornOnSameDate}
                     />
                 </FormBlock>
@@ -194,10 +186,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                                             }
                                         </LabelText>
                                     }
-                                    dato={getFodselsdatoForBarn(
-                                        (barn as FodtBarn),
-                                        fødselsdatoArrayIndex
-                                    )}
+                                    dato={buildDateObject(barn.fødselsdatoer[fødselsdatoArrayIndex])}
                                     onChange={(dato: Date) =>
                                         this.onFødselsdatoInputChange(
                                             dato,

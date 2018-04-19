@@ -4,7 +4,6 @@ import * as moment from 'moment';
 import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../redux/actions';
 import Utenlandsopphold, { Periode } from '../../types/domain/Utenlandsopphold';
-import { connect } from 'react-redux';
 import { DispatchProps } from '../../redux/types/index';
 import CountryPicker from '../../components/country-picker/CountryPicker';
 import Barn, { FodtBarn } from '../../types/domain/Barn';
@@ -12,8 +11,9 @@ import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive
 import FormBlock from 'components/form-block/FormBlock';
 import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
-import { datoIsSet } from 'util/date/dateUtils';
+import { dateFormatsAreValid } from 'util/date/dateUtils';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
+import { connect } from 'react-redux';
 
 interface StateProps {
     barn: Barn;
@@ -309,7 +309,13 @@ class Steg3 extends React.Component<Props> {
                         }}
                     />
                 </FormBlock>
-                <FormBlock visible={(senerePerioder.length > 0 || iNorgeNeste12Mnd === true) && !datoIsSet((barn as FodtBarn).fødselsdatoer)}>
+                <FormBlock
+                    visible={
+                        (senerePerioder.length > 0 ||
+                            iNorgeNeste12Mnd === true) &&
+                        !dateFormatsAreValid((barn as FodtBarn).fødselsdatoer)
+                    }
+                >
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.bostedFodsel', {
                             antallBarn:

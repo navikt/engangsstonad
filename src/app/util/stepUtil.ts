@@ -1,19 +1,21 @@
 import Barn, { UfodtBarn, FodtBarn } from 'app/types/domain/Barn';
-import { datoIsSet } from 'util/date/dateUtils';
+import { dateFormatsAreValid } from 'util/date/dateUtils';
 import Utenlandsopphold from '../types/domain/Utenlandsopphold';
 import AnnenForelder from '../types/domain/AnnenForelder';
 
 export const shouldDisplayNextButtonOnStep1 = (barn: Barn, vedlegg: File[]) => {
     if (!barn.erBarnetFødt) {
-        const b = barn as UfodtBarn;
+        const ufodtBarn = barn as UfodtBarn;
         return (
-            datoIsSet([b.terminbekreftelseDato]) &&
-            datoIsSet([b.termindato]) &&
+            ufodtBarn.termindato &&
+            ufodtBarn.terminbekreftelseDato &&
+            dateFormatsAreValid([ufodtBarn.terminbekreftelseDato, ufodtBarn.termindato]) &&
             barn.antallBarn !== undefined &&
             vedlegg.length > 0
         );
     }
-    return barn.antallBarn !== undefined && datoIsSet((barn as FodtBarn).fødselsdatoer);
+    const fodtBarn = barn as FodtBarn;
+    return (fodtBarn.antallBarn !== undefined && dateFormatsAreValid(fodtBarn.fødselsdatoer));
 };
 
 export const shouldDisplayNextButtonOnStep2 = (
@@ -46,12 +48,13 @@ export const shouldDisplayNextButtonOnStep3 = (
     utenlandsopphold: Utenlandsopphold
 ) => {
     if (utenlandsopphold.iNorgeNeste12Mnd === false) {
-        return ((datoIsSet((barn as FodtBarn).fødselsdatoer) || utenlandsopphold.fødselINorge !== undefined)) &&
+        return ((dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) || utenlandsopphold.fødselINorge !== undefined)) &&
             iNorgeNeste12MndIsValid(utenlandsopphold) && iNorgeSiste12MndIsValid(utenlandsopphold);
     } else {
         return (
-            utenlandsopphold.fødselINorge !== undefined || (datoIsSet((barn as FodtBarn).fødselsdatoer) && utenlandsopphold.iNorgeNeste12Mnd !== undefined) &&
-            iNorgeNeste12MndIsValid(utenlandsopphold) && iNorgeSiste12MndIsValid(utenlandsopphold)
+            utenlandsopphold.fødselINorge !== undefined || (dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) &&
+                utenlandsopphold.iNorgeNeste12Mnd !== undefined) && iNorgeNeste12MndIsValid(utenlandsopphold) &&
+                iNorgeSiste12MndIsValid(utenlandsopphold)
         );
     }
 };
