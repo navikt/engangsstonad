@@ -1,20 +1,19 @@
 import * as React from 'react';
-import { injectIntl } from 'react-intl';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import * as moment from 'moment';
-import DocumentTitle from 'react-document-title';
 import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../redux/actions';
 import Utenlandsopphold, { Periode } from '../../types/domain/Utenlandsopphold';
-import { connect } from 'react-redux';
 import { DispatchProps } from '../../redux/types/index';
 import CountryPicker from '../../components/country-picker/CountryPicker';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Barn, { FodtBarn } from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import FormBlock from 'components/form-block/FormBlock';
 import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
 import { dateFormatsAreValid } from 'util/date/dateUtils';
+import Skjemasteg from 'components/skjemasteg/Skjemasteg';
+import { connect } from 'react-redux';
 
 interface StateProps {
     barn: Barn;
@@ -25,23 +24,13 @@ interface StateProps {
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
-export class Steg3 extends React.Component<Props> {
+class Steg3 extends React.Component<Props> {
     componentWillMount() {
-        this.overlapsWithOtherUtenlandsopphold = this.overlapsWithOtherUtenlandsopphold.bind(
-            this
-        );
-        this.validateFomDatoSiste12Mnd = this.validateFomDatoSiste12Mnd.bind(
-            this
-        );
-        this.validateTomDatoSiste12Mnd = this.validateTomDatoSiste12Mnd.bind(
-            this
-        );
-        this.validateFomDatoNeste12Mnd = this.validateFomDatoNeste12Mnd.bind(
-            this
-        );
-        this.validateTomDatoNeste12Mnd = this.validateTomDatoNeste12Mnd.bind(
-            this
-        );
+        this.overlapsWithOtherUtenlandsopphold = this.overlapsWithOtherUtenlandsopphold.bind(this);
+        this.validateFomDatoSiste12Mnd = this.validateFomDatoSiste12Mnd.bind(this);
+        this.validateTomDatoSiste12Mnd = this.validateTomDatoSiste12Mnd.bind(this);
+        this.validateFomDatoNeste12Mnd = this.validateFomDatoNeste12Mnd.bind(this);
+        this.validateTomDatoNeste12Mnd = this.validateTomDatoNeste12Mnd.bind(this);
     }
 
     validateLand({ land }: any): Feil | undefined {
@@ -51,15 +40,8 @@ export class Steg3 extends React.Component<Props> {
         return { feilmelding: 'Du må oppgi et land' };
     }
 
-    overlapsWithOtherUtenlandsopphold(
-        momentFom: any,
-        momentTom: any,
-        utenlandsoppholdInEditMode: any
-    ) {
-        const {
-            tidligerePerioder,
-            senerePerioder
-        } = this.props.utenlandsopphold;
+    overlapsWithOtherUtenlandsopphold(momentFom: any, momentTom: any, utenlandsoppholdInEditMode: any) {
+        const { tidligerePerioder, senerePerioder } = this.props.utenlandsopphold;
         const perioder = [...tidligerePerioder, ...senerePerioder];
         const overlappendePeriode = perioder.find(periode => {
             if (periode !== utenlandsoppholdInEditMode) {
@@ -67,127 +49,126 @@ export class Steg3 extends React.Component<Props> {
                 const varighetFom = moment(varighet.fom),
                     varighetTom = moment(varighet.tom);
                 return (
-                    momentFom.isBetween(
-                        varighetFom.subtract(1, 'seconds'),
-                        varighetTom.add(1, 'seconds')
-                    ) ||
-                    momentTom.isBetween(
-                        varighetFom.subtract(1, 'seconds'),
-                        varighetTom.add(1, 'seconds')
-                    ) ||
-                    (varighetFom.isBetween(
-                        momentFom.subtract(1, 'seconds'),
-                        momentTom.add(1, 'seconds')
-                    ) ||
-                        varighetTom.isBetween(
-                            momentFom.subtract(1, 'seconds'),
-                            momentTom.add(1, 'seconds')
-                        ))
+                    momentFom.isBetween(varighetFom.subtract(1, 'seconds'), varighetTom.add(1, 'seconds')) ||
+                    momentTom.isBetween(varighetFom.subtract(1, 'seconds'), varighetTom.add(1, 'seconds')) ||
+                    (varighetFom.isBetween(momentFom.subtract(1, 'seconds'), momentTom.add(1, 'seconds')) ||
+                        varighetTom.isBetween(momentFom.subtract(1, 'seconds'), momentTom.add(1, 'seconds')))
                 );
             }
         });
         return overlappendePeriode;
     }
 
-    validateFomDatoSiste12Mnd({fom, tom, utenlandsoppholdInEditMode}: any): Feil | undefined {
+    validateFomDatoSiste12Mnd({ fom, tom, utenlandsoppholdInEditMode }: any): Feil | undefined {
         const { intl } = this.props;
         if (fom) {
             const momentFom = moment(fom),
                 momentTom = moment(tom);
             if (momentFom.isAfter(momentTom)) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato' ) };
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato')
+                };
             } else if (momentFom.isBefore(moment().subtract(1, 'years'))) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12') };
-            } else if (
-                this.overlapsWithOtherUtenlandsopphold(
-                    momentFom,
-                    momentTom,
-                    utenlandsoppholdInEditMode
-                )
-            ) {
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12')
+                };
+            } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
                 return {
                     feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper')
                 };
             }
             return;
         }
-        return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12') };
+        return {
+            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12')
+        };
     }
 
-    validateTomDatoSiste12Mnd({tom, fom, utenlandsoppholdInEditMode}: any): Feil | undefined {
+    validateTomDatoSiste12Mnd({ tom, fom, utenlandsoppholdInEditMode }: any): Feil | undefined {
         const { intl } = this.props;
         if (tom) {
             const momentFom = moment(fom),
                 momentTom = moment(tom);
             if (momentTom.isBefore(momentFom)) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato') };
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato')
+                };
             } else if (momentTom.isBefore(moment().subtract(1, 'years'))) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12') };
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12')
+                };
             } else if (momentTom.isSameOrAfter(moment().add(1, 'days'))) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12') };
-            } else if (
-                this.overlapsWithOtherUtenlandsopphold(
-                    momentFom,
-                    momentTom,
-                    utenlandsoppholdInEditMode
-                )
-            ) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper') };
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12')
+                };
+            } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper')
+                };
             }
             return;
         }
-        return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12') };
+        return {
+            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12')
+        };
     }
 
-    validateFomDatoNeste12Mnd({fom, tom, utenlandsoppholdInEditMode}: any): Feil | undefined {
+    validateFomDatoNeste12Mnd({ fom, tom, utenlandsoppholdInEditMode }: any): Feil | undefined {
         const { intl } = this.props;
         if (fom) {
             const momentFom = moment(fom),
                 momentTom = moment(tom);
             if (momentFom.isAfter(momentTom)) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato' ) };
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato')
+                };
             } else if (momentFom.isBefore(moment().startOf('day'))) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12') };
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12')
+                };
             } else if (momentFom.startOf('day').isAfter(moment().add(1, 'years'))) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12') };
-            } else if (
-                this.overlapsWithOtherUtenlandsopphold(
-                    momentFom,
-                    momentTom,
-                    utenlandsoppholdInEditMode
-                )
-            ) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper') };
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12')
+                };
+            } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper')
+                };
             }
             return;
         }
-        return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12') };
+        return {
+            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12')
+        };
     }
 
-    validateTomDatoNeste12Mnd({tom, fom, utenlandsoppholdInEditMode}: any): Feil | undefined {
+    validateTomDatoNeste12Mnd({ tom, fom, utenlandsoppholdInEditMode }: any): Feil | undefined {
         const { intl } = this.props;
         if (tom) {
             const momentFom = moment(fom),
                 momentTom = moment(tom);
             if (momentTom.isBefore(momentFom)) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato') };
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato')
+                };
             } else if (momentTom.startOf('day').isAfter(moment().add(1, 'years'))) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12') };
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12')
+                };
             } else if (momentTom.isBefore(moment().startOf('day'))) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.dagensEllerSenere') };
-            } else if (
-                this.overlapsWithOtherUtenlandsopphold(
-                    momentFom,
-                    momentTom,
-                    utenlandsoppholdInEditMode
-                )
-            ) {
-                return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper') };
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.dagensEllerSenere')
+                };
+            } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
+                return {
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper')
+                };
             }
             return;
         }
-        return { feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12') };
-
+        return {
+            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12')
+        };
     }
 
     getINorgeSiste12SelectedValue() {
@@ -225,12 +206,7 @@ export class Steg3 extends React.Component<Props> {
 
     render() {
         const { dispatch, intl, utenlandsopphold, barn, language } = this.props;
-        const {
-            iNorgeSiste12Mnd,
-            iNorgeNeste12Mnd,
-            tidligerePerioder,
-            senerePerioder
-        } = utenlandsopphold;
+        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligerePerioder, senerePerioder } = utenlandsopphold;
 
         const tidsperiodeForegående: Tidsperiode = {
             startdato: moment()
@@ -253,31 +229,22 @@ export class Steg3 extends React.Component<Props> {
         };
 
         return (
-            <div className="engangsstonad__step">
-                <DocumentTitle title="NAV Engangsstønad - Tilknytning til Norge" />
+            <Skjemasteg tittel={getMessage(intl, 'medlemmskap.sectionheading')}>
                 <FormBlock>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.siste12mnd')}
                         name="iNorgeSiste12"
-                        onChange={(event: any, value: string) =>
-                            dispatch(soknad.setINorgeSiste12Mnd(value))
-                        }
+                        onChange={(event: any, value: string) => dispatch(soknad.setINorgeSiste12Mnd(value))}
                         checked={this.getINorgeSiste12SelectedValue()}
                         radios={[
                             {
                                 inputProps: { id: 'js-iNorgeSiste12' },
-                                label: getMessage(
-                                    intl,
-                                    'medlemmskap.radiobutton.boddNorge'
-                                ),
+                                label: getMessage(intl, 'medlemmskap.radiobutton.boddNorge'),
                                 value: 'norway'
                             },
                             {
                                 inputProps: { id: 'js-iUtlandetSiste12' },
-                                label: getMessage(
-                                    intl,
-                                    'medlemmskap.radiobutton.utlandet'
-                                ),
+                                label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'),
                                 value: 'abroad'
                             }
                         ]}
@@ -290,28 +257,9 @@ export class Steg3 extends React.Component<Props> {
                         label={getMessage(intl, 'medlemmskap.text.jegBodde')}
                         language={language}
                         utenlandsoppholdListe={tidligerePerioder}
-                        addVisit={(periode: Periode) =>
-                            dispatch(
-                                soknad.addTidligereUtenlandsoppholdPeriode(
-                                    periode
-                                )
-                            )
-                        }
-                        editVisit={(periode: Periode, i: number) =>
-                            dispatch(
-                                soknad.editTidligereUtenlandsoppholdPeriode(
-                                    periode,
-                                    i
-                                )
-                            )
-                        }
-                        deleteVisit={(periode: Periode) =>
-                            dispatch(
-                                soknad.deleteTidligereUtenlandsoppholdPeriode(
-                                    periode
-                                )
-                            )
-                        }
+                        addVisit={(periode: Periode) => dispatch(soknad.addTidligereUtenlandsoppholdPeriode(periode))}
+                        editVisit={(periode: Periode, i: number) => dispatch(soknad.editTidligereUtenlandsoppholdPeriode(periode, i))}
+                        deleteVisit={(periode: Periode) => dispatch(soknad.deleteTidligereUtenlandsoppholdPeriode(periode))}
                         tidsperiode={tidsperiodeForegående}
                         validators={{
                             validateLand: this.validateLand,
@@ -320,62 +268,39 @@ export class Steg3 extends React.Component<Props> {
                         }}
                     />
                 </FormBlock>
-                <FormBlock
-                    visible={iNorgeSiste12Mnd || tidligerePerioder.length > 0}
-                >
+                <FormBlock visible={iNorgeSiste12Mnd || tidligerePerioder.length > 0}>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
                         name="iNorgeNeste12"
-                        onChange={(event: any, value: string) =>
-                            dispatch(soknad.setINorgeNeste12Mnd(value))
-                        }
+                        onChange={(event: any, value: string) => dispatch(soknad.setINorgeNeste12Mnd(value))}
                         checked={this.getINorgeNeste12SelectedValue()}
                         radios={[
                             {
                                 inputProps: { id: 'js-iNorgeNeste12' },
-                                label: getMessage(
-                                    intl,
-                                    'medlemmskap.radiobutton.boNorge'
-                                ),
+                                label: getMessage(intl, 'medlemmskap.radiobutton.boNorge'),
                                 value: 'norway'
                             },
                             {
                                 inputProps: { id: 'js-iUtlandetNeste12' },
-                                label: getMessage(
-                                    intl,
-                                    'medlemmskap.radiobutton.boUtlandet'
-                                ),
+                                label: getMessage(intl, 'medlemmskap.radiobutton.boUtlandet'),
                                 value: 'abroad'
                             }
                         ]}
                         twoColumns={true}
                     />
                 </FormBlock>
-                <FormBlock visible={iNorgeNeste12Mnd === false && (iNorgeSiste12Mnd === true || (iNorgeSiste12Mnd === false && tidligerePerioder.length > 0))}>
+                <FormBlock
+                    visible={
+                        iNorgeNeste12Mnd === false && (iNorgeSiste12Mnd === true || (iNorgeSiste12Mnd === false && tidligerePerioder.length > 0))
+                    }
+                >
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegSkalBo')}
                         language={language}
                         utenlandsoppholdListe={senerePerioder}
-                        addVisit={(periode: Periode) =>
-                            dispatch(
-                                soknad.addSenereUtenlandsoppholdPeriode(periode)
-                            )
-                        }
-                        editVisit={(periode: Periode, i: number) =>
-                            dispatch(
-                                soknad.editSenereUtenlandsoppholdPeriode(
-                                    periode,
-                                    i
-                                )
-                            )
-                        }
-                        deleteVisit={(periode: Periode) =>
-                            dispatch(
-                                soknad.deleteSenereUtenlandsoppholdPeriode(
-                                    periode
-                                )
-                            )
-                        }
+                        addVisit={(periode: Periode) => dispatch(soknad.addSenereUtenlandsoppholdPeriode(periode))}
+                        editVisit={(periode: Periode, i: number) => dispatch(soknad.editSenereUtenlandsoppholdPeriode(periode, i))}
+                        deleteVisit={(periode: Periode) => dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))}
                         tidsperiode={tidsperiodeKommende}
                         validators={{
                             validateLand: this.validateLand,
@@ -392,49 +317,31 @@ export class Steg3 extends React.Component<Props> {
                     }
                 >
                     <RadioPanelGruppeResponsive
-                        legend={getMessage(
-                            intl,
-                            'medlemmskap.text.bostedFodsel',
-                            {
-                                antallBarn:
-                                    barn.antallBarn && barn.antallBarn > 1
-                                        ? getMessage(
-                                              intl,
-                                              'medlemmskap.text.barnFlertall'
-                                          )
-                                        : getMessage(
-                                              intl,
-                                              'medlemmskap.text.barnEntall'
-                                          )
-                            }
-                        )}
+                        legend={getMessage(intl, 'medlemmskap.text.bostedFodsel', {
+                            antallBarn:
+                                barn.antallBarn && barn.antallBarn > 1
+                                    ? getMessage(intl, 'medlemmskap.text.barnFlertall')
+                                    : getMessage(intl, 'medlemmskap.text.barnEntall')
+                        })}
                         name="fødselINorge"
-                        onChange={(event: any, value: string) =>
-                            dispatch(soknad.setFødselINorge(value))
-                        }
+                        onChange={(event: any, value: string) => dispatch(soknad.setFødselINorge(value))}
                         checked={this.getFødselINorgeSelectedValue()}
                         radios={[
                             {
                                 inputProps: { id: 'js-fodselINorge' },
-                                label: getMessage(
-                                    intl,
-                                    'medlemmskap.radiobutton.vareNorge'
-                                ),
+                                label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'),
                                 value: 'norway'
                             },
                             {
                                 inputProps: { id: 'js-fodselIUtlandet' },
-                                label: getMessage(
-                                    intl,
-                                    'medlemmskap.radiobutton.vareUtlandet'
-                                ),
+                                label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'),
                                 value: 'abroad'
                             }
                         ]}
                         twoColumns={true}
                     />
                 </FormBlock>
-            </div>
+            </Skjemasteg>
         );
     }
 }

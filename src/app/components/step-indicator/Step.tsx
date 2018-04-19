@@ -9,7 +9,7 @@ interface Props {
     title: string | JSX.Element;
 }
 
-export const Step: React.StatelessComponent<Props> = ({ step, activeStep, title }) => {
+const Step: React.StatelessComponent<Props> = ({ step, activeStep, title }) => {
     const passed = step < activeStep;
 
     return (

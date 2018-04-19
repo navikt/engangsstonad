@@ -34,7 +34,7 @@ interface OwnProps {
 
 type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps<{}>;
 
-export class SøknadContainer extends React.Component<Props> {
+class SøknadContainer extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         this.handleNextClicked = this.handleNextClicked.bind(this);

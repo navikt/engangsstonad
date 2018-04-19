@@ -13,7 +13,7 @@ interface StateProps {
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
-export const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
+const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
     const { intl } = props;
     return (
         <Feilside

@@ -169,13 +169,14 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                 {!this.state.bornOnSameDate &&
                     (barn as FodtBarn).fødselsdatoer.slice(1).map((element, index) => {
                         const fødselsdatoArrayIndex = index + 1;
+                        const inputId = `fødselsdato-barn-${fødselsdatoArrayIndex}`;
                         return (
                             <FormBlock
                                 margin="xs"
-                                key={`fødselsdato` + fødselsdatoArrayIndex}
+                                key={inputId}
                             >
                                 <ValidDateInput
-                                    id="fødselsdato"
+                                    id={inputId}
                                     label={
                                         <LabelText>
                                             {
@@ -192,7 +193,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                                             fødselsdatoArrayIndex
                                         )
                                     }
-                                    name="fødselsdato"
+                                    name={inputId}
                                     validators={this.getFødselsdatoValidators(
                                         fødselsdatoArrayIndex
                                     )}

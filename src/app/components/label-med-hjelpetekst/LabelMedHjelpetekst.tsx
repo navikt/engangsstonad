@@ -11,6 +11,7 @@ const LukkInfoIkonSVG = <CustomSVG iconRef={LukkInfoIkon} size={14} />;
 import './labelMedHjelpetekst.less';
 import Sirkelknapp from 'components/sirkelknapp/Sirkelknapp';
 import LabelText from 'components/labeltext/LabelText';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 type Props = {
     label: string;
@@ -22,7 +23,7 @@ type State = {
     showHjelpetekst: boolean;
 };
 
-export default class LabelMedHjelpetekst extends React.Component<Props, State> {
+class LabelMedHjelpetekst extends React.Component<Props & InjectedIntlProps, State> {
     componentWillMount() {
         this.setState({
             showHjelpetekst: false
@@ -36,7 +37,7 @@ export default class LabelMedHjelpetekst extends React.Component<Props, State> {
     }
 
     render() {
-        const { label, hjelpetekst, buttonProps } = this.props;
+        const { label, hjelpetekst, buttonProps, intl } = this.props;
         const { showHjelpetekst } = this.state;
 
         return (
@@ -44,7 +45,7 @@ export default class LabelMedHjelpetekst extends React.Component<Props, State> {
                 <LabelText>{label}</LabelText>
                 <Sirkelknapp
                     stil="info"
-                    label="Hjelpetekst"
+                    label={intl.formatMessage({ id: 'label_med_hjelpetekst.label' })}
                     buttonProps={buttonProps}
                     ikon={showHjelpetekst ? LukkInfoIkonSVG : InfoIkonSVG}
                     toggle={{ pressed: showHjelpetekst }}
@@ -61,3 +62,5 @@ export default class LabelMedHjelpetekst extends React.Component<Props, State> {
         );
     }
 }
+
+export default injectIntl(LabelMedHjelpetekst);

@@ -11,7 +11,7 @@ interface Props {
     language: string;
 }
 
-export class IntlProvider extends React.Component<Props> {
+class IntlProvider extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         addLocaleData([...nb, ...nn]);

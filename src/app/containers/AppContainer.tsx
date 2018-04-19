@@ -42,7 +42,7 @@ type Error = {
     innsendingFeilet?: boolean;
 };
 
-export class AppContainer extends React.Component<Props> {
+class AppContainer extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
     }

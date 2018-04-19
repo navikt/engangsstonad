@@ -25,7 +25,7 @@ interface StateProps {
 
 type Props = StateProps & InjectedIntlProps;
 
-export class SøknadSendt extends React.Component<Props> {
+class SøknadSendt extends React.Component<Props> {
     receiptText() {
         const { kvittering } = this.props;
         return (
@@ -36,7 +36,7 @@ export class SøknadSendt extends React.Component<Props> {
                     0: moment(kvittering.mottattDato).format('HH:mm'),
                     1: moment(kvittering.mottattDato).format('DD. MMMM YYYY'),
                     linkText: (
-                        <Lenke href="https://www.nav.no/no/Ditt+NAV">
+                        <Lenke href="https://tjenester.nav.no/dittnav/oversikt">
                             <FormattedMessage id="kvittering.text.soknadMottatt.linkText" />
                         </Lenke>
                     )
@@ -50,7 +50,7 @@ export class SøknadSendt extends React.Component<Props> {
         
         return (
             <div className="engangsstonad">
-                <DocumentTitle title="Kvittering - NAV Engangsstønad" />
+                <DocumentTitle title={getMessage(intl, 'kvittering.sectionheading')} />
                 <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <div className="responsiveContainer">
                     <CustomSVG iconRef={SpotlightLetter} className="spotlightLetter" />

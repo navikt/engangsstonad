@@ -21,7 +21,7 @@ const URL_SØKNADSVALG = 'https://tjenester.nav.no/soknadforeldrepenger/app/star
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
-export const ErMann: React.StatelessComponent<Props> = (props: Props) => {
+const ErMann: React.StatelessComponent<Props> = (props: Props) => {
     const { intl, person } = props;
 
     if (person) {
