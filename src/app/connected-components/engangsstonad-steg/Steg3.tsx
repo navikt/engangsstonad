@@ -6,12 +6,11 @@ import { soknadActionCreators as soknad } from '../../redux/actions';
 import Utenlandsopphold, { Periode } from '../../types/domain/Utenlandsopphold';
 import { DispatchProps } from '../../redux/types/index';
 import CountryPicker from '../../components/country-picker/CountryPicker';
-import Barn, { FodtBarn } from '../../types/domain/Barn';
+import Barn, { UfodtBarn } from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import FormBlock from 'components/form-block/FormBlock';
 import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
-import { dateFormatsAreValid } from 'util/date/dateUtils';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 import { connect } from 'react-redux';
 
@@ -311,9 +310,7 @@ class Steg3 extends React.Component<Props> {
                 </FormBlock>
                 <FormBlock
                     visible={
-                        (senerePerioder.length > 0 ||
-                            iNorgeNeste12Mnd === true) &&
-                        !dateFormatsAreValid((barn as FodtBarn).fødselsdatoer)
+                        (senerePerioder.length > 0 || iNorgeNeste12Mnd) && (barn as UfodtBarn).termindato !== undefined
                     }
                 >
                     <RadioPanelGruppeResponsive

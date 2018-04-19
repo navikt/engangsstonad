@@ -61,6 +61,10 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                     intl,
                     'valideringsfeil.fodselsdato.måVæreIdagEllerTidligere'
                 )
+            },
+            {
+                test: () => moment(barn.fødselsdatoer[index]).isSameOrAfter(moment().subtract(3, 'years').startOf('day')),
+                failText: getMessage(intl, 'valideringsfeil.fodselsdato.ikkeMerEnn3ÅrTilbake')
             }
         ];
     }
@@ -132,7 +136,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
             .endOf('day')
             .toDate();
         const førsteGyldigeFødselsdato = moment()
-            .add(-1, 'years')
+            .subtract(3, 'years')
             .startOf('day')
             .toDate();
 

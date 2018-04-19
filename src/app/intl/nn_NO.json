@@ -177,6 +177,7 @@
 
     "valideringsfeil.fodselsdato.duMåOppgi": "Du må gi opp fødselsdato",
     "valideringsfeil.fodselsdato.måVæreIdagEllerTidligere": "Fødselsdato må vere i dag eller tidlegare",
+    "valideringsfeil.fodselsdato.ikkeMerEnn3ÅrTilbake": "Fødselsdato kan ikkje vere meir enn 3 år tilbake i tid",
 
     "valideringsfeil.termindato.duMåOppgi": "Du må gi opp termindato",
     "valideringsfeil.termindato.duMåVæreIUke26": "Du kan tidlegast søkje når du er i 26. svangerskapsveke",
