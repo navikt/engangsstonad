@@ -7,7 +7,10 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 const Modal = require('nav-frontend-modal').default;
 const { BekreftCheckboksPanel } = require('nav-frontend-skjema');
 
-import RettigheterOgPlikter from 'components/modal-content/RettigheterOgPlikter';
+import Plikter from 'components/modal-content/Plikter';
+import Personopplysninger from 'components/modal-content/Personopplysninger';
+import Skjemasteg from 'components/skjemasteg/Skjemasteg';
+
 import { commonActionCreators as common, soknadActionCreators as soknad, stepActionCreators as step } from '../../redux/actions';
 import { getDefaultState } from 'reducers/stepReducer';
 import LanguageToggle from '../../intl/LanguageToggle';
@@ -19,10 +22,10 @@ import SimpleIllustration from 'components/simple-illustration/SimpleIllustratio
 import { Innholdstittel } from 'nav-frontend-typografi';
 
 import '../../styles/engangsstonad.less';
-import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
 interface OwnProps {
-    isModalOpen: boolean;
+    isPersonopplysningerModalOpen: boolean;
+    isPlikterModalOpen: boolean;
 }
 
 interface StateProps {
@@ -36,7 +39,8 @@ class Intro extends React.Component<Props, OwnProps> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            isModalOpen: false
+            isPersonopplysningerModalOpen: false,
+            isPlikterModalOpen: false
         };
 
         this.bekreftetVilkarChange = this.bekreftetVilkarChange.bind(this);
@@ -49,13 +53,22 @@ class Intro extends React.Component<Props, OwnProps> {
         dispatch(common.setGodkjentVilkar(false));
     }
 
-    openRettigheterOgPlikterModal(e: React.SyntheticEvent<HTMLElement>) {
+    openPlikterModal(e: React.SyntheticEvent<HTMLElement>) {
         e.preventDefault();
-        this.setState({ isModalOpen: true });
+        this.setState({ isPlikterModalOpen: true });
     }
 
-    closeRettigheterOgPlikterModal() {
-        this.setState({ isModalOpen: false });
+    openPersonopplysningerModal(e: React.SyntheticEvent<HTMLElement>) {
+        e.preventDefault();
+        this.setState({ isPersonopplysningerModalOpen: true });
+    }
+
+    closePersonopplysningerModal() {
+        this.setState({ isPersonopplysningerModalOpen: false });
+    }
+
+    closePlikterModal() {
+        this.setState({ isPlikterModalOpen: false });
     }
 
     bekreftetVilkarChange() {
@@ -80,7 +93,7 @@ class Intro extends React.Component<Props, OwnProps> {
                 id="intro.text.samtykkeIntro"
                 values={{
                     link: (
-                        <a className="lenke" href="#" onClick={e => this.openRettigheterOgPlikterModal(e)}>
+                        <a className="lenke" href="#" onClick={e => this.openPlikterModal(e)}>
                             <FormattedMessage id="intro.text.samtykke.link" />
                         </a>
                     )
@@ -133,14 +146,33 @@ class Intro extends React.Component<Props, OwnProps> {
                                     </BekreftCheckboksPanel>
                                 </ValidGroup>
                             </div>
-                            <Hovedknapp className="responsiveButton">{getMessage(intl, 'intro.button.startSoknad')}</Hovedknapp>
+                            <div className="blokk-m">
+                                <Hovedknapp className="responsiveButton">
+                                    {getMessage(intl, 'intro.button.startSoknad')}
+                                </Hovedknapp>
+                            </div>
+
+                            <div className="blokk-m personopplysningLenke">
+                                <a className="lenke" href="#" onClick={e => this.openPersonopplysningerModal(e)}>
+                                    <FormattedMessage id="intro.text.personopplysningene.link" />
+                                </a>
+                            </div>
+
                             <Modal
-                                isOpen={this.state.isModalOpen}
+                                isOpen={this.state.isPlikterModalOpen}
                                 closeButton={true}
-                                onRequestClose={() => this.closeRettigheterOgPlikterModal()}
+                                onRequestClose={() => this.closePlikterModal()}
                                 contentLabel="rettigheter og plikter"
                             >
-                                <RettigheterOgPlikter />
+                                <Plikter />
+                            </Modal>
+                            <Modal
+                                isOpen={this.state.isPersonopplysningerModalOpen}
+                                closeButton={true}
+                                onRequestClose={() => this.closePersonopplysningerModal()}
+                                contentLabel="rettigheter og plikter"
+                            >
+                                <Personopplysninger />
                             </Modal>
                         </div>
                     </ValidForm>
