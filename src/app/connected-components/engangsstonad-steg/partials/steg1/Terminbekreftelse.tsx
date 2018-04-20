@@ -5,7 +5,7 @@ import AttachmentInput from 'components/attachment-input/AttachmentInput';
 import { validerSamletFilstørrelse } from 'components/attachment-input/utils';
 import { bytesString } from 'util/attachment/utils';
 
-const MAX_TOTAL_SIZE = 1024 * 1024 * 9;
+const MAX_TOTAL_SIZE = 1024 * 1024 * 7.5;
 
 export interface OwnProps {
     vedlegg: File[];
