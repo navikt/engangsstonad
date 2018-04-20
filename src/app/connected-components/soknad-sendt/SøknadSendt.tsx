@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import * as moment from 'moment';
+import 'moment/locale/nb';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import CustomSVG from './../../components/custom-svg/CustomSVG';
 import Lenke from 'nav-frontend-lenker';
@@ -26,15 +27,22 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps;
 
 class SøknadSendt extends React.Component<Props> {
+
+    constructor(props: Props) {
+        super(props);
+        moment.locale('nb');
+    }
+
     receiptText() {
         const { kvittering } = this.props;
+
         return (
             <FormattedMessage
                 id="kvittering.text.soknadMottatt"
                 values={{
                     referansenr: kvittering.referanseId,
                     0: moment(kvittering.mottattDato).format('HH:mm'),
-                    1: moment(kvittering.mottattDato).format('DD. MMMM YYYY'),
+                    1: moment(kvittering.mottattDato).format('LL'),
                     linkText: (
                         <Lenke href="https://tjenester.nav.no/dittnav/oversikt">
                             <FormattedMessage id="kvittering.text.soknadMottatt.linkText" />
@@ -47,7 +55,7 @@ class SøknadSendt extends React.Component<Props> {
 
     render() {
         const { intl, person } = this.props;
-        
+
         return (
             <div className="engangsstonad">
                 <DocumentTitle title={getMessage(intl, 'kvittering.sectionheading')} />
