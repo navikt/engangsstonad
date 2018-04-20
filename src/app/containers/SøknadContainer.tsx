@@ -122,7 +122,7 @@ class SøknadContainer extends React.Component<Props> {
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     )}
-                    <CancelButton redirect="https://www.nav.no"/>
+                    <CancelButton redirect="https://tjenester.nav.no/dittnav/oversikt"/>
                 </ValidForm>
             </div>
         );
