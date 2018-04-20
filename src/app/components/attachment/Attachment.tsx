@@ -4,6 +4,7 @@ const Icon = require('nav-frontend-ikoner-assets').default;
 import './attachment.less';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { bytesString } from 'util/attachment/utils';
+import DeleteButton from 'components/delete-button/DeleteButton';
 
 interface OwnProps {
     vedlegg: File;
@@ -26,20 +27,15 @@ const Attachment: React.StatelessComponent<Props> = ({
             {visFilstørrelse && <div>{bytesString(vedlegg.size)}</div>}
         </div>
         {onDelete && (
-            <button
-                type="button"
-                className="js-toggle attachment__trashcan"
-                aria-label={intl.formatMessage(
-                    { id: 'vedlegg.arialabel.slett' },
-                    { navn: vedlegg.name }
-                )}
-                onClick={e => {
-                    e.stopPropagation();
-                    onDelete(vedlegg);
-                }}
-            >
-                <Icon kind="trashcan" size={20} />
-            </button>
+            <span className="attachment__delete">
+                <DeleteButton
+                    onDelete={() => onDelete(vedlegg)}
+                    ariaLabel={intl.formatMessage(
+                        { id: 'vedlegg.arialabel.slett' },
+                        { navn: vedlegg.name }
+                    )}
+                />
+            </span>
         )}
     </div>
 );

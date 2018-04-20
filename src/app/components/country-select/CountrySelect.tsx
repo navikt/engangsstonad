@@ -1,8 +1,6 @@
 import * as React from 'react';
 import * as countries from 'i18n-iso-countries';
 import { Feil } from 'components/skjema-input-element/types';
-const bokmalCountryList = require('i18n-iso-countries/langs/nb.json');
-const nynorskCountryList = require('i18n-iso-countries/langs/nn.json');
 const { ValidSelect } = require('./../../lib') as any;
 const { Select } = require('nav-frontend-skjema');
 
@@ -20,15 +18,6 @@ interface StateProps {
 }
 
 export default class CountrySelect extends React.Component<StateProps> {
-
-    componentWillMount() {
-        const countriesLanguage =
-            this.props.language === 'nb'
-                ? bokmalCountryList
-                : nynorskCountryList;
-        countries.registerLocale(countriesLanguage);
-    }
-
     renderCountryOptions() {
         const { language } = this.props;
         const isoCodeIndex = 0;
