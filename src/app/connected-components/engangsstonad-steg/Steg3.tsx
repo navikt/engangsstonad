@@ -310,7 +310,7 @@ class Steg3 extends React.Component<Props> {
                 </FormBlock>
                 <FormBlock
                     visible={
-                        (senerePerioder.length > 0 || iNorgeNeste12Mnd) && (barn as UfodtBarn).termindato !== undefined
+                        (senerePerioder.length > 0 || iNorgeNeste12Mnd !== undefined) && (barn as UfodtBarn).termindato !== undefined
                     }
                 >
                     <RadioPanelGruppeResponsive
