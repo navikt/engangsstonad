@@ -36,7 +36,7 @@ class SøknadSendt extends React.Component<Props> {
                     0: moment(kvittering.mottattDato).format('HH:mm'),
                     1: moment(kvittering.mottattDato).format('DD. MMMM YYYY'),
                     linkText: (
-                        <Lenke href="https://www.nav.no/no/Ditt+NAV">
+                        <Lenke href="https://tjenester.nav.no/dittnav/oversikt">
                             <FormattedMessage id="kvittering.text.soknadMottatt.linkText" />
                         </Lenke>
                     )
