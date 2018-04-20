@@ -71,9 +71,7 @@ class CountryPicker extends React.Component<Props, State> {
         if (editVisit === undefined) {
             this.props.addVisit(periode);
         } else {
-            const updatedVisitIndex = this.props.utenlandsoppholdListe.indexOf(
-                editVisit
-            );
+            const updatedVisitIndex = this.props.utenlandsoppholdListe.indexOf(editVisit);
             this.props.editVisit(periode, updatedVisitIndex);
         }
         this.setState({ isOpen: false, editVisit: undefined });
@@ -90,19 +88,13 @@ class CountryPicker extends React.Component<Props, State> {
                 )}
                 <CountryList
                     utenlandsoppholdListe={this.props.utenlandsoppholdListe}
-                    onEditClick={(periode: Periode) =>
-                        this.onEditClick(periode)
-                    }
-                    onDeleteClick={(periode: Periode) =>
-                        this.onDeleteClick(periode)
-                    }
+                    onEditClick={(periode: Periode) => this.onEditClick(periode)}
+                    onDeleteClick={(periode: Periode) => this.onDeleteClick(periode)}
                 />
                 {this.state.isOpen && (
                     <CountryModal
                         utenlandsopphold={this.state.editVisit}
-                        onSubmit={(periode: Periode) =>
-                            this.onModalSubmit(periode)
-                        }
+                        onSubmit={(periode: Periode) => this.onModalSubmit(periode)}
                         closeModal={() => this.closeModal()}
                         language={this.props.language}
                         label={this.props.label}
@@ -110,11 +102,7 @@ class CountryPicker extends React.Component<Props, State> {
                         {...validators}
                     />
                 )}
-                <Knapp
-                    className="countryPicker__addButton"
-                    onClick={() => this.openModal()}
-                    htmlType="button"
-                >
+                <Knapp className="countryPicker__addButton" onClick={() => this.openModal()} htmlType="button">
                     Legg til land
                 </Knapp>
             </div>
