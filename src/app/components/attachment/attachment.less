@@ -1,5 +1,4 @@
 @import '../../styles/variables.less';
-@import '../../../../node_modules/nav-frontend-knapper-style/src/mixins.less';
 
 .attachmentButton {
     display: flex;
@@ -54,16 +53,8 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    &__trashcan {
-        .knappbase-mixin(inherit);
+    &__delete {
         position: absolute;
         right: 0;
-        width: 2rem;
-        padding: 0.3em;
-        border: none;
-        background: none;
-        svg * {
-            stroke: @c-buttonBlue;
-        }
     }
 }

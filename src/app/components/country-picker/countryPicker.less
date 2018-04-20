@@ -2,6 +2,7 @@
 
 .countryList {
     padding: 0;
+    position: relative;
     &--summary {
         .countryListElement__country {
             font-weight: bold;
@@ -39,39 +40,13 @@
         }
     }
 
-    button {
-        background: none;
-        color: inherit;
-        border: none;
-        padding: 0;
-        outline: inherit;
-        text-align: left;
-    }
-
-    &__flagIcon {
-        margin-right: 12px;
-        min-height: 20px;
-        min-width: 20px;
-        border: lightgrey;
-    }
-
     &__date {
         white-space: nowrap;
     }
 
-    &__deleteButton {
-        display: block;
-        width: 2rem;
-        padding: 0;
-        border: none;
-        background: none;
-        padding: 0;
-        margin-left: auto;
-
-        &:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px orange;
-        }
+    &__delete  {
+        position: absolute;
+        right: 0;
     }
 }
 
@@ -79,8 +54,4 @@
     display: flex;
     padding-top: @paddingSmall;
     padding-bottom: @paddingSmall;
-
-    &__flagIcon {
-        margin-right: 12px;
-    }
 }
