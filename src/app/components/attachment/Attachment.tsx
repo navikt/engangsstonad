@@ -27,7 +27,7 @@ const Attachment: React.StatelessComponent<Props> = ({
             {visFilstørrelse && <div>{bytesString(vedlegg.size)}</div>}
         </div>
         {onDelete && (
-            <span className="attachment__trashcan">
+            <span className="attachment__delete">
                 <DeleteButton
                     onDelete={() => onDelete(vedlegg)}
                     ariaLabel={intl.formatMessage(
