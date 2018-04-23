@@ -1,6 +1,7 @@
 @import '../../styles/variables.less';
 
 .countryList {
+    margin: 0;
     padding: 0;
     position: relative;
     &--summary {
@@ -30,23 +31,39 @@
 
 .countryListElement {
     display: flex;
-    padding-top: @paddingSmall;
-    padding-bottom: @paddingSmall;
-
-    &__editable {
-        color: #0067c5;
-        p {
-            text-decoration: underline;
+    width: 100%;
+    margin-bottom: 1rem;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    &__stay {
+        width: 100%;
+        margin-right: 3rem;
+        > button {
+            width: 100%;
         }
     }
-
+    &__nameAndDate {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        @media (max-width: @mobile-breakpoint) {
+            display: block;
+        }
+    }
+    &__country {
+        flex: 2 0 0;
+        min-width: 12em;
+    }
     &__date {
+        flex: 0 0;
+        min-width: 10em;
         white-space: nowrap;
     }
-
     &__delete  {
         position: absolute;
         right: 0;
+        margin-top: -0.2rem;
     }
 }
 

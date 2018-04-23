@@ -168,7 +168,7 @@
     "standard.button.gaTilbake": "Nei, gå tilbake",
     "standard.button.fortsett": "Ja, hald fram",
     "standard.label.ddmmaaaa": "dd.mm.åååå",
-    "standard.text.fromTo": "frå: {from} - til: {to}",
+    "standard.text.fromTo": "{from} - {to}",
     "standard.text.fra": "frå",
     "standard.text.til": "til",
     "standard.sectionheading": "Send inn søknad",
