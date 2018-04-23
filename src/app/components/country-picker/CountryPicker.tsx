@@ -81,16 +81,16 @@ class CountryPicker extends React.Component<Props, State> {
         const { validators } = this.props;
         return (
             <div>
-                {this.props.label && (
-                    <div className="blokk-xxs">
-                        <LabelText>{this.props.label}</LabelText>
+                <div className="blokk-xs">{this.props.label && <LabelText>{this.props.label}</LabelText>}</div>
+                {this.props.utenlandsoppholdListe.length > 0 && (
+                    <div className="blokk-m">
+                        <CountryList
+                            utenlandsoppholdListe={this.props.utenlandsoppholdListe}
+                            onEditClick={(periode: Periode) => this.onEditClick(periode)}
+                            onDeleteClick={(periode: Periode) => this.onDeleteClick(periode)}
+                        />
                     </div>
                 )}
-                <CountryList
-                    utenlandsoppholdListe={this.props.utenlandsoppholdListe}
-                    onEditClick={(periode: Periode) => this.onEditClick(periode)}
-                    onDeleteClick={(periode: Periode) => this.onDeleteClick(periode)}
-                />
                 {this.state.isOpen && (
                     <CountryModal
                         utenlandsopphold={this.state.editVisit}

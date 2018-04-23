@@ -1,6 +1,7 @@
 @import '../../styles/variables.less';
 
 .countryList {
+    margin: 0;
     padding: 0;
     position: relative;
     &--summary {
@@ -30,8 +31,10 @@
 
 .countryListElement {
     display: flex;
-    padding-top: @paddingSmall;
-    padding-bottom: @paddingSmall;
+    margin-bottom: 1rem;
+    &:last-child {
+        margin-bottom: 0;
+    }
 
     &__date {
         white-space: nowrap;
