@@ -78,7 +78,7 @@ class CountryPicker extends React.Component<Props, State> {
     }
 
     render() {
-        const { validators } = this.props;
+        const { utenlandsoppholdListe, validators } = this.props;
         return (
             <div>
                 <div className="blokk-xs">{this.props.label && <LabelText>{this.props.label}</LabelText>}</div>
@@ -99,6 +99,7 @@ class CountryPicker extends React.Component<Props, State> {
                         language={this.props.language}
                         label={this.props.label}
                         tidsperiode={this.props.tidsperiode}
+                        alleUtenlandsopphold={utenlandsoppholdListe}
                         {...validators}
                     />
                 )}
