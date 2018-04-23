@@ -2,8 +2,7 @@ import { Periode } from '../../../types/domain/Utenlandsopphold';
 
 export enum SoknadActionKeys {
     // RelasjonTilBarn
-    'EDIT_FØDSELSDATO' = 'editFødselsdato',
-    'UPDATE_FØDSELSDATOER' = 'updateFødselsdatoer',
+    'SET_FØDSELSDATO' = 'setFødselsdato',
     'SET_ANTALL_BARN' = 'setAntallBarn',
     'SET_ER_BARNET_FODT' = 'setErBarnetFødt',
     'SET_TERMINDATO' = 'setTermindato',
@@ -35,16 +34,9 @@ export enum SoknadActionKeys {
 }
 
 // Barn
-interface AddFødselsdato {
-    type: SoknadActionKeys.EDIT_FØDSELSDATO;
+interface SetFødselsdato {
+    type: SoknadActionKeys.SET_FØDSELSDATO;
     fødselsdato: string;
-    bornOnSameDate: boolean;
-    index?: number;
-}
-
-interface UpdateFødselsdatoer {
-    type: SoknadActionKeys.UPDATE_FØDSELSDATOER;
-    bornOnSameDate: boolean;
 }
 
 // RelasjonTilBarn
@@ -162,8 +154,7 @@ interface ResetSøknad {
 }
 
 export type SoknadActionTypes =
-    | AddFødselsdato
-    | UpdateFødselsdatoer
+    | SetFødselsdato
     | AddTidligereUtenlandsoppholdPeriode
     | EditTidligereUtenlandsoppholdPeriode
     | DeleteTidligereUtenlandsoppholdPeriode

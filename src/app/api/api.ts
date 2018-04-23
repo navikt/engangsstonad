@@ -15,6 +15,8 @@ function sendSoknad(soknad: EngangsstonadSoknad) {
         }
     };
 
+    console.log(JSON.stringify({...other}));
+
     const formData = new FormData();
     formData.append('soknad', new Blob([JSON.stringify({...other})], {
         type: 'application/json'

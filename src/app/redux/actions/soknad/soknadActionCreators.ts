@@ -73,21 +73,12 @@ export function setAntallBarn(antallBarn: number): SoknadActionTypes {
     };
 }
 
-export function editFødselsdato(fødselsdato: string, bornOnSameDate: boolean, index?: number): SoknadActionTypes {
+export function setFødselsdato(fødselsdato: string): SoknadActionTypes {
     return {
-        type: SoknadActionKeys.EDIT_FØDSELSDATO,
-        fødselsdato,
-        bornOnSameDate,
-        index
+        type: SoknadActionKeys.SET_FØDSELSDATO,
+        fødselsdato
     };
-}
-
-export function updateFødselsdatoer(bornOnSameDate: boolean): SoknadActionTypes {
-    return {
-        type: SoknadActionKeys.UPDATE_FØDSELSDATOER,
-        bornOnSameDate
-    };
-}
+} 
 
 export function setTermindato(termindato: string): SoknadActionTypes {
     return {
@@ -183,8 +174,7 @@ export default {
     deleteVedlegg,
     setAntallBarn,
     setErBarnetFødt,
-    editFødselsdato,
-    updateFødselsdatoer,
+    setFødselsdato,
     setTermindato,
     setTerminbekreftelseDato,
     setJobbetINorgeSiste12Mnd,

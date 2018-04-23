@@ -6,7 +6,6 @@ import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 import { ISODateToMaskedInput } from 'util/date/dateUtils';
 
 import '../../styles/engangsstonad.less';
-import { containsDifferentValues } from 'util/arrayUtil';
 import SummaryBlock from 'components/summary-block/SummaryBlock';
 
 interface Props {
@@ -19,15 +18,11 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
     const {
         antallBarn,
         erBarnetFødt,
-        fødselsdatoer,
+        fødselsdato,
         termindato,
         terminbekreftelseDato
     } = props.barn;
     const vedleggSummary = props.vedlegg.map(vedleggElement => vedleggElement.name);
-
-    const fødselsdatoerSummary = containsDifferentValues(props.barn.fødselsdatoer)
-        ? fødselsdatoer.map(fødselsdato => ISODateToMaskedInput(fødselsdato))
-        : ISODateToMaskedInput(fødselsdatoer[0]);
 
     let antallBarnSummaryText;
     if (antallBarn === 1) {
@@ -53,7 +48,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
                 text={antallBarnSummaryText}
             />
             {erBarnetFødt && (
-                <DisplayTextWithLabel label={getMessage(intl, 'oppsummering.text.medFødselsdato')} text={fødselsdatoerSummary} />
+                <DisplayTextWithLabel label={getMessage(intl, 'oppsummering.text.medFødselsdato')} text={ISODateToMaskedInput(fødselsdato)} />
             )}
             {!erBarnetFødt &&
                 termindato &&
