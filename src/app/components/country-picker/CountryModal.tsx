@@ -5,7 +5,7 @@ import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Periode } from '../../types/domain/Utenlandsopphold';
 import CountrySelect from 'components/country-select/CountrySelect';
 import DateInput from 'components/date-input/DateInput';
-import { Tidsperiode } from 'nav-datovelger';
+import { Tidsperiode, Avgrensninger } from 'nav-datovelger';
 import LabelText from 'components/labeltext/LabelText';
 import FormBlock from 'components/form-block/FormBlock';
 import { Feil } from 'components/skjema-input-element/types';
@@ -15,6 +15,7 @@ const Modal = require('nav-frontend-modal').default;
 interface OwnProps {
     language: string;
     utenlandsopphold?: Periode;
+    alleUtenlandsopphold?: Periode[];
     label: string;
     tidsperiode?: Tidsperiode;
     onSubmit: (periode: Periode) => void;
@@ -64,15 +65,19 @@ const getDateFromString = (dato?: string) => {
     return undefined;
 };
 
-class CountryModal extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        const { utenlandsopphold } = this.props;
-        this.onSubmit = this.onSubmit.bind(this);
-        this.updateFormState = this.updateFormState.bind(this);
-        this.state = {
-            erEndring: utenlandsopphold !== undefined,
-            formData: utenlandsopphold ? {
+const getRegistrertePerioder = (alleOpphold: Periode[], gjeldendeOpphold?: Periode): Tidsperiode[] => {
+    let arr = gjeldendeOpphold ? alleOpphold.filter(o => o !== gjeldendeOpphold) : alleOpphold;
+    return arr.map(opphold => ({
+        startdato: new Date(opphold.varighet.fom),
+        sluttdato: new Date(opphold.varighet.tom)
+    }));
+};
+
+const getDefaultState = (utenlandsopphold?: Periode): State => {
+    if (utenlandsopphold) {
+        return {
+            erEndring: true,
+            formData: {
                 land: {
                     value: utenlandsopphold.land
                 },
@@ -82,8 +87,22 @@ class CountryModal extends React.Component<Props, State> {
                 tom: {
                     value: utenlandsopphold.varighet.tom
                 }
-            } : {}
+            }
         };
+    }
+    return {
+        erEndring: false,
+        hasSubmitted: false,
+        formData: {}
+    };
+};
+class CountryModal extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        const { utenlandsopphold } = this.props;
+        this.onSubmit = this.onSubmit.bind(this);
+        this.updateFormState = this.updateFormState.bind(this);
+        this.state = getDefaultState(utenlandsopphold);
     }
 
     formStateHasErrors() {
@@ -140,12 +159,12 @@ class CountryModal extends React.Component<Props, State> {
                     visFeil: tomFeil && (hasSubmitted || this.state.hasSubmitted)
                 }
             },
-            hasSubmitted:  (hasSubmitted || this.state.hasSubmitted)
+            hasSubmitted: hasSubmitted || this.state.hasSubmitted
         });
     }
 
     render() {
-        const { language, tidsperiode } = this.props;
+        const { language, tidsperiode, alleUtenlandsopphold, utenlandsopphold } = this.props;
         const { formData, erEndring } = this.state;
 
         const fomDato = getDateFromString(formData && formData.fom && formData.fom.value);
@@ -158,24 +177,28 @@ class CountryModal extends React.Component<Props, State> {
         const tomMinDato = fomDato || (tidsperiode ? tidsperiode.startdato : undefined);
         const tomMaksDato = tidsperiode ? tidsperiode.sluttdato : undefined;
 
-        let fomAvgrensning, tomAvgrensning;
+        let fomAvgrensning: Avgrensninger = {};
+        let tomAvgrensning: Avgrensninger = {};
+        const registrertePerioder = alleUtenlandsopphold ? getRegistrertePerioder(alleUtenlandsopphold, utenlandsopphold) : undefined;
         if (fomMinDato || fomMaksDato) {
             fomAvgrensning = {
                 minDato: fomMinDato,
-                maksDato: fomMaksDato
+                maksDato: fomMaksDato,
+                ugyldigeTidsperioder: registrertePerioder
             };
         }
         if (tomMinDato || tomMaksDato) {
             tomAvgrensning = {
                 minDato: tomMinDato,
-                maksDato: tomMaksDato
+                maksDato: tomMaksDato,
+                ugyldigeTidsperioder: registrertePerioder
             };
         }
 
         let landFeil;
         let fomFeil;
         let tomFeil;
-        
+
         if (formData && formData.land && formData.land.visFeil === true) {
             landFeil = formData.land.feil;
         }
@@ -187,7 +210,15 @@ class CountryModal extends React.Component<Props, State> {
         }
 
         return (
-            <Modal className="countryModal" isOpen={true} contentLabel="landvelger" closeButton={true} onRequestClose={() => { this.props.closeModal(); }}>
+            <Modal
+                className="countryModal"
+                isOpen={true}
+                contentLabel="landvelger"
+                closeButton={true}
+                onRequestClose={() => {
+                    this.props.closeModal();
+                }}
+            >
                 <form onSubmit={this.onSubmit}>
                     <Undertittel className="countryModal__title">
                         <FormattedMessage id="medlemmskap.modal.overskrift" />
@@ -207,7 +238,9 @@ class CountryModal extends React.Component<Props, State> {
                             label={<LabelText intlId="standard.text.fra" />}
                             dato={fomDato}
                             feil={fomFeil}
-                            onChange={dato => this.updateFormState({ formData: { ...formData, fom: { value: dato ? dato.toISOString() : undefined } } })}
+                            onChange={dato =>
+                                this.updateFormState({ formData: { ...formData, fom: { value: dato ? dato.toISOString() : undefined } } })
+                            }
                             avgrensninger={fomAvgrensning}
                             kalenderplassering="fullskjerm"
                         />
@@ -218,7 +251,9 @@ class CountryModal extends React.Component<Props, State> {
                             label={<LabelText intlId="standard.text.til" />}
                             dato={tomDato}
                             feil={tomFeil}
-                            onChange={dato => this.updateFormState({ formData: { ...formData,  tom: { value: dato ? dato.toISOString() : undefined } } })}
+                            onChange={dato =>
+                                this.updateFormState({ formData: { ...formData, tom: { value: dato ? dato.toISOString() : undefined } } })
+                            }
                             avgrensninger={tomAvgrensning}
                             kalenderplassering="fullskjerm"
                         />
