@@ -73,28 +73,36 @@ const getRegistrertePerioder = (alleOpphold: Periode[], gjeldendeOpphold?: Perio
     }));
 };
 
+const getDefaultState = (utenlandsopphold?: Periode): State => {
+    if (utenlandsopphold) {
+        return {
+            erEndring: true,
+            formData: {
+                land: {
+                    value: utenlandsopphold.land
+                },
+                fom: {
+                    value: utenlandsopphold.varighet.fom
+                },
+                tom: {
+                    value: utenlandsopphold.varighet.tom
+                }
+            }
+        };
+    }
+    return {
+        erEndring: false,
+        hasSubmitted: false,
+        formData: {}
+    };
+};
 class CountryModal extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         const { utenlandsopphold } = this.props;
         this.onSubmit = this.onSubmit.bind(this);
         this.updateFormState = this.updateFormState.bind(this);
-        this.state = {
-            erEndring: utenlandsopphold !== undefined,
-            formData: utenlandsopphold
-                ? {
-                      land: {
-                          value: utenlandsopphold.land
-                      },
-                      fom: {
-                          value: utenlandsopphold.varighet.fom
-                      },
-                      tom: {
-                          value: utenlandsopphold.varighet.tom
-                      }
-                  }
-                : {}
-        };
+        this.state = getDefaultState(utenlandsopphold);
     }
 
     formStateHasErrors() {
