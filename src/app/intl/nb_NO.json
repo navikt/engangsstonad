@@ -15,13 +15,13 @@
     "intro.erMann.boblelenketekst": "Du finner søknaden for far her.",
 
     "intro.innsendingFeilet.tittel": "Det oppstod en feil under innsending",
-    "intro.innsendingFeilet.ingress": "Noe gikk dessverre ikke helt som det skulle ved innsending av søknaden din. Vennligst prøv igjen senere. Skulle feilen vedvare, ta kontakt med ditt lokale NAV kontor",
-    "intro.innsendingFeilet.bobletittel": "Oops",
-    "intro.innsendingFeilet.bobletekst": "Det gikk ikke helt som det skulle",
+    "intro.innsendingFeilet.ingress": " Noe gikk dessverre galt under innsending av søknaden din. Vennligst prøv igjen senere. Dersom det fremdeles oppstår feil, kontakt brukerstøtte.",
+    "intro.innsendingFeilet.bobletittel": "Oops,",
+    "intro.innsendingFeilet.bobletekst": "noe gikk galt.",
     "intro.innsendingFeilet.boblelenketekst": "Kontaktinformasjon NAV",
 
-    "intro.personIkkeFunnet.bobletittel": "Beklager!",
-    "intro.personIkkeFunnet.bobletekst": "Det skjedde desverre en feil i visningen av søknadsskjemaet",
+    "intro.personIkkeFunnet.bobletittel": "Beklager,",
+    "intro.personIkkeFunnet.bobletekst": "det skjedde desverre en feil i visningen av søknadsskjemaet. Vennligst prøv igjen senere. Dersom det fremdeles oppstår feil, kontakt brukerstøtte.",
     "intro.personIkkeFunnet.boblelenketekst": "Kontaktinformasjon NAV",
 
     "intro.text.hjelpedeg": "Jeg skal hjelpe deg med å fylle ut søknaden. ",
