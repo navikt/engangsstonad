@@ -4,7 +4,7 @@ abstract class Barn {
 }
 
 export class FodtBarn extends Barn {
-    fødselsdato: string;
+    fødselsdatoer: string[];
 }
 
 export class UfodtBarn extends Barn {

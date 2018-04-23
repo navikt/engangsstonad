@@ -1,9 +1,12 @@
 import { SoknadActionKeys, SoknadActionTypes } from '../actions/soknad/soknadActionDefinitions';
 import EngangsstonadSoknad from '../../types/domain/EngangsstonadSoknad';
+import { FodtBarn } from '../../types/domain/Barn';
 
 const getDefaultState = () => {
     const engangsstonadSoknad: EngangsstonadSoknad = {
-        barn: {},
+        barn: {
+            fødselsdatoer: []  
+        },
         utenlandsopphold: {
             tidligerePerioder: [],
             senerePerioder: []
@@ -114,8 +117,15 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             return { ...state, barn: { fødselsdatoer: [], erBarnetFødt }, vedlegg: [], utenlandsopphold: { ...utenlandsopphold, fødselINorge: undefined } };
         case SoknadActionKeys.SET_ANTALL_BARN:
             return { ...state, barn: { ...barn, antallBarn: action.antallBarn } };
-        case SoknadActionKeys.SET_FØDSELSDATO: 
-            return { ...state, barn: { ...barn, fødselsdato: action.fødselsdato }}; 
+        case SoknadActionKeys.SET_FØDSELSDATO:
+            let fødselsdatoer = (state.barn as FodtBarn).fødselsdatoer.slice(0);
+            fødselsdatoer[0] = action.fødselsdato;
+            return { ...state, 
+                barn: { 
+                    ...barn, 
+                    fødselsdatoer 
+                }
+            }; 
         case SoknadActionKeys.SET_TERMINDATO:
             const { termindato } = action;
             return {

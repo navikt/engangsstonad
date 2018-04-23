@@ -25,19 +25,19 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
         super(props);
     }
 
-    getFødselsdatoValidators() {
+    getFødselsdatoValidators(index: number) {
         const { intl } = this.props;
         const barn = this.props.barn as FodtBarn;
         return [
             {
-                test: () => barn.fødselsdato,
+                test: () => barn.fødselsdatoer[index],
                 failText: getMessage(
                     intl,
                     'valideringsfeil.fodselsdato.duMåOppgi'
                 )
             },
             {
-                test: () => barn.fødselsdato !== '',
+                test: () => barn.fødselsdatoer[index] !== '',
                 failText: getMessage(
                     intl,
                     'valideringsfeil.fodselsdato.duMåOppgi'
@@ -45,7 +45,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
             },
             {
                 test: () =>
-                    new Date(barn.fødselsdato) <=
+                    new Date(barn.fødselsdatoer[index]) <=
                     moment(new Date())
                         .endOf('day')
                         .toDate(),
@@ -55,7 +55,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                 )
             },
             {
-                test: () => moment(barn.fødselsdato).isSameOrAfter(moment().subtract(3, 'years').startOf('day')),
+                test: () => moment(barn.fødselsdatoer[index]).isSameOrAfter(moment().subtract(3, 'years').startOf('day')),
                 failText: getMessage(intl, 'valideringsfeil.fodselsdato.ikkeMerEnn3ÅrTilbake')
             }
         ];
@@ -98,12 +98,12 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                     <ValidDateInput
                         id="fødselsdato"
                         label={<LabelText>{getMessage(intl, 'relasjonBarn.text.fodselsdato')}</LabelText>}
-                        dato={buildDateObject(barn.fødselsdato)}
+                        dato={buildDateObject(barn.fødselsdatoer[0])}
                         onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, 0)}
                         onInputChange={(dato: string) => this.onFødselsdatoInputChange(dato, 0)}
                         name="fødselsdato"
                         avgrensninger={datoavgrensning}
-                        validators={this.getFødselsdatoValidators()}
+                        validators={this.getFødselsdatoValidators(0)}
                     />
                 </FormBlock>
             </FormBlock>

@@ -18,7 +18,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
     const {
         antallBarn,
         erBarnetFødt,
-        fødselsdato,
+        fødselsdatoer,
         termindato,
         terminbekreftelseDato
     } = props.barn;
@@ -48,7 +48,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
                 text={antallBarnSummaryText}
             />
             {erBarnetFødt && (
-                <DisplayTextWithLabel label={getMessage(intl, 'oppsummering.text.medFødselsdato')} text={ISODateToMaskedInput(fødselsdato)} />
+                <DisplayTextWithLabel label={getMessage(intl, 'oppsummering.text.medFødselsdato')} text={ISODateToMaskedInput(fødselsdatoer[0])} />
             )}
             {!erBarnetFødt &&
                 termindato &&
