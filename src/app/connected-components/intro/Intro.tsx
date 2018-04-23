@@ -135,21 +135,21 @@ class Intro extends React.Component<Props, OwnProps> {
                                 <Ingress>{getMessage(intl, 'intro.standard.ingress')}</Ingress>
                             </div>
                             <div className="blokk-m">
-                                <ValidGroup validators={this.getGodkjentVilkarValidators()}>
-                                    <BekreftCheckboksPanel
-                                        inputProps={{ name: 'egenerklaring' }}
-                                        label={getMessage(intl, 'intro.text.samtykke')}
-                                        onChange={this.bekreftetVilkarChange}
-                                        checked={godkjentVilkar}
-                                    >
-                                        <span>{this.confirmBoxLabelHeaderText()}</span>
-                                    </BekreftCheckboksPanel>
-                                </ValidGroup>
+                                <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
+                                    <ValidGroup validators={this.getGodkjentVilkarValidators()}>
+                                        <BekreftCheckboksPanel
+                                            inputProps={{ name: 'egenerklaring' }}
+                                            label={getMessage(intl, 'intro.text.samtykke')}
+                                            onChange={this.bekreftetVilkarChange}
+                                            checked={godkjentVilkar}
+                                        >
+                                            <span>{this.confirmBoxLabelHeaderText()}</span>
+                                        </BekreftCheckboksPanel>
+                                    </ValidGroup>
+                                </div>
                             </div>
                             <div className="blokk-m">
-                                <Hovedknapp className="responsiveButton">
-                                    {getMessage(intl, 'intro.button.startSoknad')}
-                                </Hovedknapp>
+                                <Hovedknapp className="responsiveButton">{getMessage(intl, 'intro.button.startSoknad')}</Hovedknapp>
                             </div>
 
                             <div className="blokk-m personopplysningLenke">
