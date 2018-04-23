@@ -1,17 +1,18 @@
 import * as React from 'react';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import getMessage from '../../util/i18n/i18nUtils';
 import Person from '../../types/domain/Person';
 
 import { DispatchProps } from 'app/redux/types';
 import { ApiReducerState } from 'reducers/apiReducer';
 import { CommonState } from 'reducers/commonReducer';
-
-import '../../styles/engangsstonad.less';
+import Lenke from 'nav-frontend-lenker';
 import Feilside from 'components/feilside/Feilside';
 import { setLanguage } from 'actions/common/commonActionCreators';
+
+import '../../styles/engangsstonad.less';
 
 interface StateProps {
     person: Person;
@@ -20,7 +21,7 @@ interface StateProps {
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
-const URL_KONTAKT_NAV = 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Kontakt+oss';
+const URL_BRUKERSTØTTE = 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749';
 
 const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
     const { intl, person } = props;
@@ -34,11 +35,15 @@ const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
                 ingress={getMessage(intl, 'intro.standard.ingress')}
                 illustrasjon={{
                     tittel: getMessage(intl, 'intro.personIkkeFunnet.bobletittel'),
-                    tekst: getMessage(intl, 'intro.personIkkeFunnet.bobletekst'),
-                    lenke: {
-                        url: URL_KONTAKT_NAV,
-                        tekst: getMessage(intl, 'intro.personIkkeFunnet.boblelenketekst')
-                    },
+                    tekst: (
+                        <FormattedMessage
+                            id="intro.personIkkeFunnet.bobletekst"
+                            values={{
+                                lenke: <Lenke href={URL_BRUKERSTØTTE}>{getMessage(intl, 'intro.personIkkeFunnet.bobletekst.lenketekst')}</Lenke>
+                            }}
+                        />
+                    ),
+
                     veileder: {
                         ansikt: 'undrende'
                     }
