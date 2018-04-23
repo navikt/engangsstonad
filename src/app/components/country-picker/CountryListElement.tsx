@@ -33,15 +33,19 @@ const CountryListSummaryElement: React.StatelessComponent<Props> = props => {
                 countryListElement__editable: onEditClick !== undefined
             })}
         >
-            <LinkButton onClick={onEditClickHandler}>
-                <div className="countryListElement__country">{countries.getName(land, 'nb')}</div>
-                <div className="countryListElement__date">
-                    {getMessage(props.intl, 'standard.text.fromTo', {
-                        from: ISODateToMaskedInput(varighet.fom),
-                        to: ISODateToMaskedInput(varighet.tom)
-                    })}
-                </div>
-            </LinkButton>
+            <div className="countryListElement__stay">
+                <LinkButton onClick={onEditClickHandler}>
+                    <div className="countryListElement__nameAndDate">
+                        <div className="countryListElement__country">{countries.getName(land, 'nb')}</div>
+                        <div className="countryListElement__date">
+                            {getMessage(props.intl, 'standard.text.fromTo', {
+                                from: ISODateToMaskedInput(varighet.fom),
+                                to: ISODateToMaskedInput(varighet.tom)
+                            })}
+                        </div>
+                    </div>
+                </LinkButton>
+            </div>
             {onDeleteClick && (
                 <span className="countryListElement__delete">
                     <DeleteButton ariaLabel="Slett utenlandsopphold" onDelete={() => onDeleteClick(props.utenlandsopphold)} />
