@@ -15,14 +15,14 @@
     "intro.erMann.boblelenketekst": "Du finner søknaden for far her.",
 
     "intro.innsendingFeilet.tittel": "Det oppstod en feil under innsending",
-    "intro.innsendingFeilet.ingress": "Noe gikk dessverre ikke helt som det skulle ved innsending av søknaden din. Vennligst prøv igjen senere. Skulle feilen vedvare, ta kontakt med ditt lokale NAV kontor",
-    "intro.innsendingFeilet.bobletittel": "Oops",
-    "intro.innsendingFeilet.bobletekst": "Det gikk ikke helt som det skulle",
-    "intro.innsendingFeilet.boblelenketekst": "Kontaktinformasjon NAV",
+    "intro.innsendingFeilet.ingress": " Noe gikk dessverre galt under innsending av søknaden din. Vennligst prøv igjen senere. Dersom det fremdeles oppstår feil, {lenke}.",
+    "intro.innsendingFeilet.ingress.lenketekst": "kontakt brukerstøtte",
+    "intro.innsendingFeilet.bobletittel": "Oops,",
+    "intro.innsendingFeilet.bobletekst": "noe gikk galt.",
 
-    "intro.personIkkeFunnet.bobletittel": "Beklager!",
-    "intro.personIkkeFunnet.bobletekst": "Det skjedde desverre en feil i visningen av søknadsskjemaet",
-    "intro.personIkkeFunnet.boblelenketekst": "Kontaktinformasjon NAV",
+    "intro.personIkkeFunnet.bobletittel": "Beklager,",
+    "intro.personIkkeFunnet.bobletekst": "det skjedde desverre en feil i visningen av søknadsskjemaet. Vennligst prøv igjen senere. Dersom det fremdeles oppstår feil, {lenke}.",
+    "intro.personIkkeFunnet.bobletekst.lenketekst": "kontakt brukerstøtte",
 
     "intro.text.hjelpedeg": "Jeg skal hjelpe deg med å fylle ut søknaden. ",
     "intro.text.samtykkeIntro": "For å gå videre med søknaden må du bekrefte at du har lest og forstått { link }.",
