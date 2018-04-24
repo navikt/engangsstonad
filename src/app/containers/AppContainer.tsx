@@ -142,7 +142,7 @@ class AppContainer extends React.Component<Props> {
             );
         }
 
-        if (isLoadingPerson) {
+        if (isLoadingPerson && error && error.status === 401) {
             return this.renderContent(<Spinner type="XXL" />);
         } 
         return this.renderContent(<GenerellFeil />);
