@@ -6,6 +6,18 @@ const mustacheExpress = require('mustache-express');
 const Promise = require('promise');
 const getDecorator = require('./src/build/scripts/decorator');
 
+// Prometheus metrics
+const prometheus = require('prom-client')
+const collectDefaultMetrics = prometheus.collectDefaultMetrics;
+collectDefaultMetrics({ timeout: 5000 });
+const httpRequestDurationMicroseconds = new prometheus.Histogram({
+    name: 'http_request_duration_ms',
+    help: 'Duration of HTTP requests in ms',
+    labelNames: ['route'],
+    // buckets for response time from 0.1ms to 500ms
+    buckets: [0.10, 5, 15, 50, 100, 200, 300, 400, 500]
+  })
+
 const server = express();
 
 server.set('views', `${__dirname}/dist`);
@@ -47,8 +59,16 @@ const startServer = (html) => {
         ['/', '/engangsstonad/?', /^\/engangsstonad\/(?!.*dist).*$/],
         (req, res) => {
             res.send(html);
+            httpRequestDurationMicroseconds
+                .labels(req.route.path)
+                .observe(10)
         }
     );
+
+    server.get('/metrics', (req, res) => {
+        res.set('Content-Type', prometheus.register.contentType)
+        res.end(prometheus.register.metrics())
+      })
 
     server.get('/health/isAlive', (req, res) => res.sendStatus(200));
     server.get('/health/isReady', (req, res) => res.sendStatus(200));
