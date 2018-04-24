@@ -138,6 +138,7 @@
     "kvittering.text.takk": "Takk for søknaden",
     "kvittering.text.soknadMottatt": "Vi fekk søknaden med referansenummer {referansenr} den {1} kl. {0}. Du kan følgje med på søknaden på {linkText}.",
     "kvittering.text.soknadMottatt.linkText": "Ditt NAV",
+    "kvittering.text.soknadMottatt.avsluttText": "Avslutt",
 
     "rettigheter.sectionheading": "Kva plikter du har",
     "rettigheter.text.1": "Eg søkjer om eingongsstønad. Det er ei yting frå folketrygda som eg kan få dersom eg fyller visse vilkår.",

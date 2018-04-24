@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import * as moment from 'moment';
 import 'moment/locale/nb';
@@ -44,7 +45,7 @@ class SøknadSendt extends React.Component<Props> {
                     0: moment(kvittering.mottattDato).format('HH:mm'),
                     1: moment(kvittering.mottattDato).format('LL'),
                     linkText: (
-                        <Lenke href="https://tjenester.nav.no/dittnav/oversikt">
+                        <Lenke href="https://tjenester.nav.no/saksoversikt/">
                             <FormattedMessage id="kvittering.text.soknadMottatt.linkText" />
                         </Lenke>
                     )
@@ -67,6 +68,12 @@ class SøknadSendt extends React.Component<Props> {
                         <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
                     <Ingress>{this.receiptText()}</Ingress>
+                    <Hovedknapp
+                        className="responsiveButton responsiveButton--søknadSendt"
+                        onClick={() => (window as any).location = 'https://tjenester.nav.no/dittnav/oversikt'}
+                    >
+                        {getMessage(intl, 'kvittering.text.soknadMottatt.avsluttText')}
+                    </Hovedknapp>
                 </div>
             </div>
         );
