@@ -24,6 +24,9 @@
     "intro.personIkkeFunnet.bobletekst": "det skjedde desverre en feil i visningen av søknadsskjemaet. Vennligst prøv igjen senere. Dersom det fremdeles oppstår feil, {lenke}.",
     "intro.personIkkeFunnet.bobletekst.lenketekst": "kontakt brukerstøtte",
 
+    "intro.generellFeil.tittel": "Det oppstod en feil",
+    "intro.generellFeil.ingress": " Noe gikk dessverre galt. Vennligst prøv igjen senere. Dersom det fremdeles oppstår feil, {lenke}.",
+
     "intro.text.hjelpedeg": "Jeg skal hjelpe deg med å fylle ut søknaden. ",
     "intro.text.samtykkeIntro": "For å gå videre med søknaden må du bekrefte at du har lest og forstått { link }.",
     "intro.text.samtykke": "Jeg bekrefter at jeg har lest og forstått",

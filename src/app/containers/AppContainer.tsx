@@ -21,6 +21,7 @@ import Person from '../types/domain/Person';
 import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSoknadResponse';
 
 import '../styles/engangsstonad.less';
+import GenerellFeil from '../connected-components/feilsider/GenerellFeil';
 
 interface StateProps {
     soknad: EngangsstonadSoknadResponse;
@@ -62,7 +63,7 @@ class AppContainer extends React.Component<Props> {
         const { dispatch, error, søknadSendt } = this.props;
         if (props.error && props.error.status === 401) {
             return this.redirectToLogin();
-        }
+        } 
         if (søknadSendt && !error) {
             dispatch(soknad.resetSøknad());
         }
@@ -141,7 +142,10 @@ class AppContainer extends React.Component<Props> {
             );
         }
 
-        return this.renderContent(<Spinner type="XXL" />);
+        if (isLoadingPerson) {
+            return this.renderContent(<Spinner type="XXL" />);
+        } 
+        return this.renderContent(<GenerellFeil />);
     }
 }
 
