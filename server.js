@@ -65,7 +65,7 @@ const startServer = (html) => {
         }
     );
 
-    server.get('/metrics', (req, res) => {
+    server.get('/actuator/metrics', (req, res) => {
         res.set('Content-Type', prometheus.register.contentType)
         res.end(prometheus.register.metrics())
       })

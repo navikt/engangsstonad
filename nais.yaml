@@ -14,7 +14,7 @@ healthcheck:
     initialDelay: 60
 prometheus: 
   enabled: true 
-  path: /metrics
+  path: /actuator/metrics
 resources:
   limits:
     cpu: 500m
