@@ -7,6 +7,7 @@ import Intro from './../connected-components/intro/Intro';
 import SøknadSendt from './../connected-components/soknad-sendt/SøknadSendt';
 import IkkeMyndig from './../connected-components/feilsider/IkkeMyndig';
 import ErMann from '../connected-components/feilsider/ErMann';
+import GenerellFeil from '../connected-components/feilsider/GenerellFeil';
 import PersonFinnesIkke from '../connected-components/feilsider/PersonFinnesIkke';
 import InnsendingFeilet from '../connected-components/feilsider/InnsendingFeilet';
 
@@ -21,7 +22,6 @@ import Person from '../types/domain/Person';
 import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSoknadResponse';
 
 import '../styles/engangsstonad.less';
-import GenerellFeil from '../connected-components/feilsider/GenerellFeil';
 
 interface StateProps {
     soknad: EngangsstonadSoknadResponse;

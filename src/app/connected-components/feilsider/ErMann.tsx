@@ -33,7 +33,7 @@ const ErMann: React.StatelessComponent<Props> = (props: Props) => {
                 ingress={getMessage(intl, 'intro.standard.ingress')}
                 illustrasjon={{
                     tittel: getMessage(intl, 'intro.standard.bobletittel', {
-                        name: person.fornavn
+                        name: person.fornavn.toLowerCase()
                     }),
                     tekst: getMessage(intl, 'intro.erMann.bobletekst'),
                     lenke: {
