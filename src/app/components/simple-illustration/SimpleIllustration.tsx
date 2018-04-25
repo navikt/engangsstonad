@@ -21,7 +21,7 @@ const SimpleIllustration: React.StatelessComponent<Props> = ({
     return (
         <div className="simpleIllustration">
             {dialog && (
-                <div className="simpleIllustration__speechBubble">
+                <div className="simpleIllustration__speechbubble">
                     <SpeechBubble title={dialog.title} text={dialog.text} />
                 </div>
             )}
