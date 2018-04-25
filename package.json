@@ -64,6 +64,7 @@
         "nav-frontend-stegindikator-style": "1.0.1",
         "nav-frontend-typografi": "2.0.2",
         "nav-frontend-typografi-style": "1.0.7",
+        "prom-client": "11.0.0",
         "prop-types": "15.6.1",
         "query-string": "5.0.1",
         "react": "16.3.1",

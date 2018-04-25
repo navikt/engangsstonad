@@ -1,8 +1,8 @@
 name: engangsstonad
 image: repo.adeo.no:5443/engangsstonad
 replicas: 
-  min: 1 
-  max: 1 
+  min: 2 
+  max: 2 
   cpuThresholdPercentage: 50
 port: 8080
 healthcheck: 
@@ -13,8 +13,8 @@ healthcheck:
     path: /health/isReady
     initialDelay: 60
 prometheus: 
-  enabled: false 
-  path: /metrics
+  enabled: true 
+  path: /actuator/metrics
 resources:
   limits:
     cpu: 500m

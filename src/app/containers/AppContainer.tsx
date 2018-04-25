@@ -7,6 +7,7 @@ import Intro from './../connected-components/intro/Intro';
 import SøknadSendt from './../connected-components/soknad-sendt/SøknadSendt';
 import IkkeMyndig from './../connected-components/feilsider/IkkeMyndig';
 import ErMann from '../connected-components/feilsider/ErMann';
+import GenerellFeil from '../connected-components/feilsider/GenerellFeil';
 import PersonFinnesIkke from '../connected-components/feilsider/PersonFinnesIkke';
 import InnsendingFeilet from '../connected-components/feilsider/InnsendingFeilet';
 
@@ -62,7 +63,7 @@ class AppContainer extends React.Component<Props> {
         const { dispatch, error, søknadSendt } = this.props;
         if (props.error && props.error.status === 401) {
             return this.redirectToLogin();
-        }
+        } 
         if (søknadSendt && !error) {
             dispatch(soknad.resetSøknad());
         }
@@ -141,7 +142,10 @@ class AppContainer extends React.Component<Props> {
             );
         }
 
-        return this.renderContent(<Spinner type="XXL" />);
+        if (isLoadingPerson || (error && error.status === 401)) {
+            return this.renderContent(<Spinner type="XXL" />);
+        } 
+        return this.renderContent(<GenerellFeil />);
     }
 }
 
