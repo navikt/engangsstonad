@@ -34,7 +34,7 @@
         "express": "4.16.2",
         "history": "4.7.2",
         "i18n-iso-countries": "3.4.0",
-        "is-valid-fodselsnummer": "3.0.0",
+        "is-valid-fodselsnummer": "3.0.1",
         "lodash.throttle": "4.1.1",
         "moment": "2.20.1",
         "nav-datovelger": "1.1.7",

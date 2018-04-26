@@ -38,7 +38,7 @@ const webpackConfig = {
       {
         test: /\.js$/,
         use: [{ loader: 'babel-loader' }],
-        exclude: /node_modules\/(?!(is-valid-fodselsnummer)\/).*/
+        exclude: /node_modules/
       },
       {
         test: /\.less$/,
