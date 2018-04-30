@@ -34,7 +34,7 @@ class SøknadSendt extends React.Component<Props> {
     }
 
     componentDidMount() {
-        setTimeout(() => (window as any).hj('trigger', 'es_kvittering_feedback'));
+        setTimeout(() => (window as any).hj('trigger', 'es_kvittering_feedback'), 5000);
     }
 
     receiptText() {
