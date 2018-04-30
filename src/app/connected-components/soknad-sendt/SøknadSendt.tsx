@@ -28,10 +28,13 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps;
 
 class SøknadSendt extends React.Component<Props> {
-
     constructor(props: Props) {
         super(props);
         moment.locale('nb');
+    }
+
+    componentDidMount() {
+        setTimeout(() => (window as any).hj('trigger', 'es_kvittering_feedback'));
     }
 
     receiptText() {
