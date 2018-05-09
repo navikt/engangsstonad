@@ -39,7 +39,7 @@ export const idagEllerTidligere = (dato: string) => {
 export const erMyndig = (person: Person) => {
     const now = moment();
     const momentDate = moment(person.fødselsdato);
-    return now.diff(momentDate, 'years') > 18;
+    return now.diff(momentDate, 'years') >= 18;
 };
 
 export const erMann = (person: Person) => person.kjønn === 'M';
@@ -65,12 +65,12 @@ export const getSisteMuligeTermindato = () =>
 export const getForsteMuligeTerminbekreftesesdato = (termindato?: Date | string): Date =>
     termindato
         ? moment(termindato)
-              .subtract(dagerForTerminbekreftelse, 'days')
-              .toDate()
+            .subtract(dagerForTerminbekreftelse, 'days')
+            .toDate()
         : moment()
-              .subtract(1, 'years')
-              .startOf('day')
-              .toDate();
+            .subtract(1, 'years')
+            .startOf('day')
+            .toDate();
 
 export const getSisteMuligeTerminbekreftesesdato = (termindato?: Date | string) =>
     moment(new Date())
