@@ -60,10 +60,11 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     handleNextClicked() {
-        const { dispatch, annenForelder, barn, utenlandsopphold, vedlegg } = this.props;
+        const { dispatch, type, annenForelder, barn, utenlandsopphold, vedlegg } = this.props;
         if (this.hasToWaitForResponse()) {
             return dispatch(
                 api.sendSoknad({
+                    type,
                     annenForelder,
                     barn,
                     utenlandsopphold,
@@ -131,6 +132,7 @@ class SøknadContainer extends React.Component<Props> {
 
 const mapStateToProps = (state: any) => ({
     person: state.apiReducer.person,
+    type: state.soknadReducer.type,
     utenlandsopphold: state.soknadReducer.utenlandsopphold,
     barn: state.soknadReducer.barn,
     vedlegg: state.soknadReducer.vedlegg,
