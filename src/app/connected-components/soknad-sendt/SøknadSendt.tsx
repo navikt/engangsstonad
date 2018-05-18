@@ -39,8 +39,6 @@ class SøknadSendt extends React.Component<Props> {
 
     receiptText() {
         const { kvittering } = this.props;
-        const { bankkonto } = this.props.person;
-
         return (
             <FormattedMessage
                 id="kvittering.text.soknadMottatt"
@@ -48,15 +46,9 @@ class SøknadSendt extends React.Component<Props> {
                     referansenr: kvittering.referanseId,
                     0: moment(kvittering.mottattDato).format('HH:mm'),
                     1: moment(kvittering.mottattDato).format('LL'),
-                    kontonummer: bankkonto.kontonummer,
                     dittNavLink: (
                         <Lenke href="https://tjenester.nav.no/saksoversikt/">
                             <FormattedMessage id="kvittering.text.soknadMottatt.dittNavLink" />
-                        </Lenke>
-                    ),
-                    dinProfilLink: (
-                        <Lenke href="https://tjenester.nav.no/saksoversikt/">
-                            <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
                         </Lenke>
                     )
                 }}
@@ -64,8 +56,26 @@ class SøknadSendt extends React.Component<Props> {
         );
     }
 
+    bankAccountText() {
+        const { bankkonto } = this.props.person;
+        return(
+            <FormattedMessage
+                id="kvittering.text.kontonummer"
+                values={{
+                    kontonummer: bankkonto.kontonummer,
+                dinProfilLink: (
+                    <Lenke href="https://tjenester.nav.no/saksoversikt/">
+                        <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
+                    </Lenke>
+                )
+            }}
+            />
+        );
+    }
+
     render() {
         const { intl, person } = this.props;
+        const { kontonummer } = person.bankkonto;
 
         return (
             <div className="engangsstonad">
@@ -77,7 +87,10 @@ class SøknadSendt extends React.Component<Props> {
                         {getMessage(intl, 'kvittering.text.takk')}
                         <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
-                    <Ingress>{this.receiptText()}</Ingress>
+                    <Ingress>
+                        {this.receiptText()}
+                        {kontonummer && this.bankAccountText()}    
+                    </Ingress>
                     <Hovedknapp
                         className="responsiveButton responsiveButton--søknadSendt"
                         onClick={() => (window as any).location = 'https://tjenester.nav.no/dittnav/oversikt'}
