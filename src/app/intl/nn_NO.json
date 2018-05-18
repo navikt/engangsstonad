@@ -139,8 +139,9 @@
 
     "kvittering.sectionheading": "Søknad mottatt",
     "kvittering.text.takk": "Takk for søknaden",
-    "kvittering.text.soknadMottatt": "Vi fekk søknaden med referansenummer {referansenr} den {1} kl. {0}. Du kan følgje med på søknaden på {linkText}.",
-    "kvittering.text.soknadMottatt.linkText": "Ditt NAV",
+    "kvittering.text.soknadMottatt": "Vi fekk søknaden med referansenummer {referansenr} den {1} kl. {0}. Du kan følgje med på søknaden på {dittNavLink}. Engangsstønaden blir utbetalt til kontonummer {kontonummer}. Du kan endre kontonummeret på Din profil {dinProfilLink} ",
+    "kvittering.text.soknadMottatt.dittNavLink": "Ditt NAV",
+    "kvittering.text.soknadMottatt.dinProfilLink": "Din profil",
     "kvittering.text.soknadMottatt.avsluttText": "Avslutt",
 
     "rettigheter.sectionheading": "Kva plikter du har",

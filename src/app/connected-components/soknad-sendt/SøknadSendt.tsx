@@ -39,6 +39,7 @@ class SøknadSendt extends React.Component<Props> {
 
     receiptText() {
         const { kvittering } = this.props;
+        const { bankkonto } = this.props.person;
 
         return (
             <FormattedMessage
@@ -47,9 +48,15 @@ class SøknadSendt extends React.Component<Props> {
                     referansenr: kvittering.referanseId,
                     0: moment(kvittering.mottattDato).format('HH:mm'),
                     1: moment(kvittering.mottattDato).format('LL'),
-                    linkText: (
+                    kontonummer: bankkonto.kontonummer,
+                    dittNavLink: (
                         <Lenke href="https://tjenester.nav.no/saksoversikt/">
-                            <FormattedMessage id="kvittering.text.soknadMottatt.linkText" />
+                            <FormattedMessage id="kvittering.text.soknadMottatt.dittNavLink" />
+                        </Lenke>
+                    ),
+                    dinProfilLink: (
+                        <Lenke href="https://tjenester.nav.no/saksoversikt/">
+                            <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
                         </Lenke>
                     )
                 }}
