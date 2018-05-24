@@ -29,6 +29,10 @@ interface State {
 }
 
 class Steg1 extends React.Component<Props, State> {
+    componentDidMount() {
+        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/step-1'), 5000);
+    }
+
     getFodselsTidspunktSelectedValue() {
         const { barn } = this.props;
         if (barn) {
@@ -41,7 +45,7 @@ class Steg1 extends React.Component<Props, State> {
         }
         return undefined;
     }
-
+ 
     getAntallBarnSelectedValue() {
         const { barn } = this.props;
         if (barn) {

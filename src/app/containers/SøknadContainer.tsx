@@ -9,23 +9,18 @@ import getMessage from '../util/i18n/i18nUtils';
 import getStepConfig from './../connected-components/engangsstonad-steg/steg.config';
 
 import '../styles/engangsstonad.less';
-import Utenlandsopphold from '../types/domain/Utenlandsopphold';
-import { FodtBarn, UfodtBarn } from '../types/domain/Barn';
-import AnnenForelder from '../types/domain/AnnenForelder';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import { DispatchProps } from '../redux/types';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import Person from 'app/types/domain/Person';
 import CancelButton from 'components/cancel-button/CancelButton';
+import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
+    søknad: EngangsstonadSoknad;
     person: Person;
-    annenForelder: AnnenForelder;
-    utenlandsopphold: Utenlandsopphold;
-    barn: FodtBarn & UfodtBarn;
-    vedlegg: File[];
     activeStep: number;
     error: any;
     søknadSendt: boolean;
@@ -60,15 +55,10 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     handleNextClicked() {
-        const { dispatch, annenForelder, barn, utenlandsopphold, vedlegg } = this.props;
+        const { dispatch, søknad } = this.props;
         if (this.hasToWaitForResponse()) {
             return dispatch(
-                api.sendSoknad({
-                    annenForelder,
-                    barn,
-                    utenlandsopphold,
-                    vedlegg
-                })
+                api.sendSoknad(søknad)
             );
         }
         const { activeStep } = this.props;
@@ -83,9 +73,9 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     shouldRenderFortsettKnapp(): boolean {
-        const { activeStep, annenForelder, utenlandsopphold, barn, person, vedlegg, intl } = this.props;
+        const { activeStep, person, intl, søknad } = this.props;
         const stepConfig = getStepConfig(intl, person);
-        return stepConfig[activeStep - 1].nextStepCondition({ barn, annenForelder, utenlandsopphold, vedlegg });
+        return stepConfig[activeStep - 1].nextStepCondition(søknad);
     }
 
     render() {
@@ -122,7 +112,7 @@ class SøknadContainer extends React.Component<Props> {
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     )}
-                    <CancelButton redirect="https://tjenester.nav.no/dittnav/oversikt"/>
+                    <CancelButton redirect="https://tjenester.nav.no/dittnav/oversikt" />
                 </ValidForm>
             </div>
         );
@@ -130,11 +120,8 @@ class SøknadContainer extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
+    søknad: state.soknadReducer,
     person: state.apiReducer.person,
-    utenlandsopphold: state.soknadReducer.utenlandsopphold,
-    barn: state.soknadReducer.barn,
-    vedlegg: state.soknadReducer.vedlegg,
-    annenForelder: state.soknadReducer.annenForelder,
     activeStep: state.stepReducer.activeStep,
     error: state.apiReducer.error,
     søknadSendt: state.apiReducer.søknadSendt,

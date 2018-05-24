@@ -4,6 +4,7 @@ import { FodtBarn } from '../../types/domain/Barn';
 
 const getDefaultState = () => {
     const engangsstonadSoknad: EngangsstonadSoknad = {
+        type: 'engangsstønad',
         barn: {
             fødselsdatoer: []  
         },

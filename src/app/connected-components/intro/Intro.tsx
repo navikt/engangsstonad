@@ -53,6 +53,10 @@ class Intro extends React.Component<Props, OwnProps> {
         dispatch(common.setGodkjentVilkar(false));
     }
 
+    componentDidMount() {
+        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/start'), 5000);
+    }
+
     openPlikterModal(e: React.SyntheticEvent<HTMLElement>) {
         e.preventDefault();
         this.setState({ isPlikterModalOpen: true });

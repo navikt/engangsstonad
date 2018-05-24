@@ -30,6 +30,8 @@ class Steg3 extends React.Component<Props> {
         this.validateTomDatoSiste12Mnd = this.validateTomDatoSiste12Mnd.bind(this);
         this.validateFomDatoNeste12Mnd = this.validateFomDatoNeste12Mnd.bind(this);
         this.validateTomDatoNeste12Mnd = this.validateTomDatoNeste12Mnd.bind(this);
+
+        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/step-3'), 5000);
     }
 
     validateLand({ land }: any): Feil | undefined {
