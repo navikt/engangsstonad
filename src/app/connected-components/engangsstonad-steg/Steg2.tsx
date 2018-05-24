@@ -34,6 +34,13 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 class Steg2 extends React.Component<Props> {
+<<<<<<< Updated upstream
+=======
+    componentDidMount() {
+        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/step-2'), 5000);
+    }
+
+>>>>>>> Stashed changes
     getFødselsnummerValidators() {
         const { annenForelder, intl, person } = this.props;
         return [
