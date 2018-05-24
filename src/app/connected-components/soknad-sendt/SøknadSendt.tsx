@@ -58,17 +58,17 @@ class SøknadSendt extends React.Component<Props> {
 
     bankAccountText() {
         const { bankkonto } = this.props.person;
-        return(
+        return (
             <FormattedMessage
                 id="kvittering.text.kontonummer"
                 values={{
                     kontonummer: bankkonto.kontonummer,
-                dinProfilLink: (
-                    <Lenke href="https://tjenester.nav.no/saksoversikt/">
-                        <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
-                    </Lenke>
-                )
-            }}
+                    dinProfilLink: (
+                        <Lenke href="https://tjenester.nav.no/saksoversikt/">
+                            <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
+                        </Lenke>
+                    )
+                }}
             />
         );
     }
@@ -89,7 +89,7 @@ class SøknadSendt extends React.Component<Props> {
                     </Innholdstittel>
                     <Ingress>
                         {this.receiptText()}
-                        {kontonummer && this.bankAccountText()}    
+                        {kontonummer && this.bankAccountText()}
                     </Ingress>
                     <Hovedknapp
                         className="responsiveButton responsiveButton--søknadSendt"
