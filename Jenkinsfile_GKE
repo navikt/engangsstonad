@@ -32,7 +32,7 @@ node {
 
     stage('Deploy to preprod') {
         withCredentials([$class: 'UsernamePasswordMultiBinding', credentialsId: 'srvJenkinsBris', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'], [string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
-            sh "curl -k -d \'{\"application\": \"engngsstonad\", \"version\": \"LATEST\", \"fasitEnvironment\": \"t1\", \"zone\": \"sbs\", \"namespace\": \"default\", \"fasitUsername\": \"xxxx\", \"fasitPassword\": \"yyyy\", \"manifesturl\":\"https://raw.githubusercontent.com/nais/nais-testapp/master/nais.yaml\“}\' https://daemon.nais.preprod.local/deploy"
+            sh "curl -k -d \'{\"application\": \"engangsstonad\", \"version\": \"LATEST\", \"fasitEnvironment\": \"t1\", \"zone\": \"sbs\", \"fasitUsername\": \"${env.USERNAME}\", \"fasitPassword\": \"${env.PASSWORD}\", \"namespace\": \"default\", \"manifesturl\": \"https://raw.githubusercontent.com/navikt/engangsstonad/master/nais.yaml\"}\' https://35.187.46.35/deploy"
         }
     }
 
