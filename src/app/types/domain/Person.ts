@@ -9,7 +9,7 @@ type Person = {
     kjønn: string;
     fødselsdato: string;
     ikkeNordiskEøsLand: boolean;
-    bankkonto: Bankkonto;
+    bankkonto?: Bankkonto;
 };
 
 export default Person;
