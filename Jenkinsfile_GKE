@@ -32,7 +32,7 @@ node {
 
     stage('Deploy to preprod') {
         withCredentials([usernamePassword(credentialsId: 'srvJenkinsBris', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'), string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
-            withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
+            withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
                 sh "curl -k -d \'{\"application\": \"engangsstonad\", \"version\": \"LATEST\", \"fasitEnvironment\": \"t1\", \"zone\": \"sbs\", \"fasitUsername\": \"${env.USERNAME}\", \"fasitPassword\": \"${env.PASSWORD}\", \"namespace\": \"default\", \"manifesturl\": \"https://${token}:x-oauth-basic@raw.githubusercontent.com/navikt/engangsstonad/master/nais.yaml\"}\' http://35.187.46.35/deploy"
             }
         }
