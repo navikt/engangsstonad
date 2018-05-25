@@ -32,7 +32,12 @@ node {
 
     stage('Deploy to preprod') {
         withCredentials([usernamePassword(credentialsId: 'srvJenkinsBris', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'), string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
-            withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
+            withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088',
+                'HTTP_PROXY=http://webproxy-internett.nav.no:8088',
+                'https_proxy=http://webproxy-internett.nav.no:8088',
+                'http_proxy=http://webproxy-internett.nav.no:8088',
+                'NO_PROXY=localhost,127.0.0.1,.local,.adeo.no,.nav.no,.aetat.no,.devillo.no,.oera.no',
+                'no_proxy=localhost,127.0.0.1,.local,.adeo.no,.nav.no,.aetat.no,.devillo.no,.oera.no']) {
                 sh "curl -k -d \'{\"application\": \"engangsstonad\", \"version\": \"LATEST\", \"fasitEnvironment\": \"t1\", \"zone\": \"sbs\", \"fasitUsername\": \"${env.USERNAME}\", \"fasitPassword\": \"${env.PASSWORD}\", \"namespace\": \"default\", \"manifesturl\": \"https://${token}:x-oauth-basic@raw.githubusercontent.com/navikt/engangsstonad/master/nais.yaml\"}\' http://35.187.46.35/deploy"
             }
         }
