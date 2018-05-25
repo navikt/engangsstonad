@@ -1,9 +1,9 @@
 import axios from 'axios';
 import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
-import EnvUrls from '../EnvUrls';
+import Environment from '../Environment';
 
 function getPerson() {
-    const endpoint = EnvUrls.REST_API_URL;
+    const endpoint = Environment.REST_API_URL;
     return axios.get(`${endpoint}/personinfo`, { withCredentials: true });
 }
 
@@ -28,7 +28,7 @@ function sendSoknad(soknad: EngangsstonadSoknad) {
         formData.append('vedlegg', vedleggElement);
     });
 
-    const url = `${EnvUrls.REST_API_URL}/engangsstonad`;
+    const url = `${Environment.REST_API_URL}/engangsstonad`;
     return axios.post(url, formData, config);
 }
 

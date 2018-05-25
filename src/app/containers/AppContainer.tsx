@@ -33,7 +33,7 @@ import { ExternalProps } from '../types';
 import { DispatchProps } from '../redux/types';
 import Person from '../types/domain/Person';
 import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSoknadResponse';
-import EnvUrls from '../EnvUrls';
+import Environment from '../Environment';
 import '../styles/engangsstonad.less';
 
 interface StateProps {
@@ -87,7 +87,7 @@ class AppContainer extends React.Component<Props> {
 
     redirectToLogin() {
         window.location.href =
-            EnvUrls.LOGIN_URL + '?redirect=' + window.location.href;
+            Environment.LOGIN_URL + '?redirect=' + window.location.href;
     }
 
     renderContent(children: React.ReactNode) {
