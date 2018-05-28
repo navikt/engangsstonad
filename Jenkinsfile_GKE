@@ -39,7 +39,7 @@ node {
                 'NO_PROXY=localhost,127.0.0.1,.local,.adeo.no,.nav.no,.aetat.no,.devillo.no,.oera.no',
                 'no_proxy=localhost,127.0.0.1,.local,.adeo.no,.nav.no,.aetat.no,.devillo.no,.oera.no']) {
                 sh '''
-                  status = curl -k -s -o /dev/null -w "%{http_code}" -d '{"application": "engangsstonad", "version": "LATEST", "fasitEnvironment": "t1", "zone": "sbs", "fasitUsername": "${env.USERNAME}", "fasitPassword": "${env.PASSWORD}", "namespace": "default", "manifesturl": "https://${token}:x-oauth-basic@raw.githubusercontent.com/navikt/engangsstonad/master/nais.yaml"}' http://35.187.46.35/deploy
+                  status=curl -k -s -o /dev/null -w "%{http_code}" -d '{"application": "engangsstonad", "version": "LATEST", "fasitEnvironment": "t1", "zone": "sbs", "fasitUsername": "${env.USERNAME}", "fasitPassword": "${env.PASSWORD}", "namespace": "default", "manifesturl": "https://${token}:x-oauth-basic@raw.githubusercontent.com/navikt/engangsstonad/master/nais.yaml"}' http://35.187.46.35/deploy
                   echo "----- Deploy status ----- $status"
                 '''
             }
