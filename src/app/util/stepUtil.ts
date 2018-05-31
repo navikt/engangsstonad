@@ -52,7 +52,7 @@ export const shouldDisplayNextButtonOnStep3 = (
             iNorgeNeste12MndIsValid(utenlandsopphold) && iNorgeSiste12MndIsValid(utenlandsopphold);
     } else {
         return (
-            utenlandsopphold.fødselINorge !== undefined || (dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) &&
+            utenlandsopphold.fødselINorge !== undefined && (dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) &&
                 utenlandsopphold.iNorgeNeste12Mnd !== undefined) && iNorgeNeste12MndIsValid(utenlandsopphold) &&
                 iNorgeSiste12MndIsValid(utenlandsopphold)
         );
