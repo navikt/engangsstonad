@@ -89,8 +89,10 @@ class SøknadSendt extends React.Component<Props> {
                         {getMessage(intl, 'kvittering.text.takk')}
                         <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
-                    <Ingress>
+                    <Ingress className="blokk-xs">
                         {this.receiptText()}
+                    </Ingress>
+                    <Ingress className="blokk-s">
                         {
                             person.bankkonto &&
                             person.bankkonto.kontonummer &&
