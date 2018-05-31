@@ -6,7 +6,7 @@ import { soknadActionCreators as soknad } from '../../redux/actions';
 import Utenlandsopphold, { Periode } from '../../types/domain/Utenlandsopphold';
 import { DispatchProps } from '../../redux/types/index';
 import CountryPicker from '../../components/country-picker/CountryPicker';
-import Barn, { UfodtBarn } from '../../types/domain/Barn';
+import Barn from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import FormBlock from 'components/form-block/FormBlock';
 import { Tidsperiode } from 'nav-datovelger';
@@ -313,11 +313,15 @@ class Steg3 extends React.Component<Props> {
                 <FormBlock
                     visible={
                         (iNorgeSiste12Mnd || tidligerePerioder.length > 0) && (
-                        (iNorgeNeste12Mnd || senerePerioder.length > 0) && (barn as UfodtBarn).termindato !== undefined)
+                        (iNorgeNeste12Mnd || senerePerioder.length > 0))
                     }
                 >
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.bostedFodsel', {
+                            tempus: 
+                                barn.erBarnetFødt 
+                                    ? getMessage(intl, 'medlemmskap.text.bostedFodselFortid')
+                                    : getMessage(intl, 'medlemmskap.text.bostedFodselFremtid'),
                             antallBarn:
                                 barn.antallBarn && barn.antallBarn > 1
                                     ? getMessage(intl, 'medlemmskap.text.barnFlertall')
@@ -329,12 +333,18 @@ class Steg3 extends React.Component<Props> {
                         radios={[
                             {
                                 inputProps: { id: 'js-fodselINorge' },
-                                label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'),
+                                label: 
+                                    barn.erBarnetFødt 
+                                        ? getMessage(intl, 'medlemmskap.radiobutton.iNorge')
+                                        : getMessage(intl, 'medlemmskap.radiobutton.vareNorge'),
                                 value: 'norway'
                             },
                             {
                                 inputProps: { id: 'js-fodselIUtlandet' },
-                                label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'),
+                                label: 
+                                    barn.erBarnetFødt
+                                        ? getMessage(intl, 'medlemmskap.radiobutton.iUtlandet')
+                                        : getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'),
                                 value: 'abroad'
                             }
                         ]}
