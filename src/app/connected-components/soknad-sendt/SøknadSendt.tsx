@@ -49,12 +49,7 @@ class SøknadSendt extends React.Component<Props> {
                 values={{
                     referansenr: kvittering.referanseId,
                     0: moment(kvittering.mottattDato).format('HH:mm'),
-                    1: moment(kvittering.mottattDato).format('LL'),
-                    dittNavLink: (
-                        <Lenke href="https://tjenester.nav.no/saksoversikt/">
-                            <FormattedMessage id="kvittering.text.soknadMottatt.dittNavLink" />
-                        </Lenke>
-                    )
+                    1: moment(kvittering.mottattDato).format('LL')
                 }}
             />
         );
@@ -67,7 +62,7 @@ class SøknadSendt extends React.Component<Props> {
                 values={{
                     kontonummer: kontonummer,
                     dinProfilLink: (
-                        <Lenke href="https://tjenester.nav.no/saksoversikt/">
+                        <Lenke href="https://tjenester.nav.no/brukerprofil/">
                             <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
                         </Lenke>
                     )
@@ -91,6 +86,18 @@ class SøknadSendt extends React.Component<Props> {
                     </Innholdstittel>
                     <Ingress className="blokk-xs">
                         {this.receiptText()}
+                    </Ingress>
+                    <Ingress className="blokk-xs">
+                        <FormattedMessage 
+                            id="kvittering.text.dittNav"
+                            values={{
+                                dittNavLink: (
+                                    <Lenke href="https://tjenester.nav.no/saksoversikt/">
+                                        <FormattedMessage id="kvittering.text.dittNavLink" />
+                                    </Lenke>
+                                )
+                            }}
+                        />
                     </Ingress>
                     <Ingress className="blokk-s">
                         {
