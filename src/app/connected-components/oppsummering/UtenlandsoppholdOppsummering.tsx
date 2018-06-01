@@ -12,10 +12,11 @@ import SummaryBlock from 'components/summary-block/SummaryBlock';
 
 interface Props {
     utenlandsopphold: Utenlandsopphold;
+    erBarnetFødt?: boolean;
 }
 
 const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = props => {
-    const { intl } = props;
+    const { intl, erBarnetFødt } = props;
     const {
         fødselINorge,
         iNorgeNeste12Mnd,
@@ -23,10 +24,6 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
         tidligerePerioder,
         senerePerioder
     } = props.utenlandsopphold;
-
-    const fødselINorgeMndText = fødselINorge
-        ? getMessage(intl, 'medlemmskap.radiobutton.vareNorge')
-        : getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet');
 
     return (
         <SummaryBlock title={getMessage(intl, 'medlemmskap.sectionheading')}>
@@ -36,30 +33,40 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                     text="Norge"
                 />
             ) : (
-                <div>
-                    <EtikettLiten className="textWithLabel__label">
-                        {getMessage(intl, 'oppsummering.text.boddSisteTolv')}
-                    </EtikettLiten>
-                    <CountrySummaryList utenlandsoppholdListe={tidligerePerioder} />
-                </div>
-            )}
+                    <div>
+                        <EtikettLiten className="textWithLabel__label">
+                            {getMessage(intl, 'oppsummering.text.boddSisteTolv')}
+                        </EtikettLiten>
+                        <CountrySummaryList utenlandsoppholdListe={tidligerePerioder} />
+                    </div>
+                )}
             {iNorgeNeste12Mnd ? (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.neste12mnd')}
                     text={getMessage(intl, 'medlemmskap.radiobutton.boNorge')}
                 />
             ) : (
-                <div className="textWithLabel">
-                    <EtikettLiten className="textWithLabel__label">
-                        {getMessage(intl, 'medlemmskap.text.oppsummering.neste12mnd')}
-                    </EtikettLiten>
-                    <CountrySummaryList utenlandsoppholdListe={senerePerioder} />
-                </div>
-            )}
-            {fødselINorge !== undefined && (
+                    <div className="textWithLabel">
+                        <EtikettLiten className="textWithLabel__label">
+                            {getMessage(intl, 'medlemmskap.text.oppsummering.neste12mnd')}
+                        </EtikettLiten>
+                        <CountrySummaryList utenlandsoppholdListe={senerePerioder} />
+                    </div>
+                )}
+            {erBarnetFødt === false && fødselINorge !== undefined && (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.ogKommerPåFødselstidspunktet')}
-                    text={fødselINorgeMndText}
+                    text={fødselINorge
+                        ? getMessage(intl, 'medlemmskap.radiobutton.vareNorge')
+                        : getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet')}
+                />
+            )}
+            {erBarnetFødt === true && fødselINorge !== undefined && (
+                <DisplayTextWithLabel
+                    label={getMessage(intl, 'oppsummering.text.varPåFødselstidspunktet')}
+                    text={fødselINorge
+                        ? getMessage(intl, 'medlemmskap.radiobutton.iNorge')
+                        : getMessage(intl, 'medlemmskap.radiobutton.iUtlandet')}
                 />
             )}
         </SummaryBlock>

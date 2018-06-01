@@ -44,7 +44,7 @@ class Steg4 extends React.Component<Props> {
     }
 
     render() {
-        const { person, intl, dispatch, bekreftetInformasjon } = this.props;
+        const { person, barn, intl, dispatch, bekreftetInformasjon } = this.props;
         if (!person) {
             return null;
         }
@@ -60,9 +60,9 @@ class Steg4 extends React.Component<Props> {
                         personnummer={person.fnr}
                     />
                 </div>
-                <OppsummeringBarn barn={this.props.barn} vedlegg={this.props.vedlegg} />
-                {Object.keys(this.props.annenForelder).length > 0 && <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />}
-                <OppsummeringUtenlandsopphold utenlandsopphold={this.props.utenlandsopphold} />
+                <OppsummeringBarn barn={barn} vedlegg={this.props.vedlegg} />
+                    {Object.keys(this.props.annenForelder).length > 0 && <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />}
+                <OppsummeringUtenlandsopphold utenlandsopphold={this.props.utenlandsopphold} erBarnetFødt={barn.erBarnetFødt} />
                 <div className="blokk-m">
                     <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
                         <ValidGroup
