@@ -35,7 +35,7 @@ type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 class Steg2 extends React.Component<Props> {
     componentDidMount() {
-        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/step-2'), 5000);
+        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-2'), 5000);
     }
 
     getFødselsnummerValidators() {

@@ -40,7 +40,7 @@ type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 class Steg4 extends React.Component<Props> {
     componentDidMount() {
-        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/step-4'), 5000);
+        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-4'), 5000);
     }
 
     render() {
@@ -61,7 +61,7 @@ class Steg4 extends React.Component<Props> {
                     />
                 </div>
                 <OppsummeringBarn barn={barn} vedlegg={this.props.vedlegg} />
-                    {Object.keys(this.props.annenForelder).length > 0 && <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />}
+                {Object.keys(this.props.annenForelder).length > 0 && <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />}
                 <OppsummeringUtenlandsopphold utenlandsopphold={this.props.utenlandsopphold} erBarnetFødt={barn.erBarnetFødt} />
                 <div className="blokk-m">
                     <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
