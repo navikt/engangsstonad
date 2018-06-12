@@ -260,7 +260,7 @@ class CountryModal extends React.Component<Props, State> {
                     </FormBlock>
                     <FormBlock margin="xxs">
                         <div className="countryModal__buttonBar">
-                            <Knapp type="standard" onClick={() => this.props.closeModal()} htmlType="button">
+                            <Knapp onClick={() => this.props.closeModal()} htmlType="button">
                                 <FormattedMessage id="medlemmskap.modal.avbryt" />
                             </Knapp>
                             <Hovedknapp>

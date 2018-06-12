@@ -19,8 +19,8 @@ const Modal = require('nav-frontend-modal').default;
 import LabelText from 'components/labeltext/LabelText';
 import ValidDateInput from '../../../../lib/valid-date-input';
 import FormBlock from 'components/form-block/FormBlock';
-import Terminbekreftelse from './Terminbekreftelse';
 import { buildDateObject } from 'util/date/dateUtils';
+import Søknadsvedlegg from './S\u00F8knadsvedlegg';
 
 interface StateProps {
     barn: Barn;
@@ -122,11 +122,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 )}
 
                 <FormBlock visible={barn.termindato !== undefined}>
-                    <Terminbekreftelse
-                        vedlegg={vedlegg}
-                        onFilesSelect={files => dispatch(soknad.addVedlegg(files))}
-                        onFileDelete={file => dispatch(soknad.deleteVedlegg(file))}
-                    />
+                    <Søknadsvedlegg type="terminbekreftelse" />
                 </FormBlock>
 
                 <FormBlock visible={vedlegg.length > 0 && barn.termindato !== undefined}>

@@ -16,6 +16,7 @@ import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import Person from 'app/types/domain/Person';
 import CancelButton from 'components/cancel-button/CancelButton';
 import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
+import { Attachment } from 'storage/attachment/types/Attachment';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -25,6 +26,7 @@ interface OwnProps {
     error: any;
     søknadSendt: boolean;
     søknadSendingInProgress: boolean;
+    vedlegg: Attachment[];
 }
 
 type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps<{}>;
@@ -73,9 +75,9 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     shouldRenderFortsettKnapp(): boolean {
-        const { activeStep, person, intl, søknad } = this.props;
+        const { activeStep, person, intl, søknad, vedlegg } = this.props;
         const stepConfig = getStepConfig(intl, person);
-        return stepConfig[activeStep - 1].nextStepCondition(søknad);
+        return stepConfig[activeStep - 1].nextStepCondition({ ...søknad, vedlegg });
     }
 
     render() {
@@ -125,6 +127,7 @@ const mapStateToProps = (state: any) => ({
     activeStep: state.stepReducer.activeStep,
     error: state.apiReducer.error,
     søknadSendt: state.apiReducer.søknadSendt,
-    søknadSendingInProgress: state.apiReducer.søknadSendingInProgress
+    søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
+    vedlegg: state.attachmentReducer.attachments
 });
 export default connect<OwnProps>(mapStateToProps)(injectIntl(SøknadContainer));

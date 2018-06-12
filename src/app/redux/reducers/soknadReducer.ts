@@ -6,48 +6,20 @@ const getDefaultState = () => {
     const engangsstonadSoknad: EngangsstonadSoknad = {
         type: 'engangsstønad',
         barn: {
-            fødselsdatoer: []  
+            fødselsdatoer: []
         },
         utenlandsopphold: {
             tidligerePerioder: [],
             senerePerioder: []
         },
-        vedlegg: [] as File[],
         annenForelder: {}
     };
     return engangsstonadSoknad;
 };
 
 const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => {
-    let { barn, utenlandsopphold, vedlegg } = state;
+    let { barn, utenlandsopphold } = state;
     switch (action.type) {
-        case SoknadActionKeys.ADD_VEDLEGG:
-            const vedleggMetaData = vedlegg.map((file: File) => (
-                JSON.stringify({
-                    name: file.name,
-                    size: file.size
-                })
-            ));
-
-            const newVedlegg = action.vedlegg.filter((file: File) => {
-                return (!vedleggMetaData.includes(JSON.stringify({
-                    name: file.name,
-                    size: file.size
-                })
-                ));
-            });
-
-            return {
-                ...state,
-                vedlegg: vedlegg.concat(newVedlegg)
-            };
-        case SoknadActionKeys.DELETE_VEDLEGG:
-            return {
-                ...state,
-                vedlegg: vedlegg.filter((file: File) => {
-                    return file !== action.vedlegg;
-                })
-            };
         case SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
             const tidligerePerioder = utenlandsopphold.tidligerePerioder.concat([action.periode]);
             return { ...state, utenlandsopphold: { ...utenlandsopphold, tidligerePerioder } };
@@ -121,12 +93,13 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
         case SoknadActionKeys.SET_FØDSELSDATO:
             let fødselsdatoer = (state.barn as FodtBarn).fødselsdatoer.slice(0);
             fødselsdatoer[0] = action.fødselsdato;
-            return { ...state, 
-                barn: { 
-                    ...barn, 
-                    fødselsdatoer 
+            return {
+                ...state,
+                barn: {
+                    ...barn,
+                    fødselsdatoer
                 }
-            }; 
+            };
         case SoknadActionKeys.SET_TERMINDATO:
             const { termindato } = action;
             return {

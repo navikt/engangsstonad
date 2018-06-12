@@ -6,7 +6,6 @@ type EngangsstonadSoknad = {
     type: string;
     utenlandsopphold: Utenlandsopphold;
     barn: FodtBarn | UfodtBarn;
-    vedlegg: File[];
     annenForelder: AnnenForelder;
 };
 
