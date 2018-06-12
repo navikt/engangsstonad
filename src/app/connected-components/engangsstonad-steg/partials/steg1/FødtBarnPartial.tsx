@@ -6,7 +6,7 @@ import { soknadActionCreators as soknad } from '../../../../redux/actions';
 import { default as Barn, FodtBarn } from '../../../../types/domain/Barn';
 import getMessage from 'util/i18n/i18nUtils';
 import { DispatchProps } from 'common/redux/types';
-import LabelText from 'components/labeltext/LabelText';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import FormBlock from 'components/form-block/FormBlock';
 import { buildDateObject } from 'util/date/dateUtils';
 

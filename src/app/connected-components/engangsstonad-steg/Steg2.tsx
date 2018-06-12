@@ -16,7 +16,7 @@ import {
 } from 'actions/soknad/soknadActionCreators';
 import CountrySelect from 'components/country-select/CountrySelect';
 import FormBlock from 'components/form-block/FormBlock';
-import LabelText from 'components/labeltext/LabelText';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import Person from '../../types/domain/Person';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 

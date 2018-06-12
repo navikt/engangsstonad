@@ -13,7 +13,7 @@ import getMessage from 'util/i18n/i18nUtils';
 import '../../styles/engangsstonad.less';
 import { steg1Partials } from './partials';
 import FormBlock from 'components/form-block/FormBlock';
-import LabelText from 'components/labeltext/LabelText';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
 interface StateProps {

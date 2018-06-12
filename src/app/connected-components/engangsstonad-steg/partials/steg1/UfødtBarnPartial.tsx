@@ -16,7 +16,7 @@ import {
     getSisteMuligeTerminbekreftesesdato
 } from 'util/validation/validationUtils';
 const Modal = require('nav-frontend-modal').default;
-import LabelText from 'components/labeltext/LabelText';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import ValidDateInput from '../../../../lib/valid-date-input';
 import FormBlock from 'components/form-block/FormBlock';
 import { buildDateObject } from 'util/date/dateUtils';
