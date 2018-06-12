@@ -1,10 +1,13 @@
-export interface Attachment {
+export interface AttachmentMetadata {
     id: string;
     filename: string;
     filesize: number;
-    file: File;
     url?: string;
     pending: boolean;
     uploaded: boolean;
     group?: string;
+}
+
+export interface Attachment extends AttachmentMetadata {
+    file: File;
 }

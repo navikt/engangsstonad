@@ -57,10 +57,10 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     handleNextClicked() {
-        const { dispatch, søknad } = this.props;
+        const { dispatch, søknad, vedlegg } = this.props;
         if (this.hasToWaitForResponse()) {
             return dispatch(
-                api.sendSoknad(søknad)
+                api.sendSoknad(søknad, vedlegg),
             );
         }
         const { activeStep } = this.props;
