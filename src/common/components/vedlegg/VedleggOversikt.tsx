@@ -45,7 +45,8 @@ class VedleggOversikt extends React.Component<VedleggOversiktProps> {
                     classNames="transitionFade"
                     timeout={150}
                     in={showVedleggListe}
-                    unmountOnExit={true}>
+                    unmountOnExit={true}
+                >
                     <React.Fragment>
                         {showVedleggListe && (
                             <div>

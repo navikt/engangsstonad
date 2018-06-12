@@ -19,7 +19,8 @@ const VedleggListe: React.StatelessComponent<Props> = (props) => {
                     <CSSTransition
                         classNames="transitionFade"
                         timeout={500}
-                        key={index}>
+                        key={index}
+                    >
                         <li>
                             <Vedlegg
                                 attachment={attachment}

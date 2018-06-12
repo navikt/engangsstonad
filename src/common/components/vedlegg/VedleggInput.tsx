@@ -88,7 +88,8 @@ class VedleggInput extends React.Component<Props> {
                 className="vedleggKnapp"
                 onDragOver={(e) => this.onFileDragOverHandler(e)}
                 onDrop={(e) => this.onFileDropHandler(e)}
-                onKeyPress={(e) => this.onKeyPress(e)}>
+                onKeyPress={(e) => this.onKeyPress(e)}
+            >
                 <div className="vedleggKnapp__ikon">
                     <CustomSVG iconRef={uploadIcon} size={22} />
                 </div>

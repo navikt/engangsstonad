@@ -20,7 +20,7 @@ import LabelText from 'components/labeltext/LabelText';
 import ValidDateInput from '../../../../lib/valid-date-input';
 import FormBlock from 'components/form-block/FormBlock';
 import { buildDateObject } from 'util/date/dateUtils';
-import Søknadsvedlegg from './S\u00F8knadsvedlegg';
+import Søknadsvedlegg from './Søknadsvedlegg';
 
 interface StateProps {
     barn: Barn;

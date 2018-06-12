@@ -25,13 +25,14 @@ const { ValidGroup } = require('./../../lib') as any;
 
 import '../../styles/engangsstonad.less';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
+import { Attachment } from 'storage/attachment/types/Attachment';
 
 interface StateProps {
     bekreftetInformasjon: boolean;
     person: Person;
     utenlandsopphold: Utenlandsopphold;
     barn: FodtBarn & UfodtBarn;
-    vedlegg: File[];
+    vedlegg: Attachment[];
     annenForelder: AnnenForelder;
     soknadPostResponse: EngangsstonadSoknadResponse;
 }
@@ -91,7 +92,7 @@ const mapStateToProps = (state: any) => ({
     bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
     person: state.apiReducer.person,
     barn: state.soknadReducer.barn,
-    vedlegg: state.soknadReducer.vedlegg,
+    vedlegg: state.attachmentReducer,
     annenForelder: state.soknadReducer.annenForelder,
     utenlandsopphold: state.soknadReducer.utenlandsopphold,
     soknadPostResponse: state.apiReducer.soknad

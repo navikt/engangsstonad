@@ -54,7 +54,9 @@
 			],
 			"util/*": [
 				"app/util/*"
-			]
+			],
+            "common/*": ["./common/*"],
+            "storage/*": ["./storage/*"]
 		}
 	},
 	"exclude": [

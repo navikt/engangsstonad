@@ -29,7 +29,8 @@ const Vedlegg: React.StatelessComponent<Props> = ({
         <div
             className={classnames('vedlegg', {
                 'vedlegg--pending': attachment.pending
-            })}>
+            })}
+        >
             {attachment.pending && (
                 <div className="vedlegg__spinner">
                     <NavFrontendSpinner type="S" />

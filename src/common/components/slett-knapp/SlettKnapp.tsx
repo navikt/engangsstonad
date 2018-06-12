@@ -21,7 +21,8 @@ const SlettKnapp: React.StatelessComponent<SlettKnappProps> = ({
         onClick={(e) => {
             e.stopPropagation();
             onClick();
-        }}>
+        }}
+    >
         <Icon kind="trashcan" size={20} />
     </button>
 );

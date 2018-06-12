@@ -87,7 +87,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             };
         case SoknadActionKeys.SET_ER_BARNET_FODT:
             const { erBarnetFødt } = action;
-            return { ...state, barn: { fødselsdatoer: [], erBarnetFødt }, vedlegg: [], utenlandsopphold: { ...utenlandsopphold, fødselINorge: undefined } };
+            return { ...state, barn: { fødselsdatoer: [], erBarnetFødt }, utenlandsopphold: { ...utenlandsopphold, fødselINorge: undefined } };
         case SoknadActionKeys.SET_ANTALL_BARN:
             return { ...state, barn: { ...barn, antallBarn: action.antallBarn } };
         case SoknadActionKeys.SET_FØDSELSDATO:

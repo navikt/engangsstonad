@@ -24,7 +24,8 @@ const CustomSVGFromSprite: React.StatelessComponent<Props> = ({
             height={size}
             width={size}
             {...viewBox}
-            {...other}>
+            {...other}
+        >
             <use xlinkHref={`#${iconRef.id}`} />
         </svg>
     );

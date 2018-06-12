@@ -128,6 +128,6 @@ const mapStateToProps = (state: any) => ({
     error: state.apiReducer.error,
     søknadSendt: state.apiReducer.søknadSendt,
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
-    vedlegg: state.attachmentReducer.attachments
+    vedlegg: state.attachmentReducer
 });
 export default connect<OwnProps>(mapStateToProps)(injectIntl(SøknadContainer));

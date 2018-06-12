@@ -8,7 +8,6 @@ import {
 } from 'storage/attachment/redux/attachmentActionCreators';
 import { DispatchProps } from 'common/redux/types';
 import VedleggOversikt from 'common/components/vedlegg/VedleggOversikt';
-import { AttachmentAppState } from '../../redux/attachmentReducer';
 
 export interface OwnProps {
     group: string;
@@ -66,10 +65,10 @@ class AttachmentsUploader extends React.Component<Props, {}> {
 }
 
 const mapStateToProps = (
-    state: AttachmentAppState,
+    state: any,
     props: OwnProps
 ): StateProps => ({
-    attachments: getGroupedAttachments(state.attachments, props.group)
+    attachments: getGroupedAttachments(state.attachmentReducer, props.group)
 });
 
 export default connect(mapStateToProps)(AttachmentsUploader);

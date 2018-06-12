@@ -136,7 +136,7 @@ class Steg1 extends React.Component<Props, State> {
 const mapStateToProps = (state: any) => ({
     barn: state.soknadReducer.barn,
     person: state.commonReducer.person,
-    vedlegg: state.soknadReducer.vedlegg
+    vedlegg: state.attachmentReducer
 });
 
 export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg1));
