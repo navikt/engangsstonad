@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 const { Checkbox, Input } = require('nav-frontend-skjema');
-import { DispatchProps } from '../../redux/types';
+import { DispatchProps } from 'common/redux/types';
 import { injectIntl } from 'react-intl';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import AnnenForelder from '../../types/domain/AnnenForelder';

@@ -10,13 +10,13 @@ import getStepConfig from './../connected-components/engangsstonad-steg/steg.con
 
 import '../styles/engangsstonad.less';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
-import { DispatchProps } from '../redux/types';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import Person from 'app/types/domain/Person';
 import CancelButton from 'components/cancel-button/CancelButton';
 import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 import { Attachment } from 'storage/attachment/types/Attachment';
+import { DispatchProps } from 'common/redux/types';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {

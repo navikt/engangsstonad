@@ -8,7 +8,7 @@ import { soknadActionCreators as soknad } from '../../redux/actions';
 import { default as Barn } from '../../types/domain/Barn';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Person from '../../types/domain/Person';
-import { DispatchProps } from '../../redux/types';
+import { DispatchProps } from 'common/redux/types';
 import getMessage from 'util/i18n/i18nUtils';
 import '../../styles/engangsstonad.less';
 import { steg1Partials } from './partials';

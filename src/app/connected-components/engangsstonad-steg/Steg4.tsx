@@ -13,7 +13,7 @@ import getMessage from '../../util/i18n/i18nUtils';
 import Person from 'app/types/domain/Person';
 import { FodtBarn, UfodtBarn } from 'app/types/domain/Barn';
 import AnnenForelder from 'app/types/domain/AnnenForelder';
-import { DispatchProps } from 'app/redux/types';
+import { DispatchProps } from 'common/redux/types';
 import Utenlandsopphold from 'app/types/domain/Utenlandsopphold';
 
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
