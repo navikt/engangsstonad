@@ -24,14 +24,16 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 class Steg3 extends React.Component<Props> {
+    componentDidMount() {
+        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-3'), 5000);
+    }
+
     componentWillMount() {
         this.overlapsWithOtherUtenlandsopphold = this.overlapsWithOtherUtenlandsopphold.bind(this);
         this.validateFomDatoSiste12Mnd = this.validateFomDatoSiste12Mnd.bind(this);
         this.validateTomDatoSiste12Mnd = this.validateTomDatoSiste12Mnd.bind(this);
         this.validateFomDatoNeste12Mnd = this.validateFomDatoNeste12Mnd.bind(this);
         this.validateTomDatoNeste12Mnd = this.validateTomDatoNeste12Mnd.bind(this);
-
-        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-3'), 5000);
     }
 
     validateLand({ land }: any): Feil | undefined {
