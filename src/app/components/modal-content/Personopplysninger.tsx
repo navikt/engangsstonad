@@ -81,11 +81,8 @@ const Personopplysninger: React.StatelessComponent<Props> = (props: Props) => {
                         values={{
                             link: (
                                 <Lenke
-                                    href={
-                                        'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/' +
-                                        'Teknisk+brukerstotte/Snarveier/' +
-                                        'personvernerkl%C3%A6ring-for-arbeids-og-velferdsetaten'
-                                    }
+                                    href={'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/' + 
+                                    'personvern-i-arbeids-og-velferdsetaten/personvernerkl%C3%A6ring-for-arbeids-og-velferdsetaten'}
                                     target="_blank"
                                 >
                                     <FormattedMessage id="personopplysninger.text.personvernerklering.link" />
