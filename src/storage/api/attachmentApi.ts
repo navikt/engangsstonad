@@ -19,10 +19,16 @@ function saveAttachment(attachment: Attachment) {
 
 function deleteAttachment(attachment: Attachment) {
     const config = {
-        withCredentials: true
+        withCredentials: true,
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
     };
-    const url = `${(window as any).REST_API_URL}/storage/vedlegg/${attachment.url}`;
-    return axios.delete(url, config);
+    if (typeof attachment.url === 'string') {
+        return axios.delete(attachment.url, config);
+    }
+    return null;
+
 }
 
 const AttachmentApi = { saveAttachment, deleteAttachment };

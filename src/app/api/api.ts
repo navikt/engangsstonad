@@ -4,12 +4,16 @@ import { Attachment, AttachmentMetadata } from 'storage/attachment/types/Attachm
 
 function getPerson() {
     const endpoint = (window as any).REST_API_URL;
-    return axios.get(`${endpoint}/personinfo`, { withCredentials: true });
+    return axios.get(`${endpoint}/personinfo`, {withCredentials: true});
 }
 
 function sendSoknad(soknad: EngangsstonadSoknad, vedleggListe: Attachment[] = []) {
     const config = {
-        withCredentials: true
+        withCredentials: true,
+        headers: {
+            'content-type': 'application/json;',
+        }
+
     };
 
     const vedleggWithoutFiles: AttachmentMetadata[] = vedleggListe.map((vedlegg: Attachment) => {
@@ -21,6 +25,6 @@ function sendSoknad(soknad: EngangsstonadSoknad, vedleggListe: Attachment[] = []
     return axios.post(url, {...soknad, vedlegg: vedleggWithoutFiles}, config);
 }
 
-const Api = { getPerson, sendSoknad };
+const Api = {getPerson, sendSoknad};
 
 export default Api;
