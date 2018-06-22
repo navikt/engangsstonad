@@ -15,11 +15,11 @@ import { commonActionCreators as common, soknadActionCreators as soknad, stepAct
 import { getDefaultState } from 'reducers/stepReducer';
 import LanguageToggle from '../../intl/LanguageToggle';
 import getMessage from '../../util/i18n/i18nUtils';
-import { DispatchProps } from '../../redux/types/index';
 import Person from '../../types/domain/Person';
 import { ExternalProps } from '../../types/index';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
 import { Innholdstittel } from 'nav-frontend-typografi';
+import { DispatchProps } from 'common/redux/types';
 
 import '../../styles/engangsstonad.less';
 

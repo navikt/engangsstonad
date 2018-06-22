@@ -7,7 +7,7 @@ import getMessage from 'util/i18n/i18nUtils';
 import { Periode } from '../../types/domain/Utenlandsopphold';
 
 import './countryPicker.less';
-import DeleteButton from 'components/delete-button/DeleteButton';
+import SlettKnapp from 'common/components/slett-knapp/SlettKnapp';
 import LinkButton from 'components/link-button/LinkButton';
 
 interface OwnProps {
@@ -48,7 +48,7 @@ const CountryListSummaryElement: React.StatelessComponent<Props> = props => {
             </div>
             {onDeleteClick && (
                 <span className="countryListElement__delete">
-                    <DeleteButton ariaLabel="Slett utenlandsopphold" onDelete={() => onDeleteClick(props.utenlandsopphold)} />
+                    <SlettKnapp ariaLabel="Slett utenlandsopphold" onClick={() => onDeleteClick(props.utenlandsopphold)} />
                 </span>
             )}
         </li>

@@ -2,6 +2,7 @@ import Person from '../../../types/domain/Person';
 import { default as EngangsstonadSoknad } from '../../../types/domain/EngangsstonadSoknad';
 import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
 import PersonRequest from '../../../types/services/PersonRequest';
+import { Attachment } from 'storage/attachment/types/Attachment';
 
 export enum ApiActionKeys {
     'GET_PERSON' = 'getPerson',
@@ -31,6 +32,7 @@ interface GetPersonFailed {
 interface SendSoknad {
     type: ApiActionKeys.SEND_SOKNAD;
     soknad: EngangsstonadSoknad;
+    vedlegg: Attachment[];
 }
 
 interface SendSoknadSuccess {

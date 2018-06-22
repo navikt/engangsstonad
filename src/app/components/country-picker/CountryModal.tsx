@@ -6,7 +6,7 @@ import { Periode } from '../../types/domain/Utenlandsopphold';
 import CountrySelect from 'components/country-select/CountrySelect';
 import DateInput from 'components/date-input/DateInput';
 import { Tidsperiode, Avgrensninger } from 'nav-datovelger';
-import LabelText from 'components/labeltext/LabelText';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import FormBlock from 'components/form-block/FormBlock';
 import { Feil } from 'components/skjema-input-element/types';
 
@@ -260,7 +260,7 @@ class CountryModal extends React.Component<Props, State> {
                     </FormBlock>
                     <FormBlock margin="xxs">
                         <div className="countryModal__buttonBar">
-                            <Knapp type="standard" onClick={() => this.props.closeModal()} htmlType="button">
+                            <Knapp onClick={() => this.props.closeModal()} htmlType="button">
                                 <FormattedMessage id="medlemmskap.modal.avbryt" />
                             </Knapp>
                             <Hovedknapp>

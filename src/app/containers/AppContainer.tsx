@@ -17,11 +17,11 @@ import { erMann, erMyndig, harPersonData } from 'util/validation/validationUtils
 import { apiActionCreators as api, soknadActionCreators as soknad } from '../redux/actions';
 import { ExternalProps } from '../types';
 
-import { DispatchProps } from '../redux/types';
 import Person from '../types/domain/Person';
 import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSoknadResponse';
 
 import '../styles/engangsstonad.less';
+import { DispatchProps } from 'common/redux/types';
 
 interface StateProps {
     soknad: EngangsstonadSoknadResponse;
@@ -63,7 +63,7 @@ class AppContainer extends React.Component<Props> {
         const { dispatch, error, søknadSendt } = this.props;
         if (props.error && props.error.status === 401) {
             return this.redirectToLogin();
-        } 
+        }
         if (søknadSendt && !error) {
             dispatch(soknad.resetSøknad());
         }
@@ -144,7 +144,7 @@ class AppContainer extends React.Component<Props> {
 
         if (isLoadingPerson || (error && error.status === 401)) {
             return this.renderContent(<Spinner type="XXL" />);
-        } 
+        }
         return this.renderContent(<GenerellFeil />);
     }
 }

@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../redux/actions';
 import Utenlandsopphold, { Periode } from '../../types/domain/Utenlandsopphold';
-import { DispatchProps } from '../../redux/types/index';
+import { DispatchProps } from 'common/redux/types';
 import CountryPicker from '../../components/country-picker/CountryPicker';
 import Barn from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
