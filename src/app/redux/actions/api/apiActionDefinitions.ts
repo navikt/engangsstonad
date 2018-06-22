@@ -2,6 +2,7 @@ import Person from '../../../types/domain/Person';
 import { default as EngangsstonadSoknad } from '../../../types/domain/EngangsstonadSoknad';
 import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
 import PersonRequest from '../../../types/services/PersonRequest';
+import { AppState } from '../../types';
 
 export enum ApiActionKeys {
     'GET_PERSON' = 'getPerson',
@@ -9,7 +10,10 @@ export enum ApiActionKeys {
     'GET_PERSON_FAILED' = 'getPersonFailed',
     'SEND_SOKNAD' = 'sendSoknad',
     'SEND_SOKNAD_SUCCESS' = 'sendSoknadSuccess',
-    'SEND_SOKNAD_FAILED' = 'sendSoknadFailed'
+    'SEND_SOKNAD_FAILED' = 'sendSoknadFailed',
+    'SAVE_APP_STATE' = 'saveAppState',
+    'SAVE_APP_STATE_SUCCESS' = 'saveAppStateSuccess',
+    'SAVE_APP_STATE_FAILED' = 'saveAppStateFailed',
 }
 
 interface GetPerson {
@@ -44,8 +48,22 @@ interface SendSoknadFailed {
     error: any;
 }
 
+export interface SaveAppState {
+    type: ApiActionKeys.SAVE_APP_STATE;
+    appState: AppState;
+}
+
+interface SaveAppStateSuccess {
+    type: ApiActionKeys.SAVE_APP_STATE_SUCCESS;
+}
+
+interface SaveAppStateFailed {
+    type: ApiActionKeys.SAVE_APP_STATE_FAILED;
+    // tslint:disable-next-line:no-any
+    error: any;
+}
+
 export type GetPersonActionType = GetPersonSuccess | GetPersonFailed;
-export type SendSoknadActionType = SendSoknadSuccess | SendSoknadFailed;
 
 export type ApiActionTypes =
     | GetPerson
@@ -53,4 +71,7 @@ export type ApiActionTypes =
     | GetPersonFailed
     | SendSoknad
     | SendSoknadSuccess
-    | SendSoknadFailed;
+    | SendSoknadFailed
+    | SaveAppState
+    | SaveAppStateSuccess
+    | SaveAppStateFailed;

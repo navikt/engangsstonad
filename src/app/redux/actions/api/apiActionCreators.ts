@@ -3,6 +3,7 @@ import Person from '../../../types/domain/Person';
 import PersonRequest from '../../../types/services/PersonRequest';
 import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
 import EngangsstonadSoknad from '../../../types/domain/EngangsstonadSoknad';
+import { AppState } from '../../types';
 
 export function getPerson(person?: PersonRequest): ApiActionTypes {
     return {
@@ -48,11 +49,35 @@ export function sendSoknadFailed(error: any): ApiActionTypes {
     };
 }
 
+export function saveAppState(appState: AppState): ApiActionTypes {
+    return {
+        type: ApiActionKeys.SAVE_APP_STATE,
+        appState
+    };
+}
+
+export function saveAppStateSuccess(): ApiActionTypes {
+    return {
+        type: ApiActionKeys.SAVE_APP_STATE_SUCCESS
+    };
+}
+
+// tslint:disable-next-line:no-any
+export function saveAppStateFailed(error: any): ApiActionTypes {
+    return {
+        type: ApiActionKeys.SAVE_APP_STATE_FAILED,
+        error
+    };
+}
+
 export default {
     getPerson,
     getPersonSuccess,
     getPersonFailed,
     sendSoknad,
     sendSoknadSuccess,
-    sendSoknadFailed
+    sendSoknadFailed,
+    saveAppState,
+    saveAppStateSuccess,
+    saveAppStateFailed
 };

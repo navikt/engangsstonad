@@ -1,6 +1,6 @@
 import { all, put, call, takeEvery } from 'redux-saga/effects';
 import Api from '../../api/api';
-import { ApiActionKeys, GetPersonActionType } from '../actions/api/apiActionDefinitions';
+import { ApiActionKeys, GetPersonActionType, SaveAppState} from '../actions/api/apiActionDefinitions';
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
 import apiUtils from './../../util/apiUtils';
 
@@ -26,9 +26,19 @@ function* sendSoknad(action: any) {
     }
 }
 
+function* saveAppState(action: SaveAppState) {
+    try {
+        yield call(Api.saveAppState, action.appState);
+        yield put({ type: ApiActionKeys.SAVE_APP_STATE_SUCCESS });
+    } catch (error) {
+        yield put({ type: ApiActionKeys.SAVE_APP_STATE_FAILED, error });
+    }
+}
+
 export default function* sagas() {
     yield all([
         takeEvery(ApiActionKeys.GET_PERSON, getPerson),
-        takeEvery(ApiActionKeys.SEND_SOKNAD, sendSoknad)
+        takeEvery(ApiActionKeys.SEND_SOKNAD, sendSoknad),
+        takeEvery(ApiActionKeys.SAVE_APP_STATE, saveAppState)
     ]);
 }

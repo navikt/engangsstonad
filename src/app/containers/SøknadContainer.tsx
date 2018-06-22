@@ -16,10 +16,13 @@ import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import Person from 'app/types/domain/Person';
 import CancelButton from 'components/cancel-button/CancelButton';
 import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
+import { CommonState } from 'reducers/commonReducer';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
     søknad: EngangsstonadSoknad;
+    step: {activeStep: number};
+    common: CommonState;
     person: Person;
     activeStep: number;
     error: any;
@@ -55,7 +58,7 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     handleNextClicked() {
-        const { dispatch, søknad } = this.props;
+        const { dispatch, søknad, common, step } = this.props;
         if (this.hasToWaitForResponse()) {
             return dispatch(
                 api.sendSoknad(søknad)
@@ -63,6 +66,9 @@ class SøknadContainer extends React.Component<Props> {
         }
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
+        dispatch(api.saveAppState({
+            søknad, common, step
+        }));
     }
 
     handleBackClicked() {
@@ -121,6 +127,8 @@ class SøknadContainer extends React.Component<Props> {
 
 const mapStateToProps = (state: any) => ({
     søknad: state.soknadReducer,
+    step: state.stepReducer,
+    common: state.commonReducer,
     person: state.apiReducer.person,
     activeStep: state.stepReducer.activeStep,
     error: state.apiReducer.error,
