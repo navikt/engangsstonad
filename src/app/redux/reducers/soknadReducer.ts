@@ -1,53 +1,26 @@
 import { SoknadActionKeys, SoknadActionTypes } from '../actions/soknad/soknadActionDefinitions';
 import EngangsstonadSoknad from '../../types/domain/EngangsstonadSoknad';
 import { FodtBarn } from '../../types/domain/Barn';
+import { GetAppStateSuccess, ApiActionKeys } from 'actions/api/apiActionDefinitions';
 
 const getDefaultState = () => {
     const engangsstonadSoknad: EngangsstonadSoknad = {
         type: 'engangsstønad',
         barn: {
-            fødselsdatoer: []  
+            fødselsdatoer: []
         },
         utenlandsopphold: {
             tidligerePerioder: [],
             senerePerioder: []
         },
-        vedlegg: [] as File[],
         annenForelder: {}
     };
     return engangsstonadSoknad;
 };
 
-const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => {
-    let { barn, utenlandsopphold, vedlegg } = state;
+const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | GetAppStateSuccess) => {
+    let { barn, utenlandsopphold } = state;
     switch (action.type) {
-        case SoknadActionKeys.ADD_VEDLEGG:
-            const vedleggMetaData = vedlegg.map((file: File) => (
-                JSON.stringify({
-                    name: file.name,
-                    size: file.size
-                })
-            ));
-
-            const newVedlegg = action.vedlegg.filter((file: File) => {
-                return (!vedleggMetaData.includes(JSON.stringify({
-                    name: file.name,
-                    size: file.size
-                })
-                ));
-            });
-
-            return {
-                ...state,
-                vedlegg: vedlegg.concat(newVedlegg)
-            };
-        case SoknadActionKeys.DELETE_VEDLEGG:
-            return {
-                ...state,
-                vedlegg: vedlegg.filter((file: File) => {
-                    return file !== action.vedlegg;
-                })
-            };
         case SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
             const tidligerePerioder = utenlandsopphold.tidligerePerioder.concat([action.periode]);
             return { ...state, utenlandsopphold: { ...utenlandsopphold, tidligerePerioder } };
@@ -115,18 +88,19 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             };
         case SoknadActionKeys.SET_ER_BARNET_FODT:
             const { erBarnetFødt } = action;
-            return { ...state, barn: { fødselsdatoer: [], erBarnetFødt }, vedlegg: [], utenlandsopphold: { ...utenlandsopphold, fødselINorge: undefined } };
+            return { ...state, barn: { fødselsdatoer: [], erBarnetFødt }, utenlandsopphold: { ...utenlandsopphold, fødselINorge: undefined } };
         case SoknadActionKeys.SET_ANTALL_BARN:
             return { ...state, barn: { ...barn, antallBarn: action.antallBarn } };
         case SoknadActionKeys.SET_FØDSELSDATO:
             let fødselsdatoer = (state.barn as FodtBarn).fødselsdatoer.slice(0);
             fødselsdatoer[0] = action.fødselsdato;
-            return { ...state, 
-                barn: { 
-                    ...barn, 
-                    fødselsdatoer 
+            return {
+                ...state,
+                barn: {
+                    ...barn,
+                    fødselsdatoer
                 }
-            }; 
+            };
         case SoknadActionKeys.SET_TERMINDATO:
             const { termindato } = action;
             return {
@@ -155,9 +129,10 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
         case SoknadActionKeys.SET_ANNEN_FORELDER_KAN_IKKE_OPPGIS:
             const { kanIkkeOppgis } = action;
             return { ...state, annenForelder: { kanIkkeOppgis } };
-
         case SoknadActionKeys.RESET_SØKNAD:
             return getDefaultState();
+        case ApiActionKeys.GET_APP_STATE_SUCCESS:
+            return {...state, ...action.appState.søknad};
     }
     return state;
 };

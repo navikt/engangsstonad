@@ -14,12 +14,14 @@ import Barn from '../../types/domain/Barn';
 import Utenlandsopphold from '../../types/domain/Utenlandsopphold';
 import AnnenForelder from '../../types/domain/AnnenForelder';
 import { StepConfig } from 'app/types/StepConfig';
+import { Attachment } from 'storage/attachment/types/Attachment';
 
 export interface NextStepCondition {
+    type: string;
     barn: Barn;
     annenForelder: AnnenForelder;
     utenlandsopphold: Utenlandsopphold;
-    vedlegg: File[];
+    vedlegg: Attachment[];
 }
 
 const stepConfig = [
@@ -52,7 +54,7 @@ const stepConfig = [
     }
 ];
 
-export default (intl: InjectedIntl, person: Person): StepConfig[] => 
+export default (intl: InjectedIntl, person: Person): StepConfig[] =>
     stepConfig
         .filter((step: any, index: number) => {
             if (index === 1) {

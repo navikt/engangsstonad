@@ -1,7 +1,7 @@
 // tslint:disable-next-line no-any
-import EngangsstonadSoknad from '../../types/domain/EngangsstonadSoknad';
 import { CommonState } from 'reducers/commonReducer';
 import { StepState } from 'reducers/stepReducer';
+import EngangsstonadSoknad from '../../../app/types/domain/EngangsstonadSoknad';
 
 export type Dispatch = (action: any) => any;
 

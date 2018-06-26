@@ -3,7 +3,8 @@ import Person from '../../../types/domain/Person';
 import PersonRequest from '../../../types/services/PersonRequest';
 import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
 import EngangsstonadSoknad from '../../../types/domain/EngangsstonadSoknad';
-import { AppState } from '../../types';
+import { Attachment } from 'storage/attachment/types/Attachment';
+import { AppState } from 'common/redux/types';
 
 export function getPerson(person?: PersonRequest): ApiActionTypes {
     return {
@@ -27,10 +28,11 @@ export function getPersonFailed(error: any): ApiActionTypes {
     };
 }
 
-export function sendSoknad(soknad: EngangsstonadSoknad): ApiActionTypes {
+export function sendSoknad(soknad: EngangsstonadSoknad, vedlegg: Attachment[]): ApiActionTypes {
     return {
         type: ApiActionKeys.SEND_SOKNAD,
         soknad,
+        vedlegg
     };
 }
 
@@ -70,6 +72,26 @@ export function saveAppStateFailed(error: any): ApiActionTypes {
     };
 }
 
+export function getAppState(): any {
+    return {
+        type: ApiActionKeys.GET_APP_STATE
+    };
+}
+
+export function getAppStateSuccess(appState: AppState): any {
+    return {
+        type: ApiActionKeys.GET_APP_STATE_SUCCESS,
+        appState
+    };
+}
+
+export function getAppStateFailed(appState: AppState): any {
+    return {
+        type: ApiActionKeys.GET_APP_STATE_FAILED,
+        appState
+    };
+}
+
 export default {
     getPerson,
     getPersonSuccess,
@@ -79,5 +101,8 @@ export default {
     sendSoknadFailed,
     saveAppState,
     saveAppStateSuccess,
-    saveAppStateFailed
+    saveAppStateFailed,
+    getAppState,
+    getAppStateSuccess,
+    getAppStateFailed
 };

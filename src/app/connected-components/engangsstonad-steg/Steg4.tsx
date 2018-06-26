@@ -13,7 +13,7 @@ import getMessage from '../../util/i18n/i18nUtils';
 import Person from 'app/types/domain/Person';
 import { FodtBarn, UfodtBarn } from 'app/types/domain/Barn';
 import AnnenForelder from 'app/types/domain/AnnenForelder';
-import { DispatchProps } from 'app/redux/types';
+import { DispatchProps } from 'common/redux/types';
 import Utenlandsopphold from 'app/types/domain/Utenlandsopphold';
 
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
@@ -25,13 +25,14 @@ const { ValidGroup } = require('./../../lib') as any;
 
 import '../../styles/engangsstonad.less';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
+import { Attachment } from 'storage/attachment/types/Attachment';
 
 interface StateProps {
     bekreftetInformasjon: boolean;
     person: Person;
     utenlandsopphold: Utenlandsopphold;
     barn: FodtBarn & UfodtBarn;
-    vedlegg: File[];
+    vedlegg: Attachment[];
     annenForelder: AnnenForelder;
     soknadPostResponse: EngangsstonadSoknadResponse;
 }
@@ -91,7 +92,7 @@ const mapStateToProps = (state: any) => ({
     bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
     person: state.apiReducer.person,
     barn: state.soknadReducer.barn,
-    vedlegg: state.soknadReducer.vedlegg,
+    vedlegg: state.attachmentReducer,
     annenForelder: state.soknadReducer.annenForelder,
     utenlandsopphold: state.soknadReducer.utenlandsopphold,
     soknadPostResponse: state.apiReducer.soknad

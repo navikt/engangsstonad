@@ -5,7 +5,7 @@ import getMessage from 'util/i18n/i18nUtils';
 import { connect } from 'react-redux';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { CommonState } from 'reducers/commonReducer';
-import { DispatchProps } from '../../redux/types';
+import { DispatchProps } from 'common/redux/types';
 
 import '../../styles/engangsstonad.less';
 

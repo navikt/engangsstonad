@@ -5,8 +5,8 @@ import ValidDateInput from '../../../../lib/valid-date-input';
 import { soknadActionCreators as soknad } from '../../../../redux/actions';
 import { default as Barn, FodtBarn } from '../../../../types/domain/Barn';
 import getMessage from 'util/i18n/i18nUtils';
-import { DispatchProps } from '../../../../redux/types/index';
-import LabelText from 'components/labeltext/LabelText';
+import { DispatchProps } from 'common/redux/types';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import FormBlock from 'components/form-block/FormBlock';
 import { buildDateObject } from 'util/date/dateUtils';
 
@@ -60,7 +60,7 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
             }
         ];
     }
-    
+
     onFødselsdatoInputChange(fødselsdato: Date | string, index: number) {
         if (fødselsdato) {
             const { dispatch } = this.props;

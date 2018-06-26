@@ -6,7 +6,7 @@ import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import * as moment from 'moment';
 import 'moment/locale/nb';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
-import CustomSVG from './../../components/custom-svg/CustomSVG';
+import CustomSVG from 'common/components/custom-svg/CustomSVG';
 import Lenke from 'nav-frontend-lenker';
 
 const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
@@ -88,7 +88,7 @@ class SøknadSendt extends React.Component<Props> {
                         {this.receiptText()}
                     </Ingress>
                     <Ingress className="blokk-xs">
-                        <FormattedMessage 
+                        <FormattedMessage
                             id="kvittering.text.dittNav"
                             values={{
                                 dittNavLink: (

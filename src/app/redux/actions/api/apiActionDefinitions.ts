@@ -2,7 +2,8 @@ import Person from '../../../types/domain/Person';
 import { default as EngangsstonadSoknad } from '../../../types/domain/EngangsstonadSoknad';
 import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
 import PersonRequest from '../../../types/services/PersonRequest';
-import { AppState } from '../../types';
+import { Attachment } from 'storage/attachment/types/Attachment';
+import { AppState } from 'common/redux/types';
 
 export enum ApiActionKeys {
     'GET_PERSON' = 'getPerson',
@@ -14,6 +15,9 @@ export enum ApiActionKeys {
     'SAVE_APP_STATE' = 'saveAppState',
     'SAVE_APP_STATE_SUCCESS' = 'saveAppStateSuccess',
     'SAVE_APP_STATE_FAILED' = 'saveAppStateFailed',
+    'GET_APP_STATE' = 'getAppState',
+    'GET_APP_STATE_SUCCESS' = 'getAppStateSuccess',
+    'GET_APP_STATE_FAILED' = 'getAppStateFailed',
 }
 
 interface GetPerson {
@@ -35,6 +39,7 @@ interface GetPersonFailed {
 interface SendSoknad {
     type: ApiActionKeys.SEND_SOKNAD;
     soknad: EngangsstonadSoknad;
+    vedlegg: Attachment[];
 }
 
 interface SendSoknadSuccess {
@@ -63,6 +68,21 @@ interface SaveAppStateFailed {
     error: any;
 }
 
+export interface GetAppState {
+    type: ApiActionKeys.GET_APP_STATE;
+}
+
+export interface GetAppStateSuccess {
+    type: ApiActionKeys.GET_APP_STATE_SUCCESS;
+    appState: AppState;
+}
+
+interface GetAppStateFailed {
+    type: ApiActionKeys.GET_APP_STATE_FAILED;
+    // tslint:disable-next-line:no-any
+    error: any;
+}
+
 export type GetPersonActionType = GetPersonSuccess | GetPersonFailed;
 
 export type ApiActionTypes =
@@ -74,4 +94,7 @@ export type ApiActionTypes =
     | SendSoknadFailed
     | SaveAppState
     | SaveAppStateSuccess
-    | SaveAppStateFailed;
+    | SaveAppStateFailed
+    | GetAppState
+    | GetAppStateSuccess
+    | GetAppStateFailed;
