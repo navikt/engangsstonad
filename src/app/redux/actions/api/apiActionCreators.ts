@@ -72,23 +72,23 @@ export function saveAppStateFailed(error: any): ApiActionTypes {
     };
 }
 
-export function getAppState(): any {
+export function getAppState(): ApiActionTypes {
     return {
         type: ApiActionKeys.GET_APP_STATE
     };
 }
 
-export function getAppStateSuccess(appState: AppState): any {
+export function getAppStateSuccess(appState: AppState): ApiActionTypes {
     return {
         type: ApiActionKeys.GET_APP_STATE_SUCCESS,
         appState
     };
 }
 
-export function getAppStateFailed(appState: AppState): any {
+export function getAppStateFailed(error: any): ApiActionTypes {
     return {
         type: ApiActionKeys.GET_APP_STATE_FAILED,
-        appState
+        error
     };
 }
 
