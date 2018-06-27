@@ -7,7 +7,7 @@ const { ValidGroup, ValidForm } = require('../../lib') as any;
 const { Ingress } = require('nav-frontend-typografi');
 import { Hovedknapp } from 'nav-frontend-knapper';
 const Modal = require('nav-frontend-modal').default;
-import { BekreftCheckboksPanel, ToggleGruppe, ToggleKnapp } from 'nav-frontend-skjema';
+import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 
 import Plikter from 'components/modal-content/Plikter';
 import Personopplysninger from 'components/modal-content/Personopplysninger';
@@ -66,7 +66,7 @@ class Intro extends React.Component<Props, OwnProps> {
     }
 
     componentDidMount() {
-        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/start'), 5000);
+        setTimeout(()   => (window as any).hj('vpv', '/engangsstonad/start'), 5000);
     }
 
     openPlikterModal(e: React.SyntheticEvent<HTMLElement>) {

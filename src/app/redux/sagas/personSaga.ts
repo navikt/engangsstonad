@@ -1,6 +1,6 @@
 import { all, put, call, takeLatest, takeEvery } from 'redux-saga/effects';
 import Api from '../../api/api';
-import { ApiActionKeys, GetPersonActionType } from '../actions/api/apiActionDefinitions';
+import { ApiActionKeys, GetPersonActionType, SaveAppState } from '../actions/api/apiActionDefinitions';
 
 // tslint:disable-next-line:no-any
 function* getPerson(action: any) {
