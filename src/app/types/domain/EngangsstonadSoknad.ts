@@ -1,10 +1,10 @@
-import Utenlandsopphold from './Utenlandsopphold';
+import InformasjonOmUtenlandsopphold from './InformasjonOmUtenlandsopphold';
 import { FodtBarn, UfodtBarn } from './Barn';
 import AnnenForelder from './AnnenForelder';
 
 type EngangsstonadSoknad = {
     type: string;
-    utenlandsopphold: Utenlandsopphold;
+    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: FodtBarn | UfodtBarn;
     annenForelder: AnnenForelder;
 };

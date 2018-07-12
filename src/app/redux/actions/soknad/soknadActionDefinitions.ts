@@ -1,4 +1,4 @@
-import { Periode } from '../../../types/domain/Utenlandsopphold';
+import { Utenlandsopphold } from '../../../types/domain/InformasjonOmUtenlandsopphold';
 
 export enum SoknadActionKeys {
     // RelasjonTilBarn
@@ -73,34 +73,34 @@ interface SetTerminbekreftelseDato {
 // Medlemsskap
 interface AddTidligereUtenlandsoppholdPeriode {
     type: SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE;
-    periode: Periode;
+    periode: Utenlandsopphold;
 }
 
 interface EditTidligereUtenlandsoppholdPeriode {
     type: SoknadActionKeys.EDIT_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE;
-    periode: Periode;
+    periode: Utenlandsopphold;
     index: number;
 }
 
 interface DeleteTidligereUtenlandsoppholdPeriode {
     type: SoknadActionKeys.DELETE_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE;
-    periode: Periode;
+    periode: Utenlandsopphold;
 }
 
 interface AddSenereUtenlandsoppholdPeriode {
     type: SoknadActionKeys.ADD_SENERE_UTENLANDSOPPHOLD_PERIODE;
-    periode: Periode;
+    periode: Utenlandsopphold;
 }
 
 interface EditSenereUtenlandsoppholdPeriode {
     type: SoknadActionKeys.EDIT_SENERE_UTENLANDSOPPHOLD_PERIODE;
-    periode: Periode;
+    periode: Utenlandsopphold;
     index: number;
 }
 
 interface DeleteSenereUtenlandsoppholdPeriode {
     type: SoknadActionKeys.DELETE_SENERE_UTENLANDSOPPHOLD_PERIODE;
-    periode: Periode;
+    periode: Utenlandsopphold;
 }
 
 interface SetJobbetINorgeSiste12Mnd {
