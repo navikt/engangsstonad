@@ -19,7 +19,7 @@ node {
     stage("Checkout") {
         cleanWs()
         withCredentials([string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
-            withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
+            withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
                 sh(script: "git clone https://${token}:x-oauth-basic@github.com/${project}/${app}.git -b ${branch} .")
             }
         }
@@ -65,7 +65,7 @@ node {
     }
 
     stage('Deploy to preprod') {
-        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088',
+        withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088',
                  'NO_PROXY=localhost,127.0.0.1,.local,.adeo.no,.nav.no,.aetat.no,.devillo.no,.oera.no',
                  'no_proxy=localhost,127.0.0.1,.local,.adeo.no,.nav.no,.aetat.no,.devillo.no,.oera.no'
               ]) {
@@ -91,7 +91,7 @@ node {
     }
 
     stage("Tag") {
-        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
+        withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
             withCredentials([string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
                 sh ("git tag -a ${releaseVersion} -m ${releaseVersion}")
                 sh ("git push https://${token}:x-oauth-basic@github.com/${project}/${app}.git --tags")
@@ -100,7 +100,7 @@ node {
     }
 
     stage("Deploy to prod") {
-        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088',
+        withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088',
                  'NO_PROXY=localhost,127.0.0.1,.local,.adeo.no,.nav.no,.aetat.no,.devillo.no,.oera.no',
                  'no_proxy=localhost,127.0.0.1,.local,.adeo.no,.nav.no,.aetat.no,.devillo.no,.oera.no'
               ]) {
