@@ -15,12 +15,15 @@ import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import Person from 'app/types/domain/Person';
 import CancelButton from 'components/cancel-button/CancelButton';
 import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
+import { CommonState } from 'reducers/commonReducer';
 import { Attachment } from 'storage/attachment/types/Attachment';
 import { DispatchProps } from 'common/redux/types';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
     søknad: EngangsstonadSoknad;
+    step: {activeStep: number};
+    common: CommonState;
     person: Person;
     activeStep: number;
     error: any;
@@ -57,7 +60,7 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     handleNextClicked() {
-        const { dispatch, søknad, vedlegg } = this.props;
+        const { dispatch, søknad, common, step, vedlegg } = this.props;
         if (this.hasToWaitForResponse()) {
             return dispatch(
                 api.sendSoknad(søknad, vedlegg),
@@ -65,6 +68,9 @@ class SøknadContainer extends React.Component<Props> {
         }
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
+        dispatch(api.saveAppState({
+            søknad, common, step
+        }));
     }
 
     handleBackClicked() {
@@ -123,6 +129,8 @@ class SøknadContainer extends React.Component<Props> {
 
 const mapStateToProps = (state: any) => ({
     søknad: state.soknadReducer,
+    step: state.stepReducer,
+    common: state.commonReducer,
     person: state.apiReducer.person,
     activeStep: state.stepReducer.activeStep,
     error: state.apiReducer.error,

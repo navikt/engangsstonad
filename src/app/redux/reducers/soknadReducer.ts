@@ -1,6 +1,7 @@
 import { SoknadActionKeys, SoknadActionTypes } from '../actions/soknad/soknadActionDefinitions';
 import EngangsstonadSoknad from '../../types/domain/EngangsstonadSoknad';
 import { FodtBarn } from '../../types/domain/Barn';
+import { GetAppStateSuccess, ApiActionKeys } from 'actions/api/apiActionDefinitions';
 
 const getDefaultState = () => {
     const engangsstonadSoknad: EngangsstonadSoknad = {
@@ -17,7 +18,7 @@ const getDefaultState = () => {
     return engangsstonadSoknad;
 };
 
-const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => {
+const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | GetAppStateSuccess) => {
     let { barn, utenlandsopphold } = state;
     switch (action.type) {
         case SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
@@ -128,9 +129,10 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
         case SoknadActionKeys.SET_ANNEN_FORELDER_KAN_IKKE_OPPGIS:
             const { kanIkkeOppgis } = action;
             return { ...state, annenForelder: { kanIkkeOppgis } };
-
         case SoknadActionKeys.RESET_SØKNAD:
             return getDefaultState();
+        case ApiActionKeys.GET_APP_STATE_SUCCESS:
+            return {...state, ...action.appState.søknad};
     }
     return state;
 };

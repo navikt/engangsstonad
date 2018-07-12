@@ -33,7 +33,16 @@
     "intro.text.samtykke.link": "dine plikter",
     "intro.text.personopplysningene.link": "Les om hvordan NAV behandler personopplysningene dine",
     "intro.pageheading.samtykke": "Rettigheter og plikter.",
-    "intro.button.startSoknad": "Begynn med søknaden",
+    
+    "intro.text.fortsettSøknadSpørsmål": "Jeg ønsker å",
+    "intro.text.startNySøknad": "starte en ny søknad",
+    "intro.text.fortsettSøknad": "fortsette med ekisternde søknad",
+    "intro.text.nySøknadAdvarsel": "Din eksisternde søknad vil bli slettet.",
+    "intro.text.startNySøknadPrompt": "Er du sikkert på at du vil starte en ny søknad? Din påbegynte søknad vil bli slettet.",
+    
+    
+    "intro.button.startSøknad": "Begynn med søknaden",
+    "intro.button.fortsettSøknad": "Fortsett med søknaden",
 
     "relasjonBarn.sectionheading": "Informasjon om barnet",
     "relasjonBarn.text.fodselTidspunkt": "Søknaden min gjelder en fødsel som er...",
