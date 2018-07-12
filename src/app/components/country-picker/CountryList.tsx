@@ -1,24 +1,24 @@
 import * as React from 'react';
 import CountryListElement from './CountryListElement';
-import { Periode } from '../../types/domain/Utenlandsopphold';
+import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 
 import './countryPicker.less';
 
 interface CountryListProps {
-    utenlandsoppholdListe: Periode[];
+    utenlandsoppholdListe: Utenlandsopphold[];
 }
 
 export const CountrySummaryList: React.StatelessComponent<CountryListProps> = props => (
     <ul className="countryList countryList--summary">
-        {props.utenlandsoppholdListe.map((periode: Periode, index: number) => (
+        {props.utenlandsoppholdListe.map((periode: Utenlandsopphold, index: number) => (
             <CountryListElement key={index} utenlandsopphold={periode} />
         ))}
     </ul>
 );
 
 interface EditableCountryListProps extends CountryListProps {
-    onEditClick: (periode: Periode) => void;
-    onDeleteClick: (periode: Periode) => void;
+    onEditClick: (periode: Utenlandsopphold) => void;
+    onDeleteClick: (periode: Utenlandsopphold) => void;
 }
 
 export const CountryList: React.StatelessComponent<EditableCountryListProps> = props =>

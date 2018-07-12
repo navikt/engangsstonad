@@ -2,7 +2,7 @@ import * as React from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
-import { Periode } from '../../types/domain/Utenlandsopphold';
+import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 import CountrySelect from 'components/country-select/CountrySelect';
 import DateInput from 'components/date-input/DateInput';
 import { Tidsperiode, Avgrensninger } from 'nav-datovelger';
@@ -14,11 +14,11 @@ const Modal = require('nav-frontend-modal').default;
 
 interface OwnProps {
     language: string;
-    utenlandsopphold?: Periode;
-    alleUtenlandsopphold?: Periode[];
+    utenlandsopphold?: Utenlandsopphold;
+    alleUtenlandsopphold?: Utenlandsopphold[];
     label: string;
     tidsperiode?: Tidsperiode;
-    onSubmit: (periode: Periode) => void;
+    onSubmit: (periode: Utenlandsopphold) => void;
     closeModal: () => void;
     validateLand?: (data: any) => Feil | undefined;
     validateFom?: (data: any) => Feil | undefined;
@@ -44,7 +44,7 @@ interface State {
     formData: PeriodeForm;
 }
 
-const getValidPeriode = (formData: PeriodeForm): Periode | undefined => {
+const getValidPeriode = (formData: PeriodeForm): Utenlandsopphold | undefined => {
     const { land, fom, tom } = formData;
     if (land && fom && tom) {
         return {
@@ -65,7 +65,7 @@ const getDateFromString = (dato?: string) => {
     return undefined;
 };
 
-const getRegistrertePerioder = (alleOpphold: Periode[], gjeldendeOpphold?: Periode): Tidsperiode[] => {
+const getRegistrertePerioder = (alleOpphold: Utenlandsopphold[], gjeldendeOpphold?: Utenlandsopphold): Tidsperiode[] => {
     let arr = gjeldendeOpphold ? alleOpphold.filter(o => o !== gjeldendeOpphold) : alleOpphold;
     return arr.map(opphold => ({
         startdato: new Date(opphold.varighet.fom),
@@ -73,7 +73,7 @@ const getRegistrertePerioder = (alleOpphold: Periode[], gjeldendeOpphold?: Perio
     }));
 };
 
-const getDefaultState = (utenlandsopphold?: Periode): State => {
+const getDefaultState = (utenlandsopphold?: Utenlandsopphold): State => {
     if (utenlandsopphold) {
         return {
             erEndring: true,

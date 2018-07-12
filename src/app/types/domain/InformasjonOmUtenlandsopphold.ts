@@ -1,4 +1,4 @@
-export type Periode = {
+export type Utenlandsopphold = {
     land: string;
     varighet: Varighet;
 };
@@ -8,13 +8,13 @@ export type Varighet = {
     fom: string;
 };
 
-type Utenlandsopphold = {
+type InformasjonOmUtenlandsopphold = {
     jobbetINorgeSiste12Mnd?: boolean;
     fødselINorge?: boolean;
     iNorgeSiste12Mnd?: boolean;
     iNorgeNeste12Mnd?: boolean;
-    tidligerePerioder: Periode[];
-    senerePerioder: Periode[];
+    tidligereOpphold: Utenlandsopphold[];
+    senereOpphold: Utenlandsopphold[];
 };
 
-export default Utenlandsopphold;
+export default InformasjonOmUtenlandsopphold;

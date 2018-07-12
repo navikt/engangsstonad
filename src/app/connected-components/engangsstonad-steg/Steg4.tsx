@@ -14,7 +14,7 @@ import Person from 'app/types/domain/Person';
 import { FodtBarn, UfodtBarn } from 'app/types/domain/Barn';
 import AnnenForelder from 'app/types/domain/AnnenForelder';
 import { DispatchProps } from 'common/redux/types';
-import Utenlandsopphold from 'app/types/domain/Utenlandsopphold';
+import InformasjonOmUtenlandsopphold from 'app/types/domain/InformasjonOmUtenlandsopphold';
 
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
 import OppsummeringBarn from './../oppsummering/BarnOppsummering';
@@ -30,7 +30,7 @@ import { Attachment } from 'storage/attachment/types/Attachment';
 interface StateProps {
     bekreftetInformasjon: boolean;
     person: Person;
-    utenlandsopphold: Utenlandsopphold;
+    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: FodtBarn & UfodtBarn;
     vedlegg: Attachment[];
     annenForelder: AnnenForelder;
@@ -63,7 +63,7 @@ class Steg4 extends React.Component<Props> {
                 </div>
                 <OppsummeringBarn barn={barn} vedlegg={this.props.vedlegg} />
                 {Object.keys(this.props.annenForelder).length > 0 && <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />}
-                <OppsummeringUtenlandsopphold utenlandsopphold={this.props.utenlandsopphold} erBarnetFødt={barn.erBarnetFødt} />
+                <OppsummeringUtenlandsopphold informasjonOmUtenlandsopphold={this.props.informasjonOmUtenlandsopphold} erBarnetFødt={barn.erBarnetFødt} />
                 <div className="blokk-m">
                     <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
                         <ValidGroup
@@ -94,7 +94,7 @@ const mapStateToProps = (state: any) => ({
     barn: state.soknadReducer.barn,
     vedlegg: state.attachmentReducer,
     annenForelder: state.soknadReducer.annenForelder,
-    utenlandsopphold: state.soknadReducer.utenlandsopphold,
+    informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold,
     soknadPostResponse: state.apiReducer.soknad
 });
 export default connect<StateProps>(mapStateToProps)(injectIntl(Steg4));

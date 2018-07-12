@@ -3,7 +3,7 @@ import { EtikettLiten } from 'nav-frontend-typografi';
 
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
 import { CountrySummaryList } from 'components/country-picker/CountryList';
-import Utenlandsopphold from '../../types/domain/Utenlandsopphold';
+import InformasjonOmUtenlandsopphold from '../../types/domain/InformasjonOmUtenlandsopphold';
 import getMessage from 'util/i18n/i18nUtils';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
@@ -11,7 +11,7 @@ import '../../styles/engangsstonad.less';
 import SummaryBlock from 'components/summary-block/SummaryBlock';
 
 interface Props {
-    utenlandsopphold: Utenlandsopphold;
+    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     erBarnetFødt?: boolean;
 }
 
@@ -21,9 +21,9 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
         fødselINorge,
         iNorgeNeste12Mnd,
         iNorgeSiste12Mnd,
-        tidligerePerioder,
-        senerePerioder
-    } = props.utenlandsopphold;
+        tidligereOpphold,
+        senereOpphold
+    } = props.informasjonOmUtenlandsopphold;
 
     return (
         <SummaryBlock title={getMessage(intl, 'medlemmskap.sectionheading')}>
@@ -37,7 +37,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                         <EtikettLiten className="textWithLabel__label">
                             {getMessage(intl, 'oppsummering.text.boddSisteTolv')}
                         </EtikettLiten>
-                        <CountrySummaryList utenlandsoppholdListe={tidligerePerioder} />
+                        <CountrySummaryList utenlandsoppholdListe={tidligereOpphold} />
                     </div>
                 )}
             {iNorgeNeste12Mnd ? (
@@ -50,7 +50,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                         <EtikettLiten className="textWithLabel__label">
                             {getMessage(intl, 'medlemmskap.text.oppsummering.neste12mnd')}
                         </EtikettLiten>
-                        <CountrySummaryList utenlandsoppholdListe={senerePerioder} />
+                        <CountrySummaryList utenlandsoppholdListe={senereOpphold} />
                     </div>
                 )}
             {erBarnetFødt === false && fødselINorge !== undefined && (
