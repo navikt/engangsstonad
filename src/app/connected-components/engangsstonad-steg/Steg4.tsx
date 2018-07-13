@@ -13,8 +13,8 @@ import getMessage from '../../util/i18n/i18nUtils';
 import Person from 'app/types/domain/Person';
 import { FodtBarn, UfodtBarn } from 'app/types/domain/Barn';
 import AnnenForelder from 'app/types/domain/AnnenForelder';
-import { DispatchProps } from 'app/redux/types';
-import Utenlandsopphold from 'app/types/domain/Utenlandsopphold';
+import { DispatchProps } from 'common/redux/types';
+import InformasjonOmUtenlandsopphold from 'app/types/domain/InformasjonOmUtenlandsopphold';
 
 import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
 import OppsummeringBarn from './../oppsummering/BarnOppsummering';
@@ -25,13 +25,14 @@ const { ValidGroup } = require('./../../lib') as any;
 
 import '../../styles/engangsstonad.less';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
+import { Attachment } from 'storage/attachment/types/Attachment';
 
 interface StateProps {
     bekreftetInformasjon: boolean;
     person: Person;
-    utenlandsopphold: Utenlandsopphold;
+    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: FodtBarn & UfodtBarn;
-    vedlegg: File[];
+    vedlegg: Attachment[];
     annenForelder: AnnenForelder;
     soknadPostResponse: EngangsstonadSoknadResponse;
 }
@@ -39,8 +40,12 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 class Steg4 extends React.Component<Props> {
+    componentDidMount() {
+        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-4'), 5000);
+    }
+
     render() {
-        const { person, intl, dispatch, bekreftetInformasjon } = this.props;
+        const { person, barn, intl, dispatch, bekreftetInformasjon } = this.props;
         if (!person) {
             return null;
         }
@@ -56,9 +61,9 @@ class Steg4 extends React.Component<Props> {
                         personnummer={person.fnr}
                     />
                 </div>
-                <OppsummeringBarn barn={this.props.barn} vedlegg={this.props.vedlegg} />
+                <OppsummeringBarn barn={barn} vedlegg={this.props.vedlegg} />
                 {Object.keys(this.props.annenForelder).length > 0 && <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />}
-                <OppsummeringUtenlandsopphold utenlandsopphold={this.props.utenlandsopphold} />
+                <OppsummeringUtenlandsopphold informasjonOmUtenlandsopphold={this.props.informasjonOmUtenlandsopphold} erBarnetFødt={barn.erBarnetFødt} />
                 <div className="blokk-m">
                     <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
                         <ValidGroup
@@ -87,9 +92,9 @@ const mapStateToProps = (state: any) => ({
     bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
     person: state.apiReducer.person,
     barn: state.soknadReducer.barn,
-    vedlegg: state.soknadReducer.vedlegg,
+    vedlegg: state.attachmentReducer,
     annenForelder: state.soknadReducer.annenForelder,
-    utenlandsopphold: state.soknadReducer.utenlandsopphold,
+    informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold,
     soknadPostResponse: state.apiReducer.soknad
 });
 export default connect<StateProps>(mapStateToProps)(injectIntl(Steg4));

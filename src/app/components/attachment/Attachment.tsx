@@ -4,7 +4,7 @@ const Icon = require('nav-frontend-ikoner-assets').default;
 import './attachment.less';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { bytesString } from 'util/attachment/utils';
-import DeleteButton from 'components/delete-button/DeleteButton';
+import SlettKnapp from 'common/components/slett-knapp/SlettKnapp';
 
 interface OwnProps {
     vedlegg: File;
@@ -28,8 +28,8 @@ const Attachment: React.StatelessComponent<Props> = ({
         </div>
         {onDelete && (
             <span className="attachment__delete">
-                <DeleteButton
-                    onDelete={() => onDelete(vedlegg)}
+                <SlettKnapp
+                    onClick={() => onDelete(vedlegg)}
                     ariaLabel={intl.formatMessage(
                         { id: 'vedlegg.arialabel.slett' },
                         { navn: vedlegg.name }

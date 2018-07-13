@@ -6,7 +6,7 @@ import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import * as moment from 'moment';
 import 'moment/locale/nb';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
-import CustomSVG from './../../components/custom-svg/CustomSVG';
+import CustomSVG from 'common/components/custom-svg/CustomSVG';
 import Lenke from 'nav-frontend-lenker';
 
 const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
@@ -28,25 +28,42 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps;
 
 class SøknadSendt extends React.Component<Props> {
-
     constructor(props: Props) {
         super(props);
         moment.locale('nb');
     }
 
+    componentDidMount() {
+        setTimeout(() => {
+            (window as any).hj('trigger', 'es_kvittering_feedback');
+            (window as any).hj('vpv', '/engangsstonad/end');
+            // tslint:disable-next-line:align
+        }, 5000);
+    }
+
     receiptText() {
         const { kvittering } = this.props;
-
         return (
             <FormattedMessage
                 id="kvittering.text.soknadMottatt"
                 values={{
                     referansenr: kvittering.referanseId,
                     0: moment(kvittering.mottattDato).format('HH:mm'),
-                    1: moment(kvittering.mottattDato).format('LL'),
-                    linkText: (
-                        <Lenke href="https://tjenester.nav.no/saksoversikt/">
-                            <FormattedMessage id="kvittering.text.soknadMottatt.linkText" />
+                    1: moment(kvittering.mottattDato).format('LL')
+                }}
+            />
+        );
+    }
+
+    bankAccountText(kontonummer: string) {
+        return (
+            <FormattedMessage
+                id="kvittering.text.kontonummer"
+                values={{
+                    kontonummer: kontonummer,
+                    dinProfilLink: (
+                        <Lenke href="https://tjenester.nav.no/brukerprofil/">
+                            <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
                         </Lenke>
                     )
                 }}
@@ -67,7 +84,28 @@ class SøknadSendt extends React.Component<Props> {
                         {getMessage(intl, 'kvittering.text.takk')}
                         <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
-                    <Ingress>{this.receiptText()}</Ingress>
+                    <Ingress className="blokk-xs">
+                        {this.receiptText()}
+                    </Ingress>
+                    <Ingress className="blokk-xs">
+                        <FormattedMessage
+                            id="kvittering.text.dittNav"
+                            values={{
+                                dittNavLink: (
+                                    <Lenke href="https://tjenester.nav.no/saksoversikt/">
+                                        <FormattedMessage id="kvittering.text.dittNavLink" />
+                                    </Lenke>
+                                )
+                            }}
+                        />
+                    </Ingress>
+                    <Ingress className="blokk-s">
+                        {
+                            person.bankkonto &&
+                            person.bankkonto.kontonummer &&
+                            this.bankAccountText(person.bankkonto.kontonummer)
+                        }
+                    </Ingress>
                     <Hovedknapp
                         className="responsiveButton responsiveButton--søknadSendt"
                         onClick={() => (window as any).location = 'https://tjenester.nav.no/dittnav/oversikt'}

@@ -1,5 +1,5 @@
 import { SoknadActionKeys, SoknadActionTypes } from './soknadActionDefinitions';
-import { Periode } from '../../../types/domain/Utenlandsopphold';
+import { Utenlandsopphold } from '../../../types/domain/InformasjonOmUtenlandsopphold';
 
 export function addVedlegg( vedlegg: File[]) {
     return {
@@ -15,14 +15,14 @@ export function deleteVedlegg( vedlegg: File) {
     };
 }
 
-export function addTidligereUtenlandsoppholdPeriode(periode: Periode): SoknadActionTypes {
+export function addTidligereUtenlandsoppholdPeriode(periode: Utenlandsopphold): SoknadActionTypes {
     return {
         type: SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE,
         periode
     };
 }
 
-export function editTidligereUtenlandsoppholdPeriode(periode: Periode, index: number): SoknadActionTypes {
+export function editTidligereUtenlandsoppholdPeriode(periode: Utenlandsopphold, index: number): SoknadActionTypes {
     return {
         type: SoknadActionKeys.EDIT_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE,
         periode,
@@ -30,21 +30,21 @@ export function editTidligereUtenlandsoppholdPeriode(periode: Periode, index: nu
     };
 }
 
-export function deleteTidligereUtenlandsoppholdPeriode(periode: Periode): SoknadActionTypes {
+export function deleteTidligereUtenlandsoppholdPeriode(periode: Utenlandsopphold): SoknadActionTypes {
     return {
         type: SoknadActionKeys.DELETE_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE,
         periode
     };
 }
 
-export function addSenereUtenlandsoppholdPeriode(periode: Periode): SoknadActionTypes {
+export function addSenereUtenlandsoppholdPeriode(periode: Utenlandsopphold): SoknadActionTypes {
     return {
         type: SoknadActionKeys.ADD_SENERE_UTENLANDSOPPHOLD_PERIODE,
         periode
     };
 }
 
-export function editSenereUtenlandsoppholdPeriode(periode: Periode, index: number): SoknadActionTypes {
+export function editSenereUtenlandsoppholdPeriode(periode: Utenlandsopphold, index: number): SoknadActionTypes {
     return {
         type: SoknadActionKeys.EDIT_SENERE_UTENLANDSOPPHOLD_PERIODE,
         periode,
@@ -52,7 +52,7 @@ export function editSenereUtenlandsoppholdPeriode(periode: Periode, index: numbe
     };
 }
 
-export function deleteSenereUtenlandsoppholdPeriode(periode: Periode): SoknadActionTypes {
+export function deleteSenereUtenlandsoppholdPeriode(periode: Utenlandsopphold): SoknadActionTypes {
     return {
         type: SoknadActionKeys.DELETE_SENERE_UTENLANDSOPPHOLD_PERIODE,
         periode
@@ -78,7 +78,7 @@ export function setFødselsdato(fødselsdato: string): SoknadActionTypes {
         type: SoknadActionKeys.SET_FØDSELSDATO,
         fødselsdato
     };
-} 
+}
 
 export function setTermindato(termindato: string): SoknadActionTypes {
     return {

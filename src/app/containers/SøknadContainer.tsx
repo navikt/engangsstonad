@@ -9,27 +9,27 @@ import getMessage from '../util/i18n/i18nUtils';
 import getStepConfig from './../connected-components/engangsstonad-steg/steg.config';
 
 import '../styles/engangsstonad.less';
-import Utenlandsopphold from '../types/domain/Utenlandsopphold';
-import { FodtBarn, UfodtBarn } from '../types/domain/Barn';
-import AnnenForelder from '../types/domain/AnnenForelder';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
-import { DispatchProps } from '../redux/types';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import Person from 'app/types/domain/Person';
 import CancelButton from 'components/cancel-button/CancelButton';
+import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
+import { CommonState } from 'reducers/commonReducer';
+import { Attachment } from 'storage/attachment/types/Attachment';
+import { DispatchProps } from 'common/redux/types';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
+    søknad: EngangsstonadSoknad;
+    step: {activeStep: number};
+    common: CommonState;
     person: Person;
-    annenForelder: AnnenForelder;
-    utenlandsopphold: Utenlandsopphold;
-    barn: FodtBarn & UfodtBarn;
-    vedlegg: File[];
     activeStep: number;
     error: any;
     søknadSendt: boolean;
     søknadSendingInProgress: boolean;
+    vedlegg: Attachment[];
 }
 
 type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps<{}>;
@@ -60,19 +60,17 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     handleNextClicked() {
-        const { dispatch, annenForelder, barn, utenlandsopphold, vedlegg } = this.props;
+        const { dispatch, søknad, common, step, vedlegg } = this.props;
         if (this.hasToWaitForResponse()) {
             return dispatch(
-                api.sendSoknad({
-                    annenForelder,
-                    barn,
-                    utenlandsopphold,
-                    vedlegg
-                })
+                api.sendSoknad(søknad, vedlegg),
             );
         }
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
+        dispatch(api.saveAppState({
+            søknad, common, step
+        }));
     }
 
     handleBackClicked() {
@@ -83,9 +81,9 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     shouldRenderFortsettKnapp(): boolean {
-        const { activeStep, annenForelder, utenlandsopphold, barn, person, vedlegg, intl } = this.props;
+        const { activeStep, person, intl, søknad, vedlegg } = this.props;
         const stepConfig = getStepConfig(intl, person);
-        return stepConfig[activeStep - 1].nextStepCondition({ barn, annenForelder, utenlandsopphold, vedlegg });
+        return stepConfig[activeStep - 1].nextStepCondition({ ...søknad, vedlegg });
     }
 
     render() {
@@ -122,7 +120,7 @@ class SøknadContainer extends React.Component<Props> {
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     )}
-                    <CancelButton redirect="https://tjenester.nav.no/dittnav/oversikt"/>
+                    <CancelButton redirect="https://tjenester.nav.no/dittnav/oversikt" />
                 </ValidForm>
             </div>
         );
@@ -130,14 +128,14 @@ class SøknadContainer extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
+    søknad: state.soknadReducer,
+    step: state.stepReducer,
+    common: state.commonReducer,
     person: state.apiReducer.person,
-    utenlandsopphold: state.soknadReducer.utenlandsopphold,
-    barn: state.soknadReducer.barn,
-    vedlegg: state.soknadReducer.vedlegg,
-    annenForelder: state.soknadReducer.annenForelder,
     activeStep: state.stepReducer.activeStep,
     error: state.apiReducer.error,
     søknadSendt: state.apiReducer.søknadSendt,
-    søknadSendingInProgress: state.apiReducer.søknadSendingInProgress
+    søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
+    vedlegg: state.attachmentReducer
 });
 export default connect<OwnProps>(mapStateToProps)(injectIntl(SøknadContainer));

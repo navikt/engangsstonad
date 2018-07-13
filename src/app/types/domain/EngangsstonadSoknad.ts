@@ -1,11 +1,11 @@
-import Utenlandsopphold from './Utenlandsopphold';
+import InformasjonOmUtenlandsopphold from './InformasjonOmUtenlandsopphold';
 import { FodtBarn, UfodtBarn } from './Barn';
 import AnnenForelder from './AnnenForelder';
 
 type EngangsstonadSoknad = {
-    utenlandsopphold: Utenlandsopphold;
+    type: string;
+    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: FodtBarn | UfodtBarn;
-    vedlegg: File[];
     annenForelder: AnnenForelder;
 };
 

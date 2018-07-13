@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl';
 import getMessage from '../../util/i18n/i18nUtils';
 import Person from '../../types/domain/Person';
 
-import { DispatchProps } from 'app/redux/types';
+import { DispatchProps } from 'common/redux/types';
 import { ApiReducerState } from 'reducers/apiReducer';
 import { CommonState } from 'reducers/commonReducer';
 

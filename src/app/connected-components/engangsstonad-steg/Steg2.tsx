@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 const { Checkbox, Input } = require('nav-frontend-skjema');
-import { DispatchProps } from '../../redux/types';
+import { DispatchProps } from 'common/redux/types';
 import { injectIntl } from 'react-intl';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import AnnenForelder from '../../types/domain/AnnenForelder';
@@ -16,7 +16,7 @@ import {
 } from 'actions/soknad/soknadActionCreators';
 import CountrySelect from 'components/country-select/CountrySelect';
 import FormBlock from 'components/form-block/FormBlock';
-import LabelText from 'components/labeltext/LabelText';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import Person from '../../types/domain/Person';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
@@ -34,6 +34,10 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 class Steg2 extends React.Component<Props> {
+    componentDidMount() {
+        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-2'), 5000);
+    }
+
     getFødselsnummerValidators() {
         const { annenForelder, intl, person } = this.props;
         return [

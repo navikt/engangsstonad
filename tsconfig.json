@@ -23,7 +23,10 @@
 		"suppressImplicitAnyIndexErrors": true,
 		"noUnusedLocals": true,
 		"baseUrl": "./src",
-		"typeRoots": ["./node_modules/@types", "./src/@types"],
+        "typeRoots": [
+            "./node_modules/@types",
+            "./src/@types"
+        ],
 		"paths": {
 			"shared/*": [
 				"app/components/shared/*"
@@ -51,7 +54,9 @@
 			],
 			"util/*": [
 				"app/util/*"
-			]
+			],
+            "common/*": ["./common/*"],
+            "storage/*": ["./storage/*"]
 		}
 	},
 	"exclude": [

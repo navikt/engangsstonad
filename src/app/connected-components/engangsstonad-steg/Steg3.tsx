@@ -3,10 +3,10 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import * as moment from 'moment';
 import getMessage from 'util/i18n/i18nUtils';
 import { soknadActionCreators as soknad } from '../../redux/actions';
-import Utenlandsopphold, { Periode } from '../../types/domain/Utenlandsopphold';
-import { DispatchProps } from '../../redux/types/index';
+import InformasjonOmUtenlandsopphold, { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
+import { DispatchProps } from 'common/redux/types';
 import CountryPicker from '../../components/country-picker/CountryPicker';
-import Barn, { UfodtBarn } from '../../types/domain/Barn';
+import Barn from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import FormBlock from 'components/form-block/FormBlock';
 import { Tidsperiode } from 'nav-datovelger';
@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 
 interface StateProps {
     barn: Barn;
-    utenlandsopphold: Utenlandsopphold;
+    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     vedlegg: File[];
     language: string;
 }
@@ -24,6 +24,10 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 class Steg3 extends React.Component<Props> {
+    componentDidMount() {
+        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-3'), 5000);
+    }
+
     componentWillMount() {
         this.overlapsWithOtherUtenlandsopphold = this.overlapsWithOtherUtenlandsopphold.bind(this);
         this.validateFomDatoSiste12Mnd = this.validateFomDatoSiste12Mnd.bind(this);
@@ -40,8 +44,8 @@ class Steg3 extends React.Component<Props> {
     }
 
     overlapsWithOtherUtenlandsopphold(momentFom: any, momentTom: any, utenlandsoppholdInEditMode: any) {
-        const { tidligerePerioder, senerePerioder } = this.props.utenlandsopphold;
-        const perioder = [...tidligerePerioder, ...senerePerioder];
+        const { tidligereOpphold, senereOpphold } = this.props.informasjonOmUtenlandsopphold;
+        const perioder = [...tidligereOpphold, ...senereOpphold];
         const overlappendePeriode = perioder.find(periode => {
             if (periode !== utenlandsoppholdInEditMode) {
                 const { varighet } = periode;
@@ -171,7 +175,7 @@ class Steg3 extends React.Component<Props> {
     }
 
     getINorgeSiste12SelectedValue() {
-        const { iNorgeSiste12Mnd } = this.props.utenlandsopphold;
+        const { iNorgeSiste12Mnd } = this.props.informasjonOmUtenlandsopphold;
         if (iNorgeSiste12Mnd === true) {
             return 'norway';
         } else if (iNorgeSiste12Mnd === false) {
@@ -182,7 +186,7 @@ class Steg3 extends React.Component<Props> {
     }
 
     getINorgeNeste12SelectedValue() {
-        const { iNorgeNeste12Mnd } = this.props.utenlandsopphold;
+        const { iNorgeNeste12Mnd } = this.props.informasjonOmUtenlandsopphold;
         if (iNorgeNeste12Mnd === true) {
             return 'norway';
         } else if (iNorgeNeste12Mnd === false) {
@@ -193,7 +197,7 @@ class Steg3 extends React.Component<Props> {
     }
 
     getFødselINorgeSelectedValue() {
-        const { fødselINorge } = this.props.utenlandsopphold;
+        const { fødselINorge } = this.props.informasjonOmUtenlandsopphold;
         if (fødselINorge === true) {
             return 'norway';
         } else if (fødselINorge === false) {
@@ -204,8 +208,8 @@ class Steg3 extends React.Component<Props> {
     }
 
     render() {
-        const { dispatch, intl, utenlandsopphold, barn, language } = this.props;
-        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligerePerioder, senerePerioder } = utenlandsopphold;
+        const { dispatch, intl, informasjonOmUtenlandsopphold, barn, language } = this.props;
+        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligereOpphold, senereOpphold } = informasjonOmUtenlandsopphold;
 
         const tidsperiodeForegående: Tidsperiode = {
             startdato: moment()
@@ -255,10 +259,10 @@ class Steg3 extends React.Component<Props> {
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegBodde')}
                         language={language}
-                        utenlandsoppholdListe={tidligerePerioder}
-                        addVisit={(periode: Periode) => dispatch(soknad.addTidligereUtenlandsoppholdPeriode(periode))}
-                        editVisit={(periode: Periode, i: number) => dispatch(soknad.editTidligereUtenlandsoppholdPeriode(periode, i))}
-                        deleteVisit={(periode: Periode) => dispatch(soknad.deleteTidligereUtenlandsoppholdPeriode(periode))}
+                        utenlandsoppholdListe={tidligereOpphold}
+                        addVisit={(periode: Utenlandsopphold) => dispatch(soknad.addTidligereUtenlandsoppholdPeriode(periode))}
+                        editVisit={(periode: Utenlandsopphold, i: number) => dispatch(soknad.editTidligereUtenlandsoppholdPeriode(periode, i))}
+                        deleteVisit={(periode: Utenlandsopphold) => dispatch(soknad.deleteTidligereUtenlandsoppholdPeriode(periode))}
                         tidsperiode={tidsperiodeForegående}
                         validators={{
                             validateLand: this.validateLand,
@@ -267,7 +271,7 @@ class Steg3 extends React.Component<Props> {
                         }}
                     />
                 </FormBlock>
-                <FormBlock visible={iNorgeSiste12Mnd || tidligerePerioder.length > 0}>
+                <FormBlock visible={iNorgeSiste12Mnd || tidligereOpphold.length > 0}>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
                         name="iNorgeNeste12"
@@ -290,16 +294,16 @@ class Steg3 extends React.Component<Props> {
                 </FormBlock>
                 <FormBlock
                     visible={
-                        iNorgeNeste12Mnd === false && (iNorgeSiste12Mnd === true || (iNorgeSiste12Mnd === false && tidligerePerioder.length > 0))
+                        iNorgeNeste12Mnd === false && (iNorgeSiste12Mnd === true || (iNorgeSiste12Mnd === false && tidligereOpphold.length > 0))
                     }
                 >
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegSkalBo')}
                         language={language}
-                        utenlandsoppholdListe={senerePerioder}
-                        addVisit={(periode: Periode) => dispatch(soknad.addSenereUtenlandsoppholdPeriode(periode))}
-                        editVisit={(periode: Periode, i: number) => dispatch(soknad.editSenereUtenlandsoppholdPeriode(periode, i))}
-                        deleteVisit={(periode: Periode) => dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))}
+                        utenlandsoppholdListe={senereOpphold}
+                        addVisit={(periode: Utenlandsopphold) => dispatch(soknad.addSenereUtenlandsoppholdPeriode(periode))}
+                        editVisit={(periode: Utenlandsopphold, i: number) => dispatch(soknad.editSenereUtenlandsoppholdPeriode(periode, i))}
+                        deleteVisit={(periode: Utenlandsopphold) => dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))}
                         tidsperiode={tidsperiodeKommende}
                         validators={{
                             validateLand: this.validateLand,
@@ -310,12 +314,16 @@ class Steg3 extends React.Component<Props> {
                 </FormBlock>
                 <FormBlock
                     visible={
-                        (iNorgeSiste12Mnd || tidligerePerioder.length > 0) && (
-                        (iNorgeNeste12Mnd || senerePerioder.length > 0) && (barn as UfodtBarn).termindato !== undefined)
+                        (iNorgeSiste12Mnd || tidligereOpphold.length > 0) && (
+                            (iNorgeNeste12Mnd || senereOpphold.length > 0))
                     }
                 >
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.bostedFodsel', {
+                            tempus:
+                                barn.erBarnetFødt
+                                    ? getMessage(intl, 'medlemmskap.text.bostedFodselFortid')
+                                    : getMessage(intl, 'medlemmskap.text.bostedFodselFremtid'),
                             antallBarn:
                                 barn.antallBarn && barn.antallBarn > 1
                                     ? getMessage(intl, 'medlemmskap.text.barnFlertall')
@@ -327,12 +335,18 @@ class Steg3 extends React.Component<Props> {
                         radios={[
                             {
                                 inputProps: { id: 'js-fodselINorge' },
-                                label: getMessage(intl, 'medlemmskap.radiobutton.vareNorge'),
+                                label:
+                                    barn.erBarnetFødt
+                                        ? getMessage(intl, 'medlemmskap.radiobutton.iNorge')
+                                        : getMessage(intl, 'medlemmskap.radiobutton.vareNorge'),
                                 value: 'norway'
                             },
                             {
                                 inputProps: { id: 'js-fodselIUtlandet' },
-                                label: getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'),
+                                label:
+                                    barn.erBarnetFødt
+                                        ? getMessage(intl, 'medlemmskap.radiobutton.iUtlandet')
+                                        : getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'),
                                 value: 'abroad'
                             }
                         ]}
@@ -345,7 +359,7 @@ class Steg3 extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-    utenlandsopphold: state.soknadReducer.utenlandsopphold,
+    informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold,
     barn: state.soknadReducer.barn,
     vedlegg: state.soknadReducer.vedlegg,
     language: state.commonReducer.language

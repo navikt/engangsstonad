@@ -1,3 +1,5 @@
+import Bankkonto from './Bankkonto';
+
 type Person = {
     fnr: string;
     fornavn: string;
@@ -7,6 +9,7 @@ type Person = {
     kjønn: string;
     fødselsdato: string;
     ikkeNordiskEøsLand: boolean;
+    bankkonto?: Bankkonto;
 };
 
 export default Person;

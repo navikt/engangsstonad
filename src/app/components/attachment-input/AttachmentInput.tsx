@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AttachmentButton from 'components/attachment/AttachmentButton';
 import AttachmentList from 'components/attachment/AttachmentList';
-import LabelText from 'components/labeltext/LabelText';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import { ValidGroup } from '../../lib';
 import { Validator } from '../../lib/types';
 import { FormattedMessage } from 'react-intl';

@@ -8,12 +8,12 @@ import { soknadActionCreators as soknad } from '../../redux/actions';
 import { default as Barn } from '../../types/domain/Barn';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import Person from '../../types/domain/Person';
-import { DispatchProps } from '../../redux/types';
+import { DispatchProps } from 'common/redux/types';
 import getMessage from 'util/i18n/i18nUtils';
 import '../../styles/engangsstonad.less';
 import { steg1Partials } from './partials';
 import FormBlock from 'components/form-block/FormBlock';
-import LabelText from 'components/labeltext/LabelText';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
 interface StateProps {
@@ -29,6 +29,10 @@ interface State {
 }
 
 class Steg1 extends React.Component<Props, State> {
+    componentDidMount() {
+        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-1'), 5000);
+    }
+
     getFodselsTidspunktSelectedValue() {
         const { barn } = this.props;
         if (barn) {
@@ -132,7 +136,7 @@ class Steg1 extends React.Component<Props, State> {
 const mapStateToProps = (state: any) => ({
     barn: state.soknadReducer.barn,
     person: state.commonReducer.person,
-    vedlegg: state.soknadReducer.vedlegg
+    vedlegg: state.attachmentReducer
 });
 
 export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg1));

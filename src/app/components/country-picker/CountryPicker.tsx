@@ -2,9 +2,9 @@ import * as React from 'react';
 const { Knapp } = require('nav-frontend-knapper');
 import CountryModal from 'components/country-picker/CountryModal';
 import { CountryList } from 'components/country-picker/CountryList';
-import { Periode } from '../../types/domain/Utenlandsopphold';
+import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 import './countryPicker.less';
-import LabelText from 'components/labeltext/LabelText';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
 
@@ -17,17 +17,17 @@ interface Validators {
 interface Props {
     label: string;
     language: string;
-    utenlandsoppholdListe: Periode[];
+    utenlandsoppholdListe: Utenlandsopphold[];
     tidsperiode?: Tidsperiode;
-    addVisit: (periode: Periode) => void;
-    deleteVisit: (periode: Periode) => void;
-    editVisit: (periode: Periode, index: number) => void;
+    addVisit: (periode: Utenlandsopphold) => void;
+    deleteVisit: (periode: Utenlandsopphold) => void;
+    editVisit: (periode: Utenlandsopphold, index: number) => void;
     validators?: Validators;
 }
 
 interface State {
     isOpen: boolean;
-    editVisit?: Periode;
+    editVisit?: Utenlandsopphold;
 }
 
 class CountryPicker extends React.Component<Props, State> {
@@ -53,20 +53,20 @@ class CountryPicker extends React.Component<Props, State> {
         this.setState({ isOpen: false, editVisit: undefined });
     }
 
-    addVisit(periode: Periode) {
+    addVisit(periode: Utenlandsopphold) {
         this.props.addVisit(periode);
         this.setState({ isOpen: false });
     }
 
-    onEditClick(periode: Periode) {
+    onEditClick(periode: Utenlandsopphold) {
         this.setState({ editVisit: periode, isOpen: true });
     }
 
-    onDeleteClick(periode: Periode) {
+    onDeleteClick(periode: Utenlandsopphold) {
         this.props.deleteVisit(periode);
     }
 
-    onModalSubmit(periode: Periode) {
+    onModalSubmit(periode: Utenlandsopphold) {
         const { editVisit } = this.state;
         if (editVisit === undefined) {
             this.props.addVisit(periode);
@@ -86,15 +86,15 @@ class CountryPicker extends React.Component<Props, State> {
                     <div className="blokk-s">
                         <CountryList
                             utenlandsoppholdListe={this.props.utenlandsoppholdListe}
-                            onEditClick={(periode: Periode) => this.onEditClick(periode)}
-                            onDeleteClick={(periode: Periode) => this.onDeleteClick(periode)}
+                            onEditClick={(periode: Utenlandsopphold) => this.onEditClick(periode)}
+                            onDeleteClick={(periode: Utenlandsopphold) => this.onDeleteClick(periode)}
                         />
                     </div>
                 )}
                 {this.state.isOpen && (
                     <CountryModal
                         utenlandsopphold={this.state.editVisit}
-                        onSubmit={(periode: Periode) => this.onModalSubmit(periode)}
+                        onSubmit={(periode: Utenlandsopphold) => this.onModalSubmit(periode)}
                         closeModal={() => this.closeModal()}
                         language={this.props.language}
                         label={this.props.label}

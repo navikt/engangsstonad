@@ -3,7 +3,7 @@ import { InjectedIntlProps } from 'react-intl';
 import { soknadActionCreators as soknad } from '../../../../redux/actions';
 import { default as Barn, UfodtBarn } from '../../../../types/domain/Barn';
 import getMessage from 'util/i18n/i18nUtils';
-import { DispatchProps } from '../../../../redux/types/index';
+import { DispatchProps } from 'common/redux/types';
 import OmTerminbekreftelsen from 'components/modal-content/OmTerminbekreftelsen';
 import {
     erIUke26Pluss3,
@@ -16,11 +16,11 @@ import {
     getSisteMuligeTerminbekreftesesdato
 } from 'util/validation/validationUtils';
 const Modal = require('nav-frontend-modal').default;
-import LabelText from 'components/labeltext/LabelText';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import ValidDateInput from '../../../../lib/valid-date-input';
 import FormBlock from 'components/form-block/FormBlock';
-import Terminbekreftelse from './Terminbekreftelse';
 import { buildDateObject } from 'util/date/dateUtils';
+import Søknadsvedlegg from './Søknadsvedlegg';
 
 interface StateProps {
     barn: Barn;
@@ -122,11 +122,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 )}
 
                 <FormBlock visible={barn.termindato !== undefined}>
-                    <Terminbekreftelse
-                        vedlegg={vedlegg}
-                        onFilesSelect={files => dispatch(soknad.addVedlegg(files))}
-                        onFileDelete={file => dispatch(soknad.deleteVedlegg(file))}
-                    />
+                    <Søknadsvedlegg type="terminbekreftelse" />
                 </FormBlock>
 
                 <FormBlock visible={vedlegg.length > 0 && barn.termindato !== undefined}>

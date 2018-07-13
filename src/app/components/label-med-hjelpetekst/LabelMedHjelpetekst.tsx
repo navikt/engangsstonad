@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
-import CustomSVG from './../custom-svg/CustomSVG';
+import CustomSVG from 'common/components/custom-svg/CustomSVG';
 const { Collapse } = require('react-collapse');
 const InfoIkon = require('./../../assets/svg/info_ikon.svg').default;
 const LukkInfoIkon = require('./../../assets/svg/lukk_info_ikon.svg').default;
@@ -10,7 +10,7 @@ const LukkInfoIkonSVG = <CustomSVG iconRef={LukkInfoIkon} size={14} />;
 
 import './labelMedHjelpetekst.less';
 import Sirkelknapp from 'components/sirkelknapp/Sirkelknapp';
-import LabelText from 'components/labeltext/LabelText';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 type Props = {

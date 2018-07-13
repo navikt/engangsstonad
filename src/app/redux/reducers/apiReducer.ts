@@ -8,7 +8,9 @@ const getDefaultState = (): ApiReducerState => ({
     isLoadingPerson: false,
     søknadSendt: false,
     søknadSendingInProgress: false,
-    person: undefined
+    person: undefined,
+    mellomlagretSøknad: false,
+    isLoadingAppState: false
 });
 
 export interface ApiReducerState {
@@ -16,6 +18,8 @@ export interface ApiReducerState {
     søknadSendt: boolean;
     søknadSendingInProgress: boolean;
     person?: Person;
+    mellomlagretSøknad: boolean;
+    isLoadingAppState: boolean;
 }
 
 const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
@@ -49,6 +53,22 @@ const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
                 error: action.error.response,
                 søknadSendt: true,
                 søknadSendingInProgress: false
+            };
+        case ApiActionKeys.GET_APP_STATE:
+            return {
+                ...state,
+                isLoadingAppState: true
+            };
+        case ApiActionKeys.GET_APP_STATE_SUCCESS:
+            return {
+                ...state,
+                isLoadingAppState: false,
+                mellomlagretSøknad: true
+            };
+        case ApiActionKeys.GET_APP_STATE_FAILED:
+            return {
+                ...state,
+                isLoadingAppState: false
             };
     }
     return state;

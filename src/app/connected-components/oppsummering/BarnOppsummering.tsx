@@ -7,10 +7,11 @@ import { ISODateToMaskedInput } from 'util/date/dateUtils';
 
 import '../../styles/engangsstonad.less';
 import SummaryBlock from 'components/summary-block/SummaryBlock';
+import { Attachment } from 'storage/attachment/types/Attachment';
 
 interface Props {
     barn: FodtBarn & UfodtBarn;
-    vedlegg: File[];
+    vedlegg: Attachment[];
 }
 
 const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = props => {
@@ -22,7 +23,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
         termindato,
         terminbekreftelseDato
     } = props.barn;
-    const vedleggSummary = props.vedlegg.map(vedleggElement => vedleggElement.name);
+    const vedleggSummary = props.vedlegg.map(vedleggElement => vedleggElement.filename);
 
     let antallBarnSummaryText;
     if (antallBarn === 1) {
@@ -38,8 +39,8 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
     return (
         // tslint:disable-next-line:jsx-alignment
         <SummaryBlock title={getMessage(intl, 'oppsummering.text.informasjonOmBarnet', {
-            antallBarn: antallBarn && antallBarn > 1 ? 
-                getMessage(intl, 'medlemmskap.text.barnFlertall') : 
+            antallBarn: antallBarn && antallBarn > 1 ?
+                getMessage(intl, 'medlemmskap.text.barnFlertall') :
                 getMessage(intl, 'medlemmskap.text.barnEntall') }
             )}
         >
