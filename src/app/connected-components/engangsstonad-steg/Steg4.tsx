@@ -94,7 +94,7 @@ const mapStateToProps = (state: any) => ({
     barn: state.soknadReducer.barn,
     vedlegg: state.attachmentReducer,
     annenForelder: state.soknadReducer.annenForelder,
-    informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold,
+    informasjonOmUtenlandsopphold: state.soknadReducer.utenlandsopphold,
     soknadPostResponse: state.apiReducer.soknad
 });
 export default connect<StateProps>(mapStateToProps)(injectIntl(Steg4));

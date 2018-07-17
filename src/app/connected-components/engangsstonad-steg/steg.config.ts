@@ -20,7 +20,7 @@ export interface NextStepCondition {
     type: string;
     barn: Barn;
     annenForelder: AnnenForelder;
-    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
+    utenlandsopphold: InformasjonOmUtenlandsopphold;
     vedlegg: Attachment[];
 }
 
@@ -44,7 +44,7 @@ const stepConfig = [
         stegIndikatorLabelIntlId: 'medlemmskap.sectionheading',
         component: Steg3,
         nextStepCondition: (data: NextStepCondition) =>
-            shouldDisplayNextButtonOnStep3(data.barn, data.informasjonOmUtenlandsopphold)
+            shouldDisplayNextButtonOnStep3(data.barn, data.utenlandsopphold)
     },
     {
         fortsettKnappLabelIntlId: 'standard.sectionheading',

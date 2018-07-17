@@ -44,8 +44,8 @@ class Steg3 extends React.Component<Props> {
     }
 
     overlapsWithOtherUtenlandsopphold(momentFom: any, momentTom: any, utenlandsoppholdInEditMode: any) {
-        const { tidligereOpphold, senereOpphold } = this.props.informasjonOmUtenlandsopphold;
-        const perioder = [...tidligereOpphold, ...senereOpphold];
+        const { tidligerePerioder, senerePerioder } = this.props.informasjonOmUtenlandsopphold;
+        const perioder = [...tidligerePerioder, ...senerePerioder];
         const overlappendePeriode = perioder.find(periode => {
             if (periode !== utenlandsoppholdInEditMode) {
                 const { varighet } = periode;
@@ -209,7 +209,7 @@ class Steg3 extends React.Component<Props> {
 
     render() {
         const { dispatch, intl, informasjonOmUtenlandsopphold, barn, language } = this.props;
-        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligereOpphold, senereOpphold } = informasjonOmUtenlandsopphold;
+        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligerePerioder, senerePerioder } = informasjonOmUtenlandsopphold;
 
         const tidsperiodeForegående: Tidsperiode = {
             startdato: moment()
@@ -259,7 +259,7 @@ class Steg3 extends React.Component<Props> {
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegBodde')}
                         language={language}
-                        utenlandsoppholdListe={tidligereOpphold}
+                        utenlandsoppholdListe={tidligerePerioder}
                         addVisit={(periode: Utenlandsopphold) => dispatch(soknad.addTidligereUtenlandsoppholdPeriode(periode))}
                         editVisit={(periode: Utenlandsopphold, i: number) => dispatch(soknad.editTidligereUtenlandsoppholdPeriode(periode, i))}
                         deleteVisit={(periode: Utenlandsopphold) => dispatch(soknad.deleteTidligereUtenlandsoppholdPeriode(periode))}
@@ -271,7 +271,7 @@ class Steg3 extends React.Component<Props> {
                         }}
                     />
                 </FormBlock>
-                <FormBlock visible={iNorgeSiste12Mnd || tidligereOpphold.length > 0}>
+                <FormBlock visible={iNorgeSiste12Mnd || tidligerePerioder.length > 0}>
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
                         name="iNorgeNeste12"
@@ -294,13 +294,13 @@ class Steg3 extends React.Component<Props> {
                 </FormBlock>
                 <FormBlock
                     visible={
-                        iNorgeNeste12Mnd === false && (iNorgeSiste12Mnd === true || (iNorgeSiste12Mnd === false && tidligereOpphold.length > 0))
+                        iNorgeNeste12Mnd === false && (iNorgeSiste12Mnd === true || (iNorgeSiste12Mnd === false && tidligerePerioder.length > 0))
                     }
                 >
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegSkalBo')}
                         language={language}
-                        utenlandsoppholdListe={senereOpphold}
+                        utenlandsoppholdListe={senerePerioder}
                         addVisit={(periode: Utenlandsopphold) => dispatch(soknad.addSenereUtenlandsoppholdPeriode(periode))}
                         editVisit={(periode: Utenlandsopphold, i: number) => dispatch(soknad.editSenereUtenlandsoppholdPeriode(periode, i))}
                         deleteVisit={(periode: Utenlandsopphold) => dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))}
@@ -314,8 +314,8 @@ class Steg3 extends React.Component<Props> {
                 </FormBlock>
                 <FormBlock
                     visible={
-                        (iNorgeSiste12Mnd || tidligereOpphold.length > 0) && (
-                            (iNorgeNeste12Mnd || senereOpphold.length > 0))
+                        (iNorgeSiste12Mnd || tidligerePerioder.length > 0) && (
+                            (iNorgeNeste12Mnd || senerePerioder.length > 0))
                     }
                 >
                     <RadioPanelGruppeResponsive
@@ -359,7 +359,7 @@ class Steg3 extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-    informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold,
+    informasjonOmUtenlandsopphold: state.soknadReducer.utenlandsopphold,
     barn: state.soknadReducer.barn,
     vedlegg: state.soknadReducer.vedlegg,
     language: state.commonReducer.language

@@ -13,8 +13,8 @@ type InformasjonOmUtenlandsopphold = {
     fødselINorge?: boolean;
     iNorgeSiste12Mnd?: boolean;
     iNorgeNeste12Mnd?: boolean;
-    tidligereOpphold: Utenlandsopphold[];
-    senereOpphold: Utenlandsopphold[];
+    tidligerePerioder: Utenlandsopphold[];
+    senerePerioder: Utenlandsopphold[];
 };
 
 export default InformasjonOmUtenlandsopphold;

@@ -2,15 +2,15 @@ import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 
 export default {
     cleanupSøknad: (søknad: EngangsstonadSoknad) => {
-        const { informasjonOmUtenlandsopphold } = søknad;
-        const { iNorgeSiste12Mnd, tidligereOpphold } = informasjonOmUtenlandsopphold;
-        const { iNorgeNeste12Mnd, senereOpphold } = informasjonOmUtenlandsopphold;
+        const { utenlandsopphold } = søknad;
+        const { iNorgeSiste12Mnd, tidligerePerioder } = utenlandsopphold;
+        const { iNorgeNeste12Mnd, senerePerioder } = utenlandsopphold;
 
-        if (iNorgeSiste12Mnd && tidligereOpphold.length > 0) {
-            søknad.informasjonOmUtenlandsopphold.tidligereOpphold = [];
+        if (iNorgeSiste12Mnd && tidligerePerioder.length > 0) {
+            søknad.utenlandsopphold.tidligerePerioder = [];
         }
-        if (iNorgeNeste12Mnd && senereOpphold.length > 0) {
-            søknad.informasjonOmUtenlandsopphold.senereOpphold = [];
+        if (iNorgeNeste12Mnd && senerePerioder.length > 0) {
+            søknad.utenlandsopphold.senerePerioder = [];
         }
 
         return søknad;

@@ -9,9 +9,9 @@ const getDefaultState = () => {
         barn: {
             fødselsdatoer: []
         },
-        informasjonOmUtenlandsopphold: {
-            tidligereOpphold: [],
-            senereOpphold: []
+        utenlandsopphold: {
+            tidligerePerioder: [],
+            senerePerioder: []
         },
         annenForelder: {}
     };
@@ -19,37 +19,37 @@ const getDefaultState = () => {
 };
 
 const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | GetAppStateSuccess) => {
-    let { barn, informasjonOmUtenlandsopphold } = state;
+    let { barn, utenlandsopphold } = state;
     switch (action.type) {
         case SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
-            const tidligereOpphold = informasjonOmUtenlandsopphold.tidligereOpphold.concat([action.periode]);
-            return { ...state, informasjonOmUtenlandsopphold: { ...informasjonOmUtenlandsopphold, tidligereOpphold } };
+            const tidligereOpphold = utenlandsopphold.tidligerePerioder.concat([action.periode]);
+            return { ...state, utenlandsopphold: { ...utenlandsopphold, tidligerePerioder: tidligereOpphold } };
         case SoknadActionKeys.EDIT_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
-            informasjonOmUtenlandsopphold.tidligereOpphold[action.index] = action.periode;
-            return { ...state, utenlandsopphold: informasjonOmUtenlandsopphold };
+            utenlandsopphold.tidligerePerioder[action.index] = action.periode;
+            return { ...state, utenlandsopphold: utenlandsopphold };
         case SoknadActionKeys.DELETE_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
             return {
                 ...state,
-                informasjonOmUtenlandsopphold: {
-                    ...informasjonOmUtenlandsopphold,
-                    tidligereOpphold: informasjonOmUtenlandsopphold.tidligereOpphold.filter((opphold) => {
+                utenlandsopphold: {
+                    ...utenlandsopphold,
+                    tidligerePerioder: utenlandsopphold.tidligerePerioder.filter((opphold) => {
                         return opphold.land !== action.periode.land;
                     })
                 }
             };
 
         case SoknadActionKeys.ADD_SENERE_UTENLANDSOPPHOLD_PERIODE:
-            const senereOpphold = informasjonOmUtenlandsopphold.senereOpphold.concat([action.periode]);
-            return { ...state, informasjonOmUtenlandsopphold: { ...informasjonOmUtenlandsopphold, senereOpphold } };
+            const senereOpphold = utenlandsopphold.senerePerioder.concat([action.periode]);
+            return { ...state, utenlandsopphold: { ...utenlandsopphold, senerePerioder: senereOpphold } };
         case SoknadActionKeys.EDIT_SENERE_UTENLANDSOPPHOLD_PERIODE:
-            informasjonOmUtenlandsopphold.senereOpphold[action.index] = action.periode;
-            return { ...state, utenlandsopphold: informasjonOmUtenlandsopphold };
+            utenlandsopphold.senerePerioder[action.index] = action.periode;
+            return { ...state, utenlandsopphold: utenlandsopphold };
         case SoknadActionKeys.DELETE_SENERE_UTENLANDSOPPHOLD_PERIODE:
             return {
                 ...state,
-                informasjonOmUtenlandsopphold: {
-                    ...informasjonOmUtenlandsopphold,
-                    senereOpphold: informasjonOmUtenlandsopphold.senereOpphold.filter((opphold) => {
+                utenlandsopphold: {
+                    ...utenlandsopphold,
+                    senerePerioder: utenlandsopphold.senerePerioder.filter((opphold) => {
                         return opphold.land !== action.periode.land;
                     })
                 }
@@ -57,33 +57,33 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | G
 
         case SoknadActionKeys.SET_JOBBET_I_NORGE_SISTE_12_MND:
             const { jobbetINorgeSiste12Mnd } = action;
-            return { ...state, informasjonOmUtenlandsopphold: { ...informasjonOmUtenlandsopphold, jobbetINorgeSiste12Mnd } };
+            return { ...state, utenlandsopphold: { ...utenlandsopphold, jobbetINorgeSiste12Mnd } };
         case SoknadActionKeys.SET_FODSEL_I_NORGE:
             const { fødselINorge } = action;
-            return { ...state, informasjonOmUtenlandsopphold: { ...informasjonOmUtenlandsopphold, fødselINorge } };
+            return { ...state, utenlandsopphold: { ...utenlandsopphold, fødselINorge } };
         case SoknadActionKeys.SET_I_NORGE_SISTE_12_MND:
             const { iNorgeSiste12Mnd } = action;
             return {
-                ...state, informasjonOmUtenlandsopphold: {
-                    ...getDefaultState().informasjonOmUtenlandsopphold,
+                ...state, utenlandsopphold: {
+                    ...getDefaultState().utenlandsopphold,
                     iNorgeSiste12Mnd,
-                    iNorgeNeste12Mnd: state.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd,
-                    fødselINorge: state.informasjonOmUtenlandsopphold.fødselINorge,
-                    tidligereOpphold: state.informasjonOmUtenlandsopphold.tidligereOpphold,
-                    senereOpphold: state.informasjonOmUtenlandsopphold.senereOpphold
+                    iNorgeNeste12Mnd: state.utenlandsopphold.iNorgeNeste12Mnd,
+                    fødselINorge: state.utenlandsopphold.fødselINorge,
+                    tidligerePerioder: state.utenlandsopphold.tidligerePerioder,
+                    senerePerioder: state.utenlandsopphold.senerePerioder
                 }
             };
         case SoknadActionKeys.SET_I_NORGE_NESTE_12_MND:
             const { iNorgeNeste12Mnd } = action;
             return {
                 ...state,
-                informasjonOmUtenlandsopphold: {
-                    ...informasjonOmUtenlandsopphold,
+                utenlandsopphold: {
+                    ...utenlandsopphold,
                     iNorgeNeste12Mnd,
-                    iNorgeSiste12Mnd: state.informasjonOmUtenlandsopphold.iNorgeSiste12Mnd,
-                    fødselINorge: state.informasjonOmUtenlandsopphold.fødselINorge,
-                    tidligereOpphold: state.informasjonOmUtenlandsopphold.tidligereOpphold,
-                    senereOpphold: state.informasjonOmUtenlandsopphold.senereOpphold
+                    iNorgeSiste12Mnd: state.utenlandsopphold.iNorgeSiste12Mnd,
+                    fødselINorge: state.utenlandsopphold.fødselINorge,
+                    tidligerePerioder: state.utenlandsopphold.tidligerePerioder,
+                    senerePerioder: state.utenlandsopphold.senerePerioder
                 }
             };
         case SoknadActionKeys.SET_ER_BARNET_FODT:
@@ -94,8 +94,8 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | G
                     fødselsdatoer: [],
                     erBarnetFødt
                 },
-                informasjonOmUtenlandsopphold: {
-                    ...informasjonOmUtenlandsopphold,
+                utenlandsopphold: {
+                    ...utenlandsopphold,
                     fødselINorge: undefined
                 }
             };

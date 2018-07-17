@@ -37,11 +37,11 @@ export const shouldDisplayNextButtonOnStep2 = (
 };
 
 export const iNorgeSiste12MndIsValid = (u: InformasjonOmUtenlandsopphold) => {
-    return u.iNorgeSiste12Mnd === true || (u.iNorgeSiste12Mnd === false && u.tidligereOpphold.length > 0);
+    return u.iNorgeSiste12Mnd === true || (u.iNorgeSiste12Mnd === false && u.tidligerePerioder.length > 0);
 };
 
 export const iNorgeNeste12MndIsValid = (u: InformasjonOmUtenlandsopphold) => {
-    return u.iNorgeNeste12Mnd === true || (u.iNorgeNeste12Mnd === false && u.senereOpphold.length > 0);
+    return u.iNorgeNeste12Mnd === true || (u.iNorgeNeste12Mnd === false && u.senerePerioder.length > 0);
 };
 
 export const shouldDisplayNextButtonOnStep3 = (

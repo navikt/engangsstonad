@@ -4,7 +4,7 @@ import AnnenForelder from './AnnenForelder';
 
 type EngangsstonadSoknad = {
     type: string;
-    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
+    utenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: FodtBarn | UfodtBarn;
     annenForelder: AnnenForelder;
 };
