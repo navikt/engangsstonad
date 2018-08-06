@@ -8,6 +8,7 @@ import {
 } from 'storage/attachment/redux/attachmentActionCreators';
 import { DispatchProps } from 'common/redux/types';
 import VedleggOversikt from 'common/components/vedlegg/VedleggOversikt';
+import { storageFeatureIsActive } from 'util/featureToggles';
 
 export interface OwnProps {
     group: string;
@@ -39,7 +40,9 @@ class AttachmentsUploader extends React.Component<Props, {}> {
 
     onFilesSelect(files: Attachment[]) {
         this.props.dispatch(addAttachments(files, this.props.group));
-        this.uploadNewFiles(files);
+        if (storageFeatureIsActive()) {
+            this.uploadNewFiles(files);
+        }
     }
 
     onFileDelete(file: Attachment) {
