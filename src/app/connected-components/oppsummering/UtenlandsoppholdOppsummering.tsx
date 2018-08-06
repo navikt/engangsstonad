@@ -21,8 +21,8 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
         fødselINorge,
         iNorgeNeste12Mnd,
         iNorgeSiste12Mnd,
-        tidligerePerioder,
-        senerePerioder
+        tidligereOpphold,
+        senereOpphold
     } = props.informasjonOmUtenlandsopphold;
 
     return (
@@ -37,7 +37,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                         <EtikettLiten className="textWithLabel__label">
                             {getMessage(intl, 'oppsummering.text.boddSisteTolv')}
                         </EtikettLiten>
-                        <CountrySummaryList utenlandsoppholdListe={tidligerePerioder} />
+                        <CountrySummaryList utenlandsoppholdListe={tidligereOpphold} />
                     </div>
                 )}
             {iNorgeNeste12Mnd ? (
@@ -50,7 +50,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                         <EtikettLiten className="textWithLabel__label">
                             {getMessage(intl, 'medlemmskap.text.oppsummering.neste12mnd')}
                         </EtikettLiten>
-                        <CountrySummaryList utenlandsoppholdListe={senerePerioder} />
+                        <CountrySummaryList utenlandsoppholdListe={senereOpphold} />
                     </div>
                 )}
             {erBarnetFødt === false && fødselINorge !== undefined && (
