@@ -48,9 +48,9 @@ class Steg3 extends React.Component<Props> {
         const perioder = [...tidligereOpphold, ...senereOpphold];
         const overlappendePeriode = perioder.find(periode => {
             if (periode !== utenlandsoppholdInEditMode) {
-                const { varighet } = periode;
-                const varighetFom = moment(varighet.fom),
-                    varighetTom = moment(varighet.tom);
+                const { tidsperiode } = periode;
+                const varighetFom = moment(tidsperiode.fom),
+                    varighetTom = moment(tidsperiode.tom);
                 return (
                     momentFom.isBetween(varighetFom.subtract(1, 'seconds'), varighetTom.add(1, 'seconds')) ||
                     momentTom.isBetween(varighetFom.subtract(1, 'seconds'), varighetTom.add(1, 'seconds')) ||

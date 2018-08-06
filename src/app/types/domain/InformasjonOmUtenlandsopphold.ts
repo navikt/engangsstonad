@@ -1,9 +1,9 @@
 export type Utenlandsopphold = {
     land: string;
-    varighet: Varighet;
+    tidsperiode: Tidsperiode;
 };
 
-export type Varighet = {
+export type Tidsperiode = {
     tom: string;
     fom: string;
 };

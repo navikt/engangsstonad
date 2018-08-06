@@ -31,7 +31,8 @@ const renderApp = (decoratorFragments) =>
             Object.assign(
                 {
                     REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL,
-                    LOGIN_URL: process.env.LOGINSERVICE_URL
+                    LOGIN_URL: process.env.LOGINSERVICE_URL,
+                    FEATURE_STORAGE: process.env.FEATURE_STORAGE
                 },
                 decoratorFragments
             ),
