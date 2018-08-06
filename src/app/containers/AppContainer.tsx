@@ -22,6 +22,7 @@ import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSokn
 
 import '../styles/engangsstonad.less';
 import { DispatchProps } from 'common/redux/types';
+import { storageFeatureIsActive } from 'util/featureToggles';
 
 interface StateProps {
     soknad: EngangsstonadSoknadResponse;
@@ -57,7 +58,9 @@ class AppContainer extends React.Component<Props> {
         }
         if (!person) {
             dispatch(api.getPerson());
-            dispatch(api.getAppState());
+            if (storageFeatureIsActive()) {
+                dispatch(api.getAppState());
+            }
         }
     }
 

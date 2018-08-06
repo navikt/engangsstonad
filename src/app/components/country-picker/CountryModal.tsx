@@ -49,7 +49,7 @@ const getValidPeriode = (formData: PeriodeForm): Utenlandsopphold | undefined =>
     if (land && fom && tom) {
         return {
             land: land.value,
-            varighet: {
+            tidsperiode: {
                 fom: fom.value,
                 tom: tom.value
             }
@@ -68,8 +68,8 @@ const getDateFromString = (dato?: string) => {
 const getRegistrertePerioder = (alleOpphold: Utenlandsopphold[], gjeldendeOpphold?: Utenlandsopphold): Tidsperiode[] => {
     let arr = gjeldendeOpphold ? alleOpphold.filter(o => o !== gjeldendeOpphold) : alleOpphold;
     return arr.map(opphold => ({
-        startdato: new Date(opphold.varighet.fom),
-        sluttdato: new Date(opphold.varighet.tom)
+        startdato: new Date(opphold.tidsperiode.fom),
+        sluttdato: new Date(opphold.tidsperiode.tom)
     }));
 };
 
@@ -82,10 +82,10 @@ const getDefaultState = (utenlandsopphold?: Utenlandsopphold): State => {
                     value: utenlandsopphold.land
                 },
                 fom: {
-                    value: utenlandsopphold.varighet.fom
+                    value: utenlandsopphold.tidsperiode.fom
                 },
                 tom: {
-                    value: utenlandsopphold.varighet.tom
+                    value: utenlandsopphold.tidsperiode.tom
                 }
             }
         };

@@ -23,10 +23,10 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | G
     switch (action.type) {
         case SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
             const tidligereOpphold = informasjonOmUtenlandsopphold.tidligereOpphold.concat([action.periode]);
-            return { ...state, informasjonOmUtenlandsopphold: { ...informasjonOmUtenlandsopphold, tidligereOpphold } };
+            return { ...state, informasjonOmUtenlandsopphold: { ...informasjonOmUtenlandsopphold, tidligereOpphold: tidligereOpphold } };
         case SoknadActionKeys.EDIT_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
             informasjonOmUtenlandsopphold.tidligereOpphold[action.index] = action.periode;
-            return { ...state, utenlandsopphold: informasjonOmUtenlandsopphold };
+            return { ...state, informasjonOmUtenlandsopphold: informasjonOmUtenlandsopphold };
         case SoknadActionKeys.DELETE_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
             return {
                 ...state,
@@ -40,10 +40,10 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | G
 
         case SoknadActionKeys.ADD_SENERE_UTENLANDSOPPHOLD_PERIODE:
             const senereOpphold = informasjonOmUtenlandsopphold.senereOpphold.concat([action.periode]);
-            return { ...state, informasjonOmUtenlandsopphold: { ...informasjonOmUtenlandsopphold, senereOpphold } };
+            return { ...state, informasjonOmUtenlandsopphold: { ...informasjonOmUtenlandsopphold, senereOpphold: senereOpphold } };
         case SoknadActionKeys.EDIT_SENERE_UTENLANDSOPPHOLD_PERIODE:
             informasjonOmUtenlandsopphold.senereOpphold[action.index] = action.periode;
-            return { ...state, utenlandsopphold: informasjonOmUtenlandsopphold };
+            return { ...state, informasjonOmUtenlandsopphold: informasjonOmUtenlandsopphold };
         case SoknadActionKeys.DELETE_SENERE_UTENLANDSOPPHOLD_PERIODE:
             return {
                 ...state,

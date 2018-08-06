@@ -18,6 +18,7 @@ import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 import { CommonState } from 'reducers/commonReducer';
 import { Attachment } from 'storage/attachment/types/Attachment';
 import { DispatchProps } from 'common/redux/types';
+import { storageFeatureIsActive } from 'util/featureToggles';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -68,9 +69,12 @@ class SøknadContainer extends React.Component<Props> {
         }
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
-        dispatch(api.saveAppState({
-            søknad, common, step
-        }));
+
+        if (storageFeatureIsActive()) {
+            dispatch(api.saveAppState({
+                søknad, common, step
+            }));
+        }
     }
 
     handleBackClicked() {
