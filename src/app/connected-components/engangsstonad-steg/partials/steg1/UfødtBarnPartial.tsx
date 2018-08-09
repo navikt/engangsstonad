@@ -21,6 +21,7 @@ import ValidDateInput from '../../../../lib/valid-date-input';
 import FormBlock from 'components/form-block/FormBlock';
 import { buildDateObject } from 'util/date/dateUtils';
 import Søknadsvedlegg from './Søknadsvedlegg';
+import Veilederinfo from 'components/veileder-info/Veilederinfo';
 
 interface StateProps {
     barn: Barn;
@@ -89,7 +90,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
     }
 
     render() {
-        const { vedlegg, dispatch } = this.props;
+        const { vedlegg, dispatch, intl } = this.props;
         const barn = this.props.barn as UfodtBarn;
         const { antallBarn } = barn;
         const { termindato, terminbekreftelseDato } = barn;
@@ -122,6 +123,9 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 )}
 
                 <FormBlock visible={barn.termindato !== undefined}>
+                    <div className="blokk-xs" key="veileder">
+                        <Veilederinfo>{getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}</Veilederinfo>
+                    </div>
                     <Søknadsvedlegg type="terminbekreftelse" />
                 </FormBlock>
 
