@@ -10,6 +10,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import Lenke from 'nav-frontend-lenker';
 import { Attachment } from 'storage/attachment/types/Attachment';
 import { bytesString } from '../../util/filesize';
+import { storageFeatureIsActive } from 'util/featureToggles';
 
 interface OwnProps {
     attachment: Attachment;
@@ -18,6 +19,8 @@ interface OwnProps {
 }
 
 type Props = OwnProps & InjectedIntlProps;
+
+const canDeleteAttachment = (attachment: Attachment) => (attachment.uploaded || !storageFeatureIsActive());
 
 const Vedlegg: React.StatelessComponent<Props> = ({
     attachment,
@@ -48,8 +51,7 @@ const Vedlegg: React.StatelessComponent<Props> = ({
                 )}
             </div>
             {onDelete &&
-                attachment.uploaded &&
-                !attachment.pending && (
+                canDeleteAttachment(attachment) && (
                     <span className="vedlegg__slett">
                         <SlettKnapp
                             onClick={() => onDelete(attachment)}
