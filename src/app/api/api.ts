@@ -30,7 +30,7 @@ function sendSoknad(soknad: EngangsstonadSoknad, vedleggListe: Attachment[]) {
     formData.append('soknad', new Blob([JSON.stringify({...soknad })], { type: 'application/json' }));
     vedleggListe.forEach((vedlegg: Attachment) => formData.append('vedlegg', vedlegg.file));
 
-    const url = `${(<any> window).REST_API_URL}/engangsstonad`;
+    const url = `${(<any> window).REST_API_URL}/soknad`;
     return axios.post(url, formData, config);
 }
 
