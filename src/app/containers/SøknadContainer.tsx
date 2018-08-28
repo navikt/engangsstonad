@@ -64,7 +64,7 @@ class SøknadContainer extends React.Component<Props> {
         const { dispatch, søknad, common, step } = this.props;
         if (this.hasToWaitForResponse()) {
             return dispatch(
-                api.sendSoknad(søknad),
+                api.sendSoknad({ ...søknad }),
             );
         }
         const { activeStep } = this.props;
