@@ -7,7 +7,7 @@ import { ApiActionKeys } from 'actions/api/apiActionDefinitions';
 
 function* sendSøknad(action: any) {
     try {
-        const response = yield call(Api.sendSoknad, apiUtils.cleanupSøknad(action.soknad), action.vedlegg);
+        const response = yield call(Api.sendSoknad, apiUtils.cleanupSøknad(JSON.parse(JSON.stringify(action.soknad))));
         const kvittering: EngangsstonadSoknadResponse = response.data;
         yield put({ type: ApiActionKeys.SEND_SOKNAD_SUCCESS, kvittering });
     } catch (error) {
