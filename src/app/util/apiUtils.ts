@@ -18,9 +18,7 @@ const fetchAndCleanUpAttachments = (object: object): Attachment[] => {
                 foundAttachments.push(
                     ...removeAttachmentsWithUploadError(object[key])
                 );
-                object[key] = (object[key] as Attachment[]).map(
-                    (attachment: Attachment) => attachment.id
-                );
+                delete object[key];
             } else {
                 foundAttachments.push(
                     ...fetchAndCleanUpAttachments(object[key])
