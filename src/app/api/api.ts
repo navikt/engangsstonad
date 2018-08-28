@@ -19,7 +19,10 @@ function saveAppState(state: AppState) {
 
 function sendSoknad(soknad: EngangsstonadSoknad) {
     const config  = {
-        withCredentials: true
+        withCredentials: true,
+        headers: {
+            'content-type': 'application/json;'
+        }
     };
     
     const url = `${(<any> window).REST_API_URL}/engangsstonad`;
