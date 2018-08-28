@@ -2,7 +2,6 @@ import Person from '../../../types/domain/Person';
 import { default as EngangsstonadSoknad } from '../../../types/domain/EngangsstonadSoknad';
 import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
 import PersonRequest from '../../../types/services/PersonRequest';
-import { Attachment } from 'storage/attachment/types/Attachment';
 import { AppState } from 'common/redux/types';
 
 export enum ApiActionKeys {
@@ -39,7 +38,6 @@ interface GetPersonFailed {
 interface SendSoknad {
     type: ApiActionKeys.SEND_SOKNAD;
     soknad: EngangsstonadSoknad;
-    vedlegg: Attachment[];
 }
 
 interface SendSoknadSuccess {

@@ -16,9 +16,9 @@ import Person from 'app/types/domain/Person';
 import CancelButton from 'components/cancel-button/CancelButton';
 import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 import { CommonState } from 'reducers/commonReducer';
-import { Attachment } from 'storage/attachment/types/Attachment';
 import { DispatchProps } from 'common/redux/types';
 import { storageFeatureIsActive } from 'util/featureToggles';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -61,10 +61,10 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     handleNextClicked() {
-        const { dispatch, søknad, common, step, vedlegg } = this.props;
+        const { dispatch, søknad, common, step } = this.props;
         if (this.hasToWaitForResponse()) {
             return dispatch(
-                api.sendSoknad(søknad, vedlegg),
+                api.sendSoknad(søknad),
             );
         }
         const { activeStep } = this.props;

@@ -20,12 +20,12 @@ import LabelText from 'common/components/labeltekst/Labeltekst';
 import ValidDateInput from '../../../../lib/valid-date-input';
 import FormBlock from 'components/form-block/FormBlock';
 import { buildDateObject } from 'util/date/dateUtils';
-import Søknadsvedlegg from './Søknadsvedlegg';
 import Veilederinfo from 'components/veileder-info/Veilederinfo';
+import AttachmentsUploaderPure from 'common/storage/attachment/components/AttachmentUploaderPure';
+import { Attachment, AttachmentType, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 
 interface StateProps {
     barn: Barn;
-    vedlegg: File[];
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
@@ -90,10 +90,10 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
     }
 
     render() {
-        const { vedlegg, dispatch, intl } = this.props;
+        const { dispatch, intl } = this.props;
         const barn = this.props.barn as UfodtBarn;
         const { antallBarn } = barn;
-        const { termindato, terminbekreftelseDato } = barn;
+        const { termindato, terminbekreftelse, terminbekreftelseDato } = barn;
 
         const datoavgrensningTermindato = {
             minDato: getFørsteMuligeTermindato(),
@@ -126,11 +126,25 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                     <div className="blokk-xs" key="veileder">
                         <Veilederinfo>{getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}</Veilederinfo>
                     </div>
-                    <Søknadsvedlegg type="terminbekreftelse" />
+                    <AttachmentsUploaderPure
+                        attachments={terminbekreftelse || []}
+                        attachmentType={AttachmentType.TERMINBEKREFTELSE}
+                        skjemanummer={Skjemanummer.TERMINBEKREFTELSE}
+                        onFilesSelect={(attachments: Attachment[]) => {
+                            attachments.forEach((attachment: Attachment) => {
+                                dispatch(
+                                    soknad.uploadAttachment(attachment)
+                                );
+                            });
+                        }}
+                        onFileDelete={(attachment: Attachment) => {
+                            dispatch(soknad.deleteAttachment(attachment));
+                        }}
+                    />
                 </FormBlock>
 
-                <FormBlock visible={vedlegg.length > 0 && barn.termindato !== undefined}>
-                    <div key="dateInputTerminBekreftelse">
+                <FormBlock visible={barn.terminbekreftelse !== undefined && barn.terminbekreftelse.length > 0 && barn.termindato !== undefined}>
+                        <div key="dateInputTerminBekreftelse">
                         <ValidDateInput
                             id="terminbekreftelse"
                             name="terminbekreftelse"

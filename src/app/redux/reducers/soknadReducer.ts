@@ -2,6 +2,7 @@ import { SoknadActionKeys, SoknadActionTypes } from '../actions/soknad/soknadAct
 import EngangsstonadSoknad from '../../types/domain/EngangsstonadSoknad';
 import { FodtBarn } from '../../types/domain/Barn';
 import { GetAppStateSuccess, ApiActionKeys } from 'actions/api/apiActionDefinitions';
+import { addAttachmentToState, editAttachmentInState, removeAttachmentFromState } from '../util/attachmentStateUpdates';
 
 const getDefaultState = () => {
     const engangsstonadSoknad: EngangsstonadSoknad = {
@@ -143,6 +144,38 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | G
             return getDefaultState();
         case ApiActionKeys.GET_APP_STATE_SUCCESS:
             return {...state, ...action.appState.søknad};
+
+        case SoknadActionKeys.UPLOAD_ATTACHMENT:
+            const pendingAttachment = action.payload;
+            pendingAttachment.pending = true;
+            return addAttachmentToState(pendingAttachment, state);
+
+        case SoknadActionKeys.UPLOAD_ATTACHMENT_SUCCESS:
+            const uploadedAttachment = action.attachment;
+            const url = action.url;
+            uploadedAttachment.url = url;
+            uploadedAttachment.pending = false;
+            uploadedAttachment.uploaded = true;
+            return editAttachmentInState(uploadedAttachment, state);
+
+        case SoknadActionKeys.UPLOAD_ATTACHMENT_FAILED:
+            const failedAttachment = action.attachment;
+            failedAttachment.pending = false;
+            failedAttachment.uploaded = false;
+            return editAttachmentInState(failedAttachment, state);
+
+        case SoknadActionKeys.DELETE_ATTACHMENT:
+            const attachmentToDelete = action.attachment;
+            attachmentToDelete.pending = true;
+            return editAttachmentInState(attachmentToDelete, state);
+
+        case SoknadActionKeys.DELETE_ATTACHMENT_SUCCESS:
+            const deletedAttachment = action.attachment;
+            return removeAttachmentFromState(deletedAttachment, state);
+
+        case SoknadActionKeys.DELETE_ATTACHMENT_FAILED:
+            const attachmentFailedToDelete = action.attachment;
+            return removeAttachmentFromState(attachmentFailedToDelete, state);
     }
     return state;
 };

@@ -1,4 +1,5 @@
 import { Utenlandsopphold } from '../../../types/domain/InformasjonOmUtenlandsopphold';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 export enum SoknadActionKeys {
     // RelasjonTilBarn
@@ -7,8 +8,6 @@ export enum SoknadActionKeys {
     'SET_ER_BARNET_FODT' = 'setErBarnetFødt',
     'SET_TERMINDATO' = 'setTermindato',
     'SET_TERMINBEKREFTELSE_DATO' = 'setTerminbekreftelseDato',
-    'ADD_VEDLEGG' = 'addVedlegg',
-    'DELETE_VEDLEGG' = 'deleteVedlegg',
 
     // Medlemsskap
     'ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE' = 'addTidligereUtenlandsoppholdPeriode',
@@ -30,7 +29,15 @@ export enum SoknadActionKeys {
     'SET_ANNEN_FORELDER_KAN_IKKE_OPPGIS' = 'setAnnenForelderKanIkkeOppgis',
 
     // Annet
-    'RESET_SØKNAD' = 'resetSøknad'
+    'RESET_SØKNAD' = 'resetSøknad',
+
+    // attachments
+    'UPLOAD_ATTACHMENT' = 'uploadAttachment',
+    'UPLOAD_ATTACHMENT_SUCCESS' = 'uploadAttachmentSuccess',
+    'UPLOAD_ATTACHMENT_FAILED' = 'uploadAttachmentFailed',
+    'DELETE_ATTACHMENT' = 'deleteAttachment',
+    'DELETE_ATTACHMENT_SUCCESS' = 'deleteAttachmentSuccess',
+    'DELETE_ATTACHMENT_FAILED' = 'deleteAttachmentFailed',
 }
 
 // Barn
@@ -40,16 +47,6 @@ interface SetFødselsdato {
 }
 
 // RelasjonTilBarn
-interface AddVedlegg {
-    type: SoknadActionKeys.ADD_VEDLEGG;
-    vedlegg: File[];
-}
-
-interface DeleteVedlegg {
-    type: SoknadActionKeys.DELETE_VEDLEGG;
-    vedlegg: File;
-}
-
 interface SetAntallBarn {
     type: SoknadActionKeys.SET_ANTALL_BARN;
     antallBarn: number;
@@ -153,6 +150,39 @@ interface ResetSøknad {
     type: SoknadActionKeys.RESET_SØKNAD;
 }
 
+export interface UploadAttachment {
+    type: SoknadActionKeys.UPLOAD_ATTACHMENT;
+    payload: Attachment;
+}
+
+export interface UploadAttachmentSuccess {
+    type: SoknadActionKeys.UPLOAD_ATTACHMENT_SUCCESS;
+    attachment: Attachment;
+    url: string;
+}
+
+export interface UploadAttachmentFailed {
+    type: SoknadActionKeys.UPLOAD_ATTACHMENT_FAILED;
+    attachment: Attachment;
+    error: string;
+}
+
+export interface DeleteAttachment {
+    type: SoknadActionKeys.DELETE_ATTACHMENT;
+    attachment: Attachment;
+}
+
+export interface DeleteAttachmentSuccess {
+    type: SoknadActionKeys.DELETE_ATTACHMENT_SUCCESS;
+    attachment: Attachment;
+}
+
+export interface DeleteAttachmentFailed {
+    type: SoknadActionKeys.DELETE_ATTACHMENT_FAILED;
+    error: any;
+    attachment: Attachment;
+}
+
 export type SoknadActionTypes =
     | SetFødselsdato
     | AddTidligereUtenlandsoppholdPeriode
@@ -161,8 +191,6 @@ export type SoknadActionTypes =
     | AddSenereUtenlandsoppholdPeriode
     | EditSenereUtenlandsoppholdPeriode
     | DeleteSenereUtenlandsoppholdPeriode
-    | AddVedlegg
-    | DeleteVedlegg
     | SetAntallBarn
     | SetErBarnetFødt
     | SetFødselINorge
@@ -176,4 +204,10 @@ export type SoknadActionTypes =
     | SetAnnenForelderUtenlandskFnr
     | SetAnnenForelderBostedsland
     | SetAnnenForelderKanIkkeOppgis
-    | ResetSøknad;
+    | ResetSøknad
+    | UploadAttachment
+    | UploadAttachmentSuccess
+    | UploadAttachmentFailed
+    | DeleteAttachment
+    | DeleteAttachmentSuccess
+    | DeleteAttachmentFailed;
