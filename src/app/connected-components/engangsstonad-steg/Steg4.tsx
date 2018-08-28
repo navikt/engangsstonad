@@ -23,9 +23,10 @@ import OppsummeringUtenlandsopphold from './../oppsummering/UtenlandsoppholdOpps
 
 const { ValidGroup } = require('./../../lib') as any;
 
-import '../../styles/engangsstonad.less';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
-import { Attachment } from 'storage/attachment/types/Attachment';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
+
+import '../../styles/engangsstonad.less';
 
 interface StateProps {
     bekreftetInformasjon: boolean;
@@ -61,7 +62,7 @@ class Steg4 extends React.Component<Props> {
                         personnummer={person.fnr}
                     />
                 </div>
-                <OppsummeringBarn barn={barn} vedlegg={this.props.vedlegg} />
+                <OppsummeringBarn barn={barn} />
                 {Object.keys(this.props.annenForelder).length > 0 && <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />}
                 <OppsummeringUtenlandsopphold informasjonOmUtenlandsopphold={this.props.informasjonOmUtenlandsopphold} erBarnetFødt={barn.erBarnetFødt} />
                 <div className="blokk-m">

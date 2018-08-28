@@ -4,6 +4,7 @@ import axios from 'axios';
 function saveAttachment(attachment: Attachment) {
     const config = {
         withCredentials: true,
+        timeout: 15 * 1000,
         headers: {
             'content-type': 'multipart/form-data'
         }
@@ -19,16 +20,11 @@ function saveAttachment(attachment: Attachment) {
 
 function deleteAttachment(attachment: Attachment) {
     const config = {
-        withCredentials: true,
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
+        timeout: 15 * 1000,
+        withCredentials: true
     };
-    if (typeof attachment.url === 'string') {
-        return axios.delete(attachment.url, config);
-    }
-    return null;
-
+    const url = `${(window as any).REST_API_URL}/storage/vedlegg/${attachment.id}`;
+    return axios.delete(url, config);
 }
 
 const AttachmentApi = { saveAttachment, deleteAttachment };

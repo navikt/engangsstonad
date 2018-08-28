@@ -19,7 +19,6 @@ import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 interface StateProps {
     barn: Barn;
     person: Person;
-    vedlegg: File[];
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
@@ -62,11 +61,11 @@ class Steg1 extends React.Component<Props, State> {
     }
 
     renderPartial() {
-        const { barn, vedlegg, intl, dispatch } = this.props;
+        const { barn, intl, dispatch } = this.props;
         if (barn.erBarnetFødt === true) {
             return <steg1Partials.FødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
         } else if (barn.erBarnetFødt === false) {
-            return <steg1Partials.UfødtBarnPartial barn={barn} vedlegg={vedlegg} intl={intl} dispatch={dispatch} />;
+            return <steg1Partials.UfødtBarnPartial barn={barn} intl={intl} dispatch={dispatch} />;
         }
         return null;
     }
@@ -135,8 +134,7 @@ class Steg1 extends React.Component<Props, State> {
 
 const mapStateToProps = (state: any) => ({
     barn: state.soknadReducer.barn,
-    person: state.commonReducer.person,
-    vedlegg: state.attachmentReducer
+    person: state.commonReducer.person
 });
 
 export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg1));

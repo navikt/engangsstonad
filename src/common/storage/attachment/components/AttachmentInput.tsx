@@ -1,20 +1,22 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
-import CustomSVG from '../custom-svg/CustomSVG';
+import CustomSVG from 'common/components/custom-svg/CustomSVG';
+import BEMHelper from 'common/util/bem';
 
 const uploadIcon = require('./upload.svg').default;
 
-import './vedlegg.less';
+import './attachment.less';
 
-interface OwnProps {
+interface AttachmentInputProps {
     id: string;
     onFilesSelect: (files: File[]) => void;
+    onClick: () => void;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+type Props = AttachmentInputProps & InjectedIntlProps;
 
-class VedleggInput extends React.Component<Props> {
+class AttachmentInput extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         this.fileSelectHandler = this.fileSelectHandler.bind(this);
@@ -74,8 +76,11 @@ class VedleggInput extends React.Component<Props> {
     }
 
     render() {
-        const { id, intl } = this.props;
+        const { id, onClick, intl } = this.props;
         const inputId = `${id}-input`;
+
+        const BEM = BEMHelper('attachmentButton');
+
         return (
             <label
                 role="button"
@@ -85,15 +90,15 @@ class VedleggInput extends React.Component<Props> {
                 id={id}
                 tabIndex={0}
                 htmlFor={inputId}
-                className="vedleggKnapp"
+                className={BEM.className}
                 onDragOver={(e) => this.onFileDragOverHandler(e)}
                 onDrop={(e) => this.onFileDropHandler(e)}
                 onKeyPress={(e) => this.onKeyPress(e)}
             >
-                <div className="vedleggKnapp__ikon">
+                <div className={BEM.element('icon')}>
                     <CustomSVG iconRef={uploadIcon} size={22} />
                 </div>
-                <Element className="vedleggKnapp__label">
+                <Element className={BEM.element('label')}>
                     <FormattedMessage id="vedlegg.lastoppknapp.label" />
                 </Element>
                 <input
@@ -102,9 +107,10 @@ class VedleggInput extends React.Component<Props> {
                     accept=".pdf, .jpg, .jpeg, .png"
                     onChange={(e) => this.onFileSelect(e)}
                     multiple={true}
+                    onClick={onClick}
                 />
             </label>
         );
     }
 }
-export default injectIntl(VedleggInput);
+export default injectIntl(AttachmentInput);

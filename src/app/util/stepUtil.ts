@@ -2,9 +2,8 @@ import Barn, { UfodtBarn, FodtBarn } from 'app/types/domain/Barn';
 import { dateFormatsAreValid } from 'util/date/dateUtils';
 import InformasjonOmUtenlandsopphold from '../types/domain/InformasjonOmUtenlandsopphold';
 import AnnenForelder from '../types/domain/AnnenForelder';
-import { Attachment } from 'storage/attachment/types/Attachment';
 
-export const shouldDisplayNextButtonOnStep1 = (barn: Barn, vedlegg: Attachment[]) => {
+export const shouldDisplayNextButtonOnStep1 = (barn: Barn) => {
     if (!barn.erBarnetFødt) {
         const ufodtBarn = barn as UfodtBarn;
         return (
@@ -12,7 +11,7 @@ export const shouldDisplayNextButtonOnStep1 = (barn: Barn, vedlegg: Attachment[]
             ufodtBarn.terminbekreftelseDato &&
             dateFormatsAreValid([ufodtBarn.terminbekreftelseDato, ufodtBarn.termindato]) &&
             barn.antallBarn !== undefined &&
-            vedlegg.length > 0
+            ufodtBarn.terminbekreftelse.length > 0
         );
     }
     const fodtBarn = barn as FodtBarn;

@@ -5,9 +5,8 @@ import apiReducer from './reducers/apiReducer';
 import rootSaga from './sagas/rootSaga';
 import middleware, { sagaMiddleware } from './middleware';
 import stepReducer from 'reducers/stepReducer';
-import attachmentReducer from '../../storage/attachment/redux/attachmentReducer';
 
-const reducers = combineReducers({ soknadReducer, commonReducer, apiReducer, stepReducer, attachmentReducer });
+const reducers = combineReducers({ soknadReducer, commonReducer, apiReducer, stepReducer });
 
 const store = createStore(
     reducers,

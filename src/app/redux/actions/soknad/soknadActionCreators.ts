@@ -1,19 +1,14 @@
-import { SoknadActionKeys, SoknadActionTypes } from './soknadActionDefinitions';
+import {
+    DeleteAttachment, DeleteAttachmentFailed,
+    DeleteAttachmentSuccess,
+    SoknadActionKeys,
+    SoknadActionTypes,
+    UploadAttachmentFailed,
+    UploadAttachmentSuccess
+} from './soknadActionDefinitions';
+
 import { Utenlandsopphold } from '../../../types/domain/InformasjonOmUtenlandsopphold';
-
-export function addVedlegg( vedlegg: File[]) {
-    return {
-        type: SoknadActionKeys.ADD_VEDLEGG,
-        vedlegg
-    };
-}
-
-export function deleteVedlegg( vedlegg: File) {
-    return {
-        type: SoknadActionKeys.DELETE_VEDLEGG,
-        vedlegg
-    };
-}
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 export function addTidligereUtenlandsoppholdPeriode(periode: Utenlandsopphold): SoknadActionTypes {
     return {
@@ -163,6 +158,50 @@ export function resetSøknad() {
     };
 }
 
+const uploadAttachment = (payload: Attachment) => ({
+    type: SoknadActionKeys.UPLOAD_ATTACHMENT,
+    payload
+});
+
+const uploadAttachmentSuccess = (
+    attachment: Attachment,
+    url: string
+): UploadAttachmentSuccess => ({
+    type: SoknadActionKeys.UPLOAD_ATTACHMENT_SUCCESS,
+    attachment,
+    url
+});
+
+const uploadAttachmentFailed = (
+    error: string,
+    attachment: Attachment
+): UploadAttachmentFailed => ({
+    type: SoknadActionKeys.UPLOAD_ATTACHMENT_FAILED,
+    error,
+    attachment
+});
+
+const deleteAttachment = (attachment: Attachment): DeleteAttachment => ({
+    type: SoknadActionKeys.DELETE_ATTACHMENT,
+    attachment
+});
+
+const deleteAttachmentSuccess = (
+    attachment: Attachment
+): DeleteAttachmentSuccess => ({
+    type: SoknadActionKeys.DELETE_ATTACHMENT_SUCCESS,
+    attachment
+});
+
+const deleteAttachmentFailed = (
+    error: any,
+    attachment: Attachment
+): DeleteAttachmentFailed => ({
+    type: SoknadActionKeys.DELETE_ATTACHMENT_FAILED,
+    error,
+    attachment
+});
+
 export default {
     addTidligereUtenlandsoppholdPeriode,
     editTidligereUtenlandsoppholdPeriode,
@@ -170,8 +209,6 @@ export default {
     addSenereUtenlandsoppholdPeriode,
     editSenereUtenlandsoppholdPeriode,
     deleteSenereUtenlandsoppholdPeriode,
-    addVedlegg,
-    deleteVedlegg,
     setAntallBarn,
     setErBarnetFødt,
     setFødselsdato,
@@ -181,5 +218,11 @@ export default {
     setFødselINorge,
     setINorgeSiste12Mnd,
     setINorgeNeste12Mnd,
-    resetSøknad
+    resetSøknad,
+    uploadAttachment,
+    uploadAttachmentSuccess,
+    uploadAttachmentFailed,
+    deleteAttachment,
+    deleteAttachmentSuccess,
+    deleteAttachmentFailed
 };

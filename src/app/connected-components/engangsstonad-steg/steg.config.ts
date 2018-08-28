@@ -14,7 +14,7 @@ import Barn from '../../types/domain/Barn';
 import InformasjonOmUtenlandsopphold from '../../types/domain/InformasjonOmUtenlandsopphold';
 import AnnenForelder from '../../types/domain/AnnenForelder';
 import { StepConfig } from 'app/types/StepConfig';
-import { Attachment } from 'storage/attachment/types/Attachment';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 export interface NextStepCondition {
     type: string;
@@ -30,7 +30,7 @@ const stepConfig = [
         stegIndikatorLabelIntlId: 'relasjonBarn.sectionheading',
         component: Steg1,
         nextStepCondition: (data: NextStepCondition) =>
-            shouldDisplayNextButtonOnStep1(data.barn, data.vedlegg)
+            shouldDisplayNextButtonOnStep1(data.barn)
     },
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',

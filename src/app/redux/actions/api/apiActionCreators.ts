@@ -3,7 +3,6 @@ import Person from '../../../types/domain/Person';
 import PersonRequest from '../../../types/services/PersonRequest';
 import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
 import EngangsstonadSoknad from '../../../types/domain/EngangsstonadSoknad';
-import { Attachment } from 'storage/attachment/types/Attachment';
 import { AppState } from 'common/redux/types';
 
 export function getPerson(person?: PersonRequest): ApiActionTypes {
@@ -28,11 +27,10 @@ export function getPersonFailed(error: any): ApiActionTypes {
     };
 }
 
-export function sendSoknad(soknad: EngangsstonadSoknad, vedlegg: Attachment[]): ApiActionTypes {
+export function sendSoknad(soknad: EngangsstonadSoknad): ApiActionTypes {
     return {
         type: ApiActionKeys.SEND_SOKNAD,
-        soknad,
-        vedlegg
+        soknad
     };
 }
 
