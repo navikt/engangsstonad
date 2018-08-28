@@ -21,6 +21,7 @@ function sendSoknad(soknad: EngangsstonadSoknad) {
     const config  = {
         withCredentials: true
     };
+    
     const url = `${(<any> window).REST_API_URL}/engangsstonad`;
     return axios.post(url, soknad, config);
 }
