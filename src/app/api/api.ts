@@ -25,7 +25,7 @@ function sendSoknad(soknad: EngangsstonadSoknad) {
         }
     };
     
-    const url = `${(<any> window).REST_API_URL}/engangsstonad`;
+    const url = `${(<any> window).REST_API_URL}/soknad`;
     return axios.post(url, soknad, config);
 }
 
