@@ -41,7 +41,7 @@ const Attachment: React.StatelessComponent<Props> = ({
             <Icon className={BEM.element('icon')} kind="vedlegg" size={20} />
             <div className={BEM.element('filename')}>
                 {attachment.url ? (
-                    <Lenke href={attachment.url}>{attachment.filename}</Lenke>
+                    <Lenke href={attachment.url} target="_blank">{attachment.filename}</Lenke>
                 ) : (
                     <React.Fragment>{attachment.filename}</React.Fragment>
                 )}
