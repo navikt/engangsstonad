@@ -34,3 +34,5 @@ fasitResources:
     resourceType: restservice
   - alias: engangsstonad-toggles
     resourceType: applicationProperties
+  - alias: loadbalancer:engangsstonad
+    resourceType: loadbalancerconfig
