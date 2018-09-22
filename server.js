@@ -16,13 +16,18 @@ const httpRequestDurationMicroseconds = new prometheus.Histogram({
     labelNames: ['route'],
     // buckets for response time from 0.1ms to 500ms
     buckets: [0.10, 5, 15, 50, 100, 200, 300, 400, 500]
-  })
+})
 
 const server = express();
 
 server.set('views', `${__dirname}/dist`);
 server.set('view engine', 'mustache');
 server.engine('html', mustacheExpress());
+
+server.use((req, res, next) => {
+    res.removeHeader('X-Powered-By');
+    next();
+});
 
 const renderApp = (decoratorFragments) =>
     new Promise((resolve, reject) => {
@@ -69,7 +74,7 @@ const startServer = (html) => {
     server.get('/actuator/metrics', (req, res) => {
         res.set('Content-Type', prometheus.register.contentType)
         res.end(prometheus.register.metrics())
-      })
+    })
 
     server.get('/health/isAlive', (req, res) => res.sendStatus(200));
     server.get('/health/isReady', (req, res) => res.sendStatus(200));
