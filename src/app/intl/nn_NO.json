@@ -197,6 +197,7 @@
     "valideringsfeil.terminbekreftelseDato.duMåOppgi": "Du må gi opp når stadfestinga av termin er datert",
     "valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere": "Datoen på stadfestinga av termin kan ikkje vere fram i tid.",
     "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26": "Stadfestinga på termin må vise at du er i 26. svangerskapsveke eller seinare",
+    "vedlegg.feilmelding": "Noko gjekk dessverre gale. Prøv igjen ",
     "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
     "vedlegg.liste.tittel": "Valgte vedlegg ({størrelse})",
     "vedlegg.lastoppknapp.label": "Last opp vedlegg...",

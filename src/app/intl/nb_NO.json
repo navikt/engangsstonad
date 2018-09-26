@@ -230,6 +230,7 @@
     "valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere": "Datoen på terminbekreftelsen kan ikke være frem i tid.",
     "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26": "Terminbekreftelsen må vise at du er i 26. svangerskapsuke eller senere",
 
+    "vedlegg.feilmelding": "Noe gikk galt. Prøv igjen...",
     "vedlegg.arialabel.slett": "Fjern vedlegg {navn}",
     "vedlegg.liste.tittel": "Valgte vedlegg ({størrelse})",
     "vedlegg.lastoppknapp.label": "Last opp vedlegg...",
