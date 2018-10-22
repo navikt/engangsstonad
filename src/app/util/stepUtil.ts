@@ -48,11 +48,11 @@ export const shouldDisplayNextButtonOnStep3 = (
     utenlandsopphold: InformasjonOmUtenlandsopphold
 ) => {
     if (utenlandsopphold.iNorgeNeste12Mnd === false) {
-        return ((dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) || utenlandsopphold.fødselINorge !== undefined)) &&
+        return ((dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) || utenlandsopphold.iNorgePåHendelsestidspunktet !== undefined)) &&
             iNorgeNeste12MndIsValid(utenlandsopphold) && iNorgeSiste12MndIsValid(utenlandsopphold);
     } else {
         return (
-            utenlandsopphold.fødselINorge !== undefined && (dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) &&
+            utenlandsopphold.iNorgePåHendelsestidspunktet !== undefined && (dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) &&
                 utenlandsopphold.iNorgeNeste12Mnd !== undefined) && iNorgeNeste12MndIsValid(utenlandsopphold) &&
             iNorgeSiste12MndIsValid(utenlandsopphold)
         );

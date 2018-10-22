@@ -61,7 +61,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | G
             return { ...state, informasjonOmUtenlandsopphold: { ...informasjonOmUtenlandsopphold, jobbetINorgeSiste12Mnd } };
         case SoknadActionKeys.SET_FODSEL_I_NORGE:
             const { fødselINorge } = action;
-            return { ...state, informasjonOmUtenlandsopphold: { ...informasjonOmUtenlandsopphold, fødselINorge } };
+            return { ...state, informasjonOmUtenlandsopphold: { ...informasjonOmUtenlandsopphold, iNorgePåHendelsestidspunktet: fødselINorge } };
         case SoknadActionKeys.SET_I_NORGE_SISTE_12_MND:
             const { iNorgeSiste12Mnd } = action;
             return {
@@ -69,7 +69,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | G
                     ...getDefaultState().informasjonOmUtenlandsopphold,
                     iNorgeSiste12Mnd,
                     iNorgeNeste12Mnd: state.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd,
-                    fødselINorge: state.informasjonOmUtenlandsopphold.fødselINorge,
+                    iNorgePåHendelsestidspunktet: state.informasjonOmUtenlandsopphold.iNorgePåHendelsestidspunktet,
                     tidligereOpphold: state.informasjonOmUtenlandsopphold.tidligereOpphold,
                     senereOpphold: state.informasjonOmUtenlandsopphold.senereOpphold
                 }
@@ -82,7 +82,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | G
                     ...informasjonOmUtenlandsopphold,
                     iNorgeNeste12Mnd,
                     iNorgeSiste12Mnd: state.informasjonOmUtenlandsopphold.iNorgeSiste12Mnd,
-                    fødselINorge: state.informasjonOmUtenlandsopphold.fødselINorge,
+                    iNorgePåHendelsestidspunktet: state.informasjonOmUtenlandsopphold.iNorgePåHendelsestidspunktet,
                     tidligereOpphold: state.informasjonOmUtenlandsopphold.tidligereOpphold,
                     senereOpphold: state.informasjonOmUtenlandsopphold.senereOpphold
                 }
@@ -97,7 +97,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | G
                 },
                 informasjonOmUtenlandsopphold: {
                     ...informasjonOmUtenlandsopphold,
-                    fødselINorge: undefined
+                    iNorgePåHendelsestidspunktet: undefined
                 }
             };
         case SoknadActionKeys.SET_ANTALL_BARN:
