@@ -197,10 +197,10 @@ class Steg3 extends React.Component<Props> {
     }
 
     getFødselINorgeSelectedValue() {
-        const { fødselINorge } = this.props.informasjonOmUtenlandsopphold;
-        if (fødselINorge === true) {
+        const { iNorgePåHendelsestidspunktet } = this.props.informasjonOmUtenlandsopphold;
+        if (iNorgePåHendelsestidspunktet === true) {
             return 'norway';
-        } else if (fødselINorge === false) {
+        } else if (iNorgePåHendelsestidspunktet === false) {
             return 'abroad';
         } else {
             return undefined;

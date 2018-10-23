@@ -10,7 +10,7 @@ export type Tidsperiode = {
 
 type InformasjonOmUtenlandsopphold = {
     jobbetINorgeSiste12Mnd?: boolean;
-    fødselINorge?: boolean;
+    iNorgePåHendelsestidspunktet?: boolean;
     iNorgeSiste12Mnd?: boolean;
     iNorgeNeste12Mnd?: boolean;
     tidligereOpphold: Utenlandsopphold[];

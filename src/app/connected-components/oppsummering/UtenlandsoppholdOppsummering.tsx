@@ -18,7 +18,7 @@ interface Props {
 const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = props => {
     const { intl, erBarnetFødt } = props;
     const {
-        fødselINorge,
+        iNorgePåHendelsestidspunktet,
         iNorgeNeste12Mnd,
         iNorgeSiste12Mnd,
         tidligereOpphold,
@@ -53,18 +53,18 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                         <CountrySummaryList utenlandsoppholdListe={senereOpphold} />
                     </div>
                 )}
-            {erBarnetFødt === false && fødselINorge !== undefined && (
+            {erBarnetFødt === false && iNorgePåHendelsestidspunktet !== undefined && (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.ogKommerPåFødselstidspunktet')}
-                    text={fødselINorge
+                    text={iNorgePåHendelsestidspunktet
                         ? getMessage(intl, 'medlemmskap.radiobutton.vareNorge')
                         : getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet')}
                 />
             )}
-            {erBarnetFødt === true && fødselINorge !== undefined && (
+            {erBarnetFødt === true && iNorgePåHendelsestidspunktet !== undefined && (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.varPåFødselstidspunktet')}
-                    text={fødselINorge
+                    text={iNorgePåHendelsestidspunktet
                         ? getMessage(intl, 'medlemmskap.radiobutton.iNorge')
                         : getMessage(intl, 'medlemmskap.radiobutton.iUtlandet')}
                 />
