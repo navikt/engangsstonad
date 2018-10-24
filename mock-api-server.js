@@ -16,7 +16,7 @@ const mockResponse = {
 
 const startServer = html => {
     server.get(
-        ['/', '/foreldrepengesoknad-api/rest/personinfo?'],
+        ['/', '/rest/personinfo?'],
         (req, res) => {
             res.setHeader(
                 'Access-Control-Allow-Origin',
@@ -38,7 +38,7 @@ const startServer = html => {
     server.get('/health/isAlive', (req, res) => res.sendStatus(200));
     server.get('/health/isReady', (req, res) => res.sendStatus(200));
 
-    server.post('/foreldrepengesoknad-api/rest/engangsstonad', (req, res) =>
+    server.post('/rest/engangsstonad', (req, res) =>
         res.sendStatus(200)
     );
 
