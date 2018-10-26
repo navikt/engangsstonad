@@ -3,12 +3,11 @@ const jsdom = require('jsdom');
 const request = require('request');
 
 const { JSDOM } = jsdom;
-
 const requestDecorator = (callback) =>
     request(
         `${
             process.env.APPRES_CMS_URL
-        }/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true`,
+        }/common-html/v41/navno?header=true&styles=true&scripts=true&footer=true`,
         callback
     );
 
