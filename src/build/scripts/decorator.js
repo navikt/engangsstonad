@@ -7,7 +7,7 @@ const requestDecorator = (callback) =>
     request(
         `${
             process.env.APPRES_CMS_URL
-        }/common-html/v41/navno?header=true&styles=true&scripts=true&footer=true`,
+        }/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true`,
         callback
     );
 
