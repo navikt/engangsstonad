@@ -17,7 +17,8 @@ interface StateProps {
     language: string;
 }
 
-const URL_SØKNADSVALG = 'https://tjenester.nav.no/soknadforeldrepenger/app/start#/soknadsvalg';
+const URL_SØKNADSVALG = 'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/Skjemaer/Familie/foreldrepenger-og-engangsstonad/' +
+    'Foreldrepenger+og+engangsst%C3%B8nad?method=mail&veiledertype=privatperson';
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
