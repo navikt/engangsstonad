@@ -15,11 +15,8 @@ export const mapAttachments = (object: object): Attachment[] => {
     Object.keys(object).forEach((key: string) => {
         if (typeof object[key] === 'object') {
             if (isArrayOfAttachments(object[key])) {
-                const attachmentWithoutUploadError = [...removeAttachmentsWithUploadError(object[key])];
-                foundAttachments.push(...attachmentWithoutUploadError);
-                object[key] = (object[key] as Attachment[])
-                    .filter((attachment: Attachment) => attachmentWithoutUploadError.includes(attachment))
-                    .map((attachment: Attachment) => attachment.id);
+                foundAttachments.push(...removeAttachmentsWithUploadError(object[key]));
+                delete object[key];
             } else {
                 foundAttachments.push(...mapAttachments(object[key]));
             }
