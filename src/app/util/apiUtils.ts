@@ -10,19 +10,18 @@ const isArrayOfAttachments = (object: object) => {
 const removeAttachmentsWithUploadError = (attachments: Attachment[]) =>
     attachments.filter((a: Attachment) => !isAttachmentWithError(a));
 
-const fetchAndCleanUpAttachments = (object: object): Attachment[] => {
+export const mapAttachments = (object: object): Attachment[] => {
     const foundAttachments = [] as Attachment[];
     Object.keys(object).forEach((key: string) => {
         if (typeof object[key] === 'object') {
             if (isArrayOfAttachments(object[key])) {
-                foundAttachments.push(
-                    ...removeAttachmentsWithUploadError(object[key])
-                );
-                delete object[key];
+                const attachmentWithoutUploadError = [...removeAttachmentsWithUploadError(object[key])];
+                foundAttachments.push(...attachmentWithoutUploadError);
+                object[key] = (object[key] as Attachment[])
+                    .filter((attachment: Attachment) => attachmentWithoutUploadError.includes(attachment))
+                    .map((attachment: Attachment) => attachment.id);
             } else {
-                foundAttachments.push(
-                    ...fetchAndCleanUpAttachments(object[key])
-                );
+                foundAttachments.push(...mapAttachments(object[key]));
             }
         }
     });
@@ -42,7 +41,7 @@ export default {
             søknad.informasjonOmUtenlandsopphold.senereOpphold = [];
         }
 
-        søknad.vedlegg = fetchAndCleanUpAttachments(søknad);
+        søknad.vedlegg = mapAttachments(søknad);
 
         return søknad;
     }

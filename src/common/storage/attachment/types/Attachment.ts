@@ -1,5 +1,5 @@
 export interface Attachment {
-    id: Skjemanummer;
+    id: string;
     filename: string;
     filesize: number;
     file: File;
@@ -8,6 +8,7 @@ export interface Attachment {
     uploaded: boolean;
     type: AttachmentType;
     skjemanummer: Skjemanummer;
+    error?: any;
 }
 
 export enum AttachmentType {

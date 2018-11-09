@@ -2,6 +2,8 @@ import Barn, { UfodtBarn, FodtBarn } from 'app/types/domain/Barn';
 import { dateFormatsAreValid } from 'util/date/dateUtils';
 import InformasjonOmUtenlandsopphold from '../types/domain/InformasjonOmUtenlandsopphold';
 import AnnenForelder from '../types/domain/AnnenForelder';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
+import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 
 export const shouldDisplayNextButtonOnStep1 = (barn: Barn) => {
     if (!barn.erBarnetFødt) {
@@ -11,7 +13,7 @@ export const shouldDisplayNextButtonOnStep1 = (barn: Barn) => {
             ufodtBarn.terminbekreftelseDato &&
             dateFormatsAreValid([ufodtBarn.terminbekreftelseDato, ufodtBarn.termindato]) &&
             barn.antallBarn !== undefined &&
-            ufodtBarn.terminbekreftelse.length > 0
+            ufodtBarn.terminbekreftelse.filter((a: Attachment) => !isAttachmentWithError(a)).length > 0
         );
     }
     const fodtBarn = barn as FodtBarn;

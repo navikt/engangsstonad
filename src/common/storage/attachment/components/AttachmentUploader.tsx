@@ -34,6 +34,11 @@ export default class AttachmentsUploader extends React.Component<
                 file.uploaded = true;
                 file.url = response.headers.location;
                 onFileUploadFinish(file);
+            }).catch((error) => {
+                file.pending = false;
+                file.uploaded = false;
+                file.error = error;
+                onFileUploadFinish(file);
             })
         );
     }

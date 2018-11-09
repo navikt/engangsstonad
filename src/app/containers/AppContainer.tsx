@@ -91,18 +91,19 @@ class AppContainer extends React.Component<Props> {
         );
     }
 
-    getErrorRoutes(error: Error) {
+    getErrorRoutes(error: Error, errorResponse?: any) {
+
         let component: any;
         if (error.personErMann === true) {
-            component = ErMann;
+            component = <ErMann />;
         } else if (error.personFinnes === false) {
-            component = PersonFinnesIkke;
+            component = <PersonFinnesIkke />;
         } else if (error.personErMyndig === false) {
-            component = IkkeMyndig;
+            component = <IkkeMyndig />;
         } else if (error.innsendingFeilet === true) {
-            component = InnsendingFeilet;
+            component = <InnsendingFeilet errorResponse={errorResponse}/>;
         }
-        return this.renderRoutes(<Route path="/engangsstonad" component={component} key="error" />);
+        return this.renderRoutes(<Route path="/engangsstonad" component={() => component} key="error" />);
     }
 
     getSøknadRoutes() {
@@ -143,7 +144,7 @@ class AppContainer extends React.Component<Props> {
                     personFinnes,
                     personErMyndig,
                     innsendingFeilet
-                })
+                },                  error)
             );
         }
 

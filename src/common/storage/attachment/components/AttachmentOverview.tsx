@@ -25,6 +25,7 @@ export interface AttachmentOverviewProps {
 interface State {
     showErrorMessage: boolean;
     failedAttachments: Attachment[];
+    errorMessage?: string;
 }
 
 type Props = AttachmentOverviewProps;
@@ -44,30 +45,41 @@ class AttachmentOverview extends React.Component<Props, State> {
         );
 
         if (this.hasFailedAttachments(attachmentsWithoutOldFailedAttachments)) {
-            this.setState({
-                failedAttachments: this.state.failedAttachments.concat(
-                    attachmentsWithoutOldFailedAttachments.filter(
-                        isAttachmentWithError
+            this.setState(
+                {
+                    failedAttachments: this.state.failedAttachments.concat(
+                        attachmentsWithoutOldFailedAttachments.filter(isAttachmentWithError)
                     )
-                )
-            });
-            this.showErrorMessage();
+                },
+                () => {
+                    this.showErrorMessage(this.createErrorMessage(attachmentsWithoutOldFailedAttachments[0].error));
+                }
+            );
         }
+    }
+
+    createErrorMessage(error: any): string {
+        if (error.response && error.response.status === 400) {
+            return 'vedlegg.forStort';
+        }
+        return 'vedlegg.feilmelding';
     }
 
     hasFailedAttachments(attachments: Attachment[]) {
         return attachments.some(isAttachmentWithError);
     }
 
-    showErrorMessage() {
+    showErrorMessage(errorMessage: string) {
         this.setState({
-            showErrorMessage: true
+            showErrorMessage: true,
+            errorMessage
         });
     }
 
     hideErrorMessage() {
         this.setState({
-            showErrorMessage: false
+            showErrorMessage: false,
+            errorMessage: undefined
         });
     }
 
@@ -82,6 +94,8 @@ class AttachmentOverview extends React.Component<Props, State> {
             onFilesSelect
         } = this.props;
 
+        const { showErrorMessage, errorMessage } = this.state;
+
         const attachmentsToRender = attachments.filter(
             (a: Attachment) => !isAttachmentWithError(a)
         );
@@ -91,7 +105,7 @@ class AttachmentOverview extends React.Component<Props, State> {
             <React.Fragment>
                 <FormBlock
                     margin={
-                        showAttachments || this.state.showErrorMessage
+                        showAttachments || showErrorMessage
                             ? 'xs'
                             : undefined
                     }
@@ -115,15 +129,15 @@ class AttachmentOverview extends React.Component<Props, State> {
                 <CSSTransition
                     classNames="transitionFade"
                     timeout={150}
-                    in={showAttachments || this.state.showErrorMessage}
+                    in={showAttachments || showErrorMessage}
                     unmountOnExit={true}
                 >
                     <React.Fragment>
-                        {(showAttachments || this.state.showErrorMessage) && (
+                        {(showAttachments || showErrorMessage) && (
                             <React.Fragment>
                                 <FormBlock
                                     margin="xs"
-                                    visible={this.state.showErrorMessage}
+                                    visible={showErrorMessage}
                                     animated={true}
                                 >
                                     <AlertstripeWithCloseButton
@@ -132,7 +146,7 @@ class AttachmentOverview extends React.Component<Props, State> {
                                             solid: true,
                                             children: (
                                                 <FormattedMessage
-                                                    id={'vedlegg.feilmelding'}
+                                                    id={errorMessage ? errorMessage : 'vedlegg.feilmelding'}
                                                 />
                                             )
                                         }}

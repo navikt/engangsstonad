@@ -162,6 +162,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes | G
             const failedAttachment = action.attachment;
             failedAttachment.pending = false;
             failedAttachment.uploaded = false;
+            failedAttachment.error = action.error;
             return editAttachmentInState(failedAttachment, state);
 
         case SoknadActionKeys.DELETE_ATTACHMENT:

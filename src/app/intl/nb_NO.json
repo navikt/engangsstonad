@@ -236,5 +236,7 @@
     "vedlegg.lastoppknapp.label": "Last opp vedlegg...",
     "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
 
-    "label_med_hjelpetekst.label": "Hjelpetekst"
+    "label_med_hjelpetekst.label": "Hjelpetekst",
+
+    "vedlegg.forStort": "Vedlegget må være mindre enn 9MB"
 }

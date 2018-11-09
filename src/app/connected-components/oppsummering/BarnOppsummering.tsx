@@ -8,6 +8,7 @@ import { ISODateToMaskedInput } from 'util/date/dateUtils';
 import '../../styles/engangsstonad.less';
 import SummaryBlock from 'components/summary-block/SummaryBlock';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
+import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 
 interface Props {
     barn: FodtBarn & UfodtBarn;
@@ -60,7 +61,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
                         />
                         <DisplayTextWithLabel
                             label={getMessage(intl, 'oppsummering.text.vedlagtTerminbekreftelse')}
-                            text={terminbekreftelse.map((a: Attachment) => a.filename)}
+                            text={terminbekreftelse.filter((a: Attachment) => !isAttachmentWithError(a)).map((a: Attachment) => a.filename)}
                         />
                         <DisplayTextWithLabel
                             label={getMessage(intl, 'oppsummering.text.somErDatert')}
