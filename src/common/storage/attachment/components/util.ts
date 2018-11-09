@@ -1,7 +1,4 @@
 import { Attachment, AttachmentType, Skjemanummer } from 'common/storage/attachment/types/Attachment';
-import { guid } from 'nav-frontend-js-utils';
-
-export const generateAttachmentId = () => 'V'.concat(guid().replace(/-/g, ''));
 
 export const mapFileToAttachment = (
     file: File,
@@ -9,7 +6,7 @@ export const mapFileToAttachment = (
     skjemanummer: Skjemanummer
 ): Attachment => {
     return ({
-        id: generateAttachmentId(),
+        id: skjemanummer,
         file,
         filename: file.name,
         filesize: file.size,
