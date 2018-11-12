@@ -5,6 +5,7 @@ import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 type EngangsstonadSoknad = {
     type: string;
+    erEndringssøknad: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: FodtBarn | UfodtBarn;
     annenForelder: AnnenForelder;

@@ -7,6 +7,7 @@ import { addAttachmentToState, editAttachmentInState, removeAttachmentFromState 
 const getDefaultState = () => {
     const engangsstonadSoknad: EngangsstonadSoknad = {
         type: 'engangsstønad',
+        erEndringssøknad: false,
         barn: {
             fødselsdatoer: []
         },
