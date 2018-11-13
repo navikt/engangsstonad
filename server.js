@@ -5,6 +5,7 @@ const path = require('path');
 const mustacheExpress = require('mustache-express');
 const Promise = require('promise');
 const getDecorator = require('./src/build/scripts/decorator');
+const compression = require('compression');
 
 // Prometheus metrics
 const prometheus = require('prom-client')
@@ -19,6 +20,7 @@ const httpRequestDurationMicroseconds = new prometheus.Histogram({
 })
 
 const server = express();
+server.use(compression());
 
 server.set('views', `${__dirname}/dist`);
 server.set('view engine', 'mustache');
