@@ -18,6 +18,7 @@ import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 export interface NextStepCondition {
     type: string;
+    erEndringssøknad: boolean;
     barn: Barn;
     annenForelder: AnnenForelder;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
