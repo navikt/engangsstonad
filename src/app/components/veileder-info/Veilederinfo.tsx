@@ -9,7 +9,6 @@ type Infotype = 'info' | 'advarsel' | 'feil';
 export interface VeilederInfoProps {
     utvidetInfo?: React.ReactNode;
     visVeileder?: boolean;
-    visVeiviser?: boolean;
     stil?: 'kompakt' | 'normal' | 'kunTekst';
     type?: Infotype;
 }
@@ -28,7 +27,6 @@ const getAnsiktFromType = (type: Infotype): Ansiktstype => {
 const Veilederinfo: React.StatelessComponent<VeilederInfoProps> = ({
     utvidetInfo,
     visVeileder = true,
-    visVeiviser = false,
     stil = 'normal',
     type = 'info',
     children
@@ -54,21 +52,6 @@ const Veilederinfo: React.StatelessComponent<VeilederInfoProps> = ({
                     />
                 </span>
             )}
-
-            {visVeiviser && (
-                <span
-                    className="veilederinfo__veileder"
-                    role="presentation"
-                    aria-hidden={true}
-                >
-                    <Veileder
-                        farge="lilla"
-                        ansikt={getAnsiktFromType(type)}
-                        stil="veiviser"
-                    />
-                </span>
-            )}
-
             <div
                 className={classnames(
                     'veilederinfo__innhold',

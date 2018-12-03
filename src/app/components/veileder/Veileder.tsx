@@ -5,7 +5,6 @@ import VeilederNormal from './VeilederNormalSvg';
 import VeilederKompakt from './VeilederKompaktSvg';
 
 import './veileder.less';
-import Veiviser from './VeiviserSvg';
 
 export type Ansiktstype = 'glad' | 'undrende' | 'skeptisk';
 
@@ -43,8 +42,6 @@ const Veileder = (props: Props) => {
 
     if (stil === 'normal') {
         return <VeilederNormal svgProps={svgProps} />;
-    } else if (stil === 'veiviser') {
-        return <Veiviser />;
     } else {
         return <VeilederKompakt svgProps={svgProps} />;
     }

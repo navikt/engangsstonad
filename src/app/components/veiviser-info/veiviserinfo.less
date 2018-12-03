@@ -1,0 +1,54 @@
+@import '../../styles/variables.less';
+
+@initVeiviserSize: 4rem;
+
+.setVeiviserSize(@veiviserSize, @spacing: 1rem) {
+    .veiviserinfo__innhold {
+        padding-left: @veiviserSize / 2 + @spacing;
+        margin-left: -1 * @veiviserSize / 2;
+    }
+    .veiviserinfo__veiviser {
+        width: @veiviserSize;
+        position: relative;
+        svg {
+            margin: 3rem 0;
+            width: @veiviserSize;
+            height: @veiviserSize;
+        }
+    }
+}
+.veiviserinfo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 3rem;
+    .setVeiviserSize(@initVeiviserSize);
+
+    ul,
+    ol {
+        padding-left: 1.2rem;
+    }
+
+    &__innhold {
+        width: 100%;
+        flex-grow: 2;
+        background-color: white;
+        border: 2px solid #c1b5d0;
+        border-radius: 0.5rem;
+        padding: 1.5rem 1.5rem 1.5rem @initVeiviserSize + 0.5rem;
+        &--advarsel {
+            border-color: #ff9100;
+        }
+        &--feil {
+            border-color: #ba3a26;
+        }
+    }
+
+    &__veiviser {
+        display: flex;
+        align-items: center;
+        max-height: 6rem;
+        align-self: flex-start;
+        z-index: 2;
+    }
+}
