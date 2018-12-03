@@ -36,7 +36,6 @@ import '../../styles/engangsstonad.less';
 import Veilederinfo from 'components/veileder-info/Veilederinfo';
 import FormBlock from 'components/form-block/FormBlock';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
-import VeiviserInfo from 'components/veiviser-info/VeiviserInfo';
 
 interface OwnProps {
     isPersonopplysningerModalOpen: boolean;
@@ -210,12 +209,12 @@ class Intro extends React.Component<Props, OwnProps> {
                                 </Ingress>
                             </div>
                             <div className="blokk-m">
-                                <VeiviserInfo>
+                                <Veilederinfo ikon="veiviser">
                                     <FormattedMessage id="intro.text.veiviser" />
                                     <br />
                                     <br />
                                     <FormattedHTMLMessage id="intro.text.veiviser.lenke" />
-                                </VeiviserInfo>
+                                </Veilederinfo>
                             </div>
 
                             <FormBlock visible={this.props.mellomlagretSøknad}>
@@ -260,7 +259,10 @@ class Intro extends React.Component<Props, OwnProps> {
                             {this.props.mellomlagretSøknad &&
                                 this.state.nySøknad && (
                                     <div className="blokk-m">
-                                        <Veilederinfo type="advarsel">
+                                        <Veilederinfo
+                                            ikon="veileder"
+                                            type="advarsel"
+                                        >
                                             {getMessage(
                                                 intl,
                                                 'intro.text.nySøknadAdvarsel'

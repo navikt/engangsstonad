@@ -22,7 +22,11 @@ import FormBlock from 'components/form-block/FormBlock';
 import { buildDateObject } from 'util/date/dateUtils';
 import Veilederinfo from 'components/veileder-info/Veilederinfo';
 import AttachmentsUploaderPure from 'common/storage/attachment/components/AttachmentUploaderPure';
-import { Attachment, AttachmentType, Skjemanummer } from 'common/storage/attachment/types/Attachment';
+import {
+    Attachment,
+    AttachmentType,
+    Skjemanummer
+} from 'common/storage/attachment/types/Attachment';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 
 interface StateProps {
@@ -37,64 +41,92 @@ interface State {
 
 export default class UfødtBarnPartial extends React.Component<Props, State> {
     componentWillMount() {
-        this.setState({...this.state, isModalOpen: false});
+        this.setState({ ...this.state, isModalOpen: false });
     }
 
     closeTerminbekreftelseModal() {
-        this.setState({isModalOpen: false});
+        this.setState({ isModalOpen: false });
     }
 
     getTermindatoValidators() {
-        const {intl} = this.props;
+        const { intl } = this.props;
         const barn = this.props.barn as any;
         return [
             {
                 test: () => barn.termindato,
-                failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi')
+                failText: getMessage(
+                    intl,
+                    'valideringsfeil.termindato.duMåOppgi'
+                )
             },
             {
                 test: () => barn.termindato !== '',
-                failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi')
+                failText: getMessage(
+                    intl,
+                    'valideringsfeil.termindato.duMåOppgi'
+                )
             },
             {
                 test: () => erIUke26Pluss3(barn.termindato),
-                failText: getMessage(intl, 'valideringsfeil.termindato.duMåVæreIUke26')
+                failText: getMessage(
+                    intl,
+                    'valideringsfeil.termindato.duMåVæreIUke26'
+                )
             },
             {
                 test: () => erMindreEnn3UkerSiden(barn.termindato),
-                failText: getMessage(intl, 'valideringsfeil.termindato.termindatoKanIkkeVære3UkerFraIdag')
+                failText: getMessage(
+                    intl,
+                    'valideringsfeil.termindato.termindatoKanIkkeVære3UkerFraIdag'
+                )
             }
         ];
     }
 
     getTerminbekreftelseDatoValidators() {
-        const {intl} = this.props;
+        const { intl } = this.props;
         const barn = this.props.barn as any;
         return [
             {
                 test: () => barn.terminbekreftelseDato,
-                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåOppgi')
+                failText: getMessage(
+                    intl,
+                    'valideringsfeil.terminbekreftelseDato.duMåOppgi'
+                )
             },
             {
                 test: () => barn.terminbekreftelseDato !== '',
-                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåOppgi')
+                failText: getMessage(
+                    intl,
+                    'valideringsfeil.terminbekreftelseDato.duMåOppgi'
+                )
             },
             {
                 test: () => idagEllerTidligere(barn.terminbekreftelseDato),
-                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere')
+                failText: getMessage(
+                    intl,
+                    'valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere'
+                )
             },
             {
-                test: () => utstedtDatoErIUke26(barn.terminbekreftelseDato, barn.termindato),
-                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåVæreIUke26')
+                test: () =>
+                    utstedtDatoErIUke26(
+                        barn.terminbekreftelseDato,
+                        barn.termindato
+                    ),
+                failText: getMessage(
+                    intl,
+                    'valideringsfeil.terminbekreftelseDato.duMåVæreIUke26'
+                )
             }
         ];
     }
 
     render() {
-        const {dispatch, intl} = this.props;
+        const { dispatch, intl } = this.props;
         const barn = this.props.barn as UfodtBarn;
-        const {antallBarn} = barn;
-        const {termindato, terminbekreftelse, terminbekreftelseDato} = barn;
+        const { antallBarn } = barn;
+        const { termindato, terminbekreftelse, terminbekreftelseDato } = barn;
 
         const datoavgrensningTermindato = {
             minDato: getFørsteMuligeTermindato(),
@@ -114,9 +146,20 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                             id="termindato"
                             name="termindato"
                             dato={buildDateObject(termindato)}
-                            label={<LabelText intlId="relasjonBarn.text.termindato"/>}
-                            onChange={(dato: Date) => dato && dispatch(soknad.setTermindato(dato ? dato.toISOString() : ''))}
-                            onInputChange={(dato: string) => dato && dispatch(soknad.setTermindato(dato))}
+                            label={
+                                <LabelText intlId="relasjonBarn.text.termindato" />
+                            }
+                            onChange={(dato: Date) =>
+                                dato &&
+                                dispatch(
+                                    soknad.setTermindato(
+                                        dato ? dato.toISOString() : ''
+                                    )
+                                )
+                            }
+                            onInputChange={(dato: string) =>
+                                dato && dispatch(soknad.setTermindato(dato))
+                            }
                             validators={this.getTermindatoValidators()}
                             avgrensninger={datoavgrensningTermindato}
                         />
@@ -125,7 +168,12 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
 
                 <FormBlock visible={barn.termindato !== undefined}>
                     <div className="blokk-xs" key="veileder">
-                        <Veilederinfo>{getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}</Veilederinfo>
+                        <Veilederinfo ikon="veileder">
+                            {getMessage(
+                                intl,
+                                'terminbekreftelsen.text.terminbekreftelsen'
+                            )}
+                        </Veilederinfo>
                     </div>
                     <AttachmentsUploaderPure
                         attachments={terminbekreftelse || []}
@@ -133,9 +181,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         skjemanummer={Skjemanummer.TERMINBEKREFTELSE}
                         onFilesSelect={(attachments: Attachment[]) => {
                             attachments.forEach((attachment: Attachment) => {
-                                dispatch(
-                                    soknad.uploadAttachment(attachment)
-                                );
+                                dispatch(soknad.uploadAttachment(attachment));
                             });
                         }}
                         onFileDelete={(attachment: Attachment) => {
@@ -145,18 +191,34 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 </FormBlock>
 
                 <FormBlock
-                    visible={barn.terminbekreftelse !== undefined &&
-                    barn.terminbekreftelse.filter((a: Attachment) => !isAttachmentWithError(a)).length > 0
-                    && barn.termindato !== undefined}
+                    visible={
+                        barn.terminbekreftelse !== undefined &&
+                        barn.terminbekreftelse.filter(
+                            (a: Attachment) => !isAttachmentWithError(a)
+                        ).length > 0 &&
+                        barn.termindato !== undefined
+                    }
                 >
                     <div key="dateInputTerminBekreftelse">
                         <ValidDateInput
                             id="terminbekreftelse"
                             name="terminbekreftelse"
                             dato={buildDateObject(terminbekreftelseDato)}
-                            label={<LabelText intlId="relasjonBarn.text.datoTerminbekreftelse"/>}
-                            onChange={(dato: Date) => dato && dispatch(soknad.setTerminbekreftelseDato(dato ? dato.toISOString() : ''))}
-                            onInputChange={(dato: string) => dato && dispatch(soknad.setTerminbekreftelseDato(dato))}
+                            label={
+                                <LabelText intlId="relasjonBarn.text.datoTerminbekreftelse" />
+                            }
+                            onChange={(dato: Date) =>
+                                dato &&
+                                dispatch(
+                                    soknad.setTerminbekreftelseDato(
+                                        dato ? dato.toISOString() : ''
+                                    )
+                                )
+                            }
+                            onInputChange={(dato: string) =>
+                                dato &&
+                                dispatch(soknad.setTerminbekreftelseDato(dato))
+                            }
                             validators={this.getTerminbekreftelseDatoValidators()}
                             avgrensninger={datoavgrensningTerminbekreftelse}
                         />
@@ -168,7 +230,7 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                     onRequestClose={() => this.closeTerminbekreftelseModal()}
                     contentLabel="Om terminbekreftelsen"
                 >
-                    <OmTerminbekreftelsen/>
+                    <OmTerminbekreftelsen />
                 </Modal>
             </div>
         );
