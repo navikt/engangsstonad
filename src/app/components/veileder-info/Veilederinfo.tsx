@@ -3,12 +3,15 @@ import * as classnames from 'classnames';
 
 import './veilederinfo.less';
 import Veileder, { Ansiktstype } from '../veileder/Veileder';
+import Veiviser from 'components/veiviser/VeiviserSvg';
 
 type Infotype = 'info' | 'advarsel' | 'feil';
+type Ikon = 'veileder' | 'veiviser';
 
 export interface VeilederInfoProps {
     utvidetInfo?: React.ReactNode;
-    visVeileder?: boolean;
+    ikon: Ikon;
+    visIkon?: boolean;
     stil?: 'kompakt' | 'normal' | 'kunTekst';
     type?: Infotype;
 }
@@ -24,20 +27,43 @@ const getAnsiktFromType = (type: Infotype): Ansiktstype => {
     }
 };
 
+const renderIkon = (ikon: Ikon, type: Infotype) => {
+    if (ikon === 'veileder') {
+        return (
+            <Veileder
+                farge="lilla"
+                ansikt={getAnsiktFromType(type)}
+                stil="kompakt"
+            />
+        );
+    } else {
+        return <Veiviser />;
+    }
+};
+
 const Veilederinfo: React.StatelessComponent<VeilederInfoProps> = ({
     utvidetInfo,
-    visVeileder = true,
+    ikon,
+    visIkon = true,
     stil = 'normal',
     type = 'info',
     children
 }) => {
     return (
         <div
-            className={classnames('veilederinfo', `veilederinfo--${stil}`, `veilederinfo--${type}`)}
+            className={classnames(
+                'veilederinfo',
+                `veilederinfo--${stil}`,
+                `veilederinfo--${type}`
+            )}
         >
-            {visVeileder && (
-                <span className="veilederinfo__veileder" role="presentation" aria-hidden={true}>
-                    <Veileder farge="lilla" ansikt={getAnsiktFromType(type)} stil="kompakt" />
+            {visIkon && (
+                <span
+                    className="veilederinfo__veileder"
+                    role="presentation"
+                    aria-hidden={true}
+                >
+                    {renderIkon(ikon, type)}
                 </span>
             )}
 

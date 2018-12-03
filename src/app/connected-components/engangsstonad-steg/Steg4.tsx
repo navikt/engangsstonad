@@ -42,36 +42,65 @@ type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 class Steg4 extends React.Component<Props> {
     componentDidMount() {
-        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-4'), 5000);
+        setTimeout(
+            () => (window as any).hj('vpv', '/engangsstonad/soknad/step-4'),
+            5000
+        );
     }
 
     render() {
-        const { person, barn, intl, dispatch, bekreftetInformasjon } = this.props;
+        const {
+            person,
+            barn,
+            intl,
+            dispatch,
+            bekreftetInformasjon
+        } = this.props;
         if (!person) {
             return null;
         }
 
         return (
-            <Skjemasteg tittel={getMessage(intl, 'oppsummering.sectionheading')}>
+            <Skjemasteg
+                tittel={getMessage(intl, 'oppsummering.sectionheading')}
+            >
                 <div className="blokk-m">
-                    <Veilederinfo>{getMessage(intl, 'oppsummering.text.lesNoye')}</Veilederinfo>
+                    <Veilederinfo ikon="veileder">
+                        {getMessage(intl, 'oppsummering.text.lesNoye')}
+                    </Veilederinfo>
                 </div>
                 <div className="blokk-m">
                     <PersonaliaLabel
-                        navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn).toLowerCase()}
+                        navn={fullNameFormat(
+                            person.fornavn,
+                            person.mellomnavn,
+                            person.etternavn
+                        ).toLowerCase()}
                         personnummer={person.fnr}
                     />
                 </div>
                 <OppsummeringBarn barn={barn} />
-                {Object.keys(this.props.annenForelder).length > 0 && <OppsummeringDenAndreForeldren annenForelder={this.props.annenForelder} />}
-                <OppsummeringUtenlandsopphold informasjonOmUtenlandsopphold={this.props.informasjonOmUtenlandsopphold} erBarnetFødt={barn.erBarnetFødt} />
+                {Object.keys(this.props.annenForelder).length > 0 && (
+                    <OppsummeringDenAndreForeldren
+                        annenForelder={this.props.annenForelder}
+                    />
+                )}
+                <OppsummeringUtenlandsopphold
+                    informasjonOmUtenlandsopphold={
+                        this.props.informasjonOmUtenlandsopphold
+                    }
+                    erBarnetFødt={barn.erBarnetFødt}
+                />
                 <div className="blokk-m">
                     <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
                         <ValidGroup
                             validators={[
                                 {
                                     test: () => bekreftetInformasjon === true,
-                                    failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger')
+                                    failText: getMessage(
+                                        intl,
+                                        'valideringsfeil.bekreftOpplysninger'
+                                    )
                                 }
                             ]}
                             name="bekreftOpplysninger"
@@ -79,8 +108,17 @@ class Steg4 extends React.Component<Props> {
                             <BekreftCheckboksPanel
                                 inputProps={{ name: 'bekreftOpplysninger' }}
                                 checked={bekreftetInformasjon}
-                                onChange={() => dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))}
-                                label={getMessage(intl, 'oppsummering.text.samtykke')}
+                                onChange={() =>
+                                    dispatch(
+                                        common.setBekreftetInformasjon(
+                                            !bekreftetInformasjon
+                                        )
+                                    )
+                                }
+                                label={getMessage(
+                                    intl,
+                                    'oppsummering.text.samtykke'
+                                )}
                             />
                         </ValidGroup>
                     </div>
@@ -95,7 +133,8 @@ const mapStateToProps = (state: any) => ({
     barn: state.soknadReducer.barn,
     vedlegg: state.attachmentReducer,
     annenForelder: state.soknadReducer.annenForelder,
-    informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold,
+    informasjonOmUtenlandsopphold:
+        state.soknadReducer.informasjonOmUtenlandsopphold,
     soknadPostResponse: state.apiReducer.soknad
 });
 export default connect<StateProps>(mapStateToProps)(injectIntl(Steg4));

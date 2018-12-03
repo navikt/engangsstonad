@@ -29,6 +29,8 @@
     "intro.text.fortsettSøknadSpørsmål": "Jeg ønsker å",
     "intro.text.startNySøknad": "starte en ny søknad",
     "intro.text.nySøknadAdvarsel": "Din eksisternde søknad vil bli slettet.",
+    "intro.text.veiviser": "Dersom du har hatt inntekt, utbetaling frå NAV eller vært i militæret kan du få foreldrepengar i staden for eingongsstønad. Vel du likevel å søke om eingongsstønad, kan du ikkje seinare ombestemme deg. Valet ditt får óg betydning for den andre forelderen si rett til å ta ut foreldrepengar.",
+    "intro.text.veiviser.lenke": "<a href=\"https://familie.nav.no/veiviser\"  class=\"lenke\" rel=\"noopener\">Les meir om når berre far eller medmor har rett</a>",
     "intro.text.fortsettSøknad": "fortsette med søknaden",
     "intro.button.startSøknad": "Begynn med søknaden",
     "intro.button.fortsettSøknad": "Fortsett med søknaden",

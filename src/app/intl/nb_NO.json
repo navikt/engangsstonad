@@ -33,14 +33,15 @@
     "intro.text.samtykke.link": "dine plikter",
     "intro.text.personopplysningene.link": "Les om hvordan NAV behandler personopplysningene dine",
     "intro.pageheading.samtykke": "Rettigheter og plikter.",
-    
+
     "intro.text.fortsettSøknadSpørsmål": "Jeg ønsker å",
     "intro.text.startNySøknad": "starte en ny søknad",
     "intro.text.fortsettSøknad": "fortsette med ekisternde søknad",
     "intro.text.nySøknadAdvarsel": "Din eksisternde søknad vil bli slettet.",
+    "intro.text.veiviser": "Hvis du har hatt inntekt, utbetalinger fra NAV eller vært i militæret kan du få foreldrepenger istedenfor engangsstønad. Velger du likevel å søke om engangsstønad, kan du ikke senere ombestemme deg.",
+    "intro.text.veiviser.lenke": "<a href=\"https://familie.nav.no/veiviser\"  class=\"lenke\" rel=\"noopener\">Bruk veiviseren og finn ut hva du kan få</a>",
     "intro.text.startNySøknadPrompt": "Er du sikkert på at du vil starte en ny søknad? Din påbegynte søknad vil bli slettet.",
-    
-    
+
     "intro.button.startSøknad": "Begynn med søknaden",
     "intro.button.fortsettSøknad": "Fortsett med søknaden",
 
@@ -168,7 +169,7 @@
     "personopplysninger.sectionheading": "Slik behandler NAV personopplysningene dine",
     "personopplysninger.ingress.1": "NAV innhenter og mottar opplysninger om deg når du sender inn en søknad. Det er nødvendig for at du skal kunne få riktig tjeneste og ytelser.",
     "personopplysninger.ingress.2": "Du har valgt å søke om engangsstønad. Det er en ytelse fra folketrygden du kan få hvis du fyller vilkårene. Vilkårene står på nav.no/engangsstønad.",
-  
+
     "personopplysninger.text.opplysningerViInnhenter": "Opplysninger vi innhenter fra deg og offentlige registre ",
     "personopplysninger.text.opplysningerViInnhenter.ingress": "For å behandle søknaden din henter vi inn opplysninger om  ",
 
@@ -180,14 +181,14 @@
     "personopplysninger.text.lagringAvOpplysninger": "Lagring av opplysninger",
     "personopplysninger.text.lagringAvOpplysninger.1": "Hvis du sender inn søknaden, blir opplysninger du har gitt i søknaden lagret i tråd med arkivloven. ",
     "personopplysninger.text.lagringAvOpplysninger.2": "Hvis du avbryter søknaden, blir opplysninger du har registrert i søknaden slettet.",
-    
+
     "personopplysninger.text.automatiskLagring": "Automatisk behandling av søknaden",
     "personopplysninger.text.automatiskLagring.ingress": "Hvis du søker etter at barnet er født, behandler vi søknaden din automatisk hvis vi har tilstrekkelig opplysninger. Den automatiske behandlingen baserer seg på",
     "personopplysninger.text.automatiskLagring.1": "opplysningene du gir i søknaden",
     "personopplysninger.text.automatiskLagring.2": "opplysninger fra Folkeregisteret",
     "personopplysninger.text.automatiskLagring.3": "opplysninger om arbeidsforholdene dine fra Arbeidstaker- og arbeidsgiverregisteret",
     "personopplysninger.text.automatiskLagring.4": "opplysninger om inntekten din fra A-meldingen",
-    
+
     "personopplysninger.text.svarPåSøknaden": "Svar på søknaden ",
     "personopplysninger.text.svarPåSøknaden.ingress": "Når søknaden er behandlet, får du et vedtaksbrev.  Det forteller deg om",
     "personopplysninger.text.svarPåSøknaden.1": "begrunnelse for beslutningen",

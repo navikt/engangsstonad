@@ -18,7 +18,7 @@ const Terminbekreftelse: React.StatelessComponent<
 > = props => (
     <div className="terminbekreftelse">
         <div className="blokk-m">
-            <Veilederinfo>
+            <Veilederinfo ikon="veileder">
                 <FormattedMessage id="terminbekreftelsen.text.terminbekreftelsen" />
             </Veilederinfo>
         </div>

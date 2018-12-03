@@ -39,11 +39,12 @@ const Veileder = (props: Props) => {
             props.className
         )
     };
-    return stil === 'normal' ? (
-        <VeilederNormal svgProps={svgProps} />
-    ) : (
-        <VeilederKompakt svgProps={svgProps} />
-    );
+
+    if (stil === 'normal') {
+        return <VeilederNormal svgProps={svgProps} />;
+    } else {
+        return <VeilederKompakt svgProps={svgProps} />;
+    }
 };
 
 export default Veileder;
