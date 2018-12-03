@@ -11,7 +11,7 @@ export type Ansiktstype = 'glad' | 'undrende' | 'skeptisk';
 export interface VeilederProps {
     ansikt?: 'glad' | 'undrende' | 'skeptisk';
     farge?: 'lilla' | 'gronn' | 'bla';
-    stil?: 'normal' | 'kompakt' | 'veiviser';
+    stil?: 'normal' | 'kompakt';
 }
 
 interface OwnProps {
