@@ -220,7 +220,7 @@
     "valideringsfeil.bekreftOpplysninger": "Du må bekrefte at opplysningene stemmer",
 
     "valideringsfeil.fodselsdato.duMåOppgi": "Du må oppgi fødselsdato",
-    "valideringsfeil.fodselsdato.måVæreIdagEllerTidligere": "Fødselsdato må være idag eller tidligere",
+    "valideringsfeil.fodselsdato.måVæreIdagEllerTidligere": "Fødselsdato må være i dag eller tidligere",
     "valideringsfeil.fodselsdato.ikkeMerEnn3ÅrTilbake": "Du kan ikke søke om engangsstønad for barn som er eldre enn tre år.",
 
     "valideringsfeil.termindato.duMåOppgi": "Du må oppgi termindato",
