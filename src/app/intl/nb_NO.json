@@ -153,8 +153,8 @@
     "oppsummering.text.antall.9": "Ni",
 
     "kvittering.sectionheading": "Søknad mottatt",
-    "kvittering.text.takk": "Takk for søknaden",
-    "kvittering.text.soknadMottatt": "Vi mottok søknaden med referansenummer {referansenr} den {1} kl. {0}.",
+    "kvittering.text.takk": "Takk for søknaden,",
+    "kvittering.text.soknadMottatt": "Vi mottok søknaden den {1} kl. {0}.",
     "kvittering.text.dittNav": "Du kan følge med på søknaden på {dittNavLink}.",
     "kvittering.text.kontonummer": " Hvis søknaden din blir innvilget, blir engangsstønaden utbetalt til kontonummer {kontonummer}. Du kan endre kontonummeret på {dinProfilLink}.",
     "kvittering.text.dittNavLink": "Ditt NAV",
