@@ -47,9 +47,8 @@ class SøknadSendt extends React.Component<Props> {
             <FormattedMessage
                 id="kvittering.text.soknadMottatt"
                 values={{
-                    referansenr: kvittering.referanseId,
                     0: moment(kvittering.mottattDato).format('HH:mm'),
-                    1: moment(kvittering.mottattDato).format('LL')
+                    1: moment(kvittering.mottattDato).format('LL'),
                 }}
             />
         );
@@ -92,7 +91,7 @@ class SøknadSendt extends React.Component<Props> {
                             id="kvittering.text.dittNav"
                             values={{
                                 dittNavLink: (
-                                    <Lenke href="https://tjenester.nav.no/saksoversikt/">
+                                    <Lenke href="https://foreldrepenger.nav.no">
                                         <FormattedMessage id="kvittering.text.dittNavLink" />
                                     </Lenke>
                                 )
