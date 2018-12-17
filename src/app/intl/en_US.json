@@ -1,5 +1,5 @@
-   {
-   "intro.text.endreMålform": " Change standard language to nynorsk",
+{
+    "intro.text.endreMålform": " Change standard language to nynorsk",
 
     "intro.standard.dokumenttittel": " NAV Lump-sum grant",
     "intro.standard.velkommentittel": " Welcome to the application for a lump-sum grant",
@@ -36,7 +36,7 @@
 
     "intro.text.fortsettSøknadSpørsmål": " I would like to",
     "intro.text.startNySøknad": " start a new application",
-    "intro.text.fortsettSøknad": " continue with an existing application."
+    "intro.text.fortsettSøknad": " continue with an existing application.",
     "intro.text.nySøknadAdvarsel": " Your existing application will be deleted.",
     "intro.text.veiviser": " If you have had income, received payments from NAV or been in the military, you may be entitled to the parental benefit instead of the lump-sum grant. However, if you choose to apply for the lump-sum grant, you cannot change your mind at a later date.",
     "intro.text.veiviser.lenke": "<a href=\"https://familie.nav.no/veiviser\"  class=\"lenke\" rel=\"noopener\"> Use the wizard to find out what you are entitled to</a>",
