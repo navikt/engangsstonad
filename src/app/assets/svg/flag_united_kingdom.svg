@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="29px" height="22px" viewBox="0 0 29 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Flag_of_the_United_Kingdom</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M12.5,9 L25,9 L25,18 L12.5,9 Z M12.5,9 L12.5,18 L0,18 L12.5,9 Z M12.5,9 L0,9 L0,0 L12.5,9 Z M12.5,9 L12.5,0 L25,0 L12.5,9 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Flag_of_the_United_Kingdom" transform="translate(2.000000, 2.000000)">
+            <polygon id="Path" fill="#00247D" points="0 0 0 18 25 18 25 0"></polygon>
+            <path d="M0,0 L25,18 M25,0 L0,18" id="Shape" stroke="#FFFFFF" stroke-width="3.75" fill="#000000" fill-rule="nonzero"></path>
+            <g id="Clipped">
+                <g id="Shape-Clipped">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="path-1"></g>
+                    <path d="M0,0 L25,18 M25,0 L0,18" id="Shape" stroke="#CF142B" stroke-width="2.5" fill="#000000" fill-rule="nonzero" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+            <path d="M12.5,0 L12.5,18 M0,9 L25,9" id="Shape" stroke="#FFFFFF" stroke-width="6.25" fill="#000000" fill-rule="nonzero"></path>
+            <path d="M12.5,0 L12.5,18 M0,9 L25,9" id="Shape" stroke="#CF142B" stroke-width="3.75" fill="#000000" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

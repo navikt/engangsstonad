@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="18px" viewBox="0 0 25 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Flag_of_Norway</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Flag_of_Norway">
+            <rect id="Rectangle" fill="#EF2B2D" x="0" y="0" width="25" height="18"></rect>
+            <rect id="Rectangle" fill="#FFFFFF" x="6.875" y="0" width="4.6875" height="18"></rect>
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="6.9" width="25" height="4.5"></rect>
+            <rect id="Rectangle" fill="#002868" x="8.125" y="0" width="2.1875" height="18"></rect>
+            <rect id="Rectangle" fill="#002868" x="0" y="7.8" width="25" height="2.4"></rect>
+        </g>
+    </g>
+</svg>

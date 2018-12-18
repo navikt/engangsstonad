@@ -2,7 +2,10 @@ import {
     CommonActionKeys,
     CommonActionTypes
 } from '../actions/common/commonActionDefinitions';
-import { ApiActionKeys, GetAppStateSuccess } from 'actions/api/apiActionDefinitions';
+import {
+    ApiActionKeys,
+    GetAppStateSuccess
+} from 'actions/api/apiActionDefinitions';
 
 const getDefaultState = (): CommonState => ({
     language: 'nb',
@@ -31,8 +34,8 @@ const commonReducer = (
         case CommonActionKeys.SET_GODKJENT_VILKAR:
             return { ...state, godkjentVilkar: action.godkjentVilkar };
         case ApiActionKeys.GET_APP_STATE_SUCCESS:
-            return {...state, ...action.appState.common};
-    }   
+            return { ...state, ...action.appState.common };
+    }
     return state;
 };
 

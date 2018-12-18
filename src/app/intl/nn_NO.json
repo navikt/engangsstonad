@@ -204,5 +204,9 @@
     "vedlegg.liste.tittel": "Valgte vedlegg ({størrelse})",
     "vedlegg.lastoppknapp.label": "Last opp vedlegg...",
     "vedlegg.lastoppknapp.arialabel": "Trykk for å laste opp vedlegg",
-    "label_med_hjelpetekst.label": "Hjelpetekst"
+    "label_med_hjelpetekst.label": "Hjelpetekst",
+
+    "languageToggle.bokmål": "Bokmål - Norsk",
+    "languageToggle.nynorsk": "Nynorsk - Norsk",
+    "languageToggle.english": "English"
 }
