@@ -159,7 +159,7 @@
     "kvittering.text.kontonummer": " If your application is approved, the lump-sum grant will be paid to account number {kontonummer}. You can change the account number at {dinProfilLink}.",
     "kvittering.text.dittNavLink": "Ditt NAV",
     "kvittering.text.soknadMottatt.dinProfilLink": "Your profile",
-    "kvittering.text.soknadMottatt.avsluttText": "End",
+    "kvittering.text.soknadMottatt.avsluttText": "Exit",
 
     "rettigheter.sectionheading": " Your duties",
     "rettigheter.text.2": " I understand that if I provide incorrect information or withhold information, this may have consequences for my entitlement to the lump-sum grant.",
