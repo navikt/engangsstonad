@@ -23,6 +23,7 @@
         "cy": "cypress open & npm run build && export PORT=8081 && npm run start-express"
     },
     "dependencies": {
+        "@types/react-aria-menubutton": "^5.1.1",
         "@types/react-scroll": "1.5.3",
         "@types/react-transition-group": "2.0.11",
         "axios": "0.17.1",
@@ -68,6 +69,7 @@
         "nav-frontend-typografi-style": "1.0.7",
         "prom-client": "11.0.0",
         "react": "16.3.1",
+        "react-aria-menubutton": "^6.1.0",
         "react-collapse": "4.0.3",
         "react-day-picker": "7.1.4",
         "react-document-title": "2.0.3",

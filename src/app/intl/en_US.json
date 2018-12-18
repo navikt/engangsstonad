@@ -239,5 +239,9 @@
 
     "label_med_hjelpetekst.label": " Help text",
 
-    "vedlegg.forStort": " The attachment must be less than 9MB"
+    "vedlegg.forStort": " The attachment must be less than 9MB",
+
+    "languageToggle.bokmål": "Bokmål - Norsk",
+    "languageToggle.nynorsk": "Nynorsk - Norsk",
+    "languageToggle.english": "English"
 }

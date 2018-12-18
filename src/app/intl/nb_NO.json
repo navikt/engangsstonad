@@ -239,5 +239,9 @@
 
     "label_med_hjelpetekst.label": "Hjelpetekst",
 
-    "vedlegg.forStort": "Vedlegget må være mindre enn 9MB"
+    "vedlegg.forStort": "Vedlegget må være mindre enn 9MB",
+
+    "languageToggle.bokmål": "Bokmål - Norsk",
+    "languageToggle.nynorsk": "Nynorsk - Norsk",
+    "languageToggle.english": "English"
 }
