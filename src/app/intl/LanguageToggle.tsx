@@ -1,38 +1,16 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Wrapper, Button, Menu, MenuItem } from 'react-aria-menubutton';
-// import getMessage from 'util/i18n/i18nUtils';
 import 'nav-frontend-lenker-style';
 
-import './languageToggle.less';
 import NorwayFlagSVG from 'components/flags/NorwayFlagSVG';
 import UKFlagSVG from 'components/flags/UKFlagSVG';
 import getMessage from 'common/util/i18nUtils';
+import './languageToggle.less';
 
 interface Props {
-    language: string;
     toggleLanguage: (langaugeCode: string) => void;
 }
-
-{
-    /* <a
-                className="lenke"
-                onClick={e => {
-                    stopEvent(e);
-                    language === 'nb'
-                        ? toggleLanguage('en')
-                        : toggleLanguage('nb');
-                }}
-                href="#"
-            >
-                {getMessage(intl, 'intro.text.endreMålform')}
-            </a> */
-}
-
-// const stopEvent = (evt: React.MouseEvent<HTMLAnchorElement>) => {
-//     evt.stopPropagation();
-//     evt.preventDefault();
-// };
 
 const getLanguageCodeFromValue = (value: string) => {
     if (value === 'Bokmål - Norsk') {
@@ -50,7 +28,6 @@ const handleSelection = (value: JSX.Element[], e: any, toggleLanguage: any) => {
 
 const LanguageToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({
     intl,
-    language,
     toggleLanguage
 }) => {
     return (

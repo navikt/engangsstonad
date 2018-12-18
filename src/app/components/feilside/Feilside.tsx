@@ -24,11 +24,21 @@ export interface Props {
     setLanguage?: (languageCode: string) => void;
 }
 
-const Feilside: React.StatelessComponent<Props> = ({ containerId, dokumenttittel, illustrasjon, tittel, ingress, language, setLanguage }) => {
+const Feilside: React.StatelessComponent<Props> = ({
+    containerId,
+    dokumenttittel,
+    illustrasjon,
+    tittel,
+    ingress,
+    language,
+    setLanguage
+}) => {
     return (
         <div id={containerId}>
             <DocumentTitle title={dokumenttittel} />
-            {setLanguage && language && <LanguageToggle language={language} toggleLanguage={setLanguage} />}
+            {setLanguage && language && (
+                <LanguageToggle toggleLanguage={setLanguage} />
+            )}
             {illustrasjon && (
                 <SimpleIllustration
                     veileder={illustrasjon.veileder}
@@ -38,7 +48,10 @@ const Feilside: React.StatelessComponent<Props> = ({ containerId, dokumenttittel
                             <div>
                                 <div>{illustrasjon.tekst}</div>
                                 {illustrasjon.lenke && (
-                                    <Lenke className="intro-snakkelenke" href={illustrasjon.lenke.url}>
+                                    <Lenke
+                                        className="intro-snakkelenke"
+                                        href={illustrasjon.lenke.url}
+                                    >
                                         {illustrasjon.lenke.tekst}
                                     </Lenke>
                                 )}

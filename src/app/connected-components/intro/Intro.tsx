@@ -176,7 +176,6 @@ class Intro extends React.Component<Props, OwnProps> {
                 <Skjemasteg>
                     <ValidForm noSummary={true} onSubmit={this.startSøknad}>
                         <LanguageToggle
-                            language={this.props.language}
                             toggleLanguage={(languageCode: string) =>
                                 this.toggleLanguage(languageCode)
                             }
