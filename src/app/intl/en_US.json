@@ -127,7 +127,7 @@
     "medlemsskap.modal.feil.overlapper": "You have already added the time spent abroad during this period",
 
     "oppsummering.sectionheading": "Summary",
-    "oppsummering.text.informasjonOmBarnet": "Information about { antallBarn }",
+    "oppsummering.text.relasjonTilBarnet": "Relationship to { antallBarn }",
     "oppsummering.text.lesNoye": "Please review the summary before submitting your application. If you need to make changes you can go back.",
     "oppsummering.text.vedlagtTerminbekreftelse": "Confirmation of the expected date of delivery is attached",
     "oppsummering.text.somErDatert": "Which is dated ",
