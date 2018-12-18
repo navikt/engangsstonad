@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, InjectedIntlProps, InjectedIntl } from 'react-intl';
 import { Wrapper, Button, Menu, MenuItem } from 'react-aria-menubutton';
+const { NedChevron } = require('nav-frontend-chevron');
 import 'nav-frontend-lenker-style';
 
 import NorwayFlagSVG from 'components/flags/NorwayFlagSVG';
@@ -10,6 +11,7 @@ import './languageToggle.less';
 
 interface Props {
     toggleLanguage: (langaugeCode: string) => void;
+    language: string;
 }
 
 const getLanguageCodeFromValue = (value: string) => {
@@ -22,14 +24,42 @@ const getLanguageCodeFromValue = (value: string) => {
     }
 };
 
+const getLanguageTextFromCode = (intl: InjectedIntl, code: string) => {
+    if (code === 'nb') {
+        return getMessage(intl, 'languageToggle.bokmål');
+    } else if (code === 'nn') {
+        return getMessage(intl, 'languageToggle.nynorsk');
+    } else {
+        return getMessage(intl, 'languageToggle.english');
+    }
+};
+
+const renderMenuItem = (intl: InjectedIntl, languageCode: string) => {
+    return (
+        <li>
+            <MenuItem className="languageToggle__menu__item">
+                <div className="languageToggle__button__flag">
+                    {languageCode === 'en' ? <UKFlagSVG /> : <NorwayFlagSVG />}
+                </div>
+                <div className="languageToggle__button__language">
+                    {getLanguageTextFromCode(intl, languageCode)}
+                </div>
+            </MenuItem>
+        </li>
+    );
+};
+
 const handleSelection = (value: JSX.Element[], e: any, toggleLanguage: any) => {
     toggleLanguage(getLanguageCodeFromValue(value[1].props.children));
 };
 
 const LanguageToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({
     intl,
+    language,
     toggleLanguage
 }) => {
+    const menuLanguages = ['nb', 'nn', 'en'].filter(code => code !== language);
+
     return (
         <div className="languageToggle">
             <Wrapper
@@ -37,48 +67,21 @@ const LanguageToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({
                 onSelection={(value: JSX.Element[], e: any) =>
                     handleSelection(value, e, toggleLanguage)
                 }
-                closeOnSelection={false}
             >
                 <Button className="languageToggle__button">
                     <div className="languageToggle__button__flag">
-                        <NorwayFlagSVG />
+                        {language === 'en' ? <UKFlagSVG /> : <NorwayFlagSVG />}
                     </div>
                     <div className="languageToggle__button__language">
-                        Norsk - Bokmål
+                        {getLanguageTextFromCode(intl, language)}
+                    </div>
+                    <div>
+                        <NedChevron />
                     </div>
                 </Button>
-                <Menu>
+                <Menu className="languageToggle__menu">
                     <ul>
-                        <li>
-                            <MenuItem>
-                                <div className="languageToggle__button__flag">
-                                    <NorwayFlagSVG />
-                                </div>
-                                <div className="languageToggle__button__language">
-                                    {getMessage(intl, 'languageToggle.bokmål')}
-                                </div>
-                            </MenuItem>
-                        </li>
-                        <li>
-                            <MenuItem>
-                                <div className="languageToggle__button__flag">
-                                    <NorwayFlagSVG />
-                                </div>
-                                <div className="languageToggle__button__language">
-                                    Nynorsk - Norsk
-                                </div>
-                            </MenuItem>
-                        </li>
-                        <li>
-                            <MenuItem>
-                                <div className="languageToggle__button__flag">
-                                    <UKFlagSVG />
-                                </div>
-                                <div className="languageToggle__button__language">
-                                    English
-                                </div>
-                            </MenuItem>
-                        </li>
+                        {menuLanguages.map(code => renderMenuItem(intl, code))}
                     </ul>
                 </Menu>
             </Wrapper>
