@@ -5,7 +5,6 @@ import * as countries from 'i18n-iso-countries';
 import AnnenForelder from 'app/types/domain/AnnenForelder';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
 import getMessage from 'util/i18n/i18nUtils';
-import SummaryBlock from 'components/summary-block/SummaryBlock';
 import '../../styles/engangsstonad.less';
 
 interface Props {
@@ -22,7 +21,7 @@ const AndreForeldrenOppsummering: React.StatelessComponent<Props & InjectedIntlP
     const fnrText = fnr ? fnr : 'som ikke er oppgitt';
 
     return (
-        <SummaryBlock title={getMessage(intl, 'annenForelder.sectionheading')}>
+        <div className="blokk-m">
             {kanIkkeOppgis && <Element>{getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}</Element>}
             {!kanIkkeOppgis && navn && (
                 <DisplayTextWithLabel
@@ -40,7 +39,7 @@ const AndreForeldrenOppsummering: React.StatelessComponent<Props & InjectedIntlP
                     text={countries.getName(bostedsland, 'nb')}
                 />
             )}
-        </SummaryBlock>
+        </div>
     );
 };
 export default injectIntl(AndreForeldrenOppsummering);
