@@ -65,9 +65,12 @@ const getDateFromString = (dato?: string) => {
     return undefined;
 };
 
-const getRegistrertePerioder = (alleOpphold: Utenlandsopphold[], gjeldendeOpphold?: Utenlandsopphold): Tidsperiode[] => {
-    let arr = gjeldendeOpphold ? alleOpphold.filter(o => o !== gjeldendeOpphold) : alleOpphold;
-    return arr.map(opphold => ({
+const getRegistrertePerioder = (
+    alleOpphold: Utenlandsopphold[],
+    gjeldendeOpphold?: Utenlandsopphold
+): Tidsperiode[] => {
+    let arr = gjeldendeOpphold ? alleOpphold.filter((o) => o !== gjeldendeOpphold) : alleOpphold;
+    return arr.map((opphold) => ({
         startdato: new Date(opphold.tidsperiode.fom),
         sluttdato: new Date(opphold.tidsperiode.tom)
     }));
@@ -179,7 +182,9 @@ class CountryModal extends React.Component<Props, State> {
 
         let fomAvgrensning: Avgrensninger = {};
         let tomAvgrensning: Avgrensninger = {};
-        const registrertePerioder = alleUtenlandsopphold ? getRegistrertePerioder(alleUtenlandsopphold, utenlandsopphold) : undefined;
+        const registrertePerioder = alleUtenlandsopphold
+            ? getRegistrertePerioder(alleUtenlandsopphold, utenlandsopphold)
+            : undefined;
         if (fomMinDato || fomMaksDato) {
             fomAvgrensning = {
                 minDato: fomMinDato,
@@ -217,8 +222,7 @@ class CountryModal extends React.Component<Props, State> {
                 closeButton={true}
                 onRequestClose={() => {
                     this.props.closeModal();
-                }}
-            >
+                }}>
                 <form onSubmit={this.onSubmit}>
                     <Undertittel className="countryModal__title">
                         <FormattedMessage id="medlemmskap.modal.overskrift" />
@@ -227,7 +231,11 @@ class CountryModal extends React.Component<Props, State> {
                         <CountrySelect
                             label={<LabelText>{this.props.label}</LabelText>}
                             feil={landFeil}
-                            onChange={land => this.updateFormState({ formData: { ...formData, land: { value: land } } })}
+                            onChange={(land) =>
+                                this.updateFormState({
+                                    formData: { ...formData, land: { value: land } }
+                                })
+                            }
                             language={language}
                             defaultValue={formData && formData.land && formData.land.value}
                         />
@@ -238,8 +246,13 @@ class CountryModal extends React.Component<Props, State> {
                             label={<LabelText intlId="standard.text.fra" />}
                             dato={fomDato}
                             feil={fomFeil}
-                            onChange={dato =>
-                                this.updateFormState({ formData: { ...formData, fom: { value: dato ? dato.toISOString() : undefined } } })
+                            onChange={(dato) =>
+                                this.updateFormState({
+                                    formData: {
+                                        ...formData,
+                                        fom: { value: dato ? dato.toISOString() : undefined }
+                                    }
+                                })
                             }
                             avgrensninger={fomAvgrensning}
                             kalenderplassering="fullskjerm"
@@ -251,8 +264,13 @@ class CountryModal extends React.Component<Props, State> {
                             label={<LabelText intlId="standard.text.til" />}
                             dato={tomDato}
                             feil={tomFeil}
-                            onChange={dato =>
-                                this.updateFormState({ formData: { ...formData, tom: { value: dato ? dato.toISOString() : undefined } } })
+                            onChange={(dato) =>
+                                this.updateFormState({
+                                    formData: {
+                                        ...formData,
+                                        tom: { value: dato ? dato.toISOString() : undefined }
+                                    }
+                                })
                             }
                             avgrensninger={tomAvgrensning}
                             kalenderplassering="fullskjerm"

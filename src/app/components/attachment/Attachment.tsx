@@ -1,10 +1,10 @@
 import * as React from 'react';
-const Icon = require('nav-frontend-ikoner-assets').default;
-
-import './attachment.less';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { bytesString } from 'util/attachment/utils';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import SlettKnapp from 'common/components/slett-knapp/SlettKnapp';
+import './attachment.less';
+
+const Icon = require('nav-frontend-ikoner-assets').default;
 
 interface OwnProps {
     vedlegg: File;
@@ -18,7 +18,7 @@ const Attachment: React.StatelessComponent<Props> = ({
     vedlegg,
     visFilstørrelse,
     onDelete,
-    intl
+    intl,
 }) => (
     <div className="attachment">
         <Icon className="attachment__icon" kind="vedlegg" size={20} />

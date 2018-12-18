@@ -46,7 +46,7 @@ const Veilederinfo: React.StatelessComponent<VeilederInfoProps> = ({
     ikon,
     visIkon = true,
     stil = 'normal',
-    type = 'info',
+    type = 'info' as Infotype,
     children
 }) => {
     return (

@@ -1,20 +1,20 @@
 import * as React from 'react';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
+import { EtikettLiten } from 'nav-frontend-typografi';
+import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { isAttachmentWithError } from 'common/storage/attachment/components/util';
+import { ISODateToMaskedInput } from 'util/date/dateUtils';
+import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
 import getMessage from 'util/i18n/i18nUtils';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
-import { ISODateToMaskedInput } from 'util/date/dateUtils';
-
 import '../../styles/engangsstonad.less';
-import SummaryBlock from 'components/summary-block/SummaryBlock';
-import { Attachment } from 'common/storage/attachment/types/Attachment';
-import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 
 interface Props {
     barn: FodtBarn & UfodtBarn;
 }
 
-const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = props => {
+const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl } = props;
     const {
         antallBarn,
@@ -37,39 +37,38 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
     }
 
     return (
-        // tslint:disable-next-line:jsx-alignment
-        <SummaryBlock title={getMessage(intl, 'oppsummering.text.informasjonOmBarnet', {
-            antallBarn: antallBarn && antallBarn > 1 ?
-                getMessage(intl, 'medlemmskap.text.barnFlertall') :
-                getMessage(intl, 'medlemmskap.text.barnEntall') }
-            )}
-        >
+        <div className=" blokk-m">
             <DisplayTextWithLabel
-                label={getMessage(intl, 'oppsummering.text.soknadenGjelder', )}
+                label={getMessage(intl, 'oppsummering.text.soknadenGjelder')}
                 text={antallBarnSummaryText}
             />
             {erBarnetFødt && (
-                <DisplayTextWithLabel label={getMessage(intl, 'oppsummering.text.medFødselsdato')} text={ISODateToMaskedInput(fødselsdatoer[0])} />
+                <DisplayTextWithLabel
+                    label={getMessage(intl, 'oppsummering.text.medFødselsdato')}
+                    text={ISODateToMaskedInput(fødselsdatoer[0])}
+                />
             )}
-            {!erBarnetFødt &&
-                termindato &&
-                terminbekreftelseDato && (
-                    <div>
-                        <DisplayTextWithLabel
-                            label={getMessage(intl, 'oppsummering.text.medTermindato')}
-                            text={ISODateToMaskedInput(termindato)}
-                        />
-                        <DisplayTextWithLabel
-                            label={getMessage(intl, 'oppsummering.text.vedlagtTerminbekreftelse')}
-                            text={terminbekreftelse.filter((a: Attachment) => !isAttachmentWithError(a)).map((a: Attachment) => a.filename)}
-                        />
-                        <DisplayTextWithLabel
-                            label={getMessage(intl, 'oppsummering.text.somErDatert')}
-                            text={ISODateToMaskedInput(terminbekreftelseDato)}
+            {!erBarnetFødt && termindato && terminbekreftelseDato && (
+                <div>
+                    <DisplayTextWithLabel
+                        label={getMessage(intl, 'oppsummering.text.medTermindato')}
+                        text={ISODateToMaskedInput(termindato)}
+                    />
+                    <div className="oppsummering__attachments">
+                        <EtikettLiten className="textWithLabel__label">
+                            {getMessage(intl, 'oppsummering.text.vedlagtTerminbekreftelse')}
+                        </EtikettLiten>
+                        <AttachmentList
+                            attachments={terminbekreftelse.filter((a: Attachment) => !isAttachmentWithError(a))}
                         />
                     </div>
-                )}
-        </SummaryBlock>
+                    <DisplayTextWithLabel
+                        label={getMessage(intl, 'oppsummering.text.somErDatert')}
+                        text={ISODateToMaskedInput(terminbekreftelseDato)}
+                    />
+                </div>
+            )}
+        </div>
     );
 };
 export default injectIntl(BarnOppsummering);

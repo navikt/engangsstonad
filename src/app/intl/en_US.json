@@ -53,7 +53,7 @@
     "relasjonBarn.text.antallBarnFødt": "and it was born...",
     "relasjonBarn.radiobutton.ettbarn": "one child",
     "relasjonBarn.radiobutton.tvillinger": "twins",
-    "relasjonBarn.radiobutton.flere": "more than one child ",
+    "relasjonBarn.radiobutton.flere": "more than two children",
     "relasjonBarn.text.velgantallBarn": "select number of children",
     "relasjonBarn.text.termindato": "with expected date of delivery on...",
     "relasjonBarn.link.velgeDato": "Click here to select the date",
@@ -127,7 +127,7 @@
     "medlemsskap.modal.feil.overlapper": "You have already added the time spent abroad during this period",
 
     "oppsummering.sectionheading": "Summary",
-    "oppsummering.text.informasjonOmBarnet": "Information about { antallBarn }",
+    "oppsummering.text.relasjonTilBarnet": "Relationship to { antallBarn }",
     "oppsummering.text.lesNoye": "Please review the summary before submitting your application. If you need to make changes you can go back.",
     "oppsummering.text.vedlagtTerminbekreftelse": "Confirmation of the expected date of delivery is attached",
     "oppsummering.text.somErDatert": "Which is dated ",
@@ -154,7 +154,7 @@
 
     "kvittering.sectionheading": "Application received",
     "kvittering.text.takk": "Thank you for the application",
-    "kvittering.text.soknadMottatt": "We received the application with reference number {referansenr} on {1} at {0}.",
+    "kvittering.text.soknadMottatt": "We received the application on {1} at {0}.",
     "kvittering.text.dittNav": "You can track the progress of the application {dittNavLink}.",
     "kvittering.text.kontonummer": "If your application is approved, the lump-sum grant will be paid to account number {kontonummer}. You can change the account number at {dinProfilLink}.",
     "kvittering.text.dittNavLink": "Ditt NAV",

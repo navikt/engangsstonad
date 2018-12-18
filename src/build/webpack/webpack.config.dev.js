@@ -14,7 +14,7 @@ webpackConfig.plugins.push(
 webpackConfig.plugins.push(
 	new HtmlWebpackHarddiskPlugin({
 		outputPath: path.resolve(__dirname, '../../../dist/dev')
-	})
+	}),
 );
 
 module.exports = Object.assign(webpackConfig, {

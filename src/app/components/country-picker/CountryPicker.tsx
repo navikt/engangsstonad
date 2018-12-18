@@ -7,6 +7,7 @@ import './countryPicker.less';
 import LabelText from 'common/components/labeltekst/Labeltekst';
 import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
+import { FormattedMessage } from 'react-intl';
 
 interface Validators {
     validateLand: (data: any) => Feil | undefined;
@@ -104,7 +105,7 @@ class CountryPicker extends React.Component<Props, State> {
                     />
                 )}
                 <Knapp className="countryPicker__addButton" onClick={() => this.openModal()} htmlType="button">
-                    Legg til land
+                    <FormattedMessage id="medlemmskap.knapp.leggTilLand" />
                 </Knapp>
             </div>
         );
