@@ -48,7 +48,11 @@ const Oppsummering = ({ annenForelder, barn, informasjonOmUtenlandsopphold, pers
                 <OppsummeringBarn barn={barn} />
             </Oppsummeringspunkt>
 
-            {Object.keys(annenForelder).length > 0 && <AndreForeldrenOppsummering annenForelder={annenForelder} />}
+            {Object.keys(annenForelder).length > 0 && (
+                <Oppsummeringspunkt tittel={getMessage(intl, 'annenForelder.sectionheading')}>
+                    <AndreForeldrenOppsummering annenForelder={annenForelder} />
+                </Oppsummeringspunkt>
+            )}
 
             <Oppsummeringspunkt tittel={getMessage(intl, 'medlemmskap.sectionheading')}>
                 <UtenlandsoppholdOppsummering
