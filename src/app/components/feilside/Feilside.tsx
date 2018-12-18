@@ -37,7 +37,10 @@ const Feilside: React.StatelessComponent<Props> = ({
         <div id={containerId}>
             <DocumentTitle title={dokumenttittel} />
             {setLanguage && language && (
-                <LanguageToggle toggleLanguage={setLanguage} />
+                <LanguageToggle
+                    language={language}
+                    toggleLanguage={setLanguage}
+                />
             )}
             {illustrasjon && (
                 <SimpleIllustration
