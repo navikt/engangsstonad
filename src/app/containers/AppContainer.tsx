@@ -92,7 +92,6 @@ class AppContainer extends React.Component<Props> {
     }
 
     getErrorRoutes(error: Error, errorResponse?: any) {
-
         let component: any;
         if (error.personErMann === true) {
             component = <ErMann />;
@@ -101,9 +100,11 @@ class AppContainer extends React.Component<Props> {
         } else if (error.personErMyndig === false) {
             component = <IkkeMyndig />;
         } else if (error.innsendingFeilet === true) {
-            component = <InnsendingFeilet errorResponse={errorResponse}/>;
+            component = <InnsendingFeilet errorResponse={errorResponse} />;
         }
-        return this.renderRoutes(<Route path="/engangsstonad" component={() => component} key="error" />);
+        return this.renderRoutes(
+            <Route path="/engangsstonad" component={() => component} key="error" />
+        );
     }
 
     getSøknadRoutes() {
@@ -112,10 +113,14 @@ class AppContainer extends React.Component<Props> {
         if (!søknadSendt) {
             routes.push(<Route path="/engangsstonad" component={Intro} exact={true} key="intro" />);
             if (godkjentVilkar) {
-                routes.push(<Route path="/engangsstonad/soknad" component={SøknadContainer} key="søknad" />);
+                routes.push(
+                    <Route path="/engangsstonad/soknad" component={SøknadContainer} key="søknad" />
+                );
             }
         } else {
-            routes.push(<Route path="/engangsstonad" component={SøknadSendt} exact={true} key="completed" />);
+            routes.push(
+                <Route path="/engangsstonad" component={SøknadSendt} exact={true} key="completed" />
+            );
         }
         return this.renderRoutes(routes);
     }
@@ -131,24 +136,33 @@ class AppContainer extends React.Component<Props> {
             const personFinnes = harPersonData(person);
             const personErMyndig = erMyndig(person);
             const personErMann = erMann(person);
-            const innsendingFeilet = søknadSendt && error && error.status !== 401 && error.status >= 400;
-            const applicationStateIsValid = personFinnes && personErMyndig && !personErMann && !innsendingFeilet && !isLoadingAppState;
+            const innsendingFeilet =
+                søknadSendt && error && error.status !== 401 && error.status >= 400;
+            const applicationStateIsValid =
+                personFinnes &&
+                personErMyndig &&
+                !personErMann &&
+                !innsendingFeilet &&
+                !isLoadingAppState;
 
             if (applicationStateIsValid) {
                 return this.renderContent(this.getSøknadRoutes());
             }
 
             return this.renderContent(
-                this.getErrorRoutes({
-                    personErMann,
-                    personFinnes,
-                    personErMyndig,
-                    innsendingFeilet
-                },                  error)
+                this.getErrorRoutes(
+                    {
+                        personErMann,
+                        personFinnes,
+                        personErMyndig,
+                        innsendingFeilet,
+                    },
+                    error
+                )
             );
         }
 
-        if (isLoadingPerson || (error && error.status === 401 || isLoadingAppState)) {
+        if (isLoadingPerson || ((error && error.status === 401) || isLoadingAppState)) {
             return this.renderContent(<Spinner type="XXL" />);
         }
         return this.renderContent(<GenerellFeil />);
@@ -164,7 +178,7 @@ const mapStateToProps = (state: any) => ({
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
     godkjentVilkar: state.commonReducer.godkjentVilkar,
     language: state.commonReducer.language,
-    isLoadingAppState: state.apiReducer.isLoadingAppState
+    isLoadingAppState: state.apiReducer.isLoadingAppState,
 });
 
 export default withRouter(connect<StateProps, {}, {}>(mapStateToProps)(AppContainer));

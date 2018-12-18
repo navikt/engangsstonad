@@ -23,7 +23,7 @@ const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
     søknad: EngangsstonadSoknad;
-    step: {activeStep: number};
+    step: { activeStep: number };
     common: CommonState;
     person: Person;
     activeStep: number;
