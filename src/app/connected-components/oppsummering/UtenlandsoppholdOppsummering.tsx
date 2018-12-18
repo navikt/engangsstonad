@@ -12,23 +12,20 @@ interface Props {
     erBarnetFødt?: boolean;
 }
 
-const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = props => {
+const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl, erBarnetFødt } = props;
     const {
         iNorgePåHendelsestidspunktet,
         iNorgeNeste12Mnd,
         iNorgeSiste12Mnd,
         tidligereOpphold,
-        senereOpphold,
+        senereOpphold
     } = props.informasjonOmUtenlandsopphold;
 
     return (
         <div className="blokk-m">
             {iNorgeSiste12Mnd ? (
-                <DisplayTextWithLabel
-                    label={getMessage(intl, 'oppsummering.text.boddSisteTolv')}
-                    text="Norge"
-                />
+                <DisplayTextWithLabel label={getMessage(intl, 'oppsummering.text.boddSisteTolv')} text="Norge" />
             ) : (
                 <div className="textWithLabel">
                     <EtikettLiten className="textWithLabel__label">

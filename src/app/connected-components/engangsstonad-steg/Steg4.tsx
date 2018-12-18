@@ -33,9 +33,7 @@ class Steg4 extends React.Component<Props> {
         return (
             <Skjemasteg tittel={getMessage(intl, 'oppsummering.sectionheading')}>
                 <div className="blokk-m">
-                    <Veilederinfo ikon="veileder">
-                        {getMessage(intl, 'oppsummering.text.lesNoye')}
-                    </Veilederinfo>
+                    <Veilederinfo ikon="veileder">{getMessage(intl, 'oppsummering.text.lesNoye')}</Veilederinfo>
                 </div>
                 <Oppsummering />
                 <div className="blokk-m">
@@ -44,20 +42,14 @@ class Steg4 extends React.Component<Props> {
                             validators={[
                                 {
                                     test: () => bekreftetInformasjon === true,
-                                    failText: getMessage(
-                                        intl,
-                                        'valideringsfeil.bekreftOpplysninger'
-                                    ),
-                                },
+                                    failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger')
+                                }
                             ]}
-                            name="bekreftOpplysninger"
-                        >
+                            name="bekreftOpplysninger">
                             <BekreftCheckboksPanel
                                 inputProps={{ name: 'bekreftOpplysninger' }}
                                 checked={bekreftetInformasjon}
-                                onChange={() =>
-                                    dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))
-                                }
+                                onChange={() => dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))}
                                 label={getMessage(intl, 'oppsummering.text.samtykke')}
                             />
                         </ValidGroup>
@@ -71,7 +63,7 @@ class Steg4 extends React.Component<Props> {
 const mapStateToProps = (state: any) => ({
     bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
     vedlegg: state.attachmentReducer,
-    soknadPostResponse: state.apiReducer.soknad,
+    soknadPostResponse: state.apiReducer.soknad
 });
 
 export default connect<StateProps>(mapStateToProps)(injectIntl(Steg4));

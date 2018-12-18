@@ -69,8 +69,8 @@ const getRegistrertePerioder = (
     alleOpphold: Utenlandsopphold[],
     gjeldendeOpphold?: Utenlandsopphold
 ): Tidsperiode[] => {
-    let arr = gjeldendeOpphold ? alleOpphold.filter(o => o !== gjeldendeOpphold) : alleOpphold;
-    return arr.map(opphold => ({
+    let arr = gjeldendeOpphold ? alleOpphold.filter((o) => o !== gjeldendeOpphold) : alleOpphold;
+    return arr.map((opphold) => ({
         startdato: new Date(opphold.tidsperiode.fom),
         sluttdato: new Date(opphold.tidsperiode.tom)
     }));
@@ -140,12 +140,9 @@ class CountryModal extends React.Component<Props, State> {
         const fom = formData.fom && formData.fom.value;
         const tom = formData.tom && formData.tom.value;
 
-        const landFeil =
-            validateLand && validateLand({ land: formData.land && formData.land.value });
-        const fomFeil =
-            validateFom && validateFom({ fom, tom, utenlandsoppholdInEditMode: utenlandsopphold });
-        const tomFeil =
-            validateTom && validateTom({ tom, fom, utenlandsoppholdInEditMode: utenlandsopphold });
+        const landFeil = validateLand && validateLand({ land: formData.land && formData.land.value });
+        const fomFeil = validateFom && validateFom({ fom, tom, utenlandsoppholdInEditMode: utenlandsopphold });
+        const tomFeil = validateTom && validateTom({ tom, fom, utenlandsoppholdInEditMode: utenlandsopphold });
 
         this.setState({
             formData: {
@@ -176,9 +173,7 @@ class CountryModal extends React.Component<Props, State> {
         const fomDato = getDateFromString(formData && formData.fom && formData.fom.value);
         const tomDato = getDateFromString(formData && formData.tom && formData.tom.value);
 
-        const lagreKnappTekstId = erEndring
-            ? 'medlemmskap.modal.lagreEndringer'
-            : 'medlemmskap.knapp.leggTilLand';
+        const lagreKnappTekstId = erEndring ? 'medlemmskap.modal.lagreEndringer' : 'medlemmskap.knapp.leggTilLand';
 
         const fomMinDato = tidsperiode ? tidsperiode.startdato : undefined;
         const fomMaksDato = tomDato || (tidsperiode ? tidsperiode.sluttdato : undefined);
@@ -227,8 +222,7 @@ class CountryModal extends React.Component<Props, State> {
                 closeButton={true}
                 onRequestClose={() => {
                     this.props.closeModal();
-                }}
-            >
+                }}>
                 <form onSubmit={this.onSubmit}>
                     <Undertittel className="countryModal__title">
                         <FormattedMessage id="medlemmskap.modal.overskrift" />
@@ -237,7 +231,7 @@ class CountryModal extends React.Component<Props, State> {
                         <CountrySelect
                             label={<LabelText>{this.props.label}</LabelText>}
                             feil={landFeil}
-                            onChange={land =>
+                            onChange={(land) =>
                                 this.updateFormState({
                                     formData: { ...formData, land: { value: land } }
                                 })
@@ -252,7 +246,7 @@ class CountryModal extends React.Component<Props, State> {
                             label={<LabelText intlId="standard.text.fra" />}
                             dato={fomDato}
                             feil={fomFeil}
-                            onChange={dato =>
+                            onChange={(dato) =>
                                 this.updateFormState({
                                     formData: {
                                         ...formData,
@@ -270,7 +264,7 @@ class CountryModal extends React.Component<Props, State> {
                             label={<LabelText intlId="standard.text.til" />}
                             dato={tomDato}
                             feil={tomFeil}
-                            onChange={dato =>
+                            onChange={(dato) =>
                                 this.updateFormState({
                                     formData: {
                                         ...formData,

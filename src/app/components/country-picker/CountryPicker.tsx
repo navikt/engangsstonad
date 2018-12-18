@@ -35,7 +35,7 @@ class CountryPicker extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         const state: State = {
-            isOpen: false,
+            isOpen: false
         };
         this.state = { ...state };
         this.openModal = this.openModal.bind(this);
@@ -82,17 +82,13 @@ class CountryPicker extends React.Component<Props, State> {
         const { utenlandsoppholdListe, validators } = this.props;
         return (
             <div>
-                <div className="blokk-xs">
-                    {this.props.label && <LabelText>{this.props.label}</LabelText>}
-                </div>
+                <div className="blokk-xs">{this.props.label && <LabelText>{this.props.label}</LabelText>}</div>
                 {this.props.utenlandsoppholdListe.length > 0 && (
                     <div className="blokk-s">
                         <CountryList
                             utenlandsoppholdListe={this.props.utenlandsoppholdListe}
                             onEditClick={(periode: Utenlandsopphold) => this.onEditClick(periode)}
-                            onDeleteClick={(periode: Utenlandsopphold) =>
-                                this.onDeleteClick(periode)
-                            }
+                            onDeleteClick={(periode: Utenlandsopphold) => this.onDeleteClick(periode)}
                         />
                     </div>
                 )}
@@ -108,11 +104,7 @@ class CountryPicker extends React.Component<Props, State> {
                         {...validators}
                     />
                 )}
-                <Knapp
-                    className="countryPicker__addButton"
-                    onClick={() => this.openModal()}
-                    htmlType="button"
-                >
+                <Knapp className="countryPicker__addButton" onClick={() => this.openModal()} htmlType="button">
                     <FormattedMessage id="medlemmskap.knapp.leggTilLand" />
                 </Knapp>
             </div>

@@ -23,13 +23,7 @@ interface StateProps {
 
 type Props = StateProps & InjectedIntlProps;
 
-const Oppsummering = ({
-    annenForelder,
-    barn,
-    informasjonOmUtenlandsopphold,
-    person,
-    intl,
-}: Props) => {
+const Oppsummering = ({ annenForelder, barn, informasjonOmUtenlandsopphold, person, intl }: Props) => {
     if (!person) {
         return null;
     }
@@ -38,7 +32,7 @@ const Oppsummering = ({
         antallBarn:
             barn.antallBarn && barn.antallBarn > 1
                 ? getMessage(intl, 'medlemmskap.text.barnFlertall')
-                : getMessage(intl, 'medlemmskap.text.barnEntall'),
+                : getMessage(intl, 'medlemmskap.text.barnEntall')
     });
 
     return (
@@ -46,11 +40,7 @@ const Oppsummering = ({
             <div className="blokk-m">
                 <SøkersPersonalia
                     kjønn={person.kjønn}
-                    navn={fullNameFormat(
-                        person.fornavn,
-                        person.mellomnavn,
-                        person.etternavn
-                    ).toLowerCase()}
+                    navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn).toLowerCase()}
                     personnummer={person.fnr}
                 />
             </div>
@@ -58,9 +48,7 @@ const Oppsummering = ({
                 <OppsummeringBarn barn={barn} />
             </Oppsummeringspunkt>
 
-            {Object.keys(annenForelder).length > 0 && (
-                <AndreForeldrenOppsummering annenForelder={annenForelder} />
-            )}
+            {Object.keys(annenForelder).length > 0 && <AndreForeldrenOppsummering annenForelder={annenForelder} />}
 
             <Oppsummeringspunkt tittel={getMessage(intl, 'medlemmskap.sectionheading')}>
                 <UtenlandsoppholdOppsummering
@@ -76,7 +64,7 @@ const mapStateToProps = (state: any) => ({
     person: state.apiReducer.person,
     annenForelder: state.soknadReducer.annenForelder,
     barn: state.soknadReducer.barn,
-    informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold,
+    informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold
 });
 
 export default connect<StateProps>(mapStateToProps)(injectIntl(Oppsummering));

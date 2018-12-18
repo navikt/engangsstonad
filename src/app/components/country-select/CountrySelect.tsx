@@ -21,12 +21,9 @@ export default class CountrySelect extends React.Component<StateProps> {
         const countryNameIndex = 1;
         return Object.entries(countries.getNames(language))
             .sort((a: string[], b: string[]) => a[1].localeCompare(b[1], language))
-            .filter(countryOptionValue => countryOptionValue[isoCodeIndex] !== 'NO')
+            .filter((countryOptionValue) => countryOptionValue[isoCodeIndex] !== 'NO')
             .map((countryOptionValue: string[]) => (
-                <option
-                    key={countryOptionValue[isoCodeIndex]}
-                    value={countryOptionValue[isoCodeIndex]}
-                >
+                <option key={countryOptionValue[isoCodeIndex]} value={countryOptionValue[isoCodeIndex]}>
                     {countryOptionValue[countryNameIndex]}
                 </option>
             ));
@@ -39,8 +36,7 @@ export default class CountrySelect extends React.Component<StateProps> {
             <SelectComponent
                 {...restProps}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChange(e.target.value, e)}
-                validators={validators}
-            >
+                validators={validators}>
                 <option value="" />
                 {this.renderCountryOptions()}
             </SelectComponent>

@@ -12,7 +12,7 @@ interface Props {
     annenForelder: AnnenForelder;
 }
 
-const AndreForeldrenOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = props => {
+const AndreForeldrenOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl } = props;
     const { navn, fnr, utenlandskFnr, bostedsland, kanIkkeOppgis } = props.annenForelder;
 
@@ -23,9 +23,7 @@ const AndreForeldrenOppsummering: React.StatelessComponent<Props & InjectedIntlP
 
     return (
         <SummaryBlock title={getMessage(intl, 'annenForelder.sectionheading')}>
-            {kanIkkeOppgis && (
-                <Element>{getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}</Element>
-            )}
+            {kanIkkeOppgis && <Element>{getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}</Element>}
             {!kanIkkeOppgis && navn && (
                 <DisplayTextWithLabel
                     key="annenForelderNavn"
@@ -34,11 +32,7 @@ const AndreForeldrenOppsummering: React.StatelessComponent<Props & InjectedIntlP
                 />
             )}
             {(fnr || utenlandskFnr) && (
-                <DisplayTextWithLabel
-                    key="annenForelderFødselsnummer"
-                    label={fnrLabel}
-                    text={fnrText}
-                />
+                <DisplayTextWithLabel key="annenForelderFødselsnummer" label={fnrLabel} text={fnrText} />
             )}
             {utenlandskFnr && bostedsland && (
                 <DisplayTextWithLabel

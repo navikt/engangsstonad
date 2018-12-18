@@ -14,7 +14,7 @@ interface Props {
     barn: FodtBarn & UfodtBarn;
 }
 
-const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = props => {
+const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl } = props;
     const {
         antallBarn,
@@ -22,7 +22,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
         fødselsdatoer,
         terminbekreftelse,
         termindato,
-        terminbekreftelseDato,
+        terminbekreftelseDato
     } = props.barn;
 
     let antallBarnSummaryText;
@@ -32,7 +32,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
         antallBarnSummaryText = getMessage(intl, 'relasjonBarn.radiobutton.tvillinger');
     } else {
         antallBarnSummaryText = getMessage(intl, 'oppsummering.text.flereAntallBarn', {
-            antall: antallBarn,
+            antall: antallBarn
         });
     }
 
@@ -59,9 +59,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = pr
                             {getMessage(intl, 'oppsummering.text.vedlagtTerminbekreftelse')}
                         </EtikettLiten>
                         <AttachmentList
-                            attachments={terminbekreftelse.filter(
-                                (a: Attachment) => !isAttachmentWithError(a)
-                            )}
+                            attachments={terminbekreftelse.filter((a: Attachment) => !isAttachmentWithError(a))}
                         />
                     </div>
                     <DisplayTextWithLabel
