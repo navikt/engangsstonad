@@ -10,6 +10,7 @@ import store from './redux/index';
 import * as countries from 'i18n-iso-countries';
 countries.registerLocale(require('i18n-iso-countries/langs/nb.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/nn.json'));
+countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
 const Modal = require('nav-frontend-modal').default;
 (Modal as any).setAppElement('#app');
