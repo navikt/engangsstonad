@@ -6,7 +6,7 @@
     "intro.standard.tittel": "Application for lump-sum grant ",
     "intro.standard.ingress": "The lump-sum grant is a tax-free lump sum that you can receive for each child you give birth to or adopt.",
     "intro.standard.bobletittel": "Hi, {name}!",
-    "intro.standard.bobletekst": "Remember that if your child is not born yet, you must attach confirmation of the expected date of delivery.",
+    "intro.standard.bobletekst": "Remember that if your child is not yet born, you must attach confirmation of the expected date of delivery.",
 
     "intro.under18.bobletekst": "Because you are under the age of 18, one of your parents or a guardian must sign the application together with you. You therefore have to fill out the application in paper form and send this by mail. ",
     "intro.under18.boblelenketekst": "A paper application can be downloaded here.",
@@ -38,7 +38,7 @@
     "intro.text.startNySøknad": "start a new application",
     "intro.text.fortsettSøknad": "continue with an existing application.",
     "intro.text.nySøknadAdvarsel": "Your existing application will be deleted.",
-    "intro.text.veiviser": "If you have had income, received payments from NAV or been in the military, you may be entitled to the parental benefit instead of the lump-sum grant. However, if you choose to apply for the lump-sum grant, you cannot change your mind at a later date.",
+    "intro.text.veiviser": "If you have had income, received payments from NAV or been in the national service, you may be entitled to the parental benefit instead of the lump-sum grant. However, if you choose to apply for the lump-sum grant, you cannot change your mind at a later date.",
     "intro.text.veiviser.lenke": "<a href=\"https://familie.nav.no/veiviser\"  class=\"lenke\" rel=\"noopener\"> Use the wizard to find out what you are entitled to</a>",
     "intro.text.startNySøknadPrompt": "Are you sure you want to start a new application? The application you started will be deleted.",
 
@@ -49,11 +49,11 @@
     "relasjonBarn.text.fodselTidspunkt": "My application relates to a birth that...",
     "relasjonBarn.radiobutton.fremtid": "is in the future",
     "relasjonBarn.radiobutton.fortid": "has already occurred",
-    "relasjonBarn.text.antallBarnVentet": "and I am waiting...",
+    "relasjonBarn.text.antallBarnVentet": "and I am expecting...",
     "relasjonBarn.text.antallBarnFødt": "and it was born...",
     "relasjonBarn.radiobutton.ettbarn": "one child",
     "relasjonBarn.radiobutton.tvillinger": "twins",
-    "relasjonBarn.radiobutton.flere": "more than two children",
+    "relasjonBarn.radiobutton.flere": "triplets or more",
     "relasjonBarn.text.velgantallBarn": "select number of children",
     "relasjonBarn.text.termindato": "with expected date of delivery on...",
     "relasjonBarn.link.velgeDato": "Click here to select the date",
@@ -91,7 +91,7 @@
     "annenForelder.ugyldigNavn": "You must write the name of the other parent",
     "annenForelder.ugyldigBostedsland": "You must specify where the other parent lives",
 
-    "medlemmskap.sectionheading": "Connection to Norway",
+    "medlemmskap.sectionheading": "Relationship to Norway",
     "medlemmskap.text.siste12mnd": "In the last 12 months I have...",
     "medlemmskap.radiobutton.boddNorge": "only lived in Norway",
     "medlemmskap.radiobutton.utlandet": "lived abroad full-time or part of the time",
@@ -154,7 +154,7 @@
 
     "kvittering.sectionheading": "Application received",
     "kvittering.text.takk": "Thank you for the application",
-    "kvittering.text.soknadMottatt": "We received the application on {1} at {0}.",
+    "kvittering.text.soknadMottatt": " We received your application on {1} at {0}.",
     "kvittering.text.dittNav": "You can track the progress of the application {dittNavLink}.",
     "kvittering.text.kontonummer": "If your application is approved, the lump-sum grant will be paid to account number {kontonummer}. You can change the account number at {dinProfilLink}.",
     "kvittering.text.dittNavLink": "Ditt NAV",
@@ -200,7 +200,7 @@
     "personopplysninger.text.personvernerklering.link": "nav.no/personvern",
 
     "terminbekreftelsen.sectionheading": "Confirmation of the expected date of delivery",
-    "terminbekreftelsen.text.terminbekreftelsen": "You must submit confirmation of the expected date of delivery with your application. This must be dated and signed by a doctor or midwife when you are in the 26th week of pregnancy or later.",
+    "terminbekreftelsen.text.terminbekreftelsen": "You must attach confirmation of the expected date of delivery with your application. This must be dated and signed by a doctor or midwife when your 26th week pregnancy or later.",
 
     "standard.button.foto": "Take picture",
     "standard.button.fil": "Select file",
