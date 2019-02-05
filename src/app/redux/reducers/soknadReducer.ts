@@ -199,6 +199,7 @@ const soknadReducer = (
             uploadedAttachment.url = url;
             uploadedAttachment.pending = false;
             uploadedAttachment.uploaded = true;
+            uploadedAttachment.uuid = action.uuid;
             return editAttachmentInState(uploadedAttachment, state);
 
         case SoknadActionKeys.UPLOAD_ATTACHMENT_FAILED:

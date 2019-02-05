@@ -6,9 +6,10 @@ import { ISODateToMaskedInput } from 'util/date/dateUtils';
 import getMessage from 'util/i18n/i18nUtils';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 
-import './countryPicker.less';
 import SlettKnapp from 'common/components/slett-knapp/SlettKnapp';
 import LinkButton from 'components/link-button/LinkButton';
+
+import './countryPicker.less';
 
 interface OwnProps {
     utenlandsopphold: Utenlandsopphold;

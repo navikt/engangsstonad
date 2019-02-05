@@ -165,11 +165,13 @@ const uploadAttachment = (payload: Attachment) => ({
 
 const uploadAttachmentSuccess = (
     attachment: Attachment,
-    url: string
+    url: string,
+    uuid: string
 ): UploadAttachmentSuccess => ({
     type: SoknadActionKeys.UPLOAD_ATTACHMENT_SUCCESS,
     attachment,
-    url
+    url,
+    uuid
 });
 
 const uploadAttachmentFailed = (

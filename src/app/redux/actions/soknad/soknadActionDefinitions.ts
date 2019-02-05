@@ -159,6 +159,7 @@ export interface UploadAttachmentSuccess {
     type: SoknadActionKeys.UPLOAD_ATTACHMENT_SUCCESS;
     attachment: Attachment;
     url: string;
+    uuid: string;
 }
 
 export interface UploadAttachmentFailed {
