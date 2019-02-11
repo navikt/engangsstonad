@@ -3,11 +3,13 @@ import {
     ApiActionTypes
 } from '../actions/api/apiActionDefinitions';
 import Person from '../../types/domain/Person';
+import Kvittering from 'app/types/services/Kvittering';
 
 const getDefaultState = (): ApiReducerState => ({
     isLoadingPerson: false,
     søknadSendt: false,
     søknadSendingInProgress: false,
+    kvittering: undefined,
     person: undefined,
     mellomlagretSøknad: false,
     isLoadingAppState: false
@@ -17,6 +19,7 @@ export interface ApiReducerState {
     isLoadingPerson: boolean;
     søknadSendt: boolean;
     søknadSendingInProgress: boolean;
+    kvittering?: Kvittering;
     person?: Person;
     mellomlagretSøknad: boolean;
     isLoadingAppState: boolean;

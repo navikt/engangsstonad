@@ -1,8 +1,8 @@
 import Person from '../../../types/domain/Person';
 import { default as EngangsstonadSoknad } from '../../../types/domain/EngangsstonadSoknad';
-import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
 import PersonRequest from '../../../types/services/PersonRequest';
 import { AppState } from 'common/redux/types';
+import Kvittering from 'app/types/services/Kvittering';
 
 export enum ApiActionKeys {
     'GET_PERSON' = 'getPerson',
@@ -42,7 +42,7 @@ interface SendSoknad {
 
 interface SendSoknadSuccess {
     type: ApiActionKeys.SEND_SOKNAD_SUCCESS;
-    kvittering: EngangsstonadSoknadResponse;
+    kvittering: Kvittering;
 }
 
 interface SendSoknadFailed {

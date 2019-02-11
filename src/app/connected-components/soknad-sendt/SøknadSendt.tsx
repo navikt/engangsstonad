@@ -1,28 +1,27 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import DocumentTitle from 'react-document-title';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import * as moment from 'moment';
 import 'moment/locale/nb';
+import { connect } from 'react-redux';
+import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
-import CustomSVG from 'common/components/custom-svg/CustomSVG';
+import * as moment from 'moment';
+import DocumentTitle from 'react-document-title';
 import Lenke from 'nav-frontend-lenker';
 
-const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
-
-import Person from '../../types/domain/Person';
-import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
-
-import Søknadstittel from 'components/søknadstittel/Søknadstittel';
+import CustomSVG from 'common/components/custom-svg/CustomSVG';
 import getMessage from 'util/i18n/i18nUtils';
+import Kvittering from 'app/types/services/Kvittering';
+import Person from '../../types/domain/Person';
+import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 
 import 'nav-frontend-lenker-style';
 import '../../styles/engangsstonad.less';
 
+const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
+
 interface StateProps {
     person: Person;
-    kvittering: EngangsstonadSoknadResponse;
+    kvittering: Kvittering;
 }
 
 type Props = StateProps & InjectedIntlProps;
@@ -43,12 +42,21 @@ class SøknadSendt extends React.Component<Props> {
 
     receiptText() {
         const { kvittering } = this.props;
-        return (
+        return kvittering.saksNr ? (
+            <FormattedMessage
+                id="kvittering.text.soknadMottattMedSaksnummer"
+                values={{
+                    klokkeslett: moment(kvittering.mottattDato).format('HH:mm'),
+                    dato: moment(kvittering.mottattDato).format('LL'),
+                    saksNr: kvittering.saksNr
+                }}
+            />
+        ) : (
             <FormattedMessage
                 id="kvittering.text.soknadMottatt"
                 values={{
-                    0: moment(kvittering.mottattDato).format('HH:mm'),
-                    1: moment(kvittering.mottattDato).format('LL'),
+                    klokkeslett: moment(kvittering.mottattDato).format('HH:mm'),
+                    dato: moment(kvittering.mottattDato).format('LL')
                 }}
             />
         );
@@ -83,9 +91,7 @@ class SøknadSendt extends React.Component<Props> {
                         {getMessage(intl, 'kvittering.text.takk')}
                         <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
-                    <Ingress className="blokk-xs">
-                        {this.receiptText()}
-                    </Ingress>
+                    <Ingress className="blokk-xs">{this.receiptText()}</Ingress>
                     <Ingress className="blokk-xs">
                         <FormattedMessage
                             id="kvittering.text.dittNav"
@@ -99,16 +105,13 @@ class SøknadSendt extends React.Component<Props> {
                         />
                     </Ingress>
                     <Ingress className="blokk-s">
-                        {
-                            person.bankkonto &&
+                        {person.bankkonto &&
                             person.bankkonto.kontonummer &&
-                            this.bankAccountText(person.bankkonto.kontonummer)
-                        }
+                            this.bankAccountText(person.bankkonto.kontonummer)}
                     </Ingress>
                     <Hovedknapp
                         className="responsiveButton responsiveButton--søknadSendt"
-                        onClick={() => (window as any).location = 'https://tjenester.nav.no/dittnav/oversikt'}
-                    >
+                        onClick={() => ((window as any).location = 'https://tjenester.nav.no/dittnav/oversikt')}>
                         {getMessage(intl, 'kvittering.text.soknadMottatt.avsluttText')}
                     </Hovedknapp>
                 </div>

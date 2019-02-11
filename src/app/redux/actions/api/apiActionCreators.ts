@@ -1,9 +1,9 @@
 import { ApiActionKeys, ApiActionTypes } from './apiActionDefinitions';
 import Person from '../../../types/domain/Person';
 import PersonRequest from '../../../types/services/PersonRequest';
-import { EngangsstonadSoknadResponse } from '../../../types/services/EngangsstonadSoknadResponse';
 import EngangsstonadSoknad from '../../../types/domain/EngangsstonadSoknad';
 import { AppState } from 'common/redux/types';
+import Kvittering from 'app/types/services/Kvittering';
 
 export function getPerson(person?: PersonRequest): ApiActionTypes {
     return {
@@ -34,7 +34,7 @@ export function sendSoknad(soknad: EngangsstonadSoknad): ApiActionTypes {
     };
 }
 
-export function sendSoknadSuccess(kvittering: EngangsstonadSoknadResponse): ApiActionTypes {
+export function sendSoknadSuccess(kvittering: Kvittering): ApiActionTypes {
     return {
         type: ApiActionKeys.SEND_SOKNAD_SUCCESS,
         kvittering
