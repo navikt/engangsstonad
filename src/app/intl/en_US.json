@@ -154,7 +154,9 @@
 
     "kvittering.sectionheading": "Application received",
     "kvittering.text.takk": "Thank you for the application",
-    "kvittering.text.soknadMottatt": " We received your application on {1} at {0}.",
+    "kvittering.text.soknadMottatt": "We received your application on {dato} at {klokkeslett}.",
+    "kvittering.text.soknadMottattMedSaksnummer": "We received your application with id {saksNr} on {dato} at {klokkeslett}.",
+
     "kvittering.text.dittNav": "You can track the progress of the application {dittNavLink}.",
     "kvittering.text.kontonummer": "If your application is approved, the lump-sum grant will be paid to account number {kontonummer}. You can change the account number at {dinProfilLink}.",
     "kvittering.text.dittNavLink": "Ditt NAV",

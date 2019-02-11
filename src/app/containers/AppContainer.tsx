@@ -18,14 +18,12 @@ import { apiActionCreators as api, soknadActionCreators as soknad } from '../red
 import { ExternalProps } from '../types';
 
 import Person from '../types/domain/Person';
-import { EngangsstonadSoknadResponse } from '../types/services/EngangsstonadSoknadResponse';
 
 import '../styles/engangsstonad.less';
 import { DispatchProps } from 'common/redux/types';
 import { storageFeatureIsActive } from 'util/featureToggles';
 
 interface StateProps {
-    soknad: EngangsstonadSoknadResponse;
     person: Person;
     error: any;
     søknadSendt: boolean;
@@ -162,7 +160,6 @@ const mapStateToProps = (state: any) => ({
     error: state.apiReducer.error,
     person: state.apiReducer.person,
     isLoadingPerson: state.apiReducer.isLoadingPerson,
-    soknad: state.apiReducer.soknad,
     søknadSendt: state.apiReducer.søknadSendt,
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
     godkjentVilkar: state.commonReducer.godkjentVilkar,

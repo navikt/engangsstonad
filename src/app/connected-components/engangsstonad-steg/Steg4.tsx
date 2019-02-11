@@ -4,7 +4,6 @@ import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { commonActionCreators as common } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { DispatchProps } from 'common/redux/types';
-import { EngangsstonadSoknadResponse } from '../../types/services/EngangsstonadSoknadResponse';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import getMessage from '../../util/i18n/i18nUtils';
 import Oppsummering from '../oppsummering/Oppsummering';
@@ -17,7 +16,6 @@ const { ValidGroup } = require('./../../lib') as any;
 interface StateProps {
     bekreftetInformasjon: boolean;
     vedlegg: Attachment[];
-    soknadPostResponse: EngangsstonadSoknadResponse;
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
@@ -62,8 +60,7 @@ class Steg4 extends React.Component<Props> {
 
 const mapStateToProps = (state: any) => ({
     bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
-    vedlegg: state.attachmentReducer,
-    soknadPostResponse: state.apiReducer.soknad
+    vedlegg: state.attachmentReducer
 });
 
 export default connect<StateProps>(mapStateToProps)(injectIntl(Steg4));
