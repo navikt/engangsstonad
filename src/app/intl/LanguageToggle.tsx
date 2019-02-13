@@ -36,7 +36,7 @@ const getLanguageTextFromCode = (intl: InjectedIntl, code: string) => {
 
 const renderMenuItem = (intl: InjectedIntl, languageCode: string) => {
     return (
-        <li>
+        <li key={languageCode}>
             <MenuItem className="languageToggle__menu__item">
                 <div className="languageToggle__button__flag">
                     {languageCode === 'en' ? <UKFlagSVG /> : <NorwayFlagSVG />}
