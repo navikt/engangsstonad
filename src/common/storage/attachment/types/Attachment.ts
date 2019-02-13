@@ -1,5 +1,5 @@
 export interface Attachment {
-    id: Skjemanummer;
+    id: string;
     filename: string;
     filesize: number;
     file: File;
