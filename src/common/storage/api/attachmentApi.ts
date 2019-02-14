@@ -11,7 +11,7 @@ function saveAttachment(attachment: Attachment) {
     };
 
     const formData = new FormData();
-    formData.set('id', attachment.id);
+    formData.append('id', attachment.id);
     formData.append('vedlegg', attachment.file, attachment.filename);
 
     const url = `${(window as any).REST_API_URL}/storage/vedlegg`;
