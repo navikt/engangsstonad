@@ -21,10 +21,6 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 class Steg4 extends React.Component<Props> {
-    componentDidMount() {
-        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-4'), 5000);
-    }
-
     render() {
         const { intl, dispatch, bekreftetInformasjon } = this.props;
 

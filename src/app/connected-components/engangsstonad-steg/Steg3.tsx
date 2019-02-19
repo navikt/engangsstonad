@@ -24,10 +24,6 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 class Steg3 extends React.Component<Props> {
-    componentDidMount() {
-        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-3'), 5000);
-    }
-
     componentWillMount() {
         this.overlapsWithOtherUtenlandsopphold = this.overlapsWithOtherUtenlandsopphold.bind(this);
         this.validateFomDatoSiste12Mnd = this.validateFomDatoSiste12Mnd.bind(this);

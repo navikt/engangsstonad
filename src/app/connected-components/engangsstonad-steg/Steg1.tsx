@@ -28,10 +28,6 @@ interface State {
 }
 
 class Steg1 extends React.Component<Props, State> {
-    componentDidMount() {
-        setTimeout(() => (window as any).hj('vpv', '/engangsstonad/soknad/step-1'), 5000);
-    }
-
     getFodselsTidspunktSelectedValue() {
         const { barn } = this.props;
         if (barn) {
