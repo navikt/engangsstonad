@@ -1,9 +1,25 @@
+const express = require('express');
+const server = express();
 require('dotenv').config();
 
-const express = require('express');
-const path = require('path');
+const allowCrossDomain = function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-XSRF-TOKEN,Location');
+    res.setHeader('Access-Control-Expose-Headers', 'Location');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+};
 
-const server = express();
+const delayAllResponses = function(millsec) {
+    return function(req, res, next) {
+        setTimeout(next, millsec);
+    };
+};
+
+server.use(allowCrossDomain);
+server.use(delayAllResponses(500));
+server.use(express.json());
 
 const mockResponse = {
     fnr: '11111111111',
@@ -14,23 +30,18 @@ const mockResponse = {
     ikkeNordiskEøsLand: true
 };
 
+const kvittering = {
+    motattDato: '2019-02-19T13:40:45.115',
+    referanseId: '3959c880-83d2-4f01-b107-035fa7693758',
+    leveranseStatus: 'PÅ_VENT',
+    journalId: '439772941',
+    saksNr: '137662428'
+};
+
 const startServer = html => {
     server.get(
         ['/', '/rest/personinfo?'],
         (req, res) => {
-            res.setHeader(
-                'Access-Control-Allow-Origin',
-                'http://localhost:8080'
-            );
-            res.setHeader(
-                'Access-Control-Allow-Methods',
-                'GET, POST, OPTIONS, PUT, PATCH, DELETE'
-            );
-            res.setHeader(
-                'Access-Control-Allow-Headers',
-                'X-Requested-With,content-type'
-            );
-            res.setHeader('Access-Control-Allow-Credentials', true);
             res.send(mockResponse);
         }
     );
@@ -38,9 +49,9 @@ const startServer = html => {
     server.get('/health/isAlive', (req, res) => res.sendStatus(200));
     server.get('/health/isReady', (req, res) => res.sendStatus(200));
 
-    server.post('/rest/engangsstonad', (req, res) =>
-        res.sendStatus(200)
-    );
+    server.post('/rest/soknad', (req, res) => {
+        res.send(kvittering);
+    });
 
     const port = process.env.PORT || 8888;
     server.listen(port, () => {

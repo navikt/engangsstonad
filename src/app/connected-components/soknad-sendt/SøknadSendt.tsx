@@ -3,11 +3,10 @@ import 'moment/locale/nb';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
+import { Innholdstittel, Ingress, Undertittel } from 'nav-frontend-typografi';
 import * as moment from 'moment';
 import DocumentTitle from 'react-document-title';
 import Lenke from 'nav-frontend-lenker';
-
 import CustomSVG from 'common/components/custom-svg/CustomSVG';
 import getMessage from 'util/i18n/i18nUtils';
 import Kvittering from 'app/types/services/Kvittering';
@@ -92,6 +91,9 @@ class SøknadSendt extends React.Component<Props> {
                         <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
                     <Ingress className="blokk-xs">{this.receiptText()}</Ingress>
+                    <Undertittel className="blokk-xs">
+                        {getMessage(intl, 'kvittering.text.hvorFinnerJegStatus')}
+                    </Undertittel>
                     <Ingress className="blokk-xs">
                         <FormattedMessage
                             id="kvittering.text.dittNav"
@@ -104,11 +106,12 @@ class SøknadSendt extends React.Component<Props> {
                             }}
                         />
                     </Ingress>
+
+                    {person.bankkonto &&
+                    person.bankkonto.kontonummer &&
                     <Ingress className="blokk-s">
-                        {person.bankkonto &&
-                            person.bankkonto.kontonummer &&
-                            this.bankAccountText(person.bankkonto.kontonummer)}
-                    </Ingress>
+                        {this.bankAccountText(person.bankkonto.kontonummer)}
+                    </Ingress>}
                     <Hovedknapp
                         className="responsiveButton responsiveButton--søknadSendt"
                         onClick={() => ((window as any).location = 'https://tjenester.nav.no/dittnav/oversikt')}>
