@@ -4,6 +4,7 @@ import { put, call, all, takeLatest } from 'redux-saga/effects';
 import Api from '../../api/api';
 import { ApiActionKeys } from 'actions/api/apiActionDefinitions';
 import Kvittering from 'app/types/services/Kvittering';
+import apiActionCreators from 'actions/api/apiActionCreators';
 
 function* sendSøknad(action: any) {
     try {
@@ -11,6 +12,7 @@ function* sendSøknad(action: any) {
         const kvittering: Kvittering = response.data;
         yield put({ type: ApiActionKeys.SEND_SOKNAD_SUCCESS, kvittering });
     } catch (error) {
+        (error.response.status === 401 || error.response.status === 403) ? yield put(apiActionCreators.sessionExpired()) :
         yield put({ type: ApiActionKeys.SEND_SOKNAD_FAILED, error });
     }
 }

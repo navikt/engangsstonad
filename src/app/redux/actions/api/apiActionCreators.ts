@@ -90,6 +90,12 @@ export function getAppStateFailed(error: any): ApiActionTypes {
     };
 }
 
+export function sessionExpired(): ApiActionTypes {
+    return {
+        type: ApiActionKeys.SESSION_EXPIRED
+    };
+}
+
 export default {
     getPerson,
     getPersonSuccess,
@@ -102,5 +108,6 @@ export default {
     saveAppStateFailed,
     getAppState,
     getAppStateSuccess,
-    getAppStateFailed
+    getAppStateFailed,
+    sessionExpired
 };

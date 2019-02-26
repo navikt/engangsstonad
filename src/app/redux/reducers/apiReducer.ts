@@ -1,7 +1,4 @@
-import {
-    ApiActionKeys,
-    ApiActionTypes
-} from '../actions/api/apiActionDefinitions';
+import { ApiActionKeys, ApiActionTypes } from '../actions/api/apiActionDefinitions';
 import Person from '../../types/domain/Person';
 import Kvittering from 'app/types/services/Kvittering';
 
@@ -12,7 +9,8 @@ const getDefaultState = (): ApiReducerState => ({
     kvittering: undefined,
     person: undefined,
     mellomlagretSøknad: false,
-    isLoadingAppState: false
+    isLoadingAppState: false,
+    sessionHasExpired: false
 });
 
 export interface ApiReducerState {
@@ -23,6 +21,7 @@ export interface ApiReducerState {
     person?: Person;
     mellomlagretSøknad: boolean;
     isLoadingAppState: boolean;
+    sessionHasExpired: boolean;
 }
 
 const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
@@ -72,6 +71,11 @@ const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
             return {
                 ...state,
                 isLoadingAppState: false
+            };
+        case ApiActionKeys.SESSION_EXPIRED:
+            return {
+                ...state,
+                sessionHasExpired: true
             };
     }
     return state;

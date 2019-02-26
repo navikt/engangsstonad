@@ -164,7 +164,8 @@ const mapStateToProps = (state: any) => ({
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
     godkjentVilkar: state.commonReducer.godkjentVilkar,
     language: state.commonReducer.language,
-    isLoadingAppState: state.apiReducer.isLoadingAppState
+    isLoadingAppState: state.apiReducer.isLoadingAppState,
+
 });
 
 export default withRouter(connect<StateProps, {}, {}>(mapStateToProps)(AppContainer));
