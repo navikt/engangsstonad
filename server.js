@@ -8,7 +8,7 @@ const getDecorator = require('./src/build/scripts/decorator');
 const compression = require('compression');
 
 // Prometheus metrics
-const prometheus = require('prom-client')
+const prometheus = require('prom-client');
 const collectDefaultMetrics = prometheus.collectDefaultMetrics;
 collectDefaultMetrics({ timeout: 5000 });
 const httpRequestDurationMicroseconds = new prometheus.Histogram({
@@ -16,8 +16,8 @@ const httpRequestDurationMicroseconds = new prometheus.Histogram({
     help: 'Duration of HTTP requests in ms',
     labelNames: ['route'],
     // buckets for response time from 0.1ms to 500ms
-    buckets: [0.10, 5, 15, 50, 100, 200, 300, 400, 500]
-})
+    buckets: [0.1, 5, 15, 50, 100, 200, 300, 400, 500]
+});
 
 const server = express();
 server.use(compression());
@@ -39,7 +39,8 @@ const renderApp = (decoratorFragments) =>
                 {
                     REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL,
                     LOGIN_URL: process.env.LOGINSERVICE_URL,
-                    FEATURE_STORAGE: process.env.FEATURE_STORAGE
+                    FEATURE_STORAGE: process.env.FEATURE_STORAGE,
+                    FEATURE_UKE22: process.env.FEATURE_UKE22
                 },
                 decoratorFragments
             ),
@@ -54,28 +55,17 @@ const renderApp = (decoratorFragments) =>
     });
 
 const startServer = (html) => {
-    server.use(
-        '/engangsstonad/dist/js',
-        express.static(path.resolve(__dirname, 'dist/js'))
-    );
-    server.use(
-        '/engangsstonad/dist/css',
-        express.static(path.resolve(__dirname, 'dist/css'))
-    );
+    server.use('/engangsstonad/dist/js', express.static(path.resolve(__dirname, 'dist/js')));
+    server.use('/engangsstonad/dist/css', express.static(path.resolve(__dirname, 'dist/css')));
 
-    server.get(
-        ['/', '/engangsstonad/?', /^\/engangsstonad\/(?!.*dist).*$/],
-        (req, res) => {
-            res.send(html);
-            httpRequestDurationMicroseconds
-                .labels(req.route.path)
-                .observe(10)
-        }
-    );
+    server.get(['/', '/engangsstonad/?', /^\/engangsstonad\/(?!.*dist).*$/], (req, res) => {
+        res.send(html);
+        httpRequestDurationMicroseconds.labels(req.route.path).observe(10);
+    });
 
     server.get('/internal/metrics', (req, res) => {
-        res.set('Content-Type', prometheus.register.contentType)
-        res.end(prometheus.register.metrics())
+        res.set('Content-Type', prometheus.register.contentType);
+        res.end(prometheus.register.metrics());
     });
 
     server.get('/health/isAlive', (req, res) => res.sendStatus(200));
@@ -91,7 +81,7 @@ const logError = (errorMessage, details) => console.log(errorMessage, details);
 
 getDecorator()
     .then(renderApp, (error) => {
-        logError('Failed to get decorator', error)
-        process.exit(1)
+        logError('Failed to get decorator', error);
+        process.exit(1);
     })
     .then(startServer, (error) => logError('Failed to render app', error));

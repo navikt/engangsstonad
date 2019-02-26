@@ -202,7 +202,8 @@
     "personopplysninger.text.personvernerklering.link": "nav.no/personvern",
 
     "terminbekreftelsen.sectionheading": "Confirmation of the expected date of delivery",
-    "terminbekreftelsen.text.terminbekreftelsen": "You must attach confirmation of the expected date of delivery with your application. This must be dated and signed by a doctor or midwife when your 26th week pregnancy or later.",
+    "terminbekreftelsen.text.terminbekreftelsen": "You must attach confirmation of the expected date of delivery with your application. This must be dated and signed by a doctor or midwife during your 26th week of pregnancy or later.",
+    "terminbekreftelsen.text.terminbekreftelsen.uke22": "You must attach confirmation of the expected date of delivery with your application. This must be dated and signed by a doctor or midwife during your 22nd week of pregnancy or later.",
 
     "standard.button.foto": "Take picture",
     "standard.button.fil": "Select file",

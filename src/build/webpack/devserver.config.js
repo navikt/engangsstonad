@@ -6,22 +6,20 @@ const configureDevServer = (decoratorFragments) => ({
         app.engine('html', mustacheExpress());
         app.set('views', `${__dirname}/../../../dist/dev`);
         app.set('view engine', 'mustache');
-        app.get(
-            ['/', '/engangsstonad/?', /^\/engangsstonad\/(?!.*dist).*$/],
-            (req, res) => {
-                res.render(
-                    'index.html',
-                    Object.assign(
-                        {
-                            REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL,
-                            LOGIN_URL: process.env.LOGINSERVICE_URL,
-                            FEATURE_STORAGE: process.env.FEATURE_STORAGE
-                        },
-                        decoratorFragments
-                    )
-                );
-            }
-        );
+        app.get(['/', '/engangsstonad/?', /^\/engangsstonad\/(?!.*dist).*$/], (req, res) => {
+            res.render(
+                'index.html',
+                Object.assign(
+                    {
+                        REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL,
+                        LOGIN_URL: process.env.LOGINSERVICE_URL,
+                        FEATURE_STORAGE: process.env.FEATURE_STORAGE,
+                        FEATURE_UKE22: process.env.FEATURE_UKE22
+                    },
+                    decoratorFragments
+                )
+            );
+        });
     },
     watchContentBase: true,
     quiet: false,
