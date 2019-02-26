@@ -136,6 +136,7 @@
     "oppsummering.text.antall.7": "Sju",
     "oppsummering.text.antall.8": "Åtte",
     "oppsummering.text.antall.9": "Ni",
+
     "kvittering.sectionheading": "Søknad mottatt",
     "kvittering.text.takk": "Takk for søknaden",
     "kvittering.text.soknadMottatt": "Vi fekk søknaden den {dato} kl. {klokkeslett}.",
@@ -145,10 +146,18 @@
     "kvittering.text.dittNavLink": "dine foreldrepenger",
     "kvittering.text.soknadMottatt.dinProfilLink": "Din profil",
     "kvittering.text.soknadMottatt.avsluttText": "Avslutt",
+    "kvittering.text.hvorFinnerJegStatus": "Hvor finner jeg status på min søknad?",
+
+    "sesjonUtløpt.tittel": "Du er logget ut",
+    "sesjonUtløpt.ingress": "Du må logge inn på nytt for å fortsette med søknaden.</br>Ønsker du å fortsette?",
+    "sesjonUtløpt.avslutt": "Nei, jeg vil avslutte",
+    "sesjonUtløpt.fortsett": "Ja, jeg vil fortsette",
+
     "rettigheter.sectionheading": "Kva plikter du har",
     "rettigheter.text.2": "Eg forstår at dersom eg gir urette opplysningar eller held tilbake opplysningar, kan det få konsekvensar for retten min til eingongsstønad.",
     "rettigheter.text.lestOgForstått": "Eg har lese og forstått det som står på {link}",
     "rettigheter.text.lestOgForstått.link": "nav.no/rettogplikt",
+
     "personopplysninger.sectionheading": "Slik behandlar NAV personopplysningane dine",
     "personopplysninger.ingress.1": "NAV hentar inn og får opplysningar om deg når du sender inn ein søknad. Det er nødvendig for at du skal kunne få rett teneste og rette ytingar.",
     "personopplysninger.ingress.2": "Du har valt å søkje om eingongsstønad. Det er ei yting frå folketrygda som du kan få dersom du fyller vilkåra. Vilkåra står på nav.no/engangsstønad.",
@@ -175,8 +184,10 @@
     "personopplysninger.text.personvernerklæringeniNAV": "Personvernerklæringa i NAV",
     "personopplysninger.text.personvernerklering": "Du kan lese meir om korleis NAV behandlar personopplysningar i personvernerklæringa frå Arbeids- og velferdsetaten på {link}",
     "personopplysninger.text.personvernerklering.link": "nav.no/personvern",
+
     "terminbekreftelsen.sectionheading": "Om stadfestinga av termin",
     "terminbekreftelsen.text.terminbekreftelsen": "Du må leggje ved ei stadfesting på termin. Den må vere datert og signert av lege eller jordmor når du er i 26. svangerskapsveke eller seinare.",
+
     "terminbekreftelsen.text.terminbekreftelsen.uke22": "Du må leggje ved ei stadfesting på termin. Den må vere datert og signert av lege eller jordmor når du er i 22. svangerskapsveke eller seinare.",
     "standard.button.foto": "Ta bilete",
     "standard.button.fil": "Vel fil",

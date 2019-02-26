@@ -19,6 +19,7 @@ import { CommonState } from 'reducers/commonReducer';
 import { DispatchProps } from 'common/redux/types';
 import { storageFeatureIsActive } from 'util/featureToggles';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
+import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
 const { ValidForm } = require('./../lib') as any;
 
 interface OwnProps {
@@ -31,6 +32,7 @@ interface OwnProps {
     søknadSendt: boolean;
     søknadSendingInProgress: boolean;
     vedlegg: Attachment[];
+    sessionHasExpired: boolean;
 }
 
 type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps<{}>;
@@ -91,7 +93,7 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     render() {
-        const { intl, activeStep, søknadSendingInProgress, person } = this.props;
+        const { intl, activeStep, søknadSendingInProgress, person, sessionHasExpired } = this.props;
         const stepsConfig = getStepConfig(intl, person);
         const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
         const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
@@ -126,6 +128,7 @@ class SøknadContainer extends React.Component<Props> {
                     )}
                     <CancelButton redirect="https://tjenester.nav.no/dittnav/oversikt" />
                 </ValidForm>
+                <UtløptSesjonModal erÅpen={sessionHasExpired}/>
             </div>
         );
     }
@@ -140,6 +143,7 @@ const mapStateToProps = (state: any) => ({
     error: state.apiReducer.error,
     søknadSendt: state.apiReducer.søknadSendt,
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
-    vedlegg: state.attachmentReducer
+    vedlegg: state.attachmentReducer,
+    sessionHasExpired: state.apiReducer.sessionHasExpired
 });
 export default connect<OwnProps>(mapStateToProps)(injectIntl(SøknadContainer));

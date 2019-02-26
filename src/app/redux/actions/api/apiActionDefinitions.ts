@@ -17,6 +17,11 @@ export enum ApiActionKeys {
     'GET_APP_STATE' = 'getAppState',
     'GET_APP_STATE_SUCCESS' = 'getAppStateSuccess',
     'GET_APP_STATE_FAILED' = 'getAppStateFailed',
+    'SESSION_EXPIRED' = 'sessionExpired'
+}
+
+interface SessionExpired {
+    type: ApiActionKeys.SESSION_EXPIRED;
 }
 
 interface GetPerson {
@@ -95,4 +100,5 @@ export type ApiActionTypes =
     | SaveAppStateFailed
     | GetAppState
     | GetAppStateSuccess
-    | GetAppStateFailed;
+    | GetAppStateFailed
+    | SessionExpired;

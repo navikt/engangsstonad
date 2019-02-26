@@ -10,7 +10,8 @@ import {
 const getDefaultState = (): CommonState => ({
     language: 'nb',
     godkjentVilkar: false,
-    bekreftetInformasjon: false
+    bekreftetInformasjon: false,
+
 });
 
 export interface CommonState {
