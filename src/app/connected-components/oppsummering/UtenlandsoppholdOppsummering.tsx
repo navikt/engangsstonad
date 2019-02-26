@@ -4,23 +4,45 @@ import { EtikettLiten } from 'nav-frontend-typografi';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
 import getMessage from 'util/i18n/i18nUtils';
-import InformasjonOmUtenlandsopphold from '../../types/domain/InformasjonOmUtenlandsopphold';
+import InformasjonOmUtenlandsopphold, { Tidsperiode, Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
+import * as moment from 'moment';
+import Barn, { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
+
 import '../../styles/engangsstonad.less';
 
 interface Props {
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
-    erBarnetFødt?: boolean;
+    barn: Barn;
 }
 
+// TODO fjerne denne  logikken og bruke funksjonalitet fra datovelgeren v4
+const erDatoITidsperiode = (dato: Date, tidsperiode: Tidsperiode) => {
+    return moment(dato).isBetween(moment(tidsperiode.fom), moment(tidsperiode.tom), 'day', '[]');
+};
+
+const erFamiliehendelsedatoIEnUtenlandsoppholdPeriode = (
+    familiehendelsedato: string,
+    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold
+) => {
+    const d = moment(familiehendelsedato).toDate();
+    return (
+        informasjonOmUtenlandsopphold.tidligereOpphold.some((tidligereOpphold: Utenlandsopphold) =>
+            erDatoITidsperiode(d, tidligereOpphold.tidsperiode)
+        ) ||
+        informasjonOmUtenlandsopphold.senereOpphold.some((senereOpphold: Utenlandsopphold) =>
+            erDatoITidsperiode(d, senereOpphold.tidsperiode)
+        )
+    );
+};
+
 const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
-    const { intl, erBarnetFødt } = props;
+    const { intl, barn, informasjonOmUtenlandsopphold } = props;
     const {
-        iNorgePåHendelsestidspunktet,
         iNorgeNeste12Mnd,
         iNorgeSiste12Mnd,
         tidligereOpphold,
         senereOpphold
-    } = props.informasjonOmUtenlandsopphold;
+    } = informasjonOmUtenlandsopphold;
 
     return (
         <div className="blokk-m">
@@ -47,23 +69,23 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                     <CountrySummaryList utenlandsoppholdListe={senereOpphold} />
                 </div>
             )}
-            {erBarnetFødt === false && iNorgePåHendelsestidspunktet !== undefined && (
+            {barn.erBarnetFødt === false && (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.ogKommerPåFødselstidspunktet')}
                     text={
-                        iNorgePåHendelsestidspunktet
-                            ? getMessage(intl, 'medlemmskap.radiobutton.vareNorge')
-                            : getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet')
+                        erFamiliehendelsedatoIEnUtenlandsoppholdPeriode((barn as UfodtBarn).termindato!, informasjonOmUtenlandsopphold)
+                            ? getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet')
+                            : getMessage(intl, 'medlemmskap.radiobutton.vareNorge')
                     }
                 />
             )}
-            {erBarnetFødt === true && iNorgePåHendelsestidspunktet !== undefined && (
+            {barn.erBarnetFødt === true && (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.varPåFødselstidspunktet')}
                     text={
-                        iNorgePåHendelsestidspunktet
-                            ? getMessage(intl, 'medlemmskap.radiobutton.iNorge')
-                            : getMessage(intl, 'medlemmskap.radiobutton.iUtlandet')
+                        erFamiliehendelsedatoIEnUtenlandsoppholdPeriode((barn as FodtBarn).fødselsdatoer[0]!, informasjonOmUtenlandsopphold)
+                            ? getMessage(intl, 'medlemmskap.radiobutton.iUtlandet')
+                            : getMessage(intl, 'medlemmskap.radiobutton.iNorge')
                     }
                 />
             )}

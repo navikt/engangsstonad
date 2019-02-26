@@ -1,4 +1,4 @@
-import EngangsstonadSoknad from "app/types/domain/EngangsstonadSoknad";
+import EngangsstonadSoknad from 'app/types/domain/EngangsstonadSoknad';
 
 export const getCompleteSoknad = (): EngangsstonadSoknad => ({
     type: 'engangsstønad',
@@ -29,7 +29,6 @@ export const getCompleteSoknad = (): EngangsstonadSoknad => ({
         senereOpphold: [],
         iNorgeSiste12Mnd: true,
         iNorgeNeste12Mnd: true,
-        iNorgePåHendelsestidspunktet: true,
     },
     annenForelder: {},
 });

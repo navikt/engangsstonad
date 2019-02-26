@@ -57,7 +57,7 @@ const Oppsummering = ({ annenForelder, barn, informasjonOmUtenlandsopphold, pers
             <Oppsummeringspunkt tittel={getMessage(intl, 'medlemmskap.sectionheading')}>
                 <UtenlandsoppholdOppsummering
                     informasjonOmUtenlandsopphold={informasjonOmUtenlandsopphold}
-                    erBarnetFødt={barn.erBarnetFødt}
+                    barn={barn}
                 />
             </Oppsummeringspunkt>
         </div>
