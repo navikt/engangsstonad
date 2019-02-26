@@ -108,8 +108,6 @@ const soknadReducer = (
                     ...getDefaultState().informasjonOmUtenlandsopphold,
                     iNorgeSiste12Mnd,
                     iNorgeNeste12Mnd: state.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd,
-                    iNorgePåHendelsestidspunktet:
-                        state.informasjonOmUtenlandsopphold.iNorgePåHendelsestidspunktet,
                     tidligereOpphold: state.informasjonOmUtenlandsopphold.tidligereOpphold,
                     senereOpphold: state.informasjonOmUtenlandsopphold.senereOpphold,
                 },
@@ -122,9 +120,6 @@ const soknadReducer = (
                     ...informasjonOmUtenlandsopphold,
                     iNorgeNeste12Mnd,
                     iNorgeSiste12Mnd: state.informasjonOmUtenlandsopphold.iNorgeSiste12Mnd,
-                    iNorgePåHendelsestidspunktet:
-                        state.informasjonOmUtenlandsopphold.iNorgePåHendelsestidspunktet,
-                    tidligereOpphold: state.informasjonOmUtenlandsopphold.tidligereOpphold,
                     senereOpphold: state.informasjonOmUtenlandsopphold.senereOpphold,
                 },
             };

@@ -192,19 +192,8 @@ class Steg3 extends React.Component<Props> {
         }
     }
 
-    getFødselINorgeSelectedValue() {
-        const { iNorgePåHendelsestidspunktet } = this.props.informasjonOmUtenlandsopphold;
-        if (iNorgePåHendelsestidspunktet === true) {
-            return 'norway';
-        } else if (iNorgePåHendelsestidspunktet === false) {
-            return 'abroad';
-        } else {
-            return undefined;
-        }
-    }
-
     render() {
-        const { dispatch, intl, informasjonOmUtenlandsopphold, barn, language } = this.props;
+        const { dispatch, intl, informasjonOmUtenlandsopphold, language } = this.props;
         const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligereOpphold, senereOpphold } = informasjonOmUtenlandsopphold;
 
         const tidsperiodeForegående: Tidsperiode = {
@@ -306,47 +295,6 @@ class Steg3 extends React.Component<Props> {
                             validateFom: this.validateFomDatoNeste12Mnd,
                             validateTom: this.validateTomDatoNeste12Mnd
                         }}
-                    />
-                </FormBlock>
-                <FormBlock
-                    visible={
-                        (iNorgeSiste12Mnd || tidligereOpphold.length > 0) && (
-                            (iNorgeNeste12Mnd || senereOpphold.length > 0))
-                    }
-                >
-                    <RadioPanelGruppeResponsive
-                        legend={getMessage(intl, 'medlemmskap.text.bostedFodsel', {
-                            tempus:
-                                barn.erBarnetFødt
-                                    ? getMessage(intl, 'medlemmskap.text.bostedFodselFortid')
-                                    : getMessage(intl, 'medlemmskap.text.bostedFodselFremtid'),
-                            antallBarn:
-                                barn.antallBarn && barn.antallBarn > 1
-                                    ? getMessage(intl, 'medlemmskap.text.barnFlertall')
-                                    : getMessage(intl, 'medlemmskap.text.barnEntall')
-                        })}
-                        name="fødselINorge"
-                        onChange={(event: any, value: string) => dispatch(soknad.setFødselINorge(value))}
-                        checked={this.getFødselINorgeSelectedValue()}
-                        radios={[
-                            {
-                                inputProps: { id: 'js-fodselINorge' },
-                                label:
-                                    barn.erBarnetFødt
-                                        ? getMessage(intl, 'medlemmskap.radiobutton.iNorge')
-                                        : getMessage(intl, 'medlemmskap.radiobutton.vareNorge'),
-                                value: 'norway'
-                            },
-                            {
-                                inputProps: { id: 'js-fodselIUtlandet' },
-                                label:
-                                    barn.erBarnetFødt
-                                        ? getMessage(intl, 'medlemmskap.radiobutton.iUtlandet')
-                                        : getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet'),
-                                value: 'abroad'
-                            }
-                        ]}
-                        twoColumns={true}
                     />
                 </FormBlock>
             </Skjemasteg>
