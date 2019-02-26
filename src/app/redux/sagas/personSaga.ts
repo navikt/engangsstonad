@@ -1,5 +1,4 @@
 import { all, put, call, takeLatest, takeEvery } from 'redux-saga/effects';
-import _ from 'lodash';
 import Api from '../../api/api';
 
 import { ApiActionKeys, GetPersonActionType, SaveAppState } from '../actions/api/apiActionDefinitions';
