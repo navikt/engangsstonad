@@ -13,7 +13,9 @@ import {
     getFørsteMuligeTermindato,
     getSisteMuligeTermindato,
     getForsteMuligeTerminbekreftesesdato,
-    getSisteMuligeTerminbekreftesesdato
+    getSisteMuligeTerminbekreftesesdato,
+    erIUke22Pluss3,
+    utstedtDatoErIUke22
 } from 'util/validation/validationUtils';
 const Modal = require('nav-frontend-modal').default;
 import LabelText from 'common/components/labeltekst/Labeltekst';
@@ -58,7 +60,8 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi')
             },
             {
-                test: () => erIUke26Pluss3(barn.termindato),
+                test: () =>
+                    uke22FeatureIsActive() ? erIUke22Pluss3(barn.termindato) : erIUke26Pluss3(barn.termindato),
                 failText: getMessage(intl, 'valideringsfeil.termindato.duMåVæreIUke26')
             },
             {
@@ -85,7 +88,10 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere')
             },
             {
-                test: () => utstedtDatoErIUke26(barn.terminbekreftelseDato, barn.termindato),
+                test: () =>
+                    uke22FeatureIsActive()
+                        ? utstedtDatoErIUke22(barn.terminbekreftelseDato, barn.termindato)
+                        : utstedtDatoErIUke26(barn.terminbekreftelseDato, barn.termindato),
                 failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåVæreIUke26')
             }
         ];

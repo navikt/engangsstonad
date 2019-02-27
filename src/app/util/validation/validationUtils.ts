@@ -1,16 +1,25 @@
 import * as moment from 'moment';
 import Person from '../../types/domain/Person';
+import { uke22FeatureIsActive } from 'util/featureToggles';
 
 const todaysDate = moment();
 
 const ukerAaTrekkeFraTerminDato = 14;
+const ukerAaTrekkeFraTerminDato22 = 18;
 const ekstraDagerAaTrekkeFraTerminDato = 3;
 const dagerForTerminbekreftelse = ukerAaTrekkeFraTerminDato * 7 + ekstraDagerAaTrekkeFraTerminDato;
+const dagerForTerminbekreftelse22 = ukerAaTrekkeFraTerminDato22 * 7 + ekstraDagerAaTrekkeFraTerminDato;
 
 export const erIUke26Pluss3 = (dato: string) => {
     const terminDato = moment(dato);
     const uke26Pluss3 = terminDato.subtract(dagerForTerminbekreftelse, 'days');
     return moment.max(todaysDate.startOf('day'), uke26Pluss3.startOf('day')) === todaysDate;
+};
+
+export const erIUke22Pluss3 = (dato: string) => {
+    const terminDato = moment(dato);
+    const uke22Pluss3 = terminDato.subtract(dagerForTerminbekreftelse22, 'days');
+    return moment.max(todaysDate.startOf('day'), uke22Pluss3.startOf('day')) === todaysDate;
 };
 
 export const erMindreEnn3UkerSiden = (dato: string) => {
@@ -26,6 +35,13 @@ export const utstedtDatoErIUke26 = (utstedtDatoString: string, terminDatoString:
     const terminDato = moment(terminDatoString).startOf('day');
     const uke26 = terminDato.subtract(dagerForTerminbekreftelse, 'days');
     return moment.max(uke26, utstedtDato).isSame(utstedtDato);
+};
+
+export const utstedtDatoErIUke22 = (utstedtDatoString: string, terminDatoString: string) => {
+    const utstedtDato = moment(utstedtDatoString).startOf('day');
+    const terminDato = moment(terminDatoString).startOf('day');
+    const uke22 = terminDato.subtract(dagerForTerminbekreftelse22, 'days');
+    return moment.max(uke22, utstedtDato).isSame(utstedtDato);
 };
 
 export const idagEllerTidligere = (dato: string) => {
@@ -56,21 +72,27 @@ export const getFørsteMuligeTermindato = () =>
  * Siste mulige termindato ut fra dagens dato
  * - dato må bekrefte at bruker er minst i uke 26
  */
-export const getSisteMuligeTermindato = () =>
-    moment()
-        .add(dagerForTerminbekreftelse, 'days')
+export const getSisteMuligeTermindato = () => {
+    const dager = uke22FeatureIsActive() ? dagerForTerminbekreftelse22 : dagerForTerminbekreftelse;
+
+    return moment()
+        .add(dager, 'days')
         .endOf('day')
         .toDate();
+};
 
-export const getForsteMuligeTerminbekreftesesdato = (termindato?: Date | string): Date =>
-    termindato
+export const getForsteMuligeTerminbekreftesesdato = (termindato?: Date | string): Date => {
+    const dager = uke22FeatureIsActive() ? dagerForTerminbekreftelse22 : dagerForTerminbekreftelse;
+
+    return termindato
         ? moment(termindato)
-            .subtract(dagerForTerminbekreftelse, 'days')
-            .toDate()
+              .subtract(dager, 'days')
+              .toDate()
         : moment()
-            .subtract(1, 'years')
-            .startOf('day')
-            .toDate();
+              .subtract(1, 'years')
+              .startOf('day')
+              .toDate();
+};
 
 export const getSisteMuligeTerminbekreftesesdato = (termindato?: Date | string) =>
     moment(new Date())
