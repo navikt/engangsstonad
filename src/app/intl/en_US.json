@@ -202,8 +202,7 @@
     "personopplysninger.text.personvernerklering.link": "nav.no/personvern",
 
     "terminbekreftelsen.sectionheading": "Confirmation of the expected date of delivery",
-    "terminbekreftelsen.text.terminbekreftelsen": "You must attach confirmation of the expected date of delivery with your application. This must be dated and signed by a doctor or midwife during your 26th week of pregnancy or later.",
-    "terminbekreftelsen.text.terminbekreftelsen.uke22": "You must attach confirmation of the expected date of delivery with your application. This must be dated and signed by a doctor or midwife during your 22nd week of pregnancy or later.",
+    "terminbekreftelsen.text.terminbekreftelsen": "You must attach confirmation of the expected date of delivery with your application. This must be dated and signed by a doctor or midwife during your 22nd week of pregnancy or later.",
 
     "standard.button.foto": "Take picture",
     "standard.button.fil": "Select file",
@@ -227,12 +226,12 @@
     "valideringsfeil.fodselsdato.ikkeMerEnn3ÅrTilbake": "You cannot apply for the lump-sum grant benefit for children who are more than three years of age.",
 
     "valideringsfeil.termindato.duMåOppgi": "You must provide the expected date of delivery",
-    "valideringsfeil.termindato.duMåVæreIUke26": "The earliest at which you can submit an application is when you are in the 26th week of pregnancy",
+    "valideringsfeil.termindato.duMåVæreIUke22": "The earliest at which you can submit an application is when you are in the 22nd week of pregnancy",
     "valideringsfeil.termindato.termindatoKanIkkeVære3UkerFraIdag": "The expected date of delivery cannot be earlier than 3 weeks from the present date",
 
     "valideringsfeil.terminbekreftelseDato.duMåOppgi": "You must state when confirmation of the expected date of delivery is dated",
     "valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere": "The date of the confirmation of the expected date of delivery cannot be in the future.",
-    "valideringsfeil.terminbekreftelseDato.duMåVæreIUke26": "The confirmation of the expected date of delivery must show that you are in the 26th week of pregnancy or later",
+    "valideringsfeil.terminbekreftelseDato.duMåVæreIUke22": "The confirmation of the expected date of delivery must show that you are in the 22nd week of pregnancy or later",
 
     "vedlegg.feilmelding": "Something went wrong. Try again...",
     "vedlegg.arialabel.slett": "Remove attachment {navn}",

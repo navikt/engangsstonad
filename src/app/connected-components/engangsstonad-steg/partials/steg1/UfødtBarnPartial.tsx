@@ -6,10 +6,8 @@ import getMessage from 'util/i18n/i18nUtils';
 import { DispatchProps } from 'common/redux/types';
 import OmTerminbekreftelsen from 'components/modal-content/OmTerminbekreftelsen';
 import {
-    erIUke26Pluss3,
     erMindreEnn3UkerSiden,
     idagEllerTidligere,
-    utstedtDatoErIUke26,
     getFørsteMuligeTermindato,
     getSisteMuligeTermindato,
     getForsteMuligeTerminbekreftesesdato,
@@ -26,7 +24,6 @@ import Veilederinfo from 'components/veileder-info/Veilederinfo';
 import AttachmentsUploaderPure from 'common/storage/attachment/components/AttachmentUploaderPure';
 import { Attachment, AttachmentType, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
-import { uke22FeatureIsActive } from 'util/featureToggles';
 
 interface StateProps {
     barn: Barn;
@@ -60,9 +57,8 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi')
             },
             {
-                test: () =>
-                    uke22FeatureIsActive() ? erIUke22Pluss3(barn.termindato) : erIUke26Pluss3(barn.termindato),
-                failText: getMessage(intl, 'valideringsfeil.termindato.duMåVæreIUke26')
+                test: () => erIUke22Pluss3(barn.termindato),
+                failText: getMessage(intl, 'valideringsfeil.termindato.duMåVæreIUke22')
             },
             {
                 test: () => erMindreEnn3UkerSiden(barn.termindato),
@@ -88,11 +84,8 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                 failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere')
             },
             {
-                test: () =>
-                    uke22FeatureIsActive()
-                        ? utstedtDatoErIUke22(barn.terminbekreftelseDato, barn.termindato)
-                        : utstedtDatoErIUke26(barn.terminbekreftelseDato, barn.termindato),
-                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåVæreIUke26')
+                test: () => utstedtDatoErIUke22(barn.terminbekreftelseDato, barn.termindato),
+                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåVæreIUke22')
             }
         ];
     }
@@ -112,10 +105,6 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
             minDato: getForsteMuligeTerminbekreftesesdato(barn.termindato),
             maksDato: getSisteMuligeTerminbekreftesesdato(barn.termindato)
         };
-
-        const deleteThis = uke22FeatureIsActive()
-            ? 'terminbekreftelsen.text.terminbekreftelsen.uke22'
-            : 'terminbekreftelsen.text.terminbekreftelsen';
 
         return (
             <div>
@@ -138,7 +127,9 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
 
                 <FormBlock visible={barn.termindato !== undefined}>
                     <div className="blokk-xs" key="veileder">
-                        <Veilederinfo ikon="veileder">{getMessage(intl, deleteThis)}</Veilederinfo>
+                        <Veilederinfo ikon="veileder">
+                            {getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}
+                        </Veilederinfo>
                     </div>
                     <AttachmentsUploaderPure
                         attachments={terminbekreftelse || []}
