@@ -46,6 +46,12 @@ const startServer = html => {
         }
     );
 
+    server.get(
+        '/rest/storage', (req, res) => {
+            res.sendStatus(200);
+        }
+    )
+
     server.get('/health/isAlive', (req, res) => res.sendStatus(200));
     server.get('/health/isReady', (req, res) => res.sendStatus(200));
 

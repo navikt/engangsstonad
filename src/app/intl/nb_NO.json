@@ -164,6 +164,11 @@
     "kvittering.text.soknadMottatt.avsluttText": "Avslutt",
     "kvittering.text.hvorFinnerJegStatus": "Hvor finner jeg status på min søknad?",
 
+    "sesjonUtløpt.tittel": "Du er logget ut",
+    "sesjonUtløpt.ingress": "Du må logge inn på nytt for å fortsette med søknaden.</br>Ønsker du å fortsette?",
+    "sesjonUtløpt.avslutt": "Nei, jeg vil avslutte",
+    "sesjonUtløpt.fortsett": "Ja, jeg vil fortsette",
+
     "rettigheter.sectionheading": "Dine plikter",
     "rettigheter.text.2": "Jeg forstår at hvis jeg gir uriktige eller holder tilbake opplysninger kan det få konsekvenser for retten min til engangsstønad.",
     "rettigheter.text.lestOgForstått": "Jeg har lest og forstått det som står på {link}",
