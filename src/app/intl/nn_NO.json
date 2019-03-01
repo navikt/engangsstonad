@@ -75,6 +75,7 @@
     "annenForelder.placeholder.fødselsnummer": "Fødselsnummer",
     "annenForelder.hjelpetekst.dNummer": "Du kan også skrive D-nummeret til den andre forelderen.",
     "annenForelder.ugyldigFødselsnummer": "Du må skrive eit gyldig nummer (elleve siffer)",
+    "annenForelder.ugyldigFødselsnummer.utenlandsk": "Fødselsnummer må fyllast ut",
     "annenForelder.ugyldigEgetFødselsnummer": "Du kan ikkje gi opp ditt eige fødselsnummer",
     "annenForelder.ugyldigNavn": "Du må skrive namnet på den andre forelderen",
     "annenForelder.ugyldigBostedsland": "Du må gi opp kvar den andre forelderen bur",

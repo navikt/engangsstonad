@@ -87,6 +87,7 @@
     "annenForelder.placeholder.fødselsnummer": "National identity number",
     "annenForelder.hjelpetekst.dNummer": "You can also write the D number of the other parent.",
     "annenForelder.ugyldigFødselsnummer": "You must enter a valid number (11 digits)",
+    "annenForelder.ugyldigFødselsnummer.utenlandsk": "You must enter a valid number",
     "annenForelder.ugyldigEgetFødselsnummer": "You cannot state your own national identity number",
     "annenForelder.ugyldigNavn": "You must write the name of the other parent",
     "annenForelder.ugyldigBostedsland": "You must specify where the other parent lives",

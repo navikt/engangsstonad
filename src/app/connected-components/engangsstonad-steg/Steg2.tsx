@@ -51,7 +51,9 @@ class Steg2 extends React.Component<Props> {
                     }
                     return result;
                 },
-                failText: getMessage(intl, 'annenForelder.ugyldigFødselsnummer')
+                failText: getMessage(intl, annenForelder.utenlandskFnr ?
+                    'annenForelder.ugyldigFødselsnummer.utenlandsk' :
+                    'annenForelder.ugyldigFødselsnummer')
             },
             {
                 test: () => person.fnr !== annenForelder.fnr,
@@ -87,7 +89,6 @@ class Steg2 extends React.Component<Props> {
     render() {
         const { dispatch, intl, annenForelder, language } = this.props;
         const NavnComponent = annenForelder.kanIkkeOppgis ? Input : ValidInput;
-        const FnrComponent = annenForelder.utenlandskFnr ? Input : ValidInput;
 
         return (
             <Skjemasteg tittel={getMessage(intl, 'annenForelder.sectionheading')}>
@@ -113,7 +114,7 @@ class Steg2 extends React.Component<Props> {
                 </FormBlock>
                 <FormBlock visible={annenForelder.navn !== undefined}>
                     <FormBlock margin="xxs">
-                        <FnrComponent
+                        <ValidInput
                             label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
                             id="js-fødselsnummer"
                             placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
