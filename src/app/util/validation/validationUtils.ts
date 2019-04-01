@@ -53,18 +53,18 @@ export const getFørsteMuligeTermindato = () =>
 
 /**
  * Siste mulige termindato ut fra dagens dato
- * - dato må bekrefte at bruker er minst i uke 26
+ * - dato må bekrefte at bruker er minst i uke 22
  */
 export const getSisteMuligeTermindato = () =>
     moment()
-        .add(dagerForTerminbekreftelse, 'days')
+        .add(dagerForTerminbekreftelse - 1, 'days')
         .endOf('day')
         .toDate();
 
 export const getForsteMuligeTerminbekreftesesdato = (termindato?: Date | string): Date => {
     return termindato
         ? moment(termindato)
-              .subtract(dagerForTerminbekreftelse, 'days')
+              .subtract(dagerForTerminbekreftelse - 1, 'days')
               .toDate()
         : moment()
               .subtract(1, 'years')
