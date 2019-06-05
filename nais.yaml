@@ -1,4 +1,5 @@
 name: engangsstonad
+team: teamforeldrepenger
 image: repo.adeo.no:5443/engangsstonad
 replicas:
   min: 2
