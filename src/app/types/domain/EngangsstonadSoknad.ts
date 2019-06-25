@@ -12,4 +12,17 @@ type EngangsstonadSoknad = {
     vedlegg?: Attachment[];
 };
 
+export type EngangssoknadSoknadDto  = {
+    type: string;
+    erEndringssøknad: boolean;
+    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
+    barn: FodtBarn | UfodtBarn;
+    annenForelder: AnnenForelder;
+    vedlegg?: Attachment[];
+    søker: {
+        språkkode: string;
+    };
+};
+
+
 export default EngangsstonadSoknad;

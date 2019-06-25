@@ -1,4 +1,4 @@
-import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
+import EngangsstonadSoknad, { EngangssoknadSoknadDto } from '../types/domain/EngangsstonadSoknad';
 
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
@@ -26,7 +26,7 @@ export const mapAttachments = (object: object): Attachment[] => {
 };
 
 export default {
-    cleanupSøknad: (søknad: EngangsstonadSoknad) => {
+    cleanupSøknad: (søknad: EngangsstonadSoknad, språkkode: string): EngangssoknadSoknadDto => {
         const { informasjonOmUtenlandsopphold } = søknad;
         const { iNorgeSiste12Mnd, tidligereOpphold } = informasjonOmUtenlandsopphold;
         const { iNorgeNeste12Mnd, senereOpphold } = informasjonOmUtenlandsopphold;
@@ -40,6 +40,9 @@ export default {
 
         søknad.vedlegg = mapAttachments(søknad);
 
-        return søknad;
+        return {
+            ...søknad,
+            søker: { språkkode: språkkode }
+        };
     }
 };
