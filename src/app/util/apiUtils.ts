@@ -44,5 +44,5 @@ export default {
             ...søknad,
             søker: { språkkode: språkkode }
         };
-    }
+    }   
 };

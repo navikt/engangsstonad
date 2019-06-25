@@ -43,6 +43,7 @@ interface GetPersonFailed {
 interface SendSoknad {
     type: ApiActionKeys.SEND_SOKNAD;
     soknad: EngangsstonadSoknad;
+    språkkode: string;
 }
 
 interface SendSoknadSuccess {
