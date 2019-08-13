@@ -16,7 +16,7 @@ jobs:
 
             - run:
                   name: Run tests
-                  command: npm run jest
+                  command: npm run test
 
             - run:
                   name: Build
@@ -50,7 +50,6 @@ workflows:
                   requires:
                       - build
 
-                      
             # - hold:
             #     type: approval
             #     filters:
