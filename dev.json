@@ -1,0 +1,11 @@
+{
+    "ingress": "https://engangsstonad-q.nav.no",
+    "ingress-internal" : "https://engangsstonad.nais.oera-q.local",
+    "application_name": "engangsstonad",
+    "env": {
+        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api-q.nav.no/rest",
+        "LOGINSERVICE_URL": "https://loginservice-q.nav.no/login",
+        "FEATURE_STORAGE": "off",
+        "FEATURE_UKE22": "on"
+    }
+}
