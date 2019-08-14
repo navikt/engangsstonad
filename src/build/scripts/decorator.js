@@ -6,7 +6,7 @@ const { JSDOM } = jsdom;
 const requestDecorator = (callback) => {
     const baseUrl = process.env.NAIS_CLUSTER_NAME === 'dev-sbs' ? 'https://appres-q.nav.no' : 'https://appres.nav.no';
     return request(
-        `${baseUrl}/common-html/v4/navno?header-withmenu=true&styles=true&scripts=true&footer=true`,
+        `${baseUrl}/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true`,
         callback
     );
 };
