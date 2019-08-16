@@ -89,7 +89,7 @@ workflows:
                   message: 'Godkjenn deploy til prod av $CIRCLE_PROJECT_REPONAME'
                   url: https://circleci.com/workflow-run/$CIRCLE_WORKFLOW_WORKSPACE_ID
                   requires:
-                      - dev_deploy_local
+                      - hold_gcp
                       
              - hold_prod:
                   type: approval
@@ -97,7 +97,7 @@ workflows:
                       branches:
                           only: master
                   requires:
-                      - dev_deploy_local   
+                      - hold_gcp   
                                 
              - nais/deploy:
                   name: prod_deploy
