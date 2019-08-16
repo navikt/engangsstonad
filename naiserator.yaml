@@ -6,6 +6,14 @@ metadata:
   labels:
     team: {{team}}
 spec:
+  accessPolicy:
+    egress:
+      allowAll: true
+      rules: []
+    ingress:
+      rules:
+      - application: istio-ingressgateway
+        namespace: istio-system
   image: {{version}}
   port: 8080
   replicas:
