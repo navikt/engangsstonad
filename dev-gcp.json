@@ -1,6 +1,6 @@
 {
     "ingress": "https://engangsstonad.dev-gcp.nais.io",
-    "ingress-internal" : "https://engangsstonad.nais.oera-q.local",
+    "namespace" : "foreldrepenger",
     "application_name": "engangsstonad",
     "env": {
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api-q.nav.no/rest",

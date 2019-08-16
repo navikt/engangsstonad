@@ -2,7 +2,11 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: {{application_name}}
-  namespace: foreldrepenger
+  {{#if namespace}}
+  namespace: {{namespace}}
+  {{else}}
+  namespace: default
+  {{/if}}
   labels:
     team: {{team}}
 spec:
@@ -35,6 +39,9 @@ spec:
       cpuThresholdPercentage: 50
   ingresses:
     - {{ingress}}
+  {{#if ingress-internal}}
+    - {{ingress-internal}}
+  {{/if}}  
   resources:
     limits:
       cpu: 500m
