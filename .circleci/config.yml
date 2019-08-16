@@ -29,7 +29,7 @@ workflows:
     version: 2
     deploy-nais:
         jobs:
-            - build:
+             - build:
                   context: NAIS deployment
                   
              - nais/deploy:
@@ -65,7 +65,7 @@ workflows:
                   requires:
                       - dev_deploy_local              
 
-            - nais/deploy:
+             - nais/deploy:
                   name: dev_deploy_gcp
                   enable-vars: true
                   template-vars: dev-gcp.json
@@ -84,7 +84,7 @@ workflows:
                       - hold_gcp
 
            
-            - slack/approval-notification:
+             - slack/approval-notification:
                   webhook: $SLACK
                   message: 'Godkjenn deploy til prod av $CIRCLE_PROJECT_REPONAME'
                   url: https://circleci.com/workflow-run/$CIRCLE_WORKFLOW_WORKSPACE_ID
@@ -99,7 +99,7 @@ workflows:
                   requires:
                       - dev_deploy_local   
                                 
-            - nais/deploy:
+             - nais/deploy:
                   name: prod_deploy
                   enable-vars: true
                   template-vars: prod.json
