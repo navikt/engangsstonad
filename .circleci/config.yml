@@ -56,13 +56,13 @@ workflows:
                       branches:
                           only: master
                   requires:
-                      - dev_deploy
+                      - dev_deploy_gcp
             - slack/approval-notification:
                   webhook: https://hooks.slack.com/services/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
                   message: 'Godkjenn deploy til prod av $CIRCLE_PROJECT_REPONAME'
                   url: https://circleci.com/workflow-run/$CIRCLE_WORKFLOW_WORKSPACE_ID
                   requires:
-                      - dev_deploy
+                      - dev_deploy_gcp
             - nais/deploy:
                   name: prod_deploy
                   enable-vars: true
