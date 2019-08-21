@@ -2,6 +2,7 @@
     "ingress": "https://engangsstonad-q.nav.no",
     "ingress-internal" : "https://engangsstonad.nais.oera-q.local",
     "application_name": "engangsstonad",
+    "appres" : "appres-q1.nav.no",
     "env": {
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api-q.nav.no/rest",
         "LOGINSERVICE_URL": "https://loginservice-q.nav.no/login",

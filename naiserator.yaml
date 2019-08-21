@@ -11,10 +11,10 @@ metadata:
     team: {{team}}
 spec:
   accessPolicy:
-    egress:
-      allowAll: true
-      rules: []
-    ingress:
+    outbound:
+      external: 
+        - host: {{appres}}
+    inbound:
       rules:
       - application: istio-ingressgateway
         namespace: istio-system
