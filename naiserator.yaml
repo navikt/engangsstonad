@@ -2,10 +2,22 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: {{application_name}}
+  {{#if namespace}}
+  namespace: {{namespace}}
+  {{else}}
   namespace: default
+  {{/if}}
   labels:
     team: {{team}}
 spec:
+  accessPolicy:
+    outbound:
+      external: 
+        - host: {{appres}}
+    inbound:
+      rules:
+      - application: istio-ingressgateway
+        namespace: istio-system
   image: {{version}}
   port: 8080
   replicas:
@@ -27,7 +39,9 @@ spec:
       cpuThresholdPercentage: 50
   ingresses:
     - {{ingress}}
+  {{#if ingress-internal}}
     - {{ingress-internal}}
+  {{/if}}  
   resources:
     limits:
       cpu: 500m
@@ -40,4 +54,3 @@ spec:
    - name: {{@key}}
      value: "{{this}}"
   {{/each}}
-  webproxy: true
