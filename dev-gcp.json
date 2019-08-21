@@ -2,7 +2,7 @@
     "ingress": "https://engangsstonad.dev-gcp.nais.io",
     "namespace" : "foreldrepenger",
     "application_name": "engangsstonad",
-    "appres" : "appres-q1.nav.no"
+    "appres" : "appres-q1.nav.no",
     "env": {
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api-q.nav.no/rest",
         "LOGINSERVICE_URL": "https://loginservice-q.nav.no/login",
