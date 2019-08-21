@@ -1,6 +1,5 @@
 {
     "ingress": "https://engangsstonad.nav.no",
-    "ingress-internal" : "https://engangsstonad.nais.oera.local",
     "application_name": "engangsstonad",
     "appres" : "appres.nav.no",
     "env": {
