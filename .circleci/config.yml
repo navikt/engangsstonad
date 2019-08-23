@@ -13,6 +13,8 @@ jobs:
         working_directory: ~/engangsstonad
         docker:
             - image: circleci/node:latest
+        environment:
+          MAJOR_VERSION: 2  
         steps:
             - checkout
             
@@ -27,8 +29,6 @@ jobs:
             - env/set-env-var:
                  var-name: IMAGE
                  var-value: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/$CIRCLE_PROJECT_REPONAME   
-            - run :
-                command echo "IMAGE ER $IMAGE"          
             - run:
                  name: Run npm install
                  command: npm install
