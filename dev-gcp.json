@@ -1,5 +1,5 @@
 {
-    "ingress": "https://engangsstonad.dev-gcp.nais.io",
+    "ingress": "https://engangsstonad.dev-nav.no",
     "namespace" : "foreldrepenger",
     "application_name": "engangsstonad",
     "appres" : "appres-q1.nav.no",
