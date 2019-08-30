@@ -57,7 +57,14 @@ jobs:
         - nais-deploy:
             template-vars: dev-gcp.json
             environment: dev-gcp
-          
+            
+    prod-gcp-deploy:
+      executor: go
+      steps:
+        - nais-deploy:
+            template-vars: prod-gcp.json
+            environment: prod-gcp
+                  
     prod-deploy:
        executor: go
        steps:
@@ -107,6 +114,13 @@ workflows:
               only: master
           requires:
             - build
+      - prod-gcp-deploy:
+          context: NAIS deployment
+          filters:
+            branches:
+              only: master
+          requires:
+            - build      
       - hold:
           type: approval
           filters:
