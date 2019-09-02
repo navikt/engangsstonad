@@ -113,30 +113,24 @@ workflows:
             branches:
               only: master
           requires:
-            - build
-      - prod-gcp-deploy:
-          context: NAIS deployment
-          filters:
-            branches:
-              only: master
-          requires:
-            - build      
+            - build   
       - hold:
           type: approval
           filters:
             branches:
               only: master
           requires:
+            - dev-gcp-deploy
             - dev-deploy
 
       - slack/approval-notification:
           webhook: $SLACK
-          message: "Godkjenn deploy til prod av $CIRCLE_PROJECT_REPONAME"
+          message: "Godkjenn deploy til prod-gcp av $CIRCLE_PROJECT_REPONAME"
           url: https://circleci.com/workflow-run/$CIRCLE_WORKFLOW_WORKSPACE_ID
           requires:
             - dev-deploy
 
-      - prod-deploy:
+      - prod-gcp-deploy:
           context: NAIS deployment
           filters:
             branches:
