@@ -24,7 +24,7 @@ server.use(compression());
 server.set('views', `${__dirname}/dist`);
 server.set('view engine', 'mustache');
 server.engine('html', mustacheExpress());
-server.use(morgan('combined'));
+server.use(morgan('tiny'));
 
 server.use((req, res, next) => {
     res.removeHeader('X-Powered-By');
