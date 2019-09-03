@@ -31,6 +31,12 @@ server.use((req, res, next) => {
     next();
 });
 
+server.use((request, response) => {
+    if (!request.secure) {
+        response.redirect('https://' + request.headers.host + request.url);
+    }
+});
+
 const renderApp = (decoratorFragments) =>
     new Promise((resolve, reject) => {
         server.render(
