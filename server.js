@@ -26,7 +26,6 @@ server.set('view engine', 'mustache');
 server.engine('html', mustacheExpress());
 server.use(morgan('combined'));
 
-
 server.use((req, res, next) => {
     res.removeHeader('X-Powered-By');
     res.set('X-Frame-Options', 'SAMEORIGIN');
@@ -62,8 +61,12 @@ const startServer = (html) => {
     server.use('/engangsstonad/dist/css', express.static(path.resolve(__dirname, 'dist/css')));
 
     server.get(['/', '/engangsstonad/?', /^\/engangsstonad\/(?!.*dist).*$/], (req, res) => {
-        res.send(html);
-        httpRequestDurationMicroseconds.labels(req.route.path).observe(10);
+        if (!req.secure) {
+            res.redirect('https://' + res.headers.host + res.url);
+        } else {
+            res.send(html);
+            httpRequestDurationMicroseconds.labels(req.route.path).observe(10);
+        }
     });
 
     server.get('/internal/metrics', (req, res) => {
