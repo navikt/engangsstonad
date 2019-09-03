@@ -62,7 +62,7 @@ const startServer = (html) => {
 
     server.get(['/', '/engangsstonad/?', /^\/engangsstonad\/(?!.*dist).*$/], (req, res) => {
         if (!req.secure) {
-            res.redirect('https://' + res.headers.host + res.url);
+            res.redirect('https://' + req.headers.host + req.url);
         } else {
             res.send(html);
             httpRequestDurationMicroseconds.labels(req.route.path).observe(10);
