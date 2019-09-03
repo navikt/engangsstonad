@@ -4,6 +4,7 @@ const mustacheExpress = require('mustache-express');
 const Promise = require('promise');
 const getDecorator = require('./src/build/scripts/decorator');
 const compression = require('compression');
+const morgan = require('morgan');
 
 // Prometheus metrics
 const prometheus = require('prom-client');
@@ -23,6 +24,8 @@ server.use(compression());
 server.set('views', `${__dirname}/dist`);
 server.set('view engine', 'mustache');
 server.engine('html', mustacheExpress());
+server.use(morgan('combined'));
+
 
 server.use((req, res, next) => {
     res.removeHeader('X-Powered-By');
