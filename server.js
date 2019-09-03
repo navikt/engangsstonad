@@ -61,12 +61,8 @@ const startServer = (html) => {
     server.use('/engangsstonad/dist/css', express.static(path.resolve(__dirname, 'dist/css')));
 
     server.get(['/', '/engangsstonad/?', /^\/engangsstonad\/(?!.*dist).*$/], (req, res) => {
-        if (!req.secure) {
-            res.redirect('https://' + req.headers.host + req.url);
-        } else {
             res.send(html);
             httpRequestDurationMicroseconds.labels(req.route.path).observe(10);
-        }
     });
 
     server.get('/internal/metrics', (req, res) => {
