@@ -33,7 +33,6 @@ spec:
       initialDelay: 60  
   prometheus:
       enabled: false
-      path: /internal/actuator/prometheus
   replicas:
       min: 2
       max: 2
