@@ -65,7 +65,6 @@
         "nav-frontend-stegindikator-style": "1.0.1",
         "nav-frontend-typografi": "^2.0.13",
         "nav-frontend-typografi-style": "^1.0.14",
-        "prom-client": "11.0.0",
         "react": "^16.9.0",
         "react-aria-menubutton": "^6.1.0",
         "react-collapse": "4.0.3",
