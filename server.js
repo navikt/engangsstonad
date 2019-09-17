@@ -42,7 +42,8 @@ const renderApp = (decoratorFragments) =>
                 {
                     REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL,
                     LOGIN_URL: process.env.LOGINSERVICE_URL,
-                    FEATURE_STORAGE: process.env.FEATURE_STORAGE
+                    FEATURE_STORAGE: process.env.FEATURE_STORAGE,
+                    VERSION: process.env.APP_VERSION
                 },
                 decoratorFragments
             ),
