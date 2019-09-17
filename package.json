@@ -17,9 +17,7 @@
         "start-mock-api-server": "node ./mock-api-server.js",
         "start": "node ./src/build/scripts/start-dev.js",
         "test": "cross-env NODE_ENV=test jest",
-        "lint": "tslint src/**",
-        "cypress": "export PORT=8081 && npm run start-express & wait-on -v -t 15000 http://localhost:8081 && echo $(npm config get prefix)/bin/cypress run",
-        "cy": "cypress open & npm run build && export PORT=8081 && npm run start-express"
+        "lint": "tslint src/**"
     },
     "dependencies": {
         "@sentry/browser": "^5.6.3",
