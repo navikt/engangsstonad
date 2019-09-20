@@ -10,6 +10,7 @@ const webpackConfig = {
         filename: 'js/bundle.js',
         publicPath: '/engangsstonad/dist'
     },
+    devtool: 'source-map',
     resolve: {
         alias: {
             assets: path.resolve(__dirname, './../../app/assets/'),
