@@ -6,7 +6,7 @@ const Ikon = require('nav-frontend-ikoner-assets').default;
 interface Props {
     step: number;
     activeStep: number;
-    title: string | JSX.Element;
+    title: string;
 }
 
 const Step: React.StatelessComponent<Props> = ({ step, activeStep, title }) => {

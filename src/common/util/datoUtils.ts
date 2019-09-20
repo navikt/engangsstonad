@@ -1,42 +1,68 @@
-import { format, startOfDay } from 'date-fns';
-import * as locale from 'date-fns/locale/nb';
+/* tslint:disable */
+import { startOfDay } from 'date-fns';
+import moment, { Moment } from 'moment';
 
 export const normaliserDato = (dato: Date): Date => startOfDay(dato);
 
-export function formaterDato(dato: Date, datoformat?: string): string {
-    return format(dato, datoformat || 'dddd D. MMMM YYYY', { locale });
+
+export function formaterDato(dato: Date | undefined, datoformat?: string): string {
+    return moment.utc(dato).format(datoformat || 'dddd D. MMMM YYYY');
 }
 
-export function år(dato: Date): string {
-    return format(dato, 'YYYY', { locale });
+export function formaterStønadskontoParamsDatoer(dato: Date | undefined, datoformat?: string): string | undefined {
+    return dato !== undefined ? moment.utc(dato).format(datoformat || 'dddd D. MMMM YYYY') : undefined;
 }
 
-export function måned(dato: Date): string {
-    return format(dato, 'MMMM', { locale });
+export function formaterDatoKompakt(dato: Date, datoformat?: string): string {
+    return formaterDato(dato, 'DD.MM.YYYY');
 }
 
-export function mnd(dato: Date): string {
-    return format(dato, 'MMM', { locale });
+export function formaterDatoTall(dato: string, datoformat?: string): string {
+    return moment.utc(dato).format(datoformat || 'DD.MM.YYYY');
 }
 
-export function ukedag(dato: Date): string {
-    return format(dato, 'dddd', { locale });
+export function formaterDatoUtenDag(dato: Date): string {
+    return moment.utc(dato).format('D. MMMM YYYY');
 }
 
-export function ukedagKort(dato: Date): string {
-    return format(dato, 'ddd', { locale });
+export function år(dato: Moment): string {
+    return moment.utc(dato).format('YYYY');
 }
 
-export function dagIMåned(dato: Date): string {
-    return format(dato, 'D.', { locale });
+export function årToBokstaver(dato: Date): string {
+    return moment.utc(dato).format('YY');
 }
 
-export const getUkerOgDagerFromDager = (
-    dager: number
-): { uker: number; dager: number } => {
+export function måned(dato: Moment): string {
+    return moment.utc(dato).format('MMMM');
+}
+
+export function måned3bokstaver(dato: Moment): string {
+    return dato.format('MMM').substr(0, 3);
+}
+
+export function dagOgMåned(dato: Date): string {
+    return moment(dato).format('DD.MM');
+}
+
+export function mnd(dato: Moment): string {
+    return dato.format('MMM');
+}
+
+export function ukedag(dato: Moment): string {
+    return dato.format('dddd');
+}
+
+export function dagIMåned(dato: Moment): string {
+    return dato.format('D.');
+}
+
+export const getUkerOgDagerFromDager = (dager: number): { uker: number; dager: number } => {
     const uker = Math.floor(dager / 5);
     return {
         dager: dager - uker * 5,
         uker
     };
 };
+
+export const dateToISOFormattedDateString = (date?: Date) => (date ? moment.utc(date).format('YYYY-MM-DD') : undefined);

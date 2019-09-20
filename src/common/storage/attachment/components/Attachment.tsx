@@ -5,12 +5,13 @@ const Icon = require('nav-frontend-ikoner-assets').default;
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import SlettKnapp from '../../../components/slett-knapp/SlettKnapp';
 
-import './attachment.less';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import Lenke from 'nav-frontend-lenker';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { bytesString } from 'common/util/filesize';
 import BEMHelper from 'common/util/bem';
+
+import './attachment.less';
 
 interface OwnProps {
     attachment: Attachment;
