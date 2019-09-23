@@ -4,7 +4,7 @@ declare module 'nav-frontend-lenker' {
         children: React.ReactNode;
         target?: string;
         className?: string;
-        ariaLabel?: String;
+        ariaLabel?: string;
     }
     const t: new (props: NavFrontendLenke) => React.Component<NavFrontendLenke, any>;
     export default t;

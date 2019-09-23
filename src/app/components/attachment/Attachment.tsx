@@ -8,7 +8,7 @@ const Icon = require('nav-frontend-ikoner-assets').default;
 
 interface OwnProps {
     vedlegg: File;
-    visFilstørrelse?: Boolean;
+    visFilstørrelse?: boolean;
     onDelete?: (file: File) => void;
 }
 

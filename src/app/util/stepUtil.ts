@@ -50,7 +50,7 @@ export const shouldDisplayNextButtonOnStep3 = (
     utenlandsopphold: InformasjonOmUtenlandsopphold
 ) => {
     if (utenlandsopphold.iNorgeNeste12Mnd === false) {
-        return ((dateFormatsAreValid((barn as FodtBarn).fødselsdatoer))) &&
+        return dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) &&
             iNorgeNeste12MndIsValid(utenlandsopphold) && iNorgeSiste12MndIsValid(utenlandsopphold);
     } else {
         return ((dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) &&

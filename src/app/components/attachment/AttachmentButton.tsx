@@ -41,7 +41,7 @@ class AttachmentButton extends React.Component<Props> {
     }
 
     fileSelectHandler(fileList: FileList) {
-        const files = Array.from(fileList) as File[];
+        const files = Array.from(fileList);
         const validFiles = this.getValidFiles(files);
         if (validFiles.length > 0) {
             this.props.onFileSelected(this.getValidFiles(files));
