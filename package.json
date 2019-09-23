@@ -30,7 +30,7 @@
         "date-holidays": "1.2.5",
         "dotenv": "4.0.0",
         "ejs": "2.5.7",
-        "express": "4.16.2",
+        "express": "4.17.1",
         "history": "4.7.2",
         "i18n-iso-countries": "3.4.0",
         "is-valid-fodselsnummer": "3.0.1",
