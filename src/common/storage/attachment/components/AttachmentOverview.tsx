@@ -142,7 +142,7 @@ class AttachmentOverview extends React.Component<Props, State> {
                                 >
                                     <AlertstripeWithCloseButton
                                         alertStripeProps={{
-                                            type: 'advarsel',
+                                            type: 'feil',
                                             children: (
                                                 <FormattedMessage
                                                     id={errorMessage ? errorMessage : 'vedlegg.feilmelding'}

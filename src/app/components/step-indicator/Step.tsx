@@ -20,7 +20,7 @@ const Step: React.StatelessComponent<Props> = ({ step, activeStep, title }) => {
                 'stegindikator__steg--aktiv': step === activeStep
             })}
         >
-            {passed ? <Ikon kind="ok-sirkel-fylt" /> : <span>{step}</span>}
+            {passed ? <Ikon kind="ok-sirkel-fyll" /> : <span>{step}</span>}
         </li>
     );
 };

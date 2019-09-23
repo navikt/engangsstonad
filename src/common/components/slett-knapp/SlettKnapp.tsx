@@ -1,9 +1,8 @@
 import * as React from 'react';
-// tslint:disable-next-line:no-var-requires
-const Icon = require('nav-frontend-ikoner-assets').default;
 import { KnappProps } from 'nav-frontend-knapper/lib/knapp';
 
 import './slettKnapp.less';
+import TrashcanIkon from '../ikoner/TrashcanIkon';
 
 export interface SlettKnappProps extends KnappProps {
     ariaLabel: string;
@@ -23,7 +22,7 @@ const SlettKnapp: React.StatelessComponent<SlettKnappProps> = ({
             onClick();
         }}
     >
-        <Icon kind="trashcan" size={20} />
+        <TrashcanIkon width={20} height={20} />
     </button>
 );
 
