@@ -3,13 +3,11 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import * as moment from 'moment';
 import getMessage from 'common/util/i18nUtils';
 import { soknadActionCreators as soknad } from '../../redux/actions';
-import InformasjonOmUtenlandsopphold, { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
+import InformasjonOmUtenlandsopphold from '../../types/domain/InformasjonOmUtenlandsopphold';
 import { DispatchProps } from 'common/redux/types';
-import CountryPicker from '../../components/country-picker/CountryPicker';
 import Barn from '../../types/domain/Barn';
 import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import FormBlock from 'components/form-block/FormBlock';
-import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 import { connect } from 'react-redux';
@@ -194,28 +192,28 @@ class Steg3 extends React.Component<Props> {
     }
 
     render() {
-        const { dispatch, intl, informasjonOmUtenlandsopphold, language } = this.props;
-        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligereOpphold, senereOpphold } = informasjonOmUtenlandsopphold;
+        const { dispatch, intl, informasjonOmUtenlandsopphold } = this.props;
+        const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligereOpphold } = informasjonOmUtenlandsopphold;
 
-        const tidsperiodeForegående: Tidsperiode = {
-            startdato: moment()
-                .add(-1, 'years')
-                .startOf('day')
-                .toDate(),
-            sluttdato: moment()
-                .endOf('day')
-                .toDate()
-        };
+        // const tidsperiodeForegående: Tidsperiode = {
+        //     startdato: moment()
+        //         .add(-1, 'years')
+        //         .startOf('day')
+        //         .toDate(),
+        //     sluttdato: moment()
+        //         .endOf('day')
+        //         .toDate()
+        // };
 
-        const tidsperiodeKommende: Tidsperiode = {
-            startdato: moment()
-                .startOf('day')
-                .toDate(),
-            sluttdato: moment()
-                .add(1, 'years')
-                .endOf('day')
-                .toDate()
-        };
+        // const tidsperiodeKommende: Tidsperiode = {
+        //     startdato: moment()
+        //         .startOf('day')
+        //         .toDate(),
+        //     sluttdato: moment()
+        //         .add(1, 'years')
+        //         .endOf('day')
+        //         .toDate()
+        // };
 
         return (
             <Skjemasteg tittel={getMessage(intl, 'medlemmskap.sectionheading')}>
@@ -242,7 +240,7 @@ class Steg3 extends React.Component<Props> {
                 </FormBlock>
 
                 <FormBlock visible={iNorgeSiste12Mnd === false}>
-                    <CountryPicker
+                    {/* <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegBodde')}
                         language={language}
                         utenlandsoppholdListe={tidligereOpphold}
@@ -261,7 +259,7 @@ class Steg3 extends React.Component<Props> {
                             validateFom: this.validateFomDatoSiste12Mnd,
                             validateTom: this.validateTomDatoSiste12Mnd
                         }}
-                    />
+                    /> */}
                 </FormBlock>
                 <FormBlock visible={iNorgeSiste12Mnd || tidligereOpphold.length > 0}>
                     <RadioPanelGruppeResponsive
@@ -290,7 +288,7 @@ class Steg3 extends React.Component<Props> {
                         (iNorgeSiste12Mnd === true || (iNorgeSiste12Mnd === false && tidligereOpphold.length > 0))
                     }
                 >
-                    <CountryPicker
+                    {/* <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegSkalBo')}
                         language={language}
                         utenlandsoppholdListe={senereOpphold}
@@ -309,7 +307,7 @@ class Steg3 extends React.Component<Props> {
                             validateFom: this.validateFomDatoNeste12Mnd,
                             validateTom: this.validateTomDatoNeste12Mnd
                         }}
-                    />
+                    /> */}
                 </FormBlock>
             </Skjemasteg>
         );

@@ -67,6 +67,11 @@ const startServer = html => {
         res.send(kvittering);
     });
 
+    server.post('/rest/storage/vedlegg', (req, res) => {
+        res.setHeader('Location', `http://localhost:8080/foreldrepengesoknad/dist/vedlegg/${req.body.id}`);
+        res.sendStatus(201);
+    });
+
     const port = process.env.PORT || 8888;
     server.listen(port, () => {
         console.log(`Mock-api listening on port: ${port}`);

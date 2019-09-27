@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webpackConfig = {
     entry: ['babel-polyfill', './src/app/bootstrap.tsx'],
+    mode: 'development',
     output: {
         path: path.resolve(__dirname, './../../../dist'),
         filename: 'js/bundle.js',

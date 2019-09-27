@@ -3,7 +3,7 @@ import DocumentTitle from 'react-document-title';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 export interface Props {
-    tittel?: string;
+    tittel?: string | React.ReactNode;
     children: React.ReactNode;
 }
 

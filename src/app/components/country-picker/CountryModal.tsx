@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
-import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
+import { Knapp } from 'nav-frontend-knapper';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
-import CountrySelect from 'components/country-select/CountrySelect';
-import DateInput from 'components/date-input/DateInput';
-import { Tidsperiode, Avgrensninger } from 'nav-datovelger';
-import LabelText from 'common/components/labeltekst/Labeltekst';
+import { Tidsperiode } from 'nav-datovelger';
 import FormBlock from 'components/form-block/FormBlock';
 import { Feil } from 'components/skjema-input-element/types';
 import { Language } from 'intl/IntlProvider';
@@ -59,23 +56,23 @@ const getValidPeriode = (formData: PeriodeForm): Utenlandsopphold | undefined =>
     return undefined;
 };
 
-const getDateFromString = (dato?: string) => {
-    if (dato) {
-        return new Date(dato);
-    }
-    return undefined;
-};
+// const getDateFromString = (dato?: string) => {
+//     if (dato) {
+//         return new Date(dato);
+//     }
+//     return undefined;
+// };
 
-const getRegistrertePerioder = (
-    alleOpphold: Utenlandsopphold[],
-    gjeldendeOpphold?: Utenlandsopphold
-): Tidsperiode[] => {
-    const arr = gjeldendeOpphold ? alleOpphold.filter((o) => o !== gjeldendeOpphold) : alleOpphold;
-    return arr.map((opphold) => ({
-        startdato: new Date(opphold.tidsperiode.fom),
-        sluttdato: new Date(opphold.tidsperiode.tom)
-    }));
-};
+// const getRegistrertePerioder = (
+//     alleOpphold: Utenlandsopphold[],
+//     gjeldendeOpphold?: Utenlandsopphold
+// ): Tidsperiode[] => {
+//     let arr = gjeldendeOpphold ? alleOpphold.filter((o) => o !== gjeldendeOpphold) : alleOpphold;
+//     return arr.map((opphold) => ({
+//         fom: opphold.tidsperiode.fom,
+//         tom: opphold.tidsperiode.tom
+//     }));
+// };
 
 const getDefaultState = (utenlandsopphold?: Utenlandsopphold): State => {
     if (utenlandsopphold) {
@@ -168,52 +165,7 @@ class CountryModal extends React.Component<Props, State> {
     }
 
     render() {
-        const { language, tidsperiode, alleUtenlandsopphold, utenlandsopphold } = this.props;
-        const { formData, erEndring } = this.state;
 
-        const fomDato = getDateFromString(formData && formData.fom && formData.fom.value);
-        const tomDato = getDateFromString(formData && formData.tom && formData.tom.value);
-
-        const lagreKnappTekstId = erEndring ? 'medlemmskap.modal.lagreEndringer' : 'medlemmskap.knapp.leggTilLand';
-
-        const fomMinDato = tidsperiode ? tidsperiode.startdato : undefined;
-        const fomMaksDato = tomDato || (tidsperiode ? tidsperiode.sluttdato : undefined);
-        const tomMinDato = fomDato || (tidsperiode ? tidsperiode.startdato : undefined);
-        const tomMaksDato = tidsperiode ? tidsperiode.sluttdato : undefined;
-
-        let fomAvgrensning: Avgrensninger = {};
-        let tomAvgrensning: Avgrensninger = {};
-        const registrertePerioder = alleUtenlandsopphold
-            ? getRegistrertePerioder(alleUtenlandsopphold, utenlandsopphold)
-            : undefined;
-        if (fomMinDato || fomMaksDato) {
-            fomAvgrensning = {
-                minDato: fomMinDato,
-                maksDato: fomMaksDato,
-                ugyldigeTidsperioder: registrertePerioder
-            };
-        }
-        if (tomMinDato || tomMaksDato) {
-            tomAvgrensning = {
-                minDato: tomMinDato,
-                maksDato: tomMaksDato,
-                ugyldigeTidsperioder: registrertePerioder
-            };
-        }
-
-        let landFeil;
-        let fomFeil;
-        let tomFeil;
-
-        if (formData && formData.land && formData.land.visFeil === true) {
-            landFeil = formData.land.feil;
-        }
-        if (formData && formData.fom && formData.fom.visFeil === true) {
-            fomFeil = formData.fom.feil;
-        }
-        if (formData && formData.tom && formData.tom.visFeil === true) {
-            tomFeil = formData.tom.feil;
-        }
 
         return (
             <Modal
@@ -228,7 +180,8 @@ class CountryModal extends React.Component<Props, State> {
                     <Undertittel className="countryModal__title">
                         <FormattedMessage id="medlemmskap.modal.overskrift" />
                     </Undertittel>
-                    <FormBlock margin="xs">
+                    {/* <FormBlock margin="xs">
+
                         <CountrySelect
                             label={<LabelText>{this.props.label}</LabelText>}
                             feil={landFeil}
@@ -240,8 +193,8 @@ class CountryModal extends React.Component<Props, State> {
                             language={language}
                             defaultValue={formData && formData.land && formData.land.value}
                         />
-                    </FormBlock>
-                    <FormBlock margin="xs">
+                    </FormBlock> */}
+                    {/* <FormBlock margin="xs">
                         <DateInput
                             id="boddFraDato"
                             label={<LabelText intlId="standard.text.fra" />}
@@ -276,15 +229,15 @@ class CountryModal extends React.Component<Props, State> {
                             avgrensninger={tomAvgrensning}
                             kalenderplassering="fullskjerm"
                         />
-                    </FormBlock>
+                    </FormBlock> */}
                     <FormBlock margin="xxs">
                         <div className="countryModal__buttonBar">
                             <Knapp onClick={() => this.props.closeModal()} htmlType="button">
                                 <FormattedMessage id="medlemmskap.modal.avbryt" />
                             </Knapp>
-                            <Hovedknapp>
+                            {/* <Hovedknapp>
                                 <FormattedMessage id={lagreKnappTekstId} />
-                            </Hovedknapp>
+                            </Hovedknapp> */}
                         </div>
                     </FormBlock>
                 </form>

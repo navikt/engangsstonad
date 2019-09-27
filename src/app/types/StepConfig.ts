@@ -1,8 +1,6 @@
-import { NextStepCondition } from 'app/connected-components/engangsstonad-steg/steg.config';
-
-export type StepConfig = {
+export interface StepConfig {
     fortsettKnappLabel: string;
     stegIndikatorLabel: string;
     component: any;
-    nextStepCondition: (params: NextStepCondition) => boolean;
+    nextStepCondition: () => boolean;
 };

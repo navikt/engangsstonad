@@ -13,11 +13,9 @@ import CancelButton from 'components/cancel-button/CancelButton';
 import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 import { DispatchProps } from 'common/redux/types';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
-const { ValidForm } = require('./../lib') as any;
 import { AppState } from 'reducers/reducers';
 import { Language } from 'intl/IntlProvider';
-
-import '../styles/engangsstonad.less';
+import { Formik, Form, FormikProps } from 'formik';
 
 interface OwnProps {
     søknad: EngangsstonadSoknad;
@@ -61,48 +59,53 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     shouldRenderFortsettKnapp(): boolean {
-        const { activeStep, person, intl, søknad } = this.props;
+        const { activeStep, person, intl } = this.props;
         const stepConfig = getStepConfig(intl, person);
-        return stepConfig[activeStep - 1].nextStepCondition({ ...søknad });
+        return stepConfig[activeStep - 1].nextStepCondition();
     }
 
     render() {
         const { intl, activeStep, søknadSendingInProgress, person, sessionHasExpired } = this.props;
         const stepsConfig = getStepConfig(intl, person);
         const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
-        const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
-
-        const ActiveStep = stepsConfig[activeStep - 1].component;
-
+        const ActiveStep = stepsConfig[activeStep - 1];
         return (
             <>
-                <Prompt message={() => getMessage(intl, 'søknadContainer.prompt')} />
+                <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
                 <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
-                <ValidForm
-                    summaryTitle={getMessage(intl, 'validForm.summaryTitle')}
-                    noSummary={activeStep === stepsConfig.length - 1}
-                    onSubmit={this.handleNextClicked}
-                    className="responsiveContainer"
-                >
-                    <SkjemaHeader
-                        onPrevious={() => this.handleBackClicked()}
-                        activeStep={activeStep}
-                        stepTitles={titles}
-                    />
+                <Formik
+                    initialValues={{}}
+                    onSubmit={(e) => {
+                        console.log(e)
+                        this.handleNextClicked();
+                    }}
+                    render={(formikProps: FormikProps<any>) => {
+                        return (
+                            <>
+                                <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
+                                <SkjemaHeader
+                                    onPrevious={() => this.handleBackClicked()}
+                                    activeStep={activeStep}
+                                    stepTitles={titles}
+                                />
 
-                    <ActiveStep />
+                                <Form className="søknad-container">
+                                    {ActiveStep.component(formikProps)}
 
-                    {this.shouldRenderFortsettKnapp() && (
-                        <Hovedknapp
-                            className="responsiveButton"
-                            disabled={søknadSendingInProgress}
-                            spinner={søknadSendingInProgress}
-                        >
-                            {fortsettKnappLabel}
-                        </Hovedknapp>
-                    )}
-                    <CancelButton />
-                </ValidForm>
+                                    {this.shouldRenderFortsettKnapp() && (
+                                        <Hovedknapp
+                                            className="responsiveButton"
+                                            disabled={søknadSendingInProgress}
+                                            spinner={søknadSendingInProgress}>
+                                            {ActiveStep.fortsettKnappLabel}
+                                        </Hovedknapp>
+                                    )}
+                                </Form>
+                                <CancelButton />
+                            </>
+                        );
+                    }}
+                />
                 <UtløptSesjonModal erÅpen={sessionHasExpired} />
             </>
         );

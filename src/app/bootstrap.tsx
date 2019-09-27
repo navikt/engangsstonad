@@ -10,7 +10,6 @@ import IntlProvider from './intl/IntlProvider';
 import store from './redux/index';
 
 import * as countries from 'i18n-iso-countries';
-import ErrorBoundary from './ErrorBoundary';
 countries.registerLocale(require('i18n-iso-countries/langs/nb.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/nn.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
@@ -29,7 +28,6 @@ if (process.env.NODE_ENV !== 'development') {
 
 const root = document.getElementById('app');
 render(
-    <ErrorBoundary>
         <Provider store={store}>
             <IntlProvider>
                 <Router>
@@ -38,7 +36,6 @@ render(
                     </Normaltekst>
                 </Router>
             </IntlProvider>
-        </Provider>
-    </ErrorBoundary>,
+        </Provider>,
     root
 );

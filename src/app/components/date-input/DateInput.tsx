@@ -1,10 +1,10 @@
 import * as React from 'react';
 import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
 import { Feil } from 'components/skjema-input-element/types';
-import Datovelger, { Props as DatovelgerProps } from 'nav-datovelger';
 import { connect } from 'react-redux';
 import { Language } from 'intl/IntlProvider';
 import { AppState } from 'reducers/reducers';
+import { DatovelgerProps } from 'nav-datovelger';
 
 export interface Props extends DatovelgerProps {
     label: string | React.ReactNode;
@@ -17,14 +17,13 @@ interface StateProps {
 
 class DateInput extends React.Component<Props & StateProps, {}> {
     render() {
-        const { label, feil, language, ...rest } = this.props;
+        const { label, feil } = this.props;
         return (
             <SkjemaInputElement id={this.props.id} feil={feil} label={label}>
-                <Datovelger
+                {/* <Datovelger
                     {...rest}
-                    locale={language}
                     inputProps={{ placeholder: 'dd.mm.åååå' }}
-                />
+                /> */}
             </SkjemaInputElement>
         );
     }
