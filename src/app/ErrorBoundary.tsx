@@ -1,10 +1,6 @@
 import React from 'react';
-import * as countries from 'i18n-iso-countries';
 import * as Sentry from '@sentry/browser';
 
-countries.registerLocale(require('i18n-iso-countries/langs/nb.json'));
-countries.registerLocale(require('i18n-iso-countries/langs/nn.json'));
-countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
 interface State {
     eventId: string | null;
