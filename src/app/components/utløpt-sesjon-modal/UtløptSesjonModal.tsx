@@ -7,6 +7,7 @@ import BEMHelper from 'common/util/bem';
 import getMessage from 'common/util/i18nUtils';
 import Knappelenke from '../knappelenke/Knappelenke';
 import Modal from 'nav-frontend-modal';
+import { redirectToLogin } from 'util/login';
 import './utløptSesjonModal.less';
 
 const cls = BEMHelper('utløptSesjonModal');
@@ -15,10 +16,6 @@ const AVSLUTT_HREF = 'https://www.nav.no';
 interface OwnProps {
     erÅpen: boolean;
 }
-
-const redirectToLogin = () => {
-  window.location.href = (window as any).LOGIN_URL + '?redirect=' + window.location.href;
-};
 
 type Props = OwnProps & InjectedIntlProps;
 
@@ -41,7 +38,7 @@ const UtløptSesjonModal = ({ erÅpen, intl }: Props) => {
                 <Knappelenke href={AVSLUTT_HREF}>
                     <FormattedMessage id="sesjonUtløpt.avslutt" />
                 </Knappelenke>
-                <Hovedknapp onClick={redirectToLogin}>
+                <Hovedknapp onClick={() => redirectToLogin()}>
                     <FormattedMessage id="sesjonUtløpt.fortsett" />
                 </Hovedknapp>
             </div>

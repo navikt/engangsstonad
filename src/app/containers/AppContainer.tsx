@@ -22,6 +22,7 @@ import Person from '../types/domain/Person';
 import '../styles/engangsstonad.less';
 import { DispatchProps } from 'common/redux/types';
 import { storageFeatureIsActive } from 'util/featureToggles';
+import { redirectToLogin } from 'util/login';
 
 interface StateProps {
     person: Person;
@@ -73,7 +74,7 @@ class AppContainer extends React.Component<Props> {
     }
 
     redirectToLogin() {
-        window.location.href = (window as any).LOGIN_URL + '?redirect=' + window.location.href;
+        redirectToLogin()
     }
 
     renderContent(children: React.ReactNode) {
