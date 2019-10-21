@@ -5,7 +5,7 @@
     "appres" : "appres-q1.nav.no",
     "env": {
         "APPRES_CMS_URL": "https://appres-q1.nav.no",
-        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api-q.nav.no/rest",
+        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad.dev-nav.no/rest",
         "LOGINSERVICE_URL": "https://loginservice.dev-nav.no/login",
         "FEATURE_STORAGE": "off",
         "FEATURE_UKE22": "on"
