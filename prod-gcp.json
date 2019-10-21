@@ -7,7 +7,6 @@
         "APPRES_CMS_URL": "https://appres.nav.no",
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.nav.no/rest",
         "LOGINSERVICE_URL": "https://loginservice.nav.no/login",
-        "FEATURE_STORAGE": "off",
         "FEATURE_UKE22": "on"
     }
 }

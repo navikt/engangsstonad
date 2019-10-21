@@ -56,22 +56,6 @@ const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
                 søknadSendt: true,
                 søknadSendingInProgress: false
             };
-        case ApiActionKeys.GET_APP_STATE:
-            return {
-                ...state,
-                isLoadingAppState: true
-            };
-        case ApiActionKeys.GET_APP_STATE_SUCCESS:
-            return {
-                ...state,
-                isLoadingAppState: false,
-                mellomlagretSøknad: true
-            };
-        case ApiActionKeys.GET_APP_STATE_FAILED:
-            return {
-                ...state,
-                isLoadingAppState: false
-            };
         case ApiActionKeys.SESSION_EXPIRED:
             return {
                 ...state,

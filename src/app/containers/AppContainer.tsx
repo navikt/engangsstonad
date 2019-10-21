@@ -21,7 +21,6 @@ import Person from '../types/domain/Person';
 
 import '../styles/engangsstonad.less';
 import { DispatchProps } from 'common/redux/types';
-import { storageFeatureIsActive } from 'util/featureToggles';
 import { redirectToLogin } from 'util/login';
 
 interface StateProps {
@@ -57,9 +56,6 @@ class AppContainer extends React.Component<Props> {
         }
         if (!person) {
             dispatch(api.getPerson());
-            if (storageFeatureIsActive()) {
-                dispatch(api.getAppState());
-            }
         }
     }
 

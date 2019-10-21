@@ -17,7 +17,6 @@ import CancelButton from 'components/cancel-button/CancelButton';
 import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 import { CommonState } from 'reducers/commonReducer';
 import { DispatchProps } from 'common/redux/types';
-import { storageFeatureIsActive } from 'util/featureToggles';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
 const { ValidForm } = require('./../lib') as any;
@@ -63,7 +62,7 @@ class SøknadContainer extends React.Component<Props> {
     }
 
     handleNextClicked() {
-        const { dispatch, søknad, common, step } = this.props;
+        const { dispatch, søknad, common } = this.props;
         if (this.hasToWaitForResponse()) {
             return dispatch(
                 api.sendSoknad(søknad, common.language),
@@ -71,12 +70,6 @@ class SøknadContainer extends React.Component<Props> {
         }
         const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
-
-        if (storageFeatureIsActive()) {
-            dispatch(api.saveAppState({
-                søknad, common, step
-            }));
-        }
     }
 
     handleBackClicked() {

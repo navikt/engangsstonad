@@ -1,7 +1,6 @@
 import Person from '../../../types/domain/Person';
 import { default as EngangsstonadSoknad } from '../../../types/domain/EngangsstonadSoknad';
 import PersonRequest from '../../../types/services/PersonRequest';
-import { AppState } from 'common/redux/types';
 import Kvittering from 'app/types/services/Kvittering';
 
 export enum ApiActionKeys {
@@ -11,12 +10,6 @@ export enum ApiActionKeys {
     'SEND_SOKNAD' = 'sendSoknad',
     'SEND_SOKNAD_SUCCESS' = 'sendSoknadSuccess',
     'SEND_SOKNAD_FAILED' = 'sendSoknadFailed',
-    'SAVE_APP_STATE' = 'saveAppState',
-    'SAVE_APP_STATE_SUCCESS' = 'saveAppStateSuccess',
-    'SAVE_APP_STATE_FAILED' = 'saveAppStateFailed',
-    'GET_APP_STATE' = 'getAppState',
-    'GET_APP_STATE_SUCCESS' = 'getAppStateSuccess',
-    'GET_APP_STATE_FAILED' = 'getAppStateFailed',
     'SESSION_EXPIRED' = 'sessionExpired'
 }
 
@@ -57,36 +50,6 @@ interface SendSoknadFailed {
     error: any;
 }
 
-export interface SaveAppState {
-    type: ApiActionKeys.SAVE_APP_STATE;
-    appState: AppState;
-}
-
-interface SaveAppStateSuccess {
-    type: ApiActionKeys.SAVE_APP_STATE_SUCCESS;
-}
-
-interface SaveAppStateFailed {
-    type: ApiActionKeys.SAVE_APP_STATE_FAILED;
-    // tslint:disable-next-line:no-any
-    error: any;
-}
-
-export interface GetAppState {
-    type: ApiActionKeys.GET_APP_STATE;
-}
-
-export interface GetAppStateSuccess {
-    type: ApiActionKeys.GET_APP_STATE_SUCCESS;
-    appState: AppState;
-}
-
-interface GetAppStateFailed {
-    type: ApiActionKeys.GET_APP_STATE_FAILED;
-    // tslint:disable-next-line:no-any
-    error: any;
-}
-
 export type GetPersonActionType = GetPersonSuccess | GetPersonFailed;
 
 export type ApiActionTypes =
@@ -96,10 +59,4 @@ export type ApiActionTypes =
     | SendSoknad
     | SendSoknadSuccess
     | SendSoknadFailed
-    | SaveAppState
-    | SaveAppStateSuccess
-    | SaveAppStateFailed
-    | GetAppState
-    | GetAppStateSuccess
-    | GetAppStateFailed
     | SessionExpired;
