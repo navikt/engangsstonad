@@ -11,7 +11,7 @@ export const shouldDisplayNextButtonOnStep1 = (barn: Barn) => {
         return (
             ufodtBarn.termindato &&
             ufodtBarn.terminbekreftelseDato &&
-            dateFormatsAreValid([ufodtBarn.terminbekreftelseDato, ufodtBarn.termindato]) &&
+            dateFormatsAreValid([ufodtBarn.termindato]) &&
             barn.antallBarn !== undefined &&
             ufodtBarn.terminbekreftelse.filter((a: Attachment) => !isAttachmentWithError(a)).length > 0
         );

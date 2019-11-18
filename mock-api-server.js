@@ -1,5 +1,6 @@
 const express = require('express');
 const server = express();
+const multer = require('multer');
 require('dotenv').config();
 
 const allowCrossDomain = function(req, res, next) {
@@ -51,6 +52,18 @@ const startServer = html => {
             res.sendStatus(200);
         }
     )
+
+    const vedleggUpload = multer({
+        dest: './dist/vedlegg/'
+    });
+    server.post('/rest/storage/vedlegg', vedleggUpload.single('vedlegg'), (req, res) => {
+        res.setHeader('Location', `http://localhost:8080/engangsstonad/dist/vedlegg/${req.body.id}`);
+        res.sendStatus(201);
+    });
+    
+    server.delete('/rest/storage/vedlegg/:id', (req, res) => {
+        res.sendStatus(204);
+    });
 
     server.get('/health/isAlive', (req, res) => res.sendStatus(200));
     server.get('/health/isReady', (req, res) => res.sendStatus(200));
