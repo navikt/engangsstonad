@@ -2,8 +2,6 @@ const nb = require('../nb_NO.json');
 const nn = require('../nn_NO.json');
 const en = require('../en_US.json');
 
-const _ = require('lodash');
-
 describe('intl tests', () => {
     it('Language files should have exactly the same keys', () => {
         const keysBokmål = Object.keys(nb);
@@ -17,6 +15,6 @@ describe('intl tests', () => {
         expect(keysNynorsk.sort()).toMatchObject(keysEnglish.sort());
 
         expect(keysEnglish.sort()).toMatchObject(keysBokmål.sort());
-        expect(keysEnglish.sort()).toMatchObject(keysEnglish.sort());
+        expect(keysEnglish.sort()).toMatchObject(keysNynorsk.sort());
     });
 });

@@ -21,7 +21,6 @@
         "skipLibCheck": true,
 		"suppressImplicitAnyIndexErrors": true,
 		"noUnusedLocals": true,
-		"resolveJsonModule": true,
 		"baseUrl": "./src",
         "typeRoots": [
             "./node_modules/@types",
