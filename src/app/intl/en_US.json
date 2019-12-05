@@ -60,7 +60,7 @@
     "kvittering.text.takk": "Thank you for the application",
     "label_med_hjelpetekst.label": "Help text",
     "languageToggle.bokmål": "Bokmål - Norsk",
-    "languageToggle.english": "English"
+    "languageToggle.english": "English",
     "languageToggle.nynorsk": "Nynorsk - Norsk",
     "medlemmskap.knapp.leggTilLand": "Add Country",
     "medlemmskap.modal.avbryt": "Cancel",
@@ -221,4 +221,12 @@
     "vedlegg.tomFil": "You can not upload an empty file",
     "vedlegg.virus.flereFeil": "{filename} - The attachment did not pass our virus scan",
     "vedlegg.virus": "The attachment did not pass our virus scan",
+
+
+    "kvittering.text.hvorFinnerJegStatus": "Hvor finner jeg status på min søknad?",
+    "sesjonUtløpt.avslutt": "Nei, jeg vil avslutte",
+    "sesjonUtløpt.fortsett": "Ja, jeg vil fortsette",
+    "sesjonUtløpt.ingress": "Du må logge inn på nytt for å fortsette med søknaden.</br>Ønsker du å fortsette?",
+    "sesjonUtløpt.tittel": "Du er logget ut",
+    "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }"
 }

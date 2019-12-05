@@ -225,4 +225,9 @@
     "vedlegg.tomFil": "Du kan ikke laste opp en tom fil",
     "vedlegg.virus.flereFeil": "{filename} - Vedlegget inneheld noko vi ikkje vil ha",
     "vedlegg.virus": "Vedlegget inneholder noe vi ikkje vil ha",
+
+
+
+    "intro.text.startNySøknadPrompt": "Er du sikkert på at du vil starte en ny søknad? Din påbegynte søknad vil bli slettet.",
+    "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }"
 }
