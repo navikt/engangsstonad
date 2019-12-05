@@ -13,9 +13,7 @@ export interface AttachmentsUploaderProps {
     onFileDeleteFinish: (attachment: Attachment) => void;
 }
 
-export default class AttachmentsUploader extends React.Component<
-    AttachmentsUploaderProps
-> {
+export default class AttachmentsUploader extends React.Component<AttachmentsUploaderProps> {
     constructor(props: AttachmentsUploaderProps) {
         super(props);
         this.onFilesSelect = this.onFilesSelect.bind(this);
@@ -29,26 +27,30 @@ export default class AttachmentsUploader extends React.Component<
         });
         onFilesUploadStart(files);
         files.forEach((file: Attachment) =>
-            AttachmentApi.saveAttachment(file).then((response: any) => {
-                file.pending = false;
-                file.uploaded = true;
-                file.url = response.headers.location;
-                onFileUploadFinish(file);
-            }).catch((error) => {
-                file.pending = false;
-                file.uploaded = false;
-                file.error = error;
-                onFileUploadFinish(file);
-            })
+            AttachmentApi.saveAttachment(file)
+                .then((response: any) => {
+                    file.pending = false;
+                    file.uploaded = true;
+                    file.url = response.headers.location;
+                    onFileUploadFinish(file);
+                })
+                .catch((error) => {
+                    file.pending = false;
+                    file.uploaded = false;
+                    file.error = error;
+                    onFileUploadFinish(file);
+                })
         );
     }
 
-    onFileDelete(file: Attachment) {
-        const { onFileDeleteStart, onFileDeleteFinish } = this.props;
-        file.pending = true;
-        onFileDeleteStart(file);
-        AttachmentApi.deleteAttachment(file).then(() => {
-            onFileDeleteFinish(file);
+    onFileDelete(files: Attachment[]) {
+        files.forEach((file) => {
+            const { onFileDeleteStart, onFileDeleteFinish } = this.props;
+            file.pending = true;
+            onFileDeleteStart(file);
+            AttachmentApi.deleteAttachment(file).then(() => {
+                onFileDeleteFinish(file);
+            });
         });
     }
 

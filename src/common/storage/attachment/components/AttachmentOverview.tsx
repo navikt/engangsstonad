@@ -19,68 +19,69 @@ export interface AttachmentOverviewProps {
     inputId?: string;
     showFileSize?: boolean;
     onFilesSelect: (files: Attachment[]) => void;
-    onFileDelete: (file: Attachment) => void;
+    onFileDelete: (file: Attachment[]) => void;
 }
 
 interface State {
     showErrorMessage: boolean;
-    failedAttachments: Attachment[];
-    errorMessage?: string;
 }
 
 type Props = AttachmentOverviewProps;
 class AttachmentOverview extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.state = {
-            showErrorMessage: false,
-            failedAttachments: props.attachments.filter(isAttachmentWithError)
-        };
-        this.hideErrorMessage = this.hideErrorMessage.bind(this);
+        this.deleteFailedAttachments = this.deleteFailedAttachments.bind(this);
     }
 
-    componentDidUpdate() {
-        const attachmentsWithoutOldFailedAttachments = this.props.attachments.filter(
-            (a: Attachment) => !this.state.failedAttachments.includes(a)
-        );
+    createErrorMessagesForFailedAttachments(attachments: Attachment[]) {
+        const errorMessages: React.ReactNode[] = [];
+        const attachmentsWithError = attachments.filter(isAttachmentWithError);
+        const multipleErrors = attachmentsWithError.length > 1;
 
-        if (this.hasFailedAttachments(attachmentsWithoutOldFailedAttachments)) {
-            this.setState(
-                {
-                    failedAttachments: this.state.failedAttachments.concat(
-                        attachmentsWithoutOldFailedAttachments.filter(isAttachmentWithError)
-                    )
-                },
-                () => {
-                    this.showErrorMessage(this.createErrorMessage(attachmentsWithoutOldFailedAttachments[0].error));
-                }
-            );
-        }
-    }
+        attachmentsWithError.forEach((a: Attachment) => {
+            const error = a.error;
+            if (a.filesize === 0) {
+                errorMessages.push(
+                    <FormattedMessage
+                        id={multipleErrors ? 'vedlegg.tomFil.flereFeil' : 'vedlegg.tomFil'}
+                        values={{ filename: a.filename }}
+                    />
+                );
+            } else if (error && error.response !== undefined && error.response.status === 413) {
+                errorMessages.push(
+                    <FormattedMessage
+                        id={multipleErrors ? 'vedlegg.forStort.flereFeil' : 'vedlegg.forStort'}
+                        values={{ filename: a.filename }}
+                    />
+                );
+            } else if (error && error.response !== undefined && error.response.status === 422) {
+                const intlId =
+                    error.response.data &&
+                    error.response.data.messages &&
+                    error.response.data.messages.includes('AttachmentPasswordProtectedException')
+                        ? 'vedlegg.passordbeskyttet'
+                        : 'vedlegg.virus';
 
-    createErrorMessage(error: any): string {
-        if (error && error.response && error.response.status === 413) {
-            return 'vedlegg.forStort';
-        }
-        return 'vedlegg.feilmelding';
-    }
-
-    hasFailedAttachments(attachments: Attachment[]) {
-        return attachments.some(isAttachmentWithError);
-    }
-
-    showErrorMessage(errorMessage: string) {
-        this.setState({
-            showErrorMessage: true,
-            errorMessage
+                errorMessages.push(
+                    <FormattedMessage
+                        id={multipleErrors ? `${intlId}.flereFeil` : intlId}
+                        values={{ filename: a.filename }}
+                    />
+                );
+            } else {
+                errorMessages.push(
+                    <FormattedMessage
+                        id={multipleErrors ? 'vedlegg.feilmelding.flereFeil' : 'vedlegg.feilmelding'}
+                        values={{ filename: a.filename }}
+                    />
+                );
+            }
         });
+        return errorMessages;
     }
 
-    hideErrorMessage() {
-        this.setState({
-            showErrorMessage: false,
-            errorMessage: undefined
-        });
+    deleteFailedAttachments(): void {
+        this.props.onFileDelete(this.props.attachments.filter(isAttachmentWithError));
     }
 
     render() {
@@ -94,66 +95,39 @@ class AttachmentOverview extends React.Component<Props, State> {
             onFilesSelect
         } = this.props;
 
-        const { showErrorMessage, errorMessage } = this.state;
-
-        const attachmentsToRender = attachments.filter(
-            (a: Attachment) => !isAttachmentWithError(a)
-        );
+        const showErrorMessage: boolean = this.props.attachments.some(isAttachmentWithError);
+        const attachmentsToRender = attachments.filter((a: Attachment) => !isAttachmentWithError(a));
         const showAttachments = attachmentsToRender.length > 0;
 
         return (
             <React.Fragment>
-                <FormBlock
-                    margin={
-                        showAttachments || showErrorMessage
-                            ? 'xs'
-                            : undefined
-                    }
-                >
+                <FormBlock margin={showAttachments || showErrorMessage ? 'xs' : undefined}>
                     <VedleggInput
                         id={inputId}
                         onFilesSelect={(files: File[]) => {
-                            onFilesSelect(
-                                files.map((f) =>
-                                    mapFileToAttachment(
-                                        f,
-                                        attachmentType,
-                                        skjemanummer
-                                    )
-                                )
-                            );
+                            onFilesSelect(files.map((f) => mapFileToAttachment(f, attachmentType, skjemanummer)));
                         }}
-                        onClick={this.hideErrorMessage}
+                        onClick={this.deleteFailedAttachments}
                     />
                 </FormBlock>
                 <CSSTransition
                     classNames="transitionFade"
                     timeout={150}
                     in={showAttachments || showErrorMessage}
-                    unmountOnExit={true}
-                >
-                    <React.Fragment>
+                    unmountOnExit={true}>
+                    <>
                         {(showAttachments || showErrorMessage) && (
-                            <React.Fragment>
-                                <FormBlock
-                                    margin="xs"
-                                    visible={showErrorMessage}
-                                    animated={true}
-                                >
+                            <>
+                                <FormBlock margin="xs" visible={showErrorMessage} animated={true}>
                                     <AlertstripeWithCloseButton
-                                        alertStripeProps={{
-                                            type: 'feil',
-                                            children: (
-                                                <FormattedMessage
-                                                    id={errorMessage ? errorMessage : 'vedlegg.feilmelding'}
-                                                />
-                                            )
-                                        }}
                                         lukknappProps={{
-                                            hvit: true,
+                                            hvit: false,
                                             type: 'button'
                                         }}
-                                        onClose={this.hideErrorMessage}
+                                        errorMessages={this.createErrorMessagesForFailedAttachments(
+                                            this.props.attachments.filter(isAttachmentWithError)
+                                        )}
+                                        onClose={this.deleteFailedAttachments}
                                     />
                                 </FormBlock>
                                 <FormBlock margin="xs">
@@ -162,12 +136,7 @@ class AttachmentOverview extends React.Component<Props, State> {
                                             id="vedlegg.liste.tittel"
                                             values={{
                                                 størrelse: bytesString(
-                                                    getTotalFileSize(
-                                                        attachmentsToRender.map(
-                                                            (a: Attachment) =>
-                                                                a.file
-                                                        )
-                                                    )
+                                                    getTotalFileSize(attachmentsToRender.map((a: Attachment) => a.file))
                                                 )
                                             }}
                                         />
@@ -176,13 +145,11 @@ class AttachmentOverview extends React.Component<Props, State> {
                                 <AttachmentList
                                     attachments={attachmentsToRender}
                                     showFileSize={showFileSize}
-                                    onDelete={(file: Attachment) =>
-                                        onFileDelete(file)
-                                    }
+                                    onDelete={(file: Attachment) => onFileDelete([file])}
                                 />
-                            </React.Fragment>
+                            </>
                         )}
-                    </React.Fragment>
+                    </>
                 </CSSTransition>
             </React.Fragment>
         );
