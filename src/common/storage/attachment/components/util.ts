@@ -20,5 +20,5 @@ export const mapFileToAttachment = (
     });
 };
 
-export const isAttachmentWithError = ({ pending, uploaded }: Attachment) =>
-    pending === false && uploaded === false;
+export const isAttachmentWithError = ({ pending, uploaded, filesize }: Attachment) =>
+    (pending === false && uploaded === false) || filesize === 0;;
