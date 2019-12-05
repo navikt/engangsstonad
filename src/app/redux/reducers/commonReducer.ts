@@ -2,9 +2,10 @@ import {
     CommonActionKeys,
     CommonActionTypes
 } from '../actions/common/commonActionDefinitions';
+import { Language } from 'intl/IntlProvider';
 
 const getDefaultState = (): CommonState => ({
-    language: 'nb',
+    language: Language.BOKMÅL,
     godkjentVilkar: false,
     bekreftetInformasjon: false,
 

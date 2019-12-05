@@ -13,10 +13,16 @@ interface Props {
     language: string;
 }
 
+export const enum Language {
+    BOKMÅL = 'nb',
+    NYNORSK = 'nn',
+    ENGELSK = 'en'
+}
+
 const getLanguageMessages = (language: string) => {
-    if (language === 'nb') {
+    if (language === Language.BOKMÅL) {
         return nbMessages;
-    } else if (language === 'nn') {
+    } else if (language === Language.NYNORSK) {
         return nnMessages;
     } else {
         return enMessages;
@@ -32,7 +38,7 @@ class IntlProvider extends React.Component<Props> {
     render() {
         const messages = getLanguageMessages(this.props.language);
         return (
-            <Provider locale="nb" messages={messages || {}}>
+            <Provider locale={Language.BOKMÅL} messages={messages || {}}>
                 {this.props.children}
             </Provider>
         );

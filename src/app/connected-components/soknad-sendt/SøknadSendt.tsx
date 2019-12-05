@@ -12,11 +12,13 @@ import getMessage from 'util/i18n/i18nUtils';
 import Kvittering from 'app/types/services/Kvittering';
 import Person from '../../types/domain/Person';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
+import { Language } from 'intl/IntlProvider';
 
 import 'nav-frontend-lenker-style';
-import '../../styles/engangsstonad.less';
 
 const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
+
+import '../../styles/engangsstonad.less';
 
 interface StateProps {
     person: Person;
@@ -28,7 +30,7 @@ type Props = StateProps & InjectedIntlProps;
 class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
     constructor(props: Props) {
         super(props);
-        moment.locale('nb');
+        moment.locale(Language.BOKMÅL);
     }
 
     componentDidMount() {

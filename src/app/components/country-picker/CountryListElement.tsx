@@ -8,6 +8,7 @@ import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsoppho
 
 import SlettKnapp from 'common/components/slett-knapp/SlettKnapp';
 import LinkButton from 'components/link-button/LinkButton';
+import { Language } from 'intl/IntlProvider';
 
 import './countryPicker.less';
 
@@ -37,7 +38,7 @@ const CountryListSummaryElement: React.StatelessComponent<Props> = props => {
             <div className="countryListElement__stay">
                 <LinkButton onClick={onEditClickHandler}>
                     <div className="countryListElement__nameAndDate">
-                        <div className="countryListElement__country">{countries.getName(land, 'nb')}</div>
+                        <div className="countryListElement__country">{countries.getName(land, Language.BOKMÅL)}</div>
                         <div className="countryListElement__date">
                             {getMessage(props.intl, 'standard.text.fromTo', {
                                 from: ISODateToMaskedInput(tidsperiode.fom),

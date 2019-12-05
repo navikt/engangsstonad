@@ -30,7 +30,8 @@
             "styles/*": ["app/styles/*"],
             "util/*": ["app/util/*"],
             "common/*": ["./common/*"],
-            "storage/*": ["./storage/*"]
+            "storage/*": ["./storage/*"],
+            "intl/*": ["app/intl/*"]
         }
     },
     "exclude": ["node_modules", "build", "scripts", "config", "jest", "src/build", "src/config", "dist"]
