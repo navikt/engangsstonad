@@ -64,7 +64,7 @@ export function setErBarnetFødt(erBarnetFødt?: string): SoknadActionTypes {
 export function setAntallBarn(antallBarn: number): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_ANTALL_BARN,
-        antallBarn: antallBarn
+        antallBarn
     };
 }
 

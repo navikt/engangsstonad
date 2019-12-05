@@ -20,7 +20,7 @@ const getDefaultState = (): EngangsstonadSoknad => {
 };
 
 const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => {
-    let { barn, informasjonOmUtenlandsopphold } = state;
+    const { barn, informasjonOmUtenlandsopphold } = state;
     switch (action.type) {
         case SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
             const tidligereOpphold = informasjonOmUtenlandsopphold.tidligereOpphold.concat([action.periode]);
@@ -28,12 +28,12 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
                 ...state,
                 informasjonOmUtenlandsopphold: {
                     ...informasjonOmUtenlandsopphold,
-                    tidligereOpphold: tidligereOpphold
+                    tidligereOpphold
                 }
             };
         case SoknadActionKeys.EDIT_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
             informasjonOmUtenlandsopphold.tidligereOpphold[action.index] = action.periode;
-            return { ...state, informasjonOmUtenlandsopphold: informasjonOmUtenlandsopphold };
+            return { ...state, informasjonOmUtenlandsopphold };
         case SoknadActionKeys.DELETE_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
             return {
                 ...state,
@@ -51,12 +51,12 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
                 ...state,
                 informasjonOmUtenlandsopphold: {
                     ...informasjonOmUtenlandsopphold,
-                    senereOpphold: senereOpphold
+                    senereOpphold
                 }
             };
         case SoknadActionKeys.EDIT_SENERE_UTENLANDSOPPHOLD_PERIODE:
             informasjonOmUtenlandsopphold.senereOpphold[action.index] = action.periode;
-            return { ...state, informasjonOmUtenlandsopphold: informasjonOmUtenlandsopphold };
+            return { ...state, informasjonOmUtenlandsopphold };
         case SoknadActionKeys.DELETE_SENERE_UTENLANDSOPPHOLD_PERIODE:
             return {
                 ...state,
@@ -125,7 +125,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
         case SoknadActionKeys.SET_ANTALL_BARN:
             return { ...state, barn: { ...barn, antallBarn: action.antallBarn } };
         case SoknadActionKeys.SET_FØDSELSDATO:
-            let fødselsdatoer = (state.barn as FodtBarn).fødselsdatoer.slice(0);
+            const fødselsdatoer = (state.barn as FodtBarn).fødselsdatoer.slice(0);
             fødselsdatoer[0] = action.fødselsdato;
             return {
                 ...state,

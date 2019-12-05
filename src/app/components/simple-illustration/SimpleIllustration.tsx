@@ -1,15 +1,16 @@
 import * as React from 'react';
 import SpeechBubble from '../speech-bubble/SpeechBubble';
 
-import './simpleIllustration.less';
 import Veileder, { VeilederProps } from 'components/veileder/Veileder';
+
+import './simpleIllustration.less';
 
 interface Props {
     dialog?: Dialog;
     veileder?: VeilederProps;
 }
 
-type Dialog = {
+interface Dialog {
     title: string;
     text: string | React.ReactNode;
 };

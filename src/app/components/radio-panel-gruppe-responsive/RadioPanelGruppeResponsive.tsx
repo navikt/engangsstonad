@@ -5,11 +5,9 @@ import { RadioPanelGruppeProps } from 'nav-frontend-skjema';
 import './radioPanelGruppeResponsive.less';
 import 'nav-frontend-skjema-style';
 
-type ResponsiveProps = {
+interface Props extends RadioPanelGruppeProps {
     twoColumns?: boolean;
 };
-
-type Props = RadioPanelGruppeProps & ResponsiveProps;
 
 export default class RadioPanelGruppeResponsive extends React.Component<Props> {
     render() {

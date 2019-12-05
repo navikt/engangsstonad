@@ -1,7 +1,9 @@
 import * as React from 'react';
 import './søknadstittel.less';
 
-type Props = { tittel: string };
+interface Props {
+    tittel: string;
+}
 
 export default class Søknadstittel extends React.Component<Props> {
     render() {

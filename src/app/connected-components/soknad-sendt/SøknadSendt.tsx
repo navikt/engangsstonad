@@ -25,7 +25,7 @@ interface StateProps {
 
 type Props = StateProps & InjectedIntlProps;
 
-class SøknadSendt extends React.Component<Props> {
+class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
     constructor(props: Props) {
         super(props);
         moment.locale('nb');
@@ -66,7 +66,7 @@ class SøknadSendt extends React.Component<Props> {
             <FormattedMessage
                 id="kvittering.text.kontonummer"
                 values={{
-                    kontonummer: kontonummer,
+                    kontonummer,
                     dinProfilLink: (
                         <Lenke href="https://tjenester.nav.no/brukerprofil/">
                             <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />

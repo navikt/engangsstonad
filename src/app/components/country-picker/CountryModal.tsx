@@ -26,7 +26,7 @@ interface OwnProps {
 }
 type Props = OwnProps & InjectedIntlProps;
 
-type Field = {
+interface Field {
     value: any;
     feil?: Feil;
     visFeil?: boolean;
@@ -69,7 +69,7 @@ const getRegistrertePerioder = (
     alleOpphold: Utenlandsopphold[],
     gjeldendeOpphold?: Utenlandsopphold
 ): Tidsperiode[] => {
-    let arr = gjeldendeOpphold ? alleOpphold.filter((o) => o !== gjeldendeOpphold) : alleOpphold;
+    const arr = gjeldendeOpphold ? alleOpphold.filter((o) => o !== gjeldendeOpphold) : alleOpphold;
     return arr.map((opphold) => ({
         startdato: new Date(opphold.tidsperiode.fom),
         sluttdato: new Date(opphold.tidsperiode.tom)

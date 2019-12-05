@@ -3,11 +3,12 @@ const { Knapp } = require('nav-frontend-knapper');
 import CountryModal from 'components/country-picker/CountryModal';
 import { CountryList } from 'components/country-picker/CountryList';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
-import './countryPicker.less';
 import LabelText from 'common/components/labeltekst/Labeltekst';
 import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
 import { FormattedMessage } from 'react-intl';
+
+import './countryPicker.less';
 
 interface Validators {
     validateLand: (data: any) => Feil | undefined;

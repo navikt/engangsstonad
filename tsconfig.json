@@ -1,71 +1,37 @@
 {
-	"compilerOptions": {
-		"outDir": "build/dist",
-		"module": "esnext",
-		"target": "es5",
-		"lib": [
-			"es6",
-			"dom",
-			"es2017"
-		],
-		"sourceMap": true,
-		"allowJs": true,
+    "compilerOptions": {
+        "outDir": "build/dist",
+        "module": "esnext",
+        "target": "es5",
+        "lib": ["es6", "dom", "es2017"],
+        "sourceMap": true,
+        "allowJs": true,
         "allowSyntheticDefaultImports": true,
-		"jsx": "react",
-		"moduleResolution": "node",
-		"forceConsistentCasingInFileNames": true,
-		"noImplicitReturns": true,
-		"noImplicitThis": true,
-		"noImplicitAny": true,
-		"strictNullChecks": true,
+        "jsx": "react",
+        "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": false,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
         "skipLibCheck": true,
-		"suppressImplicitAnyIndexErrors": true,
-		"noUnusedLocals": true,
-		"baseUrl": "./src",
-        "typeRoots": [
-            "./node_modules/@types",
-            "./src/@types"
-        ],
-		"paths": {
-			"shared/*": [
-				"app/components/shared/*"
-			],
-			"assets/*": [
-				"app/assets/*"
-			],
-			"components/*": [
-				"app/components/*"
-			],
-            "connectedComponents/*": [
-                "app/connected-components"
-            ],
-			"actions": [
-				"app/redux/actions"
-			],
-			"actions/*": [
-				"app/redux/actions/*"
-			],
-			"reducers/*": [
-				"app/redux/reducers/*"
-			],
-			"styles/*": [
-				"app/styles/*"
-			],
-			"util/*": [
-				"app/util/*"
-			],
+        "suppressImplicitAnyIndexErrors": true,
+        "noUnusedLocals": true,
+        "baseUrl": "./src",
+        "typeRoots": ["./node_modules/@types", "./src/@types"],
+        "paths": {
+            "shared/*": ["app/components/shared/*"],
+            "assets/*": ["app/assets/*"],
+            "components/*": ["app/components/*"],
+            "connectedComponents/*": ["app/connected-components"],
+            "actions": ["app/redux/actions"],
+            "actions/*": ["app/redux/actions/*"],
+            "reducers/*": ["app/redux/reducers/*"],
+            "styles/*": ["app/styles/*"],
+            "util/*": ["app/util/*"],
             "common/*": ["./common/*"],
             "storage/*": ["./storage/*"]
-		}
-	},
-	"exclude": [
-		"node_modules",
-		"build",
-		"scripts",
-		"config",
-		"jest",
-		"src/build",
-		"src/config",
-		"dist"
-	]
+        }
+    },
+    "exclude": ["node_modules", "build", "scripts", "config", "jest", "src/build", "src/config", "dist"]
 }

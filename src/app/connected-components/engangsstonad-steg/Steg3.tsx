@@ -42,16 +42,16 @@ class Steg3 extends React.Component<Props> {
     overlapsWithOtherUtenlandsopphold(momentFom: any, momentTom: any, utenlandsoppholdInEditMode: any) {
         const { tidligereOpphold, senereOpphold } = this.props.informasjonOmUtenlandsopphold;
         const perioder = [...tidligereOpphold, ...senereOpphold];
-        const overlappendePeriode = perioder.find(periode => {
+        const overlappendePeriode = perioder.find((periode) => {
             if (periode !== utenlandsoppholdInEditMode) {
                 const { tidsperiode } = periode;
-                const varighetFom = moment(tidsperiode.fom),
-                    varighetTom = moment(tidsperiode.tom);
+                const varighetFom = moment(tidsperiode.fom);
+                const varighetTom = moment(tidsperiode.tom);
                 return (
                     momentFom.isBetween(varighetFom.subtract(1, 'seconds'), varighetTom.add(1, 'seconds')) ||
                     momentTom.isBetween(varighetFom.subtract(1, 'seconds'), varighetTom.add(1, 'seconds')) ||
-                    (varighetFom.isBetween(momentFom.subtract(1, 'seconds'), momentTom.add(1, 'seconds')) ||
-                        varighetTom.isBetween(momentFom.subtract(1, 'seconds'), momentTom.add(1, 'seconds')))
+                    varighetFom.isBetween(momentFom.subtract(1, 'seconds'), momentTom.add(1, 'seconds')) ||
+                        varighetTom.isBetween(momentFom.subtract(1, 'seconds'), momentTom.add(1, 'seconds'))
                 );
             }
         });
@@ -61,8 +61,8 @@ class Steg3 extends React.Component<Props> {
     validateFomDatoSiste12Mnd({ fom, tom, utenlandsoppholdInEditMode }: any): Feil | undefined {
         const { intl } = this.props;
         if (fom) {
-            const momentFom = moment(fom),
-                momentTom = moment(tom);
+            const momentFom = moment(fom);
+            const momentTom = moment(tom);
             if (momentFom.isAfter(momentTom)) {
                 return {
                     feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato')
@@ -86,8 +86,8 @@ class Steg3 extends React.Component<Props> {
     validateTomDatoSiste12Mnd({ tom, fom, utenlandsoppholdInEditMode }: any): Feil | undefined {
         const { intl } = this.props;
         if (tom) {
-            const momentFom = moment(fom),
-                momentTom = moment(tom);
+            const momentFom = moment(fom);
+            const momentTom = moment(tom);
             if (momentTom.isBefore(momentFom)) {
                 return {
                     feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato')
@@ -115,8 +115,8 @@ class Steg3 extends React.Component<Props> {
     validateFomDatoNeste12Mnd({ fom, tom, utenlandsoppholdInEditMode }: any): Feil | undefined {
         const { intl } = this.props;
         if (fom) {
-            const momentFom = moment(fom),
-                momentTom = moment(tom);
+            const momentFom = moment(fom);
+            const momentTom = moment(tom);
             if (momentFom.isAfter(momentTom)) {
                 return {
                     feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato')
@@ -144,8 +144,8 @@ class Steg3 extends React.Component<Props> {
     validateTomDatoNeste12Mnd({ tom, fom, utenlandsoppholdInEditMode }: any): Feil | undefined {
         const { intl } = this.props;
         if (tom) {
-            const momentFom = moment(fom),
-                momentTom = moment(tom);
+            const momentFom = moment(fom);
+            const momentTom = moment(tom);
             if (momentTom.isBefore(momentFom)) {
                 return {
                     feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato')
@@ -245,9 +245,15 @@ class Steg3 extends React.Component<Props> {
                         label={getMessage(intl, 'medlemmskap.text.jegBodde')}
                         language={language}
                         utenlandsoppholdListe={tidligereOpphold}
-                        addVisit={(periode: Utenlandsopphold) => dispatch(soknad.addTidligereUtenlandsoppholdPeriode(periode))}
-                        editVisit={(periode: Utenlandsopphold, i: number) => dispatch(soknad.editTidligereUtenlandsoppholdPeriode(periode, i))}
-                        deleteVisit={(periode: Utenlandsopphold) => dispatch(soknad.deleteTidligereUtenlandsoppholdPeriode(periode))}
+                        addVisit={(periode: Utenlandsopphold) =>
+                            dispatch(soknad.addTidligereUtenlandsoppholdPeriode(periode))
+                        }
+                        editVisit={(periode: Utenlandsopphold, i: number) =>
+                            dispatch(soknad.editTidligereUtenlandsoppholdPeriode(periode, i))
+                        }
+                        deleteVisit={(periode: Utenlandsopphold) =>
+                            dispatch(soknad.deleteTidligereUtenlandsoppholdPeriode(periode))
+                        }
                         tidsperiode={tidsperiodeForegående}
                         validators={{
                             validateLand: this.validateLand,
@@ -279,16 +285,23 @@ class Steg3 extends React.Component<Props> {
                 </FormBlock>
                 <FormBlock
                     visible={
-                        iNorgeNeste12Mnd === false && (iNorgeSiste12Mnd === true || (iNorgeSiste12Mnd === false && tidligereOpphold.length > 0))
+                        iNorgeNeste12Mnd === false &&
+                        (iNorgeSiste12Mnd === true || (iNorgeSiste12Mnd === false && tidligereOpphold.length > 0))
                     }
                 >
                     <CountryPicker
                         label={getMessage(intl, 'medlemmskap.text.jegSkalBo')}
                         language={language}
                         utenlandsoppholdListe={senereOpphold}
-                        addVisit={(periode: Utenlandsopphold) => dispatch(soknad.addSenereUtenlandsoppholdPeriode(periode))}
-                        editVisit={(periode: Utenlandsopphold, i: number) => dispatch(soknad.editSenereUtenlandsoppholdPeriode(periode, i))}
-                        deleteVisit={(periode: Utenlandsopphold) => dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))}
+                        addVisit={(periode: Utenlandsopphold) =>
+                            dispatch(soknad.addSenereUtenlandsoppholdPeriode(periode))
+                        }
+                        editVisit={(periode: Utenlandsopphold, i: number) =>
+                            dispatch(soknad.editSenereUtenlandsoppholdPeriode(periode, i))
+                        }
+                        deleteVisit={(periode: Utenlandsopphold) =>
+                            dispatch(soknad.deleteSenereUtenlandsoppholdPeriode(periode))
+                        }
                         tidsperiode={tidsperiodeKommende}
                         validators={{
                             validateLand: this.validateLand,

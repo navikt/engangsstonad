@@ -36,7 +36,7 @@ interface StateProps {
 
 type Props = StateProps & ExternalProps & DispatchProps & RouteComponentProps<{}>;
 
-type Error = {
+interface Error {
     personFinnes: boolean;
     personErMann?: boolean;
     personErMyndig?: boolean;
@@ -70,7 +70,7 @@ class AppContainer extends React.Component<Props> {
     }
 
     redirectToLogin() {
-        redirectToLogin()
+        redirectToLogin();
     }
 
     renderContent(children: React.ReactNode) {
