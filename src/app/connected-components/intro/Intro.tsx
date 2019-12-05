@@ -218,7 +218,6 @@ class Intro extends React.Component<Props, State> {
 const mapStateToProps = (state: any) => ({
     person: state.apiReducer.person,
     godkjentVilkar: state.commonReducer.godkjentVilkar,
-    language: state.commonReducer.language,
-    mellomlagretSøknad: state.apiReducer.mellomlagretSøknad
+    language: state.commonReducer.language
 });
 export default connect<StateProps>(mapStateToProps)(injectIntl(Intro));
