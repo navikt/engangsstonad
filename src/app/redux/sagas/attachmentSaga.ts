@@ -2,7 +2,7 @@ import { all, call, put, takeEvery } from 'redux-saga/effects';
 import AttachmentApi from '../../../common/storage/api/attachmentApi';
 
 import soknadActionCreators from 'actions/soknad/soknadActionCreators';
-import { DeleteAttachment, SoknadActionKeys, UploadAttachment } from 'actions/soknad/soknadActionDefinitions';
+import { SoknadActionKeys, UploadAttachment } from 'actions/soknad/soknadActionDefinitions';
 import apiActionCreators from 'actions/api/apiActionCreators';
 
 function* uploadAttachment(action: UploadAttachment) {
@@ -19,20 +19,8 @@ function* uploadAttachment(action: UploadAttachment) {
     }
 }
 
-function* deleteAttachment(action: DeleteAttachment) {
-    const attachment = action.attachment;
-    try {
-        yield call(AttachmentApi.deleteAttachment, attachment);
-        yield put(soknadActionCreators.deleteAttachmentSuccess(attachment));
-        // yield put(apiActions.storeAppState());
-    } catch (error) {
-        yield put(soknadActionCreators.deleteAttachmentFailed(error, attachment));
-    }
-}
-
 export default function* attachmentSaga() {
     yield all([
-        takeEvery(SoknadActionKeys.UPLOAD_ATTACHMENT, uploadAttachment),
-        takeEvery(SoknadActionKeys.DELETE_ATTACHMENT, deleteAttachment)
+        takeEvery(SoknadActionKeys.UPLOAD_ATTACHMENT, uploadAttachment)
     ]);
 }
