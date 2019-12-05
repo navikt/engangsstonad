@@ -243,6 +243,15 @@
     "label_med_hjelpetekst.label": "Help text",
 
     "vedlegg.forStort": "The attachment must be less than 9MB",
+    "vedlegg.feilmelding.flereFeil": "{filename} - Something went wrong. Try again...",
+    "vedlegg.feilmelding.tittel.flereFeil": "An error has occured in the following uploads:",
+    "vedlegg.forStort.flereFeil": "{filename} - The attachment must be less than 9MB",
+    "vedlegg.tomFil": "You can not upload an empty file",
+    "vedlegg.tomFil.flereFeil": "{filename} - You can not upload an empty file",
+    "vedlegg.virus": "The attachment did not pass our virus scan",
+    "vedlegg.virus.flereFeil": "{filename} - The attachment did not pass our virus scan",
+    "vedlegg.passordbeskyttet": "The attachment seems to be password protected. You must remove the password protection or upload another attachment.",
+    "vedlegg.passordbeskyttet.flereFeil": "{filename} - The attachment seems to be password protected. You must remove the password protection or upload another attachment.",
 
     "languageToggle.bokmål": "Bokmål - Norsk",
     "languageToggle.nynorsk": "Nynorsk - Norsk",
