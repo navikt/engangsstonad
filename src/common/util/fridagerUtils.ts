@@ -3,8 +3,6 @@ import {
     isBefore,
     isAfter,
     addDays,
-    startOfMonth,
-    endOfMonth,
     isEqual
 } from 'date-fns';
 import { normaliserDato } from 'common/util/datoUtils';
@@ -27,15 +25,6 @@ export const getOffentligeFridager = (tidsperiode: Tidsperiode): Holiday[] => {
     }
     const start = addDays(tidsperiode.startdato, -1);
     const slutt = addDays(tidsperiode.sluttdato, 1);
-    return days
-        .filter((d) => d.type === 'public')
-        .filter((d) => isAfter(d.date, start) && isBefore(d.date, slutt));
-};
-
-export const getOffentligeFridagerIMåned = (måned: Date): Holiday[] => {
-    const days: Holiday[] = holidays.getHolidays(måned.getFullYear());
-    const start = startOfMonth(måned);
-    const slutt = endOfMonth(måned);
     return days
         .filter((d) => d.type === 'public')
         .filter((d) => isAfter(d.date, start) && isBefore(d.date, slutt));
