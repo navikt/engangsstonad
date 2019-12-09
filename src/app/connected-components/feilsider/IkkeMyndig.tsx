@@ -14,7 +14,7 @@ import Feilside from 'components/feilside/Feilside';
 import { setLanguage } from 'actions/common/commonActionCreators';
 
 const URL_PAPIRSØKNAD =
-    'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/skjemaveileder/vedlegg?key=267390&veiledertype=privatperson&method=mail';
+    'https://www.nav.no/soknader/nb/person/familie/foreldrepenger-og-engangsstonad';
 
 interface StateProps {
     person: Person;
