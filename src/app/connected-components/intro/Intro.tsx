@@ -24,11 +24,12 @@ import getMessage from '../../util/i18n/i18nUtils';
 import Person from '../../types/domain/Person';
 import { ExternalProps } from '../../types/index';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import { DispatchProps } from 'common/redux/types';
 import Veilederinfo from 'components/veileder-info/Veilederinfo';
 
 import '../../styles/engangsstonad.less';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 interface State {
     isPersonopplysningerModalOpen: boolean;
@@ -147,6 +148,13 @@ class Intro extends React.Component<Props, State> {
                             }}
                         />
                         <div className="responsiveContainer">
+                            <div className="blokk-s">
+                                <AlertStripe type="info">
+                                    <Normaltekst>
+                                        <FormattedMessage id="feilmelding.nedetid" />
+                                    </Normaltekst>
+                                </AlertStripe>
+                            </div>
                             <div className="blokk-s">
                                 <Innholdstittel>{getMessage(intl, 'intro.standard.velkommentittel')}</Innholdstittel>
                             </div>
