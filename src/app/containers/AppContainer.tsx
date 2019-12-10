@@ -133,7 +133,7 @@ class AppContainer extends React.Component<Props> {
             return (
                 <Feilside
                     dokumenttittel={'NAV Engangsstønad'}
-                    ingress="Søknaden om engangsstønad er dessverre utilgjengelig tirsdag 10. desember 12-13."
+                    ingress="Søknaden om engangsstønad er dessverre utilgjengelig tirsdag 10. desember kolkken 12:00-14:30."
                 />
             );
 
