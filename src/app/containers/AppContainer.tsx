@@ -22,7 +22,6 @@ import Person from '../types/domain/Person';
 import '../styles/engangsstonad.less';
 import { DispatchProps } from 'common/redux/types';
 import { redirectToLogin } from 'util/login';
-import Feilside from 'components/feilside/Feilside';
 
 interface StateProps {
     person: Person;
@@ -42,7 +41,7 @@ interface Error {
     personErMann?: boolean;
     personErMyndig?: boolean;
     innsendingFeilet?: boolean;
-}
+};
 
 class AppContainer extends React.Component<Props> {
     constructor(props: Props) {
@@ -130,13 +129,6 @@ class AppContainer extends React.Component<Props> {
             const applicationStateIsValid =
                 personFinnes && personErMyndig && !personErMann && !innsendingFeilet && !isLoadingAppState;
 
-            return (
-                <Feilside
-                    dokumenttittel={'NAV Engangsstønad'}
-                    ingress="Søknaden om engangsstønad er dessverre utilgjengelig tirsdag 10. desember kolkken 12:00-14:30."
-                />
-            );
-
             if (applicationStateIsValid) {
                 return this.renderContent(this.getSøknadRoutes());
             }
@@ -154,7 +146,7 @@ class AppContainer extends React.Component<Props> {
             );
         }
 
-        if (isLoadingPerson || (error && error.status === 401) || isLoadingAppState) {
+        if (isLoadingPerson || ((error && error.status === 401) || isLoadingAppState)) {
             return this.renderContent(<Spinner type="XXL" />);
         }
         return this.renderContent(<GenerellFeil />);
@@ -169,7 +161,8 @@ const mapStateToProps = (state: any) => ({
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
     godkjentVilkar: state.commonReducer.godkjentVilkar,
     language: state.commonReducer.language,
-    isLoadingAppState: state.apiReducer.isLoadingAppState
+    isLoadingAppState: state.apiReducer.isLoadingAppState,
+
 });
 
 export default withRouter(connect<StateProps, {}, {}>(mapStateToProps)(AppContainer));

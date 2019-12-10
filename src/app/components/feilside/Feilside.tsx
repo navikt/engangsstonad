@@ -18,7 +18,7 @@ export interface Props {
         };
         veileder?: VeilederProps;
     };
-    tittel?: React.ReactNode;
+    tittel: React.ReactNode;
     ingress: React.ReactNode;
     language?: string;
     setLanguage?: (languageCode: string) => void;
@@ -36,7 +36,12 @@ const Feilside: React.StatelessComponent<Props> = ({
     return (
         <div id={containerId}>
             <DocumentTitle title={dokumenttittel} />
-            {setLanguage && language && <LanguageToggle language={language} toggleLanguage={setLanguage} />}
+            {setLanguage && language && (
+                <LanguageToggle
+                    language={language}
+                    toggleLanguage={setLanguage}
+                />
+            )}
             {illustrasjon && (
                 <SimpleIllustration
                     veileder={illustrasjon.veileder}
@@ -46,7 +51,10 @@ const Feilside: React.StatelessComponent<Props> = ({
                             <div>
                                 <div>{illustrasjon.tekst}</div>
                                 {illustrasjon.lenke && (
-                                    <Lenke className="intro-snakkelenke" href={illustrasjon.lenke.url}>
+                                    <Lenke
+                                        className="intro-snakkelenke"
+                                        href={illustrasjon.lenke.url}
+                                    >
                                         {illustrasjon.lenke.tekst}
                                     </Lenke>
                                 )}
@@ -56,11 +64,9 @@ const Feilside: React.StatelessComponent<Props> = ({
                 />
             )}
             <div className="responsiveContainer">
-                {tittel && (
-                    <div className="blokk-s">
-                        <Innholdstittel>{tittel}</Innholdstittel>
-                    </div>
-                )}
+                <div className="blokk-s">
+                    <Innholdstittel>{tittel}</Innholdstittel>
+                </div>
                 <div className="blokk-l">
                     <Ingress>{ingress}</Ingress>
                 </div>
