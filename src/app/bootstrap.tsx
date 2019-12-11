@@ -18,7 +18,7 @@ const Modal = require('nav-frontend-modal').default;
 (Modal as any).setAppElement('#app');
 
 Sentry.init({
-    dsn: 'https://733aa29391624d3081906d7bb15d681c@sentry.nav.no/14',
+    dsn: 'https://e2de35941445465aae1e83fcbcc2934d@sentry.gc.nav.no/8',
     release: (window as any).APP_VERSION,
     environment: window.location.hostname,
     integrations: [new Sentry.Integrations.Breadcrumbs({ console: false })]
