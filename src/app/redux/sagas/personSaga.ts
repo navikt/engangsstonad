@@ -3,10 +3,9 @@ import Api from '../../api/api';
 
 import { ApiActionKeys, GetPersonActionType } from '../actions/api/apiActionDefinitions';
 
-// tslint:disable-next-line:no-any
-function* getPerson(action: any) {
+function* getPerson() {
     try {
-        const response = yield call(Api.getPerson, action.params);
+        const response = yield call(Api.getPerson);
         const person: GetPersonActionType = response.data;
         yield put({ type: ApiActionKeys.GET_PERSON_SUCCESS, person });
     } catch (error) {
