@@ -229,6 +229,4 @@
     "sesjonUtløpt.ingress": "Du må logge inn på nytt for å fortsette med søknaden.</br>Ønsker du å fortsette?",
     "sesjonUtløpt.tittel": "Du er logget ut",
     "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }",
-
-    "feilmelding.nedetid": "The application for Lump-sum grant is unfortunately unavailable on Tuesday 10 December between 12-13."
 }

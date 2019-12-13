@@ -149,13 +149,6 @@ class Intro extends React.Component<Props, State> {
                         />
                         <div className="responsiveContainer">
                             <div className="blokk-s">
-                                <AlertStripe type="info">
-                                    <Normaltekst>
-                                        <FormattedMessage id="feilmelding.nedetid" />
-                                    </Normaltekst>
-                                </AlertStripe>
-                            </div>
-                            <div className="blokk-s">
                                 <Innholdstittel>{getMessage(intl, 'intro.standard.velkommentittel')}</Innholdstittel>
                             </div>
                             <div className="blokk-m">
