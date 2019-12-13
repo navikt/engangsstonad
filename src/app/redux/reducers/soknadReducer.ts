@@ -191,15 +191,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
         case SoknadActionKeys.DELETE_ATTACHMENT:
             const attachmentToDelete = action.attachment;
             attachmentToDelete.pending = true;
-            return editAttachmentInState(attachmentToDelete, state);
-
-        case SoknadActionKeys.DELETE_ATTACHMENT_SUCCESS:
-            const deletedAttachment = action.attachment;
-            return removeAttachmentFromState(deletedAttachment, state);
-
-        case SoknadActionKeys.DELETE_ATTACHMENT_FAILED:
-            const attachmentFailedToDelete = action.attachment;
-            return removeAttachmentFromState(attachmentFailedToDelete, state);
+            return removeAttachmentFromState(attachmentToDelete, state);
     }
     return state;
 };

@@ -229,5 +229,5 @@
 
 
     "intro.text.startNySøknadPrompt": "Er du sikkert på at du vil starte en ny søknad? Din påbegynte søknad vil bli slettet.",
-    "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }",
+    "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }"
 }

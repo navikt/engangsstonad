@@ -1,6 +1,5 @@
 import {
-    DeleteAttachment, DeleteAttachmentFailed,
-    DeleteAttachmentSuccess,
+    DeleteAttachment,
     SoknadActionKeys,
     SoknadActionTypes,
     UploadAttachmentFailed,
@@ -188,22 +187,6 @@ const deleteAttachment = (attachment: Attachment): DeleteAttachment => ({
     attachment
 });
 
-const deleteAttachmentSuccess = (
-    attachment: Attachment
-): DeleteAttachmentSuccess => ({
-    type: SoknadActionKeys.DELETE_ATTACHMENT_SUCCESS,
-    attachment
-});
-
-const deleteAttachmentFailed = (
-    error: any,
-    attachment: Attachment
-): DeleteAttachmentFailed => ({
-    type: SoknadActionKeys.DELETE_ATTACHMENT_FAILED,
-    error,
-    attachment
-});
-
 export default {
     addTidligereUtenlandsoppholdPeriode,
     editTidligereUtenlandsoppholdPeriode,
@@ -224,7 +207,5 @@ export default {
     uploadAttachment,
     uploadAttachmentSuccess,
     uploadAttachmentFailed,
-    deleteAttachment,
-    deleteAttachmentSuccess,
-    deleteAttachmentFailed
+    deleteAttachment
 };

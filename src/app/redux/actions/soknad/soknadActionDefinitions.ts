@@ -35,9 +35,7 @@ export enum SoknadActionKeys {
     'UPLOAD_ATTACHMENT' = 'uploadAttachment',
     'UPLOAD_ATTACHMENT_SUCCESS' = 'uploadAttachmentSuccess',
     'UPLOAD_ATTACHMENT_FAILED' = 'uploadAttachmentFailed',
-    'DELETE_ATTACHMENT' = 'deleteAttachment',
-    'DELETE_ATTACHMENT_SUCCESS' = 'deleteAttachmentSuccess',
-    'DELETE_ATTACHMENT_FAILED' = 'deleteAttachmentFailed',
+    'DELETE_ATTACHMENT' = 'deleteAttachment'
 }
 
 // Barn
@@ -173,17 +171,6 @@ export interface DeleteAttachment {
     attachment: Attachment;
 }
 
-export interface DeleteAttachmentSuccess {
-    type: SoknadActionKeys.DELETE_ATTACHMENT_SUCCESS;
-    attachment: Attachment;
-}
-
-export interface DeleteAttachmentFailed {
-    type: SoknadActionKeys.DELETE_ATTACHMENT_FAILED;
-    error: any;
-    attachment: Attachment;
-}
-
 export type SoknadActionTypes =
     | SetFødselsdato
     | AddTidligereUtenlandsoppholdPeriode
@@ -210,5 +197,3 @@ export type SoknadActionTypes =
     | UploadAttachmentSuccess
     | UploadAttachmentFailed
     | DeleteAttachment
-    | DeleteAttachmentSuccess
-    | DeleteAttachmentFailed;

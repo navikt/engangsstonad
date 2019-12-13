@@ -24,12 +24,11 @@ import getMessage from '../../util/i18n/i18nUtils';
 import Person from '../../types/domain/Person';
 import { ExternalProps } from '../../types/index';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { DispatchProps } from 'common/redux/types';
 import Veilederinfo from 'components/veileder-info/Veilederinfo';
 
 import '../../styles/engangsstonad.less';
-import AlertStripe from 'nav-frontend-alertstriper';
 
 interface State {
     isPersonopplysningerModalOpen: boolean;
