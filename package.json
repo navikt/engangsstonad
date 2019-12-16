@@ -70,7 +70,7 @@
         "react-day-picker": "7.1.4",
         "react-document-title": "2.0.3",
         "react-dom": "16.8.6",
-        "react-intl": "2.4.0",
+        "react-intl": "3.9.2",
         "react-modal": "^3.10.1",
         "react-motion": "0.5.2",
         "react-redux": "5.0.6",
