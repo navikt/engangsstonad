@@ -43,7 +43,6 @@ const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
                             }}
                         />
                     ),
-
                     veileder: {
                         ansikt: 'undrende'
                     }

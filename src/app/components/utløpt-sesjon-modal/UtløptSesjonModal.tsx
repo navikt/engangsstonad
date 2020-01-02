@@ -8,6 +8,7 @@ import getMessage from 'common/util/i18nUtils';
 import Knappelenke from '../knappelenke/Knappelenke';
 import Modal from 'nav-frontend-modal';
 import { redirectToLogin } from 'util/login';
+
 import './utløptSesjonModal.less';
 
 const cls = BEMHelper('utløptSesjonModal');
