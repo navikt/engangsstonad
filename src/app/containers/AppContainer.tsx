@@ -19,9 +19,10 @@ import { ExternalProps } from '../types';
 
 import Person from '../types/domain/Person';
 
-import '../styles/engangsstonad.less';
 import { DispatchProps } from 'common/redux/types';
 import { redirectToLogin } from 'util/login';
+
+import '../styles/engangsstonad.less';
 
 interface StateProps {
     person: Person;
@@ -31,7 +32,6 @@ interface StateProps {
     isLoadingPerson: boolean;
     language: string;
     søknadSendingInProgress: boolean;
-    isLoadingAppState: boolean;
 }
 
 type Props = StateProps & ExternalProps & DispatchProps & RouteComponentProps<{}>;
@@ -52,7 +52,7 @@ class AppContainer extends React.Component<Props> {
         const { dispatch, person, error } = this.props;
 
         if (error && error.status === 401) {
-            return this.redirectToLogin();
+            return redirectToLogin();
         }
         if (!person) {
             dispatch(api.getPerson());
@@ -62,15 +62,11 @@ class AppContainer extends React.Component<Props> {
     componentWillReceiveProps(props: any) {
         const { dispatch, error, søknadSendt } = this.props;
         if (props.error && props.error.status === 401) {
-            return this.redirectToLogin();
+            return redirectToLogin();
         }
         if (søknadSendt && !error) {
             dispatch(soknad.resetSøknad());
         }
-    }
-
-    redirectToLogin() {
-        redirectToLogin();
     }
 
     renderContent(children: React.ReactNode) {
@@ -115,7 +111,7 @@ class AppContainer extends React.Component<Props> {
     }
 
     render() {
-        const { person, søknadSendt, error, isLoadingPerson, isLoadingAppState } = this.props;
+        const { person, søknadSendt, error, isLoadingPerson } = this.props;
 
         if (!person && !error && !isLoadingPerson) {
             return this.renderContent(this.getErrorRoutes({ personFinnes: false }));
@@ -127,7 +123,7 @@ class AppContainer extends React.Component<Props> {
             const personErMann = erMann(person);
             const innsendingFeilet = søknadSendt && error && error.status !== 401 && error.status >= 400;
             const applicationStateIsValid =
-                personFinnes && personErMyndig && !personErMann && !innsendingFeilet && !isLoadingAppState;
+                personFinnes && personErMyndig && !personErMann && !innsendingFeilet;
 
             if (applicationStateIsValid) {
                 return this.renderContent(this.getSøknadRoutes());
@@ -146,7 +142,7 @@ class AppContainer extends React.Component<Props> {
             );
         }
 
-        if (isLoadingPerson || ((error && error.status === 401) || isLoadingAppState)) {
+        if (isLoadingPerson || (error && error.status === 401)) {
             return this.renderContent(<Spinner type="XXL" />);
         }
         return this.renderContent(<GenerellFeil />);
@@ -161,8 +157,6 @@ const mapStateToProps = (state: any) => ({
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
     godkjentVilkar: state.commonReducer.godkjentVilkar,
     language: state.commonReducer.language,
-    isLoadingAppState: state.apiReducer.isLoadingAppState,
-
 });
 
 export default withRouter(connect<StateProps, {}, {}>(mapStateToProps)(AppContainer));

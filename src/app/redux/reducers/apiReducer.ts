@@ -8,7 +8,6 @@ const getDefaultState = (): ApiReducerState => ({
     søknadSendingInProgress: false,
     kvittering: undefined,
     person: undefined,
-    isLoadingAppState: false,
     sessionHasExpired: false
 });
 
@@ -18,7 +17,6 @@ export interface ApiReducerState {
     søknadSendingInProgress: boolean;
     kvittering?: Kvittering;
     person?: Person;
-    isLoadingAppState: boolean;
     sessionHasExpired: boolean;
 }
 
