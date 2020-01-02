@@ -20,10 +20,11 @@ import LabelText from 'common/components/labeltekst/Labeltekst';
 import ValidDateInput from '../../../../lib/valid-date-input';
 import FormBlock from 'components/form-block/FormBlock';
 import { buildDateObject } from 'util/date/dateUtils';
-import Veilederinfo from 'components/veileder-info/Veilederinfo';
 import AttachmentsUploaderPure from 'common/storage/attachment/components/AttachmentUploaderPure';
 import { Attachment, AttachmentType, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+import Veileder from 'components/veileder/Veileder';
 
 interface StateProps {
     barn: Barn;
@@ -127,9 +128,9 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
 
                 <FormBlock visible={barn.termindato !== undefined}>
                     <div className="blokk-xs" key="veileder">
-                        <Veilederinfo ikon="veileder">
+                        <Veilederpanel kompakt={true} svg={<Veileder />}>
                             {getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}
-                        </Veilederinfo>
+                        </Veilederpanel>
                     </div>
                     <AttachmentsUploaderPure
                         attachments={terminbekreftelse || []}

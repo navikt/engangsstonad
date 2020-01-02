@@ -26,7 +26,8 @@ import { ExternalProps } from '../../types/index';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { DispatchProps } from 'common/redux/types';
-import Veilederinfo from 'components/veileder-info/Veilederinfo';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+import Veiviser from 'components/veiviser/VeiviserSvg';
 
 import '../../styles/engangsstonad.less';
 
@@ -154,12 +155,12 @@ class Intro extends React.Component<Props, State> {
                                 <Ingress>{getMessage(intl, 'intro.standard.ingress')}</Ingress>
                             </div>
                             <div className="blokk-m">
-                                <Veilederinfo ikon="veiviser">
+                                <Veilederpanel kompakt={true} svg={<Veiviser />}>
                                     <FormattedMessage id="intro.text.veiviser" />
                                     <br />
                                     <br />
                                     <FormattedHTMLMessage id="intro.text.veiviser.lenke" />
-                                </Veilederinfo>
+                                </Veilederpanel>
                             </div>
 
                             <div className="blokk-m">

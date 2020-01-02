@@ -1,9 +1,7 @@
 import * as React from 'react';
 
-// tslint:disable max-line-length
-
-const Veiviser = () => (
-    <svg width={64} height={64}>
+const Veiviser: React.StatelessComponent<any> = (props: any) => (
+    <svg width={80} height={80} viewBox="0 0 64 64"  {...props}>
         <title>{'Illustration'}</title>
         <g transform="translate(-1)" fill="none" fillRule="evenodd">
             <circle fill="#C1B5D0" cx={33} cy={32} r={32} />

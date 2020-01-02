@@ -8,8 +8,9 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import getMessage from '../../util/i18n/i18nUtils';
 import Oppsummering from '../oppsummering/Oppsummering';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
-import Veilederinfo from 'components/veileder-info/Veilederinfo';
 import '../../styles/engangsstonad.less';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+import Veileder from 'components/veileder/Veileder';
 
 const { ValidGroup } = require('./../../lib') as any;
 
@@ -27,7 +28,9 @@ class Steg4 extends React.Component<Props> {
         return (
             <Skjemasteg tittel={getMessage(intl, 'oppsummering.sectionheading')}>
                 <div className="blokk-m">
-                    <Veilederinfo ikon="veileder">{getMessage(intl, 'oppsummering.text.lesNoye')}</Veilederinfo>
+                    <Veilederpanel kompakt={true} svg={<Veileder />}>
+                        {getMessage(intl, 'oppsummering.text.lesNoye')}
+                    </Veilederpanel>
                 </div>
                 <Oppsummering />
                 <div className="blokk-m">
@@ -39,7 +42,8 @@ class Steg4 extends React.Component<Props> {
                                     failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger')
                                 }
                             ]}
-                            name="bekreftOpplysninger">
+                            name="bekreftOpplysninger"
+                        >
                             <BekreftCheckboksPanel
                                 inputProps={{ name: 'bekreftOpplysninger' }}
                                 checked={bekreftetInformasjon}

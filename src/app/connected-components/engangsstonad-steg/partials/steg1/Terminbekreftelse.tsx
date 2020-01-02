@@ -1,9 +1,10 @@
 import * as React from 'react';
-import Veilederinfo from 'components/veileder-info/Veilederinfo';
 import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
 import AttachmentInput from 'components/attachment-input/AttachmentInput';
 import { validerSamletFilstørrelse } from 'components/attachment-input/utils';
 import { bytesString } from 'util/attachment/utils';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+import Veileder from 'components/veileder/Veileder';
 
 const MAX_TOTAL_SIZE = 1024 * 1024 * 7.5;
 
@@ -18,9 +19,9 @@ const Terminbekreftelse: React.StatelessComponent<
 > = props => (
     <div className="terminbekreftelse">
         <div className="blokk-m">
-            <Veilederinfo ikon="veileder">
+            <Veilederpanel kompakt={true} svg={<Veileder />}>
                 <FormattedMessage id="terminbekreftelsen.text.terminbekreftelsen" />
-            </Veilederinfo>
+            </Veilederpanel>
         </div>
         <AttachmentInput
             vedlegg={props.vedlegg}
