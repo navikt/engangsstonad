@@ -9,6 +9,7 @@ import { ApiReducerState } from 'reducers/apiReducer';
 import { CommonState } from 'reducers/commonReducer';
 import Feilside from 'components/feilside/Feilside';
 import { setLanguage } from 'actions/common/commonActionCreators';
+import { lenker } from 'util/lenker';
 
 import '../../styles/engangsstonad.less';
 
@@ -16,9 +17,6 @@ interface StateProps {
     person: Person;
     language: string;
 }
-
-const URL_SØKNADSVALG = 'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/Skjemaer/Familie/foreldrepenger-og-engangsstonad/' +
-    'Foreldrepenger+og+engangsst%C3%B8nad?method=mail&veiledertype=privatperson';
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
@@ -38,7 +36,7 @@ const ErMann: React.StatelessComponent<Props> = (props: Props) => {
                     }),
                     tekst: getMessage(intl, 'intro.erMann.bobletekst'),
                     lenke: {
-                        url: URL_SØKNADSVALG,
+                        url: lenker.søknadsveileder,
                         tekst: getMessage(intl, 'intro.erMann.boblelenketekst')
                     }
                 }}

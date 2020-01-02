@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { CommonState } from 'reducers/commonReducer';
 import { DispatchProps } from 'common/redux/types';
+import { lenker } from 'util/lenker';
 
 import '../../styles/engangsstonad.less';
 
@@ -18,8 +19,6 @@ interface InnsendingFeiletProps {
 }
 
 type Props = InnsendingFeiletProps & StateProps & DispatchProps & InjectedIntlProps;
-
-const URL_BRUKERSTØTTE = 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749';
 
 const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
     const {errorResponse, intl} = props;
@@ -37,7 +36,7 @@ const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
                     <FormattedMessage
                         id="intro.innsendingFeilet.ingress"
                         values={{
-                            lenke: <Lenke href={URL_BRUKERSTØTTE}>{getMessage(intl, 'intro.innsendingFeilet.ingress.lenketekst')}</Lenke>
+                            lenke: <Lenke href={lenker.brukerstøtte}>{getMessage(intl, 'intro.innsendingFeilet.ingress.lenketekst')}</Lenke>
                         }}
                     />
                 )

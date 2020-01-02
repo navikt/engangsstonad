@@ -4,6 +4,7 @@ import { InjectedIntlProps } from 'react-intl';
 const { FormattedMessage, injectIntl } = require('react-intl');
 const { Undertittel, Normaltekst, Element } = require('nav-frontend-typografi');
 import Lenke from 'nav-frontend-lenker';
+import { lenker } from 'util/lenker';
 
 type Props = InjectedIntlProps;
 
@@ -81,8 +82,7 @@ const Personopplysninger: React.StatelessComponent<Props> = (props: Props) => {
                         values={{
                             link: (
                                 <Lenke
-                                    href={'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/' + 
-                                    'personvern-i-arbeids-og-velferdsetaten/personvernerkl%C3%A6ring-for-arbeids-og-velferdsetaten'}
+                                    href={lenker.personvernerklæring}
                                     target="_blank"
                                 >
                                     <FormattedMessage id="personopplysninger.text.personvernerklering.link" />

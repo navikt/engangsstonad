@@ -11,6 +11,7 @@ import { CommonState } from 'reducers/commonReducer';
 import Lenke from 'nav-frontend-lenker';
 import Feilside from 'components/feilside/Feilside';
 import { setLanguage } from 'actions/common/commonActionCreators';
+import { lenker } from 'util/lenker';
 
 import '../../styles/engangsstonad.less';
 
@@ -21,7 +22,6 @@ interface StateProps {
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;
 
-const URL_BRUKERSTØTTE = 'https://www.nav.no/no/NAV+og+samfunn/Kontakt+NAV/Teknisk+brukerstotte/hjelp-til-personbruker?kap=398749';
 
 const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
     const { intl, person } = props;
@@ -39,7 +39,7 @@ const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
                         <FormattedMessage
                             id="intro.personIkkeFunnet.bobletekst"
                             values={{
-                                lenke: <Lenke href={URL_BRUKERSTØTTE}>{getMessage(intl, 'intro.personIkkeFunnet.bobletekst.lenketekst')}</Lenke>
+                                lenke: <Lenke href={lenker.brukerstøtte}>{getMessage(intl, 'intro.personIkkeFunnet.bobletekst.lenketekst')}</Lenke>
                             }}
                         />
                     ),

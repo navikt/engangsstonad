@@ -8,7 +8,6 @@ import getMessage from '../util/i18n/i18nUtils';
 
 import getStepConfig from './../connected-components/engangsstonad-steg/steg.config';
 
-import '../styles/engangsstonad.less';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
@@ -19,7 +18,10 @@ import { CommonState } from 'reducers/commonReducer';
 import { DispatchProps } from 'common/redux/types';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
+import { lenker } from 'util/lenker';
 const { ValidForm } = require('./../lib') as any;
+
+import '../styles/engangsstonad.less';
 
 interface OwnProps {
     søknad: EngangsstonadSoknad;
@@ -119,7 +121,7 @@ class SøknadContainer extends React.Component<Props> {
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     )}
-                    <CancelButton redirect="https://tjenester.nav.no/dittnav/oversikt" />
+                    <CancelButton redirect={lenker.dittNav} />
                 </ValidForm>
                 <UtløptSesjonModal erÅpen={sessionHasExpired}/>
             </div>

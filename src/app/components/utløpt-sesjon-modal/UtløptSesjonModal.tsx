@@ -8,11 +8,11 @@ import getMessage from 'common/util/i18nUtils';
 import Knappelenke from '../knappelenke/Knappelenke';
 import Modal from 'nav-frontend-modal';
 import { redirectToLogin } from 'util/login';
+import { lenker } from 'util/lenker';
 
 import './utløptSesjonModal.less';
 
 const cls = BEMHelper('utløptSesjonModal');
-const AVSLUTT_HREF = 'https://www.nav.no';
 
 interface OwnProps {
     erÅpen: boolean;
@@ -36,7 +36,7 @@ const UtløptSesjonModal = ({ erÅpen, intl }: Props) => {
                 <FormattedHTMLMessage id="sesjonUtløpt.ingress" />
             </Normaltekst>
             <div className={cls.element('valg')}>
-                <Knappelenke href={AVSLUTT_HREF}>
+                <Knappelenke href={lenker.nav}>
                     <FormattedMessage id="sesjonUtløpt.avslutt" />
                 </Knappelenke>
                 <Hovedknapp onClick={() => redirectToLogin()}>

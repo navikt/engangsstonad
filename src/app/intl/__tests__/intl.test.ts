@@ -4,17 +4,17 @@ const en = require('../en_US.json');
 
 describe('intl tests', () => {
     it('Language files should have exactly the same keys', () => {
-        const keysBokmål = Object.keys(nb);
-        const keysNynorsk = Object.keys(nn);
-        const keysEnglish = Object.keys(en);
+        const keysBokmål = Object.keys(nb).sort();
+        const keysNynorsk = Object.keys(nn).sort();
+        const keysEnglish = Object.keys(en).sort();
 
-        expect(keysBokmål.sort()).toMatchObject(keysNynorsk.sort());
-        expect(keysBokmål.sort()).toMatchObject(keysEnglish.sort());
+        expect(keysBokmål).toMatchObject(keysNynorsk);
+        expect(keysBokmål).toMatchObject(keysEnglish);
 
-        expect(keysNynorsk.sort()).toMatchObject(keysBokmål.sort());
-        expect(keysNynorsk.sort()).toMatchObject(keysEnglish.sort());
+        expect(keysNynorsk).toMatchObject(keysBokmål);
+        expect(keysNynorsk).toMatchObject(keysEnglish);
 
-        expect(keysEnglish.sort()).toMatchObject(keysBokmål.sort());
-        expect(keysEnglish.sort()).toMatchObject(keysNynorsk.sort());
+        expect(keysEnglish).toMatchObject(keysBokmål);
+        expect(keysEnglish).toMatchObject(keysNynorsk);
     });
 });

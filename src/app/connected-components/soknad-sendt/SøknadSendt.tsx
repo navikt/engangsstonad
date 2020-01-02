@@ -18,6 +18,9 @@ import 'nav-frontend-lenker-style';
 
 const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
 
+import { lenker } from 'util/lenker';
+import { redirect } from 'util/login';
+
 import '../../styles/engangsstonad.less';
 
 interface StateProps {
@@ -38,7 +41,7 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
             if ((window as any).hj) {
                 (window as any).hj('trigger', 'es_kvittering_feedback');
             }
-        },         5000);
+        }, 5000);
     }
 
     receiptText() {
@@ -70,7 +73,7 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
                 values={{
                     kontonummer,
                     dinProfilLink: (
-                        <Lenke href="https://tjenester.nav.no/brukerprofil/">
+                        <Lenke href={lenker.brukerprofil}>
                             <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
                         </Lenke>
                     )
@@ -101,7 +104,7 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
                             id="kvittering.text.dittNav"
                             values={{
                                 dittNavLink: (
-                                    <Lenke href="https://foreldrepenger.nav.no">
+                                    <Lenke href={lenker.foreldrepenger}>
                                         <FormattedMessage id="kvittering.text.dittNavLink" />
                                     </Lenke>
                                 )
@@ -109,14 +112,13 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
                         />
                     </Ingress>
 
-                    {person.bankkonto &&
-                    person.bankkonto.kontonummer &&
-                    <Ingress className="blokk-s">
-                        {this.bankAccountText(person.bankkonto.kontonummer)}
-                    </Ingress>}
+                    {person.bankkonto && person.bankkonto.kontonummer && (
+                        <Ingress className="blokk-s">{this.bankAccountText(person.bankkonto.kontonummer)}</Ingress>
+                    )}
                     <Hovedknapp
                         className="responsiveButton responsiveButton--søknadSendt"
-                        onClick={() => ((window as any).location = 'https://tjenester.nav.no/dittnav/oversikt')}>
+                        onClick={() => redirect(lenker.dittNav)}
+                    >
                         {getMessage(intl, 'kvittering.text.soknadMottatt.avsluttText')}
                     </Hovedknapp>
                 </div>

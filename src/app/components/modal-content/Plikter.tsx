@@ -3,9 +3,10 @@ const { FormattedMessage, injectIntl } = require('react-intl');
 const { Undertittel, Normaltekst } = require('nav-frontend-typografi');
 import getMessage from '../../util/i18n/i18nUtils';
 import Lenke from 'nav-frontend-lenker';
+import InjectedIntl = ReactIntl.InjectedIntl;
+import { lenker } from 'util/lenker';
 
 import './modalContent.less';
-import InjectedIntl = ReactIntl.InjectedIntl;
 
 interface Props {
     intl: InjectedIntl;
@@ -24,7 +25,7 @@ const Plikter: React.StatelessComponent<Props> = ({ intl }) => (
                         id="rettigheter.text.lestOgForstått"
                         values={{
                             link: (
-                                <Lenke href="https://nav.no/rettOgPlikt" target="_blank">
+                                <Lenke href={lenker.plikter} target="_blank">
                                     <FormattedMessage id="rettigheter.text.lestOgForstått.link" />
                                 </Lenke>
                             )

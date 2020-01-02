@@ -9,12 +9,11 @@ import { DispatchProps } from 'common/redux/types';
 import { ApiReducerState } from 'reducers/apiReducer';
 import { CommonState } from 'reducers/commonReducer';
 
-import '../../styles/engangsstonad.less';
 import Feilside from 'components/feilside/Feilside';
 import { setLanguage } from 'actions/common/commonActionCreators';
+import { lenker } from 'util/lenker';
 
-const URL_PAPIRSØKNAD =
-    'https://www.nav.no/soknader/nb/person/familie/foreldrepenger-og-engangsstonad';
+import '../../styles/engangsstonad.less';
 
 interface StateProps {
     person: Person;
@@ -39,7 +38,7 @@ const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
                     }),
                     tekst: getMessage(intl, 'intro.under18.bobletekst'),
                     lenke: {
-                        url: URL_PAPIRSØKNAD,
+                        url: lenker.papirsøknad,
                         tekst: getMessage(intl, 'intro.under18.boblelenketekst')
                     }
                 }}
