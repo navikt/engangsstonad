@@ -48,4 +48,4 @@ spec:
         value: "{{this}}"
     {{/each}}
       - name: APP_VERSION
-        value: {{version}}
+        value: {{image}}
