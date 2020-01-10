@@ -64,6 +64,7 @@ jobs:
             <tr><td>dev-gcp</td>
             <tr><td>prod-gcp</tr>
             </table>
+
       - name: Trigg deploy til dev-sbs
         if: success()
         uses: peter-evans/create-or-update-comment@v1
@@ -72,6 +73,7 @@ jobs:
           issue-number: ${{ steps.createdeployissue.outputs.number }}
           body: /promote ${{ env.TAG }} dev-sbs
       - name: Trigg deploy til dev-gcp
+
         if: success()
         uses: peter-evans/create-or-update-comment@v1
         with:
