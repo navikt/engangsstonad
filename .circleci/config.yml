@@ -48,7 +48,7 @@ jobs:
       executor: go
       steps:
         - nais-deploy:
-            template-vars: dev.json
+            template-vars: dev-sbs.json
             environment: dev-sbs
   
     dev-gcp-deploy:
@@ -65,12 +65,6 @@ jobs:
             template-vars: prod-gcp.json
             environment: prod-gcp
                   
-    prod-deploy:
-       executor: go
-       steps:
-          - nais-deploy:
-             template-vars: prod.json
-             environment: prod-sbs
 
 commands:
   nais-deploy:

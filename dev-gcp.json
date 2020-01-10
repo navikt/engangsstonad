@@ -1,7 +1,6 @@
 {
     "ingress": "https://engangsstonad.dev-nav.no",
     "namespace" : "foreldrepenger",
-    "application_name": "engangsstonad",
     "appres" : "appres-q1.nav.no",
     "env": {
         "APPRES_CMS_URL": "https://appres-q1.nav.no",
