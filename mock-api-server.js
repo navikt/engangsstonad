@@ -1,6 +1,7 @@
 const express = require('express');
 const server = express();
 const multer = require('multer');
+const morgan = require('morgan');
 require('dotenv').config();
 
 const allowCrossDomain = function(req, res, next) {
@@ -18,6 +19,7 @@ const delayAllResponses = function(millsec) {
     };
 };
 
+server.use(morgan('tiny'));
 server.use(allowCrossDomain);
 server.use(delayAllResponses(500));
 server.use(express.json());
@@ -35,8 +37,7 @@ const kvittering = {
     motattDato: '2019-02-19T13:40:45.115',
     referanseId: '3959c880-83d2-4f01-b107-035fa7693758',
     leveranseStatus: 'PÅ_VENT',
-    journalId: '439772941',
-    saksNr: '137662428'
+    journalId: '439772941'
 };
 
 const startServer = html => {
@@ -53,10 +54,7 @@ const startServer = html => {
         }
     )
 
-    const vedleggUpload = multer({
-        dest: './dist/vedlegg/'
-    });
-    server.post('/rest/storage/vedlegg', vedleggUpload.single('vedlegg'), (req, res) => {
+    server.post('/rest/storage/vedlegg', (req, res) => {
         res.setHeader('Location', `http://localhost:8080/engangsstonad/dist/vedlegg/${req.body.id}`);
         res.sendStatus(201);
     });

@@ -12,18 +12,19 @@ import Oppsummeringspunkt from './Oppsummeringspunkt';
 import Person from 'app/types/domain/Person';
 import SøkersPersonalia from 'components/søkers-personalia/SøkersPersonalia';
 import UtenlandsoppholdOppsummering from './UtenlandsoppholdOppsummering';
+import { AppState } from 'reducers/reducers';
+
 import './oppsummering.less';
 
 interface StateProps {
     annenForelder: AnnenForelder;
     barn: FodtBarn & UfodtBarn;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
-    person: Person;
+    person?: Person;
 }
 
 type Props = StateProps & InjectedIntlProps;
-
-const Oppsummering = ({ annenForelder, barn, informasjonOmUtenlandsopphold, person, intl }: Props) => {
+const Oppsummering: React.StatelessComponent<Props> = ({ annenForelder, barn, informasjonOmUtenlandsopphold, person, intl }) => {
     if (!person) {
         return null;
     }
@@ -64,10 +65,10 @@ const Oppsummering = ({ annenForelder, barn, informasjonOmUtenlandsopphold, pers
     );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppState) => ({
     person: state.apiReducer.person,
     annenForelder: state.soknadReducer.annenForelder,
-    barn: state.soknadReducer.barn,
+    barn: state.soknadReducer.barn as FodtBarn & UfodtBarn,
     informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold
 });
 

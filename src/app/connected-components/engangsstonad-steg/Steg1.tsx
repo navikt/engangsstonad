@@ -7,7 +7,6 @@ import RadioPanelGruppeResponsive from './../../components/radio-panel-gruppe-re
 import { soknadActionCreators as soknad } from '../../redux/actions';
 import { default as Barn } from '../../types/domain/Barn';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import Person from '../../types/domain/Person';
 import { DispatchProps } from 'common/redux/types';
 import getMessage from 'util/i18n/i18nUtils';
 import '../../styles/engangsstonad.less';
@@ -15,10 +14,10 @@ import { steg1Partials } from './partials';
 import FormBlock from 'components/form-block/FormBlock';
 import LabelText from 'common/components/labeltekst/Labeltekst';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
+import { AppState } from 'reducers/reducers';
 
 interface StateProps {
     barn: Barn;
-    person: Person;
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
@@ -128,9 +127,8 @@ class Steg1 extends React.Component<Props, State> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
-    barn: state.soknadReducer.barn,
-    person: state.commonReducer.person
+const mapStateToProps = (state: AppState) => ({
+    barn: state.soknadReducer.barn
 });
 
 export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg1));

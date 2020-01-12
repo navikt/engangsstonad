@@ -13,12 +13,13 @@ import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 import { connect } from 'react-redux';
+import { AppState } from 'reducers/reducers';
+import { Language } from 'intl/IntlProvider';
 
 interface StateProps {
     barn: Barn;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
-    vedlegg: File[];
-    language: string;
+    language: Language;
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
@@ -315,10 +316,9 @@ class Steg3 extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppState) => ({
     informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold,
     barn: state.soknadReducer.barn,
-    vedlegg: state.soknadReducer.vedlegg,
     language: state.commonReducer.language
 });
 

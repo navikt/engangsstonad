@@ -8,9 +8,10 @@ import * as en from 'react-intl/locale-data/en';
 import nnMessages from './nn_NO.json';
 import nbMessages from './nb_NO.json';
 import enMessages from './en_US.json';
+import { AppState } from 'reducers/reducers';
 
 interface Props {
-    language: string;
+    language: Language;
 }
 
 export const enum Language {
@@ -19,7 +20,7 @@ export const enum Language {
     ENGELSK = 'en'
 }
 
-const getLanguageMessages = (language: string) => {
+const getLanguageMessages = (language: Language) => {
     if (language === Language.BOKMÅL) {
         return nbMessages;
     } else if (language === Language.NYNORSK) {
@@ -45,7 +46,7 @@ class IntlProvider extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppState) => ({
     language: state.commonReducer.language
 });
 

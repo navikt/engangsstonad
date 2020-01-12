@@ -1,26 +1,29 @@
 import { ApiActionKeys, ApiActionTypes } from '../actions/api/apiActionDefinitions';
 import Person from '../../types/domain/Person';
 import Kvittering from 'app/types/services/Kvittering';
+import { AxiosResponse } from 'axios';
 
-const getDefaultState = (): ApiReducerState => ({
-    isLoadingPerson: false,
+const initialState = (): ApiState => ({
+    isLoadingPerson: true,
     søknadSendt: false,
     søknadSendingInProgress: false,
     kvittering: undefined,
     person: undefined,
-    sessionHasExpired: false
+    sessionHasExpired: false,
+    error: undefined
 });
 
-export interface ApiReducerState {
+export interface ApiState {
     isLoadingPerson: boolean;
     søknadSendt: boolean;
     søknadSendingInProgress: boolean;
     kvittering?: Kvittering;
     person?: Person;
     sessionHasExpired: boolean;
+    error: AxiosResponse | Error | undefined;
 }
 
-const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
+const apiReducer = (state = initialState(), action: ApiActionTypes) => {
     switch (action.type) {
         case ApiActionKeys.GET_PERSON:
             return { ...state, params: action.params, isLoadingPerson: true };
@@ -57,8 +60,9 @@ const apiReducer = (state = getDefaultState(), action: ApiActionTypes) => {
                 ...state,
                 sessionHasExpired: true
             };
+        default:
+            return state;
     }
-    return state;
 };
 
 export default apiReducer;

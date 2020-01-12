@@ -25,9 +25,6 @@
     "intro.innsendingFeilet.ingress": " Noe gikk dessverre galt under innsending av søknaden din. Vennligst prøv igjen senere. Dersom det fremdeles oppstår feil, {lenke}.",
     "intro.innsendingFeilet.tittel": "Det oppstod en feil under innsending",
     "intro.pageheading.samtykke": "Rettigheter og plikter.",
-    "intro.personIkkeFunnet.bobletekst.lenketekst": "kontakt brukerstøtte",
-    "intro.personIkkeFunnet.bobletekst": "det skjedde desverre en feil i visningen av søknadsskjemaet. Vennligst prøv igjen senere. Dersom det fremdeles oppstår feil, {lenke}.",
-    "intro.personIkkeFunnet.bobletittel": "Beklager,",
     "intro.standard.bobletekst": "Husk at hvis barnet ikke er født ennå, må du legge ved en terminbekreftelse.",
     "intro.standard.bobletittel": "Hei, {name}!",
     "intro.standard.dokumenttittel": "NAV Engangsstønad",
@@ -56,8 +53,7 @@
     "kvittering.text.kontonummer": " Hvis søknaden din blir innvilget, blir engangsstønaden utbetalt til kontonummer {kontonummer}. Du kan endre kontonummeret på {dinProfilLink}.",
     "kvittering.text.soknadMottatt.avsluttText": "Avslutt",
     "kvittering.text.soknadMottatt.dinProfilLink": "Din profil",
-    "kvittering.text.soknadMottatt": "Vi mottok søknaden den {dato} kl. {klokkeslett}.",
-    "kvittering.text.soknadMottattMedSaksnummer": "Vi mottok søknaden med saksnummer {saksNr} den {dato} kl. {klokkeslett}.",
+    "kvittering.text.soknadMottatt": "Vi mottok søknaden {harSaksnummer, select, true {med saksnummer  {saksNr}} false {}} den {dato} kl. {klokkeslett}.",
     "kvittering.text.takk": "Takk for søknaden,",
     "label_med_hjelpetekst.label": "Hjelpetekst",
     "languageToggle.bokmål": "Bokmål - Norsk",
@@ -226,5 +222,7 @@
     "vedlegg.tomFil.flereFeil": "{filename} - Du kan ikke laste opp en tom fil",
     "vedlegg.tomFil": "Du kan ikke laste opp en tom fil",
     "vedlegg.virus.flereFeil": "{filename} - Vedlegget inneholder noe vi ikke vil ha",
-    "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha"
+    "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha",
+    "søknadContainer.prompt": "Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?",
+    "validForm.summaryTitle": "Du må rette opp i følgende feil:"
 }

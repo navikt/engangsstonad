@@ -1,10 +1,10 @@
-// tslint:disable-next-line:no-any
 import apiUtils from 'util/apiUtils';
 import { put, call, all, takeLatest } from 'redux-saga/effects';
 import Api from '../../api/api';
 import { ApiActionKeys } from 'actions/api/apiActionDefinitions';
 import Kvittering from 'app/types/services/Kvittering';
 import apiActionCreators from 'actions/api/apiActionCreators';
+import { SoknadActionKeys } from 'actions/soknad/soknadActionDefinitions';
 
 function* sendSøknad(action: any) {
     try {
@@ -13,6 +13,7 @@ function* sendSøknad(action: any) {
         yield put({ type: ApiActionKeys.SEND_SOKNAD_SUCCESS, kvittering });
     } catch (error) {
         error.response && (error.response.status === 401 || error.response.status === 403) ? yield put(apiActionCreators.sessionExpired()) :
+        yield put({ type: SoknadActionKeys.RESET_SØKNAD });
         yield put({ type: ApiActionKeys.SEND_SOKNAD_FAILED, error });
     }
 }

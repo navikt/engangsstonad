@@ -3,7 +3,7 @@ import { FodtBarn, UfodtBarn } from './Barn';
 import AnnenForelder from './AnnenForelder';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 
-type EngangsstonadSoknad = {
+interface EngangsstonadSoknad {
     type: string;
     erEndringssøknad: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
@@ -12,7 +12,7 @@ type EngangsstonadSoknad = {
     vedlegg?: Attachment[];
 };
 
-export type EngangssoknadSoknadDto  = {
+export interface EngangssoknadSoknadDto {
     type: string;
     erEndringssøknad: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;

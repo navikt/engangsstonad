@@ -3,7 +3,7 @@ import EngangsstonadSoknad from '../../types/domain/EngangsstonadSoknad';
 import { FodtBarn } from '../../types/domain/Barn';
 import { addAttachmentToState, editAttachmentInState, removeAttachmentFromState } from '../util/attachmentStateUpdates';
 
-const getDefaultState = (): EngangsstonadSoknad => {
+const initialState = (): EngangsstonadSoknad => {
     const engangsstonadSoknad = {
         type: 'engangsstønad',
         erEndringssøknad: false,
@@ -19,7 +19,7 @@ const getDefaultState = (): EngangsstonadSoknad => {
     return engangsstonadSoknad;
 };
 
-const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => {
+const soknadReducer = (state = initialState(), action: SoknadActionTypes) => {
     const { barn, informasjonOmUtenlandsopphold } = state;
     switch (action.type) {
         case SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE:
@@ -91,7 +91,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             return {
                 ...state,
                 informasjonOmUtenlandsopphold: {
-                    ...getDefaultState().informasjonOmUtenlandsopphold,
+                    ...initialState().informasjonOmUtenlandsopphold,
                     iNorgeSiste12Mnd,
                     iNorgeNeste12Mnd: state.informasjonOmUtenlandsopphold.iNorgeNeste12Mnd,
                     tidligereOpphold: state.informasjonOmUtenlandsopphold.tidligereOpphold,
@@ -165,7 +165,7 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             const { kanIkkeOppgis } = action;
             return { ...state, annenForelder: { kanIkkeOppgis } };
         case SoknadActionKeys.RESET_SØKNAD:
-            return getDefaultState();
+            return initialState();
 
         case SoknadActionKeys.UPLOAD_ATTACHMENT:
             const pendingAttachment = action.payload;
@@ -189,11 +189,10 @@ const soknadReducer = (state = getDefaultState(), action: SoknadActionTypes) => 
             return editAttachmentInState(failedAttachment, state);
 
         case SoknadActionKeys.DELETE_ATTACHMENT:
-            const attachmentToDelete = action.attachment;
-            attachmentToDelete.pending = true;
-            return removeAttachmentFromState(attachmentToDelete, state);
+            return removeAttachmentFromState(action.attachment, state);
+        default:
+            return state;
     }
-    return state;
 };
 
 export default soknadReducer;

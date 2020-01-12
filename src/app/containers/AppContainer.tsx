@@ -1,71 +1,38 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route, Redirect, withRouter, RouteComponentProps } from 'react-router-dom';
+import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom';
 import Spinner from 'nav-frontend-spinner';
-
-import Intro from './../connected-components/intro/Intro';
-import SøknadSendt from './../connected-components/soknad-sendt/SøknadSendt';
-import IkkeMyndig from './../connected-components/feilsider/IkkeMyndig';
-import ErMann from '../connected-components/feilsider/ErMann';
-import GenerellFeil from '../connected-components/feilsider/GenerellFeil';
-import PersonFinnesIkke from '../connected-components/feilsider/PersonFinnesIkke';
-import InnsendingFeilet from '../connected-components/feilsider/InnsendingFeilet';
-
-import SøknadContainer from './SøknadContainer';
-import { erMann, erMyndig, harPersonData } from 'util/validation/validationUtils';
-
-import { apiActionCreators as api, soknadActionCreators as soknad } from '../redux/actions';
-import { ExternalProps } from '../types';
-
-import Person from '../types/domain/Person';
-
+import { AxiosResponse } from 'axios';
+import { apiActionCreators as api } from '../redux/actions';
 import { DispatchProps } from 'common/redux/types';
-import { redirectToLogin } from 'util/login';
+import Person from '../types/domain/Person';
+import Kvittering from '../types/services/Kvittering';
+import Intro from '../connected-components/intro/Intro';
+import Skjema from './SøknadContainer';
+import ErMann from '../connected-components/feilsider/ErMann';
+import IkkeMyndig from '../connected-components/feilsider/IkkeMyndig';
+import { erMyndig, erMann } from 'util/validation/validationUtils';
+import SøknadSendt from '../connected-components/soknad-sendt/SøknadSendt';
+import GenerellFeil from '../connected-components/feilsider/GenerellFeil';
+import InnsendingFeilet from '../connected-components/feilsider/InnsendingFeilet';
+import { AppState } from 'reducers/reducers';
 
 import '../styles/engangsstonad.less';
 
 interface StateProps {
-    person: Person;
-    error: any;
-    søknadSendt: boolean;
-    godkjentVilkar: boolean;
+    person?: Person;
+    error: AxiosResponse | Error | undefined;
     isLoadingPerson: boolean;
-    language: string;
-    søknadSendingInProgress: boolean;
+    godkjentVilkar: boolean;
+    kvittering?: Kvittering;
+    søknadSendt: boolean;
 }
 
-type Props = StateProps & ExternalProps & DispatchProps & RouteComponentProps<{}>;
-
-interface Error {
-    personFinnes: boolean;
-    personErMann?: boolean;
-    personErMyndig?: boolean;
-    innsendingFeilet?: boolean;
-};
-
+type Props = StateProps & DispatchProps;
 class AppContainer extends React.Component<Props> {
-    constructor(props: Props) {
-        super(props);
-    }
-
     componentWillMount() {
-        const { dispatch, person, error } = this.props;
-
-        if (error && error.status === 401) {
-            return redirectToLogin();
-        }
-        if (!person) {
-            dispatch(api.getPerson());
-        }
-    }
-
-    componentWillReceiveProps(props: any) {
-        const { dispatch, error, søknadSendt } = this.props;
-        if (props.error && props.error.status === 401) {
-            return redirectToLogin();
-        }
-        if (søknadSendt && !error) {
-            dispatch(soknad.resetSøknad());
+        if (!this.props.person) {
+            this.props.dispatch(api.getPerson());
         }
     }
 
@@ -73,90 +40,56 @@ class AppContainer extends React.Component<Props> {
         return <div className="engangsstonad">{children}</div>;
     }
 
-    renderRoutes(routes: JSX.Element | JSX.Element[]) {
-        return (
+    getIntroComponent(person: Person, routeProps: RouteComponentProps): React.ReactNode {
+        if (erMann(person)) {
+            return <ErMann />;
+        }
+        if (!erMyndig(person)) {
+            return <IkkeMyndig />;
+        }
+        return <Intro {...routeProps} />;
+    }
+
+    render() {
+        const { godkjentVilkar, kvittering, error, isLoadingPerson, søknadSendt, person } = this.props;
+        if (isLoadingPerson || (error && (error as AxiosResponse).status === 401)) {
+            return this.renderContent(<Spinner type="XXL" />);
+        }
+        if (søknadSendt && error && (error as AxiosResponse).status > 401) {
+            return this.renderContent(<InnsendingFeilet error={error} />);
+        }
+        if (error || !person) {
+            return this.renderContent(<GenerellFeil />);
+        }
+        return this.renderContent(
             <Switch>
-                {routes}
+                {kvittering ? (
+                    <Route path="/engangsstonad" component={SøknadSendt} exact={true} />
+                ) : (
+                    <Route
+                        path="/engangsstonad"
+                        render={(routeProps) => this.getIntroComponent(person, routeProps)}
+                        exact={true}
+                    />
+                )}
+                {godkjentVilkar && !søknadSendt && (
+                    <Route path={'/engangsstonad/soknad'} exact={true} strict={true} component={Skjema} />
+                )}
                 <Redirect to="/engangsstonad" />
             </Switch>
         );
     }
-
-    getErrorRoutes(error: Error, errorResponse?: any) {
-        let component: any;
-        if (error.personErMann === true) {
-            component = <ErMann />;
-        } else if (error.personFinnes === false) {
-            component = <PersonFinnesIkke />;
-        } else if (error.personErMyndig === false) {
-            component = <IkkeMyndig />;
-        } else if (error.innsendingFeilet === true) {
-            component = <InnsendingFeilet errorResponse={errorResponse} />;
-        }
-        return this.renderRoutes(<Route path="/engangsstonad" component={() => component} key="error" />);
-    }
-
-    getSøknadRoutes() {
-        const { godkjentVilkar, søknadSendt } = this.props;
-        const routes = [];
-        if (!søknadSendt) {
-            routes.push(<Route path="/engangsstonad" component={Intro} exact={true} key="intro" />);
-            if (godkjentVilkar) {
-                routes.push(<Route path="/engangsstonad/soknad" component={SøknadContainer} key="søknad" />);
-            }
-        } else {
-            routes.push(<Route path="/engangsstonad" component={SøknadSendt} exact={true} key="completed" />);
-        }
-        return this.renderRoutes(routes);
-    }
-
-    render() {
-        const { person, søknadSendt, error, isLoadingPerson } = this.props;
-
-        if (!person && !error && !isLoadingPerson) {
-            return this.renderContent(this.getErrorRoutes({ personFinnes: false }));
-        }
-
-        if (person) {
-            const personFinnes = harPersonData(person);
-            const personErMyndig = erMyndig(person);
-            const personErMann = erMann(person);
-            const innsendingFeilet = søknadSendt && error && error.status !== 401 && error.status >= 400;
-            const applicationStateIsValid =
-                personFinnes && personErMyndig && !personErMann && !innsendingFeilet;
-
-            if (applicationStateIsValid) {
-                return this.renderContent(this.getSøknadRoutes());
-            }
-
-            return this.renderContent(
-                this.getErrorRoutes(
-                    {
-                        personErMann,
-                        personFinnes,
-                        personErMyndig,
-                        innsendingFeilet
-                    },
-                    error
-                )
-            );
-        }
-
-        if (isLoadingPerson || (error && error.status === 401)) {
-            return this.renderContent(<Spinner type="XXL" />);
-        }
-        return this.renderContent(<GenerellFeil />);
-    }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppState) => ({
     error: state.apiReducer.error,
     person: state.apiReducer.person,
     isLoadingPerson: state.apiReducer.isLoadingPerson,
-    søknadSendt: state.apiReducer.søknadSendt,
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
     godkjentVilkar: state.commonReducer.godkjentVilkar,
-    language: state.commonReducer.language,
+    kvittering: state.apiReducer.kvittering,
+    søknadSendt: state.apiReducer.søknadSendt,
+    language: state.commonReducer.language
 });
 
-export default withRouter(connect<StateProps, {}, {}>(mapStateToProps)(AppContainer));
+export default connect<StateProps, {}, {}>(mapStateToProps)(AppContainer);

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import * as countries from 'i18n-iso-countries';
 import { Feil } from 'components/skjema-input-element/types';
+import { Language } from 'intl/IntlProvider';
 const { ValidSelect } = require('./../../lib') as any;
 const { Select } = require('nav-frontend-skjema');
 
 interface StateProps {
     defaultValue?: string;
-    language: string;
+    language: Language;
     label: React.ReactNode;
     feil?: Feil;
     validators?: any;

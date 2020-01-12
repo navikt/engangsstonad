@@ -5,6 +5,7 @@ import LanguageToggle from '../../intl/LanguageToggle';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import { VeilederProps } from 'components/veileder/Veileder';
+import { Language } from 'intl/IntlProvider';
 
 export interface Props {
     containerId?: string;
@@ -20,7 +21,7 @@ export interface Props {
     };
     tittel: React.ReactNode;
     ingress: React.ReactNode;
-    language?: string;
+    language?: Language;
     setLanguage?: (languageCode: string) => void;
 }
 

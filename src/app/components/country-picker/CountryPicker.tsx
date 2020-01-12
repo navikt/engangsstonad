@@ -7,6 +7,7 @@ import LabelText from 'common/components/labeltekst/Labeltekst';
 import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
 import { FormattedMessage } from 'react-intl';
+import { Language } from 'intl/IntlProvider';
 
 import './countryPicker.less';
 
@@ -18,7 +19,7 @@ interface Validators {
 
 interface Props {
     label: string;
-    language: string;
+    language: Language;
     utenlandsoppholdListe: Utenlandsopphold[];
     tidsperiode?: Tidsperiode;
     addVisit: (periode: Utenlandsopphold) => void;

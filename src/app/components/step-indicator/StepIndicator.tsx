@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Stegindikator from 'nav-frontend-stegindikator';
-import 'nav-frontend-stegindikator-style';
+
 import './stepIndicator.less';
 
 interface Props {

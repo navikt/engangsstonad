@@ -1,4 +1,5 @@
 import { CommonActionKeys, CommonActionTypes } from './commonActionDefinitions';
+import { Language } from 'intl/IntlProvider';
 
 export function setBekreftetInformasjon(bekreftetInformasjon: boolean): CommonActionTypes {
     return {
@@ -14,7 +15,7 @@ export function setGodkjentVilkar(godkjentVilkar: boolean): CommonActionTypes {
     };
 }
 
-export function setLanguage(language: string): CommonActionTypes {
+export function setLanguage(language: Language): CommonActionTypes {
     return {
         type: CommonActionKeys.SET_LANGUAGE,
         language

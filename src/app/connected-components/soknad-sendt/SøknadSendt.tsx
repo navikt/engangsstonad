@@ -20,6 +20,7 @@ const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
 
 import { lenker } from 'util/lenker';
 import { redirect } from 'util/login';
+import { AppState } from 'reducers/reducers';
 
 import '../../styles/engangsstonad.less';
 
@@ -44,49 +45,10 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
         }, 5000);
     }
 
-    receiptText() {
-        const { kvittering } = this.props;
-        return kvittering.saksNr ? (
-            <FormattedMessage
-                id="kvittering.text.soknadMottattMedSaksnummer"
-                values={{
-                    klokkeslett: moment(kvittering.mottattDato).format('HH:mm'),
-                    dato: moment(kvittering.mottattDato).format('LL'),
-                    saksNr: kvittering.saksNr
-                }}
-            />
-        ) : (
-            <FormattedMessage
-                id="kvittering.text.soknadMottatt"
-                values={{
-                    klokkeslett: moment(kvittering.mottattDato).format('HH:mm'),
-                    dato: moment(kvittering.mottattDato).format('LL')
-                }}
-            />
-        );
-    }
-
-    bankAccountText(kontonummer: string) {
-        return (
-            <FormattedMessage
-                id="kvittering.text.kontonummer"
-                values={{
-                    kontonummer,
-                    dinProfilLink: (
-                        <Lenke href={lenker.brukerprofil}>
-                            <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
-                        </Lenke>
-                    )
-                }}
-            />
-        );
-    }
-
     render() {
-        const { intl, person } = this.props;
-
+        const { intl, kvittering, person } = this.props;
         return (
-            <div className="engangsstonad">
+            <>
                 <DocumentTitle title={getMessage(intl, 'kvittering.sectionheading')} />
                 <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <div className="responsiveContainer">
@@ -95,7 +57,17 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
                         {getMessage(intl, 'kvittering.text.takk')}
                         <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
-                    <Ingress className="blokk-xs">{this.receiptText()}</Ingress>
+                    <Ingress className="blokk-xs">
+                        <FormattedMessage
+                            id="kvittering.text.soknadMottatt"
+                            values={{
+                                klokkeslett: moment(kvittering.mottattDato).format('HH:mm'),
+                                dato: moment(kvittering.mottattDato).format('LL'),
+                                harSaksnummer: kvittering.saksNr !== undefined,
+                                saksNr: kvittering.saksNr
+                            }}
+                        />
+                    </Ingress>
                     <Undertittel className="blokk-xs">
                         {getMessage(intl, 'kvittering.text.hvorFinnerJegStatus')}
                     </Undertittel>
@@ -113,7 +85,19 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
                     </Ingress>
 
                     {person.bankkonto && person.bankkonto.kontonummer && (
-                        <Ingress className="blokk-s">{this.bankAccountText(person.bankkonto.kontonummer)}</Ingress>
+                        <Ingress className="blokk-s">
+                            <FormattedMessage
+                                id="kvittering.text.kontonummer"
+                                values={{
+                                    kontonummer: person.bankkonto.kontonummer,
+                                    dinProfilLink: (
+                                        <Lenke href={lenker.brukerprofil}>
+                                            <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
+                                        </Lenke>
+                                    )
+                                }}
+                            />
+                        </Ingress>
                     )}
                     <Hovedknapp
                         className="responsiveButton responsiveButton--søknadSendt"
@@ -122,14 +106,14 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
                         {getMessage(intl, 'kvittering.text.soknadMottatt.avsluttText')}
                     </Hovedknapp>
                 </div>
-            </div>
+            </>
         );
     }
 }
 
-const mapStateToProps = (state: any) => ({
-    person: state.apiReducer.person,
-    kvittering: state.apiReducer.kvittering
+const mapStateToProps = (state: AppState) => ({
+    person: state.apiReducer.person!,
+    kvittering: state.apiReducer.kvittering!
 });
 
 export default connect<StateProps>(mapStateToProps)(injectIntl(SøknadSendt));

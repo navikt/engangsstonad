@@ -17,12 +17,14 @@ countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 const Modal = require('nav-frontend-modal').default;
 (Modal as any).setAppElement('#app');
 
-Sentry.init({
-    dsn: 'https://e2de35941445465aae1e83fcbcc2934d@sentry.gc.nav.no/8',
-    release: (window as any).APP_VERSION,
-    environment: window.location.hostname,
-    integrations: [new Sentry.Integrations.Breadcrumbs({ console: false })]
-});
+if (process.env.NODE_ENV !== 'development') {
+    Sentry.init({
+        dsn: 'https://e2de35941445465aae1e83fcbcc2934d@sentry.gc.nav.no/8',
+        release: (window as any).APP_VERSION,
+        environment: window.location.hostname,
+        integrations: [new Sentry.Integrations.Breadcrumbs({ console: false })]
+    });
+}
 
 const root = document.getElementById('app');
 render(
@@ -30,9 +32,7 @@ render(
         <Provider store={store}>
             <IntlProvider>
                 <Router>
-                    <div className="app">
-                        <AppContainer />
-                    </div>
+                    <AppContainer />
                 </Router>
             </IntlProvider>
         </Provider>

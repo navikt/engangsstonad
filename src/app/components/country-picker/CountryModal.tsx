@@ -9,11 +9,12 @@ import { Tidsperiode, Avgrensninger } from 'nav-datovelger';
 import LabelText from 'common/components/labeltekst/Labeltekst';
 import FormBlock from 'components/form-block/FormBlock';
 import { Feil } from 'components/skjema-input-element/types';
+import { Language } from 'intl/IntlProvider';
 
 const Modal = require('nav-frontend-modal').default;
 
 interface OwnProps {
-    language: string;
+    language: Language;
     utenlandsopphold?: Utenlandsopphold;
     alleUtenlandsopphold?: Utenlandsopphold[];
     label: string;

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
-import { RouteComponentProps } from 'react-router';
 
 const { ValidGroup, ValidForm } = require('../../lib') as any;
 const { Ingress } = require('nav-frontend-typografi');
@@ -22,12 +21,15 @@ import { getDefaultState } from 'reducers/stepReducer';
 import LanguageToggle from '../../intl/LanguageToggle';
 import getMessage from '../../util/i18n/i18nUtils';
 import Person from '../../types/domain/Person';
-import { ExternalProps } from '../../types/index';
+import { RouteComponentProps } from 'react-router-dom';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
 import { Innholdstittel } from 'nav-frontend-typografi';
 import { DispatchProps } from 'common/redux/types';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import Veiviser from 'components/veiviser/VeiviserSvg';
+
+import { AppState } from 'reducers/reducers';
+import { Language } from 'intl/IntlProvider';
 
 import '../../styles/engangsstonad.less';
 
@@ -40,10 +42,10 @@ interface State {
 interface StateProps {
     person: Person;
     godkjentVilkar: boolean;
-    language: string;
+    language: Language;
 }
 
-type Props = StateProps & DispatchProps & InjectedIntlProps & ExternalProps & RouteComponentProps<{}>;
+type Props = StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps;
 class Intro extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
@@ -86,12 +88,6 @@ class Intro extends React.Component<Props, State> {
         this.setState({ godkjentVilkår: !this.state.godkjentVilkår });
     }
 
-    fortsettSøknad() {
-        if (this.props.godkjentVilkar) {
-            this.props.history.push('/engangsstonad/soknad');
-        }
-    }
-
     startNySøknad() {
         if (this.state.godkjentVilkår) {
             this.props.dispatch(common.setGodkjentVilkar(true));
@@ -99,8 +95,8 @@ class Intro extends React.Component<Props, State> {
         }
     }
 
-    toggleLanguage(languageCode: string) {
-        this.props.dispatch(common.setLanguage(languageCode));
+    toggleLanguage(language: Language) {
+        this.props.dispatch(common.setLanguage(language));
     }
 
     confirmBoxLabelHeaderText() {
@@ -137,7 +133,7 @@ class Intro extends React.Component<Props, State> {
                     <ValidForm noSummary={true} onSubmit={this.startNySøknad}>
                         <LanguageToggle
                             language={this.props.language}
-                            toggleLanguage={(languageCode: string) => this.toggleLanguage(languageCode)}
+                            toggleLanguage={(language: Language) => this.toggleLanguage(language)}
                         />
                         <SimpleIllustration
                             dialog={{
@@ -216,8 +212,8 @@ class Intro extends React.Component<Props, State> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
-    person: state.apiReducer.person,
+const mapStateToProps = (state: AppState) => ({
+    person: state.apiReducer.person!,
     godkjentVilkar: state.commonReducer.godkjentVilkar,
     language: state.commonReducer.language
 });

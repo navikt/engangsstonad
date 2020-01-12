@@ -19,6 +19,8 @@ import FormBlock from 'components/form-block/FormBlock';
 import LabelText from 'common/components/labeltekst/Labeltekst';
 import Person from '../../types/domain/Person';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
+import { AppState } from 'reducers/reducers';
+import { Language } from 'intl/IntlProvider';
 
 const { ValidInput } = require('./../../lib') as any;
 
@@ -27,7 +29,7 @@ const MAKS_FNR_LENGTH = 30;
 
 interface StateProps {
     annenForelder: AnnenForelder;
-    language: string;
+    language: Language;
     person: Person;
 }
 
@@ -47,13 +49,19 @@ class Steg2 extends React.Component<Props> {
                             result = false;
                         }
                     } else {
-                        result = annenForelder.fnr !== undefined && annenForelder.fnr !== '' && annenForelder.fnr.length <= MAKS_FNR_LENGTH;
+                        result =
+                            annenForelder.fnr !== undefined &&
+                            annenForelder.fnr !== '' &&
+                            annenForelder.fnr.length <= MAKS_FNR_LENGTH;
                     }
                     return result;
                 },
-                failText: getMessage(intl, annenForelder.utenlandskFnr ?
-                    'annenForelder.ugyldigFødselsnummer.utenlandsk' :
-                    'annenForelder.ugyldigFødselsnummer')
+                failText: getMessage(
+                    intl,
+                    annenForelder.utenlandskFnr
+                        ? 'annenForelder.ugyldigFødselsnummer.utenlandsk'
+                        : 'annenForelder.ugyldigFødselsnummer'
+                )
             },
             {
                 test: () => person.fnr !== annenForelder.fnr,
@@ -67,7 +75,12 @@ class Steg2 extends React.Component<Props> {
         return [
             {
                 test: () => {
-                    return annenForelder && annenForelder.navn && annenForelder.navn.length > 0 && annenForelder.navn.length <= MAKS_NAVN_LENGTH;
+                    return (
+                        annenForelder &&
+                        annenForelder.navn &&
+                        annenForelder.navn.length > 0 &&
+                        annenForelder.navn.length <= MAKS_NAVN_LENGTH
+                    );
                 },
                 failText: getMessage(intl, 'annenForelder.ugyldigNavn')
             }
@@ -100,7 +113,9 @@ class Steg2 extends React.Component<Props> {
                             label={<LabelText>{getMessage(intl, 'annenForelder.label.navn')}</LabelText>}
                             placeholder={getMessage(intl, 'annenForelder.placeholder.navn')}
                             disabled={annenForelder.kanIkkeOppgis || false}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderNavn(e.target.value))}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                dispatch(setAnnenForelderNavn(e.target.value))
+                            }
                             value={annenForelder.navn || ''}
                             validators={this.getNavnValidators()}
                             maxLength={MAKS_NAVN_LENGTH}
@@ -118,7 +133,9 @@ class Steg2 extends React.Component<Props> {
                             label={getMessage(intl, 'annenForelder.label.fødselsnummer')}
                             id="js-fødselsnummer"
                             placeholder={getMessage(intl, 'annenForelder.placeholder.fødselsnummer')}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(setAnnenForelderFnr(e.target.value))}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                dispatch(setAnnenForelderFnr(e.target.value))
+                            }
                             name="fodselsnummerfelt"
                             validators={this.getFødselsnummerValidators()}
                             value={annenForelder.fnr || ''}
@@ -137,7 +154,7 @@ class Steg2 extends React.Component<Props> {
                         name="bostedsland"
                         defaultValue={annenForelder.bostedsland}
                         label={<LabelText intlId="annenForelder.label.bostedsland" />}
-                        onChange={land => dispatch(setAnnenForelderBostedsland(land))}
+                        onChange={(land) => dispatch(setAnnenForelderBostedsland(land))}
                         language={language}
                         validators={this.getBostedslandValidators()}
                     />
@@ -147,10 +164,10 @@ class Steg2 extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppState) => ({
     annenForelder: state.soknadReducer.annenForelder,
     language: state.commonReducer.language,
-    person: state.apiReducer.person
+    person: state.apiReducer.person!
 });
 
 export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg2));

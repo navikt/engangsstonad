@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { commonActionCreators as common } from '../../redux/actions';
 import { connect } from 'react-redux';
@@ -11,12 +10,12 @@ import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 import '../../styles/engangsstonad.less';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import Veileder from 'components/veileder/Veileder';
+import { AppState } from 'reducers/reducers';
 
 const { ValidGroup } = require('./../../lib') as any;
 
 interface StateProps {
     bekreftetInformasjon: boolean;
-    vedlegg: Attachment[];
 }
 
 type Props = StateProps & InjectedIntlProps & DispatchProps;
@@ -58,9 +57,8 @@ class Steg4 extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
-    bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
-    vedlegg: state.attachmentReducer
+const mapStateToProps = (state: AppState) => ({
+    bekreftetInformasjon: state.commonReducer.bekreftetInformasjon
 });
 
 export default connect<StateProps>(mapStateToProps)(injectIntl(Steg4));

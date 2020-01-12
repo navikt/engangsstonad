@@ -25,9 +25,6 @@
     "intro.innsendingFeilet.ingress": "Noko gjekk dessverre gale under innsending av søknaden din. Ver vennleg og prøv igjen seinare. Dersom det framleis oppstår feil, {lenke}.",
     "intro.innsendingFeilet.tittel": "Det oppstod ein feil under innsending",
     "intro.pageheading.samtykke": "Rettar og plikter.",
-    "intro.personIkkeFunnet.bobletekst.lenketekst": "kontakt brukarstøtte",
-    "intro.personIkkeFunnet.bobletekst": "noko gjekk dessverre gale under visinga av søknadsskjemaet. Ver vennleg og prøv igjen seinare. Dersom det framleis oppstår feil, {lenke}.",
-    "intro.personIkkeFunnet.bobletittel": "Beklager,",
     "intro.standard.bobletekst": "Hugs at dersom barnet ikkje er født enno, må du leggje ved ei stadfesting på termin.",
     "intro.standard.bobletittel": "Hei, {name}!",
     "intro.standard.dokumenttittel": "NAV eingongsstønad",
@@ -55,8 +52,7 @@
     "kvittering.text.kontonummer": " Hvis søknaden din blir innvilga, blir eingongsstønaden utbetalt til kontonummer {kontonummer}. Du kan endre kontonummeret på {dinProfilLink}.",
     "kvittering.text.soknadMottatt.avsluttText": "Avslutt",
     "kvittering.text.soknadMottatt.dinProfilLink": "Din profil",
-    "kvittering.text.soknadMottatt": "Vi fekk søknaden den {dato} kl. {klokkeslett}.",
-    "kvittering.text.soknadMottattMedSaksnummer": "Vi fekk søknaden med saksnummer {saksNr} den {dato} kl. {klokkeslett}.",
+    "kvittering.text.soknadMottatt": "Vi fekk søknaden {harSaksnummer, select, true {med saksnummer {saksNr}} false {}} den {dato} kl. {klokkeslett}.",
     "kvittering.text.takk": "Takk for søknaden",
     "label_med_hjelpetekst.label": "Hjelpetekst",
     "languageToggle.bokmål": "Bokmål - Norsk",
@@ -225,9 +221,8 @@
     "vedlegg.tomFil": "Du kan ikke laste opp en tom fil",
     "vedlegg.virus.flereFeil": "{filename} - Vedlegget inneheld noko vi ikkje vil ha",
     "vedlegg.virus": "Vedlegget inneholder noe vi ikkje vil ha",
-
-
-
     "intro.text.startNySøknadPrompt": "Er du sikkert på at du vil starte en ny søknad? Din påbegynte søknad vil bli slettet.",
-    "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }"
+    "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }",
+    "søknadContainer.prompt": "Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?",
+    "validForm.summaryTitle": "Du må rette opp i følgende feil:"
 }

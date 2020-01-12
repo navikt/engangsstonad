@@ -7,11 +7,12 @@ import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { CommonState } from 'reducers/commonReducer';
 import { DispatchProps } from 'common/redux/types';
 import { lenker } from 'util/lenker';
+import { Language } from 'intl/IntlProvider';
 
 import '../../styles/engangsstonad.less';
 
 interface StateProps {
-    language: string;
+    language: Language;
 }
 
 type Props = StateProps & DispatchProps & InjectedIntlProps;

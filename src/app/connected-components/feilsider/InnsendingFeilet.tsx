@@ -5,38 +5,41 @@ import getMessage from 'util/i18n/i18nUtils';
 import { connect } from 'react-redux';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { CommonState } from 'reducers/commonReducer';
-import { DispatchProps } from 'common/redux/types';
 import { lenker } from 'util/lenker';
+import { Language } from 'intl/IntlProvider';
 
 import '../../styles/engangsstonad.less';
 
 interface StateProps {
-    language: string;
+    language: Language;
 }
 
 interface InnsendingFeiletProps {
-    errorResponse: any;
-}
+    error?: any;
+};
 
-type Props = InnsendingFeiletProps & StateProps & DispatchProps & InjectedIntlProps;
-
+type Props = InnsendingFeiletProps & StateProps & InjectedIntlProps;
 const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
-    const {errorResponse, intl} = props;
+    const { error, intl } = props;
     const errorMessage =
-        errorResponse && errorResponse.status === 413 && errorResponse.data && errorResponse.data.messages
-            ? errorResponse.data.messages
-            : undefined;
+        error && error.status === 413 && error.data && error.data.messages ? error.data.messages : undefined;
 
     return (
         <Feilside
             dokumenttittel={getMessage(intl, 'intro.standard.dokumenttittel')}
             tittel={getMessage(intl, 'intro.innsendingFeilet.tittel')}
             ingress={
-                errorMessage ? errorMessage : (
+                errorMessage ? (
+                    errorMessage
+                ) : (
                     <FormattedMessage
                         id="intro.innsendingFeilet.ingress"
                         values={{
-                            lenke: <Lenke href={lenker.brukerstøtte}>{getMessage(intl, 'intro.innsendingFeilet.ingress.lenketekst')}</Lenke>
+                            lenke: (
+                                <Lenke href={lenker.brukerstøtte}>
+                                    {getMessage(intl, 'intro.innsendingFeilet.ingress.lenketekst')}
+                                </Lenke>
+                            )
                         }}
                     />
                 )

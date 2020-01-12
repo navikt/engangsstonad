@@ -1,5 +1,5 @@
 import * as React from 'react';
-const { Element } = require('nav-frontend-typografi');
+import { Element } from 'nav-frontend-typografi';
 
 import './speechBubble.less';
 

@@ -14,15 +14,11 @@ import Barn from '../../types/domain/Barn';
 import InformasjonOmUtenlandsopphold from '../../types/domain/InformasjonOmUtenlandsopphold';
 import AnnenForelder from '../../types/domain/AnnenForelder';
 import { StepConfig } from 'app/types/StepConfig';
-import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 export interface NextStepCondition {
-    type: string;
-    erEndringssøknad: boolean;
     barn: Barn;
     annenForelder: AnnenForelder;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
-    vedlegg: Attachment[];
 }
 
 const stepConfig = [

@@ -43,8 +43,6 @@ export const erMyndig = (person: Person) => {
 
 export const erMann = (person: Person) => person.kjønn === 'M';
 
-export const harPersonData = (person?: Person) => person !== undefined && person.fødselsdato !== undefined;
-
 export const getFørsteMuligeTermindato = () =>
     moment()
         .subtract(21, 'days')

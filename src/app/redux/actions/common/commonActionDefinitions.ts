@@ -1,3 +1,5 @@
+import { Language } from "intl/IntlProvider";
+
 export enum CommonActionKeys {
     'SET_BEKREFTET_INFORMASJON' = 'setBekreftetInformasjon',
     'SET_GODKJENT_VILKAR' = 'setGodkjentVilkar',
@@ -16,7 +18,7 @@ interface SetGodkjentVilkar {
 
 interface SetLanguage {
     type: CommonActionKeys.SET_LANGUAGE;
-    language: string;
+    language: Language;
 }
 
 export type CommonActionTypes =

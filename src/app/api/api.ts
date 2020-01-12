@@ -1,23 +1,48 @@
-import axios from 'axios';
 import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import { redirectToLogin } from 'util/login';
 
-function getPerson() {
-    const endpoint = (window as any).REST_API_URL;
-    return axios.get(`${endpoint}/personinfo`, { withCredentials: true });
-}
+const foreldrepengersoknadApi = axios.create({
+    baseURL: (window as any).REST_API_URL,
+    withCredentials: true
+});
 
-function sendSoknad(soknad: EngangsstonadSoknad) {
-    const config = {
-        withCredentials: true,
+foreldrepengersoknadApi.interceptors.request.use(
+    (config: AxiosRequestConfig): AxiosRequestConfig => {
+        config.withCredentials = true;
+        config.timeout = 60 * 1000;
+        return config;
+    }
+);
+
+foreldrepengersoknadApi.interceptors.response.use(
+    (response: AxiosResponse) => {
+        return response;
+    },
+    (error: AxiosError) => {
+        if (
+            error.response &&
+            error.response.status === 401 &&
+            error.config.url &&
+            !error.config.url.includes('/soknad')
+        ) {
+            redirectToLogin();
+        }
+        return Promise.reject(error);
+    }
+);
+
+const getPerson = () => {
+    return foreldrepengersoknadApi.get('/personinfo');
+};
+
+const sendSoknad = (soknad: EngangsstonadSoknad) => {
+    return foreldrepengersoknadApi.post('/soknad', soknad, {
         headers: {
             'content-type': 'application/json;'
         }
-    };
-
-    const url = `${(window as any).REST_API_URL}/soknad`;
-    return axios.post(url, soknad, config);
-}
+    });
+};
 
 const Api = { getPerson, sendSoknad };
-
 export default Api;

@@ -3,7 +3,8 @@ import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputEleme
 import { Feil } from 'components/skjema-input-element/types';
 import Datovelger, { Props as DatovelgerProps } from 'nav-datovelger';
 import { connect } from 'react-redux';
-import { CommonState } from 'reducers/commonReducer';
+import { Language } from 'intl/IntlProvider';
+import { AppState } from 'reducers/reducers';
 
 export interface Props extends DatovelgerProps {
     label: string | React.ReactNode;
@@ -11,7 +12,7 @@ export interface Props extends DatovelgerProps {
 }
 
 interface StateProps {
-    language: string;
+    language: Language;
 }
 
 class DateInput extends React.Component<Props & StateProps, {}> {
@@ -29,7 +30,7 @@ class DateInput extends React.Component<Props & StateProps, {}> {
     }
 }
 
-const mapStateToProps = (state: { commonReducer: CommonState }) => ({
+const mapStateToProps = (state: AppState) => ({
     language: state.commonReducer.language
 });
 

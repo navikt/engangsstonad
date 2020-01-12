@@ -12,8 +12,8 @@ const stepReducer = (state = getDefaultState(), action: StepActionTypes): StepSt
     switch (action.type) {
         case StepActionKeys.SET_ACTIVE_STEP:
             return { ...state, activeStep: action.activeStep };
+        default:
+            return state;
     }
-    return state;
 };
-
 export default stepReducer;

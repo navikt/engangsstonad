@@ -12,8 +12,8 @@ import { Language } from './IntlProvider';
 import './languageToggle.less';
 
 interface Props {
-    toggleLanguage: (langaugeCode: string) => void;
-    language: string;
+    toggleLanguage: (language: Language) => void;
+    language: Language;
 }
 
 const getLanguageCodeFromValue = (value: string) => {

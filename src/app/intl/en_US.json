@@ -25,9 +25,6 @@
     "intro.innsendingFeilet.ingress": "Unfortunately, something went wrong during submission of your application. Please try again later. If the errors continue to occur {lenke}.",
     "intro.innsendingFeilet.tittel": "An error occurred during submission",
     "intro.pageheading.samtykke": "Rights and duties.",
-    "intro.personIkkeFunnet.bobletekst.lenketekst": "please contact user support",
-    "intro.personIkkeFunnet.bobletekst": "unfortunately an error occurred in the display of the application form. Please try again later. If the errors continue to occur {lenke}.",
-    "intro.personIkkeFunnet.bobletittel": "Sorry,",
     "intro.standard.bobletekst": "Remember that if your child is not yet born, you must attach confirmation of the expected date of delivery.",
     "intro.standard.bobletittel": "Hi, {name}!",
     "intro.standard.dokumenttittel": "NAV Lump-sum grant",
@@ -55,8 +52,7 @@
     "kvittering.text.kontonummer": "If your application is approved, the lump-sum grant will be paid to account number {kontonummer}. You can change the account number at {dinProfilLink}.",
     "kvittering.text.soknadMottatt.avsluttText": "Exit",
     "kvittering.text.soknadMottatt.dinProfilLink": "Your profile",
-    "kvittering.text.soknadMottatt": "We received your application on {dato} at {klokkeslett}.",
-    "kvittering.text.soknadMottattMedSaksnummer": "We received your application with id {saksNr} on {dato} at {klokkeslett}.",
+    "kvittering.text.soknadMottatt": "We received your application {harSaksnummer, select, true {with id {saksNr}} false {}} on {dato} at {klokkeslett}.",
     "kvittering.text.takk": "Thank you for the application",
     "label_med_hjelpetekst.label": "Help text",
     "languageToggle.bokmål": "Bokmål - Norsk",
@@ -228,5 +224,7 @@
     "sesjonUtløpt.fortsett": "Ja, jeg vil fortsette",
     "sesjonUtløpt.ingress": "Du må logge inn på nytt for å fortsette med søknaden.</br>Ønsker du å fortsette?",
     "sesjonUtløpt.tittel": "Du er logget ut",
-    "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }"
+    "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }",
+    "søknadContainer.prompt": "Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?",
+    "validForm.summaryTitle": "Du må rette opp i følgende feil:"
 }
