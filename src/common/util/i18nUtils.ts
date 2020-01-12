@@ -1,5 +1,4 @@
-import InjectedIntl = ReactIntl.InjectedIntl;
-import MessageValue = ReactIntl.MessageValue;
+import { InjectedIntl, MessageValue } from 'react-intl'
 
 const getMessage = (
     intl: InjectedIntl,

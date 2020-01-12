@@ -7,7 +7,7 @@ import { isAttachmentWithError } from 'common/storage/attachment/components/util
 import { ISODateToMaskedInput } from 'util/date/dateUtils';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
-import getMessage from 'util/i18n/i18nUtils';
+import getMessage from 'common/util/i18nUtils';
 import '../../styles/engangsstonad.less';
 
 interface Props {

@@ -1,5 +1,5 @@
-import getMessage from 'util/i18n/i18nUtils';
-import InjectedIntl = ReactIntl.InjectedIntl;
+import getMessage from 'common/util/i18nUtils';
+import { InjectedIntl } from 'react-intl'
 import Steg1 from './Steg1';
 import Steg2 from './Steg2';
 import Steg3 from './Steg3';

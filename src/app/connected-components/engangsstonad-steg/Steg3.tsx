@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import * as moment from 'moment';
-import getMessage from 'util/i18n/i18nUtils';
+import getMessage from 'common/util/i18nUtils';
 import { soknadActionCreators as soknad } from '../../redux/actions';
 import InformasjonOmUtenlandsopphold, { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 import { DispatchProps } from 'common/redux/types';

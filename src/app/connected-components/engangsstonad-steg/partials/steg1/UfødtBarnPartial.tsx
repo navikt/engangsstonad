@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InjectedIntlProps } from 'react-intl';
 import { soknadActionCreators as soknad } from '../../../../redux/actions';
 import { default as Barn, UfodtBarn } from '../../../../types/domain/Barn';
-import getMessage from 'util/i18n/i18nUtils';
+import getMessage from 'common/util/i18nUtils';
 import { DispatchProps } from 'common/redux/types';
 import OmTerminbekreftelsen from 'components/modal-content/OmTerminbekreftelsen';
 import {

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import Feilside from 'components/feilside/Feilside';
-import getMessage from 'util/i18n/i18nUtils';
 import { connect } from 'react-redux';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { CommonState } from 'reducers/commonReducer';
 import { lenker } from 'util/lenker';
 import { Language } from 'intl/IntlProvider';
+import getMessage from 'common/util/i18nUtils';
 
 import '../../styles/engangsstonad.less';
 

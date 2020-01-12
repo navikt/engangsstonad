@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import getMessage from '../../util/i18n/i18nUtils';
+import getMessage from 'common/util/i18nUtils';
 import Person from '../../types/domain/Person';
 import { DispatchProps } from 'common/redux/types';
 import { ApiState } from 'reducers/apiReducer';

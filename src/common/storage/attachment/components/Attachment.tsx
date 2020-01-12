@@ -9,9 +9,9 @@ import Lenke from 'nav-frontend-lenker';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { bytesString } from 'common/util/filesize';
 import BEMHelper from 'common/util/bem';
+import VedleggIkon from 'common/components/ikoner/VedleggIkon';
 
 import './attachment.less';
-import VedleggIkon from 'common/components/ikoner/VedleggIkon';
 
 interface OwnProps {
     attachment: Attachment;

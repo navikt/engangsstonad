@@ -5,7 +5,8 @@ import { DispatchProps } from 'common/redux/types';
 import { injectIntl } from 'react-intl';
 import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import AnnenForelder from '../../types/domain/AnnenForelder';
-import getMessage from 'util/i18n/i18nUtils';
+import getMessage from 'common/util/i18nUtils';
+
 const isValidFødselsnummer = require('is-valid-fodselsnummer');
 import {
     setAnnenForelderBostedsland,

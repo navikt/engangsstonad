@@ -3,10 +3,10 @@ import { CountrySummaryList } from 'components/country-picker/CountryList';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
-import getMessage from 'util/i18n/i18nUtils';
 import InformasjonOmUtenlandsopphold, { Tidsperiode, Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 import * as moment from 'moment';
 import Barn, { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
+import getMessage from 'common/util/i18nUtils';
 
 import '../../styles/engangsstonad.less';
 

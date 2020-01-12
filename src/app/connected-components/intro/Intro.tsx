@@ -19,7 +19,7 @@ import {
 } from '../../redux/actions';
 import { getDefaultState } from 'reducers/stepReducer';
 import LanguageToggle from '../../intl/LanguageToggle';
-import getMessage from '../../util/i18n/i18nUtils';
+import getMessage from 'common/util/i18nUtils';
 import Person from '../../types/domain/Person';
 import { RouteComponentProps } from 'react-router-dom';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';

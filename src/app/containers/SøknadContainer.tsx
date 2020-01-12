@@ -3,7 +3,7 @@ import { RouteComponentProps, Prompt } from 'react-router';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import getMessage from '../util/i18n/i18nUtils';
+import getMessage from 'common/util/i18nUtils';
 import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';

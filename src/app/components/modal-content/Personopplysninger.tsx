@@ -1,10 +1,10 @@
 import React from 'react';
-import getMessage from 'util/i18n/i18nUtils';
 import { InjectedIntlProps } from 'react-intl';
 const { FormattedMessage, injectIntl } = require('react-intl');
 const { Undertittel, Normaltekst, Element } = require('nav-frontend-typografi');
 import Lenke from 'nav-frontend-lenker';
 import { lenker } from 'util/lenker';
+import getMessage from 'common/util/i18nUtils';
 
 type Props = InjectedIntlProps;
 
@@ -12,13 +12,19 @@ const Personopplysninger: React.StatelessComponent<Props> = (props: Props) => {
     const { intl } = props;
     return (
         <div className="modalContent">
-            <Undertittel className="modalContent__header">{getMessage(intl, 'personopplysninger.sectionheading')}</Undertittel>
+            <Undertittel className="modalContent__header">
+                {getMessage(intl, 'personopplysninger.sectionheading')}
+            </Undertittel>
             <Normaltekst className="blokk-xs">{getMessage(intl, 'personopplysninger.ingress.1')}</Normaltekst>
             <Normaltekst className="blokk-xs">{getMessage(intl, 'personopplysninger.ingress.2')}</Normaltekst>
 
             <div className="blokk-xs">
-                <Element className="blokk-xs">{getMessage(intl, 'personopplysninger.text.opplysningerViInnhenter')}</Element>
-                <Normaltekst className="blokk-xs">{getMessage(intl, 'personopplysninger.text.opplysningerViInnhenter.ingress')}</Normaltekst>
+                <Element className="blokk-xs">
+                    {getMessage(intl, 'personopplysninger.text.opplysningerViInnhenter')}
+                </Element>
+                <Normaltekst className="blokk-xs">
+                    {getMessage(intl, 'personopplysninger.text.opplysningerViInnhenter.ingress')}
+                </Normaltekst>
                 <ul>
                     <li>
                         <Normaltekst>{getMessage(intl, 'personopplysninger.opplysningerViInnhenter.1')}</Normaltekst>
@@ -34,14 +40,22 @@ const Personopplysninger: React.StatelessComponent<Props> = (props: Props) => {
             </div>
 
             <div>
-                <Element className="blokk-xs">{getMessage(intl, 'personopplysninger.text.lagringAvOpplysninger')}</Element>
-                <Normaltekst className="blokk-xs">{getMessage(intl, 'personopplysninger.text.lagringAvOpplysninger.1')}</Normaltekst>
-                <Normaltekst className="blokk-xs">{getMessage(intl, 'personopplysninger.text.lagringAvOpplysninger.2')}</Normaltekst>
+                <Element className="blokk-xs">
+                    {getMessage(intl, 'personopplysninger.text.lagringAvOpplysninger')}
+                </Element>
+                <Normaltekst className="blokk-xs">
+                    {getMessage(intl, 'personopplysninger.text.lagringAvOpplysninger.1')}
+                </Normaltekst>
+                <Normaltekst className="blokk-xs">
+                    {getMessage(intl, 'personopplysninger.text.lagringAvOpplysninger.2')}
+                </Normaltekst>
             </div>
 
             <div className="blokk-xs">
                 <Element className="blokk-xs">{getMessage(intl, 'personopplysninger.text.automatiskLagring')}</Element>
-                <Normaltekst className="blokk-xs">{getMessage(intl, 'personopplysninger.text.automatiskLagring.ingress')}</Normaltekst>
+                <Normaltekst className="blokk-xs">
+                    {getMessage(intl, 'personopplysninger.text.automatiskLagring.ingress')}
+                </Normaltekst>
                 <ul>
                     <li>
                         <Normaltekst>{getMessage(intl, 'personopplysninger.text.automatiskLagring.1')}</Normaltekst>
@@ -60,7 +74,9 @@ const Personopplysninger: React.StatelessComponent<Props> = (props: Props) => {
 
             <div className="blokk-xs">
                 <Element className="blokk-xs">{getMessage(intl, 'personopplysninger.text.svarPåSøknaden')}</Element>
-                <Normaltekst className="blokk-xs">{getMessage(intl, 'personopplysninger.text.svarPåSøknaden.ingress')}</Normaltekst>
+                <Normaltekst className="blokk-xs">
+                    {getMessage(intl, 'personopplysninger.text.svarPåSøknaden.ingress')}
+                </Normaltekst>
                 <ul>
                     <li>
                         <Normaltekst>{getMessage(intl, 'personopplysninger.text.svarPåSøknaden.1')}</Normaltekst>
@@ -75,16 +91,15 @@ const Personopplysninger: React.StatelessComponent<Props> = (props: Props) => {
             </div>
 
             <div>
-                <Element className="blokk-xs">{getMessage(intl, 'personopplysninger.text.personvernerklæringeniNAV')}</Element>
+                <Element className="blokk-xs">
+                    {getMessage(intl, 'personopplysninger.text.personvernerklæringeniNAV')}
+                </Element>
                 <Normaltekst>
                     <FormattedMessage
                         id="personopplysninger.text.personvernerklering"
                         values={{
                             link: (
-                                <Lenke
-                                    href={lenker.personvernerklæring}
-                                    target="_blank"
-                                >
+                                <Lenke href={lenker.personvernerklæring} target="_blank">
                                     <FormattedMessage id="personopplysninger.text.personvernerklering.link" />
                                 </Lenke>
                             )

@@ -4,7 +4,7 @@ import { commonActionCreators as common } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { DispatchProps } from 'common/redux/types';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import getMessage from '../../util/i18n/i18nUtils';
+import getMessage from 'common/util/i18nUtils';
 import Oppsummering from '../oppsummering/Oppsummering';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 import '../../styles/engangsstonad.less';

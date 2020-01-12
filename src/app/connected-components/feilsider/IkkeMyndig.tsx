@@ -1,8 +1,6 @@
 import * as React from 'react';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
-import getMessage from '../../util/i18n/i18nUtils';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import Person from '../../types/domain/Person';
 
 import { DispatchProps } from 'common/redux/types';
@@ -13,6 +11,7 @@ import Feilside from 'components/feilside/Feilside';
 import { setLanguage } from 'actions/common/commonActionCreators';
 import { lenker } from 'util/lenker';
 import { Language } from 'intl/IntlProvider';
+import getMessage from 'common/util/i18nUtils';
 
 import '../../styles/engangsstonad.less';
 

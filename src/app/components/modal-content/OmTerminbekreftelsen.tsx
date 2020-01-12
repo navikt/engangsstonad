@@ -1,28 +1,18 @@
 import * as React from 'react';
-
-const { injectIntl, intlShape } = require('react-intl');
-const { Undertittel, Normaltekst } = require('nav-frontend-typografi');
-import getMessage from '../../util/i18n/i18nUtils';
+import { FormattedMessage } from 'react-intl';
+import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 
 import './modalContent.less';
-import InjectedIntl = ReactIntl.InjectedIntl;
 
-interface Props {
-    intl: InjectedIntl;
-}
-
-const OmTerminbekreftelsen: React.StatelessComponent<Props> = ({ intl }) => (
+const OmTerminbekreftelsen: React.StatelessComponent = () => (
     <div className="modalContent">
         <Undertittel className="modalContent__header">
-            {getMessage(intl, 'terminbekreftelsen.sectionheading')}
+            <FormattedMessage id="terminbekreftelsen.sectionheading" />
         </Undertittel>
         <Normaltekst className="modalContent__paragraph">
-            {getMessage(intl, 'terminbekreftelsen.text.terminbekreftelsen')}
+            <FormattedMessage id="terminbekreftelsen.text.terminbekreftelsen" />
         </Normaltekst>
     </div>
 );
 
-OmTerminbekreftelsen.propTypes = {
-    intl: intlShape.isRequired
-};
-export default injectIntl(OmTerminbekreftelsen);
+export default OmTerminbekreftelsen;

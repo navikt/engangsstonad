@@ -3,7 +3,7 @@ import * as countries from 'i18n-iso-countries';
 import classnames from 'classnames';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { ISODateToMaskedInput } from 'util/date/dateUtils';
-import getMessage from 'util/i18n/i18nUtils';
+import getMessage from 'common/util/i18nUtils';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 
 import SlettKnapp from 'common/components/slett-knapp/SlettKnapp';

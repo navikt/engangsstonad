@@ -1,9 +1,8 @@
 import * as React from 'react';
-const { FormattedMessage, injectIntl } = require('react-intl');
+import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
 const { Undertittel, Normaltekst } = require('nav-frontend-typografi');
-import getMessage from '../../util/i18n/i18nUtils';
+import getMessage from 'common/util/i18nUtils';
 import Lenke from 'nav-frontend-lenker';
-import InjectedIntl = ReactIntl.InjectedIntl;
 import { lenker } from 'util/lenker';
 
 import './modalContent.less';

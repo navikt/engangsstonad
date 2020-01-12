@@ -1,26 +1,17 @@
-import { Attachment, AttachmentType } from 'common/storage/attachment/types/Attachment';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { Operation } from '../types/Operation';
 import EngangsstonadSoknad from '../../types/domain/EngangsstonadSoknad';
 
-export const editAttachmentInState = (
-    attachment: Attachment,
-    state: EngangsstonadSoknad
-): EngangsstonadSoknad => {
-    return updateAttachmentState(attachment, state, Operation.EDIT);
+export const editAttachmentInState = (attachment: Attachment, state: EngangsstonadSoknad): EngangsstonadSoknad => {
+    return stateWithUpdatedBarnAttachments(attachment, state, Operation.EDIT);
 };
 
-export const removeAttachmentFromState = (
-    attachment: Attachment,
-    state: EngangsstonadSoknad
-) => {
-    return updateAttachmentState(attachment, state, Operation.DELETE);
+export const removeAttachmentFromState = (attachment: Attachment, state: EngangsstonadSoknad) => {
+    return stateWithUpdatedBarnAttachments(attachment, state, Operation.DELETE);
 };
 
-export const addAttachmentToState = (
-    attachment: Attachment,
-    state: EngangsstonadSoknad
-) => {
-    return updateAttachmentState(attachment, state, Operation.ADD);
+export const addAttachmentToState = (attachment: Attachment, state: EngangsstonadSoknad) => {
+    return stateWithUpdatedBarnAttachments(attachment, state, Operation.ADD);
 };
 
 const updateAttachmentList = (
@@ -44,28 +35,9 @@ const stateWithUpdatedBarnAttachments = (
     operation: Operation
 ): EngangsstonadSoknad => {
     const attachments = state.barn[attachment.type] || [];
-    const updatedAttachments = updateAttachmentList(
-        attachments,
-        attachment,
-        operation
-    );
+    const updatedAttachments = updateAttachmentList(attachments, attachment, operation);
     return {
         ...state,
         barn: { ...state.barn, [attachment.type]: updatedAttachments }
     };
-};
-
-const updateAttachmentState = (
-    attachment: Attachment,
-    state: EngangsstonadSoknad,
-    operation: Operation
-): EngangsstonadSoknad => {
-    const { type } = attachment;
-    const isAttachmentForBarn =
-        type === AttachmentType.TERMINBEKREFTELSE;
-
-    if (isAttachmentForBarn) {
-        return stateWithUpdatedBarnAttachments(attachment, state, operation);
-    }
-    return state;
 };

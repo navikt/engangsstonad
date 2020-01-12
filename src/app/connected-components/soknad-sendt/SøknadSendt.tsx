@@ -8,7 +8,6 @@ import * as moment from 'moment';
 import DocumentTitle from 'react-document-title';
 import Lenke from 'nav-frontend-lenker';
 import CustomSVG from 'common/components/custom-svg/CustomSVG';
-import getMessage from 'util/i18n/i18nUtils';
 import Kvittering from 'app/types/services/Kvittering';
 import Person from '../../types/domain/Person';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
@@ -21,6 +20,7 @@ const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
 import { lenker } from 'util/lenker';
 import { redirect } from 'util/login';
 import { AppState } from 'reducers/reducers';
+import getMessage from 'common/util/i18nUtils';
 
 import '../../styles/engangsstonad.less';
 
