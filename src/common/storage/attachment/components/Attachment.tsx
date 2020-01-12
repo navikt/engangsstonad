@@ -44,13 +44,11 @@ const Attachment: React.StatelessComponent<Props> = ({
                 {attachment.url ? (
                     <Lenke href={attachment.url} target="_blank">{attachment.filename}</Lenke>
                 ) : (
-                    <React.Fragment>{attachment.filename}</React.Fragment>
+                    <span>{attachment.filename}</span>
                 )}
                 {showFileSize && <div>{bytesString(attachment.filesize)}</div>}
             </div>
-            {onDelete &&
-                attachment.uploaded &&
-                !attachment.pending && (
+            {onDelete && (
                     <span className={BEM.element('deleteButton')}>
                         <SlettKnapp
                             onClick={() => onDelete(attachment)}
