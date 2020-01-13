@@ -2,6 +2,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { Normaltekst } from 'nav-frontend-typografi';
 import * as Sentry from '@sentry/browser';
 
 import AppContainer from './containers/AppContainer';
@@ -32,7 +33,9 @@ render(
         <Provider store={store}>
             <IntlProvider>
                 <Router>
-                    <AppContainer />
+                    <Normaltekst tag="div">
+                        <AppContainer />
+                    </Normaltekst>
                 </Router>
             </IntlProvider>
         </Provider>
