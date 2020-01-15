@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Field, FieldProps, FormikProps } from 'formik';
-const Modal = require('nav-frontend-modal').default;
-
 import Select from 'components/form/select/Select';
 import { JaNeiSpørsmål } from 'components/form/ja-nei-spørsmål/JaNeiSpørsmål';
 import RadioPanelGruppeResponsiveWrapper from 'components/form/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
@@ -22,46 +20,25 @@ const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
     const [isOmTerminbekreftelsenOpen, setOmTerminbekreftelsenOpen] = useState(false);
     return (
         <>
-            <Field
+            <RadioPanelGruppeResponsiveWrapper
                 name={Question.erFødt}
-                render={(fieldProps: FieldProps) => (
-                    <RadioPanelGruppeResponsiveWrapper
-                        radioValues={[JaNeiSpørsmål.JA, JaNeiSpørsmål.NEI]}
-                        fieldProps={fieldProps}
-                    />
-                )}
+                radioValues={[JaNeiSpørsmål.JA, JaNeiSpørsmål.NEI]}
             />
+
             {touched[Question.erFødt] && (
-                <Field
-                    name={Question.antallBarn}
-                    render={(fieldProps: FieldProps) => {
-                        return (
-                            <RadioPanelGruppeResponsiveWrapper radioValues={[1, 2, 3].map(String)} fieldProps={fieldProps} />
-                        );
-                    }}
-                />
+                <RadioPanelGruppeResponsiveWrapper radioValues={[1, 2, 3].map(String)} name={Question.antallBarn} />
             )}
-            {values[Question.antallBarn]! >= 3 && (
-                <Field
-                    name={Question.antallBarn}
-                    render={(fieldProps: FieldProps) => (
-                        <Select fieldProps={fieldProps} options={[3, 4, 5, 6, 7, 8, 9]} />
-                    )}
-                />
-            )}
+
+            {values[Question.antallBarn]! >= 3 && <Select name={Question.antallBarn} options={[3, 4, 5, 6, 7, 8, 9]} />}
+
             {touched[Question.antallBarn] && values[Question.erFødt] && (
-                <Field
-                    name={Question.fødselsdato}
-                    render={(fieldProps: FieldProps) => <DatovelgerElement fieldProps={fieldProps} />}
-                />
+                <DatovelgerElement name={Question.fødselsdato} />
             )}
+
             {touched[Question.antallBarn] && values[Question.erFødt] === false && (
                 <>
-                    <Field
-                        name={Question.termindato}
-                        render={(fieldProps: FieldProps) => <DatovelgerElement fieldProps={fieldProps} />}
-                    />
-
+                    <DatovelgerElement name={Question.termindato} />
+                    
                     {values[Question.termindato] && (
                         <Field
                             name={Question.terminberkreftelse}
@@ -73,20 +50,13 @@ const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
                             )}
                         />
                     )}
-
-                    {values[Question.termindato] && (
-                        <Field
-                            name={Question.terminberkreftelseDato}
-                            render={(fieldProps: FieldProps) => <DatovelgerElement fieldProps={fieldProps} />}
-                        />
-                    )}
-                    <Modal
+                    
+                    {values[Question.termindato] && <DatovelgerElement name={Question.terminberkreftelseDato} />}
+                    
+                    <OmTerminbekreftelsen
                         isOpen={isOmTerminbekreftelsenOpen}
-                        closeButton={true}
                         onRequestClose={() => setOmTerminbekreftelsenOpen(false)}
-                        contentLabel="Om terminbekreftelsen">
-                        <OmTerminbekreftelsen />
-                    </Modal>
+                    />
                 </>
             )}
         </>
