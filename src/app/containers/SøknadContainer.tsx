@@ -13,7 +13,6 @@ import CancelButton from 'components/cancel-button/CancelButton';
 import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 import { DispatchProps } from 'common/redux/types';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
-import { lenker } from 'util/lenker';
 const { ValidForm } = require('./../lib') as any;
 import { AppState } from 'reducers/reducers';
 import { Language } from 'intl/IntlProvider';
@@ -102,7 +101,7 @@ class SøknadContainer extends React.Component<Props> {
                             {fortsettKnappLabel}
                         </Hovedknapp>
                     )}
-                    <CancelButton redirect={lenker.dittNav} />
+                    <CancelButton />
                 </ValidForm>
                 <UtløptSesjonModal erÅpen={sessionHasExpired} />
             </>
