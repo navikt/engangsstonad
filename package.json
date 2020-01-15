@@ -111,6 +111,7 @@
         "@types/react-router-dom": "^5.1.2",
         "@types/react-scroll": "^1.5.4",
         "@types/react-transition-group": "^2.0.14",
+        "@types/yup": "^0.26.27",
         "autoprefixer": "^9.7.3",
         "babel-eslint": "8.0.2",
         "babel-loader": "^8.0.6",

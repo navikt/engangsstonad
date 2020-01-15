@@ -3,6 +3,7 @@ import { RouteComponentProps, Prompt } from 'react-router';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
+
 import getMessage from 'common/util/i18nUtils';
 import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
 import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
@@ -16,6 +17,7 @@ import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonMod
 import { AppState } from 'reducers/reducers';
 import { Language } from 'intl/IntlProvider';
 import { Formik, Form, FormikProps } from 'formik';
+import ValidationSchema from './validationSchema';
 
 interface OwnProps {
     søknad: EngangsstonadSoknad;
@@ -75,22 +77,22 @@ class SøknadContainer extends React.Component<Props> {
                 <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <Formik
                     initialValues={{}}
+                    validationSchema={ValidationSchema}
                     onSubmit={(e) => {
                         console.log(e);
                         this.handleNextClicked();
                     }}
                     render={(formikProps: FormikProps<any>) => {
+                        console.log(formikProps.errors);
                         return (
                             <>
-                                <SkjemaHeader
-                                    onPrevious={() => this.handleBackClicked()}
-                                    activeStep={activeStep}
-                                    stepTitles={titles}
-                                />
-
                                 <Form className="responsiveContainer">
+                                    <SkjemaHeader
+                                        onPrevious={() => this.handleBackClicked()}
+                                        activeStep={activeStep}
+                                        stepTitles={titles}
+                                    />
                                     {ActiveStep.component(formikProps)}
-
                                     {this.shouldRenderFortsettKnapp() && (
                                         <Hovedknapp
                                             className="responsiveButton"

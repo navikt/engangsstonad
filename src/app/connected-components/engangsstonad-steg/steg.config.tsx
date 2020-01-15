@@ -19,7 +19,7 @@ const stepConfig = [
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
         stegIndikatorLabelIntlId: 'annenForelder.sectionheading',
-        component: Steg3,
+        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg1 formikProps={formikProps} />,
         nextStepCondition: () => true
     },
     {
