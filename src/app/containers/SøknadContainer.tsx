@@ -76,27 +76,27 @@ class SøknadContainer extends React.Component<Props> {
                 <Formik
                     initialValues={{}}
                     onSubmit={(e) => {
-                        console.log(e)
+                        console.log(e);
                         this.handleNextClicked();
                     }}
                     render={(formikProps: FormikProps<any>) => {
                         return (
                             <>
-                                <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                                 <SkjemaHeader
                                     onPrevious={() => this.handleBackClicked()}
                                     activeStep={activeStep}
                                     stepTitles={titles}
                                 />
 
-                                <Form className="søknad-container">
+                                <Form className="responsiveContainer">
                                     {ActiveStep.component(formikProps)}
 
                                     {this.shouldRenderFortsettKnapp() && (
                                         <Hovedknapp
                                             className="responsiveButton"
                                             disabled={søknadSendingInProgress}
-                                            spinner={søknadSendingInProgress}>
+                                            spinner={søknadSendingInProgress}
+                                        >
                                             {ActiveStep.fortsettKnappLabel}
                                         </Hovedknapp>
                                     )}
