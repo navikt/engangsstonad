@@ -29,9 +29,8 @@ const RadioPanelGruppeResponsiveWrapper: React.StatelessComponent<Props> = ({ na
                             }
                         }))}
                         onChange={(e, value: string) => {
-                            field.onChange(e);
                             form.setFieldValue(field.name, parseNavFrontend(value));
-                            form.setFieldTouched(field.name, true);
+                            form.setFieldTouched(field.name, true, false);
                         }}
                         checked={getCheckedRadioValue(field.value)}
                     />

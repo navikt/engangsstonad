@@ -16,7 +16,7 @@
         "start-express": "node ./server.js",
         "start-mock-api-server": "node ./mock-api-server.js",
         "start": "node ./src/build/scripts/start-dev.js",
-        "test": "cross-env NODE_ENV=test jest",
+        "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
         "lint": "tslint src/**"
     },
     "dependencies": {

@@ -26,7 +26,7 @@ const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
             />
 
             {touched[Question.erFødt] && (
-                <RadioPanelGruppeResponsiveWrapper radioValues={[1, 2, 3].map(String)} name={Question.antallBarn} />
+                <RadioPanelGruppeResponsiveWrapper name={Question.antallBarn} radioValues={[1, 2, 3].map(String)} />
             )}
 
             {values[Question.antallBarn]! >= 3 && <Select name={Question.antallBarn} options={[3, 4, 5, 6, 7, 8, 9]} />}
@@ -40,23 +40,24 @@ const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
                     <DatovelgerElement name={Question.termindato} />
                     
                     {values[Question.termindato] && (
-                        <Field
-                            name={Question.terminberkreftelse}
-                            render={(fieldProps: FieldProps) => (
-                                <AttachmentUploader
-                                    skjemanummer={Skjemanummer.TERMINBEKREFTELSE}
-                                    fieldProps={fieldProps}
-                                />
-                            )}
-                        />
+                        <>
+                            <OmTerminbekreftelsen
+                                isOpen={isOmTerminbekreftelsenOpen}
+                                onRequestClose={() => setOmTerminbekreftelsenOpen(false)}
+                            />
+                            <Field
+                                name={Question.terminberkreftelse}
+                                render={(fieldProps: FieldProps) => (
+                                    <AttachmentUploader
+                                        skjemanummer={Skjemanummer.TERMINBEKREFTELSE}
+                                        fieldProps={fieldProps}
+                                    />
+                                )}
+                            />
+                        </>
                     )}
-                    
+
                     {values[Question.termindato] && <DatovelgerElement name={Question.terminberkreftelseDato} />}
-                    
-                    <OmTerminbekreftelsen
-                        isOpen={isOmTerminbekreftelsenOpen}
-                        onRequestClose={() => setOmTerminbekreftelsenOpen(false)}
-                    />
                 </>
             )}
         </>

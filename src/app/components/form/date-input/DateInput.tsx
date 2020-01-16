@@ -2,7 +2,6 @@ import * as React from 'react';
 import Datovelger from 'nav-datovelger/dist/datovelger/Datovelger';
 import { DatovelgerProps } from 'nav-datovelger';
 import { guid } from 'nav-frontend-js-utils';
-import moment from 'moment';
 import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
 import { Field, FieldProps } from 'formik';
 
@@ -25,15 +24,15 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, datovelgerPr
                                 id: field.name,
                                 name: field.name,
                                 onChange: (inputValue) => {
-                                    const val = moment(inputValue, moment.HTML5_FMT.DATE, true);
-                                    if (!val.isValid()) {
-                                        form.setFieldValue(field.name, val);
+                                    if (inputValue !== '') {
+                                        form.setFieldValue(field.name, inputValue);
                                     }
                                 }
                             }}
                             onChange={(value) => {
-                                form.setFieldValue(field.name, value);
-                                form.setFieldTouched(field.name, true);
+                                if (value !== 'Invalid date') {
+                                    form.setFieldValue(field.name, value);
+                                }
                             }}
                             valgtDato={field.value}
                             {...datovelgerProps}

@@ -13,14 +13,12 @@ const stepConfig = [
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
         stegIndikatorLabelIntlId: 'relasjonBarn.sectionheading',
-        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg1 formikProps={formikProps} />,
-        nextStepCondition: () => true
+        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg1 formikProps={formikProps} />
     },
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
         stegIndikatorLabelIntlId: 'annenForelder.sectionheading',
-        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg1 formikProps={formikProps} />,
-        nextStepCondition: () => true
+        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg1 formikProps={formikProps} />
     },
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',

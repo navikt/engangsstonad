@@ -3,6 +3,8 @@ import { RouteComponentProps, Prompt } from 'react-router';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import { Formik, Form, FormikProps } from 'formik';
+import _ from 'lodash';
 
 import getMessage from 'common/util/i18nUtils';
 import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
@@ -16,8 +18,8 @@ import { DispatchProps } from 'common/redux/types';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
 import { AppState } from 'reducers/reducers';
 import { Language } from 'intl/IntlProvider';
-import { Formik, Form, FormikProps } from 'formik';
 import ValidationSchema from './validationSchema';
+import ValidationErrorSummaryBase from 'components/validation-error-summary/ValidationErrorSummaryBase';
 
 interface OwnProps {
     søknad: EngangsstonadSoknad;
@@ -29,12 +31,19 @@ interface OwnProps {
     sessionHasExpired: boolean;
 }
 
+interface State {
+    liveValidation: boolean;
+}
+
 type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps;
 
-class SøknadContainer extends React.Component<Props> {
+class SøknadContainer extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.handleNextClicked = this.handleNextClicked.bind(this);
+        this.state = {
+            liveValidation: false
+        };
+        this.onSubmit = this.onSubmit.bind(this);
         this.handleBackClicked = this.handleBackClicked.bind(this);
     }
 
@@ -44,12 +53,9 @@ class SøknadContainer extends React.Component<Props> {
         return activeStep === stepsConfig.length;
     }
 
-    handleNextClicked() {
-        const { dispatch, søknad, language } = this.props;
-        if (this.hasToWaitForResponse()) {
-            return dispatch(api.sendSoknad(søknad, language));
-        }
-        const { activeStep } = this.props;
+    onSubmit() {
+        this.setState({ liveValidation: false });
+        const { dispatch, activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
     }
 
@@ -60,14 +66,9 @@ class SøknadContainer extends React.Component<Props> {
         }
     }
 
-    shouldRenderFortsettKnapp(): boolean {
-        const { activeStep, person, intl } = this.props;
-        const stepConfig = getStepConfig(intl, person);
-        return stepConfig[activeStep - 1].nextStepCondition();
-    }
-
     render() {
         const { intl, activeStep, søknadSendingInProgress, person, sessionHasExpired } = this.props;
+        const { liveValidation } = this.state;
         const stepsConfig = getStepConfig(intl, person);
         const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
         const ActiveStep = stepsConfig[activeStep - 1];
@@ -78,9 +79,10 @@ class SøknadContainer extends React.Component<Props> {
                 <Formik
                     initialValues={{}}
                     validationSchema={ValidationSchema}
-                    onSubmit={(e) => {
-                        console.log(e);
-                        this.handleNextClicked();
+                    validateOnMount={true}
+                    onSubmit={(values, actions) => {
+                        console.log(values);
+                        this.onSubmit();
                     }}
                     render={(formikProps: FormikProps<any>) => {
                         console.log(formikProps.errors);
@@ -92,18 +94,31 @@ class SøknadContainer extends React.Component<Props> {
                                         activeStep={activeStep}
                                         stepTitles={titles}
                                     />
+
+                                    {liveValidation && !_.isEmpty(formikProps.errors) && (
+                                        <ValidationErrorSummaryBase
+                                            title={getMessage(intl, 'title')}
+                                            errors={Object.entries(formikProps.errors).map((error) => ({
+                                                name: error[0],
+                                                message: error[1]
+                                            }))}
+                                        />
+                                    )}
+
                                     {ActiveStep.component(formikProps)}
-                                    {this.shouldRenderFortsettKnapp() && (
+
+                                    {!_.some(formikProps.errors, (value) => value === 'Required') && (
                                         <Hovedknapp
                                             className="responsiveButton"
                                             disabled={søknadSendingInProgress}
                                             spinner={søknadSendingInProgress}
+                                            onClick={() => this.setState({ liveValidation: true })}
                                         >
                                             {ActiveStep.fortsettKnappLabel}
                                         </Hovedknapp>
                                     )}
+                                    <CancelButton />
                                 </Form>
-                                <CancelButton />
                             </>
                         );
                     }}
