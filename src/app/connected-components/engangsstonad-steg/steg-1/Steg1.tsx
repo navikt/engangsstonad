@@ -29,7 +29,15 @@ const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
                 <RadioPanelGruppeResponsiveWrapper name={Question.antallBarn} radioValues={[1, 2, 3].map(String)} />
             )}
 
-            {values[Question.antallBarn]! >= 3 && <Select name={Question.antallBarn} options={[3, 4, 5, 6, 7, 8, 9]} />}
+            {values[Question.antallBarn]! >= 3 && (
+                <Select
+                    name={Question.antallBarn}
+                    options={[3, 4, 5, 6, 7, 8, 9].map((value) => ({
+                        label: String(value),
+                        value
+                    }))}
+                />
+            )}
 
             {touched[Question.antallBarn] && values[Question.erFødt] && (
                 <DatovelgerElement name={Question.fødselsdato} />
@@ -38,7 +46,7 @@ const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
             {touched[Question.antallBarn] && values[Question.erFødt] === false && (
                 <>
                     <DatovelgerElement name={Question.termindato} />
-                    
+
                     {values[Question.termindato] && (
                         <>
                             <OmTerminbekreftelsen

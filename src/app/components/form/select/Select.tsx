@@ -6,7 +6,10 @@ import { guid } from 'nav-frontend-js-utils';
 
 interface Props {
     name: string;
-    options: Array<string | number>;
+    options: Array<{
+        value: string | number;
+        label: string;
+    }>;
 }
 
 const Select: React.StatelessComponent<Props> = ({ name, options }) => {
@@ -27,8 +30,8 @@ const Select: React.StatelessComponent<Props> = ({ name, options }) => {
                     >
                         {options.map((option) => {
                             return (
-                                <option key={guid()} value={option}>
-                                    {String(option)}
+                                <option key={guid()} value={option.value}>
+                                    {option.label}
                                 </option>
                             );
                         })}
