@@ -1,12 +1,19 @@
-import { Question } from "./steg-1/questions";
+import { Questions as Steg1Questions } from "./steg-1/questions";
 import { Attachment } from "common/storage/attachment/types/Attachment";
+import { Questions as Steg2Questions } from "./steg-2/questions";
 
 
 export interface FormProps {
-    [Question.erFødt]: boolean;
-    [Question.antallBarn]: number;
-    [Question.fødselsdato]: string[];
-    [Question.termindato]: string;
-    [Question.terminberkreftelse]: Attachment[];
-    [Question.termindato]: string;
+    [Steg1Questions.erFødt]: boolean;
+    [Steg1Questions.antallBarn]: number;
+    [Steg1Questions.fødselsdato]: string[];
+    [Steg1Questions.termindato]: string;
+    [Steg1Questions.terminberkreftelse]: Attachment[];
+    [Steg1Questions.termindato]: string;
+
+    [Steg2Questions.navn]: string;
+    [Steg2Questions.kanIkkeOppgis]: boolean;
+    [Steg2Questions.fødselsnummer]: string;
+    [Steg2Questions.utenlandskFødselsnummer]: boolean;
+    [Steg2Questions.bostedsland]: string;    
 }

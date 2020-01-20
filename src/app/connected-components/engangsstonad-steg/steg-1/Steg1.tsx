@@ -8,7 +8,7 @@ import OmTerminbekreftelsen from 'components/modal-content/OmTerminbekreftelsen'
 import { Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import AttachmentUploader from 'components/form/attachment-uploader/AttachmentUploader';
 
-import { Question } from './questions';
+import { Questions } from './questions';
 import { FormProps } from '../FormProps';
 
 interface Props {
@@ -21,17 +21,17 @@ const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
     return (
         <>
             <RadioPanelGruppeResponsiveWrapper
-                name={Question.erFødt}
+                name={Questions.erFødt}
                 radioValues={[JaNeiSpørsmål.JA, JaNeiSpørsmål.NEI]}
             />
 
-            {touched[Question.erFødt] && (
-                <RadioPanelGruppeResponsiveWrapper name={Question.antallBarn} radioValues={[1, 2, 3].map(String)} />
+            {touched[Questions.erFødt] && (
+                <RadioPanelGruppeResponsiveWrapper name={Questions.antallBarn} radioValues={[1, 2, 3].map(String)} />
             )}
 
-            {values[Question.antallBarn]! >= 3 && (
+            {values[Questions.antallBarn]! >= 3 && (
                 <Select
-                    name={Question.antallBarn}
+                    name={Questions.antallBarn}
                     options={[3, 4, 5, 6, 7, 8, 9].map((value) => ({
                         label: String(value),
                         value
@@ -39,22 +39,22 @@ const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
                 />
             )}
 
-            {touched[Question.antallBarn] && values[Question.erFødt] && (
-                <DatovelgerElement name={Question.fødselsdato} />
+            {touched[Questions.antallBarn] && values[Questions.erFødt] && (
+                <DatovelgerElement name={Questions.fødselsdato} />
             )}
 
-            {touched[Question.antallBarn] && values[Question.erFødt] === false && (
+            {touched[Questions.antallBarn] && values[Questions.erFødt] === false && (
                 <>
-                    <DatovelgerElement name={Question.termindato} />
+                    <DatovelgerElement name={Questions.termindato} />
 
-                    {values[Question.termindato] && (
+                    {values[Questions.termindato] && (
                         <>
                             <OmTerminbekreftelsen
                                 isOpen={isOmTerminbekreftelsenOpen}
                                 onRequestClose={() => setOmTerminbekreftelsenOpen(false)}
                             />
                             <Field
-                                name={Question.terminberkreftelse}
+                                name={Questions.terminberkreftelse}
                                 render={(fieldProps: FieldProps) => (
                                     <AttachmentUploader
                                         skjemanummer={Skjemanummer.TERMINBEKREFTELSE}
@@ -65,7 +65,7 @@ const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
                         </>
                     )}
 
-                    {values[Question.termindato] && <DatovelgerElement name={Question.terminberkreftelseDato} />}
+                    {values[Questions.termindato] && <DatovelgerElement name={Questions.terminberkreftelseDato} />}
                 </>
             )}
         </>

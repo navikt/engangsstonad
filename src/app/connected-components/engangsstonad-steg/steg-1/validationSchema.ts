@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { Question } from './questions';
+import { Questions } from './questions';
 import * as moment from 'moment';
 import {
     erIUke22Pluss3,
@@ -10,55 +10,55 @@ import {
 
 const Steg1ValidationSchema = () =>
     Yup.object().shape({
-        [Question.erFødt]: Yup.boolean().required('Required'),
-        [Question.antallBarn]: Yup.number().required('Required'),
-        [Question.fødselsdato]: Yup.string().when(Question.erFødt, {
+        [Questions.erFødt]: Yup.boolean().required('Required'),
+        [Questions.antallBarn]: Yup.number().required('Required'),
+        [Questions.fødselsdato]: Yup.string().when(Questions.erFødt, {
             is: true,
             then: Yup.string()
                 .required('Required')
-                .test(Question.fødselsdato, 'Ikke en gyldig dato', (value) => {
+                .test(Questions.fødselsdato, 'Ikke en gyldig dato', (value) => {
                     return moment(value, moment.HTML5_FMT.DATE, true).isValid();
                 })
-                .test(Question.fødselsdato, 'Kan ikke være frem i tid', (value) => {
+                .test(Questions.fødselsdato, 'Kan ikke være frem i tid', (value) => {
                     return moment(value, moment.HTML5_FMT.DATE, true).isSameOrBefore(moment());
                 })
-                .test(Question.fødselsdato, 'Kan ikke være mer enn 3 år tilbake i tid', (value) => {
+                .test(Questions.fødselsdato, 'Kan ikke være mer enn 3 år tilbake i tid', (value) => {
                     return moment(value, moment.HTML5_FMT.DATE, true).isSameOrAfter(
                         moment().subtract(3, 'years'),
                         'days'
                     );
                 })
         }),
-        [Question.termindato]: Yup.string().when(Question.erFødt, {
+        [Questions.termindato]: Yup.string().when(Questions.erFødt, {
             is: false,
             then: Yup.string()
                 .required('Required')
-                .test(Question.termindato, 'Ikke en gyldig dato', (value) => {
+                .test(Questions.termindato, 'Ikke en gyldig dato', (value) => {
                     return moment(value, moment.HTML5_FMT.DATE, true).isValid();
                 })
-                .test(Question.termindato, 'Du må være i uke 22', (value) => {
+                .test(Questions.termindato, 'Du må være i uke 22', (value) => {
                     return erIUke22Pluss3(value);
                 })
-                .test(Question.termindato, 'Termindato kan ikke være 3 uker fra i dag', (value) => {
+                .test(Questions.termindato, 'Termindato kan ikke være 3 uker fra i dag', (value) => {
                     return erMindreEnn3UkerSiden(value);
                 })
         }),
-        [Question.terminberkreftelse]: Yup.array().when(Question.erFødt, {
+        [Questions.terminberkreftelse]: Yup.array().when(Questions.erFødt, {
             is: false,
             then: Yup.array().min(1, 'Terminbekreftelse er påkrevd')
         }),
-        [Question.terminberkreftelseDato]: Yup.string().when(Question.erFødt, {
+        [Questions.terminberkreftelseDato]: Yup.string().when(Questions.erFødt, {
             is: false,
             then: Yup.string()
                 .required('Required')
-                .test(Question.terminberkreftelseDato, 'Ikke en gyldig dato', (value) => {
+                .test(Questions.terminberkreftelseDato, 'Ikke en gyldig dato', (value) => {
                     return moment(value, moment.HTML5_FMT.DATE, true).isValid();
                 })
-                .test(Question.terminberkreftelseDato, 'Dato må være i dag eller tidligere', (value) => {
+                .test(Questions.terminberkreftelseDato, 'Dato må være i dag eller tidligere', (value) => {
                     return idagEllerTidligere(value);
                 })
-                .test(Question.terminberkreftelseDato, 'Du må være i uke 22', (value) => {
-                    return utstedtDatoErIUke22(value, (Yup.ref(Question.termindato) as unknown) as string);
+                .test(Questions.terminberkreftelseDato, 'Du må være i uke 22', (value) => {
+                    return utstedtDatoErIUke22(value, (Yup.ref(Questions.termindato) as unknown) as string);
                 })
         })
     });

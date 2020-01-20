@@ -5,6 +5,7 @@ import { StepConfig } from 'app/types/StepConfig';
 import { FormikProps } from 'formik';
 import { FormProps } from './FormProps';
 import Steg1 from './steg-1/Steg1';
+import Steg2 from './steg-2/Steg2';
 import Steg3 from './Steg3';
 import Steg4 from './Steg4';
 import getMessage from 'common/util/i18nUtils';
@@ -18,7 +19,7 @@ const stepConfig = [
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
         stegIndikatorLabelIntlId: 'annenForelder.sectionheading',
-        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg1 formikProps={formikProps} />
+        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg2 formikProps={formikProps} />
     },
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
