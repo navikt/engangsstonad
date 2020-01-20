@@ -4,7 +4,7 @@ import Person from '../../types/domain/Person';
 const todaysDate = moment();
 const ukerAaTrekkeFraTerminDato = 18;
 const ekstraDagerAaTrekkeFraTerminDato = 3;
-const dagerForTerminbekreftelse = ukerAaTrekkeFraTerminDato * 7 + ekstraDagerAaTrekkeFraTerminDato;
+export const dagerForTerminbekreftelse = ukerAaTrekkeFraTerminDato * 7 + ekstraDagerAaTrekkeFraTerminDato;
 
 export const erIUke22Pluss3 = (dato: string) => {
     const terminDato = moment(dato);
