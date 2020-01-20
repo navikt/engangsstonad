@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { FieldProps, Field } from 'formik';
-import { Input as NavInput } from 'nav-frontend-skjema';
+import { Input as NavInput, NavFrontendInputProps } from 'nav-frontend-skjema';
 
-interface Props {
+interface Props extends Omit<NavFrontendInputProps, 'label' | 'onChange' | 'value'> {
     name: string;
 }
 
-const Input: React.StatelessComponent<Props> = ({ name }) => {
+const Input: React.StatelessComponent<Props> = ({ name, ...rest }) => {
     return (
         <Field
             name={name}
@@ -21,6 +21,7 @@ const Input: React.StatelessComponent<Props> = ({ name }) => {
                             form.setFieldTouched(field.name, true);
                         }}
                         value={fieldProps.field.value}
+                        {...rest}
                     />
                 );
             }}
