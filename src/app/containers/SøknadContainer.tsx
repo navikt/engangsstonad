@@ -8,7 +8,7 @@ import _ from 'lodash';
 
 import getMessage from 'common/util/i18nUtils';
 import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
-import { apiActionCreators as api, stepActionCreators as stepActions } from 'actions';
+import { stepActionCreators as stepActions } from 'actions';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import Person from 'app/types/domain/Person';
@@ -79,13 +79,11 @@ class SøknadContainer extends React.Component<Props, State> {
                 <Formik
                     initialValues={{}}
                     validationSchema={ValidationSchema}
-                    validateOnMount={true}
                     onSubmit={(values, actions) => {
-                        console.log(values);
                         this.onSubmit();
                     }}
                     render={(formikProps: FormikProps<any>) => {
-                        console.log(formikProps.errors);
+                        console.log(formikProps.values, formikProps.errors);
                         return (
                             <>
                                 <Form className="responsiveContainer">
