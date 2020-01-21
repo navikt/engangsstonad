@@ -18,7 +18,10 @@ import { DispatchProps } from 'common/redux/types';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
 import { AppState } from 'reducers/reducers';
 import { Language } from 'intl/IntlProvider';
-import ValidationErrorSummaryBase from 'components/validation-error-summary/ValidationErrorSummaryBase';
+import ValidationErrorSummaryBase, {
+    ValidationSummaryError
+} from 'components/validation-error-summary/ValidationErrorSummaryBase';
+import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
 
 interface OwnProps {
     søknad: EngangsstonadSoknad;
@@ -65,6 +68,13 @@ class SøknadContainer extends React.Component<Props, State> {
         }
     }
 
+    getErrorMessages(formikProps: FormikProps<FormProps>): ValidationSummaryError[] {
+        return Object.entries(formikProps.errors).map(error => ({
+            name: error[0],
+            message: error[1] as string
+        }));
+    }
+
     render() {
         const { intl, activeStep, søknadSendingInProgress, person, sessionHasExpired } = this.props;
         const { liveValidation } = this.state;
@@ -95,10 +105,7 @@ class SøknadContainer extends React.Component<Props, State> {
                                     {liveValidation && !_.isEmpty(formikProps.errors) && (
                                         <ValidationErrorSummaryBase
                                             title={getMessage(intl, 'title')}
-                                            errors={Object.entries(formikProps.errors).map((error) => ({
-                                                name: error[0],
-                                                message: error[1]
-                                            }))}
+                                            errors={this.getErrorMessages(formikProps)}
                                         />
                                     )}
 
