@@ -8,7 +8,8 @@ module.exports = {
 	testPathIgnorePatterns: ['/node_modules/'],
 	moduleNameMapper: {
 		'\\.(css|less|scss|sass|less)$': '<rootDir>/node_modules/jest-css-modules',
-		'\\-style$': '<rootDir>/node_modules/jest-css-modules'
+		'\\-style$': '<rootDir>/node_modules/jest-css-modules',
+		'^components/(.*)': '<rootDir>/src/app/components/$1'
 	},
 	setupFiles: ['<rootDir>/src/test/test-setup.js']
 };

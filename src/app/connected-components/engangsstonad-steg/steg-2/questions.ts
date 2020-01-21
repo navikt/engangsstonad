@@ -1,7 +1,7 @@
 export enum Questions {
     kanIkkeOppgis = 'kanIkkeOppgis',
     navn = 'navn',
-    fødselsnummer = 'fødselsnummer',
-    utenlandskFødselsnummer = 'utenlandskFødselsnummer',
+    fodselsnummer = 'fodselsnummer',
+    utenlandskFodselsnummer = 'utenlandskFodselsnummer',
     bostedsland = 'bostedsland'
 }

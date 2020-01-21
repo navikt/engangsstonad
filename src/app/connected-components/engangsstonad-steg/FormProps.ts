@@ -13,7 +13,7 @@ export interface FormProps {
 
     [Steg2Questions.navn]: string;
     [Steg2Questions.kanIkkeOppgis]: boolean;
-    [Steg2Questions.fødselsnummer]: string;
-    [Steg2Questions.utenlandskFødselsnummer]: boolean;
+    [Steg2Questions.fodselsnummer]: string;
+    [Steg2Questions.utenlandskFodselsnummer]: boolean;
     [Steg2Questions.bostedsland]: string;    
 }

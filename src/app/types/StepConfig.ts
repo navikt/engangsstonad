@@ -1,6 +1,8 @@
+import * as Yup from 'yup';
+
 export interface StepConfig {
     fortsettKnappLabel: string;
     stegIndikatorLabel: string;
     component: any;
-    nextStepCondition: () => boolean;
+    validationSchema: Yup.ObjectSchema
 };

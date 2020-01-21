@@ -1,14 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import { FormikProps } from 'formik';
+import * as countries from 'i18n-iso-countries';
+
 import Input from 'components/form/input/Input';
+import Checkbox from 'components/form/checkbox/Checkbox';
+import Select from 'components/form/select/Select';
+import { Language } from 'intl/IntlProvider';
 
 import { Questions } from './questions';
 import { FormProps } from '../FormProps';
-import Checkbox from 'components/form/checkbox/Checkbox';
-import Select from 'components/form/select/Select';
-
-import * as countries from 'i18n-iso-countries';
-import { Language } from 'intl/IntlProvider';
 
 // TODO flytt
 const getForignCountries = (language: Language) => {
@@ -28,14 +28,21 @@ interface Props {
 }
 
 const Steg2: React.FunctionComponent<Props> = ({ formikProps }) => {
+    const { values } = formikProps;
     return (
         <>
-            <Input name={Questions.navn} disabled={formikProps.values[Questions.kanIkkeOppgis]} />
+            <Input name={Questions.navn} disabled={values[Questions.kanIkkeOppgis]} />
             <Checkbox name={Questions.kanIkkeOppgis} />
-            {<Input name={Questions.fødselsnummer} />}
-            {<Checkbox name={Questions.utenlandskFødselsnummer} />}
-            {formikProps.values[Questions.utenlandskFødselsnummer] && (
-                <Select name={Questions.bostedsland} options={getForignCountries(Language.BOKMÅL)} />
+
+            {values[Questions.navn] && !values[Questions.kanIkkeOppgis] && (
+                <>
+                    <Input name={Questions.fodselsnummer} />
+                    <Checkbox name={Questions.utenlandskFodselsnummer} />
+
+                    {values[Questions.fodselsnummer] && values[Questions.utenlandskFodselsnummer] && (
+                        <Select name={Questions.bostedsland} options={getForignCountries(Language.BOKMÅL)} />
+                    )}
+                </>
             )}
         </>
     );

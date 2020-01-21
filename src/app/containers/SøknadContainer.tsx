@@ -18,7 +18,6 @@ import { DispatchProps } from 'common/redux/types';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
 import { AppState } from 'reducers/reducers';
 import { Language } from 'intl/IntlProvider';
-import ValidationSchema from './validationSchema';
 import ValidationErrorSummaryBase from 'components/validation-error-summary/ValidationErrorSummaryBase';
 
 interface OwnProps {
@@ -78,17 +77,17 @@ class SøknadContainer extends React.Component<Props, State> {
                 <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <Formik
                     initialValues={{}}
-                    validationSchema={ValidationSchema}
-                    onSubmit={(values, actions) => {
-                        this.onSubmit();
-                    }}
+                    validationSchema={ActiveStep.validationSchema}
+                    onSubmit={() => this.onSubmit()}
                     render={(formikProps: FormikProps<any>) => {
-                        console.log(formikProps.values, formikProps.errors);
                         return (
                             <>
                                 <Form className="responsiveContainer">
                                     <SkjemaHeader
-                                        onPrevious={() => this.handleBackClicked()}
+                                        onPrevious={() => {
+                                            formikProps.setErrors({});
+                                            this.handleBackClicked();
+                                        }}
                                         activeStep={activeStep}
                                         stepTitles={titles}
                                     />

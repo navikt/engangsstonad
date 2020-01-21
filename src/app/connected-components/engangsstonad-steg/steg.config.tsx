@@ -6,25 +6,28 @@ import { FormikProps } from 'formik';
 import { FormProps } from './FormProps';
 import Steg1 from './steg-1/Steg1';
 import Steg2 from './steg-2/Steg2';
-import Steg3 from './Steg3';
 import Steg4 from './Steg4';
 import getMessage from 'common/util/i18nUtils';
+import Steg1ValidationSchema from './steg-1/validationSchema';
+import Steg2ValidationSchema from './steg-2/validationSchema';
 
 const stepConfig = [
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
         stegIndikatorLabelIntlId: 'relasjonBarn.sectionheading',
-        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg1 formikProps={formikProps} />
+        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg1 formikProps={formikProps} />,
+        validationSchema: Steg1ValidationSchema
     },
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
         stegIndikatorLabelIntlId: 'annenForelder.sectionheading',
-        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg2 formikProps={formikProps} />
+        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg2 formikProps={formikProps} />,
+        validationSchema: Steg2ValidationSchema
     },
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
         stegIndikatorLabelIntlId: 'medlemmskap.sectionheading',
-        component: Steg3,
+        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg2 formikProps={formikProps} />,
         nextStepCondition: () => true
     },
     {
