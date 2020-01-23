@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
-import { Knapp } from 'nav-frontend-knapper';
+import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
+import CountrySelect from 'components/country-select/CountrySelect';
 import { Tidsperiode } from 'nav-datovelger';
+import LabelText from 'common/components/labeltekst/Labeltekst';
 import FormBlock from 'components/form-block/FormBlock';
 import { Feil } from 'components/skjema-input-element/types';
 import { Language } from 'intl/IntlProvider';
+import moment from 'moment';
+import Datovelger from 'nav-datovelger/dist/datovelger/Datovelger';
 
 const Modal = require('nav-frontend-modal').default;
 
@@ -28,7 +32,7 @@ interface Field {
     value: any;
     feil?: Feil;
     visFeil?: boolean;
-};
+}
 
 interface PeriodeForm {
     fom?: Field;
@@ -56,23 +60,24 @@ const getValidPeriode = (formData: PeriodeForm): Utenlandsopphold | undefined =>
     return undefined;
 };
 
-// const getDateFromString = (dato?: string) => {
-//     if (dato) {
-//         return new Date(dato);
-//     }
-//     return undefined;
-// };
+const getDateFromString = (dato?: string) => {
+    if (dato) {
+        return new Date(dato);
+    }
+    return undefined;
+};
 
-// const getRegistrertePerioder = (
-//     alleOpphold: Utenlandsopphold[],
-//     gjeldendeOpphold?: Utenlandsopphold
-// ): Tidsperiode[] => {
-//     let arr = gjeldendeOpphold ? alleOpphold.filter((o) => o !== gjeldendeOpphold) : alleOpphold;
-//     return arr.map((opphold) => ({
-//         fom: opphold.tidsperiode.fom,
-//         tom: opphold.tidsperiode.tom
-//     }));
-// };
+const getRegistrertePerioder = (
+    alleOpphold: Utenlandsopphold[],
+    gjeldendeOpphold?: Utenlandsopphold
+): Tidsperiode[] => {
+    // const arr = gjeldendeOpphold ? alleOpphold.filter((o) => o !== gjeldendeOpphold) : alleOpphold;
+    // return arr.map((opphold) => ({
+    //     startdato: new Date(opphold.tidsperiode.fom),
+    //     sluttdato: new Date(opphold.tidsperiode.tom)
+    // }));
+    return [];
+};
 
 const getDefaultState = (utenlandsopphold?: Utenlandsopphold): State => {
     if (utenlandsopphold) {
@@ -165,7 +170,52 @@ class CountryModal extends React.Component<Props, State> {
     }
 
     render() {
+        const { language, tidsperiode, alleUtenlandsopphold, utenlandsopphold } = this.props;
+        const { formData, erEndring } = this.state;
 
+        const fomDato = getDateFromString(formData && formData.fom && formData.fom.value);
+        const tomDato = getDateFromString(formData && formData.tom && formData.tom.value);
+
+        const lagreKnappTekstId = erEndring ? 'medlemmskap.modal.lagreEndringer' : 'medlemmskap.knapp.leggTilLand';
+
+        const fomMinDato = tidsperiode ? tidsperiode.fom : undefined;
+        const fomMaksDato = tomDato || (tidsperiode ? tidsperiode.tom : undefined);
+        const tomMinDato = fomDato || (tidsperiode ? tidsperiode.fom : undefined);
+        const tomMaksDato = tidsperiode ? tidsperiode.tom : undefined;
+
+        let fomAvgrensning = {};
+        let tomAvgrensning = {};
+        const registrertePerioder = alleUtenlandsopphold
+            ? getRegistrertePerioder(alleUtenlandsopphold, utenlandsopphold)
+            : undefined;
+        if (fomMinDato || fomMaksDato) {
+            fomAvgrensning = {
+                minDato: fomMinDato,
+                maksDato: fomMaksDato,
+                ugyldigeTidsperioder: registrertePerioder
+            };
+        }
+        if (tomMinDato || tomMaksDato) {
+            tomAvgrensning = {
+                minDato: tomMinDato,
+                maksDato: tomMaksDato,
+                ugyldigeTidsperioder: registrertePerioder
+            };
+        }
+
+        let landFeil;
+        let fomFeil;
+        let tomFeil;
+
+        if (formData && formData.land && formData.land.visFeil === true) {
+            landFeil = formData.land.feil;
+        }
+        if (formData && formData.fom && formData.fom.visFeil === true) {
+            fomFeil = formData.fom.feil;
+        }
+        if (formData && formData.tom && formData.tom.visFeil === true) {
+            tomFeil = formData.tom.feil;
+        }
 
         return (
             <Modal
@@ -175,13 +225,13 @@ class CountryModal extends React.Component<Props, State> {
                 closeButton={true}
                 onRequestClose={() => {
                     this.props.closeModal();
-                }}>
+                }}
+            >
                 <form onSubmit={this.onSubmit}>
                     <Undertittel className="countryModal__title">
                         <FormattedMessage id="medlemmskap.modal.overskrift" />
                     </Undertittel>
-                    {/* <FormBlock margin="xs">
-
+                    <FormBlock margin="xs">
                         <CountrySelect
                             label={<LabelText>{this.props.label}</LabelText>}
                             feil={landFeil}
@@ -193,51 +243,51 @@ class CountryModal extends React.Component<Props, State> {
                             language={language}
                             defaultValue={formData && formData.land && formData.land.value}
                         />
-                    </FormBlock> */}
-                    {/* <FormBlock margin="xs">
-                        <DateInput
-                            id="boddFraDato"
-                            label={<LabelText intlId="standard.text.fra" />}
-                            dato={fomDato}
-                            feil={fomFeil}
-                            onChange={(dato) =>
-                                this.updateFormState({
-                                    formData: {
-                                        ...formData,
-                                        fom: { value: dato ? dato.toISOString() : undefined }
-                                    }
-                                })
-                            }
-                            avgrensninger={fomAvgrensning}
-                            kalenderplassering="fullskjerm"
-                        />
                     </FormBlock>
-                    <FormBlock margin="m">
-                        <DateInput
-                            id="boddTilDato"
-                            label={<LabelText intlId="standard.text.til" />}
-                            dato={tomDato}
-                            feil={tomFeil}
-                            onChange={(dato) =>
-                                this.updateFormState({
-                                    formData: {
-                                        ...formData,
-                                        tom: { value: dato ? dato.toISOString() : undefined }
-                                    }
-                                })
-                            }
-                            avgrensninger={tomAvgrensning}
-                            kalenderplassering="fullskjerm"
-                        />
-                    </FormBlock> */}
+                    <Datovelger
+                        id="boddFraDato"
+                        valgtDato={moment(fomDato).format(moment.HTML5_FMT.DATE)}
+                        input={{
+                            id: 'boddFraDato',
+                            name: 'boddFraDato',
+                            onChange: (inputValue) => {}
+                        }}
+                        onChange={(dato) =>
+                            this.updateFormState({
+                                formData: {
+                                    ...formData,
+                                    fom: { value: dato ? dato : undefined }
+                                }
+                            })
+                        }
+                        avgrensninger={fomAvgrensning}
+                    />
+                    <Datovelger
+                        id="boddTilDato"
+                        valgtDato={moment(tomDato).format(moment.HTML5_FMT.DATE)}
+                        input={{
+                            id: 'boddTilDato',
+                            name: 'boddTilDato',
+                            onChange: (inputValue) => {}
+                        }}
+                        onChange={(dato) =>
+                            this.updateFormState({
+                                formData: {
+                                    ...formData,
+                                    tom: { value: dato ? dato : undefined }
+                                }
+                            })
+                        }
+                        avgrensninger={tomAvgrensning}
+                    />
                     <FormBlock margin="xxs">
                         <div className="countryModal__buttonBar">
                             <Knapp onClick={() => this.props.closeModal()} htmlType="button">
                                 <FormattedMessage id="medlemmskap.modal.avbryt" />
                             </Knapp>
-                            {/* <Hovedknapp>
+                            <Hovedknapp>
                                 <FormattedMessage id={lagreKnappTekstId} />
-                            </Hovedknapp> */}
+                            </Hovedknapp>
                         </div>
                     </FormBlock>
                 </form>

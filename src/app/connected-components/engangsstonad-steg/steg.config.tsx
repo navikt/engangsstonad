@@ -1,15 +1,21 @@
 import * as React from 'react';
+import { FormikProps } from 'formik';
 import { InjectedIntl } from 'react-intl';
+
 import Person from 'app/types/domain/Person';
 import { StepConfig } from 'app/types/StepConfig';
-import { FormikProps } from 'formik';
+
 import { FormProps } from './FormProps';
 import Steg1 from './steg-1/Steg1';
 import Steg2 from './steg-2/Steg2';
+import Steg3 from './steg-3/Steg3';
 import Steg4 from './Steg4';
-import getMessage from 'common/util/i18nUtils';
+
 import Steg1ValidationSchema from './steg-1/validationSchema';
 import Steg2ValidationSchema from './steg-2/validationSchema';
+import Steg3ValidationSchema from './steg-3/validationSchema';
+
+import getMessage from 'common/util/i18nUtils';
 
 const stepConfig = [
     {
@@ -27,14 +33,13 @@ const stepConfig = [
     {
         fortsettKnappLabelIntlId: 'standard.button.neste',
         stegIndikatorLabelIntlId: 'medlemmskap.sectionheading',
-        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg2 formikProps={formikProps} />,
-        nextStepCondition: () => true
+        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg3 formikProps={formikProps} />,
+        validationSchema: Steg3ValidationSchema
     },
     {
         fortsettKnappLabelIntlId: 'standard.sectionheading',
         stegIndikatorLabelIntlId: 'oppsummering.sectionheading',
         component: Steg4,
-        nextStepCondition: () => true
     }
 ];
 

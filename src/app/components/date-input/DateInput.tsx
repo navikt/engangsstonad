@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Language } from 'intl/IntlProvider';
 import { AppState } from 'reducers/reducers';
 import { DatovelgerProps } from 'nav-datovelger';
+import Datovelger from 'nav-datovelger/dist/datovelger/Datovelger';
 
 export interface Props extends DatovelgerProps {
     label: string | React.ReactNode;
@@ -17,13 +18,10 @@ interface StateProps {
 
 class DateInput extends React.Component<Props & StateProps, {}> {
     render() {
-        const { label, feil } = this.props;
+        const { label, feil, ...rest } = this.props;
         return (
             <SkjemaInputElement id={this.props.id} feil={feil} label={label}>
-                {/* <Datovelger
-                    {...rest}
-                    inputProps={{ placeholder: 'dd.mm.åååå' }}
-                /> */}
+                <Datovelger {...rest} />
             </SkjemaInputElement>
         );
     }
