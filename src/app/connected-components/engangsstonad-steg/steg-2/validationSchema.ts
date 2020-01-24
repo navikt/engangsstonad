@@ -13,8 +13,9 @@ const Steg2ValidationSchema = () =>
                 .required('Required')
                 .max(MAKS_NAVN_LENGTH, 'Kan ikke være mer enn 30 karakterer')
         }),
+        [Questions.kanIkkeOppgis]: Yup.boolean(),
         [Questions.fodselsnummer]: Yup.string().when([Questions.kanIkkeOppgis, Questions.navn], {
-            is: (kanIkkeOppgis, navn) => navn && (kanIkkeOppgis === false || kanIkkeOppgis === undefined),
+            is: (kanIkkeOppgis) => (kanIkkeOppgis === false || kanIkkeOppgis === undefined),
             then: Yup.string()
                 .required('Required')
                 .max(MAKS_FNR_LENGTH)
@@ -27,7 +28,8 @@ const Steg2ValidationSchema = () =>
                 })
         }),
         [Questions.bostedsland]: Yup.string().when([Questions.kanIkkeOppgis, Questions.utenlandskFodselsnummer], {
-            is: (kanIkkeOppgis, utenlanskFødselsnummer) => kanIkkeOppgis === false && utenlanskFødselsnummer,
+            is: (kanIkkeOppgis, utenlanskFødselsnummer) =>
+                (kanIkkeOppgis === undefined || kanIkkeOppgis === false) && utenlanskFødselsnummer,
             then: Yup.string().required('Required')
         })
     });

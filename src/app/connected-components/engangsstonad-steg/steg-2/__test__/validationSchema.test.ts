@@ -45,9 +45,16 @@ describe('annen forelder', () => {
         await expect(
             Steg2ValidationSchema().validateAt(Questions.fodselsnummer, {
                 [Questions.kanIkkeOppgis]: false,
-                [Questions.fodselsnummer]: ''
+                [Questions.fodselsnummer]: '2406166345231' // uhyldig
             } as any)
         ).rejects.toBeDefined();
+
+        await expect(
+            Steg2ValidationSchema().validateAt(Questions.fodselsnummer, {
+                [Questions.kanIkkeOppgis]: false,
+                [Questions.fodselsnummer]: '24061663459' // generert fnr
+            } as any)
+        ).resolves.toBeTruthy();
     });
 
     it('bostedsland er påbudt hvis annen part er utenlandsk', async () => {
