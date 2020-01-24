@@ -1,5 +1,5 @@
 import * as React from 'react';
-const { Knapp } = require('nav-frontend-knapper');
+import { Knapp } from 'nav-frontend-knapper';
 import CountryModal from 'components/utenlandsopphold/utenlandsopphold-modal/UtenlandsoppholdModal';
 import { CountryList } from 'components/utenlandsopphold/UtenlandsoppholdList';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';

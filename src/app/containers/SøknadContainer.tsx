@@ -13,7 +13,6 @@ import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import Person from 'app/types/domain/Person';
 import CancelButton from 'components/cancel-button/CancelButton';
-import EngangsstonadSoknad from '../types/domain/EngangsstonadSoknad';
 import { DispatchProps } from 'common/redux/types';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
 import { AppState } from 'reducers/reducers';
@@ -24,7 +23,6 @@ import ValidationErrorSummaryBase, {
 import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
 
 interface OwnProps {
-    søknad: EngangsstonadSoknad;
     language: Language;
     person: Person;
     activeStep: number;
@@ -138,7 +136,6 @@ class SøknadContainer extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    søknad: state.soknadReducer,
     language: state.commonReducer.language,
     person: state.apiReducer.person!,
     activeStep: state.stepReducer.activeStep,
