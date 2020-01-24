@@ -10,7 +10,7 @@ import SlettKnapp from 'common/components/slett-knapp/SlettKnapp';
 import LinkButton from 'components/link-button/LinkButton';
 import { Language } from 'intl/IntlProvider';
 
-import './countryPicker.less';
+import './utenlandsopphold.less';
 
 interface OwnProps {
     utenlandsopphold: Utenlandsopphold;

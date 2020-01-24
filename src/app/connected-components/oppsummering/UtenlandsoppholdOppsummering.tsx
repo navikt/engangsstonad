@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CountrySummaryList } from 'components/country-picker/CountryList';
+import { CountrySummaryList } from 'components/utenlandsopphold/UtenlandsoppholdList';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
@@ -15,7 +15,6 @@ interface Props {
     barn: Barn;
 }
 
-// TODO fjerne denne  logikken og bruke funksjonalitet fra datovelgeren v4
 const erDatoITidsperiode = (dato: Date, tidsperiode: Tidsperiode) => {
     return moment(dato).isBetween(moment(tidsperiode.fom), moment(tidsperiode.tom), 'day', '[]');
 };

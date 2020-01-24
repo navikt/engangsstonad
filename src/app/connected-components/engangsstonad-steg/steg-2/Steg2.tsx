@@ -5,13 +5,14 @@ import * as countries from 'i18n-iso-countries';
 import Input from 'components/form/input/Input';
 import Checkbox from 'components/form/checkbox/Checkbox';
 import Select from 'components/form/select/Select';
+
 import { Language } from 'intl/IntlProvider';
 
 import { Questions } from './questions';
 import { FormProps } from '../FormProps';
 
 // TODO flytt
-const getForignCountries = (language: Language) => {
+export const getForignCountries = (language: Language) => {
     const isoCodeIndex = 0;
     const countryNameIndex = 1;
     return Object.entries(countries.getNames(language))

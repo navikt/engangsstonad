@@ -6,7 +6,7 @@ import { JaNeiSpørsmål } from 'components/form/ja-nei-spørsmål/JaNeiSpørsm�
 
 import { Questions } from '../steg-3/questions';
 import { FormProps } from '../FormProps';
-import CountryPicker from 'components/country-picker/CountryPicker';
+import CountryPicker from 'components/utenlandsopphold/Utenlandsopphold';
 import { Utenlandsopphold } from 'app/types/domain/InformasjonOmUtenlandsopphold';
 import { Language } from 'intl/IntlProvider';
 
@@ -35,7 +35,7 @@ const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
                                 arrayHelpers.replace(index, periode)
                             }
                             deleteVisit={(periode: Utenlandsopphold) =>
-                                arrayHelpers.remove(values[Questions.oppholdNeste12Mnd])
+                                arrayHelpers.remove(values[Questions.oppholdNeste12Mnd]!.indexOf(periode))
                             }
                         />
                     )}
@@ -59,7 +59,7 @@ const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
                                 arrayHelpers.replace(index, periode)
                             }
                             deleteVisit={(periode: Utenlandsopphold) =>
-                                arrayHelpers.remove(values[Questions.oppholdNeste12Mnd])
+                                arrayHelpers.remove(values[Questions.oppholdNeste12Mnd]!.indexOf(periode))
                             }
                         />
                     )}

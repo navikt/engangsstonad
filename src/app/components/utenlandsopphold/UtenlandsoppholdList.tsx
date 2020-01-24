@@ -1,8 +1,8 @@
 import * as React from 'react';
-import CountryListElement from './CountryListElement';
+import CountryListElement from './UtenlandsoppholdListElement';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 
-import './countryPicker.less';
+import './utenlandsopphold.less';
 
 interface CountryListProps {
     utenlandsoppholdListe: Utenlandsopphold[];

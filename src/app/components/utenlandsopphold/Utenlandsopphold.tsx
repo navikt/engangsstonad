@@ -1,21 +1,14 @@
 import * as React from 'react';
 const { Knapp } = require('nav-frontend-knapper');
-import CountryModal from 'components/country-picker/CountryModal';
-import { CountryList } from 'components/country-picker/CountryList';
+import CountryModal from 'components/utenlandsopphold/utenlandsopphold-modal/UtenlandsoppholdModal';
+import { CountryList } from 'components/utenlandsopphold/UtenlandsoppholdList';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 import LabelText from 'common/components/labeltekst/Labeltekst';
 import { Tidsperiode } from 'nav-datovelger';
-import { Feil } from 'components/skjema-input-element/types';
 import { FormattedMessage } from 'react-intl';
 import { Language } from 'intl/IntlProvider';
 
-import './countryPicker.less';
-
-interface Validators {
-    validateLand: (data: any) => Feil | undefined;
-    validateFom: (data: any) => Feil | undefined;
-    validateTom: (data: any) => Feil | undefined;
-}
+import './utenlandsopphold.less';
 
 interface Props {
     label: string;
@@ -25,7 +18,6 @@ interface Props {
     addVisit: (periode: Utenlandsopphold) => void;
     deleteVisit: (periode: Utenlandsopphold) => void;
     editVisit: (periode: Utenlandsopphold, index: number) => void;
-    validators?: Validators;
 }
 
 interface State {
@@ -81,7 +73,7 @@ class CountryPicker extends React.Component<Props, State> {
     }
 
     render() {
-        const { utenlandsoppholdListe, validators } = this.props;
+        const { utenlandsoppholdListe } = this.props;
         return (
             <div>
                 <div className="blokk-xs">{this.props.label && <LabelText>{this.props.label}</LabelText>}</div>
@@ -101,9 +93,7 @@ class CountryPicker extends React.Component<Props, State> {
                         closeModal={() => this.closeModal()}
                         language={this.props.language}
                         label={this.props.label}
-                        tidsperiode={this.props.tidsperiode}
                         alleUtenlandsopphold={utenlandsoppholdListe}
-                        {...validators}
                     />
                 )}
                 <Knapp className="countryPicker__addButton" onClick={() => this.openModal()} htmlType="button">

@@ -1,9 +1,9 @@
-export type Utenlandsopphold = {
+export interface Utenlandsopphold {
     land: string;
     tidsperiode: Tidsperiode;
 };
 
-export type Tidsperiode = {
+export interface Tidsperiode {
     tom: string;
     fom: string;
 };

@@ -68,7 +68,7 @@ class SøknadContainer extends React.Component<Props, State> {
         }
     }
 
-    getErrorMessages(formikProps: FormikProps<FormProps>): ValidationSummaryError[] {
+    getErrorMessages(formikProps: FormikProps<Partial<FormProps>>): ValidationSummaryError[] {
         return Object.entries(formikProps.errors).map(error => ({
             name: error[0],
             message: error[1] as string
@@ -86,10 +86,14 @@ class SøknadContainer extends React.Component<Props, State> {
                 <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
                 <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
                 <Formik
-                    initialValues={{}}
+                    initialValues={{
+                        terminberkreftelse: [],
+                        oppholdNeste12Mnd: [],
+                        oppholdSiste12Mnd: []
+                    }}
                     validationSchema={ActiveStep.validationSchema}
                     onSubmit={() => this.onSubmit()}
-                    render={(formikProps: FormikProps<any>) => {
+                    render={(formikProps: FormikProps<Partial<FormProps>>) => {
                         return (
                             <>
                                 <Form className="responsiveContainer">
