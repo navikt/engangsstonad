@@ -3,6 +3,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Formik, Form } from 'formik';
+import Modal from 'nav-frontend-modal';
 
 import { getForignCountries } from '../../../connected-components/engangsstonad-steg/steg-2/Steg2';
 import FormBlock from 'components/form-block/FormBlock';
@@ -10,18 +11,16 @@ import DatovelgerElement from 'components/form/date-input/DateInput';
 import Select from 'components/form/select/Select';
 import { Language } from 'intl/IntlProvider';
 
-import { Utenlandsopphold } from '../../../types/domain/InformasjonOmUtenlandsopphold';
+import { Utenlandsopphold, Tidsperiode } from '../../../types/domain/InformasjonOmUtenlandsopphold';
 
 import validationSchema from './validationSchema';
 import { Questions } from './questions';
 
-import Modal from 'nav-frontend-modal';
-
 interface Props {
     language: Language;
+    gyldigTidsperiode?: Tidsperiode;
     utenlandsopphold?: Utenlandsopphold;
     alleUtenlandsopphold?: Utenlandsopphold[];
-    label: string;
     onSubmit: (periode: Utenlandsopphold) => void;
     closeModal: () => void;
 }
@@ -32,7 +31,14 @@ interface FormValues {
     tom: string;
 }
 
-const CountryModal: React.FunctionComponent<Props> = ({ utenlandsopphold, onSubmit, closeModal, language }) => {
+const CountryModal: React.FunctionComponent<Props> = ({
+    utenlandsopphold,
+    gyldigTidsperiode,
+    alleUtenlandsopphold = [],
+    onSubmit,
+    closeModal,
+    language
+}) => {
     const initialValues = () => {
         return utenlandsopphold
             ? {
@@ -54,6 +60,12 @@ const CountryModal: React.FunctionComponent<Props> = ({ utenlandsopphold, onSubm
         closeModal();
     };
 
+    const datoavelgerAvgrensninger = {
+        minDato: gyldigTidsperiode?.fom,
+        maksDato: gyldigTidsperiode?.tom,
+        ugyldigeTidsperioder: alleUtenlandsopphold.map((u) => u.tidsperiode)
+    };
+
     return (
         <Modal
             className="countryModal"
@@ -64,18 +76,17 @@ const CountryModal: React.FunctionComponent<Props> = ({ utenlandsopphold, onSubm
         >
             <Formik
                 initialValues={initialValues()}
-                validationSchema={() => validationSchema()}
+                validationSchema={validationSchema(gyldigTidsperiode, datoavelgerAvgrensninger.ugyldigeTidsperioder)}
                 onSubmit={handleOnSubmit}
-                render={(form) => {
-                    console.log(form);
+                render={() => {
                     return (
                         <Form>
                             <Undertittel className="countryModal__title">
                                 <FormattedMessage id="medlemmskap.modal.overskrift" />
                             </Undertittel>
                             <Select name={Questions.land} options={getForignCountries(language)} />
-                            <DatovelgerElement name={Questions.fom} />
-                            <DatovelgerElement name={Questions.tom} />
+                            <DatovelgerElement name={Questions.fom} avgrensninger={datoavelgerAvgrensninger} />
+                            <DatovelgerElement name={Questions.tom} avgrensninger={datoavelgerAvgrensninger} />
                             <FormBlock margin="xxs">
                                 <div className="countryModal__buttonBar">
                                     <Knapp onClick={() => closeModal()} htmlType="button">

@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { Knapp } from 'nav-frontend-knapper';
-import CountryModal from 'components/utenlandsopphold/utenlandsopphold-modal/UtenlandsoppholdModal';
-import { CountryList } from 'components/utenlandsopphold/UtenlandsoppholdList';
+import CountryModal from '../../components/utenlandsopphold/utenlandsopphold-modal/UtenlandsoppholdModal';
+import { CountryList } from '../../components/utenlandsopphold/UtenlandsoppholdList';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
-import LabelText from 'common/components/labeltekst/Labeltekst';
+import LabelText from '../../../common/components/labeltekst/Labeltekst';
 import { Tidsperiode } from 'nav-datovelger';
 import { FormattedMessage } from 'react-intl';
-import { Language } from 'intl/IntlProvider';
+import { Language } from '../../intl/IntlProvider';
 
 import './utenlandsopphold.less';
 
 interface Props {
-    label: string;
+    label: React.ReactNode;
     language: Language;
     utenlandsoppholdListe: Utenlandsopphold[];
-    tidsperiode?: Tidsperiode;
+    gyldigTildsperiode?: Tidsperiode;
     addVisit: (periode: Utenlandsopphold) => void;
     deleteVisit: (periode: Utenlandsopphold) => void;
     editVisit: (periode: Utenlandsopphold, index: number) => void;
@@ -22,16 +22,13 @@ interface Props {
 
 interface State {
     isOpen: boolean;
-    editVisit?: Utenlandsopphold;
+    utenlandsoppholdToEdit?: Utenlandsopphold;
 }
 
 class CountryPicker extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        const state: State = {
-            isOpen: false
-        };
-        this.state = { ...state };
+        this.state = { isOpen: false };
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.addVisit = this.addVisit.bind(this);
@@ -45,55 +42,55 @@ class CountryPicker extends React.Component<Props, State> {
     }
 
     closeModal() {
-        this.setState({ isOpen: false, editVisit: undefined });
+        this.setState({ isOpen: false, utenlandsoppholdToEdit: undefined });
     }
 
-    addVisit(periode: Utenlandsopphold) {
-        this.props.addVisit(periode);
+    addVisit(utenlandsopphold: Utenlandsopphold) {
+        this.props.addVisit(utenlandsopphold);
         this.setState({ isOpen: false });
     }
 
-    onEditClick(periode: Utenlandsopphold) {
-        this.setState({ editVisit: periode, isOpen: true });
+    onEditClick(utenlandsopphold: Utenlandsopphold) {
+        this.setState({ utenlandsoppholdToEdit: utenlandsopphold, isOpen: true });
     }
 
-    onDeleteClick(periode: Utenlandsopphold) {
-        this.props.deleteVisit(periode);
+    onDeleteClick(utenlandsopphold: Utenlandsopphold) {
+        this.props.deleteVisit(utenlandsopphold);
     }
 
-    onModalSubmit(periode: Utenlandsopphold) {
-        const { editVisit } = this.state;
+    onModalSubmit(utenlandsopphold: Utenlandsopphold) {
+        const { utenlandsoppholdToEdit: editVisit } = this.state;
         if (editVisit === undefined) {
-            this.props.addVisit(periode);
+            this.props.addVisit(utenlandsopphold);
         } else {
             const updatedVisitIndex = this.props.utenlandsoppholdListe.indexOf(editVisit);
-            this.props.editVisit(periode, updatedVisitIndex);
+            this.props.editVisit(utenlandsopphold, updatedVisitIndex);
         }
-        this.setState({ isOpen: false, editVisit: undefined });
+        this.setState({ isOpen: false, utenlandsoppholdToEdit: undefined });
     }
 
     render() {
-        const { utenlandsoppholdListe } = this.props;
+        const { utenlandsoppholdListe, gyldigTildsperiode, language } = this.props;
         return (
             <div>
                 <div className="blokk-xs">{this.props.label && <LabelText>{this.props.label}</LabelText>}</div>
-                {this.props.utenlandsoppholdListe.length > 0 && (
+                {utenlandsoppholdListe.length > 0 && (
                     <div className="blokk-s">
                         <CountryList
-                            utenlandsoppholdListe={this.props.utenlandsoppholdListe}
-                            onEditClick={(periode: Utenlandsopphold) => this.onEditClick(periode)}
-                            onDeleteClick={(periode: Utenlandsopphold) => this.onDeleteClick(periode)}
+                            utenlandsoppholdListe={utenlandsoppholdListe}
+                            onEditClick={this.onEditClick}
+                            onDeleteClick={this.onDeleteClick}
                         />
                     </div>
                 )}
                 {this.state.isOpen && (
                     <CountryModal
-                        utenlandsopphold={this.state.editVisit}
-                        onSubmit={(periode: Utenlandsopphold) => this.onModalSubmit(periode)}
-                        closeModal={() => this.closeModal()}
-                        language={this.props.language}
-                        label={this.props.label}
+                        utenlandsopphold={this.state.utenlandsoppholdToEdit}
+                        onSubmit={this.onModalSubmit}
+                        closeModal={this.closeModal}
+                        language={language}
                         alleUtenlandsopphold={utenlandsoppholdListe}
+                        gyldigTidsperiode={gyldigTildsperiode}
                     />
                 )}
                 <Knapp className="countryPicker__addButton" onClick={() => this.openModal()} htmlType="button">

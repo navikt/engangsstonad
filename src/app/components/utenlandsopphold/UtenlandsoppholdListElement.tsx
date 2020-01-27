@@ -2,13 +2,13 @@ import * as React from 'react';
 import * as countries from 'i18n-iso-countries';
 import classnames from 'classnames';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { ISODateToMaskedInput } from 'util/date/dateUtils';
-import getMessage from 'common/util/i18nUtils';
+import { ISODateToMaskedInput } from '../../util/date/dateUtils';
+import getMessage from '../../../common/util/i18nUtils';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 
-import SlettKnapp from 'common/components/slett-knapp/SlettKnapp';
-import LinkButton from 'components/link-button/LinkButton';
-import { Language } from 'intl/IntlProvider';
+import SlettKnapp from '../../../common/components/slett-knapp/SlettKnapp';
+import LinkButton from '../../components/link-button/LinkButton';
+import { Language } from '../../intl/IntlProvider';
 
 import './utenlandsopphold.less';
 
