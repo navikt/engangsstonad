@@ -18,7 +18,7 @@ const Checkbox: React.StatelessComponent<Props> = ({ name }) => {
                         label={<FormattedMessage id={field.name} />}
                         onChange={(e) => {
                             form.setFieldValue(field.name, e.target.checked);
-                            form.setFieldTouched(field.name, true);
+                            form.setFieldTouched(field.name, true, false);
                         }}
                         value={fieldProps.field.value}
                     />
