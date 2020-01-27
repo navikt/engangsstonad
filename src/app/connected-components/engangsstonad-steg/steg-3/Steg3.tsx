@@ -7,8 +7,10 @@ import { JaNeiSpørsmål } from 'components/form/ja-nei-spørsmål/JaNeiSpørsm�
 import { Questions } from '../steg-3/questions';
 import { FormProps } from '../FormProps';
 import CountryPicker from 'components/utenlandsopphold/Utenlandsopphold';
-import { Utenlandsopphold } from 'app/types/domain/InformasjonOmUtenlandsopphold';
-import { Language } from 'intl/IntlProvider';
+import { Utenlandsopphold } from '../../../../app/types/domain/InformasjonOmUtenlandsopphold';
+import { Language } from '../../../intl/IntlProvider';
+import { FormattedMessage } from 'react-intl';
+import moment from 'moment';
 
 interface Props {
     formikProps: FormikProps<Partial<FormProps>>;
@@ -25,17 +27,21 @@ const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
             {values[Questions.harVærtIUtlandSiste12Mnd] && (
                 <FieldArray
                     name={Questions.oppholdSiste12Mnd}
-                    render={(arrayHelpers) => (
+                    render={({ push, remove, replace }) => (
                         <CountryPicker
-                            label={'label'}
+                            label={<FormattedMessage id={Questions.oppholdSiste12Mnd} />}
                             language={Language.BOKMÅL}
-                            utenlandsoppholdListe={values[Questions.oppholdSiste12Mnd] || []}
-                            addVisit={arrayHelpers.push}
-                            editVisit={(periode: Utenlandsopphold, index: number) =>
-                                arrayHelpers.replace(index, periode)
-                            }
+                            utenlandsoppholdListe={values[Questions.oppholdSiste12Mnd]!}
+                            gyldigTildsperiode={{
+                                fom: moment()
+                                    .subtract(1, 'year')
+                                    .format(moment.HTML5_FMT.DATE),
+                                tom: moment().format(moment.HTML5_FMT.DATE)
+                            }}
+                            addVisit={push}
+                            editVisit={(periode: Utenlandsopphold, index: number) => replace(index, periode)}
                             deleteVisit={(periode: Utenlandsopphold) =>
-                                arrayHelpers.remove(values[Questions.oppholdNeste12Mnd]!.indexOf(periode))
+                                remove(values[Questions.oppholdNeste12Mnd]!.indexOf(periode))
                             }
                         />
                     )}
@@ -48,18 +54,22 @@ const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
             />
             {values[Questions.skalVæreIUtlandNeste12Mnd] && (
                 <FieldArray
-                    name={Questions.oppholdSiste12Mnd}
-                    render={(arrayHelpers) => (
+                    name={Questions.oppholdNeste12Mnd}
+                    render={({ push, remove, replace }) => (
                         <CountryPicker
-                            label={'label'}
+                            label={<FormattedMessage id={Questions.oppholdNeste12Mnd} />}
                             language={Language.BOKMÅL}
-                            utenlandsoppholdListe={values[Questions.oppholdNeste12Mnd] || []}
-                            addVisit={arrayHelpers.push}
-                            editVisit={(periode: Utenlandsopphold, index: number) =>
-                                arrayHelpers.replace(index, periode)
-                            }
+                            utenlandsoppholdListe={values[Questions.oppholdNeste12Mnd]!}
+                            gyldigTildsperiode={{
+                                fom: moment().format(moment.HTML5_FMT.DATE),
+                                tom: moment()
+                                    .add(1, 'year')
+                                    .format(moment.HTML5_FMT.DATE)
+                            }}
+                            addVisit={push}
+                            editVisit={(periode: Utenlandsopphold, index: number) => replace(index, periode)}
                             deleteVisit={(periode: Utenlandsopphold) =>
-                                arrayHelpers.remove(values[Questions.oppholdNeste12Mnd]!.indexOf(periode))
+                                remove(values[Questions.oppholdNeste12Mnd]!.indexOf(periode))
                             }
                         />
                     )}
