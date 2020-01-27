@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
-const { SkjemaGruppe, Fieldset, RadioPanel } = require('nav-frontend-skjema');
-import { RadioPanelGruppeProps } from 'nav-frontend-skjema';
+import { SkjemaGruppe, Fieldset, RadioPanel, RadioPanelGruppeProps } from 'nav-frontend-skjema';
+import { guid } from 'nav-frontend-js-utils';
+
 import './radioPanelGruppeResponsive.less';
-import 'nav-frontend-skjema-style';
 
 interface Props extends RadioPanelGruppeProps {
     twoColumns?: boolean;
@@ -19,14 +19,16 @@ export default class RadioPanelGruppeResponsive extends React.Component<Props> {
             <div className="radioPanelGruppe">
                 <Fieldset legend={legend}>
                     <SkjemaGruppe className="radioPanelGruppe--responsive" feil={feil}>
-                        {radios.map((radio) => {
+                        {radios.map(({ value, inputProps, ...rest }) => {
                             return (
-                                <div className={cls} key={radio.value}>
+                                <div className={cls} key={guid()}>
                                     <RadioPanel
-                                        checked={checked === radio.value}
+                                        id={inputProps?.id}
+                                        checked={checked === value}
                                         name={name}
-                                        onChange={(event: any) => onChange(event, radio.value)}
-                                        {...radio}
+                                        onChange={(event: any) => onChange(event, value)}
+                                        value={value}
+                                        {...rest}
                                     />
                                 </div>
                             );

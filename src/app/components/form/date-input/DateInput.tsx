@@ -5,12 +5,11 @@ import { guid } from 'nav-frontend-js-utils';
 import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
 import { Field, FieldProps } from 'formik';
 
-interface Props {
+interface Props extends Partial<DatovelgerProps> {
     name: string;
-    datovelgerProps?: Partial<DatovelgerProps>;
 }
 
-const DatovelgerElement: React.StatelessComponent<Props> = ({ name, datovelgerProps }) => {
+const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) => {
     return (
         <Field
             name={name}
@@ -35,7 +34,7 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, datovelgerPr
                                 }
                             }}
                             valgtDato={field.value}
-                            {...datovelgerProps}
+                            {...rest}
                         />
                     </SkjemaInputElement>
                 );
