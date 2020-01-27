@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
 
-const { ValidGroup, ValidForm } = require('../../lib') as any;
 const { Ingress } = require('nav-frontend-typografi');
 import { Hovedknapp } from 'nav-frontend-knapper';
 const Modal = require('nav-frontend-modal').default;
@@ -130,7 +129,7 @@ class Intro extends React.Component<Props, State> {
         return (
             <div id="js-intro">
                 <Skjemasteg>
-                    <ValidForm noSummary={true} onSubmit={this.startNySøknad}>
+                    <form onSubmit={this.startNySøknad}>
                         <LanguageToggle
                             language={this.props.language}
                             toggleLanguage={(language: Language) => this.toggleLanguage(language)}
@@ -161,7 +160,6 @@ class Intro extends React.Component<Props, State> {
 
                             <div className="blokk-m">
                                 <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
-                                    <ValidGroup validators={this.getGodkjentVilkarValidators()}>
                                         <BekreftCheckboksPanel
                                             inputProps={{
                                                 name: 'egenerklaring'
@@ -172,7 +170,6 @@ class Intro extends React.Component<Props, State> {
                                         >
                                             <span>{this.confirmBoxLabelHeaderText()}</span>
                                         </BekreftCheckboksPanel>
-                                    </ValidGroup>
                                 </div>
                             </div>
 
@@ -205,7 +202,7 @@ class Intro extends React.Component<Props, State> {
                                 <Personopplysninger />
                             </Modal>
                         </div>
-                    </ValidForm>
+                    </form>
                 </Skjemasteg>
             </div>
         );

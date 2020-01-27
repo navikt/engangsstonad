@@ -12,7 +12,6 @@ import Veilederpanel from 'nav-frontend-veilederpanel';
 import Veileder from 'components/veileder/Veileder';
 import { AppState } from 'reducers/reducers';
 
-const { ValidGroup } = require('./../../lib') as any;
 
 interface StateProps {
     bekreftetInformasjon: boolean;
@@ -34,22 +33,13 @@ class Steg4 extends React.Component<Props> {
                 <Oppsummering />
                 <div className="blokk-m">
                     <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
-                        <ValidGroup
-                            validators={[
-                                {
-                                    test: () => bekreftetInformasjon === true,
-                                    failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger')
-                                }
-                            ]}
-                            name="bekreftOpplysninger"
-                        >
+
                             <BekreftCheckboksPanel
                                 inputProps={{ name: 'bekreftOpplysninger' }}
                                 checked={bekreftetInformasjon}
                                 onChange={() => dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))}
                                 label={getMessage(intl, 'oppsummering.text.samtykke')}
                             />
-                        </ValidGroup>
                     </div>
                 </div>
             </Skjemasteg>
