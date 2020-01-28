@@ -10,12 +10,12 @@ export const mapFormStateToEngangsstonadDto = (
         type: 'engangsstønad',
         erEndringssøknad: false,
         barn: {
-            erBarnetFødt: values.isBorn,
+            erBarnetFødt: values.erFødt,
             antallBarn: values.numberOfChildren,
-            fødselsdatoer: values.isBorn ? values.fodselsdato : undefined,
-            termindato: !values.isBorn ? values.termindato : undefined,
-            terminbekreftelse: !values.isBorn ? values.terminberkreftelse! : [],
-            terminbekreftelseDato: !values.isBorn ? values.terminberkreftelseDato : undefined
+            fødselsdatoer: values.erFødt ? values.fodselsdato : undefined,
+            termindato: !values.erFødt ? values.termindato : undefined,
+            terminbekreftelse: !values.erFødt ? values.terminberkreftelse! : [],
+            terminbekreftelseDato: !values.erFødt ? values.terminberkreftelseDato : undefined
         },
         annenForelder: {
             kanIkkeOppgis: values.kanIkkeOppgis,

@@ -1,5 +1,5 @@
 export enum Questions {
-    erFødt = 'isBorn',
+    erFødt = 'erFødt',
     antallBarn = 'numberOfChildren',
     fødselsdato = 'fodselsdato',
     termindato = 'termindato',

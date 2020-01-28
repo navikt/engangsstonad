@@ -92,6 +92,7 @@ class SøknadContainer extends React.Component<Props, State> {
                     validationSchema={ActiveStep.validationSchema}
                     onSubmit={() => this.onSubmit()}
                     render={(formikProps: FormikProps<Partial<FormProps>>) => {
+                        console.log(formikProps.values, formikProps.errors);
                         return (
                             <>
                                 <Form className="responsiveContainer">

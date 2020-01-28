@@ -23,9 +23,7 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) =
                                 id: field.name,
                                 name: field.name,
                                 onChange: (inputValue) => {
-                                    if (inputValue !== '') {
-                                        form.setFieldValue(field.name, inputValue);
-                                    }
+                                    form.setFieldValue(field.name, inputValue);
                                 }
                             }}
                             onChange={(value) => {

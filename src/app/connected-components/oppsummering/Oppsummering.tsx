@@ -21,13 +21,11 @@ interface StateProps {
 
 interface OwnProps {
     søknad: EngangssoknadSoknadDto
-    
 }
 
 type Props = OwnProps & StateProps & InjectedIntlProps;
 const Oppsummering: React.StatelessComponent<Props> = ({ søknad, person, intl }) => {
     const { barn, annenForelder, informasjonOmUtenlandsopphold } = søknad;
-    console.log(søknad);
 
     const oppsummeringBarnTittel = getMessage(intl, 'oppsummering.text.relasjonTilBarnet', {
         antallBarn:
@@ -45,6 +43,7 @@ const Oppsummering: React.StatelessComponent<Props> = ({ søknad, person, intl }
                     personnummer={person.fnr}
                 />
             </div>
+            
             <Oppsummeringspunkt tittel={oppsummeringBarnTittel}>
                 <OppsummeringBarn barn={barn as any} />
             </Oppsummeringspunkt>

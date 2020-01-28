@@ -17,6 +17,7 @@
         "start-mock-api-server": "node ./mock-api-server.js",
         "start": "node ./src/build/scripts/start-dev.js",
         "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
+        "test-coverage": "jest --config ./jest.config.js --coverage --collectCoverageFrom=src/**/*.{ts,tsx} --collectCoverageFrom=!src/**/*.d.{ts,tsx}",
         "lint": "tslint src/**"
     },
     "dependencies": {

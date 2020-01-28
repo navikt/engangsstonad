@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { Field, FieldProps, FormikProps } from 'formik';
+import { FormattedMessage } from 'react-intl';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+
 import Select from 'components/form/select/Select';
 import { JaNeiSpørsmål } from 'components/form/ja-nei-spørsmål/JaNeiSpørsmål';
 import RadioPanelGruppeResponsiveWrapper from 'components/form/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import DatovelgerElement from 'components/form/date-input/DateInput';
-import OmTerminbekreftelsen from 'components/modal-content/OmTerminbekreftelsen';
 import { Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import AttachmentUploader from 'components/form/attachment-uploader/AttachmentUploader';
 
 import { Questions } from './questions';
 import { FormProps } from '../FormProps';
+import Veileder from 'components/veileder/Veileder';
 
 interface Props {
     formikProps: FormikProps<Partial<FormProps>>;
 }
 
-const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
+const Steg1: React.StatelessComponent<Props> = ({ formikProps }) => {
     const { values, touched } = formikProps;
-    const [isOmTerminbekreftelsenOpen, setOmTerminbekreftelsenOpen] = useState(false);
     return (
         <>
             <RadioPanelGruppeResponsiveWrapper
@@ -49,10 +51,10 @@ const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
 
                     {values[Questions.termindato] && (
                         <>
-                            <OmTerminbekreftelsen
-                                isOpen={isOmTerminbekreftelsenOpen}
-                                onRequestClose={() => setOmTerminbekreftelsenOpen(false)}
-                            />
+                            <Veilederpanel kompakt={true} svg={<Veileder />}>
+                                <FormattedMessage id="terminbekreftelsen.text.terminbekreftelsen" />
+                            </Veilederpanel>
+                            
                             <Field
                                 name={Questions.terminberkreftelse}
                                 render={(fieldProps: FieldProps) => (
@@ -65,8 +67,11 @@ const Steg1: React.FunctionComponent<Props> = ({ formikProps }) => {
                         </>
                     )}
 
-                    {values[Questions.termindato] && <DatovelgerElement name={Questions.terminberkreftelseDato} />}
+                    {values[Questions.termindato] && values[Questions.terminberkreftelse]!.length > 0 && (
+                        <DatovelgerElement name={Questions.terminberkreftelseDato} />
+                    )}
                 </>
+
             )}
         </>
     );

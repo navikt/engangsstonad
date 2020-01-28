@@ -7,9 +7,10 @@ module.exports = {
 	moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 	testPathIgnorePatterns: ['/node_modules/'],
 	moduleNameMapper: {
-		'\\.(css|less|scss|sass|less)$': '<rootDir>/node_modules/jest-css-modules',
+		'\\.(css|less|scss|sass|less|svg)$': '<rootDir>/node_modules/jest-css-modules',
 		'\\-style$': '<rootDir>/node_modules/jest-css-modules',
-		'^components/(.*)': '<rootDir>/src/app/components/$1'
+		'^components/(.*)': '<rootDir>/src/app/components/$1',
+		'^common/(.*)': '<rootDir>/src/common/$1'
 	},
 	setupFiles: ['<rootDir>/src/test/test-setup.js']
 };
