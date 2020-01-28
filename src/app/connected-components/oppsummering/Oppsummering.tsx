@@ -1,33 +1,33 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FodtBarn, UfodtBarn } from 'app/types/domain/Barn';
+
 import { fullNameFormat } from 'util/formats/formatUtils';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import AndreForeldrenOppsummering from './AndreForeldrenOppsummering';
-import AnnenForelder from 'app/types/domain/AnnenForelder';
 import getMessage from 'common/util/i18nUtils';
-import InformasjonOmUtenlandsopphold from 'app/types/domain/InformasjonOmUtenlandsopphold';
 import OppsummeringBarn from './../oppsummering/BarnOppsummering';
 import Oppsummeringspunkt from './Oppsummeringspunkt';
 import Person from 'app/types/domain/Person';
 import SøkersPersonalia from 'components/søkers-personalia/SøkersPersonalia';
 import UtenlandsoppholdOppsummering from './UtenlandsoppholdOppsummering';
 import { AppState } from 'reducers/reducers';
+import { EngangssoknadSoknadDto } from 'app/types/domain/EngangsstonadSoknad';
 
 import './oppsummering.less';
 
 interface StateProps {
-    annenForelder: AnnenForelder;
-    barn: FodtBarn & UfodtBarn;
-    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
-    person?: Person;
+    person: Person;
 }
 
-type Props = StateProps & InjectedIntlProps;
-const Oppsummering: React.StatelessComponent<Props> = ({ annenForelder, barn, informasjonOmUtenlandsopphold, person, intl }) => {
-    if (!person) {
-        return null;
-    }
+interface OwnProps {
+    søknad: EngangssoknadSoknadDto
+    
+}
+
+type Props = OwnProps & StateProps & InjectedIntlProps;
+const Oppsummering: React.StatelessComponent<Props> = ({ søknad, person, intl }) => {
+    const { barn, annenForelder, informasjonOmUtenlandsopphold } = søknad;
+    console.log(søknad);
 
     const oppsummeringBarnTittel = getMessage(intl, 'oppsummering.text.relasjonTilBarnet', {
         antallBarn:
@@ -46,10 +46,10 @@ const Oppsummering: React.StatelessComponent<Props> = ({ annenForelder, barn, in
                 />
             </div>
             <Oppsummeringspunkt tittel={oppsummeringBarnTittel}>
-                <OppsummeringBarn barn={barn} />
+                <OppsummeringBarn barn={barn as any} />
             </Oppsummeringspunkt>
 
-            {Object.keys(annenForelder).length > 0 && (
+            {person.ikkeNordiskEøsLand && (
                 <Oppsummeringspunkt tittel={getMessage(intl, 'annenForelder.sectionheading')}>
                     <AndreForeldrenOppsummering annenForelder={annenForelder} />
                 </Oppsummeringspunkt>
@@ -66,10 +66,7 @@ const Oppsummering: React.StatelessComponent<Props> = ({ annenForelder, barn, in
 };
 
 const mapStateToProps = (state: AppState) => ({
-    person: state.apiReducer.person,
-    annenForelder: state.soknadReducer.annenForelder,
-    barn: state.soknadReducer.barn as FodtBarn & UfodtBarn,
-    informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold
+    person: state.apiReducer.person!
 });
 
 export default connect<StateProps>(mapStateToProps)(injectIntl(Oppsummering));

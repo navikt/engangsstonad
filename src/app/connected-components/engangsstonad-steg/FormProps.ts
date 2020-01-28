@@ -10,7 +10,7 @@ export interface FormProps {
     [Steg1Questions.fødselsdato]: string[];
     [Steg1Questions.termindato]: string;
     [Steg1Questions.terminberkreftelse]: Attachment[];
-    [Steg1Questions.termindato]: string;
+    [Steg1Questions.terminberkreftelseDato]: string;
 
     [Steg2Questions.navn]: string;
     [Steg2Questions.kanIkkeOppgis]: boolean;

@@ -37,15 +37,13 @@ const erFamiliehendelsedatoIEnUtenlandsoppholdPeriode = (
 const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl, barn, informasjonOmUtenlandsopphold } = props;
     const {
-        iNorgeNeste12Mnd,
-        iNorgeSiste12Mnd,
         tidligereOpphold,
         senereOpphold
     } = informasjonOmUtenlandsopphold;
 
     return (
         <div className="blokk-m">
-            {iNorgeSiste12Mnd ? (
+            {tidligereOpphold.length === 0 ? (
                 <DisplayTextWithLabel label={getMessage(intl, 'oppsummering.text.boddSisteTolv')} text="Norge" />
             ) : (
                 <div className="textWithLabel">
@@ -55,7 +53,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                     <CountrySummaryList utenlandsoppholdListe={tidligereOpphold} />
                 </div>
             )}
-            {iNorgeNeste12Mnd ? (
+            {senereOpphold.length === 0 ? (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.neste12mnd')}
                     text={getMessage(intl, 'medlemmskap.radiobutton.boNorge')}

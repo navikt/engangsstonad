@@ -9,7 +9,7 @@ import { FormProps } from './FormProps';
 import Steg1 from './steg-1/Steg1';
 import Steg2 from './steg-2/Steg2';
 import Steg3 from './steg-3/Steg3';
-import Steg4 from './Steg4';
+import Steg4 from './steg-4/Steg4';
 
 import Steg1ValidationSchema from './steg-1/validationSchema';
 import Steg2ValidationSchema from './steg-2/validationSchema';
@@ -39,7 +39,7 @@ const stepConfig = [
     {
         fortsettKnappLabelIntlId: 'standard.sectionheading',
         stegIndikatorLabelIntlId: 'oppsummering.sectionheading',
-        component: Steg4,
+        component:  (formikProps: FormikProps<Partial<FormProps>>) => <Steg4 formikProps={formikProps} />,
     }
 ];
 
