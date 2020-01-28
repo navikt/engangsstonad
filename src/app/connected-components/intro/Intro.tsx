@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
 
-const { Ingress } = require('nav-frontend-typografi');
 import { Hovedknapp } from 'nav-frontend-knapper';
 const Modal = require('nav-frontend-modal').default;
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
@@ -11,18 +10,14 @@ import Plikter from 'components/modal-content/Plikter';
 import Personopplysninger from 'components/modal-content/Personopplysninger';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
-import {
-    commonActionCreators as common,
-    soknadActionCreators as soknad,
-    stepActionCreators as step
-} from '../../redux/actions';
+import { commonActionCreators as common, stepActionCreators as step } from '../../redux/actions';
 import { getDefaultState } from 'reducers/stepReducer';
 import LanguageToggle from '../../intl/LanguageToggle';
 import getMessage from 'common/util/i18nUtils';
 import Person from '../../types/domain/Person';
 import { RouteComponentProps } from 'react-router-dom';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import { DispatchProps } from 'common/redux/types';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import Veiviser from 'components/veiviser/VeiviserSvg';
@@ -60,7 +55,7 @@ class Intro extends React.Component<Props, State> {
     resetAppState() {
         const { dispatch } = this.props;
         dispatch(step.setActiveStep(getDefaultState().activeStep));
-        dispatch(soknad.resetSøknad());
+        // dispatch(soknad.resetSøknad());
         dispatch(common.setBekreftetInformasjon(false));
         dispatch(common.setGodkjentVilkar(false));
     }

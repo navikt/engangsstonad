@@ -4,7 +4,7 @@ import AnnenForelder from './AnnenForelder';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 
 interface EngangsstonadSoknad {
-    type: string;
+    type: 'engangsstønad';
     erEndringssøknad: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: FodtBarn | UfodtBarn;
@@ -13,7 +13,7 @@ interface EngangsstonadSoknad {
 };
 
 export interface EngangssoknadSoknadDto {
-    type: string;
+    type: 'engangsstønad';
     erEndringssøknad: boolean;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: FodtBarn | UfodtBarn;
