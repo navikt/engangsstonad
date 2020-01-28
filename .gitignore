@@ -7,3 +7,4 @@ dist
 cypress/videos
 cypress/screenshots
 yarn.lock
+coverage
