@@ -42,6 +42,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
 }) => {
     const [activeStepIndex, setActiveStepIndex] = React.useState(0);
     const [liveValidation, setLiveValidation] = React.useState(false);
+
     const stepsConfig = getStepConfig(intl, person);
     const ActiveStep = stepsConfig[activeStepIndex];
 
@@ -67,7 +68,6 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
 
     return (
         <>
-            <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
             <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
             <Formik
                 initialValues={{
@@ -78,16 +78,15 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                 validationSchema={ActiveStep.validationSchema}
                 onSubmit={(values) => onSubmit(values)}
                 render={(formikProps: FormikProps<Partial<FormProps>>) => {
-                    console.log(formikProps.values, formikProps.errors);
                     return (
-                        <>
-                            <Form className="responsiveContainer">
-                                <SkjemaHeader
-                                    onPrevious={() => handleBackClicked(formikProps)}
-                                    activeStep={activeStepIndex}
-                                    stepTitles={stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel)}
-                                />
+                        <div className="responsiveContainer">
+                            <SkjemaHeader
+                                onPrevious={() => handleBackClicked(formikProps)}
+                                activeStep={activeStepIndex + 1}
+                                stepTitles={stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel)}
+                            />
 
+                            <Form>
                                 {liveValidation && !_.isEmpty(formikProps.errors) && (
                                     <ValidationErrorSummaryBase
                                         title={getMessage(intl, 'title')}
@@ -109,10 +108,11 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                                 )}
                                 <CancelButton />
                             </Form>
-                        </>
+                        </div>
                     );
                 }}
             />
+            <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
             <UtløptSesjonModal erÅpen={sessionHasExpired} />
         </>
     );
