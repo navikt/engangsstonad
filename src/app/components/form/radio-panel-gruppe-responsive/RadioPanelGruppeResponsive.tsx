@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { FieldProps, Field } from 'formik';
 import { parseNavFrontend, getCheckedRadioValue } from './util';
-import RadioPanelGruppeResponsive from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
+import { RadioPanelGruppeResponsive } from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 
 export type RadioValues = string | boolean | number;
 
@@ -25,15 +25,13 @@ const RadioPanelGruppeResponsiveWrapper: React.StatelessComponent<Props> = ({ na
                         radios={radioValues.map((radioValue) => ({
                             label: <FormattedMessage id={`${field.name}.${radioValue}`} />,
                             value: radioValue.toString(),
-                            inputProps: {
-                                id: `js-${field.name}-${radioValue}`
-                            }
                         }))}
                         onChange={(e, value: string) => {
                             form.setFieldValue(field.name, parseNavFrontend(value));
                             form.setFieldTouched(field.name, true, false);
                         }}
                         checked={getCheckedRadioValue(field.value)}
+                        twoColumns={true}
                     />
                 );
             }}
