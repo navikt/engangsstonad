@@ -22,7 +22,7 @@ const Input: React.StatelessComponent<Props> = ({ name, ...rest }) => {
                         onChange={(e) => {
                             form.setFieldValue(field.name, e.target.value);
                         }}
-                        value={fieldProps.field.value}
+                        value={fieldProps.field.value || ''}
                         {...rest}
                     />
                 );
