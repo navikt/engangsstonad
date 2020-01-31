@@ -6,22 +6,26 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { Formik, Form, FormikProps } from 'formik';
 import _ from 'lodash';
 
-import getMessage from 'common/util/i18nUtils';
-import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
+import { sendSoknad } from 'actions/api/apiActionCreators';
+import Person from 'app/types/domain/Person';
+import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
-import Person from 'app/types/domain/Person';
 import CancelButton from 'components/cancel-button/CancelButton';
-import { DispatchProps } from 'common/redux/types';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
-import { Language } from 'intl/IntlProvider';
 import ValidationErrorSummaryBase, {
     ValidationSummaryError
 } from 'components/validation-error-summary/ValidationErrorSummaryBase';
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
-import { sendSoknad } from 'actions/api/apiActionCreators';
+
+import { DispatchProps } from 'common/redux/types';
+import getMessage from 'common/util/i18nUtils';
+
+import { Language } from 'intl/IntlProvider';
 import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDtoMapper';
 import { AppState } from 'reducers/reducers';
+
+import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
 
 interface OwnProps {
     language: Language;
@@ -47,6 +51,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
     const ActiveStep = stepsConfig[activeStepIndex];
 
     const onSubmit = (values: Partial<FormProps>) => {
+        setLiveValidation(false);
         activeStepIndex === stepsConfig.length - 1
             ? dispatch(sendSoknad(mapFormStateToEngangsstonadDto(values, language)))
             : setActiveStepIndex(activeStepIndex + 1);
@@ -76,8 +81,11 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                     oppholdSiste12Mnd: []
                 }}
                 validationSchema={ActiveStep.validationSchema}
-                onSubmit={(values) => onSubmit(values)}
+                validateOnMount={true}
+                validateOnBlur={false}
+                onSubmit={onSubmit}
                 render={(formikProps: FormikProps<Partial<FormProps>>) => {
+                    console.log(formikProps.values, formikProps.errors);
                     return (
                         <div className="responsiveContainer">
                             <SkjemaHeader
