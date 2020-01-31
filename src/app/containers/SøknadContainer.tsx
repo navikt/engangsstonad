@@ -1,146 +1,126 @@
 import * as React from 'react';
-import { RouteComponentProps, Prompt } from 'react-router';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { Prompt, RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Formik, Form, FormikProps } from 'formik';
 import _ from 'lodash';
 
 import getMessage from 'common/util/i18nUtils';
 import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
-import { stepActionCreators as stepActions } from 'actions';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import Person from 'app/types/domain/Person';
 import CancelButton from 'components/cancel-button/CancelButton';
 import { DispatchProps } from 'common/redux/types';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
-import { AppState } from 'reducers/reducers';
 import { Language } from 'intl/IntlProvider';
 import ValidationErrorSummaryBase, {
     ValidationSummaryError
 } from 'components/validation-error-summary/ValidationErrorSummaryBase';
 import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { sendSoknad } from 'actions/api/apiActionCreators';
+import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDtoMapper';
+import { AppState } from 'reducers/reducers';
 
 interface OwnProps {
     language: Language;
     person: Person;
-    activeStep: number;
-    søknadSendt: boolean;
     søknadSendingInProgress: boolean;
     sessionHasExpired: boolean;
 }
 
-interface State {
-    liveValidation: boolean;
-}
-
 type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps;
 
-class SøknadContainer extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            liveValidation: false
-        };
-        this.onSubmit = this.onSubmit.bind(this);
-        this.handleBackClicked = this.handleBackClicked.bind(this);
-    }
+const SøknadContainer: React.FunctionComponent<Props> = ({
+    person,
+    søknadSendingInProgress,
+    sessionHasExpired,
+    language,
+    dispatch,
+    intl
+}) => {
+    const [activeStepIndex, setActiveStepIndex] = React.useState(0);
+    const [liveValidation, setLiveValidation] = React.useState(false);
+    const stepsConfig = getStepConfig(intl, person);
+    const ActiveStep = stepsConfig[activeStepIndex];
 
-    hasToWaitForResponse() {
-        const { activeStep, intl, person } = this.props;
-        const stepsConfig = getStepConfig(intl, person);
-        return activeStep === stepsConfig.length;
-    }
+    const onSubmit = (values: Partial<FormProps>) => {
+        activeStepIndex === stepsConfig.length - 1
+            ? dispatch(sendSoknad(mapFormStateToEngangsstonadDto(values, language)))
+            : setActiveStepIndex(activeStepIndex + 1);
+    };
 
-    onSubmit() {
-        this.setState({ liveValidation: false });
-        const { dispatch, activeStep } = this.props;
-        dispatch(stepActions.setActiveStep(activeStep + 1));
-    }
-
-    handleBackClicked() {
-        const { dispatch, activeStep } = this.props;
-        if (activeStep > 1) {
-            dispatch(stepActions.setActiveStep(activeStep - 1));
+    const handleBackClicked = (formikProps: FormikProps<Partial<FormProps>>) => {
+        if (activeStepIndex > 0) {
+            formikProps.setErrors({});
+            setActiveStepIndex(activeStepIndex - 1);
         }
-    }
+    };
 
-    getErrorMessages(formikProps: FormikProps<Partial<FormProps>>): ValidationSummaryError[] {
-        return Object.entries(formikProps.errors).map(error => ({
+    const getErrorMessages = (formikProps: FormikProps<Partial<FormProps>>): ValidationSummaryError[] => {
+        return Object.entries(formikProps.errors).map((error) => ({
             name: error[0],
             message: error[1] as string
         }));
-    }
+    };
 
-    render() {
-        const { intl, activeStep, søknadSendingInProgress, person, sessionHasExpired } = this.props;
-        const { liveValidation } = this.state;
-        const stepsConfig = getStepConfig(intl, person);
-        const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
-        const ActiveStep = stepsConfig[activeStep - 1];
-        return (
-            <>
-                <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
-                <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
-                <Formik
-                    initialValues={{
-                        terminberkreftelse: [],
-                        oppholdNeste12Mnd: [],
-                        oppholdSiste12Mnd: []
-                    }}
-                    validationSchema={ActiveStep.validationSchema}
-                    onSubmit={() => this.onSubmit()}
-                    render={(formikProps: FormikProps<Partial<FormProps>>) => {
-                        console.log(formikProps.values, formikProps.errors);
-                        return (
-                            <>
-                                <Form className="responsiveContainer">
-                                    <SkjemaHeader
-                                        onPrevious={() => {
-                                            formikProps.setErrors({});
-                                            this.handleBackClicked();
-                                        }}
-                                        activeStep={activeStep}
-                                        stepTitles={titles}
+    return (
+        <>
+            <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
+            <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
+            <Formik
+                initialValues={{
+                    terminberkreftelse: [],
+                    oppholdNeste12Mnd: [],
+                    oppholdSiste12Mnd: []
+                }}
+                validationSchema={ActiveStep.validationSchema}
+                onSubmit={(values) => onSubmit(values)}
+                render={(formikProps: FormikProps<Partial<FormProps>>) => {
+                    console.log(formikProps.values, formikProps.errors);
+                    return (
+                        <>
+                            <Form className="responsiveContainer">
+                                <SkjemaHeader
+                                    onPrevious={() => handleBackClicked(formikProps)}
+                                    activeStep={activeStepIndex}
+                                    stepTitles={stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel)}
+                                />
+
+                                {liveValidation && !_.isEmpty(formikProps.errors) && (
+                                    <ValidationErrorSummaryBase
+                                        title={getMessage(intl, 'title')}
+                                        errors={getErrorMessages(formikProps)}
                                     />
+                                )}
 
-                                    {liveValidation && !_.isEmpty(formikProps.errors) && (
-                                        <ValidationErrorSummaryBase
-                                            title={getMessage(intl, 'title')}
-                                            errors={this.getErrorMessages(formikProps)}
-                                        />
-                                    )}
+                                {ActiveStep.component(formikProps)}
 
-                                    {ActiveStep.component(formikProps)}
-
-                                    {!_.some(formikProps.errors, (value) => value === 'Required') && (
-                                        <Hovedknapp
-                                            className="responsiveButton"
-                                            disabled={søknadSendingInProgress}
-                                            spinner={søknadSendingInProgress}
-                                            onClick={() => this.setState({ liveValidation: true })}
-                                        >
-                                            {ActiveStep.fortsettKnappLabel}
-                                        </Hovedknapp>
-                                    )}
-                                    <CancelButton />
-                                </Form>
-                            </>
-                        );
-                    }}
-                />
-                <UtløptSesjonModal erÅpen={sessionHasExpired} />
-            </>
-        );
-    }
-}
+                                {!_.some(formikProps.errors, (value) => value === 'Required') && (
+                                    <Hovedknapp
+                                        className="responsiveButton"
+                                        disabled={søknadSendingInProgress}
+                                        spinner={søknadSendingInProgress}
+                                        onClick={() => setLiveValidation(true)}
+                                    >
+                                        {ActiveStep.fortsettKnappLabel}
+                                    </Hovedknapp>
+                                )}
+                                <CancelButton />
+                            </Form>
+                        </>
+                    );
+                }}
+            />
+            <UtløptSesjonModal erÅpen={sessionHasExpired} />
+        </>
+    );
+};
 
 const mapStateToProps = (state: AppState) => ({
     language: state.commonReducer.language,
     person: state.apiReducer.person!,
-    activeStep: state.stepReducer.activeStep,
-    søknadSendt: state.apiReducer.søknadSendt,
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
     sessionHasExpired: state.apiReducer.sessionHasExpired
 });

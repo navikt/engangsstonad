@@ -1,5 +1,5 @@
 import Person from '../../../types/domain/Person';
-import { default as EngangsstonadSoknad } from '../../../types/domain/EngangsstonadSoknad';
+import { EngangssoknadSoknadDto } from '../../../types/domain/EngangsstonadSoknad';
 import PersonRequest from '../../../types/services/PersonRequest';
 import Kvittering from 'app/types/services/Kvittering';
 
@@ -35,8 +35,7 @@ interface GetPersonFailed {
 
 interface SendSoknad {
     type: ApiActionKeys.SEND_SOKNAD;
-    soknad: EngangsstonadSoknad;
-    språkkode: string;
+    soknad: EngangssoknadSoknadDto;
 }
 
 interface SendSoknadSuccess {

@@ -1,7 +1,7 @@
 import { ApiActionKeys, ApiActionTypes } from './apiActionDefinitions';
 import Person from '../../../types/domain/Person';
 import PersonRequest from '../../../types/services/PersonRequest';
-import EngangsstonadSoknad from '../../../types/domain/EngangsstonadSoknad';
+import { EngangssoknadSoknadDto } from '../../../types/domain/EngangsstonadSoknad';
 import Kvittering from 'app/types/services/Kvittering';
 
 export function getPerson(person?: PersonRequest): ApiActionTypes {
@@ -26,11 +26,10 @@ export function getPersonFailed(error: any): ApiActionTypes {
     };
 }
 
-export function sendSoknad(soknad: EngangsstonadSoknad, språkkode: string): ApiActionTypes {
+export function sendSoknad(soknad: EngangssoknadSoknadDto): ApiActionTypes {
     return {
         type: ApiActionKeys.SEND_SOKNAD,
-        soknad,
-        språkkode
+        soknad
     };
 }
 

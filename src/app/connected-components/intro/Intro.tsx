@@ -10,8 +10,7 @@ import Plikter from 'components/modal-content/Plikter';
 import Personopplysninger from 'components/modal-content/Personopplysninger';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
-import { commonActionCreators as common, stepActionCreators as step } from '../../redux/actions';
-import { getDefaultState } from 'reducers/stepReducer';
+import { commonActionCreators as common } from '../../redux/actions';
 import LanguageToggle from '../../intl/LanguageToggle';
 import getMessage from 'common/util/i18nUtils';
 import Person from '../../types/domain/Person';
@@ -50,14 +49,6 @@ class Intro extends React.Component<Props, State> {
         };
         this.bekreftetVilkarChange = this.bekreftetVilkarChange.bind(this);
         this.startNySøknad = this.startNySøknad.bind(this);
-    }
-
-    resetAppState() {
-        const { dispatch } = this.props;
-        dispatch(step.setActiveStep(getDefaultState().activeStep));
-        // dispatch(soknad.resetSøknad());
-        dispatch(common.setBekreftetInformasjon(false));
-        dispatch(common.setGodkjentVilkar(false));
     }
 
     openPlikterModal(e: React.SyntheticEvent<HTMLElement>) {
