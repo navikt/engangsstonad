@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
 
 import { Hovedknapp } from 'nav-frontend-knapper';
-const Modal = require('nav-frontend-modal').default;
+import Modal from 'nav-frontend-modal';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 
 import Plikter from 'components/modal-content/Plikter';
@@ -73,7 +73,8 @@ class Intro extends React.Component<Props, State> {
         this.setState({ godkjentVilkår: !this.state.godkjentVilkår });
     }
 
-    startNySøknad() {
+    startNySøknad(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
         if (this.state.godkjentVilkår) {
             this.props.dispatch(common.setGodkjentVilkar(true));
             this.props.history.push('/engangsstonad/soknad');
@@ -97,16 +98,6 @@ class Intro extends React.Component<Props, State> {
                 }}
             />
         );
-    }
-
-    getGodkjentVilkarValidators() {
-        const { intl } = this.props;
-        return [
-            {
-                test: () => this.state.godkjentVilkår === true,
-                failText: getMessage(intl, 'valideringsfeil.godkjentVilkar')
-            }
-        ];
     }
 
     render() {
