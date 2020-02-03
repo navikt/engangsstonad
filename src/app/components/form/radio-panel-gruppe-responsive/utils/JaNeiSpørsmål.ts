@@ -1,4 +1,4 @@
 export enum JaNeiSpørsmål {
-    JA = 'JA',
-    NEI = 'NEI'
+    JA = 'ja',
+    NEI = 'nei'
 }

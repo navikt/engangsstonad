@@ -47,17 +47,17 @@ const Steg1ValidationSchema = () =>
             is: false,
             then: Yup.array().min(1, 'Terminbekreftelse er påkrevd')
         }),
-        [Questions.terminberkreftelseDato]: Yup.string().when(Questions.erFødt, {
+        [Questions.terminbekreftelseDato]: Yup.string().when(Questions.erFødt, {
             is: false,
             then: Yup.string()
                 .required('Required')
-                .test(Questions.terminberkreftelseDato, 'Ikke en gyldig dato', (value) => {
+                .test(Questions.terminbekreftelseDato, 'Ikke en gyldig dato', (value) => {
                     return moment(value, moment.HTML5_FMT.DATE, true).isValid();
                 })
-                .test(Questions.terminberkreftelseDato, 'Dato må være i dag eller tidligere', (value) => {
+                .test(Questions.terminbekreftelseDato, 'Dato må være i dag eller tidligere', (value) => {
                     return idagEllerTidligere(value);
                 })
-                .test(Questions.terminberkreftelseDato, 'Du må være i uke 22', (value) => {
+                .test(Questions.terminbekreftelseDato, 'Du må være i uke 22', (value) => {
                     return utstedtDatoErIUke22(value, (Yup.ref(Questions.termindato) as unknown) as string);
                 })
         })

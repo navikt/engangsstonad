@@ -4,6 +4,7 @@ import { DatovelgerProps } from 'nav-datovelger';
 import { guid } from 'nav-frontend-js-utils';
 import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
 import { Field, FieldProps } from 'formik';
+import { FormattedMessage } from 'react-intl';
 
 interface Props extends Partial<DatovelgerProps> {
     name: string;
@@ -16,7 +17,7 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) =
             render={(fieldProps: FieldProps) => {
                 const { field, form } = fieldProps;
                 return (
-                    <SkjemaInputElement label={field.name}>
+                    <SkjemaInputElement label={<FormattedMessage id={`spørsmål.${name}`} />}>
                         <Datovelger
                             id={guid()}
                             input={{

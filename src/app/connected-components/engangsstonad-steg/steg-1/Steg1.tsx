@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Field, FieldProps, FormikProps } from 'formik';
+import { FormikProps } from 'formik';
 import { FormattedMessage } from 'react-intl';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 
 import Select from 'components/form/select/Select';
-import { JaNeiSpørsmål } from 'components/form/ja-nei-spørsmål/JaNeiSpørsmål';
+import { JaNeiSpørsmål } from 'components/form/radio-panel-gruppe-responsive/utils/JaNeiSpørsmål';
 import RadioPanelGruppeResponsiveWrapper from 'components/form/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import DatovelgerElement from 'components/form/date-input/DateInput';
 import { Skjemanummer } from 'common/storage/attachment/types/Attachment';
@@ -54,24 +54,18 @@ const Steg1: React.StatelessComponent<Props> = ({ formikProps }) => {
                             <Veilederpanel kompakt={true} svg={<Veileder />}>
                                 <FormattedMessage id="terminbekreftelsen.text.terminbekreftelsen" />
                             </Veilederpanel>
-                            
-                            <Field
+
+                            <AttachmentUploader
                                 name={Questions.terminberkreftelse}
-                                render={(fieldProps: FieldProps) => (
-                                    <AttachmentUploader
-                                        skjemanummer={Skjemanummer.TERMINBEKREFTELSE}
-                                        fieldProps={fieldProps}
-                                    />
-                                )}
+                                skjemanummer={Skjemanummer.TERMINBEKREFTELSE}
                             />
                         </>
                     )}
 
                     {values[Questions.termindato] && values[Questions.terminberkreftelse]!.length > 0 && (
-                        <DatovelgerElement name={Questions.terminberkreftelseDato} />
+                        <DatovelgerElement name={Questions.terminbekreftelseDato} />
                     )}
                 </>
-
             )}
         </>
     );

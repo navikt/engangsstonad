@@ -99,7 +99,7 @@ describe('Steg1', () => {
             expect(wrapper.find({ name: Questions.antallBarn }).length).toEqual(1);
             expect(wrapper.find({ name: Questions.termindato }).length).toEqual(1);
             expect(wrapper.find({ name: Questions.terminberkreftelse }).length).toEqual(1);
-            expect(wrapper.find({ name: Questions.terminberkreftelseDato }).length).toEqual(1);
+            expect(wrapper.find({ name: Questions.terminbekreftelseDato }).length).toEqual(1);
         });
     });
 });

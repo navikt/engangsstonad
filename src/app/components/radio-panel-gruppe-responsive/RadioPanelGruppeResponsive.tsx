@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import * as classnames from 'classnames';
 import { SkjemaGruppe, RadioPanel, RadioPanelGruppeProps } from 'nav-frontend-skjema';
 import { guid } from 'nav-frontend-js-utils';
@@ -14,6 +13,7 @@ export const RadioPanelGruppeResponsive: React.StatelessComponent<Props> = ({
     twoColumns = false,
     checked,
     name,
+    legend,
     radios,
     onChange
 }) => {
@@ -21,7 +21,7 @@ export const RadioPanelGruppeResponsive: React.StatelessComponent<Props> = ({
         <div className="radioPanelGruppe">
             <SkjemaGruppe>
                 <legend className="radioPanelGruppe__legend">
-                    <FormattedMessage id={name} />
+                    {legend}
                 </legend>
                 <div className="radioPanelGruppe--responsive">
                     {radios.map(({ value, ...rest }) => {

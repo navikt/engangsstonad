@@ -21,7 +21,7 @@ const Select: React.StatelessComponent<Props> = ({ name, options }) => {
                 return (
                     <NavSelect
                         bredde="xs"
-                        label={<FormattedMessage id={field.name} />}
+                        label={<FormattedMessage id={`spørsmål.${name}`} />}
                         onChange={(e) => {
                             form.setFieldValue(field.name, e.target.value);
                             form.setFieldTouched(field.name, true);

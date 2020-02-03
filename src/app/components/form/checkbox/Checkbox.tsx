@@ -15,7 +15,7 @@ const Checkbox: React.StatelessComponent<Props> = ({ name }) => {
                 const { field, form } = fieldProps;
                 return (
                     <NavCheckbox
-                        label={<FormattedMessage id={field.name} />}
+                        label={<FormattedMessage id={`spørsmål.${name}`} />}
                         onChange={(e) => {
                             form.setFieldValue(field.name, e.target.checked);
                             form.setFieldTouched(field.name, true, false);

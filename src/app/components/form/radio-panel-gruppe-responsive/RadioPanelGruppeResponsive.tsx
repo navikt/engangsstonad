@@ -21,9 +21,9 @@ const RadioPanelGruppeResponsiveWrapper: React.StatelessComponent<Props> = ({ na
                     <RadioPanelGruppeResponsive
                         className={field.name}
                         name={field.name}
-                        legend={<FormattedMessage id={field.name} />}
+                        legend={<FormattedMessage id={`spørsmål.${name}`} />}
                         radios={radioValues.map((radioValue) => ({
-                            label: <FormattedMessage id={`${field.name}.${radioValue}`} />,
+                            label: <FormattedMessage id={`spørsmål.${field.name}.${radioValue}`} />,
                             value: radioValue.toString(),
                         }))}
                         onChange={(e, value: string) => {

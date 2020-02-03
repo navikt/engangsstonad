@@ -69,9 +69,9 @@ describe('barn validation schema', () => {
 
         it('terminbekreftelsesdato skal ikke være frem i tid', async () => {
             await expect(
-                Steg1ValidationSchema().validateAt(Questions.terminberkreftelseDato, {
+                Steg1ValidationSchema().validateAt(Questions.terminbekreftelseDato, {
                     [Questions.erFødt]: false,
-                    [Questions.terminberkreftelseDato]: moment()
+                    [Questions.terminbekreftelseDato]: moment()
                         .add(1, 'days')
                         .format(moment.HTML5_FMT.DATE)
                 } as any)
@@ -80,19 +80,19 @@ describe('barn validation schema', () => {
 
         it('terminbekreftelsesdato skal kunne være dagens dato', async () => {
             await expect(
-                Steg1ValidationSchema().validateAt(Questions.terminberkreftelseDato, {
+                Steg1ValidationSchema().validateAt(Questions.terminbekreftelseDato, {
                     [Questions.erFødt]: false,
-                    [Questions.terminberkreftelseDato]: moment().format(moment.HTML5_FMT.DATE)
+                    [Questions.terminbekreftelseDato]: moment().format(moment.HTML5_FMT.DATE)
                 } as any)
             ).resolves.toBeTruthy();
         });
 
         it('terminbekreftelsesdato må våre i uke 22 eller senere', async () => {
             await expect(
-                Steg1ValidationSchema().validateAt(Questions.terminberkreftelseDato, {
+                Steg1ValidationSchema().validateAt(Questions.terminbekreftelseDato, {
                     [Questions.erFødt]: false,
                     [Questions.termindato]: moment().format(moment.HTML5_FMT.DATE),
-                    [Questions.terminberkreftelseDato]: moment()
+                    [Questions.terminbekreftelseDato]: moment()
                         .subtract(dagerForTerminbekreftelse, 'days')
                         .format(moment.HTML5_FMT.DATE)
                 } as any)
@@ -101,10 +101,10 @@ describe('barn validation schema', () => {
 
         it('terminbekreftelsesdato kan ikke være før uke 22', async () => {
             await expect(
-                Steg1ValidationSchema().validateAt(Questions.terminberkreftelseDato, {
+                Steg1ValidationSchema().validateAt(Questions.terminbekreftelseDato, {
                     [Questions.erFødt]: false,
                     [Questions.termindato]: moment().format(moment.HTML5_FMT.DATE),
-                    [Questions.terminberkreftelseDato]: moment()
+                    [Questions.terminbekreftelseDato]: moment()
                         .subtract(dagerForTerminbekreftelse + 1, 'days')
                         .format(moment.HTML5_FMT.DATE)
                 } as any)

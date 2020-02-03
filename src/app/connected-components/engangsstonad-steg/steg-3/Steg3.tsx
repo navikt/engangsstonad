@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
 import RadioPanelGruppeResponsiveWrapper from 'components/form/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
-import { JaNeiSpørsmål } from 'components/form/ja-nei-spørsmål/JaNeiSpørsmål';
+import { JaNeiSpørsmål } from 'components/form/radio-panel-gruppe-responsive/utils/JaNeiSpørsmål';
 import CountryPicker from 'components/utenlandsopphold/Utenlandsopphold';
 
 import { Questions } from '../steg-3/questions';

@@ -27,9 +27,9 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (p
 
     let antallBarnSummaryText;
     if (antallBarn === 1) {
-        antallBarnSummaryText = getMessage(intl, 'relasjonBarn.radiobutton.ettbarn');
+        antallBarnSummaryText = getMessage(intl, 'numberOfChildren.1');
     } else if (antallBarn === 2) {
-        antallBarnSummaryText = getMessage(intl, 'relasjonBarn.radiobutton.tvillinger');
+        antallBarnSummaryText = getMessage(intl, 'numberOfChildren.2');
     } else {
         antallBarnSummaryText = getMessage(intl, 'oppsummering.text.flereAntallBarn', {
             antall: antallBarn
@@ -51,7 +51,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (p
             {!erBarnetFødt && termindato && terminbekreftelseDato && (
                 <div>
                     <DisplayTextWithLabel
-                        label={getMessage(intl, 'oppsummering.text.medTermindato')}
+                        label={getMessage(intl, 'termindato')}
                         text={ISODateToMaskedInput(termindato)}
                     />
                     <div className="oppsummering__attachments">

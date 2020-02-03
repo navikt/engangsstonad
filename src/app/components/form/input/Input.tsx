@@ -18,7 +18,7 @@ const Input: React.StatelessComponent<Props> = ({ name, ...rest }) => {
                     <NavInput
                         id={name}
                         name={name}
-                        label={<FormattedMessage id={field.name} />}
+                        label={<FormattedMessage id={`spørsmål.${name}`} />}
                         onChange={(e) => {
                             form.setFieldValue(field.name, e.target.value);
                         }}
