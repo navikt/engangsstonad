@@ -13,11 +13,11 @@
 }
 
 .radioPanelGruppe {
-    &--responsive{
+    &--responsive {
         display: flex;
         flex-flow: row wrap;
     }
-    &--twoColumns{
+    &--twoColumns {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-evenly;
@@ -29,6 +29,15 @@
 
         &--twoColumns {
             min-width: 50%;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        &--responsive {
+            display: block;
+        }
+        .radioPanelWrapper {
+            max-width: 100%;
         }
     }
 }

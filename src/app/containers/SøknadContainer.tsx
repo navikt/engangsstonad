@@ -59,7 +59,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
     };
 
     const handleBackClicked = (formikProps: FormikProps<Partial<FormProps>>) => {
-        formikProps.setStatus({ liveValidation: true });
+        formikProps.setStatus({ liveValidation: false });
         if (activeStepIndex > 0) {
             formikProps.setErrors({});
             setActiveStepIndex(activeStepIndex - 1);
