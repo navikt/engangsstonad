@@ -20,7 +20,7 @@ const Checkbox: React.StatelessComponent<Props> = ({ name }) => {
                             form.setFieldValue(field.name, e.target.checked);
                             form.setFieldTouched(field.name, true, false);
                         }}
-                        value={fieldProps.field.value}
+                        checked={field.value}
                     />
                 );
             }}
