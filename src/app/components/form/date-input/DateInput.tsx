@@ -2,9 +2,9 @@ import * as React from 'react';
 import Datovelger from 'nav-datovelger/dist/datovelger/Datovelger';
 import { DatovelgerProps } from 'nav-datovelger';
 import { guid } from 'nav-frontend-js-utils';
-import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
 import { Field, FieldProps } from 'formik';
 import { FormattedMessage } from 'react-intl';
+import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
 
 interface Props extends Partial<DatovelgerProps> {
     name: string;

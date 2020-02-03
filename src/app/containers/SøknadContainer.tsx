@@ -27,6 +27,9 @@ import { AppState } from 'reducers/reducers';
 
 import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
 
+
+import './søknadContainer.less';
+
 interface OwnProps {
     language: Language;
     person: Person;

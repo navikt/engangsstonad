@@ -5,12 +5,8 @@ import { guid } from 'nav-frontend-js-utils';
 
 import './radioPanelGruppeResponsive.less';
 
-interface Props extends RadioPanelGruppeProps {
-    twoColumns?: boolean;
-}
-
-export const RadioPanelGruppeResponsive: React.StatelessComponent<Props> = ({
-    twoColumns = false,
+export const RadioPanelGruppeResponsive: React.StatelessComponent<RadioPanelGruppeProps> = ({
+    className,
     checked,
     name,
     legend,
@@ -18,30 +14,21 @@ export const RadioPanelGruppeResponsive: React.StatelessComponent<Props> = ({
     onChange
 }) => {
     return (
-        <div className="radioPanelGruppe">
-            <SkjemaGruppe>
-                <legend className="radioPanelGruppe__legend">
-                    {legend}
-                </legend>
-                <div className="radioPanelGruppe--responsive">
-                    {radios.map(({ value, ...rest }) => {
-                        const cls = classnames('radioPanelWrapper', {
-                            'radioPanelWrapper--twoColumns': twoColumns === true
-                        });
-                        return (
-                            <div className={cls} key={guid()}>
-                                <RadioPanel
-                                    checked={checked === value}
-                                    name={name}
-                                    onChange={(event: any) => onChange(event, value)}
-                                    value={value}
-                                    {...rest}
-                                />
-                            </div>
-                        );
-                    })}
-                </div>
-            </SkjemaGruppe>
-        </div>
+        <SkjemaGruppe className={classnames('radioPanelGruppe', className)}>
+            <legend className="radioPanelGruppe__legend">{legend}</legend>
+            <div className="radioPanelGruppe--responsive">
+                {radios.map(({ value, ...rest }) => (
+                    <div className={'radioPanelWrapper'} key={guid()}>
+                        <RadioPanel
+                            checked={checked === value}
+                            name={name}
+                            onChange={(event: any) => onChange(event, value)}
+                            value={value}
+                            {...rest}
+                        />
+                    </div>
+                ))}
+            </div>
+        </SkjemaGruppe>
     );
 };

@@ -9,10 +9,12 @@ import RadioPanelGruppeResponsiveWrapper from 'components/form/radio-panel-grupp
 import DatovelgerElement from 'components/form/date-input/DateInput';
 import { Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import AttachmentUploader from 'components/form/attachment-uploader/AttachmentUploader';
+import Veileder from 'components/veileder/Veileder';
 
 import { Questions } from './questions';
 import { FormProps } from '../FormProps';
-import Veileder from 'components/veileder/Veileder';
+
+import './steg1.less';
 
 interface Props {
     formikProps: FormikProps<Partial<FormProps>>;
