@@ -5,20 +5,27 @@ import { guid } from 'nav-frontend-js-utils';
 
 import './radioPanelGruppeResponsive.less';
 
-export const RadioPanelGruppeResponsive: React.StatelessComponent<RadioPanelGruppeProps> = ({
-    className,
+interface Props extends RadioPanelGruppeProps {
+    twoColumns?: boolean;
+}
+
+export const RadioPanelGruppeResponsive: React.StatelessComponent<Props> = ({
     checked,
     name,
     legend,
     radios,
-    onChange
+    onChange,
+    twoColumns = false
 }) => {
     return (
-        <SkjemaGruppe className={classnames('radioPanelGruppe', className)}>
+        <SkjemaGruppe className={'radioPanelGruppe'}>
             <legend className="radioPanelGruppe__legend">{legend}</legend>
-            <div className="radioPanelGruppe--responsive">
+            <div className={classnames('radioPanelGruppe--responsive', { 'radioPanelGruppe--twoColumns': twoColumns })}>
                 {radios.map(({ value, ...rest }) => (
-                    <div className={'radioPanelWrapper'} key={guid()}>
+                    <div
+                        className={classnames('radioPanelWrapper', { 'radioPanelWrapper--twoColumns': twoColumns })}
+                        key={guid()}
+                    >
                         <RadioPanel
                             checked={checked === value}
                             name={name}

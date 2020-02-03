@@ -23,6 +23,7 @@ const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
             <RadioPanelGruppeResponsiveWrapper
                 name={Questions.harVærtIUtlandSiste12Mnd}
                 radioValues={[JaNeiSpørsmål.JA, JaNeiSpørsmål.NEI]}
+                twoColumns={true}
             />
 
             {values[Questions.harVærtIUtlandSiste12Mnd] && (
@@ -54,6 +55,7 @@ const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
                     <RadioPanelGruppeResponsiveWrapper
                         name={Questions.skalVæreIUtlandNeste12Mnd}
                         radioValues={[JaNeiSpørsmål.JA, JaNeiSpørsmål.NEI]}
+                        twoColumns={true}
                     />
 
                     {values[Questions.skalVæreIUtlandNeste12Mnd] && (

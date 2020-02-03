@@ -12,12 +12,23 @@
     }
 }
 
-.radioPanelGruppe--responsive {
-    display: flex;
-    flex-flow: row wrap;
+.radioPanelGruppe {
+    &--responsive{
+        display: flex;
+        flex-flow: row wrap;
+    }
+    &--twoColumns{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+    }
     .radioPanelWrapper {
         flex: 1;
         max-width: 32%;
         padding: 0 0.5rem 0.5rem 0;
+
+        &--twoColumns {
+            min-width: 50%;
+        }
     }
 }

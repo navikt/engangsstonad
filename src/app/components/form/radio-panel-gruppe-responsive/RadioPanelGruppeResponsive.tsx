@@ -9,9 +9,11 @@ export type RadioValues = string | boolean | number;
 interface Props {
     name: string;
     radioValues: RadioValues[];
+    twoColumns?: boolean;
+
 }
 
-const RadioPanelGruppeResponsiveWrapper: React.StatelessComponent<Props> = ({ name, radioValues, ...rest }) => {
+const RadioPanelGruppeResponsiveWrapper: React.StatelessComponent<Props> = ({ name, radioValues, twoColumns, ...rest }) => {
     return (
         <Field
             name={name}
@@ -28,6 +30,7 @@ const RadioPanelGruppeResponsiveWrapper: React.StatelessComponent<Props> = ({ na
                         form.setFieldTouched(field.name, true, false);
                     }}
                     checked={getCheckedRadioValue(field.value)}
+                    twoColumns={twoColumns}
                     {...rest}
                 />
             )}
