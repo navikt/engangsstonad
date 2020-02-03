@@ -102,7 +102,6 @@ class Intro extends React.Component<Props, State> {
 
     render() {
         const { intl, person } = this.props;
-
         return (
             <div id="js-intro">
                 <Skjemasteg>
@@ -151,7 +150,7 @@ class Intro extends React.Component<Props, State> {
                             </div>
 
                             <div className="blokk-m">
-                                <Hovedknapp className="responsiveButton">
+                                <Hovedknapp className="responsiveButton" disabled={!this.state.godkjentVilkår}>
                                     {getMessage(intl, 'intro.button.startSøknad')}
                                 </Hovedknapp>
                             </div>
