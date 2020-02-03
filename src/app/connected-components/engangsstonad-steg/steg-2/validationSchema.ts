@@ -15,11 +15,14 @@ const Steg2ValidationSchema = () =>
                 .max(MAKS_NAVN_LENGTH, 'Kan ikke være mer enn 30 karakterer')
         }),
         [Questions.fodselsnummer]: Yup.string().when([Questions.kanIkkeOppgis, Questions.navn], {
-            is: (kanIkkeOppgis) => (kanIkkeOppgis === false || kanIkkeOppgis === undefined),
+            is: (kanIkkeOppgis) => kanIkkeOppgis === false || kanIkkeOppgis === undefined,
             then: Yup.string()
                 .required('Required')
                 .max(MAKS_FNR_LENGTH)
                 .test(Questions.fodselsnummer, 'Må være et gyldig fødselsnummer', (value) => {
+                    if ((Yup.ref(Questions.utenlandskFodselsnummer) as unknown) as boolean) {
+                        return true;
+                    }
                     try {
                         return isValidFødselsnummer(value);
                     } catch (error) {
