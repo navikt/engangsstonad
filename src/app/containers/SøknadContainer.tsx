@@ -71,6 +71,15 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
         }));
     };
 
+    const shouldRenderSubmitButton = ({ values }: FormikProps<Partial<FormProps>>): boolean => {
+        try {
+            ActiveStep.validationSchema().validateSync(values);
+            return true;
+        } catch (error) {
+            return error.type !== 'required';
+        }
+    };
+
     return (
         <>
             <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
@@ -82,41 +91,39 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                 }}
                 validationSchema={ActiveStep.validationSchema}
                 onSubmit={onSubmit}
-                render={(formikProps: FormikProps<Partial<FormProps>>) => {
-                    console.log(formikProps.values, formikProps.errors);
-                    return (
-                        <div className="responsiveContainer">
-                            <SkjemaHeader
-                                onPrevious={() => handleBackClicked(formikProps)}
-                                activeStep={activeStepIndex + 1}
-                                stepTitles={stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel)}
-                            />
+                render={(formikProps: FormikProps<Partial<FormProps>>) => (
+                    <div className="responsiveContainer">
+                        <SkjemaHeader
+                            onPrevious={() => handleBackClicked(formikProps)}
+                            activeStep={activeStepIndex + 1}
+                            stepTitles={stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel)}
+                        />
 
-                            <Form>
-                                {liveValidation && !_.isEmpty(formikProps.errors) && (
-                                    <ValidationErrorSummaryBase
-                                        title={getMessage(intl, 'title')}
-                                        errors={getErrorMessages(formikProps)}
-                                    />
-                                )}
+                        <Form>
+                            {liveValidation && !_.isEmpty(formikProps.errors) && (
+                                <ValidationErrorSummaryBase
+                                    title={getMessage(intl, 'title')}
+                                    errors={getErrorMessages(formikProps)}
+                                />
+                            )}
 
-                                {ActiveStep.component(formikProps)}
+                            {ActiveStep.component(formikProps)}
 
-                                {!_.some(formikProps.errors, (value) => value === 'Required') && (
-                                    <Hovedknapp
-                                        className="responsiveButton"
-                                        disabled={søknadSendingInProgress}
-                                        spinner={søknadSendingInProgress}
-                                        onClick={() => setLiveValidation(true)}
-                                    >
-                                        {ActiveStep.fortsettKnappLabel}
-                                    </Hovedknapp>
-                                )}
-                                <CancelButton />
-                            </Form>
-                        </div>
-                    );
-                }}
+                            {shouldRenderSubmitButton(formikProps) && (
+                                <Hovedknapp
+                                    className="responsiveButton"
+                                    disabled={søknadSendingInProgress}
+                                    spinner={søknadSendingInProgress}
+                                    onClick={() => setLiveValidation(true)}
+                                >
+                                    {ActiveStep.fortsettKnappLabel}
+                                </Hovedknapp>
+                            )}
+
+                            <CancelButton />
+                        </Form>
+                    </div>
+                )}
             />
             <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
             <UtløptSesjonModal erÅpen={sessionHasExpired} />

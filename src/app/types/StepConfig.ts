@@ -4,5 +4,5 @@ export interface StepConfig {
     fortsettKnappLabel: string;
     stegIndikatorLabel: string;
     component: any;
-    validationSchema: Yup.ObjectSchema
+    validationSchema: () => Yup.ObjectSchema<Yup.Shape<object,any>>
 };
