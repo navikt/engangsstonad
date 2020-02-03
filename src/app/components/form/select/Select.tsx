@@ -20,7 +20,7 @@ const Select: React.StatelessComponent<Props> = ({ name, options }) => {
                 const { field, form } = fieldProps;
                 return (
                     <NavSelect
-                        bredde="xs"
+                        bredde="fullbredde"
                         label={<FormattedMessage id={`spørsmål.${name}`} />}
                         onChange={(e) => {
                             form.setFieldValue(field.name, e.target.value);
@@ -28,6 +28,7 @@ const Select: React.StatelessComponent<Props> = ({ name, options }) => {
                         }}
                         value={fieldProps.field.value}
                     >
+                        <option key={guid()} value={''} />
                         {options.map((option) => {
                             return (
                                 <option key={guid()} value={option.value}>
