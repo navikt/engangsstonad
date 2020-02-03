@@ -81,8 +81,6 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                     oppholdSiste12Mnd: []
                 }}
                 validationSchema={ActiveStep.validationSchema}
-                validateOnMount={true}
-                validateOnBlur={false}
                 onSubmit={onSubmit}
                 render={(formikProps: FormikProps<Partial<FormProps>>) => {
                     console.log(formikProps.values, formikProps.errors);
