@@ -11,6 +11,8 @@ import { Language } from 'intl/IntlProvider';
 import { Questions } from './questions';
 import { FormProps } from '../FormProps';
 
+import './steg2.less';
+
 // TODO flytt
 export const getForignCountries = (language: Language) => {
     const isoCodeIndex = 0;
