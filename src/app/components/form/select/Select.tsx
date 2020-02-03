@@ -24,7 +24,7 @@ const Select: React.StatelessComponent<Props> = ({ name, options }) => {
                         label={<FormattedMessage id={`spørsmål.${name}`} />}
                         onChange={(e) => {
                             form.setFieldValue(field.name, e.target.value);
-                            form.setFieldTouched(field.name, true);
+                            form.setFieldTouched(field.name, true, false);
                         }}
                         value={fieldProps.field.value}
                     >

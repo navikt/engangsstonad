@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { FieldProps, Field } from 'formik';
-import { Input as NavInput, InputProps} from 'nav-frontend-skjema';
+import { Input as NavInput, InputProps } from 'nav-frontend-skjema';
 import _ from 'lodash';
 
 interface Props extends Omit<InputProps, 'label' | 'onChange' | 'value'> {
@@ -22,7 +22,8 @@ const Input: React.StatelessComponent<Props> = ({ name, ...rest }) => {
                         onChange={(e) => {
                             form.setFieldValue(field.name, e.target.value);
                         }}
-                        value={fieldProps.field.value || ''}
+                        value={field.value || ''}
+                        feil={form.status.liveValidation ? form.errors[name] : undefined}
                         {...rest}
                     />
                 );

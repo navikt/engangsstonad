@@ -15,6 +15,7 @@ import { Questions } from './questions';
 import { FormProps } from '../FormProps';
 
 import './steg1.less';
+import moment from 'moment';
 
 interface Props {
     formikProps: FormikProps<Partial<FormProps>>;
@@ -44,7 +45,10 @@ const Steg1: React.StatelessComponent<Props> = ({ formikProps }) => {
             )}
 
             {touched[Questions.antallBarn] && values[Questions.erFødt] && (
-                <DatovelgerElement name={Questions.fødselsdato} />
+                <DatovelgerElement
+                    name={Questions.fødselsdato}
+                    avgrensninger={{ maksDato: moment().format(moment.HTML5_FMT.DATE) }}
+                />
             )}
 
             {touched[Questions.antallBarn] && values[Questions.erFødt] === false && (

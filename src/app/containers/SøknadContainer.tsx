@@ -3,7 +3,7 @@ import { Prompt, RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Formik, Form, FormikProps } from 'formik';
+import { Formik, Form, FormikProps, FormikHelpers } from 'formik';
 import _ from 'lodash';
 
 import { sendSoknad } from 'actions/api/apiActionCreators';
@@ -27,7 +27,6 @@ import { AppState } from 'reducers/reducers';
 
 import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
 
-
 import './søknadContainer.less';
 
 interface OwnProps {
@@ -48,19 +47,19 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
     intl
 }) => {
     const [activeStepIndex, setActiveStepIndex] = React.useState(0);
-    const [liveValidation, setLiveValidation] = React.useState(false);
 
     const stepsConfig = getStepConfig(intl, person);
     const ActiveStep = stepsConfig[activeStepIndex];
 
-    const onSubmit = (values: Partial<FormProps>) => {
-        setLiveValidation(false);
+    const onSubmit = (values: Partial<FormProps>, formikHelpers: FormikHelpers<Partial<FormProps>>) => {
+        formikHelpers.setStatus({ liveValidation: false });
         activeStepIndex === stepsConfig.length - 1
             ? dispatch(sendSoknad(mapFormStateToEngangsstonadDto(values, language)))
             : setActiveStepIndex(activeStepIndex + 1);
     };
 
     const handleBackClicked = (formikProps: FormikProps<Partial<FormProps>>) => {
+        formikProps.setStatus({ liveValidation: true });
         if (activeStepIndex > 0) {
             formikProps.setErrors({});
             setActiveStepIndex(activeStepIndex - 1);
@@ -74,7 +73,10 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
         }));
     };
 
-    const shouldRenderSubmitButton = ({ values }: FormikProps<Partial<FormProps>>): boolean => {
+    const shouldRenderSubmitButton = ({ values, status }: FormikProps<Partial<FormProps>>): boolean => {
+        if(status?.liveValidation) {
+            return true;
+        }
         try {
             ActiveStep.validationSchema().validateSync(values);
             return true;
@@ -94,39 +96,41 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                 }}
                 validationSchema={ActiveStep.validationSchema}
                 onSubmit={onSubmit}
-                render={(formikProps: FormikProps<Partial<FormProps>>) => (
-                    <div className="responsiveContainer">
-                        <SkjemaHeader
-                            onPrevious={() => handleBackClicked(formikProps)}
-                            activeStep={activeStepIndex + 1}
-                            stepTitles={stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel)}
-                        />
+                render={(formikProps: FormikProps<Partial<FormProps>>) => {
+                    return (
+                        <div className="responsiveContainer">
+                            <SkjemaHeader
+                                onPrevious={() => handleBackClicked(formikProps)}
+                                activeStep={activeStepIndex + 1}
+                                stepTitles={stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel)}
+                            />
 
-                        <Form>
-                            {liveValidation && !_.isEmpty(formikProps.errors) && (
-                                <ValidationErrorSummaryBase
-                                    title={getMessage(intl, 'title')}
-                                    errors={getErrorMessages(formikProps)}
-                                />
-                            )}
+                            <Form>
+                                {formikProps.status?.liveValidation && !_.isEmpty(formikProps.errors) && (
+                                    <ValidationErrorSummaryBase
+                                        title={getMessage(intl, 'title')}
+                                        errors={getErrorMessages(formikProps)}
+                                    />
+                                )}
 
-                            {ActiveStep.component(formikProps)}
+                                {ActiveStep.component(formikProps)}
 
-                            {shouldRenderSubmitButton(formikProps) && (
-                                <Hovedknapp
-                                    className="responsiveButton"
-                                    disabled={søknadSendingInProgress}
-                                    spinner={søknadSendingInProgress}
-                                    onClick={() => setLiveValidation(true)}
-                                >
-                                    {ActiveStep.fortsettKnappLabel}
-                                </Hovedknapp>
-                            )}
+                                {shouldRenderSubmitButton(formikProps) && (
+                                    <Hovedknapp
+                                        className="responsiveButton"
+                                        disabled={søknadSendingInProgress}
+                                        spinner={søknadSendingInProgress}
+                                        onClick={() => formikProps.setStatus({ liveValidation: true })}
+                                    >
+                                        {ActiveStep.fortsettKnappLabel}
+                                    </Hovedknapp>
+                                )}
 
-                            <CancelButton />
-                        </Form>
-                    </div>
-                )}
+                                <CancelButton />
+                            </Form>
+                        </div>
+                    );
+                }}
             />
             <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
             <UtløptSesjonModal erÅpen={sessionHasExpired} />

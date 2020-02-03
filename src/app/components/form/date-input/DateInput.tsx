@@ -16,8 +16,12 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) =
             name={name}
             render={(fieldProps: FieldProps) => {
                 const { field, form } = fieldProps;
+                const feilmelding = form.status?.liveValidation ? form.errors[name]?.toString() : undefined;
                 return (
-                    <SkjemaInputElement label={<FormattedMessage id={`spørsmål.${name}`} />}>
+                    <SkjemaInputElement
+                        label={<FormattedMessage id={`spørsmål.${name}`} />}
+                        feil={feilmelding ? { feilmelding } : undefined}
+                    >
                         <Datovelger
                             id={guid()}
                             input={{
