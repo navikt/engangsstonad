@@ -66,12 +66,12 @@ class AppContainer extends React.Component<Props> {
                 {kvittering ? (
                     <Route path="/engangsstonad" component={SøknadSendt} exact={true} />
                 ) : (
-                    <Route
-                        path="/engangsstonad"
-                        render={(routeProps) => this.getIntroComponent(person, routeProps)}
-                        exact={true}
-                    />
-                )}
+                        <Route
+                            path="/engangsstonad"
+                            render={(routeProps) => this.getIntroComponent(person, routeProps)}
+                            exact={true}
+                        />
+                    )}
                 {godkjentVilkar && !søknadSendt && (
                     <Route path={'/engangsstonad/soknad'} exact={true} strict={true} component={Skjema} />
                 )}
