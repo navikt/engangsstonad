@@ -20,7 +20,7 @@ const Steg2ValidationSchema = () =>
                 .required('Required')
                 .max(MAKS_FNR_LENGTH)
                 .test(Questions.fodselsnummer, 'Må være et gyldig fødselsnummer', (value) => {
-                    if ((Yup.ref(Questions.utenlandskFodselsnummer) as unknown) as boolean) {
+                    if ((Yup.ref(Questions.utenlandskFodselsnummer) as unknown) as boolean === true) {
                         return true;
                     }
                     try {

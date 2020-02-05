@@ -205,5 +205,14 @@
     "intro.text.startNySøknadPrompt": "Er du sikkert på at du vil starte en ny søknad? Din påbegynte søknad vil bli slettet.",
     "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }",
     "søknadContainer.prompt": "Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?",
-    "validForm.summaryTitle": "Du må rette opp i følgende feil:"
+    "validForm.summaryTitle": "Du må rette opp i følgende feil:",
+    "oppsummering.text.antall.1": "Eitt",
+    "oppsummering.text.antall.2": "To",
+    "oppsummering.text.antall.3": "Tre",
+    "oppsummering.text.antall.4": "Fire",
+    "oppsummering.text.antall.5": "Fem",
+    "oppsummering.text.antall.6": "Seks",
+    "oppsummering.text.antall.7": "Sju",
+    "oppsummering.text.antall.8": "Åtte",
+    "oppsummering.text.antall.9": "Ni"
 }
