@@ -37,7 +37,6 @@ interface OwnProps {
 }
 
 type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps;
-
 const SøknadContainer: React.FunctionComponent<Props> = ({
     person,
     søknadSendingInProgress,
@@ -59,8 +58,8 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
     };
 
     const handleBackClicked = (formikProps: FormikProps<Partial<FormProps>>) => {
-        formikProps.setStatus({ liveValidation: false });
         if (activeStepIndex > 0) {
+            formikProps.setStatus({ liveValidation: false });
             formikProps.setErrors({});
             setActiveStepIndex(activeStepIndex - 1);
         }
@@ -97,6 +96,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                 validationSchema={ActiveStep.validationSchema}
                 onSubmit={onSubmit}
                 render={(formikProps: FormikProps<Partial<FormProps>>) => {
+                    console.log({ formikProps });
                     return (
                         <div className="responsiveContainer">
                             <SkjemaHeader

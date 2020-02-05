@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { FieldProps, Field } from 'formik';
 import { RadioPanelGruppeResponsive } from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { parseNavFrontend, getCheckedRadioValue } from './utils/utils';
+import { intlPrefix } from '../utils';
 
 export type RadioValues = string | boolean | number;
 
@@ -10,19 +11,23 @@ interface Props {
     name: string;
     radioValues: RadioValues[];
     twoColumns?: boolean;
-
 }
 
-const RadioPanelGruppeResponsiveWrapper: React.StatelessComponent<Props> = ({ name, radioValues, twoColumns, ...rest }) => {
+const RadioPanelGruppeResponsiveWrapper: React.StatelessComponent<Props> = ({
+    name,
+    radioValues,
+    twoColumns,
+    ...rest
+}) => {
     return (
         <Field
             name={name}
             render={({ field, form }: FieldProps) => (
                 <RadioPanelGruppeResponsive
                     name={field.name}
-                    legend={<FormattedMessage id={`spørsmål.${name}`} />}
+                    legend={<FormattedMessage id={intlPrefix(name)} />}
                     radios={radioValues.map((radioValue) => ({
-                        label: <FormattedMessage id={`spørsmål.${field.name}.${radioValue}`} />,
+                        label: <FormattedMessage id={intlPrefix(`${field.name}.${radioValue}`)} />,
                         value: radioValue.toString()
                     }))}
                     onChange={(e, value: string) => {
