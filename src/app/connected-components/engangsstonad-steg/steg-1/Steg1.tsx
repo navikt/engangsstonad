@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FormikProps } from 'formik';
 import { FormattedMessage } from 'react-intl';
 import Veilederpanel from 'nav-frontend-veilederpanel';
+import * as moment from 'moment';
 
 import Select from 'components/form/select/Select';
 import { JaNeiSpørsmål } from 'components/form/radio-panel-gruppe-responsive/utils/JaNeiSpørsmål';
@@ -15,7 +16,6 @@ import { Questions } from './questions';
 import { FormProps } from '../FormProps';
 
 import './steg1.less';
-import moment from 'moment';
 
 interface Props {
     formikProps: FormikProps<Partial<FormProps>>;
