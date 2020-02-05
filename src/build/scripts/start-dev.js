@@ -4,6 +4,8 @@ const webpackConfig = require('../webpack/webpack.config.dev');
 const configureDevServer = require('../webpack/devserver.config');
 const getDecorator = require('./decorator');
 
+const PORT = 8081;
+
 getDecorator().then((decoratorData) => {
     const compiler = webpack(webpackConfig);
     const server = new WebpackDevServer(
@@ -11,7 +13,7 @@ getDecorator().then((decoratorData) => {
         configureDevServer(decoratorData)
     );
 
-    server.listen(8080, '127.0.0.1', () =>
-        console.log('Started server on http://localhost:8080')
+    server.listen(PORT, '127.0.0.1', () =>
+        console.log(`Started server on http://localhost:${PORT}`)
     );
 });
