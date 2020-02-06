@@ -1,10 +1,13 @@
 import * as React from 'react';
+import { useIntl } from 'react-intl';
 import { FormikProps } from 'formik';
 import * as countries from 'i18n-iso-countries';
 
+import getMessage from 'common/util/i18nUtils';
 import Input from 'components/form/input/Input';
 import Checkbox from 'components/form/checkbox/Checkbox';
 import Select from 'components/form/select/Select';
+import { getPlaceholder as intlPlaceholderPrefix } from 'components/form/utils';
 
 import { Language } from 'intl/IntlProvider';
 
@@ -32,14 +35,22 @@ interface Props {
 
 const Steg2: React.FunctionComponent<Props> = ({ formikProps }) => {
     const { values } = formikProps;
+    const intl = useIntl();
     return (
         <>
-            <Input name={Questions.navn} disabled={values[Questions.kanIkkeOppgis]} />
+            <Input
+                name={Questions.navn}
+                placeholder={getMessage(intl, intlPlaceholderPrefix(Questions.navn))}
+                disabled={values[Questions.kanIkkeOppgis]}
+            />
             <Checkbox name={Questions.kanIkkeOppgis} />
 
             {values[Questions.navn] && !values[Questions.kanIkkeOppgis] && (
                 <>
-                    <Input name={Questions.fodselsnummer} />
+                    <Input
+                        name={Questions.fodselsnummer}
+                        placeholder={getMessage(intl, intlPlaceholderPrefix(Questions.fodselsnummer))}
+                    />
                     <Checkbox name={Questions.utenlandskFodselsnummer} />
 
                     {values[Questions.fodselsnummer] && values[Questions.utenlandskFodselsnummer] && (
