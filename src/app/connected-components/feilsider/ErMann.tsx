@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
 import Person from '../../types/domain/Person';
 import { DispatchProps } from 'common/redux/types';
@@ -19,7 +18,7 @@ interface StateProps {
     language: Language;
 }
 
-type Props = StateProps & DispatchProps & InjectedIntlProps;
+type Props = StateProps & DispatchProps & WrappedComponentProps;
 
 const ErMann: React.StatelessComponent<Props> = (props: Props) => {
     const { intl, person } = props;

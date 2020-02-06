@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Formik, Form } from 'formik';
@@ -104,4 +104,4 @@ const CountryModal: React.FunctionComponent<Props> = ({
         </Modal>
     );
 };
-export default injectIntl(CountryModal);
+export default CountryModal;

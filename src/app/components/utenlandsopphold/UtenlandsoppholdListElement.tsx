@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as countries from 'i18n-iso-countries';
 import classnames from 'classnames';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { ISODateToMaskedInput } from '../../util/date/dateUtils';
 import getMessage from '../../../common/util/i18nUtils';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
@@ -18,7 +18,7 @@ interface OwnProps {
     onEditClick?: (periode: Utenlandsopphold) => void;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+type Props = OwnProps & WrappedComponentProps;
 
 const CountryListSummaryElement: React.StatelessComponent<Props> = props => {
     const { tidsperiode, land } = props.utenlandsopphold;

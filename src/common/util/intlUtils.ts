@@ -1,9 +1,9 @@
-import { InjectedIntl } from 'react-intl';
 import { getUkerOgDagerFromDager } from 'common/util/datoUtils';
+import { IntlShape } from 'react-intl';
 
 export const getVarighetString = (
     antallDager: number,
-    intl: InjectedIntl
+    intl: IntlShape
 ): string => {
     const { uker, dager } = getUkerOgDagerFromDager(antallDager);
     const dagerStr = intl.formatMessage(
@@ -31,7 +31,7 @@ export const getVarighetString = (
 export const pluralize = (count: number, single: string, other: string) =>
     count === 1 ? single : other;
 
-export const tallTilTekst = (tall: number, intl: InjectedIntl): string => {
+export const tallTilTekst = (tall: number, intl: IntlShape): string => {
     if (tall > 10 || tall < 0) {
         return `${tall}`;
     } else {

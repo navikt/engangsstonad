@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
-const { Undertittel, Normaltekst } = require('nav-frontend-typografi');
-import getMessage from 'common/util/i18nUtils';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
+
+import getMessage from 'common/util/i18nUtils';
 import { lenker } from 'util/lenker';
 
 import './modalContent.less';
 
-interface Props {
-    intl: InjectedIntl;
-}
-
-const Plikter: React.StatelessComponent<Props> = ({ intl }) => (
+const Plikter: React.StatelessComponent<WrappedComponentProps> = ({ intl }) => (
     <div className="modalContent">
         <Undertittel className="modalContent__header">{getMessage(intl, 'rettigheter.sectionheading')}</Undertittel>
         <ul>

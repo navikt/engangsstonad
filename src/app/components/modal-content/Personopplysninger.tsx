@@ -1,12 +1,12 @@
 import React from 'react';
-import { InjectedIntlProps } from 'react-intl';
+import { WrappedComponentProps } from 'react-intl';
 const { FormattedMessage, injectIntl } = require('react-intl');
 const { Undertittel, Normaltekst, Element } = require('nav-frontend-typografi');
 import Lenke from 'nav-frontend-lenker';
 import { lenker } from 'util/lenker';
 import getMessage from 'common/util/i18nUtils';
 
-type Props = InjectedIntlProps;
+type Props = WrappedComponentProps;
 
 const Personopplysninger: React.StatelessComponent<Props> = (props: Props) => {
     const { intl } = props;

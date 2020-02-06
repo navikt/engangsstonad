@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { injectIntl } from 'react-intl';
 import { ReactNode } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
@@ -16,4 +15,4 @@ const Oppsummeringspunkt = ({ tittel, children }: Props) => (
     </div>
 );
 
-export default injectIntl(Oppsummeringspunkt);
+export default Oppsummeringspunkt;

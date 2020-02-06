@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Prompt, RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Formik, Form, FormikProps, FormikHelpers } from 'formik';
 import _ from 'lodash';
@@ -36,7 +36,7 @@ interface OwnProps {
     sessionHasExpired: boolean;
 }
 
-type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps;
+type Props = OwnProps & DispatchProps & WrappedComponentProps & RouteComponentProps;
 const SøknadContainer: React.FunctionComponent<Props> = ({
     person,
     søknadSendingInProgress,

@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps, MessageValue } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import './labeltekst.less';
 
 interface OwnProps {
     children?: React.ReactNode;
     intlId?: string;
-    intlValue?: { [key: string]: MessageValue };
+    intlValue?: { [key: string]: string | number };
 }
 
-export type Props = OwnProps & InjectedIntlProps;
+export type Props = OwnProps & WrappedComponentProps;
 
 const Labeltekst: React.StatelessComponent<Props> = ({
     children,

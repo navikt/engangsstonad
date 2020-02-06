@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Element } from 'nav-frontend-typografi';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import * as countries from 'i18n-iso-countries';
 import AnnenForelder from 'app/types/domain/AnnenForelder';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
@@ -13,7 +13,7 @@ interface Props {
     annenForelder: AnnenForelder;
 }
 
-const AndreForeldrenOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
+const AndreForeldrenOppsummering: React.StatelessComponent<Props & WrappedComponentProps> = (props) => {
     const { intl } = props;
     const { navn, fnr, utenlandskFnr, bostedsland, kanIkkeOppgis } = props.annenForelder;
 

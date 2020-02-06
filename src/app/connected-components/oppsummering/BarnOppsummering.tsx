@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import { ISODateToMaskedInput } from 'util/date/dateUtils';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
@@ -14,7 +14,7 @@ interface Props {
     barn: FodtBarn & UfodtBarn;
 }
 
-const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
+const BarnOppsummering: React.StatelessComponent<Props & WrappedComponentProps> = (props) => {
     const { intl } = props;
     const {
         antallBarn,
@@ -32,7 +32,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (p
         antallBarnSummaryText = getMessage(intl, 'numberOfChildren.2');
     } else {
         antallBarnSummaryText = getMessage(intl, 'oppsummering.text.flereAntallBarn', {
-            antall: antallBarn
+            antall: antallBarn!
         });
     }
 

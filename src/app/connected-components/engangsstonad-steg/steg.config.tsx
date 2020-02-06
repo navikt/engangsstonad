@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { FormikProps } from 'formik';
-import { InjectedIntl } from 'react-intl';
 
 import Person from 'app/types/domain/Person';
 import { StepConfig } from 'app/types/StepConfig';
@@ -16,6 +15,7 @@ import Steg2ValidationSchema from './steg-2/validationSchema';
 import Steg3ValidationSchema from './steg-3/validationSchema';
 
 import getMessage from 'common/util/i18nUtils';
+import { IntlShape } from 'react-intl';
 
 const stepConfig = [
     {
@@ -39,11 +39,11 @@ const stepConfig = [
     {
         fortsettKnappLabelIntlId: 'standard.sectionheading',
         stegIndikatorLabelIntlId: 'oppsummering.sectionheading',
-        component:  (formikProps: FormikProps<Partial<FormProps>>) => <Steg4 formikProps={formikProps} />,
+        component: (formikProps: FormikProps<Partial<FormProps>>) => <Steg4 formikProps={formikProps} />
     }
 ];
 
-export default (intl: InjectedIntl, person: Person): StepConfig[] =>
+export default (intl: IntlShape, person: Person): StepConfig[] =>
     stepConfig
         .filter((step: any, index: number) => {
             if (index === 1) {

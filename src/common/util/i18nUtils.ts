@@ -1,9 +1,9 @@
-import { InjectedIntl, MessageValue } from 'react-intl'
+import { IntlShape } from "react-intl";
 
 const getMessage = (
-    intl: InjectedIntl,
+    intl: IntlShape,
     id: string,
-    value?: { [key: string]: MessageValue }
+    value?: { [key: string]: string | number }
 ): string => intl.formatMessage({ id }, value);
 
 export default getMessage;

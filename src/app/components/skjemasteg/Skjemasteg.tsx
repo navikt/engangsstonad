@@ -1,13 +1,13 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 export interface Props {
     tittel?: string | React.ReactNode;
     children: React.ReactNode;
 }
 
-const EngangsstønadSteg: React.StatelessComponent<Props & InjectedIntlProps> = ({ tittel, children, intl }) => {
+const EngangsstønadSteg: React.StatelessComponent<Props & WrappedComponentProps> = ({ tittel, children, intl }) => {
     let dokumenttittel = intl.formatMessage({
         id: 'intro.standard.dokumenttittel'
     });

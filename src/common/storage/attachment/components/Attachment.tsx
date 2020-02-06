@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
 
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import SlettKnapp from '../../../components/slett-knapp/SlettKnapp';
 
 import NavFrontendSpinner from 'nav-frontend-spinner';
@@ -19,7 +19,7 @@ interface OwnProps {
     onDelete?: (file: Attachment) => void;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+type Props = OwnProps & WrappedComponentProps;
 
 const Attachment: React.StatelessComponent<Props> = ({
     attachment,

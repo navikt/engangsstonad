@@ -1,7 +1,7 @@
 import * as React from 'react';
 import 'moment/locale/nb';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Innholdstittel, Ingress, Undertittel } from 'nav-frontend-typografi';
 import * as moment from 'moment';
@@ -29,9 +29,9 @@ interface StateProps {
     kvittering: Kvittering;
 }
 
-type Props = StateProps & InjectedIntlProps;
+type Props = StateProps & WrappedComponentProps;
 
-class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
+class SøknadSendt extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         moment.locale(Language.BOKMÅL);

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import CustomSVG from 'common/components/custom-svg/CustomSVG';
 import BEMHelper from 'common/util/bem';
@@ -14,7 +14,7 @@ interface AttachmentInputProps {
     onClick: () => void;
 }
 
-type Props = AttachmentInputProps & InjectedIntlProps;
+type Props = AttachmentInputProps & WrappedComponentProps;
 
 class AttachmentInput extends React.Component<Props> {
     constructor(props: Props) {

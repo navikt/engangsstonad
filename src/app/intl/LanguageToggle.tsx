@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps, InjectedIntl } from 'react-intl';
+import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 import { Wrapper, Button, Menu, MenuItem } from 'react-aria-menubutton';
 const { NedChevron } = require('nav-frontend-chevron');
 import 'nav-frontend-lenker-style';
@@ -26,7 +26,7 @@ const getLanguageCodeFromValue = (value: string) => {
     }
 };
 
-const getLanguageTextFromCode = (intl: InjectedIntl, code: string) => {
+const getLanguageTextFromCode = (intl: IntlShape, code: string) => {
     if (code === Language.BOKMÅL) {
         return getMessage(intl, 'languageToggle.bokmål');
     } else if (code === Language.NYNORSK) {
@@ -36,7 +36,7 @@ const getLanguageTextFromCode = (intl: InjectedIntl, code: string) => {
     }
 };
 
-const renderMenuItem = (intl: InjectedIntl, languageCode: string) => {
+const renderMenuItem = (intl: IntlShape, languageCode: string) => {
     return (
         <li key={languageCode}>
             <MenuItem className="languageToggle__menu__item">
@@ -53,7 +53,7 @@ const handleSelection = (value: JSX.Element[], e: any, toggleLanguage: any) => {
     toggleLanguage(getLanguageCodeFromValue(value[1].props.children));
 };
 
-const LanguageToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({ intl, language, toggleLanguage }) => {
+const LanguageToggle: React.StatelessComponent<Props & WrappedComponentProps> = ({ intl, language, toggleLanguage }) => {
     const menuLanguages = [Language.BOKMÅL, Language.NYNORSK, Language.ENGELSK].filter((code) => code !== language);
 
     return (

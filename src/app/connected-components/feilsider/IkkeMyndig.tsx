@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import Person from '../../types/domain/Person';
 
 import { DispatchProps } from 'common/redux/types';
@@ -20,7 +20,7 @@ interface StateProps {
     language: Language;
 }
 
-type Props = StateProps & DispatchProps & InjectedIntlProps;
+type Props = StateProps & DispatchProps & WrappedComponentProps;
 
 const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
     const { intl, person } = props;

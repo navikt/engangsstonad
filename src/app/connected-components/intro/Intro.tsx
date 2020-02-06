@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, InjectedIntlProps, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, FormattedHTMLMessage, WrappedComponentProps } from 'react-intl';
 
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
@@ -38,7 +38,7 @@ interface StateProps {
     language: Language;
 }
 
-type Props = StateProps & DispatchProps & InjectedIntlProps & RouteComponentProps;
+type Props = StateProps & DispatchProps & WrappedComponentProps & RouteComponentProps;
 class Intro extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
@@ -136,16 +136,16 @@ class Intro extends React.Component<Props, State> {
 
                             <div className="blokk-m">
                                 <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
-                                        <BekreftCheckboksPanel
-                                            inputProps={{
-                                                name: 'egenerklaring'
-                                            }}
-                                            label={getMessage(intl, 'intro.text.samtykke')}
-                                            onChange={this.bekreftetVilkarChange}
-                                            checked={this.state.godkjentVilkår}
-                                        >
-                                            <span>{this.confirmBoxLabelHeaderText()}</span>
-                                        </BekreftCheckboksPanel>
+                                    <BekreftCheckboksPanel
+                                        inputProps={{
+                                            name: 'egenerklaring'
+                                        }}
+                                        label={getMessage(intl, 'intro.text.samtykke')}
+                                        onChange={this.bekreftetVilkarChange}
+                                        checked={this.state.godkjentVilkår}
+                                    >
+                                        <span>{this.confirmBoxLabelHeaderText()}</span>
+                                    </BekreftCheckboksPanel>
                                 </div>
                             </div>
 

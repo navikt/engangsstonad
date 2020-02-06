@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, FormattedHTMLMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import AdvarselIkon from '../advarsel-ikon/AdvarselIkon';
@@ -18,7 +18,7 @@ interface OwnProps {
     erÅpen: boolean;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+type Props = OwnProps & WrappedComponentProps;
 
 const UtløptSesjonModal = ({ erÅpen, intl }: Props) => {
     return (

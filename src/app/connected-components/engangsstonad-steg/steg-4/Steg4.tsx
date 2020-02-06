@@ -3,7 +3,7 @@ import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { connect } from 'react-redux';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import { FormikProps } from 'formik';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { injectIntl, WrappedComponentProps, FormattedMessage } from 'react-intl';
 
 import { DispatchProps } from 'common/redux/types';
 import getMessage from 'common/util/i18nUtils';
@@ -26,7 +26,7 @@ interface OwnProps {
     formikProps: FormikProps<Partial<FormProps>>;
 }
 
-type Props = OwnProps & StateProps & InjectedIntlProps & DispatchProps;
+type Props = OwnProps & StateProps & WrappedComponentProps & DispatchProps;
 
 const Steg4: React.StatelessComponent<Props> = ({ intl, dispatch, bekreftetInformasjon, formikProps, language }) => {
     return (

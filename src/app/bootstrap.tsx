@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 import * as Sentry from '@sentry/browser';
+import Modal from 'nav-frontend-modal';
 
 import AppContainer from './containers/AppContainer';
 import IntlProvider from './intl/IntlProvider';
@@ -14,7 +15,6 @@ countries.registerLocale(require('i18n-iso-countries/langs/nb.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/nn.json'));
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
-const Modal = require('nav-frontend-modal').default;
 (Modal as any).setAppElement('#app');
 
 if (process.env.NODE_ENV !== 'development') {

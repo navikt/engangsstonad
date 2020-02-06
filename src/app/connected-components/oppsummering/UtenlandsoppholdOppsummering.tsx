@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CountrySummaryList } from 'components/utenlandsopphold/UtenlandsoppholdList';
 import { EtikettLiten } from 'nav-frontend-typografi';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
 import InformasjonOmUtenlandsopphold, { Tidsperiode, Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 import * as moment from 'moment';
@@ -34,7 +34,7 @@ const erFamiliehendelsedatoIEnUtenlandsoppholdPeriode = (
     );
 };
 
-const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
+const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & WrappedComponentProps> = (props) => {
     const { intl, barn, informasjonOmUtenlandsopphold } = props;
     const {
         tidligereOpphold,

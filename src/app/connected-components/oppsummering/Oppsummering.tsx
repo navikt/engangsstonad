@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { fullNameFormat } from 'util/formats/formatUtils';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { injectIntl, WrappedComponentProps} from 'react-intl';
 import AndreForeldrenOppsummering from './AndreForeldrenOppsummering';
 import getMessage from 'common/util/i18nUtils';
 import OppsummeringBarn from './../oppsummering/BarnOppsummering';
@@ -23,7 +23,7 @@ interface OwnProps {
     søknad: EngangssoknadSoknadDto
 }
 
-type Props = OwnProps & StateProps & InjectedIntlProps;
+type Props = OwnProps & StateProps & WrappedComponentProps;
 const Oppsummering: React.StatelessComponent<Props> = ({ søknad, person, intl }) => {
     const { barn, annenForelder, informasjonOmUtenlandsopphold } = søknad;
 

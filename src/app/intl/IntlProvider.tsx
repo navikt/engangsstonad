@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { addLocaleData, IntlProvider as Provider } from 'react-intl';
-import * as nb from 'react-intl/locale-data/nb';
-import * as nn from 'react-intl/locale-data/nn';
-import * as en from 'react-intl/locale-data/en';
+import { IntlProvider as Provider } from 'react-intl';
 
 import nnMessages from './nn_NO.json';
 import nbMessages from './nb_NO.json';
@@ -33,7 +30,7 @@ const getLanguageMessages = (language: Language) => {
 class IntlProvider extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
-        addLocaleData([...nb, ...nn, ...en]);
+        // addLocaleData([...nb, ...nn, ...en]); // TODO
     }
 
     render() {

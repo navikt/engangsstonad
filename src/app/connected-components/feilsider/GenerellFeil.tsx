@@ -2,7 +2,7 @@ import * as React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import Feilside from 'components/feilside/Feilside';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { injectIntl, WrappedComponentProps, FormattedMessage } from 'react-intl';
 import { CommonState } from 'reducers/commonReducer';
 import { DispatchProps } from 'common/redux/types';
 import { lenker } from 'util/lenker';
@@ -15,7 +15,7 @@ interface StateProps {
     language: Language;
 }
 
-type Props = StateProps & DispatchProps & InjectedIntlProps;
+type Props = StateProps & DispatchProps & WrappedComponentProps;
 const GenerellFeil: React.StatelessComponent<Props> = (props: Props) => {
     const { intl } = props;
     return (

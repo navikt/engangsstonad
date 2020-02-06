@@ -2,7 +2,7 @@ import * as React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import Feilside from 'components/feilside/Feilside';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { CommonState } from 'reducers/commonReducer';
 import { lenker } from 'util/lenker';
 import { Language } from 'intl/IntlProvider';
@@ -18,7 +18,7 @@ interface InnsendingFeiletProps {
     error?: any;
 };
 
-type Props = InnsendingFeiletProps & StateProps & InjectedIntlProps;
+type Props = InnsendingFeiletProps & StateProps & WrappedComponentProps;
 const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
     const { error, intl } = props;
     const errorMessage =
