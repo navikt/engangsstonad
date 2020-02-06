@@ -21,7 +21,7 @@ const configureDevServer = (decoratorFragments) => ({
     },
     watchContentBase: true,
     quiet: false,
-    noInfo: true,
+    noInfo: false,
     stats: 'errors-only',
     publicPath: '/engangsstonad/dist'
 });

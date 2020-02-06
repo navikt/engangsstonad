@@ -12,8 +12,7 @@ const Input: React.StatelessComponent<Props> = ({ name, ...rest }) => {
     return (
         <Field
             name={name}
-            render={(fieldProps: FieldProps) => {
-                const { field, form } = fieldProps;
+            render={({ field, form }: FieldProps) => {
                 return (
                     <NavInput
                         id={name}
@@ -23,7 +22,7 @@ const Input: React.StatelessComponent<Props> = ({ name, ...rest }) => {
                             form.setFieldValue(field.name, e.target.value);
                         }}
                         value={field.value || ''}
-                        feil={form.status.liveValidation ? form.errors[name] : undefined}
+                        feil={form.status.hasSubmitted ? form.errors[name] : undefined}
                         {...rest}
                     />
                 );

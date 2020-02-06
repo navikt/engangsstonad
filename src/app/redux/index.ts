@@ -1,10 +1,10 @@
-import { combineReducers, createStore } from 'redux';
-import reducers from './reducers/reducers';
+import { createStore } from 'redux';
+import rootreducer from './reducers';
 import rootSaga from './sagas/rootSaga';
 import middleware, { sagaMiddleware } from './middleware';
 
 const store = createStore(
-    combineReducers(reducers),
+    rootreducer,
     (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
     middleware
 );

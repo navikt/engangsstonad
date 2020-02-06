@@ -15,7 +15,7 @@ import { erMyndig, erMann } from 'util/validation/validationUtils';
 import SøknadSendt from '../connected-components/soknad-sendt/SøknadSendt';
 import GenerellFeil from '../connected-components/feilsider/GenerellFeil';
 import InnsendingFeilet from '../connected-components/feilsider/InnsendingFeilet';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'reducers/index';
 
 import '../styles/engangsstonad.less';
 

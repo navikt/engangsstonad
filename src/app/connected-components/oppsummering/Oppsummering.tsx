@@ -10,7 +10,7 @@ import Oppsummeringspunkt from './Oppsummeringspunkt';
 import Person from 'app/types/domain/Person';
 import SøkersPersonalia from 'components/søkers-personalia/SøkersPersonalia';
 import UtenlandsoppholdOppsummering from './UtenlandsoppholdOppsummering';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'reducers/index';
 import { EngangssoknadSoknadDto } from 'app/types/domain/EngangsstonadSoknad';
 
 import './oppsummering.less';

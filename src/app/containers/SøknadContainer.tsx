@@ -23,7 +23,7 @@ import getMessage from 'common/util/i18nUtils';
 
 import { Language } from 'intl/IntlProvider';
 import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDtoMapper';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'reducers/index';
 
 import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
 
@@ -51,7 +51,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
     const ActiveStep = stepsConfig[activeStepIndex];
 
     const onSubmit = (values: Partial<FormProps>, formikHelpers: FormikHelpers<Partial<FormProps>>) => {
-        formikHelpers.setStatus({ liveValidation: false });
+        formikHelpers.setStatus({ hasSubmitted: false });
         activeStepIndex === stepsConfig.length - 1
             ? dispatch(sendSoknad(mapFormStateToEngangsstonadDto(values, language)))
             : setActiveStepIndex(activeStepIndex + 1);
@@ -59,7 +59,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
 
     const handleBackClicked = (formikProps: FormikProps<Partial<FormProps>>) => {
         if (activeStepIndex > 0) {
-            formikProps.setStatus({ liveValidation: false });
+            formikProps.setStatus({ hasSubmitted: false });
             formikProps.setErrors({});
             setActiveStepIndex(activeStepIndex - 1);
         }
@@ -73,7 +73,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
     };
 
     const shouldRenderSubmitButton = ({ values, status }: FormikProps<Partial<FormProps>>): boolean => {
-        if(status?.liveValidation) {
+        if(status?.hasSubmitted) {
             return true;
         }
         try {
@@ -106,7 +106,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                             />
 
                             <Form>
-                                {formikProps.status?.liveValidation && !_.isEmpty(formikProps.errors) && (
+                                {formikProps.status?.hasSubmitted && !_.isEmpty(formikProps.errors) && (
                                     <ValidationErrorSummaryBase
                                         title={getMessage(intl, 'title')}
                                         errors={getErrorMessages(formikProps)}
@@ -120,7 +120,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                                         className="responsiveButton"
                                         disabled={søknadSendingInProgress}
                                         spinner={søknadSendingInProgress}
-                                        onClick={() => formikProps.setStatus({ liveValidation: true })}
+                                        onClick={() => formikProps.setStatus({ hasSubmitted: true })}
                                     >
                                         {ActiveStep.fortsettKnappLabel}
                                     </Hovedknapp>

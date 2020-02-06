@@ -9,7 +9,7 @@ import { DispatchProps } from 'common/redux/types';
 import getMessage from 'common/util/i18nUtils';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 import Veileder from 'components/veileder/Veileder';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'reducers/index';
 import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDtoMapper';
 import { Language } from 'intl/IntlProvider';
 

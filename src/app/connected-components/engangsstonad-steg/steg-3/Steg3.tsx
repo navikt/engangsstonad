@@ -17,7 +17,7 @@ interface Props {
 }
 
 const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
-    const { values, } = formikProps;
+    const { values } = formikProps;
     return (
         <>
             <RadioPanelGruppeResponsiveWrapper
@@ -50,7 +50,8 @@ const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
                 />
             )}
 
-            {(values[Questions.harVærtIUtlandSiste12Mnd] === false || values[Questions.oppholdSiste12Mnd]!.length > 0) && (
+            {(values[Questions.harVærtIUtlandSiste12Mnd] === false ||
+                values[Questions.oppholdSiste12Mnd]!.length > 0) && (
                 <>
                     <RadioPanelGruppeResponsiveWrapper
                         name={Questions.skalVæreIUtlandNeste12Mnd}
@@ -61,30 +62,32 @@ const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
                     {values[Questions.skalVæreIUtlandNeste12Mnd] && (
                         <FieldArray
                             name={Questions.oppholdNeste12Mnd}
-                            render={({ push, remove, replace }) => (
-                                <CountryPicker
-                                    label={<FormattedMessage id={Questions.oppholdNeste12Mnd} />}
-                                    language={Language.BOKMÅL}
-                                    utenlandsoppholdListe={values[Questions.oppholdNeste12Mnd]!}
-                                    gyldigTildsperiode={{
-                                        fom: moment().format(moment.HTML5_FMT.DATE),
-                                        tom: moment()
-                                            .add(1, 'year')
-                                            .format(moment.HTML5_FMT.DATE)
-                                    }}
-                                    addVisit={push}
-                                    editVisit={(periode: Utenlandsopphold, index: number) => replace(index, periode)}
-                                    deleteVisit={(periode: Utenlandsopphold) =>
-                                        remove(values[Questions.oppholdNeste12Mnd]!.indexOf(periode))
-                                    }
-                                />
-                            )}
+                            render={({ push, remove, replace }) => {
+                                return (
+                                    <CountryPicker
+                                        label={<FormattedMessage id={Questions.oppholdNeste12Mnd} />}
+                                        language={Language.BOKMÅL}
+                                        utenlandsoppholdListe={values[Questions.oppholdNeste12Mnd]!}
+                                        gyldigTildsperiode={{
+                                            fom: moment().format(moment.HTML5_FMT.DATE),
+                                            tom: moment()
+                                                .add(1, 'year')
+                                                .format(moment.HTML5_FMT.DATE)
+                                        }}
+                                        addVisit={push}
+                                        editVisit={(periode: Utenlandsopphold, index: number) =>
+                                            replace(index, periode)
+                                        }
+                                        deleteVisit={(periode: Utenlandsopphold) =>
+                                            remove(values[Questions.oppholdNeste12Mnd]!.indexOf(periode))
+                                        }
+                                    />
+                                );
+                            }}
                         />
                     )}
-
                 </>
             )}
-
         </>
     );
 };

@@ -6,7 +6,6 @@ import { Formik, Form } from 'formik';
 import Modal from 'nav-frontend-modal';
 
 import { getForignCountries } from '../../../connected-components/engangsstonad-steg/steg-2/Steg2';
-import FormBlock from 'components/form-block/FormBlock';
 import DatovelgerElement from 'components/form/date-input/DateInput';
 import Select from 'components/form/select/Select';
 import { Language } from 'intl/IntlProvider';
@@ -15,6 +14,8 @@ import { Utenlandsopphold, Tidsperiode } from '../../../types/domain/Informasjon
 
 import validationSchema from './validationSchema';
 import { Questions } from './questions';
+
+import "./utenlandsoppholdModal.less";
 
 interface Props {
     language: Language;
@@ -31,7 +32,7 @@ interface FormValues {
     tom: string;
 }
 
-const CountryModal: React.FunctionComponent<Props> = ({
+const UtenlandsoppholdModal: React.FunctionComponent<Props> = ({
     utenlandsopphold,
     gyldigTidsperiode,
     alleUtenlandsopphold = [],
@@ -78,7 +79,7 @@ const CountryModal: React.FunctionComponent<Props> = ({
                 initialValues={initialValues()}
                 validationSchema={validationSchema(gyldigTidsperiode, datoavelgerAvgrensninger.ugyldigeTidsperioder)}
                 onSubmit={handleOnSubmit}
-                render={() => {
+                render={(formikProps) => {
                     return (
                         <Form>
                             <Undertittel className="countryModal__title">
@@ -87,16 +88,15 @@ const CountryModal: React.FunctionComponent<Props> = ({
                             <Select name={Questions.land} options={getForignCountries(language)} />
                             <DatovelgerElement name={Questions.fom} avgrensninger={datoavelgerAvgrensninger} />
                             <DatovelgerElement name={Questions.tom} avgrensninger={datoavelgerAvgrensninger} />
-                            <FormBlock margin="xxs">
-                                <div className="countryModal__buttonBar">
-                                    <Knapp onClick={() => closeModal()} htmlType="button">
-                                        <FormattedMessage id="avbryt" />
-                                    </Knapp>
-                                    <Hovedknapp>
-                                        <FormattedMessage id="lagre" />
-                                    </Hovedknapp>
-                                </div>
-                            </FormBlock>
+
+                            <div className="countryModal__buttonBar">
+                                <Knapp onClick={() => closeModal()} htmlType="button">
+                                    <FormattedMessage id="avbryt" />
+                                </Knapp>
+                                <Hovedknapp onClick={() => formikProps.setStatus({ hasSubmitted: true })}>
+                                    <FormattedMessage id="lagre" />
+                                </Hovedknapp>
+                            </div>
                         </Form>
                     );
                 }}
@@ -104,4 +104,4 @@ const CountryModal: React.FunctionComponent<Props> = ({
         </Modal>
     );
 };
-export default CountryModal;
+export default UtenlandsoppholdModal;

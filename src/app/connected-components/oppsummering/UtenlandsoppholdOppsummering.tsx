@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { CountrySummaryList } from 'components/utenlandsopphold/UtenlandsoppholdList';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
+import * as moment from 'moment';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
 import InformasjonOmUtenlandsopphold, { Tidsperiode, Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
-import * as moment from 'moment';
 import Barn, { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 import getMessage from 'common/util/i18nUtils';
 
@@ -50,7 +49,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & WrappedComp
                     <EtikettLiten className="textWithLabel__label">
                         {getMessage(intl, 'oppsummering.text.boddSisteTolv')}
                     </EtikettLiten>
-                    <CountrySummaryList utenlandsoppholdListe={tidligereOpphold} />
+                    {/* <CountryList utenlandsoppholdListe={tidligereOpphold} /> */}
                 </div>
             )}
             {senereOpphold.length === 0 ? (
@@ -63,7 +62,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & WrappedComp
                     <EtikettLiten className="textWithLabel__label">
                         {getMessage(intl, 'medlemmskap.text.oppsummering.neste12mnd')}
                     </EtikettLiten>
-                    <CountrySummaryList utenlandsoppholdListe={senereOpphold} />
+                    {/* <CountryList utenlandsoppholdListe={senereOpphold} /> */}
                 </div>
             )}
             {barn.erBarnetFødt === false && (

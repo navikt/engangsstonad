@@ -1,5 +1,6 @@
 import commonReducer, { CommonState } from './commonReducer';
 import apiReducer, { ApiState } from './apiReducer';
+import { combineReducers } from 'redux';
 
 interface MainState {
     commonReducer: CommonState;
@@ -7,4 +8,4 @@ interface MainState {
 }
 
 export type AppState = MainState;
-export default { commonReducer, apiReducer };
+export default combineReducers({ commonReducer, apiReducer });

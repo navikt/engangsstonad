@@ -5,7 +5,7 @@ import { IntlProvider as Provider } from 'react-intl';
 import nnMessages from './nn_NO.json';
 import nbMessages from './nb_NO.json';
 import enMessages from './en_US.json';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'reducers/index';
 
 interface Props {
     language: Language;

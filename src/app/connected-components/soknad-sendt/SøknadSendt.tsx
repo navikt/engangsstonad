@@ -19,7 +19,7 @@ const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
 
 import { lenker } from 'util/lenker';
 import { redirect } from 'util/login';
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'reducers/index';
 import getMessage from 'common/util/i18nUtils';
 
 import '../../styles/engangsstonad.less';

@@ -21,7 +21,7 @@ import { DispatchProps } from 'common/redux/types';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import Veiviser from 'components/veiviser/VeiviserSvg';
 
-import { AppState } from 'reducers/reducers';
+import { AppState } from 'reducers/index';
 import { Language } from 'intl/IntlProvider';
 
 import '../../styles/engangsstonad.less';
