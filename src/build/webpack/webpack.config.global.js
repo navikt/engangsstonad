@@ -4,7 +4,7 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webpackConfig = {
-    entry: ['babel-polyfill', './src/app/bootstrap.tsx'],
+    entry: ['react-hot-loader/patch','babel-polyfill', './src/app/bootstrap.tsx'],
     mode: 'development',
     output: {
         path: path.resolve(__dirname, './../../../dist'),
@@ -22,7 +22,8 @@ const webpackConfig = {
             styles: path.resolve(__dirname, './../../app/styles/'),
             util: path.resolve(__dirname, './../../app/util/'),
             common: path.resolve(__dirname, './../../common/'),
-            storage: path.resolve(__dirname, './../../storage/')
+            storage: path.resolve(__dirname, './../../storage/'),
+            'react-dom': '@hot-loader/react-dom'
         },
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx']
     },

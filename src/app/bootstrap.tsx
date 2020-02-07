@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -27,7 +28,8 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 const root = document.getElementById('app');
-render(
+const renderApp = () =>
+    render(
         <Provider store={store}>
             <IntlProvider>
                 <Router>
@@ -37,5 +39,11 @@ render(
                 </Router>
             </IntlProvider>
         </Provider>,
-    root
-);
+        root
+    );
+
+if (process.env.NODE_ENV !== 'production' && module.hot) {
+    module.hot.accept('./containers/AppContainer', renderApp);
+}
+
+renderApp();

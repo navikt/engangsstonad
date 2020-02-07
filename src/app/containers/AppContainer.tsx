@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom';
@@ -92,4 +93,4 @@ const mapStateToProps = (state: AppState) => ({
     language: state.commonReducer.language
 });
 
-export default connect<StateProps, {}, {}>(mapStateToProps)(AppContainer);
+export default connect<StateProps, {}, {}>(mapStateToProps)(hot(AppContainer));

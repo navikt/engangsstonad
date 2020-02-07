@@ -44,7 +44,6 @@ const Steg2: React.FunctionComponent<Props> = ({ formikProps }) => {
                 disabled={values[Questions.kanIkkeOppgis]}
             />
             <Checkbox name={Questions.kanIkkeOppgis} />
-
             {values[Questions.navn] && !values[Questions.kanIkkeOppgis] && (
                 <>
                     <Input

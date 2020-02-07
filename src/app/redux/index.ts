@@ -9,6 +9,11 @@ const store = createStore(
     middleware
 );
 
+if (process.env.NODE_ENV !== 'production' && module.hot) {
+    console.log(rootreducer);
+    module.hot.accept('./reducers', () => store.replaceReducer(rootreducer))
+  }
+
 sagaMiddleware.run(rootSaga);
 
 export default store;
