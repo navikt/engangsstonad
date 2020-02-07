@@ -3,6 +3,10 @@ const webpack = require('webpack');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const devMode = process.env.NODE_ENV !== 'production';
+
+console.log(process.env.NODE_ENV === 'development')
+
 const webpackConfig = {
     entry: ['react-hot-loader/patch','babel-polyfill', './src/app/bootstrap.tsx'],
     mode: 'development',
@@ -49,7 +53,10 @@ const webpackConfig = {
                 test: /\.less$/,
                 use: [
                     {
-                        loader: MiniCssExtractPlugin.loader
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hmr: process.env.NODE_ENV === 'development'
+                        }
                     },
                     'css-loader',
                     'postcss-loader',
@@ -72,9 +79,8 @@ const webpackConfig = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]',
-            disable: false,
-            allChunks: true
+            filename: devMode ? '[name].css' : '[name].[hash].css',
+            chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
         }),
         new SpriteLoaderPlugin({
             plainSprite: true

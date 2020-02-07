@@ -15,7 +15,7 @@
         "docker-rmi": "npm run docker-kill && docker rmi engangsstonad",
         "start-express": "node ./server.js",
         "start-mock-api-server": "node ./mock-api-server.js",
-        "start": "node ./src/build/scripts/start-dev.js",
+        "start": "cross-env NODE_ENV=development node ./src/build/scripts/start-dev.js",
         "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
         "test-coverage": "jest --config ./jest.config.js --coverage --collectCoverageFrom=src/**/*.{ts,tsx} --collectCoverageFrom=!src/**/*.d.{ts,tsx}",
         "lint": "tslint src/**"
@@ -136,7 +136,7 @@
         "jsdom": "11.4.0",
         "less": "2.7.3",
         "less-loader": "^5.0.0",
-        "mini-css-extract-plugin": "^0.8.0",
+        "mini-css-extract-plugin": "^0.9.0",
         "multer": "1.3.0",
         "mustache-express": "1.3.0",
         "mustache-loader": "1.4.0",
