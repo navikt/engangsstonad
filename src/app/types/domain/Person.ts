@@ -5,7 +5,7 @@ export enum Kjønn {
     K = 'K'
 }
 
-type Person = {
+interface Person {
     fnr: string;
     fornavn: string;
     mellomnavn: string;
