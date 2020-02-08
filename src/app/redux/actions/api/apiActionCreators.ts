@@ -1,13 +1,11 @@
 import { ApiActionKeys, ApiActionTypes } from './apiActionDefinitions';
 import Person from '../../../types/domain/Person';
-import PersonRequest from '../../../types/services/PersonRequest';
 import { EngangssoknadSoknadDto } from '../../../types/domain/EngangsstonadSoknad';
 import Kvittering from 'app/types/services/Kvittering';
 
-export function getPerson(person?: PersonRequest): ApiActionTypes {
+export function getPerson(): ApiActionTypes {
     return {
-        type: ApiActionKeys.GET_PERSON,
-        params: person
+        type: ApiActionKeys.GET_PERSON
     };
 }
 

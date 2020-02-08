@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, FormattedHTMLMessage, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, useIntl } from 'react-intl';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -26,151 +26,130 @@ import Person from '../../types/domain/Person';
 
 import '../../styles/engangsstonad.less';
 
-interface State {
-    isPersonopplysningerModalOpen: boolean;
-    isPlikterModalOpen: boolean;
-}
-
 interface StateProps {
     person: Person;
     godkjentVilkår: boolean;
     language: Language;
 }
 
-type Props = StateProps & DispatchProps & WrappedComponentProps & RouteComponentProps;
-class Intro extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            isPersonopplysningerModalOpen: false,
-            isPlikterModalOpen: false
-        };
-        this.startNySøknad = this.startNySøknad.bind(this);
-    }
+type Props = StateProps & DispatchProps & RouteComponentProps;
+const Intro: React.FunctionComponent<Props> = ({ person, godkjentVilkår, language, dispatch, history }) => {
+    const intl = useIntl();
+    const [isPlikterModalOpen, setIsPlikterModalOpen] = React.useState(false);
+    const [isPersonopplysningerModalOpen, setIsPersonopplysningerModalOpen] = React.useState(false);
 
-    openPlikterModal(e: React.SyntheticEvent<HTMLElement>) {
+    const openPlikterModal = (e: React.SyntheticEvent<HTMLElement>) => {
         e.preventDefault();
-        this.setState({ isPlikterModalOpen: true });
-    }
+        setIsPlikterModalOpen(true);
+    };
 
-    openPersonopplysningerModal(e: React.SyntheticEvent<HTMLElement>) {
+    const openPersonopplysningerModal = (e: React.SyntheticEvent<HTMLElement>) => {
         e.preventDefault();
-        this.setState({ isPersonopplysningerModalOpen: true });
-    }
+        setIsPersonopplysningerModalOpen(true);
+    };
 
-    startNySøknad(e: React.FormEvent<HTMLFormElement>) {
+    const startNySøknad = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (this.props.godkjentVilkår) {
-            this.props.history.push('/engangsstonad/soknad');
+        if (godkjentVilkår) {
+            history.push('/engangsstonad/soknad');
         }
-    }
+    };
 
-    toggleLanguage(language: Language) {
-        this.props.dispatch(common.setLanguage(language));
-    }
+    return (
+        <div id="js-intro">
+            <Skjemasteg>
+                <LanguageToggle
+                    language={language}
+                    toggleLanguage={(lang: Language) => dispatch(common.setLanguage(lang))}
+                />
+                <SimpleIllustration
+                    dialog={{
+                        title: getMessage(intl, 'intro.standard.bobletittel', {
+                            name: person.fornavn.toLowerCase()
+                        }),
+                        text: getMessage(intl, 'intro.standard.bobletekst')
+                    }}
+                />
 
-    render() {
-        const { intl, person, godkjentVilkår, language, dispatch } = this.props;
-        console.log(godkjentVilkår);
-        return (
-            <div id="js-intro">
-                <Skjemasteg>
-                    <form onSubmit={this.startNySøknad}>
-                        <LanguageToggle
-                            language={language}
-                            toggleLanguage={(lang: Language) => this.toggleLanguage(lang)}
-                        />
-                        <SimpleIllustration
-                            dialog={{
-                                title: getMessage(intl, 'intro.standard.bobletittel', {
-                                    name: person.fornavn.toLowerCase()
-                                }),
-                                text: getMessage(intl, 'intro.standard.bobletekst')
-                            }}
-                        />
-                        <div className="responsiveContainer">
-                            <div className="blokk-s">
-                                <Innholdstittel>{getMessage(intl, 'intro.standard.velkommentittel')}</Innholdstittel>
-                            </div>
-                            <div className="blokk-m">
-                                <Ingress>{getMessage(intl, 'intro.standard.ingress')}</Ingress>
-                            </div>
-                            <div className="blokk-m">
-                                <Veilederpanel kompakt={true} svg={<Veiviser />}>
-                                    <FormattedMessage id="intro.text.veiviser" />
-                                    <br />
-                                    <br />
-                                    <FormattedHTMLMessage id="intro.text.veiviser.lenke" />
-                                </Veilederpanel>
-                            </div>
+                <form onSubmit={startNySøknad} className="responsiveContainer">
+                    <Innholdstittel className="blokk-s">
+                        <FormattedMessage id="intro.standard.velkommentittel" />
+                    </Innholdstittel>
 
-                            <div className="blokk-m">
-                                <BekreftCheckboksPanel
-                                    inputProps={{
-                                        name: 'egenerklaring'
-                                    }}
-                                    label={getMessage(intl, 'intro.text.samtykke')}
-                                    onChange={() => dispatch(common.setGodkjentVilkar(!godkjentVilkår))}
-                                    checked={godkjentVilkår}
-                                >
-                                    <span>
-                                        <FormattedMessage
-                                            id="intro.text.samtykkeIntro"
-                                            values={{
-                                                link: (
-                                                    <a
-                                                        className="lenke"
-                                                        href="#"
-                                                        onClick={(e) => this.openPlikterModal(e)}
-                                                    >
-                                                        <FormattedMessage id="intro.text.samtykke.link" />
-                                                    </a>
-                                                )
-                                            }}
-                                        />
-                                    </span>
-                                </BekreftCheckboksPanel>
-                            </div>
+                    <Ingress className="blokk-m">
+                        <FormattedMessage id="intro.standard.ingress" />
+                    </Ingress>
 
-                            <div className="blokk-m">
-                                <Hovedknapp className="responsiveButton" disabled={!godkjentVilkår}>
-                                    {getMessage(intl, 'intro.button.startSøknad')}
-                                </Hovedknapp>
-                            </div>
+                    <div className="blokk-m">
+                        <Veilederpanel kompakt={true} svg={<Veiviser />}>
+                            <FormattedMessage id="intro.text.veiviser" />
+                            <br />
+                            <br />
+                            <FormattedHTMLMessage id="intro.text.veiviser.lenke" />
+                        </Veilederpanel>
+                    </div>
 
-                            <div className="blokk-m personopplysningLenke">
-                                <a className="lenke" href="#" onClick={(e) => this.openPersonopplysningerModal(e)}>
-                                    <FormattedMessage id="intro.text.personopplysningene.link" />
-                                </a>
-                            </div>
+                    <BekreftCheckboksPanel
+                        className="blokk-m"
+                        inputProps={{
+                            name: 'egenerklaring'
+                        }}
+                        label={getMessage(intl, 'intro.text.samtykke')}
+                        onChange={() => dispatch(common.setGodkjentVilkar(!godkjentVilkår))}
+                        checked={godkjentVilkår}
+                    >
+                        <span>
+                            <FormattedMessage
+                                id="intro.text.samtykkeIntro"
+                                values={{
+                                    link: (
+                                        <a className="lenke" href="#" onClick={openPlikterModal}>
+                                            <FormattedMessage id="intro.text.samtykke.link" />
+                                        </a>
+                                    )
+                                }}
+                            />
+                        </span>
+                    </BekreftCheckboksPanel>
 
-                            <Modal
-                                isOpen={this.state.isPlikterModalOpen}
-                                closeButton={true}
-                                onRequestClose={() => this.setState({ isPlikterModalOpen: false })}
-                                contentLabel="rettigheter og plikter"
-                            >
-                                <Plikter />
-                            </Modal>
-                            <Modal
-                                isOpen={this.state.isPersonopplysningerModalOpen}
-                                closeButton={true}
-                                onRequestClose={() => this.setState({ isPersonopplysningerModalOpen: false })}
-                                contentLabel="rettigheter og plikter"
-                            >
-                                <Personopplysninger />
-                            </Modal>
-                        </div>
-                    </form>
-                </Skjemasteg>
-            </div>
-        );
-    }
-}
+                    <div className="blokk-m">
+                        <Hovedknapp className="responsiveButton" disabled={!godkjentVilkår}>
+                            <FormattedMessage id="intro.button.startSøknad" />
+                        </Hovedknapp>
+                    </div>
+
+                    <div className="blokk-m personopplysningLenke">
+                        <a className="lenke" href="#" onClick={openPersonopplysningerModal}>
+                            <FormattedMessage id="intro.text.personopplysningene.link" />
+                        </a>
+                    </div>
+
+                    <Modal
+                        isOpen={isPlikterModalOpen}
+                        closeButton={true}
+                        onRequestClose={() => setIsPlikterModalOpen(false)}
+                        contentLabel="rettigheter og plikter"
+                    >
+                        <Plikter />
+                    </Modal>
+
+                    <Modal
+                        isOpen={isPersonopplysningerModalOpen}
+                        closeButton={true}
+                        onRequestClose={() => setIsPersonopplysningerModalOpen(false)}
+                        contentLabel="rettigheter og plikter"
+                    >
+                        <Personopplysninger />
+                    </Modal>
+                </form>
+            </Skjemasteg>
+        </div>
+    );
+};
 
 const mapStateToProps = (state: AppState) => ({
     person: state.apiReducer.person!,
     godkjentVilkår: state.commonReducer.godkjentVilkår,
     language: state.commonReducer.language
 });
-export default connect<StateProps>(mapStateToProps)(injectIntl(Intro));
+export default connect<StateProps>(mapStateToProps)(Intro);

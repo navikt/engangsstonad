@@ -26,7 +26,7 @@ export interface ApiState {
 const apiReducer = (state = initialState(), action: ApiActionTypes) => {
     switch (action.type) {
         case ApiActionKeys.GET_PERSON:
-            return { ...state, params: action.params, isLoadingPerson: true };
+            return { ...state, isLoadingPerson: true };
         case ApiActionKeys.GET_PERSON_SUCCESS:
             return { ...state, person: action.person, isLoadingPerson: false };
         case ApiActionKeys.GET_PERSON_FAILED:

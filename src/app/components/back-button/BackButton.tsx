@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { Knapp } from 'nav-frontend-knapper';
 const { VenstreChevron } = require('nav-frontend-chevron');
-const { Knapp } = require('nav-frontend-knapper');
 
 import './backButton.less';
 

@@ -37,10 +37,6 @@ class AppContainer extends React.Component<Props> {
         }
     }
 
-    renderContent(children: React.ReactNode) {
-        return <div className="engangsstonad">{children}</div>;
-    }
-
     getIntroComponent(person: Person, routeProps: RouteComponentProps): React.ReactNode {
         if (erMann(person)) {
             return <ErMann />;
@@ -54,15 +50,15 @@ class AppContainer extends React.Component<Props> {
     render() {
         const { godkjentVilkår, kvittering, error, isLoadingPerson, søknadSendt, person } = this.props;
         if (isLoadingPerson || (error && (error as AxiosResponse).status === 401)) {
-            return this.renderContent(<Spinner type="XXL" />);
+            return <Spinner type="XXL" />;
         }
         if (søknadSendt && error && (error as AxiosResponse).status > 401) {
-            return this.renderContent(<InnsendingFeilet error={error} />);
+            return <InnsendingFeilet error={error} />;
         }
         if (error || !person) {
-            return this.renderContent(<GenerellFeil />);
+            return <GenerellFeil />;
         }
-        return this.renderContent(
+        return (
             <Switch>
                 {kvittering ? (
                     <Route path="/engangsstonad" component={SøknadSendt} exact={true} />
@@ -86,11 +82,9 @@ const mapStateToProps = (state: AppState) => ({
     error: state.apiReducer.error,
     person: state.apiReducer.person,
     isLoadingPerson: state.apiReducer.isLoadingPerson,
-    søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
     godkjentVilkår: state.commonReducer.godkjentVilkår,
     kvittering: state.apiReducer.kvittering,
     søknadSendt: state.apiReducer.søknadSendt,
-    language: state.commonReducer.language
 });
 
 export default connect<StateProps, {}, {}>(mapStateToProps)(hot(AppContainer));

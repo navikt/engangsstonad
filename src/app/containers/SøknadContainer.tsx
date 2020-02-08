@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Prompt, RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Formik, Form, FormikProps, FormikHelpers } from 'formik';
 import _ from 'lodash';
@@ -36,17 +36,17 @@ interface OwnProps {
     sessionHasExpired: boolean;
 }
 
-type Props = OwnProps & DispatchProps & WrappedComponentProps & RouteComponentProps;
+type Props = OwnProps & DispatchProps & RouteComponentProps;
 const SøknadContainer: React.FunctionComponent<Props> = ({
     person,
     søknadSendingInProgress,
     sessionHasExpired,
     language,
-    dispatch,
-    intl
+    dispatch
 }) => {
+    const intl = useIntl();
     const [activeStepIndex, setActiveStepIndex] = React.useState(0);
-
+    
     const stepsConfig = getStepConfig(intl, person);
     const ActiveStep = stepsConfig[activeStepIndex];
 
@@ -112,9 +112,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                                         errors={getErrorMessages(formikProps)}
                                     />
                                 )}
-
                                 {ActiveStep.component(formikProps)}
-
                                 {shouldRenderSubmitButton(formikProps) && (
                                     <Hovedknapp
                                         className="responsiveButton"
@@ -125,7 +123,6 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                                         {ActiveStep.fortsettKnappLabel}
                                     </Hovedknapp>
                                 )}
-
                                 <CancelButton />
                             </Form>
                         </div>
@@ -144,4 +141,4 @@ const mapStateToProps = (state: AppState) => ({
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
     sessionHasExpired: state.apiReducer.sessionHasExpired
 });
-export default connect<OwnProps>(mapStateToProps)(injectIntl(SøknadContainer));
+export default connect<OwnProps>(mapStateToProps)(SøknadContainer);

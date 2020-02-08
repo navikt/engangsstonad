@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import Person from '../../types/domain/Person';
+import Person, { Kjønn } from '../../types/domain/Person';
 
 const todaysDate = moment();
 const ukerAaTrekkeFraTerminDato = 18;
@@ -41,7 +41,7 @@ export const erMyndig = (person: Person) => {
     return now.diff(momentDate, 'years') >= 18;
 };
 
-export const erMann = (person: Person) => person.kjønn === 'M';
+export const erMann = (person: Person) => person.kjønn === Kjønn.M;
 
 export const getFørsteMuligeTermindato = () =>
     moment()

@@ -1,6 +1,5 @@
 import Person from '../../../types/domain/Person';
 import { EngangssoknadSoknadDto } from '../../../types/domain/EngangsstonadSoknad';
-import PersonRequest from '../../../types/services/PersonRequest';
 import Kvittering from 'app/types/services/Kvittering';
 
 export enum ApiActionKeys {
@@ -19,7 +18,6 @@ interface SessionExpired {
 
 interface GetPerson {
     type: ApiActionKeys.GET_PERSON;
-    params?: PersonRequest;
 }
 
 interface GetPersonSuccess {

@@ -5,6 +5,7 @@ import { IntlProvider as Provider } from 'react-intl';
 import nnMessages from './nn_NO.json';
 import nbMessages from './nb_NO.json';
 import enMessages from './en_US.json';
+
 import { AppState } from 'reducers/index';
 
 interface Props {
@@ -34,9 +35,8 @@ class IntlProvider extends React.Component<Props> {
     }
 
     render() {
-        const messages = getLanguageMessages(this.props.language);
         return (
-            <Provider locale={Language.BOKMÅL} messages={messages || {}}>
+            <Provider locale={Language.BOKMÅL} messages={getLanguageMessages(this.props.language)}>
                 {this.props.children}
             </Provider>
         );

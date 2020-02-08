@@ -1,20 +1,23 @@
 import * as React from 'react';
-import { Attachment } from 'common/storage/attachment/types/Attachment';
+import { useIntl } from 'react-intl';
 import { EtikettLiten } from 'nav-frontend-typografi';
-import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+
+import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
+import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
-import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
 import getMessage from 'common/util/i18nUtils';
+
+import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
+
 import '../../styles/engangsstonad.less';
 
 interface Props {
     barn: FodtBarn & UfodtBarn;
 }
 
-const BarnOppsummering: React.StatelessComponent<Props & WrappedComponentProps> = (props) => {
-    const { intl } = props;
+const BarnOppsummering: React.StatelessComponent<Props> = (props) => {
+    const intl = useIntl();
     const {
         antallBarn,
         erBarnetFødt,
@@ -44,7 +47,7 @@ const BarnOppsummering: React.StatelessComponent<Props & WrappedComponentProps> 
             {erBarnetFødt && (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.medFødselsdato')}
-                    text={fødselsdatoer}
+                    text={fødselsdatoer[0]}
                 />
             )}
             {!erBarnetFødt && termindato && terminbekreftelseDato && (
@@ -70,4 +73,4 @@ const BarnOppsummering: React.StatelessComponent<Props & WrappedComponentProps> 
         </div>
     );
 };
-export default injectIntl(BarnOppsummering);
+export default BarnOppsummering;

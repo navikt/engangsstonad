@@ -3,15 +3,6 @@ import { FodtBarn, UfodtBarn } from './Barn';
 import AnnenForelder from './AnnenForelder';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 
-interface EngangsstonadSoknad {
-    type: 'engangsstønad';
-    erEndringssøknad: boolean;
-    informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
-    barn: FodtBarn | UfodtBarn;
-    annenForelder: AnnenForelder;
-    vedlegg?: Attachment[];
-};
-
 export interface EngangssoknadSoknadDto {
     type: 'engangsstønad';
     erEndringssøknad: boolean;
@@ -24,5 +15,4 @@ export interface EngangssoknadSoknadDto {
     };
 };
 
-
-export default EngangsstonadSoknad;
+export default EngangssoknadSoknadDto;

@@ -1,8 +1,9 @@
 import Bankkonto from './Bankkonto';
 
-export type Kjønn =
-    | 'M'
-    | 'K';
+export enum Kjønn {
+    M = 'M',
+    K = 'K'
+}
 
 type Person = {
     fnr: string;
