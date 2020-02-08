@@ -3,12 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
 import { Tidsperiode } from 'nav-datovelger';
 
-import CountryModal from '../../components/utenlandsopphold/utenlandsopphold-modal/UtenlandsoppholdModal';
-import { CountryList } from './utenlandsopphold-list/UtenlandsoppholdList';
-import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
-import { Language } from '../../intl/IntlProvider';
+import { Language } from 'intl/IntlProvider';
+import { Utenlandsopphold } from 'app/types/domain/InformasjonOmUtenlandsopphold';
 
-import './utenlandsopphold.less';
+import CountryModal from '../utenlandsopphold-modal/UtenlandsoppholdModal';
+import { CountryList } from '../utenlandsopphold-list/UtenlandsoppholdList';
+
+import './utenlandsoppholdSeksjon.less';
 
 interface Props {
     label: React.ReactNode;
@@ -20,8 +21,7 @@ interface Props {
     editVisit: (periode: Utenlandsopphold, index: number) => void;
 }
 
-const CountryPicker: React.FunctionComponent<Props> = ({
-    label,
+const UtenlandsoppholdSeksjon: React.FunctionComponent<Props> = ({
     utenlandsoppholdListe,
     gyldigTildsperiode,
     language,
@@ -56,6 +56,7 @@ const CountryPicker: React.FunctionComponent<Props> = ({
                     utenlandsoppholdListe={utenlandsoppholdListe}
                     onEditClick={onEditClick}
                     onDeleteClick={deleteVisit}
+                    language={language}
                 />
             </div>
 
@@ -76,4 +77,4 @@ const CountryPicker: React.FunctionComponent<Props> = ({
         </>
     );
 };
-export default CountryPicker;
+export default UtenlandsoppholdSeksjon;

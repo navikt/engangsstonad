@@ -24,7 +24,7 @@ interface StateProps {
     person?: Person;
     error: AxiosResponse | Error | undefined;
     isLoadingPerson: boolean;
-    godkjentVilkar: boolean;
+    godkjentVilkår: boolean;
     kvittering?: Kvittering;
     søknadSendt: boolean;
 }
@@ -52,7 +52,7 @@ class AppContainer extends React.Component<Props> {
     }
 
     render() {
-        const { godkjentVilkar, kvittering, error, isLoadingPerson, søknadSendt, person } = this.props;
+        const { godkjentVilkår, kvittering, error, isLoadingPerson, søknadSendt, person } = this.props;
         if (isLoadingPerson || (error && (error as AxiosResponse).status === 401)) {
             return this.renderContent(<Spinner type="XXL" />);
         }
@@ -67,13 +67,13 @@ class AppContainer extends React.Component<Props> {
                 {kvittering ? (
                     <Route path="/engangsstonad" component={SøknadSendt} exact={true} />
                 ) : (
-                        <Route
-                            path="/engangsstonad"
-                            render={(routeProps) => this.getIntroComponent(person, routeProps)}
-                            exact={true}
-                        />
-                    )}
-                {godkjentVilkar && !søknadSendt && (
+                    <Route
+                        path="/engangsstonad"
+                        render={(routeProps) => this.getIntroComponent(person, routeProps)}
+                        exact={true}
+                    />
+                )}
+                {godkjentVilkår && !søknadSendt && (
                     <Route path={'/engangsstonad/soknad'} exact={true} strict={true} component={Skjema} />
                 )}
                 <Redirect to="/engangsstonad" />
@@ -87,7 +87,7 @@ const mapStateToProps = (state: AppState) => ({
     person: state.apiReducer.person,
     isLoadingPerson: state.apiReducer.isLoadingPerson,
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
-    godkjentVilkar: state.commonReducer.godkjentVilkar,
+    godkjentVilkår: state.commonReducer.godkjentVilkår,
     kvittering: state.apiReducer.kvittering,
     søknadSendt: state.apiReducer.søknadSendt,
     language: state.commonReducer.language

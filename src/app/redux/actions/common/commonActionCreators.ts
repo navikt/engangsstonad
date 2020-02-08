@@ -8,10 +8,10 @@ export function setBekreftetInformasjon(bekreftetInformasjon: boolean): CommonAc
     };
 }
 
-export function setGodkjentVilkar(godkjentVilkar: boolean): CommonActionTypes {
+export function setGodkjentVilkar(godkjentVilkår: boolean): CommonActionTypes {
     return {
-        type: CommonActionKeys.SET_GODKJENT_VILKAR,
-        godkjentVilkar
+        type: CommonActionKeys.SET_GODKJENT_VILKÅR,
+        godkjentVilkår
     };
 }
 

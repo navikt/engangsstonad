@@ -1,40 +1,39 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, FormattedHTMLMessage, WrappedComponentProps } from 'react-intl';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
+import Veilederpanel from 'nav-frontend-veilederpanel';
+import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 
 import Plikter from 'components/modal-content/Plikter';
 import Personopplysninger from 'components/modal-content/Personopplysninger';
+import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
+import Veiviser from 'components/veiviser/VeiviserSvg';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
+
+import getMessage from 'common/util/i18nUtils';
+import { DispatchProps } from 'common/redux/types';
+import { AppState } from 'reducers/index';
+import { Language } from 'intl/IntlProvider';
 
 import { commonActionCreators as common } from '../../redux/actions';
 import LanguageToggle from '../../intl/LanguageToggle';
-import getMessage from 'common/util/i18nUtils';
 import Person from '../../types/domain/Person';
-import { RouteComponentProps } from 'react-router-dom';
-import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
-import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
-import { DispatchProps } from 'common/redux/types';
-import Veilederpanel from 'nav-frontend-veilederpanel';
-import Veiviser from 'components/veiviser/VeiviserSvg';
-
-import { AppState } from 'reducers/index';
-import { Language } from 'intl/IntlProvider';
 
 import '../../styles/engangsstonad.less';
 
 interface State {
     isPersonopplysningerModalOpen: boolean;
     isPlikterModalOpen: boolean;
-    godkjentVilkår: boolean;
 }
 
 interface StateProps {
     person: Person;
-    godkjentVilkar: boolean;
+    godkjentVilkår: boolean;
     language: Language;
 }
 
@@ -44,10 +43,8 @@ class Intro extends React.Component<Props, State> {
         super(props);
         this.state = {
             isPersonopplysningerModalOpen: false,
-            isPlikterModalOpen: false,
-            godkjentVilkår: false
+            isPlikterModalOpen: false
         };
-        this.bekreftetVilkarChange = this.bekreftetVilkarChange.bind(this);
         this.startNySøknad = this.startNySøknad.bind(this);
     }
 
@@ -61,22 +58,9 @@ class Intro extends React.Component<Props, State> {
         this.setState({ isPersonopplysningerModalOpen: true });
     }
 
-    closePersonopplysningerModal() {
-        this.setState({ isPersonopplysningerModalOpen: false });
-    }
-
-    closePlikterModal() {
-        this.setState({ isPlikterModalOpen: false });
-    }
-
-    bekreftetVilkarChange() {
-        this.setState({ godkjentVilkår: !this.state.godkjentVilkår });
-    }
-
     startNySøknad(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (this.state.godkjentVilkår) {
-            this.props.dispatch(common.setGodkjentVilkar(true));
+        if (this.props.godkjentVilkår) {
             this.props.history.push('/engangsstonad/soknad');
         }
     }
@@ -85,30 +69,16 @@ class Intro extends React.Component<Props, State> {
         this.props.dispatch(common.setLanguage(language));
     }
 
-    confirmBoxLabelHeaderText() {
-        return (
-            <FormattedMessage
-                id="intro.text.samtykkeIntro"
-                values={{
-                    link: (
-                        <a className="lenke" href="#" onClick={(e) => this.openPlikterModal(e)}>
-                            <FormattedMessage id="intro.text.samtykke.link" />
-                        </a>
-                    )
-                }}
-            />
-        );
-    }
-
     render() {
-        const { intl, person } = this.props;
+        const { intl, person, godkjentVilkår, language, dispatch } = this.props;
+        console.log(godkjentVilkår);
         return (
             <div id="js-intro">
                 <Skjemasteg>
                     <form onSubmit={this.startNySøknad}>
                         <LanguageToggle
-                            language={this.props.language}
-                            toggleLanguage={(language: Language) => this.toggleLanguage(language)}
+                            language={language}
+                            toggleLanguage={(lang: Language) => this.toggleLanguage(lang)}
                         />
                         <SimpleIllustration
                             dialog={{
@@ -135,22 +105,35 @@ class Intro extends React.Component<Props, State> {
                             </div>
 
                             <div className="blokk-m">
-                                <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
-                                    <BekreftCheckboksPanel
-                                        inputProps={{
-                                            name: 'egenerklaring'
-                                        }}
-                                        label={getMessage(intl, 'intro.text.samtykke')}
-                                        onChange={this.bekreftetVilkarChange}
-                                        checked={this.state.godkjentVilkår}
-                                    >
-                                        <span>{this.confirmBoxLabelHeaderText()}</span>
-                                    </BekreftCheckboksPanel>
-                                </div>
+                                <BekreftCheckboksPanel
+                                    inputProps={{
+                                        name: 'egenerklaring'
+                                    }}
+                                    label={getMessage(intl, 'intro.text.samtykke')}
+                                    onChange={() => dispatch(common.setGodkjentVilkar(!godkjentVilkår))}
+                                    checked={godkjentVilkår}
+                                >
+                                    <span>
+                                        <FormattedMessage
+                                            id="intro.text.samtykkeIntro"
+                                            values={{
+                                                link: (
+                                                    <a
+                                                        className="lenke"
+                                                        href="#"
+                                                        onClick={(e) => this.openPlikterModal(e)}
+                                                    >
+                                                        <FormattedMessage id="intro.text.samtykke.link" />
+                                                    </a>
+                                                )
+                                            }}
+                                        />
+                                    </span>
+                                </BekreftCheckboksPanel>
                             </div>
 
                             <div className="blokk-m">
-                                <Hovedknapp className="responsiveButton" disabled={!this.state.godkjentVilkår}>
+                                <Hovedknapp className="responsiveButton" disabled={!godkjentVilkår}>
                                     {getMessage(intl, 'intro.button.startSøknad')}
                                 </Hovedknapp>
                             </div>
@@ -164,7 +147,7 @@ class Intro extends React.Component<Props, State> {
                             <Modal
                                 isOpen={this.state.isPlikterModalOpen}
                                 closeButton={true}
-                                onRequestClose={() => this.closePlikterModal()}
+                                onRequestClose={() => this.setState({ isPlikterModalOpen: false })}
                                 contentLabel="rettigheter og plikter"
                             >
                                 <Plikter />
@@ -172,7 +155,7 @@ class Intro extends React.Component<Props, State> {
                             <Modal
                                 isOpen={this.state.isPersonopplysningerModalOpen}
                                 closeButton={true}
-                                onRequestClose={() => this.closePersonopplysningerModal()}
+                                onRequestClose={() => this.setState({ isPersonopplysningerModalOpen: false })}
                                 contentLabel="rettigheter og plikter"
                             >
                                 <Personopplysninger />
@@ -187,7 +170,7 @@ class Intro extends React.Component<Props, State> {
 
 const mapStateToProps = (state: AppState) => ({
     person: state.apiReducer.person!,
-    godkjentVilkar: state.commonReducer.godkjentVilkar,
+    godkjentVilkår: state.commonReducer.godkjentVilkår,
     language: state.commonReducer.language
 });
 export default connect<StateProps>(mapStateToProps)(injectIntl(Intro));

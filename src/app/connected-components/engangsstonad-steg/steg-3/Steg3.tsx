@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import RadioPanelGruppeResponsiveWrapper from 'components/form/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { JaNeiSpørsmål } from 'components/form/radio-panel-gruppe-responsive/utils/JaNeiSpørsmål';
-import CountryPicker from 'components/utenlandsopphold/Utenlandsopphold';
+import UtenlandsoppholdSeksjon from 'components/utenlandsopphold/utenlansopphold-seksjon/UtenlandsoppholdSeksjon';
 
 import { Questions } from '../steg-3/questions';
 import { FormProps } from '../FormProps';
@@ -30,7 +30,7 @@ const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
                 <FieldArray
                     name={Questions.oppholdSiste12Mnd}
                     render={({ push, remove, replace }) => (
-                        <CountryPicker
+                        <UtenlandsoppholdSeksjon
                             label={<FormattedMessage id={Questions.oppholdSiste12Mnd} />}
                             language={Language.BOKMÅL}
                             utenlandsoppholdListe={values[Questions.oppholdSiste12Mnd]!}
@@ -64,7 +64,7 @@ const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
                             name={Questions.oppholdNeste12Mnd}
                             render={({ push, remove, replace }) => {
                                 return (
-                                    <CountryPicker
+                                    <UtenlandsoppholdSeksjon
                                         label={<FormattedMessage id={Questions.oppholdNeste12Mnd} />}
                                         language={Language.BOKMÅL}
                                         utenlandsoppholdListe={values[Questions.oppholdNeste12Mnd]!}

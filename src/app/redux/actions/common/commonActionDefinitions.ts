@@ -2,7 +2,7 @@ import { Language } from "intl/IntlProvider";
 
 export enum CommonActionKeys {
     'SET_BEKREFTET_INFORMASJON' = 'setBekreftetInformasjon',
-    'SET_GODKJENT_VILKAR' = 'setGodkjentVilkar',
+    'SET_GODKJENT_VILKÅR' = 'setGodkjentVilkår',
     'SET_LANGUAGE' = 'setLanguage'
 }
 
@@ -12,8 +12,8 @@ interface SetBekreftetInformasjon {
 }
 
 interface SetGodkjentVilkar {
-    type: CommonActionKeys.SET_GODKJENT_VILKAR;
-    godkjentVilkar: boolean;
+    type: CommonActionKeys.SET_GODKJENT_VILKÅR;
+    godkjentVilkår: boolean;
 }
 
 interface SetLanguage {

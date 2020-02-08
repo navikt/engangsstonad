@@ -4,7 +4,6 @@ import { EtikettLiten } from 'nav-frontend-typografi';
 import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
-import { ISODateToMaskedInput } from 'util/date/dateUtils';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
 import getMessage from 'common/util/i18nUtils';
@@ -45,14 +44,14 @@ const BarnOppsummering: React.StatelessComponent<Props & WrappedComponentProps> 
             {erBarnetFødt && (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.medFødselsdato')}
-                    text={ISODateToMaskedInput(fødselsdatoer[0])}
+                    text={fødselsdatoer}
                 />
             )}
             {!erBarnetFødt && termindato && terminbekreftelseDato && (
                 <div>
                     <DisplayTextWithLabel
                         label={getMessage(intl, 'termindato')}
-                        text={ISODateToMaskedInput(termindato)}
+                        text={termindato}
                     />
                     <div className="oppsummering__attachments">
                         <EtikettLiten className="textWithLabel__label">
@@ -64,7 +63,7 @@ const BarnOppsummering: React.StatelessComponent<Props & WrappedComponentProps> 
                     </div>
                     <DisplayTextWithLabel
                         label={getMessage(intl, 'oppsummering.text.somErDatert')}
-                        text={ISODateToMaskedInput(terminbekreftelseDato)}
+                        text={terminbekreftelseDato}
                     />
                 </div>
             )}

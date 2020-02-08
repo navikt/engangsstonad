@@ -3,13 +3,13 @@ import { Language } from 'intl/IntlProvider';
 
 const initialState = (): CommonState => ({
     language: Language.BOKMÅL,
-    godkjentVilkar: false,
+    godkjentVilkår: false,
     bekreftetInformasjon: false
 });
 
 export interface CommonState {
     language: Language;
-    godkjentVilkar: boolean;
+    godkjentVilkår: boolean;
     bekreftetInformasjon: boolean;
 }
 
@@ -22,8 +22,8 @@ const commonReducer = (state = initialState(), action: CommonActionTypes) => {
             };
         case CommonActionKeys.SET_LANGUAGE:
             return { ...state, language: action.language };
-        case CommonActionKeys.SET_GODKJENT_VILKAR:
-            return { ...state, godkjentVilkar: action.godkjentVilkar };
+        case CommonActionKeys.SET_GODKJENT_VILKÅR:
+            return { ...state, godkjentVilkår: action.godkjentVilkår };
         default:
             return state;
     }

@@ -29,7 +29,6 @@ const Steg1: React.StatelessComponent<Props> = ({ formikProps }) => {
                 name={Questions.erFødt}
                 radioValues={[JaNeiSpørsmål.JA, JaNeiSpørsmål.NEI]}
             />
-            test
 
             {touched[Questions.erFødt] && (
                 <RadioPanelGruppeResponsiveWrapper name={Questions.antallBarn} radioValues={[1, 2, 3].map(String)} />

@@ -26,7 +26,7 @@ const CountryPickerValidationSchema = (validDateRange?: Tidsperiode, invalidDate
             .test(
                 Questions.fom,
                 'Kan ikke starte etter tom dato',
-                (value) => !moment(value).isAfter((Yup.ref(Questions.tom) as unknown) as string)
+                (value) => !moment(value).isAfter((Yup.ref(Questions.tom) as unknown, 'days') as string)
             ),
         [Questions.tom]: Yup.string()
             .required('Required')
@@ -42,7 +42,7 @@ const CountryPickerValidationSchema = (validDateRange?: Tidsperiode, invalidDate
             .test(
                 Questions.tom,
                 'tom dato kan ikke være før fom dato',
-                (value) => !moment(value).isBefore((Yup.ref(Questions.fom) as unknown) as string)
+                (value) => !moment(value).isBefore((Yup.ref(Questions.fom) as unknown, 'days') as string)
             )
     });
 

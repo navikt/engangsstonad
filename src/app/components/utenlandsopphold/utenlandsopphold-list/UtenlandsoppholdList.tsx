@@ -1,10 +1,14 @@
 import * as React from 'react';
-import { Utenlandsopphold } from '../../../types/domain/InformasjonOmUtenlandsopphold';
+import * as countries from 'i18n-iso-countries';
+import { Language } from 'intl/IntlProvider';
+import { prettifyTidsperiode } from 'common/util/datoUtils';
 import InteractiveListElement from 'components/interactive-list-element/InteractiveListElement';
+import { Utenlandsopphold } from '../../../types/domain/InformasjonOmUtenlandsopphold';
 
 import './utenlandsoppholdList.less';
 
 interface CountryListProps {
+    language: Language;
     utenlandsoppholdListe: Utenlandsopphold[];
     onEditClick: (periode: Utenlandsopphold) => void;
     onDeleteClick: (periode: Utenlandsopphold) => void;
@@ -13,14 +17,15 @@ interface CountryListProps {
 export const CountryList: React.StatelessComponent<CountryListProps> = ({
     onDeleteClick,
     onEditClick,
-    utenlandsoppholdListe
+    utenlandsoppholdListe,
+    language
 }) => {
     return (
         <ul className="utenlandsopphold-list">
             {utenlandsoppholdListe.map((utenlandsopphold) => (
                 <InteractiveListElement
-                    title={utenlandsopphold.land}
-                    text={utenlandsopphold.tidsperiode.fom}
+                    title={countries.getName(utenlandsopphold.land, language)}
+                    text={prettifyTidsperiode(utenlandsopphold.tidsperiode)}
                     deleteLinkText={'Slett'}
                     onDelete={() => onDeleteClick(utenlandsopphold)}
                     onEdit={() => onEditClick(utenlandsopphold)}
