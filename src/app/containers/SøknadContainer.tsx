@@ -111,7 +111,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                                         errors={getErrorMessages(formikProps)}
                                     />
                                 )}
-                                {ActiveStep.component(formikProps)}
+                                {ActiveStep.component({ formikProps, intl, language })}
                                 {shouldRenderSubmitButton(formikProps) && (
                                     <Hovedknapp
                                         className="responsiveButton"

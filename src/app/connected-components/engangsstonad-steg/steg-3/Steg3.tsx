@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormikProps, FieldArray } from 'formik';
+import { FieldArray } from 'formik';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
@@ -8,15 +8,11 @@ import { JaNeiSpørsmål } from 'components/form/radio-panel-gruppe-responsive/u
 import UtenlandsoppholdSeksjon from 'components/utenlandsopphold/utenlansopphold-seksjon/UtenlandsoppholdSeksjon';
 
 import { Questions } from '../steg-3/questions';
-import { FormProps } from '../FormProps';
 import { Utenlandsopphold } from '../../../../app/types/domain/InformasjonOmUtenlandsopphold';
 import { Language } from '../../../intl/IntlProvider';
+import StegProps from '../StegProps';
 
-interface Props {
-    formikProps: FormikProps<Partial<FormProps>>;
-}
-
-const Steg3: React.FunctionComponent<Props> = ({ formikProps }) => {
+const Steg3: React.FunctionComponent<StegProps> = ({ formikProps }) => {
     const { values } = formikProps;
     return (
         <>

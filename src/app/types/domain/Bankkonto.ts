@@ -1,4 +1,4 @@
-type Bankkonto = {
+interface Bankkonto {
     kontonummer: string;
     banknavn: string;
 };

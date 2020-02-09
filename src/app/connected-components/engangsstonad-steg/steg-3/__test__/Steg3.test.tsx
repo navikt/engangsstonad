@@ -2,6 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import Steg3 from '../Steg3';
 import { Questions } from '../questions';
+import { Language } from 'intl/IntlProvider';
 
 describe('Steg3', () => {
     it('kun harVærtIUtlandSiste12Mnd spørsmål skal være synlig ved initiell render', () => {
@@ -16,6 +17,8 @@ describe('Steg3', () => {
                         }
                     } as any
                 }
+                language={Language.BOKMÅL}
+                intl={{} as any}
             />
         );
         expect(wrapper.find({ name: Questions.harVærtIUtlandSiste12Mnd }).length).toEqual(1);
@@ -36,6 +39,8 @@ describe('Steg3', () => {
                         }
                     } as any
                 }
+                language={Language.BOKMÅL}
+                intl={{} as any}
             />
         );
         expect(wrapper.find({ name: Questions.harVærtIUtlandSiste12Mnd }).length).toEqual(1);
@@ -54,6 +59,8 @@ describe('Steg3', () => {
                         }
                     } as any
                 }
+                language={Language.BOKMÅL}
+                intl={{} as any}
             />
         );
         expect(wrapper.find({ name: Questions.harVærtIUtlandSiste12Mnd }).length).toEqual(1);
@@ -74,6 +81,8 @@ describe('Steg3', () => {
                         }
                     } as any
                 }
+                language={Language.BOKMÅL}
+                intl={{} as any}
             />
         );
         expect(wrapper.find({ name: Questions.harVærtIUtlandSiste12Mnd }).length).toEqual(1);
@@ -95,6 +104,8 @@ describe('Steg3', () => {
                         }
                     } as any
                 }
+                language={Language.BOKMÅL}
+                intl={{} as any}
             />
         );
         expect(wrapper.find({ name: Questions.skalVæreIUtlandNeste12Mnd }).length).toEqual(1);

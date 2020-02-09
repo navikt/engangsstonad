@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormikProps } from 'formik';
 import { FormattedMessage } from 'react-intl';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import * as moment from 'moment';
@@ -13,15 +12,11 @@ import AttachmentUploader from 'components/form/attachment-uploader/AttachmentUp
 import Veileder from 'components/veileder/Veileder';
 
 import { Questions } from './questions';
-import { FormProps } from '../FormProps';
+import StegProps from '../StegProps';
 
 import './steg1.less';
 
-interface Props {
-    formikProps: FormikProps<Partial<FormProps>>;
-}
-
-const Steg1: React.StatelessComponent<Props> = ({ formikProps }) => {
+const Steg1: React.StatelessComponent<StegProps> = ({ formikProps }) => {
     const { values, touched } = formikProps;
     return (
         <>

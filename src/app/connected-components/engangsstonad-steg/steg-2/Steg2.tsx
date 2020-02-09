@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { useIntl } from 'react-intl';
-import { FormikProps } from 'formik';
 import * as countries from 'i18n-iso-countries';
 
 import getMessage from 'common/util/i18nUtils';
@@ -12,7 +10,7 @@ import { getPlaceholder as intlPlaceholderPrefix } from 'components/form/utils';
 import { Language } from 'intl/IntlProvider';
 
 import { Questions } from './questions';
-import { FormProps } from '../FormProps';
+import StegProps from '../StegProps';
 
 import './steg2.less';
 
@@ -29,13 +27,8 @@ export const getForignCountries = (language: Language) => {
         }));
 };
 
-interface Props {
-    formikProps: FormikProps<Partial<FormProps>>;
-}
-
-const Steg2: React.FunctionComponent<Props> = ({ formikProps }) => {
+const Steg2: React.FunctionComponent<StegProps> = ({ formikProps, intl }) => {
     const { values } = formikProps;
-    const intl = useIntl();
     return (
         <>
             <Input

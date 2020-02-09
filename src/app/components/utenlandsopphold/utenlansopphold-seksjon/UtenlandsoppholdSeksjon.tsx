@@ -9,8 +9,6 @@ import { Utenlandsopphold } from 'app/types/domain/InformasjonOmUtenlandsopphold
 import CountryModal from '../utenlandsopphold-modal/UtenlandsoppholdModal';
 import { CountryList } from '../utenlandsopphold-list/UtenlandsoppholdList';
 
-import './utenlandsoppholdSeksjon.less';
-
 interface Props {
     label: React.ReactNode;
     language: Language;

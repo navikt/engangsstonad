@@ -2,31 +2,23 @@ import * as React from 'react';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { connect } from 'react-redux';
 import Veilederpanel from 'nav-frontend-veilederpanel';
-import { FormikProps } from 'formik';
-import { injectIntl, WrappedComponentProps, FormattedMessage } from 'react-intl';
+import { WrappedComponentProps, FormattedMessage } from 'react-intl';
 
 import { DispatchProps } from 'common/redux/types';
 import getMessage from 'common/util/i18nUtils';
 import Veileder from 'components/veileder/Veileder';
 import { AppState } from 'reducers/index';
 import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDtoMapper';
-import { Language } from 'intl/IntlProvider';
 
 import { commonActionCreators as common } from '../../../redux/actions';
 import Oppsummering from '../../oppsummering/Oppsummering';
-import { FormProps } from '../FormProps';
+import StegProps from '../StegProps';
 
 interface StateProps {
     bekreftetInformasjon: boolean;
-    language: Language;
 }
 
-interface OwnProps {
-    formikProps: FormikProps<Partial<FormProps>>;
-}
-
-type Props = OwnProps & StateProps & WrappedComponentProps & DispatchProps;
-
+type Props = StegProps & StateProps & WrappedComponentProps & DispatchProps;
 const Steg4: React.StatelessComponent<Props> = ({ intl, dispatch, bekreftetInformasjon, formikProps, language }) => {
     return (
         <>
@@ -49,8 +41,7 @@ const Steg4: React.StatelessComponent<Props> = ({ intl, dispatch, bekreftetInfor
 };
 
 const mapStateToProps = (state: AppState) => ({
-    bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
-    language: state.commonReducer.language
+    bekreftetInformasjon: state.commonReducer.bekreftetInformasjon
 });
 
-export default connect<StateProps>(mapStateToProps)(injectIntl(Steg4));
+export default connect<StateProps>(mapStateToProps)(Steg4);

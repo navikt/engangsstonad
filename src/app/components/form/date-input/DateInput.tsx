@@ -31,7 +31,8 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) =
                                 name: field.name,
                                 onChange: (inputValue) => {
                                     form.setFieldValue(field.name, inputValue);
-                                }
+                                },
+                                placeholder: 'dd.mm.yyyy'
                             }}
                             onChange={(value) => {
                                 if (value !== 'Invalid date') {

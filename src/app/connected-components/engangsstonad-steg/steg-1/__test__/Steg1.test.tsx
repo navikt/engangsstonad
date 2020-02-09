@@ -3,16 +3,25 @@ import { shallow } from 'enzyme';
 import Steg1 from '../Steg1';
 import { Questions } from '../questions';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
+import { Language } from 'intl/IntlProvider';
 
 describe('Steg1', () => {
     it('kun erFødt spørsmål skal være synlig ved initiell render', () => {
-        const wrapper = shallow(<Steg1 formikProps={{ values: {}, touched: {} } as any} />);
+        const wrapper = shallow(
+            <Steg1 formikProps={{ values: {}, touched: {} } as any} language={Language.BOKMÅL} intl={{} as any} />
+        );
         expect(wrapper.find({ name: Questions.erFødt }).length).toEqual(1);
         expect(wrapper.children().length).toEqual(1);
     });
 
     it('antallBarn spørsmål skal være synlig når erFødt er besvart', () => {
-        const wrapper = shallow(<Steg1 formikProps={{ values: {}, touched: { [Questions.erFødt]: true } } as any} />);
+        const wrapper = shallow(
+            <Steg1
+                formikProps={{ values: {}, touched: { [Questions.erFødt]: true } } as any}
+                language={Language.BOKMÅL}
+                intl={{} as any}
+            />
+        );
         expect(wrapper.find({ name: Questions.erFødt }).length).toEqual(1);
         expect(wrapper.find({ name: Questions.antallBarn }).length).toEqual(1);
         expect(wrapper.children().length).toEqual(2);
@@ -28,6 +37,8 @@ describe('Steg1', () => {
                             touched: { [Questions.erFødt]: true, [Questions.antallBarn]: true }
                         } as any
                     }
+                    language={Language.BOKMÅL}
+                    intl={{} as any}
                 />
             );
 
@@ -48,6 +59,8 @@ describe('Steg1', () => {
                             touched: { [Questions.erFødt]: true, [Questions.antallBarn]: true }
                         } as any
                     }
+                    language={Language.BOKMÅL}
+                    intl={{} as any}
                 />
             );
 
@@ -69,6 +82,8 @@ describe('Steg1', () => {
                             touched: { [Questions.erFødt]: true, [Questions.antallBarn]: true }
                         } as any
                     }
+                    language={Language.BOKMÅL}
+                    intl={{} as any}
                 />
             );
 
@@ -92,6 +107,8 @@ describe('Steg1', () => {
                             touched: { [Questions.erFødt]: true, [Questions.antallBarn]: true }
                         } as any
                     }
+                    language={Language.BOKMÅL}
+                    intl={{} as any}
                 />
             );
 

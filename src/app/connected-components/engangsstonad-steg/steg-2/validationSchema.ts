@@ -33,7 +33,7 @@ const Steg2ValidationSchema = () =>
         [Questions.bostedsland]: Yup.string().when([Questions.kanIkkeOppgis, Questions.utenlandskFodselsnummer], {
             is: (kanIkkeOppgis, utenlanskFødselsnummer) =>
                 (kanIkkeOppgis === undefined || kanIkkeOppgis === false) && utenlanskFødselsnummer,
-            then: Yup.string().required('valideringsfeil.påkrevd')
+            then: Yup.string().required('annenForelder.ugyldigBostedsland')
         })
     });
 
