@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { FieldProps, Field } from 'formik';
 import { Select as NavSelect } from 'nav-frontend-skjema';
 import { guid } from 'nav-frontend-js-utils';
+import { getErrorMessage } from '../utils';
 
 interface Props {
     name: string;
@@ -16,8 +17,7 @@ const Select: React.StatelessComponent<Props> = ({ name, options }) => {
     return (
         <Field
             name={name}
-            render={(fieldProps: FieldProps) => {
-                const { field, form } = fieldProps;
+            render={({ field, form }: FieldProps) => {
                 return (
                     <NavSelect
                         bredde="fullbredde"
@@ -26,7 +26,8 @@ const Select: React.StatelessComponent<Props> = ({ name, options }) => {
                             form.setFieldValue(field.name, e.target.value);
                             form.setFieldTouched(field.name, true, false);
                         }}
-                        value={fieldProps.field.value}
+                        value={field.value}
+                        feil={getErrorMessage(form, name)}
                     >
                         <option key={guid()} value={''} />
                         {options.map((option) => {

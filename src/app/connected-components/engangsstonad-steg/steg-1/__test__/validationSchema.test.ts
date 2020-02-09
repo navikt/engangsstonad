@@ -1,6 +1,8 @@
+import * as moment from 'moment';
+
 import Steg1ValidationSchema from '../validationSchema';
 import { Questions } from '../questions';
-import * as moment from 'moment';
+
 import { dagerForTerminbekreftelse } from '../../../../util/validation/validationUtils';
 
 describe('barn validation schema', () => {

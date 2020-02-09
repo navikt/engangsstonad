@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { FieldProps, Field } from 'formik';
 import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 
-import { intlPrefix } from '../utils';
+import { intlPrefix, getErrorMessage } from '../utils';
 
 interface Props {
     name: string;
@@ -22,6 +22,7 @@ const Checkbox: React.StatelessComponent<Props> = ({ name }) => {
                             form.setFieldTouched(field.name, true, false);
                         }}
                         checked={field.value || false}
+                        feil={getErrorMessage(form, name)}
                     />
                 );
             }}

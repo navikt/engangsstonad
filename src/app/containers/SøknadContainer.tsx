@@ -46,7 +46,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
 }) => {
     const intl = useIntl();
     const [activeStepIndex, setActiveStepIndex] = React.useState(0);
-    
+
     const stepsConfig = getStepConfig(intl, person);
     const ActiveStep = stepsConfig[activeStepIndex];
 
@@ -73,11 +73,11 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
     };
 
     const shouldRenderSubmitButton = ({ values, status }: FormikProps<Partial<FormProps>>): boolean => {
-        if(status?.hasSubmitted) {
+        if (status?.hasSubmitted) {
             return true;
         }
         try {
-            ActiveStep.validationSchema().validateSync(values);
+            ActiveStep.validationSchema(intl).validateSync(values);
             return true;
         } catch (error) {
             return error.type !== 'required';
@@ -96,7 +96,6 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                 validationSchema={ActiveStep.validationSchema}
                 onSubmit={onSubmit}
                 render={(formikProps: FormikProps<Partial<FormProps>>) => {
-                    console.log({ formikProps });
                     return (
                         <div className="responsiveContainer">
                             <SkjemaHeader

@@ -11,16 +11,16 @@ const Steg2ValidationSchema = () =>
         [Questions.navn]: Yup.string().when(Questions.kanIkkeOppgis, {
             is: (kanIkkeOppgis) => kanIkkeOppgis === false || kanIkkeOppgis === undefined,
             then: Yup.string()
-                .required('Required')
+                .required('annenForelder.ugyldigNavn')
                 .max(MAKS_NAVN_LENGTH, 'Kan ikke være mer enn 30 karakterer')
         }),
         [Questions.fodselsnummer]: Yup.string().when([Questions.kanIkkeOppgis, Questions.navn], {
             is: (kanIkkeOppgis) => kanIkkeOppgis === false || kanIkkeOppgis === undefined,
             then: Yup.string()
-                .required('Required')
-                .max(MAKS_FNR_LENGTH)
-                .test(Questions.fodselsnummer, 'Må være et gyldig fødselsnummer', (value) => {
-                    if ((Yup.ref(Questions.utenlandskFodselsnummer) as unknown) as boolean === true) {
+                .required('annenForelder.ugyldigFødselsnummer.utenlandsk')
+                .max(MAKS_FNR_LENGTH, 'valideringsfeil.maksFnrLengdel')
+                .test(Questions.fodselsnummer, 'annenForelder.ugyldigFødselsnummer', (value) => {
+                    if (((Yup.ref(Questions.utenlandskFodselsnummer) as unknown) as boolean) === true) {
                         return true;
                     }
                     try {
@@ -33,7 +33,7 @@ const Steg2ValidationSchema = () =>
         [Questions.bostedsland]: Yup.string().when([Questions.kanIkkeOppgis, Questions.utenlandskFodselsnummer], {
             is: (kanIkkeOppgis, utenlanskFødselsnummer) =>
                 (kanIkkeOppgis === undefined || kanIkkeOppgis === false) && utenlanskFødselsnummer,
-            then: Yup.string().required('Required')
+            then: Yup.string().required('valideringsfeil.påkrevd')
         })
     });
 

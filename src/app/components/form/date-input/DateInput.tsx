@@ -3,14 +3,17 @@ import Datovelger from 'nav-datovelger/dist/datovelger/Datovelger';
 import { DatovelgerProps } from 'nav-datovelger';
 import { guid } from 'nav-frontend-js-utils';
 import { Field, FieldProps } from 'formik';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
+import getMessage from 'common/util/i18nUtils';
+import { intlPrefix } from '../utils';
 
 interface Props extends Partial<DatovelgerProps> {
     name: string;
 }
 
 const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) => {
+    const intl = useIntl();
     return (
         <Field
             name={name}
@@ -18,8 +21,8 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) =
                 const feilmelding = form.status?.hasSubmitted ? form.errors[name]?.toString() : undefined;
                 return (
                     <SkjemaInputElement
-                        label={<FormattedMessage id={`spørsmål.${name}`} />}
-                        feil={feilmelding ? { feilmelding } : undefined}
+                        label={<FormattedMessage id={intlPrefix(name)} />}
+                        feil={feilmelding ? { feilmelding: getMessage(intl, feilmelding) } : undefined}
                     >
                         <Datovelger
                             id={guid()}

@@ -16,13 +16,13 @@ const Steg1ValidationSchema = () =>
             is: true,
             then: Yup.string()
                 .required('Required')
-                .test(Questions.fødselsdato, 'Ikke en gyldig dato', (value) => {
+                .test(Questions.fødselsdato, 'valideringsfeil.ugyldigDato', (value) => {
                     return moment(value, moment.HTML5_FMT.DATE, true).isValid();
                 })
-                .test(Questions.fødselsdato, 'Kan ikke være frem i tid', (value) => {
+                .test(Questions.fødselsdato, 'valideringsfeil.fodselsdato.måVæreIdagEllerTidligere', (value) => {
                     return moment(value, moment.HTML5_FMT.DATE, true).isSameOrBefore(moment());
                 })
-                .test(Questions.fødselsdato, 'Kan ikke være mer enn 3 år tilbake i tid', (value) => {
+                .test(Questions.fødselsdato, 'valideringsfeil.fodselsdato.ikkeMerEnn3ÅrTilbake"', (value) => {
                     return moment(value, moment.HTML5_FMT.DATE, true).isSameOrAfter(
                         moment().subtract(3, 'years'),
                         'days'
@@ -33,33 +33,41 @@ const Steg1ValidationSchema = () =>
             is: false,
             then: Yup.string()
                 .required('Required')
-                .test(Questions.termindato, 'Ikke en gyldig dato', (value) => {
+                .test(Questions.termindato, 'valideringsfeil.ugyldigDato', (value) => {
                     return moment(value, moment.HTML5_FMT.DATE, true).isValid();
                 })
-                .test(Questions.termindato, 'Du må være i uke 22', (value) => {
+                .test(Questions.termindato, 'valideringsfeil.termindato.duMåVæreIUke22', (value) => {
                     return erIUke22Pluss3(value);
                 })
-                .test(Questions.termindato, 'Termindato kan ikke være 3 uker fra i dag', (value) => {
+                .test(Questions.termindato, 'valideringsfeil.termindato.termindatoKanIkkeVære3UkerFraIdag', (value) => {
                     return erMindreEnn3UkerSiden(value);
                 })
         }),
         [Questions.terminberkreftelse]: Yup.array().when(Questions.erFødt, {
             is: false,
-            then: Yup.array().min(1, 'Terminbekreftelse er påkrevd')
+            then: Yup.array().min(1, 'relasjonBarn.vedlegg.feilmelding.vedleggMangler')
         }),
         [Questions.terminbekreftelseDato]: Yup.string().when(Questions.erFødt, {
             is: false,
             then: Yup.string()
                 .required('Required')
-                .test(Questions.terminbekreftelseDato, 'Ikke en gyldig dato', (value) => {
+                .test(Questions.terminbekreftelseDato, 'valideringsfeil.ugyldigDato', (value) => {
                     return moment(value, moment.HTML5_FMT.DATE, true).isValid();
                 })
-                .test(Questions.terminbekreftelseDato, 'Dato må være i dag eller tidligere', (value) => {
-                    return idagEllerTidligere(value);
-                })
-                .test(Questions.terminbekreftelseDato, 'Du må være i uke 22', (value) => {
-                    return utstedtDatoErIUke22(value, (Yup.ref(Questions.termindato) as unknown) as string);
-                })
+                .test(
+                    Questions.terminbekreftelseDato,
+                    'valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere',
+                    (value) => {
+                        return idagEllerTidligere(value);
+                    }
+                )
+                .test(
+                    Questions.terminbekreftelseDato,
+                    'valideringsfeil.terminbekreftelseDato.duMåVæreIUke22',
+                    (value) => {
+                        return utstedtDatoErIUke22(value, (Yup.ref(Questions.termindato) as unknown) as string);
+                    }
+                )
         })
     });
 

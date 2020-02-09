@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { FieldProps, Field } from 'formik';
 import { RadioPanelGruppeResponsive } from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { parseNavFrontend, getCheckedRadioValue } from './utils/utils';
-import { intlPrefix } from '../utils';
+import { intlPrefix, getErrorMessage } from '../utils';
 
 export type RadioValues = string | boolean | number;
 
@@ -36,6 +36,7 @@ const RadioPanelGruppeResponsiveWrapper: React.StatelessComponent<Props> = ({
                     }}
                     checked={getCheckedRadioValue(field.value)}
                     twoColumns={twoColumns}
+                    feil={getErrorMessage(form, name)}
                     {...rest}
                 />
             )}

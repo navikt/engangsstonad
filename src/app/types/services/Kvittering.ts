@@ -5,5 +5,4 @@ interface Kvittering {
     referanseId: string;
     saksNr: string;
 }
-
 export default Kvittering;

@@ -29,8 +29,8 @@ const AttachmentUploader: React.StatelessComponent<Props> = ({ name, skjemanumme
                                 form.values[index].url = attachment.url;
                             }
                         }}
-                        onFileDelete={(attachments) => {
-                            attachments.forEach(({ id }) =>
+                        onFileDelete={(attachmentsToDelete) => {
+                            attachmentsToDelete.forEach(({ id }) =>
                                 form.setFieldValue(
                                     field.name,
                                     field.value.filter((attachment: Attachment) => attachment.id !== id)
