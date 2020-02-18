@@ -11,11 +11,15 @@ import '../../styles/engangsstonad.less';
 
 interface Props {
     annenForelder: AnnenForelder;
+    language: Language;
 }
 
-const AndreForeldrenOppsummering: React.StatelessComponent<Props & WrappedComponentProps> = (props) => {
-    const { intl } = props;
-    const { navn, fnr, utenlandskFnr, bostedsland, kanIkkeOppgis } = props.annenForelder;
+const AndreForeldrenOppsummering: React.StatelessComponent<Props & WrappedComponentProps> = ({
+    annenForelder,
+    intl,
+    language
+}) => {
+    const { navn, fnr, utenlandskFnr, bostedsland, kanIkkeOppgis } = annenForelder;
 
     const fnrLabel = utenlandskFnr
         ? getMessage(intl, 'oppsummering.text.utenlandskfødselsnummer')
@@ -38,7 +42,7 @@ const AndreForeldrenOppsummering: React.StatelessComponent<Props & WrappedCompon
             {utenlandskFnr && bostedsland && (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'annenForelder.label.bostedsland')}
-                    text={countries.getName(bostedsland, Language.BOKMÅL)}
+                    text={countries.getName(bostedsland, language)}
                 />
             )}
         </div>

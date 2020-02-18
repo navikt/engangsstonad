@@ -9,10 +9,9 @@ import UtenlandsoppholdSeksjon from 'components/utenlandsopphold/utenlansopphold
 
 import { Questions } from '../steg-3/questions';
 import { Utenlandsopphold } from '../../../../app/types/domain/InformasjonOmUtenlandsopphold';
-import { Language } from '../../../intl/IntlProvider';
 import StegProps from '../StegProps';
 
-const Steg3: React.FunctionComponent<StegProps> = ({ formikProps }) => {
+const Steg3: React.FunctionComponent<StegProps> = ({ formikProps, language }) => {
     const { values } = formikProps;
     return (
         <>
@@ -28,7 +27,7 @@ const Steg3: React.FunctionComponent<StegProps> = ({ formikProps }) => {
                     render={({ push, remove, replace }) => (
                         <UtenlandsoppholdSeksjon
                             label={<FormattedMessage id={Questions.oppholdSiste12Mnd} />}
-                            language={Language.BOKMÅL}
+                            language={language}
                             utenlandsoppholdListe={values[Questions.oppholdSiste12Mnd]!}
                             gyldigTildsperiode={{
                                 fom: moment()
@@ -62,7 +61,7 @@ const Steg3: React.FunctionComponent<StegProps> = ({ formikProps }) => {
                                 return (
                                     <UtenlandsoppholdSeksjon
                                         label={<FormattedMessage id={Questions.oppholdNeste12Mnd} />}
-                                        language={Language.BOKMÅL}
+                                        language={language}
                                         utenlandsoppholdListe={values[Questions.oppholdNeste12Mnd]!}
                                         gyldigTildsperiode={{
                                             fom: moment().format(moment.HTML5_FMT.DATE),

@@ -27,7 +27,7 @@ export const getForignCountries = (language: Language) => {
         }));
 };
 
-const Steg2: React.FunctionComponent<StegProps> = ({ formikProps, intl }) => {
+const Steg2: React.FunctionComponent<StegProps> = ({ formikProps, language ,intl }) => {
     const { values } = formikProps;
     return (
         <>
@@ -46,7 +46,7 @@ const Steg2: React.FunctionComponent<StegProps> = ({ formikProps, intl }) => {
                     <Checkbox name={Questions.utenlandskFodselsnummer} />
 
                     {values[Questions.fodselsnummer] && values[Questions.utenlandskFodselsnummer] && (
-                        <Select name={Questions.bostedsland} options={getForignCountries(Language.BOKMÅL)} />
+                        <Select name={Questions.bostedsland} options={getForignCountries(language)} />
                     )}
                 </>
             )}

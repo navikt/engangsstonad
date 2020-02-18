@@ -20,33 +20,30 @@ interface StateProps {
 
 type Props = StateProps & DispatchProps & WrappedComponentProps;
 
-const ErMann: React.StatelessComponent<Props> = (props: Props) => {
-    const { intl, person } = props;
-
-    if (person) {
-        return (
-            <Feilside
-                containerId="js-erMann"
-                dokumenttittel={getMessage(intl, 'intro.standard.dokumenttittel')}
-                tittel={getMessage(intl, 'intro.standard.tittel')}
-                ingress={getMessage(intl, 'intro.standard.ingress')}
-                illustrasjon={{
-                    tittel: getMessage(intl, 'intro.standard.bobletittel', {
-                        name: person.fornavn.toLowerCase()
-                    }),
-                    tekst: getMessage(intl, 'intro.erMann.bobletekst'),
-                    lenke: {
-                        url: lenker.søknadsveileder,
-                        tekst: getMessage(intl, 'intro.erMann.boblelenketekst')
-                    }
-                }}
-                language={props.language}
-                setLanguage={(language: Language) => props.dispatch(setLanguage(language))}
-            />
-        );
+const ErMann: React.StatelessComponent<Props> = ({ intl, person, language, dispatch }: Props) => {
+    if (person === undefined) {
+        return null;
     }
-
-    return null;
+    return (
+        <Feilside
+            containerId="js-erMann"
+            dokumenttittel={getMessage(intl, 'intro.standard.dokumenttittel')}
+            tittel={getMessage(intl, 'intro.standard.tittel')}
+            ingress={getMessage(intl, 'intro.standard.ingress')}
+            illustrasjon={{
+                tittel: getMessage(intl, 'intro.standard.bobletittel', {
+                    name: person.fornavn.toLowerCase()
+                }),
+                tekst: getMessage(intl, 'intro.erMann.bobletekst'),
+                lenke: {
+                    url: lenker.søknadsveileder,
+                    tekst: getMessage(intl, 'intro.erMann.boblelenketekst')
+                }
+            }}
+            language={language}
+            setLanguage={(lang: Language) => dispatch(setLanguage(lang))}
+        />
+    );
 };
 
 const mapStateToProps = (state: { apiReducer: ApiState; commonReducer: CommonState }) => ({
