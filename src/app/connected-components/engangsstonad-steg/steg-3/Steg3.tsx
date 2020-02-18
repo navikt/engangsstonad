@@ -81,7 +81,9 @@ const Steg3: React.FunctionComponent<StegProps> = ({ formikProps, language }) =>
                             }}
                         />
                     )}
+
                 </>
+                
             )}
         </>
     );

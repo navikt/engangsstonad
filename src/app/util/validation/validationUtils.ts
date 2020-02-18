@@ -1,12 +1,12 @@
 import * as moment from 'moment';
 import Person, { Kjønn } from '../../types/domain/Person';
 
-const todaysDate = moment();
 const ukerAaTrekkeFraTerminDato = 18;
 const ekstraDagerAaTrekkeFraTerminDato = 3;
 export const dagerForTerminbekreftelse = ukerAaTrekkeFraTerminDato * 7 + ekstraDagerAaTrekkeFraTerminDato;
 
 export const erIUke22Pluss3 = (dato: string) => {
+    const todaysDate = moment();
     const terminDato = moment(dato);
     const uke22Pluss3 = terminDato.subtract(dagerForTerminbekreftelse, 'days');
     return moment.max(todaysDate.startOf('day'), uke22Pluss3.startOf('day')) === todaysDate;
@@ -36,9 +36,7 @@ export const idagEllerTidligere = (dato: string) => {
 };
 
 export const erMyndig = (person: Person) => {
-    const now = moment();
-    const momentDate = moment(person.fødselsdato);
-    return now.diff(momentDate, 'years') >= 18;
+    return moment().diff(person.fødselsdato, 'years') >= 18;
 };
 
 export const erMann = (person: Person) => person.kjønn === Kjønn.M;
