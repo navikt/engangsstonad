@@ -13,12 +13,11 @@ export const mapFileToAttachment = (
         file,
         filename: file.name,
         filesize: file.size,
-        uploaded: false,
         pending: false,
         type,
         skjemanummer
     });
 };
 
-export const isAttachmentWithError = ({ pending, uploaded, filesize }: Attachment) =>
-    (pending === false && uploaded === false) || filesize === 0;;
+export const isAttachmentWithError = ({ pending, filesize, url }: Attachment) =>
+    (pending === false && url === undefined) || filesize === 0;;

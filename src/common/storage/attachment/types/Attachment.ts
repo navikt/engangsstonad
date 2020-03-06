@@ -6,7 +6,6 @@ export interface Attachment {
     url?: string;
     uuid?: string;
     pending: boolean;
-    uploaded: boolean;
     type: AttachmentType;
     skjemanummer: Skjemanummer;
     error?: any;

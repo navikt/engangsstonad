@@ -15,7 +15,7 @@ const AttachmentUploader: React.StatelessComponent<Props> = ({ name, skjemanumme
             name={name}
             render={(fieldProps: FieldProps) => {
                 const { field, form } = fieldProps;
-                const attachments = field.value || [];
+                const attachments: Attachment[] = field.value || [];
                 return (
                     <AttachmentsUploader
                         attachments={attachments}
@@ -25,8 +25,9 @@ const AttachmentUploader: React.StatelessComponent<Props> = ({ name, skjemanumme
                             form.setFieldValue(field.name, [...attachments, ...newAttachments]);
                         }}
                         onFileUploadFinish={(attachment: Attachment) => {
-                            const index = form.values.findIndex(({ id }) => id === attachment.id);
-                            form.values[index].url = attachment.url;
+                            const index = attachments.findIndex(({ id }) => id === attachment.id);
+                            attachments[index].url = attachment.url;
+                            form.setFieldValue(field.name, [...attachments]);
                         }}
                         onFileDelete={(attachmentsToDelete) => {
                             attachmentsToDelete.forEach(({ id }) =>
