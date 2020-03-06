@@ -72,15 +72,14 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
         }));
     };
 
-    const shouldRenderSubmitButton = ({ values, status }: FormikProps<Partial<FormProps>>): boolean => {
-        if (status?.hasSubmitted) {
-            return true;
-        }
+    const shouldRenderSubmitButton = ({ values }: FormikProps<Partial<FormProps>>): boolean => {
         try {
-            ActiveStep.validationSchema(intl).validateSync(values);
+            if (ActiveStep.validationSchema) {
+                ActiveStep.validationSchema(intl).validateSync(values, { abortEarly: false });
+            }
             return true;
         } catch (error) {
-            return error.type !== 'required';
+            return !error.inner.some((err: any) => err.type === 'required' || err.type === 'min');
         }
     };
 
@@ -96,7 +95,6 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                 validationSchema={ActiveStep.validationSchema}
                 onSubmit={onSubmit}
                 render={(formikProps: FormikProps<Partial<FormProps>>) => {
-                    console.log(formikProps);
                     return (
                         <div className="responsiveContainer">
                             <SkjemaHeader
@@ -130,7 +128,7 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                 }}
             />
             <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
-            <UtløptSesjonModal erÅpen={sessionHasExpired} />
+            <UtløptSesjonModal erÅpen={sessionHasExpired} />q
         </>
     );
 };
