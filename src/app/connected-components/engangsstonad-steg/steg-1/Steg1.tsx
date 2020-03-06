@@ -19,7 +19,7 @@ import './steg1.less';
 const Steg1: React.StatelessComponent<StegProps> = ({ formikProps }) => {
     const { values, touched } = formikProps;
     return (
-        <>
+        <div className="steg1">
             <RadioPanelGruppeResponsiveWrapper
                 name={Questions.erFødt}
                 radioValues={[JaNeiSpørsmål.JA, JaNeiSpørsmål.NEI]}
@@ -68,7 +68,7 @@ const Steg1: React.StatelessComponent<StegProps> = ({ formikProps }) => {
                     )}
                 </>
             )}
-        </>
+        </div>
     );
 };
 export default Steg1;

@@ -27,7 +27,7 @@ export const getForignCountries = (language: Language) => {
         }));
 };
 
-const Steg2: React.FunctionComponent<StegProps> = ({ formikProps, language ,intl }) => {
+const Steg2: React.FunctionComponent<StegProps> = ({ formikProps, language, intl }) => {
     const { values } = formikProps;
     return (
         <>

@@ -28,7 +28,7 @@ const AndreForeldrenOppsummering: React.StatelessComponent<Props & WrappedCompon
 
     return (
         <div className="blokk-m">
-            {kanIkkeOppgis && <Element>{getMessage(intl, 'annenForelder.label.kanIkkeOppgiNavn')}</Element>}
+            {kanIkkeOppgis && <Element>{getMessage(intl, 'spørsmål.kanIkkeOppgis')}</Element>}
             {!kanIkkeOppgis && navn && (
                 <DisplayTextWithLabel
                     key="annenForelderNavn"

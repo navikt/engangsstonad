@@ -12,7 +12,6 @@ describe('Steg2', () => {
         const wrapper = shallow(
             <Steg2 formikProps={{ values: {} } as any} language={Language.BOKMÅL} intl={{} as any} />
         );
-        console.log(wrapper.debug());
         expect(wrapper.find(`#${Questions.navn}`)).toBeDefined();
         expect(wrapper.find(`#${Questions.kanIkkeOppgis}`)).toBeDefined();
         expect(wrapper.find(Input).length).toEqual(1);

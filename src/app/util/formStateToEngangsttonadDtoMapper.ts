@@ -12,7 +12,7 @@ export const mapFormStateToEngangsstonadDto = (
         barn: {
             erBarnetFødt: values.erFødt,
             antallBarn: values.antallBarn,
-            fødselsdatoer: values.erFødt ? values.fodselsdato : undefined,
+            fødselsdatoer: values.erFødt ? [values.fodselsdato!] : undefined,
             termindato: !values.erFødt ? values.termindato : undefined,
             terminbekreftelse: !values.erFødt ? values.terminberkreftelse! : [],
             terminbekreftelseDato: !values.erFødt ? values.terminbekreftelseDato : undefined

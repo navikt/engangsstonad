@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { guid } from 'nav-frontend-js-utils';
 import { FormattedMessage } from 'react-intl';
 import * as countries from 'i18n-iso-countries';
 import classnames from 'classnames';
+import { Element } from 'nav-frontend-typografi';
 
 import { Utenlandsopphold } from '../../../types/domain/InformasjonOmUtenlandsopphold';
 import { Language } from '../../../intl/IntlProvider';
@@ -15,18 +17,22 @@ interface Props {
 
 const UtenlandsoppholdOppsummeringList: React.StatelessComponent<Props> = ({ utenlandsoppholdListe, language }) => {
     return (
-        <ul>
+        <ul className="countrySummaryList">
             {utenlandsoppholdListe.map(({ land, tidsperiode }) => (
-                <li className={classnames('countryListElement')}>
-                    <div className="countryListElement__country">{countries.getName(land, language)}</div>
+                <li key={guid()} className={classnames('countrySummaryList__listElement')}>
+                    <div className="countryListElement__country">
+                        <Element>{countries.getName(land, language)}</Element>
+                    </div>
                     <div className="countryListElement__date">
-                        <FormattedMessage
-                            id="standard.text.fromTo"
-                            values={{
-                                from: tidsperiode.fom,
-                                to: tidsperiode.tom
-                            }}
-                        />
+                        <Element>
+                            <FormattedMessage
+                                id="standard.text.fromTo"
+                                values={{
+                                    from: tidsperiode.fom,
+                                    to: tidsperiode.tom
+                                }}
+                            />
+                        </Element>
                     </div>
                 </li>
             ))}

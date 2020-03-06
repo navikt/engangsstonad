@@ -1,5 +1,6 @@
 import React from 'react';
 import { FieldProps, Field } from 'formik';
+
 import { Skjemanummer, AttachmentType, Attachment } from 'common/storage/attachment/types/Attachment';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 
@@ -24,10 +25,8 @@ const AttachmentUploader: React.StatelessComponent<Props> = ({ name, skjemanumme
                             form.setFieldValue(field.name, [...attachments, ...newAttachments]);
                         }}
                         onFileUploadFinish={(attachment: Attachment) => {
-                            if (Array.isArray(form.values)) {
-                                const index = form.values.findIndex(({ id }) => id === attachment.id);
-                                form.values[index].url = attachment.url;
-                            }
+                            const index = form.values.findIndex(({ id }) => id === attachment.id);
+                            form.values[index].url = attachment.url;
                         }}
                         onFileDelete={(attachmentsToDelete) => {
                             attachmentsToDelete.forEach(({ id }) =>

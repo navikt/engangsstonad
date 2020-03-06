@@ -195,5 +195,7 @@
     "vedlegg.tomFil.flereFeil": "{filename} - Du kan ikke laste opp en tom fil",
     "vedlegg.tomFil": "Du kan ikke laste opp en tom fil",
     "vedlegg.virus.flereFeil": "{filename} - Vedlegget inneholder noe vi ikke vil ha",
-    "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha"
+    "vedlegg.virus": "Vedlegget inneholder noe vi ikke vil ha",
+    "numberOfChildren.1": "ett barn",
+    "numberOfChildren.2": "tvillinger"
 }

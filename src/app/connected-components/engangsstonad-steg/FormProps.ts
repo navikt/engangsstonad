@@ -7,7 +7,7 @@ import { Utenlandsopphold } from 'app/types/domain/InformasjonOmUtenlandsopphold
 export interface FormProps {
     [Steg1Questions.erFødt]: boolean;
     [Steg1Questions.antallBarn]: number;
-    [Steg1Questions.fødselsdato]: string[];
+    [Steg1Questions.fødselsdato]: string;
     [Steg1Questions.termindato]: string;
     [Steg1Questions.terminberkreftelse]: Attachment[];
     [Steg1Questions.terminbekreftelseDato]: string;

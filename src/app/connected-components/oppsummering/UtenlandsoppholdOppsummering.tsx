@@ -2,21 +2,24 @@ import * as React from 'react';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import * as moment from 'moment';
+
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
 import UtenlandsoppholdOppsummeringList from 'components/utenlandsopphold/utenlandsopphold-oppsummering-list/UtenlandsoppholdOppsummeringList';
+import getMessage from 'common/util/i18nUtils';
+import { Language } from 'intl/IntlProvider';
+
+import Barn, { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 import InformasjonOmUtenlandsopphold, {
     Tidsperiode,
     Utenlandsopphold
 } from '../../types/domain/InformasjonOmUtenlandsopphold';
-import Barn, { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
-import getMessage from 'common/util/i18nUtils';
 
 import '../../styles/engangsstonad.less';
-import { Language } from 'intl/IntlProvider';
 
 interface Props {
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     barn: Barn;
+    langauge: Language;
 }
 
 const erDatoITidsperiode = (dato: Date, tidsperiode: Tidsperiode) => {
@@ -41,7 +44,8 @@ const erFamiliehendelsedatoIEnUtenlandsoppholdPeriode = (
 const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & WrappedComponentProps> = ({
     intl,
     barn,
-    informasjonOmUtenlandsopphold
+    informasjonOmUtenlandsopphold,
+    langauge
 }) => {
     const { tidligereOpphold, senereOpphold } = informasjonOmUtenlandsopphold;
 
@@ -56,7 +60,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & WrappedComp
                     </EtikettLiten>
                     <UtenlandsoppholdOppsummeringList
                         utenlandsoppholdListe={tidligereOpphold}
-                        language={Language.BOKMÅL}
+                        language={langauge}
                     />
                 </div>
             )}
@@ -64,7 +68,7 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & WrappedComp
             {senereOpphold.length === 0 ? (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.neste12mnd')}
-                    text={getMessage(intl, 'medlemmskap.radiobutton.boNorge')}
+                    text={getMessage(intl, 'spørsmål.skalVæreIUtlandNeste12Mnd.nei')}
                 />
             ) : (
                 <div className="textWithLabel">
@@ -72,8 +76,8 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & WrappedComp
                         {getMessage(intl, 'medlemmskap.text.oppsummering.neste12mnd')}
                     </EtikettLiten>
                     <UtenlandsoppholdOppsummeringList
-                        utenlandsoppholdListe={tidligereOpphold}
-                        language={Language.BOKMÅL}
+                        utenlandsoppholdListe={senereOpphold}
+                        language={langauge}
                     />
                 </div>
             )}
