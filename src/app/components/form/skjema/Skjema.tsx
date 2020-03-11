@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Prompt } from 'react-router';
 import { useIntl } from 'react-intl';
+import DocumentTitle from 'react-document-title';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Formik, Form, FormikProps, FormikHelpers } from 'formik';
 import _ from 'lodash';
@@ -18,9 +19,7 @@ import ValidationErrorSummaryBase, {
 } from 'components/validation-error-summary/ValidationErrorSummaryBase';
 import { Language } from 'intl/IntlProvider';
 
-
-import './skjema.less'; 
-
+import './skjema.less';
 
 interface Props {
     language: Language;
@@ -43,9 +42,7 @@ const Skjema: React.FunctionComponent<Props> = ({
 
     const onSubmit = (values: Partial<FormProps>, formikHelpers: FormikHelpers<Partial<FormProps>>) => {
         formikHelpers.setStatus({ hasSubmitted: false });
-        activeStepIndex === stegConfig.length - 1
-            ? sendSøknad(values)
-            : setActiveStepIndex(activeStepIndex + 1);
+        activeStepIndex === stegConfig.length - 1 ? sendSøknad(values) : setActiveStepIndex(activeStepIndex + 1);
     };
 
     const handleBackClicked = (formikProps: FormikProps<Partial<FormProps>>) => {
@@ -77,6 +74,11 @@ const Skjema: React.FunctionComponent<Props> = ({
     return (
         <>
             <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
+            <DocumentTitle
+                title={getMessage(intl, 'dokument.tittel.steg', {
+                    steg: getMessage(intl, stegConfig[activeStepIndex].stegIndikatorLabel)
+                })}
+            />
             <Formik
                 initialValues={{
                     terminberkreftelse: [],
@@ -101,7 +103,9 @@ const Skjema: React.FunctionComponent<Props> = ({
                                         errors={getErrorMessages(formikProps)}
                                     />
                                 )}
+
                                 {ActiveStep.component({ formikProps, intl, language })}
+
                                 {shouldRenderSubmitButton(formikProps) && (
                                     <Hovedknapp
                                         className="responsiveButton"
@@ -112,6 +116,7 @@ const Skjema: React.FunctionComponent<Props> = ({
                                         {ActiveStep.fortsettKnappLabel}
                                     </Hovedknapp>
                                 )}
+
                                 <CancelButton />
                             </Form>
                         </div>

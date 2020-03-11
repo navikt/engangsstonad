@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
-import _  from 'lodash';
+import _ from 'lodash';
 
 import { sendSoknad } from 'actions/api/apiActionCreators';
 import { ApiActionTypes } from 'actions/api/apiActionDefinitions';
@@ -23,23 +23,21 @@ interface Props {
     sendSøknad: (values: Partial<FormProps>) => void;
 }
 
-const SøknadContainer: React.FunctionComponent<Props & RouteComponentProps > = ({
+const SøknadContainer: React.FunctionComponent<Props & RouteComponentProps> = ({
     person,
     søknadSendingInProgress,
     language,
     sessionHasExpired,
     sendSøknad
-}) => {
-    return (
-        <Skjema
-            stegConfig={getStepConfig(useIntl(), person)}
-            language={language}
-            søknadSendingInProgress={søknadSendingInProgress}
-            sessionHasExpired={sessionHasExpired}
-            sendSøknad={sendSøknad}
-        />
-    );
-};
+}) => (
+    <Skjema
+        stegConfig={getStepConfig(useIntl(), person)}
+        language={language}
+        søknadSendingInProgress={søknadSendingInProgress}
+        sessionHasExpired={sessionHasExpired}
+        sendSøknad={sendSøknad}
+    />
+);
 
 const mapStateToProps = (state: AppState) => ({
     language: state.commonReducer.language,
