@@ -88,6 +88,7 @@ const Skjema: React.FunctionComponent<Props> = ({
                 validationSchema={ActiveStep.validationSchema}
                 onSubmit={onSubmit}
                 render={(formikProps: FormikProps<Partial<FormProps>>) => {
+                    console.log(formikProps);
                     return (
                         <div className="responsiveContainer">
                             <SkjemaHeader

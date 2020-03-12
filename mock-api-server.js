@@ -25,12 +25,39 @@ server.use(delayAllResponses(500));
 server.use(express.json());
 
 const mockResponse = {
-    fnr: '11111111111',
-    fornavn: 'Henrikke',
-    etternavn: 'Ibsen',
-    kjønn: 'K',
-    fødselsdato: '1979-01-28',
-    ikkeNordiskEøsLand: true
+    søker: {
+        fnr: '11076931536',
+        fornavn: 'ROBUST',
+        etternavn: 'KAMELEON',
+        kjønn: 'K',
+        fødselsdato: '1969-07-11',
+        land: 'NO',
+        ikkeNordiskEøsLand: false,
+        barn: [
+            {
+                fnr: '01101992302',
+                fornavn: 'VAKKER',
+                etternavn: 'KAKKERLAKK',
+                kjønn: 'M',
+                fødselsdato: '2019-10-01',
+                annenForelder: {
+                    fnr: '23018821850',
+                    fornavn: 'BRÅKETE',
+                    etternavn: 'TRANFLASKE',
+                    fødselsdato: '1988-01-23'
+                }
+            }
+        ]
+    },
+    arbeidsforhold: [
+        {
+            arbeidsgiverId: '973861778',
+            arbeidsgiverIdType: 'orgnr',
+            arbeidsgiverNavn: 'EQUINOR ASA, AVD STATOIL SOKKELVIRKSOMHET',
+            stillingsprosent: 100,
+            fom: '2016-01-01'
+        }
+    ]
 };
 
 const kvittering = {
@@ -40,25 +67,20 @@ const kvittering = {
     journalId: '439772941'
 };
 
-const startServer = html => {
-    server.get(
-        ['/', '/rest/personinfo?'],
-        (req, res) => {
-            res.send(mockResponse);
-        }
-    );
+const startServer = (html) => {
+    server.get(['/', '/rest/sokerinfo?'], (req, res) => {
+        res.send(mockResponse);
+    });
 
-    server.get(
-        '/rest/storage', (req, res) => {
-            res.sendStatus(200);
-        }
-    )
+    server.get('/rest/storage', (req, res) => {
+        res.sendStatus(200);
+    });
 
     server.post('/rest/storage/vedlegg', (req, res) => {
         res.setHeader('Location', `http://localhost:8080/engangsstonad/dist/vedlegg/${req.body.id}`);
         res.sendStatus(201);
     });
-    
+
     server.delete('/rest/storage/vedlegg/:id', (req, res) => {
         res.sendStatus(204);
     });

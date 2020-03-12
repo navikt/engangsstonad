@@ -1,8 +1,11 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import * as moment from 'moment';
 
+import { Søkerinfo } from 'app/types/domain/Søkerinfo';
+import CheckboksPanelGruppe from 'components/form/checkbox-panel-gruppe/CheckboksPanelGruppe';
 import Select from 'components/form/select/Select';
 import { JaNeiSpørsmål } from 'components/form/radio-panel-gruppe-responsive/utils/JaNeiSpørsmål';
 import RadioPanelGruppeResponsiveWrapper from 'components/form/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
@@ -10,16 +13,33 @@ import DatovelgerElement from 'components/form/date-input/DateInput';
 import { Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import AttachmentUploader from 'components/form/attachment-uploader/AttachmentUploader';
 import Veileder from 'components/veileder/Veileder';
+import Checkbox from 'components/form/checkbox/Checkbox';
 
 import { Questions } from './questions';
 import StegProps from '../StegProps';
+import { AppState } from 'reducers/index';
 
 import './steg1.less';
 
-const Steg1: React.StatelessComponent<StegProps> = ({ formikProps }) => {
+interface StateProps {
+    søkerinfo: Søkerinfo;
+}
+
+const Steg1: React.StatelessComponent<StegProps & StateProps> = ({ formikProps, søkerinfo }) => {
     const { values, touched } = formikProps;
     return (
         <div className="steg1">
+            <CheckboksPanelGruppe
+                name={Questions.relevantBarn}
+                checkboxes={søkerinfo.barn.map((b) => ({
+                    label: b.fornavn,
+                    subtext: b.fødselsdato,
+                    value: b.fnr,
+                    disabled: values[Questions.gjelderNyttbarn]
+                }))}
+            />
+            <Checkbox name={Questions.gjelderNyttbarn} />
+
             <RadioPanelGruppeResponsiveWrapper
                 name={Questions.erFødt}
                 radioValues={[JaNeiSpørsmål.JA, JaNeiSpørsmål.NEI]}
@@ -71,4 +91,9 @@ const Steg1: React.StatelessComponent<StegProps> = ({ formikProps }) => {
         </div>
     );
 };
-export default Steg1;
+
+const mapStateToProps = (state: AppState) => ({
+    søkerinfo: state.apiReducer.søkerinfo!
+});
+
+export default connect<StateProps>(mapStateToProps)(Steg1);

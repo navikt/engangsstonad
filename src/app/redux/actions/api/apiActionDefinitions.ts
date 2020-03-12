@@ -1,11 +1,11 @@
-import Person from '../../../types/domain/Person';
 import { EngangssoknadSoknadDto } from '../../../types/domain/EngangsstonadSoknad';
 import Kvittering from 'app/types/services/Kvittering';
+import { Søkerinfo } from 'app/types/domain/Søkerinfo';
 
 export enum ApiActionKeys {
-    'GET_PERSON' = 'getPerson',
-    'GET_PERSON_SUCCESS' = 'getPersonSuccess',
-    'GET_PERSON_FAILED' = 'getPersonFailed',
+    'GET_SØKERINFO' = 'getSøkerinfo',
+    'GET_SØKERINFO_SUCCESS' = 'getSøkerinfoSuccess',
+    'GET_SØKERINFO_FAILED' = 'getSøkerinfoFailed',
     'SEND_SOKNAD' = 'sendSoknad',
     'SEND_SOKNAD_SUCCESS' = 'sendSoknadSuccess',
     'SEND_SOKNAD_FAILED' = 'sendSoknadFailed',
@@ -16,17 +16,17 @@ interface SessionExpired {
     type: ApiActionKeys.SESSION_EXPIRED;
 }
 
-interface GetPerson {
-    type: ApiActionKeys.GET_PERSON;
+interface GetSøkerinfo {
+    type: ApiActionKeys.GET_SØKERINFO;
 }
 
 interface GetPersonSuccess {
-    type: ApiActionKeys.GET_PERSON_SUCCESS;
-    person: Person;
+    type: ApiActionKeys.GET_SØKERINFO_SUCCESS;
+    søkerinfo: Søkerinfo;
 }
 
-interface GetPersonFailed {
-    type: ApiActionKeys.GET_PERSON_FAILED;
+interface GetSøkerinfoFailed {
+    type: ApiActionKeys.GET_SØKERINFO_FAILED;
     // tslint:disable-next-line:no-any
     error: any;
 }
@@ -47,12 +47,12 @@ interface SendSoknadFailed {
     error: any;
 }
 
-export type GetPersonActionType = GetPersonSuccess | GetPersonFailed;
+export type GetSøkerinfoActionType = GetPersonSuccess | GetSøkerinfoFailed;
 
 export type ApiActionTypes =
-    | GetPerson
+    | GetSøkerinfo
     | GetPersonSuccess
-    | GetPersonFailed
+    | GetSøkerinfoFailed
     | SendSoknad
     | SendSoknadSuccess
     | SendSoknadFailed

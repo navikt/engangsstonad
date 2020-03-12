@@ -32,8 +32,8 @@ foreldrepengersoknadApi.interceptors.response.use(
     }
 );
 
-const getPerson = () => {
-    return foreldrepengersoknadApi.get('/personinfo');
+const getSøkerinfo = () => {
+    return foreldrepengersoknadApi.get('/sokerinfo');
 };
 
 const sendSoknad = (soknad: EngangsstonadSoknad) => {
@@ -44,5 +44,5 @@ const sendSoknad = (soknad: EngangsstonadSoknad) => {
     });
 };
 
-const Api = { getPerson, sendSoknad };
+const Api = { getSøkerinfo, sendSoknad };
 export default Api;

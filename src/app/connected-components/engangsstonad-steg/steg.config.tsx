@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import Person from 'app/types/domain/Person';
 import { StepConfig } from 'app/types/StepConfig';
 
 import Steg1 from './steg-1/Steg1';
@@ -15,6 +14,7 @@ import Steg3ValidationSchema from './steg-3/validationSchema';
 import getMessage from 'common/util/i18nUtils';
 import { IntlShape } from 'react-intl';
 import StegProps from './StegProps';
+import { Søkerinfo } from 'app/types/domain/Søkerinfo';
 
 const stepConfig = [
     {
@@ -42,11 +42,11 @@ const stepConfig = [
     }
 ];
 
-export default (intl: IntlShape, person: Person): StepConfig[] =>
+export default (intl: IntlShape, søkerinfo: Søkerinfo): StepConfig[] =>
     stepConfig
         .filter((step: any, index: number) => {
             if (index === 1) {
-                return person.ikkeNordiskEøsLand;
+                return søkerinfo.ikkeNordiskEøsLand;
             } else {
                 return true;
             }

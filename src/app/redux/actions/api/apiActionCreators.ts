@@ -1,25 +1,25 @@
 import { ApiActionKeys, ApiActionTypes } from './apiActionDefinitions';
-import Person from '../../../types/domain/Person';
 import { EngangssoknadSoknadDto } from '../../../types/domain/EngangsstonadSoknad';
 import Kvittering from 'app/types/services/Kvittering';
+import { Søkerinfo } from 'app/types/domain/Søkerinfo';
 
 export function getPerson(): ApiActionTypes {
     return {
-        type: ApiActionKeys.GET_PERSON
+        type: ApiActionKeys.GET_SØKERINFO
     };
 }
 
-export function getPersonSuccess(person: Person): ApiActionTypes {
+export function getPersonSuccess(søkerinfo: Søkerinfo): ApiActionTypes {
     return {
-        type: ApiActionKeys.GET_PERSON_SUCCESS,
-        person
+        type: ApiActionKeys.GET_SØKERINFO_SUCCESS,
+        søkerinfo
     };
 }
 
 // tslint:disable-next-line:no-any
 export function getPersonFailed(error: any): ApiActionTypes {
     return {
-        type: ApiActionKeys.GET_PERSON_FAILED,
+        type: ApiActionKeys.GET_SØKERINFO_FAILED,
         error
     };
 }

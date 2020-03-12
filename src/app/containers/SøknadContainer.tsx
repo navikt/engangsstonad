@@ -6,7 +6,6 @@ import _ from 'lodash';
 
 import { sendSoknad } from 'actions/api/apiActionCreators';
 import { ApiActionTypes } from 'actions/api/apiActionDefinitions';
-import Person from 'app/types/domain/Person';
 import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
 import Skjema from 'components/form/skjema/Skjema';
 import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDtoMapper';
@@ -14,24 +13,25 @@ import { Language } from 'intl/IntlProvider';
 import { AppState } from 'reducers/index';
 
 import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
+import { Søkerinfo } from 'app/types/domain/Søkerinfo';
 
 interface Props {
     language: Language;
-    person: Person;
+    søkerinfo: Søkerinfo;
     søknadSendingInProgress: boolean;
     sessionHasExpired: boolean;
     sendSøknad: (values: Partial<FormProps>) => void;
 }
 
 const SøknadContainer: React.FunctionComponent<Props & RouteComponentProps> = ({
-    person,
+    søkerinfo,
     søknadSendingInProgress,
     language,
     sessionHasExpired,
     sendSøknad
 }) => (
     <Skjema
-        stegConfig={getStepConfig(useIntl(), person)}
+        stegConfig={getStepConfig(useIntl(), søkerinfo)}
         language={language}
         søknadSendingInProgress={søknadSendingInProgress}
         sessionHasExpired={sessionHasExpired}
@@ -41,7 +41,7 @@ const SøknadContainer: React.FunctionComponent<Props & RouteComponentProps> = (
 
 const mapStateToProps = (state: AppState) => ({
     language: state.commonReducer.language,
-    person: state.apiReducer.person!,
+    søkerinfo: state.apiReducer.søkerinfo!,
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
     sessionHasExpired: state.apiReducer.sessionHasExpired
 });

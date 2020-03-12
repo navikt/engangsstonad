@@ -1,14 +1,14 @@
 import { ApiActionKeys, ApiActionTypes } from '../actions/api/apiActionDefinitions';
-import Person from '../../types/domain/Person';
 import Kvittering from 'app/types/services/Kvittering';
 import { AxiosResponse } from 'axios';
+import { Søkerinfo } from 'app/types/domain/Søkerinfo';
 
 const initialState = (): ApiState => ({
     isLoadingPerson: true,
     søknadSendt: false,
     søknadSendingInProgress: false,
     kvittering: undefined,
-    person: undefined,
+    søkerinfo: undefined,
     sessionHasExpired: false,
     error: undefined
 });
@@ -18,18 +18,18 @@ export interface ApiState {
     søknadSendt: boolean;
     søknadSendingInProgress: boolean;
     kvittering?: Kvittering;
-    person?: Person;
+    søkerinfo?: Søkerinfo;
     sessionHasExpired: boolean;
     error: AxiosResponse | Error | undefined;
 }
 
-const apiReducer = (state = initialState(), action: ApiActionTypes) => {
+const apiReducer = (state = initialState(), action: ApiActionTypes): ApiState => {
     switch (action.type) {
-        case ApiActionKeys.GET_PERSON:
+        case ApiActionKeys.GET_SØKERINFO:
             return { ...state, isLoadingPerson: true };
-        case ApiActionKeys.GET_PERSON_SUCCESS:
-            return { ...state, person: action.person, isLoadingPerson: false };
-        case ApiActionKeys.GET_PERSON_FAILED:
+        case ApiActionKeys.GET_SØKERINFO_SUCCESS:
+            return { ...state, søkerinfo: action.søkerinfo, isLoadingPerson: false };
+        case ApiActionKeys.GET_SØKERINFO_FAILED:
             return {
                 ...state,
                 error: action.error.response,
@@ -38,7 +38,6 @@ const apiReducer = (state = initialState(), action: ApiActionTypes) => {
         case ApiActionKeys.SEND_SOKNAD:
             return {
                 ...state,
-                soknad: action.soknad,
                 søknadSendingInProgress: true
             };
         case ApiActionKeys.SEND_SOKNAD_SUCCESS:

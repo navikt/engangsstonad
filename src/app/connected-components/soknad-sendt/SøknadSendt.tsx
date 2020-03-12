@@ -7,13 +7,12 @@ import { Innholdstittel, Ingress, Undertittel } from 'nav-frontend-typografi';
 import * as moment from 'moment';
 import DocumentTitle from 'react-document-title';
 import Lenke from 'nav-frontend-lenker';
-import CustomSVG from 'common/components/custom-svg/CustomSVG';
+
+import { Søkerinfo } from 'app/types/domain/Søkerinfo';
 import Kvittering from 'app/types/services/Kvittering';
-import Person from '../../types/domain/Person';
+import CustomSVG from 'common/components/custom-svg/CustomSVG';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import { Language } from 'intl/IntlProvider';
-
-import 'nav-frontend-lenker-style';
 
 const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
 
@@ -25,7 +24,7 @@ import getMessage from 'common/util/i18nUtils';
 import '../../styles/engangsstonad.less';
 
 interface StateProps {
-    person: Person;
+    søkerinfo: Søkerinfo;
     kvittering: Kvittering;
 }
 
@@ -46,7 +45,7 @@ class SøknadSendt extends React.Component<Props> {
     }
 
     render() {
-        const { intl, kvittering, person } = this.props;
+        const { intl, kvittering, søkerinfo } = this.props;
         return (
             <>
                 <DocumentTitle title={getMessage(intl, 'kvittering.sectionheading')} />
@@ -55,7 +54,7 @@ class SøknadSendt extends React.Component<Props> {
                     <CustomSVG iconRef={SpotlightLetter} className="spotlightLetter" />
                     <Innholdstittel className="blokk-s">
                         {getMessage(intl, 'kvittering.text.takk')}
-                        <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
+                        <span className="capitalizeName"> {søkerinfo.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
                     <Ingress className="blokk-xs">
                         <FormattedMessage
@@ -84,12 +83,12 @@ class SøknadSendt extends React.Component<Props> {
                         />
                     </Ingress>
 
-                    {person.bankkonto && person.bankkonto.kontonummer && (
+                    {søkerinfo.bankkonto && søkerinfo.bankkonto.kontonummer && (
                         <Ingress className="blokk-s">
                             <FormattedMessage
                                 id="kvittering.text.kontonummer"
                                 values={{
-                                    kontonummer: person.bankkonto.kontonummer,
+                                    kontonummer: søkerinfo.bankkonto.kontonummer,
                                     dinProfilLink: (
                                         <Lenke href={lenker.brukerprofil}>
                                             <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
@@ -112,7 +111,7 @@ class SøknadSendt extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    person: state.apiReducer.person!,
+    søkerinfo: state.apiReducer.søkerinfo!,
     kvittering: state.apiReducer.kvittering!
 });
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-import Person from 'app/types/domain/Person';
+import { Søkerinfo } from 'app/types/domain/Søkerinfo';
 import { EngangssoknadSoknadDto } from 'app/types/domain/EngangsstonadSoknad';
 import getMessage from 'common/util/i18nUtils';
 import SøkersPersonalia from 'components/søkers-personalia/SøkersPersonalia';
@@ -18,7 +18,7 @@ import OppsummeringBarn from './../oppsummering/BarnOppsummering';
 import './oppsummering.less';
 
 interface StateProps {
-    person: Person;
+    søkerinfo: Søkerinfo;
     language: Language;
 }
 
@@ -27,7 +27,7 @@ interface OwnProps {
 }
 
 type Props = OwnProps & StateProps & WrappedComponentProps;
-const Oppsummering: React.StatelessComponent<Props> = ({ søknad, person, language, intl }) => {
+const Oppsummering: React.StatelessComponent<Props> = ({ søknad, søkerinfo, language, intl }) => {
     
     const { barn, annenForelder, informasjonOmUtenlandsopphold } = søknad;    
     const oppsummeringBarnTittel = getMessage(intl, 'oppsummering.text.relasjonTilBarnet', {
@@ -41,9 +41,9 @@ const Oppsummering: React.StatelessComponent<Props> = ({ søknad, person, langua
         <div className="oppsummering blokk-m">
             <div className="blokk-m">
                 <SøkersPersonalia
-                    kjønn={person.kjønn}
-                    navn={fullNameFormat(person.fornavn, person.mellomnavn, person.etternavn).toLowerCase()}
-                    personnummer={person.fnr}
+                    kjønn={søkerinfo.kjønn}
+                    navn={fullNameFormat(søkerinfo.fornavn, søkerinfo.mellomnavn, søkerinfo.etternavn).toLowerCase()}
+                    personnummer={søkerinfo.fnr}
                 />
             </div>
 
@@ -51,7 +51,8 @@ const Oppsummering: React.StatelessComponent<Props> = ({ søknad, person, langua
                 <OppsummeringBarn barn={barn as any} />
             </Oppsummeringspunkt>
 
-            {person.ikkeNordiskEøsLand && (
+            // TODO skjekk heller om steget har blitt vist....
+            {søkerinfo.ikkeNordiskEøsLand && (
                 <Oppsummeringspunkt tittel={getMessage(intl, 'annenForelder.sectionheading')}>
                     <AndreForeldrenOppsummering annenForelder={annenForelder} language={language} />
                 </Oppsummeringspunkt>
@@ -69,7 +70,7 @@ const Oppsummering: React.StatelessComponent<Props> = ({ søknad, person, langua
 };
 
 const mapStateToProps = (state: AppState) => ({
-    person: state.apiReducer.person!,
+    søkerinfo: state.apiReducer.søkerinfo!,
     language: state.commonReducer.language
 });
 

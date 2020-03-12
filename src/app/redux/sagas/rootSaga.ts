@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
-import personSaga from './personSaga';
+import søkerinfoSaga from './søkerinfoSaga';
 import søknadSaga from './søknadSaga';
 
 export default function* rootSaga() {
-    yield all([personSaga(), søknadSaga()]);
+    yield all([søkerinfoSaga(), søknadSaga()]);
 }
