@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Sentry from '@sentry/browser';
-import GenerellFeil from './connected-components/feilsider/GenerellFeil';
+import GenerellFeil from './pages/feilsider/GenerellFeil';
 
 interface State {
     eventId: string | null;

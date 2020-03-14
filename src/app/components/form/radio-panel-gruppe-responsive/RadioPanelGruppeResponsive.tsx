@@ -6,7 +6,7 @@ import { RadioPanelGruppeResponsive } from 'components/radio-panel-gruppe-respon
 import { parseNavFrontend, getCheckedRadioValue } from './utils/utils';
 import { intlPrefix, getErrorMessage } from '../utils';
 import { FormComponentProps, withGradualVisibility as withGradualVisibility } from '../visibility-hoc/withVisibility';
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { FormProps } from 'app/engangsstonad/FormProps';
 import { visibilityHook } from '../hooks/hooks';
 
 export type RadioValues = string | boolean | number;

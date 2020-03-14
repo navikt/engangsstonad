@@ -10,7 +10,7 @@ import getMessage from 'common/util/i18nUtils';
 import { intlPrefix } from '../utils';
 import { withGradualVisibility } from '../visibility-hoc/withVisibility';
 import { DatovelgerProps } from 'nav-datovelger';
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { FormProps } from 'app/engangsstonad/FormProps';
 import { visibilityHook } from '../hooks/hooks';
 
 interface Props extends Partial<DatovelgerProps> {

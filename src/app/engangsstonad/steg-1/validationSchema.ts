@@ -6,7 +6,7 @@ import {
     erMindreEnn3UkerSiden,
     idagEllerTidligere,
     utstedtDatoErIUke22
-} from '../../../util/validation/validationUtils';
+} from '../../util/validation/validationUtils';
 
 const Steg1ValidationSchema = () =>
     Yup.object().shape({

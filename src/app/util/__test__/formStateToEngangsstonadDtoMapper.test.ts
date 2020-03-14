@@ -1,6 +1,6 @@
 import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDtoMapper';
 import { Language } from 'intl/IntlProvider';
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { FormProps } from 'app/engangsstonad/FormProps';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { Utenlandsopphold } from 'app/types/domain/InformasjonOmUtenlandsopphold';
 

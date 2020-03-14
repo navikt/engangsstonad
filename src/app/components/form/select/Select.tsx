@@ -6,7 +6,7 @@ import { guid } from 'nav-frontend-js-utils';
 
 import { getErrorMessage, intlPrefix } from '../utils';
 import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { FormProps } from 'app/engangsstonad/FormProps';
 import { visibilityHook } from '../hooks/hooks';
 
 interface Props extends FormComponentProps, Omit<SelectProps, 'name' | 'children'> {

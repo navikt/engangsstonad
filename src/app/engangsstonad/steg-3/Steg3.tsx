@@ -7,8 +7,8 @@ import RadioPanelGruppeResponsiveWrapper from 'components/form/radio-panel-grupp
 import { JaNeiSpørsmål } from 'components/form/radio-panel-gruppe-responsive/utils/JaNeiSpørsmål';
 import UtenlandsoppholdSeksjon from 'components/utenlandsopphold/utenlansopphold-seksjon/UtenlandsoppholdSeksjon';
 
-import { Questions } from '../steg-3/questions';
-import { Utenlandsopphold } from '../../../../app/types/domain/InformasjonOmUtenlandsopphold';
+import { Questions } from './questions';
+import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
 import StegProps from '../StegProps';
 
 const Steg3: React.FunctionComponent<StegProps> = ({ formikProps, language }) => {

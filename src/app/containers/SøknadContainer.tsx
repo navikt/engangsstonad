@@ -6,13 +6,13 @@ import _ from 'lodash';
 
 import { sendSoknad } from 'actions/api/apiActionCreators';
 import { ApiActionTypes } from 'actions/api/apiActionDefinitions';
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { FormProps } from 'app/engangsstonad/FormProps';
 import Skjema from 'components/form/skjema/Skjema';
 import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDtoMapper';
 import { Language } from 'intl/IntlProvider';
 import { AppState } from 'reducers/index';
 
-import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
+import getStepConfig from '../engangsstonad/steg.config';
 import { Søkerinfo } from 'app/types/domain/Søkerinfo';
 
 interface Props {

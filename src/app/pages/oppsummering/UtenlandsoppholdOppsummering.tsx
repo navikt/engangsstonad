@@ -3,9 +3,9 @@ import { EtikettLiten } from 'nav-frontend-typografi';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import * as moment from 'moment';
 
+import getMessage from 'common/util/i18nUtils';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
 import UtenlandsoppholdOppsummeringList from 'components/utenlandsopphold/utenlandsopphold-oppsummering-list/UtenlandsoppholdOppsummeringList';
-import getMessage from 'common/util/i18nUtils';
 import { Language } from 'intl/IntlProvider';
 
 import Barn, { FodtBarn, UfodtBarn } from '../../types/domain/Barn';

@@ -1,6 +1,6 @@
 import { EngangssoknadSoknadDto } from 'app/types/domain/EngangsstonadSoknad';
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
 import { Language } from 'intl/IntlProvider';
+import { FormProps } from 'app/engangsstonad/FormProps';
 
 export const mapFormStateToEngangsstonadDto = (
     values: Partial<FormProps>,

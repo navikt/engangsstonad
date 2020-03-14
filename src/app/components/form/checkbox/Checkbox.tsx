@@ -5,7 +5,7 @@ import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 
 import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
 import { intlPrefix, getErrorMessage } from '../utils';
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { FormProps } from 'app/engangsstonad/FormProps';
 import { visibilityHook } from '../hooks/hooks';
 
 const Checkbox: React.StatelessComponent<FormComponentProps> = ({ name, parent ="NO_PARENT" }) => {

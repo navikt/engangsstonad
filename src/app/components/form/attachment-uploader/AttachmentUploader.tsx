@@ -5,7 +5,7 @@ import { Skjemanummer, AttachmentType, Attachment } from 'common/storage/attachm
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
 import { visibilityHook } from '../hooks/hooks';
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { FormProps } from 'app/engangsstonad/FormProps';
 
 interface Props extends FormComponentProps {
     skjemanummer: Skjemanummer;
