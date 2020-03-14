@@ -6,7 +6,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { Formik, Form, FormikProps, FormikHelpers } from 'formik';
 import _ from 'lodash';
 
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { FormProps } from 'app/engangsstonad/FormProps';
 import { StepConfig } from 'app/types/StepConfig';
 
 import getMessage from 'common/util/i18nUtils';

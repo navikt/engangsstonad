@@ -7,13 +7,12 @@ import _ from 'lodash';
 import { sendSoknad } from 'actions/api/apiActionCreators';
 import { ApiActionTypes } from 'actions/api/apiActionDefinitions';
 import Person from 'app/types/domain/Person';
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
 import Skjema from 'components/form/skjema/Skjema';
 import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDtoMapper';
 import { Language } from 'intl/IntlProvider';
 import { AppState } from 'reducers/index';
+import { FormProps } from 'app/engangsstonad/FormProps';
 
-import getStepConfig from '../connected-components/engangsstonad-steg/steg.config';
 
 interface Props {
     language: Language;

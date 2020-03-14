@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormikProps, FormikContextType } from 'formik';
-import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { FormProps } from 'app/engangsstonad/FormProps';
 import { FormattedMessage } from 'react-intl';
 
 export const intlPrefix = (value: string) => {

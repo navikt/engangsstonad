@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import Steg2 from '../Steg2';
-import { Questions } from '../../steg-2/questions';
+import { Questions } from '../questions';
 import Input from 'components/form/input/Input';
 import Checkbox from 'components/form/checkbox/Checkbox';
 import Select from 'components/form/select/Select';

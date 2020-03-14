@@ -4,10 +4,10 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import * as countries from 'i18n-iso-countries';
 import AnnenForelder from 'app/types/domain/AnnenForelder';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
-import getMessage from 'common/util/i18nUtils';
 import { Language } from 'intl/IntlProvider';
 
 import '../../styles/engangsstonad.less';
+import getMessage from 'common/util/i18nUtils';
 
 interface Props {
     annenForelder: AnnenForelder;

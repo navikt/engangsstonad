@@ -10,8 +10,8 @@ import Veileder from 'components/veileder/Veileder';
 import { AppState } from 'reducers/index';
 import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDtoMapper';
 
-import { commonActionCreators as common } from '../../../redux/actions';
-import Oppsummering from '../../oppsummering/Oppsummering';
+import { commonActionCreators as common } from '../../redux/actions';
+import Oppsummering from '../../pages/oppsummering/Oppsummering';
 import StegProps from '../StegProps';
 
 interface StateProps {

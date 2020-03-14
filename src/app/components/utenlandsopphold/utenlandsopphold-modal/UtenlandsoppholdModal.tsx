@@ -5,7 +5,7 @@ import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Formik, Form } from 'formik';
 import Modal from 'nav-frontend-modal';
 
-import { getForignCountries } from '../../../connected-components/engangsstonad-steg/steg-2/Steg2';
+import { getForignCountries } from '../../../engangsstonad/steg-2/Steg2';
 import DatovelgerElement from 'components/form/date-input/DateInput';
 import Select from 'components/form/select/Select';
 import { Language } from 'intl/IntlProvider';

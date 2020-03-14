@@ -6,14 +6,14 @@ import Person from 'app/types/domain/Person';
 import { EngangssoknadSoknadDto } from 'app/types/domain/EngangsstonadSoknad';
 import getMessage from 'common/util/i18nUtils';
 import SøkersPersonalia from 'components/søkers-personalia/SøkersPersonalia';
-import { AppState } from 'reducers/index';
 import { Language } from 'intl/IntlProvider';
 import { fullNameFormat } from 'util/formats/formatUtils';
 
 import UtenlandsoppholdOppsummering from './UtenlandsoppholdOppsummering';
 import AndreForeldrenOppsummering from './AndreForeldrenOppsummering';
 import Oppsummeringspunkt from './Oppsummeringspunkt';
-import OppsummeringBarn from './../oppsummering/BarnOppsummering';
+import OppsummeringBarn from './BarnOppsummering';
+import { AppState } from 'reducers/index';
 
 import './oppsummering.less';
 

@@ -6,11 +6,11 @@ import DisplayTextWithLabel from 'components/display-text-with-label/DisplayText
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
-import getMessage from 'common/util/i18nUtils';
 
 import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 
 import '../../styles/engangsstonad.less';
+import getMessage from 'common/util/i18nUtils';
 
 interface Props {
     barn: FodtBarn & UfodtBarn;

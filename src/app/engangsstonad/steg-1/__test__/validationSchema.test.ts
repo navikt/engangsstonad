@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import Steg1ValidationSchema from '../validationSchema';
 import { Questions } from '../questions';
 
-import { dagerForTerminbekreftelse } from '../../../../util/validation/validationUtils';
+import { dagerForTerminbekreftelse } from '../../../util/validation/validationUtils';
 
 describe('barn validation schema', () => {
     describe('født barn', () => {
