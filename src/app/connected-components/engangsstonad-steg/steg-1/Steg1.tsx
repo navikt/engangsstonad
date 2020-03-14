@@ -5,15 +5,15 @@ import Veilederpanel from 'nav-frontend-veilederpanel';
 import * as moment from 'moment';
 
 import { Søkerinfo } from 'app/types/domain/Søkerinfo';
-import CheckboksPanelGruppe from 'components/form/checkbox-panel-gruppe/CheckboksPanelGruppe';
+import Checkbox from 'components/form/checkbox/Checkbox';
 import Select from 'components/form/select/Select';
+import CheckboksPanelGruppe from 'components/form/checkbox-panel-gruppe/CheckboksPanelGruppe';
 import { JaNeiSpørsmål } from 'components/form/radio-panel-gruppe-responsive/utils/JaNeiSpørsmål';
 import RadioPanelGruppeResponsiveWrapper from 'components/form/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import DatovelgerElement from 'components/form/date-input/DateInput';
 import { Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import AttachmentUploader from 'components/form/attachment-uploader/AttachmentUploader';
 import Veileder from 'components/veileder/Veileder';
-import Checkbox from 'components/form/checkbox/Checkbox';
 
 import { Questions } from './questions';
 import StegProps from '../StegProps';
@@ -26,7 +26,7 @@ interface StateProps {
 }
 
 const Steg1: React.StatelessComponent<StegProps & StateProps> = ({ formikProps, søkerinfo }) => {
-    const { values, touched } = formikProps;
+    const { values } = formikProps;
     return (
         <div className="steg1">
             <CheckboksPanelGruppe
@@ -42,16 +42,20 @@ const Steg1: React.StatelessComponent<StegProps & StateProps> = ({ formikProps, 
 
             <RadioPanelGruppeResponsiveWrapper
                 name={Questions.erFødt}
+                parent={Questions.gjelderNyttbarn}
                 radioValues={[JaNeiSpørsmål.JA, JaNeiSpørsmål.NEI]}
             />
 
-            {touched[Questions.erFødt] && (
-                <RadioPanelGruppeResponsiveWrapper name={Questions.antallBarn} radioValues={[1, 2, 3].map(String)} />
-            )}
+            <RadioPanelGruppeResponsiveWrapper
+                name={Questions.antallBarn}
+                parent={Questions.erFødt}
+                radioValues={[1, 2, 3].map(String)}
+            />
 
             {values[Questions.antallBarn]! >= 3 && (
                 <Select
                     name={Questions.antallBarn}
+                    parent={Questions.erFødt}
                     options={[3, 4, 5, 6, 7, 8, 9].map((value) => ({
                         label: String(value),
                         value
@@ -59,32 +63,35 @@ const Steg1: React.StatelessComponent<StegProps & StateProps> = ({ formikProps, 
                 />
             )}
 
-            {touched[Questions.antallBarn] && values[Questions.erFødt] && (
+            {values[Questions.erFødt] && (
                 <DatovelgerElement
                     name={Questions.fødselsdato}
+                    parent={Questions.antallBarn}
                     avgrensninger={{ maksDato: moment().format(moment.HTML5_FMT.DATE) }}
                 />
             )}
 
-            {touched[Questions.antallBarn] && values[Questions.erFødt] === false && (
+            {values[Questions.erFødt] === false && (
                 <>
-                    <DatovelgerElement name={Questions.termindato} />
+                    <DatovelgerElement name={Questions.termindato} parent={Questions.fødselsdato} />
 
                     {values[Questions.termindato] && (
-                        <>
-                            <Veilederpanel kompakt={true} svg={<Veileder />}>
-                                <FormattedMessage id="terminbekreftelsen.text.terminbekreftelsen" />
-                            </Veilederpanel>
-
-                            <AttachmentUploader
-                                name={Questions.terminberkreftelse}
-                                skjemanummer={Skjemanummer.TERMINBEKREFTELSE}
-                            />
-                        </>
+                        <Veilederpanel kompakt={true} svg={<Veileder />}>
+                            <FormattedMessage id="terminbekreftelsen.text.terminbekreftelsen" />
+                        </Veilederpanel>
                     )}
 
-                    {values[Questions.termindato] && values[Questions.terminberkreftelse]!.length > 0 && (
-                        <DatovelgerElement name={Questions.terminbekreftelseDato} />
+                    <AttachmentUploader
+                        name={Questions.terminberkreftelse}
+                        parent={Questions.termindato}
+                        skjemanummer={Skjemanummer.TERMINBEKREFTELSE}
+                    />
+
+                    {values[Questions.terminberkreftelse]!.length > 0 && (
+                        <DatovelgerElement
+                            name={Questions.terminbekreftelseDato}
+                            parent={Questions.terminberkreftelse}
+                        />
                     )}
                 </>
             )}

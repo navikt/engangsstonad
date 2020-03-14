@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { FieldProps, Field } from 'formik';
+import { FieldProps, Field, useFormikContext } from 'formik';
 import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 
+import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
 import { intlPrefix, getErrorMessage } from '../utils';
+import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { visibilityHook } from '../hooks/hooks';
 
-interface Props {
-    name: string;
-}
-
-const Checkbox: React.StatelessComponent<Props> = ({ name }) => {
+const Checkbox: React.StatelessComponent<FormComponentProps> = ({ name, parent ="NO_PARENT" }) => {
+    const formik = useFormikContext<Partial<FormProps>>();
+    React.useEffect(() => visibilityHook(formik.status, formik.setStatus, name, parent), []);
     return (
         <Field
             name={name}
@@ -29,4 +30,4 @@ const Checkbox: React.StatelessComponent<Props> = ({ name }) => {
         />
     );
 };
-export default Checkbox;
+export default withGradualVisibility(Checkbox);

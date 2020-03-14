@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { FieldProps, Field } from 'formik';
+import { FieldProps, Field, useFormikContext } from 'formik';
 import { Input as NavInput, InputProps } from 'nav-frontend-skjema';
 import { getErrorMessage, intlPrefix } from '../utils';
+import { withGradualVisibility, FormComponentProps } from '../visibility-hoc/withVisibility';
+import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { visibilityHook } from '../hooks/hooks';
 
-interface Props extends Omit<InputProps, 'label' | 'onChange' | 'value'> {
-    name: string;
-}
+type Props = FormComponentProps & Omit<InputProps, 'label' | 'onChange' | 'value'>
 
-const Input: React.StatelessComponent<Props> = ({ name, ...rest }) => {
+const Input: React.StatelessComponent<Props> = ({ name, parent = 'NO_PARENT', ...rest }) => {
+    const formik = useFormikContext<Partial<FormProps>>();
+    React.useEffect(() => visibilityHook(formik.status, formik.setStatus, name, parent), []);
     return (
         <Field
             name={name}
@@ -30,4 +33,4 @@ const Input: React.StatelessComponent<Props> = ({ name, ...rest }) => {
         />
     );
 };
-export default Input;
+export default withGradualVisibility(Input);

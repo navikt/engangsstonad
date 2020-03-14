@@ -1,19 +1,24 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { FieldProps, Field } from 'formik';
-import { Select as NavSelect } from 'nav-frontend-skjema';
+import { FieldProps, Field, useFormikContext } from 'formik';
+import { Select as NavSelect, SelectProps } from 'nav-frontend-skjema';
 import { guid } from 'nav-frontend-js-utils';
-import { getErrorMessage } from '../utils';
 
-interface Props {
-    name: string;
+import { getErrorMessage, intlPrefix } from '../utils';
+import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
+import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { visibilityHook } from '../hooks/hooks';
+
+interface Props extends FormComponentProps, Omit<SelectProps, 'name' | 'children'> {
     options: Array<{
         value: string | number;
         label: string;
     }>;
 }
 
-const Select: React.StatelessComponent<Props> = ({ name, options }) => {
+const Select: React.FunctionComponent<Props> = ({ name, parent = "NO_PARENT", options }) => {
+    const formik = useFormikContext<Partial<FormProps>>();
+    React.useEffect(() => visibilityHook(formik.status, formik.setStatus, name, parent), []);
     return (
         <Field
             name={name}
@@ -21,7 +26,7 @@ const Select: React.StatelessComponent<Props> = ({ name, options }) => {
                 return (
                     <NavSelect
                         bredde="fullbredde"
-                        label={<FormattedMessage id={`spørsmål.${name}`} />}
+                        label={<FormattedMessage id={intlPrefix(name)} />}
                         onChange={(e) => {
                             form.setFieldValue(field.name, e.target.value);
                             form.setFieldTouched(field.name, true, false);
@@ -43,4 +48,4 @@ const Select: React.StatelessComponent<Props> = ({ name, options }) => {
         />
     );
 };
-export default Select;
+export default withGradualVisibility<Props>(Select);

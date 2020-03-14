@@ -1,19 +1,27 @@
 import * as React from 'react';
-import Datovelger from 'nav-datovelger/dist/datovelger/Datovelger';
-import { DatovelgerProps } from 'nav-datovelger';
-import { guid } from 'nav-frontend-js-utils';
-import { Field, FieldProps } from 'formik';
 import { FormattedMessage, useIntl } from 'react-intl';
+import Datovelger from 'nav-datovelger/dist/datovelger/Datovelger';
+import { guid } from 'nav-frontend-js-utils';
+import { Field, FieldProps, useFormikContext } from 'formik';
+
 import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
 import getMessage from 'common/util/i18nUtils';
+
 import { intlPrefix } from '../utils';
+import { withGradualVisibility } from '../visibility-hoc/withVisibility';
+import { DatovelgerProps } from 'nav-datovelger';
+import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
+import { visibilityHook } from '../hooks/hooks';
 
 interface Props extends Partial<DatovelgerProps> {
     name: string;
+    parent?: string;
 }
 
-const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) => {
+const DatovelgerElement: React.StatelessComponent<Props> = ({ name, parent = 'NO_PARENT', ...rest }) => {
     const intl = useIntl();
+    const formik = useFormikContext<Partial<FormProps>>();
+    React.useEffect(() => visibilityHook(formik.status, formik.setStatus, name, parent), []);
     return (
         <Field
             name={name}
@@ -48,4 +56,4 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) =
         />
     );
 };
-export default DatovelgerElement;
+export default withGradualVisibility<Props>(DatovelgerElement);

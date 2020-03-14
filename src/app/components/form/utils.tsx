@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormikProps } from 'formik';
+import { FormikProps, FormikContextType } from 'formik';
 import { FormProps } from 'app/connected-components/engangsstonad-steg/FormProps';
 import { FormattedMessage } from 'react-intl';
 
@@ -17,4 +17,11 @@ export const getErrorMessage = (form: FormikProps<Partial<FormProps>>, name: str
     ) : (
         undefined
     );
+};
+
+export const shouldRender = (form: FormikContextType<Partial<FormData>>, parent: string): boolean => {
+    if (parent === 'NO_PARENT') {
+        return true;
+    }
+    return form.values[parent] !== undefined && form.status[parent]?.visible;
 };
