@@ -13,7 +13,6 @@ import Plikter from 'components/modal-content/Plikter';
 import Personopplysninger from 'components/modal-content/Personopplysninger';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
 import Veiviser from 'components/veiviser/VeiviserSvg';
-import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
 import getMessage from 'common/util/i18nUtils';
 import { DispatchProps } from 'common/redux/types';
@@ -57,7 +56,6 @@ const Intro: React.FunctionComponent<Props> = ({ person, godkjentVilkår, langua
 
     return (
         <div id="js-intro">
-            <Skjemasteg>
                 <LanguageToggle
                     language={language}
                     toggleLanguage={(lang: Language) => dispatch(common.setLanguage(lang))}
@@ -142,7 +140,6 @@ const Intro: React.FunctionComponent<Props> = ({ person, godkjentVilkår, langua
                         <Personopplysninger />
                     </Modal>
                 </form>
-            </Skjemasteg>
         </div>
     );
 };

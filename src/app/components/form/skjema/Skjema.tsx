@@ -85,6 +85,8 @@ const Skjema: React.FunctionComponent<Props> = ({
                     oppholdNeste12Mnd: [],
                     oppholdSiste12Mnd: []
                 }}
+                validateOnMount={true}
+                initialStatus={{}}
                 validationSchema={ActiveStep.validationSchema}
                 onSubmit={onSubmit}
                 render={(formikProps: FormikProps<Partial<FormProps>>) => {
@@ -124,7 +126,7 @@ const Skjema: React.FunctionComponent<Props> = ({
                 }}
             />
             <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
-            <UtløptSesjonModal erÅpen={sessionHasExpired} />q
+            <UtløptSesjonModal erÅpen={sessionHasExpired} />
         </>
     );
 };
