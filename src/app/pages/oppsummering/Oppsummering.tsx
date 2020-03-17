@@ -51,7 +51,6 @@ const Oppsummering: React.StatelessComponent<Props> = ({ søknad, søkerinfo, la
                 <OppsummeringBarn barn={barn as any} />
             </Oppsummeringspunkt>
 
-            // TODO skjekk heller om steget har blitt vist....
             {søkerinfo.ikkeNordiskEøsLand && (
                 <Oppsummeringspunkt tittel={getMessage(intl, 'annenForelder.sectionheading')}>
                     <AndreForeldrenOppsummering annenForelder={annenForelder} language={language} />

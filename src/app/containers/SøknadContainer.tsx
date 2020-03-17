@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import { Søkerinfo } from 'app/types/domain/Søkerinfo';
 import { sendSoknad } from 'actions/api/apiActionCreators';
 import { ApiActionTypes } from 'actions/api/apiActionDefinitions';
 import { FormProps } from 'app/engangsstonad/FormProps';
@@ -12,8 +13,7 @@ import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDto
 import { Language } from 'intl/IntlProvider';
 import { AppState } from 'reducers/index';
 
-import getStepConfig from '../engangsstonad/steg.config';
-import { Søkerinfo } from 'app/types/domain/Søkerinfo';
+import { getStepConfig } from '../engangsstonad/steg.config';
 
 interface Props {
     language: Language;

@@ -1,21 +1,21 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { CheckboksPanelGruppe as NavCheckboksPanelGruppe, CheckboksPanelProps } from 'nav-frontend-skjema';
-import { FieldProps, Field, useFormikContext } from 'formik';
+import { FieldProps, Field } from 'formik';
 
 
 import { getErrorMessage, intlPrefix } from '../utils';
 import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
-import { FormProps } from 'app/engangsstonad/FormProps';
+import { VisibilityContext } from '../visibility-context/VisibilityContext';
 import { visibilityHook } from '../hooks/hooks';
 
 interface Props extends FormComponentProps {
     checkboxes: CheckboksPanelProps[];
 }
 
-const CheckboksPanelGruppe: React.StatelessComponent<Props> = ({ name, parent = "NO_PARENT", checkboxes }) => {
-    const formik = useFormikContext<Partial<FormProps>>();
-    React.useEffect(() => visibilityHook(formik.status, formik.setStatus, name, parent), []);
+const CheckboksPanelGruppe: React.StatelessComponent<Props> = ({ name, checkboxes }) => {
+    const visibilityContext = React.useContext(VisibilityContext);
+    visibilityHook(visibilityContext.updateVisibility, name);
     return (
         <Field
             name={name}

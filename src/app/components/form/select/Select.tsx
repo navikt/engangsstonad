@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { FieldProps, Field, useFormikContext } from 'formik';
+import { FieldProps, Field } from 'formik';
 import { Select as NavSelect, SelectProps } from 'nav-frontend-skjema';
 import { guid } from 'nav-frontend-js-utils';
 
 import { getErrorMessage, intlPrefix } from '../utils';
 import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
-import { FormProps } from 'app/engangsstonad/FormProps';
+import { VisibilityContext } from '../visibility-context/VisibilityContext';
 import { visibilityHook } from '../hooks/hooks';
 
 interface Props extends FormComponentProps, Omit<SelectProps, 'name' | 'children'> {
@@ -16,9 +16,9 @@ interface Props extends FormComponentProps, Omit<SelectProps, 'name' | 'children
     }>;
 }
 
-const Select: React.FunctionComponent<Props> = ({ name, parent = "NO_PARENT", options }) => {
-    const formik = useFormikContext<Partial<FormProps>>();
-    React.useEffect(() => visibilityHook(formik.status, formik.setStatus, name, parent), []);
+const Select: React.FunctionComponent<Props> = ({ name, options }) => {
+    const visibilityContext = React.useContext(VisibilityContext);
+    visibilityHook(visibilityContext.updateVisibility, name);
     return (
         <Field
             name={name}

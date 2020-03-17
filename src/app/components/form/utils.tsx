@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { FormikProps, FormikContextType } from 'formik';
-import { FormProps } from 'app/engangsstonad/FormProps';
 import { FormattedMessage } from 'react-intl';
+import { FormikProps } from 'formik';
+
+import { FormProps } from 'app/engangsstonad/FormProps';
 
 export const intlPrefix = (value: string) => {
     return `spørsmål.${value}`;
@@ -19,9 +20,9 @@ export const getErrorMessage = (form: FormikProps<Partial<FormProps>>, name: str
     );
 };
 
-export const shouldRender = (form: FormikContextType<Partial<FormData>>, parent: string): boolean => {
+export const shouldRender = (visibleComponents: object, values: Partial<FormProps> , parent: string): boolean => {
     if (parent === 'NO_PARENT') {
         return true;
     }
-    return form.values[parent] !== undefined && form.status[parent]?.visible;
+    return values[parent] !== undefined && visibleComponents[parent] === true;
 };

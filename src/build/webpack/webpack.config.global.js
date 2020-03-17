@@ -5,10 +5,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
-console.log(process.env.NODE_ENV === 'development')
+console.log(process.env.NODE_ENV === 'development');
 
 const webpackConfig = {
-    entry: ['react-hot-loader/patch','babel-polyfill', './src/app/bootstrap.tsx'],
+    entry: ['react-hot-loader/patch', 'babel-polyfill', './src/app/bootstrap.tsx'],
     mode: 'development',
     output: {
         path: path.resolve(__dirname, './../../../dist'),
@@ -18,15 +18,15 @@ const webpackConfig = {
     devtool: 'source-map',
     resolve: {
         alias: {
+            actions: path.resolve(__dirname, './../../app/redux/actions/'),
             assets: path.resolve(__dirname, './../../app/assets/'),
+            common: path.resolve(__dirname, './../../common/'),
             components: path.resolve(__dirname, './../../app/components/'),
             containers: path.resolve(__dirname, './../../app/containers/'),
-            actions: path.resolve(__dirname, './../../app/redux/actions/'),
             reducers: path.resolve(__dirname, './../../app/redux/reducers'),
+            storage: path.resolve(__dirname, './../../storage/'),
             styles: path.resolve(__dirname, './../../app/styles/'),
             util: path.resolve(__dirname, './../../app/util/'),
-            common: path.resolve(__dirname, './../../common/'),
-            storage: path.resolve(__dirname, './../../storage/'),
             'react-dom': '@hot-loader/react-dom'
         },
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx']
@@ -80,7 +80,7 @@ const webpackConfig = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: devMode ? '[name].css' : '[name].[hash].css',
-            chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+            chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
         }),
         new SpriteLoaderPlugin({
             plainSprite: true

@@ -26,7 +26,7 @@ interface StateProps {
 }
 
 const Steg1: React.StatelessComponent<StegProps & StateProps> = ({ formikProps, søkerinfo }) => {
-    const { values } = formikProps;
+    const { values, status } = formikProps;
     return (
         <div className="steg1">
             <CheckboksPanelGruppe
@@ -73,9 +73,9 @@ const Steg1: React.StatelessComponent<StegProps & StateProps> = ({ formikProps, 
 
             {values[Questions.erFødt] === false && (
                 <>
-                    <DatovelgerElement name={Questions.termindato} parent={Questions.fødselsdato} />
+                    <DatovelgerElement name={Questions.termindato} parent={Questions.antallBarn} />
 
-                    {values[Questions.termindato] && (
+                    {status[Questions.termindato]?.visible && (
                         <Veilederpanel kompakt={true} svg={<Veileder />}>
                             <FormattedMessage id="terminbekreftelsen.text.terminbekreftelsen" />
                         </Veilederpanel>
