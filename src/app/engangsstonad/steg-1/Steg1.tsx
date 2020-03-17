@@ -52,9 +52,9 @@ const Steg1: React.StatelessComponent<StegProps> = ({ formikProps }) => {
 
             {values[Questions.erFødt] === false && (
                 <>
-                    <DatovelgerElement name={Questions.termindato} parent={Questions.fødselsdato} />
+                    <DatovelgerElement name={Questions.termindato} parent={Questions.antallBarn} />
 
-                    {values[Questions.termindato] && (
+                    {status[Questions.termindato]?.visible && (
                         <Veilederpanel kompakt={true} svg={<Veileder />}>
                             <FormattedMessage id="terminbekreftelsen.text.terminbekreftelsen" />
                         </Veilederpanel>

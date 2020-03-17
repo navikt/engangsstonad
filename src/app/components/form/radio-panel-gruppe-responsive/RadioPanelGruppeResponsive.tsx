@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { FieldProps, Field, useFormikContext } from 'formik';
+import { FieldProps, Field } from 'formik';
 import { RadioPanelGruppeResponsive } from 'components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 
 import { parseNavFrontend, getCheckedRadioValue } from './utils/utils';
 import { intlPrefix, getErrorMessage } from '../utils';
 import { FormComponentProps, withGradualVisibility as withGradualVisibility } from '../visibility-hoc/withVisibility';
-import { FormProps } from 'app/engangsstonad/FormProps';
+import { VisibilityContext } from '../visibility-context/VisibilityContext';
 import { visibilityHook } from '../hooks/hooks';
 
 export type RadioValues = string | boolean | number;
@@ -23,8 +23,8 @@ const RadioPanelGruppeResponsiveWrapper: React.FunctionComponent<Props> = ({
     twoColumns,
     ...rest
 }) => {
-    const formik = useFormikContext<Partial<FormProps>>();
-    React.useEffect(() => visibilityHook(formik.status, formik.setStatus, name, parent), []);
+    const visibilityContext = React.useContext(VisibilityContext);
+    visibilityHook(visibilityContext.updateVisibility, name);
     return (
         <Field
             name={name}

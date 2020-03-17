@@ -4,22 +4,23 @@ import { connect } from 'react-redux';
 import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom';
 import Spinner from 'nav-frontend-spinner';
 import { AxiosResponse } from 'axios';
+
 import { apiActionCreators as api } from '../redux/actions';
 import { DispatchProps } from 'common/redux/types';
 import Person from '../types/domain/Person';
 import Kvittering from '../types/services/Kvittering';
-import Intro from '../pages/intro/Intro';
 import Skjema from './SøknadContainer';
-import ErMann from '../pages/feilsider/ErMann';
-import IkkeMyndig from '../pages/feilsider/IkkeMyndig';
 import { erMyndig, erMann } from 'util/validation/validationUtils';
-import SøknadSendt from '../pages/soknad-sendt/SøknadSendt';
-import GenerellFeil from '../pages/feilsider/GenerellFeil';
-import InnsendingFeilet from '../pages/feilsider/InnsendingFeilet';
 import { AppState } from 'reducers/index';
 
-import '../styles/engangsstonad.less';
+import ErMann from '../pages/feilsider/ErMann';
+import IkkeMyndig from '../pages/feilsider/IkkeMyndig';
+import Intro from '../pages/intro/Intro';
+import InnsendingFeilet from '../pages/feilsider/InnsendingFeilet';
+import GenerellFeil from '../pages/feilsider/GenerellFeil';
+import SøknadSendt from '../pages/soknad-sendt/SøknadSendt';
 
+import '../styles/engangsstonad.less';
 interface StateProps {
     person?: Person;
     error: AxiosResponse | Error | undefined;
@@ -84,7 +85,7 @@ const mapStateToProps = (state: AppState) => ({
     isLoadingPerson: state.apiReducer.isLoadingPerson,
     godkjentVilkår: state.commonReducer.godkjentVilkår,
     kvittering: state.apiReducer.kvittering,
-    søknadSendt: state.apiReducer.søknadSendt,
+    søknadSendt: state.apiReducer.søknadSendt
 });
 
 export default connect<StateProps, {}, {}>(mapStateToProps)(hot(AppContainer));

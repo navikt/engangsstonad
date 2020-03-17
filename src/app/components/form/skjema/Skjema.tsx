@@ -18,6 +18,7 @@ import ValidationErrorSummaryBase, {
     ValidationSummaryError
 } from 'components/validation-error-summary/ValidationErrorSummaryBase';
 import { Language } from 'intl/IntlProvider';
+import VisibilityContextProvider from '../visibility-context/VisibilityContext';
 
 import './skjema.less';
 
@@ -79,52 +80,55 @@ const Skjema: React.FunctionComponent<Props> = ({
                     steg: getMessage(intl, stegConfig[activeStepIndex].stegIndikatorLabel)
                 })}
             />
-            <Formik
-                initialValues={{
-                    terminberkreftelse: [],
-                    oppholdNeste12Mnd: [],
-                    oppholdSiste12Mnd: []
-                }}
-                validateOnMount={true}
-                initialStatus={{}}
-                validationSchema={ActiveStep.validationSchema}
-                onSubmit={onSubmit}
-                render={(formikProps: FormikProps<Partial<FormProps>>) => {
-                    return (
-                        <div className="responsiveContainer">
-                            <SkjemaHeader
-                                onPrevious={() => handleBackClicked(formikProps)}
-                                activeStep={activeStepIndex + 1}
-                                stepTitles={stegConfig.map((stepConf) => stepConf.stegIndikatorLabel)}
-                            />
+            <VisibilityContextProvider>
+                <Formik
+                    initialValues={{
+                        terminberkreftelse: [],
+                        oppholdNeste12Mnd: [],
+                        oppholdSiste12Mnd: []
+                    }}
+                    validateOnMount={true}
+                    initialStatus={{}}
+                    validationSchema={ActiveStep.validationSchema}
+                    onSubmit={onSubmit}
+                    render={(formikProps: FormikProps<Partial<FormProps>>) => {
+                        console.log(formikProps);
+                        return (
+                            <div className="responsiveContainer">
+                                <SkjemaHeader
+                                    onPrevious={() => handleBackClicked(formikProps)}
+                                    activeStep={activeStepIndex + 1}
+                                    stepTitles={stegConfig.map((stepConf) => stepConf.stegIndikatorLabel)}
+                                />
 
-                            <Form>
-                                {formikProps.status?.hasSubmitted && !_.isEmpty(formikProps.errors) && (
-                                    <ValidationErrorSummaryBase
-                                        title={getMessage(intl, 'title')}
-                                        errors={getErrorMessages(formikProps)}
-                                    />
-                                )}
+                                <Form>
+                                    {formikProps.status?.hasSubmitted && !_.isEmpty(formikProps.errors) && (
+                                        <ValidationErrorSummaryBase
+                                            title={getMessage(intl, 'title')}
+                                            errors={getErrorMessages(formikProps)}
+                                        />
+                                    )}
 
-                                {ActiveStep.component({ formikProps, intl, language })}
+                                    {ActiveStep.component({ formikProps, intl, language })}
 
-                                {shouldRenderSubmitButton(formikProps) && (
-                                    <Hovedknapp
-                                        className="responsiveButton"
-                                        disabled={søknadSendingInProgress}
-                                        spinner={søknadSendingInProgress}
-                                        onClick={() => formikProps.setStatus({ hasSubmitted: true })}
-                                    >
-                                        {ActiveStep.fortsettKnappLabel}
-                                    </Hovedknapp>
-                                )}
+                                    {shouldRenderSubmitButton(formikProps) && (
+                                        <Hovedknapp
+                                            className="responsiveButton"
+                                            disabled={søknadSendingInProgress}
+                                            spinner={søknadSendingInProgress}
+                                            onClick={() => formikProps.setStatus({ hasSubmitted: true })}
+                                        >
+                                            {ActiveStep.fortsettKnappLabel}
+                                        </Hovedknapp>
+                                    )}
 
-                                <CancelButton />
-                            </Form>
-                        </div>
-                    );
-                }}
-            />
+                                    <CancelButton />
+                                </Form>
+                            </div>
+                        );
+                    }}
+                />
+            </VisibilityContextProvider>
             <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
             <UtløptSesjonModal erÅpen={sessionHasExpired} />
         </>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Datovelger from 'nav-datovelger/dist/datovelger/Datovelger';
 import { guid } from 'nav-frontend-js-utils';
-import { Field, FieldProps, useFormikContext } from 'formik';
+import { Field, FieldProps } from 'formik';
 
 import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
 import getMessage from 'common/util/i18nUtils';
@@ -10,7 +10,7 @@ import getMessage from 'common/util/i18nUtils';
 import { intlPrefix } from '../utils';
 import { withGradualVisibility } from '../visibility-hoc/withVisibility';
 import { DatovelgerProps } from 'nav-datovelger';
-import { FormProps } from 'app/engangsstonad/FormProps';
+import { VisibilityContext } from '../visibility-context/VisibilityContext';
 import { visibilityHook } from '../hooks/hooks';
 
 interface Props extends Partial<DatovelgerProps> {
@@ -18,10 +18,10 @@ interface Props extends Partial<DatovelgerProps> {
     parent?: string;
 }
 
-const DatovelgerElement: React.StatelessComponent<Props> = ({ name, parent = 'NO_PARENT', ...rest }) => {
+const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) => {
     const intl = useIntl();
-    const formik = useFormikContext<Partial<FormProps>>();
-    React.useEffect(() => visibilityHook(formik.status, formik.setStatus, name, parent), []);
+    const visibilityContext = React.useContext(VisibilityContext);
+    visibilityHook(visibilityContext.updateVisibility, name);
     return (
         <Field
             name={name}
@@ -38,7 +38,7 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, parent = 'NO
                                 id: field.name,
                                 name: field.name,
                                 onChange: (inputValue) => {
-                                    form.setFieldValue(field.name, inputValue);
+                                    form.setFieldValue(field.name, inputValue !== '' ? inputValue : undefined);
                                 },
                                 placeholder: 'dd.mm.yyyy'
                             }}

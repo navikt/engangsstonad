@@ -1,19 +1,19 @@
 import React from 'react';
-import { FieldProps, Field, useFormikContext } from 'formik';
+import { FieldProps, Field } from 'formik';
 
 import { Skjemanummer, AttachmentType, Attachment } from 'common/storage/attachment/types/Attachment';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
 import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
 import { visibilityHook } from '../hooks/hooks';
-import { FormProps } from 'app/engangsstonad/FormProps';
+import { VisibilityContext } from '../visibility-context/VisibilityContext';
 
 interface Props extends FormComponentProps {
     skjemanummer: Skjemanummer;
 }
 
-const AttachmentUploader: React.StatelessComponent<Props> = ({ name, parent ="NO_PARENT", skjemanummer }) => {
-    const formik = useFormikContext<Partial<FormProps>>();
-    React.useEffect(() => visibilityHook(formik.status, formik.setStatus, name, parent), []);
+const AttachmentUploader: React.StatelessComponent<Props> = ({ name, skjemanummer }) => {
+    const visibilityContext = React.useContext(VisibilityContext);
+    visibilityHook(visibilityContext.updateVisibility, name);
     return (
         <Field
             name={name}

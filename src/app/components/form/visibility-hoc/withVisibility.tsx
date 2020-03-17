@@ -1,5 +1,8 @@
 import React from 'react';
 import { useFormikContext } from 'formik';
+import { FormProps } from 'app/engangsstonad/FormProps';
+
+import { VisibilityContext } from '../visibility-context/VisibilityContext';
 import { shouldRender } from '../utils';
 
 export interface FormComponentProps {
@@ -13,11 +16,11 @@ export function withGradualVisibility<T>(WrappedComponent: React.ComponentType<T
         parent = 'NO_PARENT',
         ...otherProps
     }) => {
-        const formik = useFormikContext<Partial<FormData>>();
-        if (!shouldRender(formik, parent)) {
-            return null;
-        }
-        return <WrappedComponent name={name} parent={parent} {...(otherProps as T)} />;
+        const { values } = useFormikContext<Partial<FormProps>>();
+        const visibilityContext = React.useContext(VisibilityContext);
+        return shouldRender(visibilityContext.visibleComponents!, values, parent) ? (
+            <WrappedComponent name={name} parent={parent} {...(otherProps as T)} />
+        ) : null;
     };
     return VisibilityHoc;
 }

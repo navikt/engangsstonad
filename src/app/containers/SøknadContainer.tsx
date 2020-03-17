@@ -13,6 +13,7 @@ import { Language } from 'intl/IntlProvider';
 import { AppState } from 'reducers/index';
 import { FormProps } from 'app/engangsstonad/FormProps';
 
+import { getStepConfig } from '../engangsstonad/steg.config';
 
 interface Props {
     language: Language;

@@ -16,44 +16,28 @@ import getMessage from 'common/util/i18nUtils';
 import { IntlShape } from 'react-intl';
 import StegProps from './StegProps';
 
-const stepConfig = [
+export const getStepConfig = (intl: IntlShape, person: Person): StepConfig[] => [
     {
-        fortsettKnappLabelIntlId: 'standard.button.neste',
-        stegIndikatorLabelIntlId: 'relasjonBarn.sectionheading',
+        fortsettKnappLabel: getMessage(intl, 'standard.button.neste'),
+        stegIndikatorLabel: getMessage(intl, 'relasjonBarn.sectionheading'),
         component: (props: StegProps) => <Steg1 {...props} />,
         validationSchema: Steg1ValidationSchema
     },
     {
-        fortsettKnappLabelIntlId: 'standard.button.neste',
-        stegIndikatorLabelIntlId: 'annenForelder.sectionheading',
+        fortsettKnappLabel: getMessage(intl, 'standard.button.neste'),
+        stegIndikatorLabel: getMessage(intl, 'annenForelder.sectionheading'),
         component: (props: StegProps) => <Steg2 {...props} />,
         validationSchema: Steg2ValidationSchema
     },
     {
-        fortsettKnappLabelIntlId: 'standard.button.neste',
-        stegIndikatorLabelIntlId: 'medlemmskap.sectionheading',
+        fortsettKnappLabel: getMessage(intl, 'standard.button.neste'),
+        stegIndikatorLabel: getMessage(intl, 'medlemmskap.sectionheading'),
         component: (props: StegProps) => <Steg3 {...props} />,
         validationSchema: Steg3ValidationSchema
     },
     {
-        fortsettKnappLabelIntlId: 'standard.sectionheading',
-        stegIndikatorLabelIntlId: 'oppsummering.sectionheading',
+        fortsettKnappLabel: getMessage(intl, 'standard.sectionheading'),
+        stegIndikatorLabel: getMessage(intl, 'oppsummering.sectionheading'),
         component: (props: StegProps) => <Steg4 {...props} />
     }
 ];
-
-export default (intl: IntlShape, person: Person): StepConfig[] =>
-    stepConfig
-        .filter((step: any, index: number) => {
-            if (index === 1) {
-                return person.ikkeNordiskEøsLand;
-            } else {
-                return true;
-            }
-        })
-        .map((step: any) => ({
-            ...step,
-            fortsettKnappLabel: getMessage(intl, step.fortsettKnappLabelIntlId),
-            stegIndikatorLabel: getMessage(intl, step.stegIndikatorLabelIntlId),
-            component: step.component
-        }));
