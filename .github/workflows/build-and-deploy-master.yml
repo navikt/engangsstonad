@@ -70,7 +70,7 @@ jobs:
           token: ${{ secrets.NOTIFICATION }}
           title: Bygg av ${{ env.TAG }}
           body: |
-            Kommenter med <b>/promote ${{ env.TAG }} cluster</b>, hvor <b>cluster</b> er et gyldig clusternavn
+            Kommenter med <b>/promote cluster</b>, hvor <b>cluster</b> er et gyldig clusternavn
             <table>
             <tr><th>Cluster</th></tr>
             <tr><td>dev-sbs</td>
@@ -80,7 +80,7 @@ jobs:
 
       - name: Trigg deploy til dev-sbs 
         if: success()
-        uses: actions/github-script@0.3.0
+        uses: actions/github-script@0.8.0
         with:
           github-token: ${{secrets.NOTIFICATION}}
           script: |
@@ -89,11 +89,11 @@ jobs:
                             issue_number: ${{ steps.createdeployissue.outputs.number }} }
             github.issues.createComment({...issue,
                                     title: 'Deploy av ${{ env.TAG }}',
-                                    body: '/promote ${{ env.TAG }} dev-sbs'})
+                                    body: '/promote  dev-sbs'})
                                     
       - name: Trigg deploy til dev-gcp 
         if: success()
-        uses: actions/github-script@0.3.0
+        uses: actions/github-script@0.8.0
         with:
           github-token: ${{secrets.NOTIFICATION}}
           script: |
@@ -102,5 +102,5 @@ jobs:
                             issue_number: ${{ steps.createdeployissue.outputs.number }} }
             github.issues.createComment({...issue,
                                     title: 'Deploy av ${{ env.TAG }}',
-                                    body: '/promote ${{ env.TAG }} dev-gcp'}) 
+                                    body: '/promote dev-gcp'}) 
      
