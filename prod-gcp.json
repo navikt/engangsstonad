@@ -1,6 +1,6 @@
 {
     "ingress": "https://engangsstonad.nav.no",
-    "namespace" : "foreldrepenger",
+    "namespace" : "teamforeldrepenger",
     "appres" : "appres.nav.no",
     "env": {
         "APPRES_CMS_URL": "https://appres.nav.no",
