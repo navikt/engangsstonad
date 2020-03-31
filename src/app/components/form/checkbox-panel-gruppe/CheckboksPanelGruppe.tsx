@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { CheckboksPanelGruppe as NavCheckboksPanelGruppe, CheckboksPanelProps } from 'nav-frontend-skjema';
 import { FieldProps, Field } from 'formik';
 
-
 import { getErrorMessage, intlPrefix } from '../utils';
 import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
 import { VisibilityContext } from '../visibility-context/VisibilityContext';
@@ -24,7 +23,10 @@ const CheckboksPanelGruppe: React.StatelessComponent<Props> = ({ name, checkboxe
                 return (
                     <NavCheckboksPanelGruppe
                         legend={<FormattedMessage id={intlPrefix(name)} />}
-                        checkboxes={checkboxes.map((c) => ({ ...c, checked: values.includes(c.value as any) }))}
+                        checkboxes={checkboxes.map((c) => ({
+                            ...c,
+                            checked: !c.disabled && values.includes(c.value as any)
+                        }))}
                         onChange={(_, value) => {
                             if (values.includes(value)) {
                                 form.setFieldValue(
