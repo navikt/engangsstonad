@@ -12,7 +12,7 @@ const erInnenforTidsperiode = (dato: string, validDateRange?: Tidsperiode) => {
 const CountryPickerValidationSchema = (validDateRange?: Tidsperiode, invalidDateRanges: Tidsperiode[] = []) =>
     Yup.object().shape({
         [Questions.land]: Yup.string().required('Required'),
-        [Questions.fom]: Yup.string()
+        [Questions.fom]: Yup.date()
             .required('Required')
             .test(Questions.fom, 'Ikke en gyldig dato', (value) => {
                 return moment(value, moment.HTML5_FMT.DATE, true).isValid();
@@ -23,12 +23,8 @@ const CountryPickerValidationSchema = (validDateRange?: Tidsperiode, invalidDate
             .test(Questions.fom, 'Kan ikke overlappe ekisterende periode', (value) => {
                 return !invalidDateRanges.some((dateRange) => erInnenforTidsperiode(value, dateRange));
             })
-            .test(
-                Questions.fom,
-                'Kan ikke starte etter tom dato',
-                (value) => !moment(value).isAfter((Yup.ref(Questions.tom) as unknown) as string, 'days')
-            ),
-        [Questions.tom]: Yup.string()
+            .max(Yup.ref(Questions.tom), 'Kan ikke starte etter tom dato'),
+        [Questions.tom]: Yup.date()
             .required('Required')
             .test(Questions.tom, 'Ikke en gyldig dato', (value) => {
                 return moment(value, moment.HTML5_FMT.DATE, true).isValid();
@@ -39,11 +35,7 @@ const CountryPickerValidationSchema = (validDateRange?: Tidsperiode, invalidDate
             .test(Questions.fom, 'Kan ikke overlappe ekisterende periode', (value) => {
                 return !invalidDateRanges.some((dateRange) => erInnenforTidsperiode(value, dateRange));
             })
-            .test(
-                Questions.tom,
-                'tom dato kan ikke være før fom dato',
-                (value) => !moment(value).isBefore((Yup.ref(Questions.fom) as unknown) as string, 'days')
-            )
+            .min(Yup.ref(Questions.fom), 'tom dato kan ikke være før fom dato')
     });
 
 export default CountryPickerValidationSchema;
