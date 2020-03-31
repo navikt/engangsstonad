@@ -45,9 +45,11 @@ const Steg2: React.FunctionComponent<StegProps> = ({ formikProps, language, intl
                     />
                     <Checkbox name={Questions.utenlandskFodselsnummer} />
 
-                    {values[Questions.fodselsnummer] && values[Questions.utenlandskFodselsnummer] && (
-                        <Select name={Questions.bostedsland} options={getForignCountries(language)} />
-                    )}
+                    <Select
+                        name={Questions.bostedsland}
+                        parent={Questions.utenlandskFodselsnummer}
+                        options={getForignCountries(language)}
+                    />
                 </>
             )}
         </>
