@@ -42,9 +42,8 @@ const AttachmentUploader: React.StatelessComponent<Props> = ({ name, skjemanumme
                             );
                         }}
                     />
-                );
-            }}
-        />
+            )}}
+            />
     );
 };
 

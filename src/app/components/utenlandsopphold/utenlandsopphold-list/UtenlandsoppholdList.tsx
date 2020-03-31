@@ -6,6 +6,7 @@ import InteractiveListElement from 'components/interactive-list-element/Interact
 import { Utenlandsopphold } from '../../../types/domain/InformasjonOmUtenlandsopphold';
 
 import './utenlandsoppholdList.less';
+import { guid } from 'nav-frontend-js-utils';
 
 interface CountryListProps {
     language: Language;
@@ -24,6 +25,7 @@ export const CountryList: React.StatelessComponent<CountryListProps> = ({
         <ul className="utenlandsopphold-list">
             {utenlandsoppholdListe.map((utenlandsopphold) => (
                 <InteractiveListElement
+                    key={guid()}
                     title={countries.getName(utenlandsopphold.land, language)}
                     text={prettifyTidsperiode(utenlandsopphold.tidsperiode)}
                     deleteLinkText={'Slett'}
