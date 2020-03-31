@@ -12,6 +12,7 @@
     "annenForelder.ugyldigFødselsnummer.utenlandsk": "Fødselsnummer må fyllast ut",
     "annenForelder.ugyldigFødselsnummer": "Du må skrive eit gyldig nummer (elleve siffer)",
     "annenForelder.ugyldigNavn": "Du må skrive namnet på den andre forelderen",
+    "dokument.tittel.steg": "{steg} - Søknad om engangsstønad - NAV",
     "intro.button.startSøknad": "Begynn med søknaden",
     "intro.erMann.boblelenketekst": "Du finn søknaden for far her.",
     "intro.erMann.bobletekst": "Du kan ikkje søkje for mor. Er det du som skal ha eingongsstønaden, må du senda papirskjema i posten.",
@@ -195,5 +196,7 @@
     "oppsummering.text.antall.6": "Seks",
     "oppsummering.text.antall.7": "Sju",
     "oppsummering.text.antall.8": "Åtte",
-    "oppsummering.text.antall.9": "Ni"
+    "oppsummering.text.antall.9": "Ni",
+    "numberOfChildren.1": "eitt barn",
+    "numberOfChildren.2": "tvillingar"
 }
