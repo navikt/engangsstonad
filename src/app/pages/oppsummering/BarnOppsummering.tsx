@@ -11,6 +11,7 @@ import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 
 import '../../styles/engangsstonad.less';
 import getMessage from 'common/util/i18nUtils';
+import { formatDate } from 'common/util/datoUtils';
 
 interface Props {
     barn: FodtBarn & UfodtBarn;
@@ -47,14 +48,14 @@ const BarnOppsummering: React.StatelessComponent<Props> = (props) => {
             {erBarnetFødt && (
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.medFødselsdato')}
-                    text={fødselsdatoer[0]}
+                    text={formatDate(fødselsdatoer[0])}
                 />
             )}
             {!erBarnetFødt && termindato && terminbekreftelseDato && (
                 <div>
                     <DisplayTextWithLabel
                         label={getMessage(intl, 'termindato')}
-                        text={termindato}
+                        text={formatDate(termindato)}
                     />
                     <div className="oppsummering__attachments">
                         <EtikettLiten className="textWithLabel__label">
@@ -66,7 +67,7 @@ const BarnOppsummering: React.StatelessComponent<Props> = (props) => {
                     </div>
                     <DisplayTextWithLabel
                         label={getMessage(intl, 'oppsummering.text.somErDatert')}
-                        text={terminbekreftelseDato}
+                        text={formatDate(terminbekreftelseDato)}
                     />
                 </div>
             )}
