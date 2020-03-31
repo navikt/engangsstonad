@@ -1,4 +1,4 @@
-import UtenlandsoppholdValidationSchema from '../validationSchema';
+import UtenlandsoppholdValidationSchema from '../CountryPickerValidationSchema';
 import { Questions } from '../questions';
 import * as moment from 'moment';
 

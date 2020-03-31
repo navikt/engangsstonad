@@ -9,9 +9,10 @@ import AttachmentList from 'common/storage/attachment/components/AttachmentList'
 
 import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 
-import '../../styles/engangsstonad.less';
 import getMessage from 'common/util/i18nUtils';
 import { formatDate } from 'common/util/datoUtils';
+
+import '../../styles/engangsstonad.less';
 
 interface Props {
     barn: FodtBarn & UfodtBarn;

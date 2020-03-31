@@ -12,7 +12,7 @@ import { Language } from 'intl/IntlProvider';
 
 import { Utenlandsopphold, Tidsperiode } from '../../../types/domain/InformasjonOmUtenlandsopphold';
 
-import validationSchema from './validationSchema';
+import validationSchema from './CountryPickerValidationSchema';
 import { Questions } from './questions';
 
 import "./utenlandsoppholdModal.less";

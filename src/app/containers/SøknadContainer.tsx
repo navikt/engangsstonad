@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 
 import { Søkerinfo } from 'app/types/domain/Søkerinfo';
 import { sendSoknad } from 'actions/api/apiActionCreators';
