@@ -12,6 +12,7 @@
     "annenForelder.ugyldigFødselsnummer.utenlandsk": "You must enter a valid number",
     "annenForelder.ugyldigFødselsnummer": "You must enter a valid number (11 digits)",
     "annenForelder.ugyldigNavn": "You must write the name of the other parent",
+    "dokument.tittel.steg": "{steg} - Søknad om engangsstønad - NAV",
     "intro.button.startSøknad": "Start with the application",
     "intro.erMann.boblelenketekst": "The application for the father can be found here.",
     "intro.erMann.bobletekst": "You cannot submit an application for the mother. If you are the person who will receive the lump-sum grant, you have to fill out the application in paper form and send this by mail.",
@@ -195,5 +196,7 @@
     "sesjonUtløpt.tittel": "Du er logget ut",
     "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }",
     "søknadContainer.prompt": "Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?",
-    "validForm.summaryTitle": "Du må rette opp i følgende feil:"
+    "validForm.summaryTitle": "Du må rette opp i følgende feil:",
+    "numberOfChildren.1": "one child",
+    "numberOfChildren.2": "twins"
 }
