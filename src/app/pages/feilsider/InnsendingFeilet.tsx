@@ -16,7 +16,7 @@ interface StateProps {
 
 interface InnsendingFeiletProps {
     error?: any;
-};
+}
 
 type Props = InnsendingFeiletProps & StateProps & WrappedComponentProps;
 const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {

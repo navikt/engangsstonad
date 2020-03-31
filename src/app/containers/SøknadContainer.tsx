@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 
 import { sendSoknad } from 'actions/api/apiActionCreators';
 import { ApiActionTypes } from 'actions/api/apiActionDefinitions';

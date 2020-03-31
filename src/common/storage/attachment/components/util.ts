@@ -3,12 +3,8 @@ import { guid } from 'nav-frontend-js-utils';
 
 const generateAttachmentId = () => 'V'.concat(guid().replace(/-/g, ''));
 
-export const mapFileToAttachment = (
-    file: File,
-    type: AttachmentType,
-    skjemanummer: Skjemanummer
-): Attachment => {
-    return ({
+export const mapFileToAttachment = (file: File, type: AttachmentType, skjemanummer: Skjemanummer): Attachment => {
+    return {
         id: generateAttachmentId(),
         file,
         filename: file.name,
@@ -16,8 +12,8 @@ export const mapFileToAttachment = (
         pending: false,
         type,
         skjemanummer
-    });
+    };
 };
 
 export const isAttachmentWithError = ({ pending, filesize, url }: Attachment) =>
-    (pending === false && url === undefined) || filesize === 0;;
+    (pending === false && url === undefined) || filesize === 0;

@@ -15,6 +15,6 @@ interface Person {
     fødselsdato: string;
     ikkeNordiskEøsLand: boolean;
     bankkonto?: Bankkonto;
-};
+}
 
 export default Person;
