@@ -20,6 +20,7 @@ import StegProps from '../StegProps';
 import { AppState } from 'reducers/index';
 
 import './steg1.less';
+import { formatDate } from 'common/util/datoUtils';
 
 interface StateProps {
     søkerinfo: Søkerinfo;
@@ -33,7 +34,7 @@ const Steg1: React.StatelessComponent<StegProps & StateProps> = ({ formikProps, 
                 name={Questions.relevantBarn}
                 checkboxes={søkerinfo.barn.map((b) => ({
                     label: b.fornavn,
-                    subtext: b.fødselsdato,
+                    subtext: formatDate(b.fødselsdato),
                     value: b.fnr,
                     disabled: values[Questions.gjelderNyttbarn]
                 }))}
