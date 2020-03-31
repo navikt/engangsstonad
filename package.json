@@ -16,8 +16,8 @@
         "start-express": "node ./server.js",
         "start-mock-api-server": "node ./mock-api-server.js",
         "start": "cross-env NODE_ENV=development node ./src/build/scripts/start-dev.js",
-        "test": "cross-env NODE_ENV=test jest --config ./jest/jest.config.js --detectOpenHandles",
-        "test-coverage": "jest --config ./jest/jest.config.js --coverage --collectCoverageFrom=src/**/*.{ts,tsx} --collectCoverageFrom=!src/**/*.d.{ts,tsx}",
+        "jest": "cross-env NODE_ENV=test jest --config ./jest/jest.config.js --detectOpenHandles",
+        "jest-coverage": "jest --config ./jest/jest.config.js --coverage --collectCoverageFrom=src/**/*.{ts,tsx} --collectCoverageFrom=!src/**/*.d.{ts,tsx}",
         "lint": "tslint src/**"
     },
     "dependencies": {
