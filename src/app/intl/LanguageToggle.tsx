@@ -4,8 +4,8 @@ import { Wrapper, Button, Menu, MenuItem } from 'react-aria-menubutton';
 const { NedChevron } = require('nav-frontend-chevron');
 import 'nav-frontend-lenker-style';
 
-import NorwayFlagSVG from 'components/flags/NorwayFlagSVG';
-import UKFlagSVG from 'components/flags/UKFlagSVG';
+import NorwayFlagSVG from 'components/ikoner/flags/NorwayFlagSVG';
+import UKFlagSVG from 'components/ikoner/flags/UKFlagSVG';
 import getMessage from 'common/util/i18nUtils';
 import { Language } from './IntlProvider';
 

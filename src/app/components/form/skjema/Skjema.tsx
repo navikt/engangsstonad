@@ -77,7 +77,7 @@ const Skjema: React.FunctionComponent<Props> = ({
             <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
             <DocumentTitle
                 title={getMessage(intl, 'dokument.tittel.steg', {
-                    steg: getMessage(intl, stegConfig[activeStepIndex].stegIndikatorLabel),
+                    steg: stegConfig[activeStepIndex].stegIndikatorLabel,
                 })}
             />
             <VisibilityContextProvider>

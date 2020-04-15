@@ -12,7 +12,7 @@ import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import Plikter from 'components/modal-content/Plikter';
 import Personopplysninger from 'components/modal-content/Personopplysninger';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
-import Veiviser from 'components/veiviser/VeiviserSvg';
+import Veiviser from 'components/ikoner/flags/veiviser/VeiviserSvg';
 
 import getMessage from 'common/util/i18nUtils';
 import { DispatchProps } from 'common/redux/types';

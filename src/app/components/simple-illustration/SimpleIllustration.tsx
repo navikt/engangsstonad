@@ -1,7 +1,7 @@
 import * as React from 'react';
 import SpeechBubble from '../speech-bubble/SpeechBubble';
 
-import Veileder, { VeilederProps } from 'components/veileder/Veileder';
+import Veileder, { VeilederProps } from 'components/ikoner/flags/veileder/Veileder';
 
 import './simpleIllustration.less';
 

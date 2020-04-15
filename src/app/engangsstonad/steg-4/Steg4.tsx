@@ -6,7 +6,7 @@ import { WrappedComponentProps, FormattedMessage } from 'react-intl';
 
 import { DispatchProps } from 'common/redux/types';
 import getMessage from 'common/util/i18nUtils';
-import Veileder from 'components/veileder/Veileder';
+import Veileder from 'components/ikoner/flags/veileder/Veileder';
 import { AppState } from 'reducers/index';
 import { mapFormStateToEngangsstonadDto } from 'util/formStateToEngangsttonadDtoMapper';
 

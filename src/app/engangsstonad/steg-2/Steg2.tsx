@@ -14,7 +14,6 @@ import StegProps from '../StegProps';
 
 import './steg2.less';
 
-// TODO flytt
 export const getForignCountries = (language: Language) => {
     const isoCodeIndex = 0;
     const countryNameIndex = 1;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
-import AdvarselIkon from '../advarsel-ikon/AdvarselIkon';
+import AdvarselIkon from '../ikoner/flags/advarsel-ikon/AdvarselIkon';
 import BEMHelper from 'common/util/bem';
 import getMessage from 'common/util/i18nUtils';
 import Knappelenke from '../knappelenke/Knappelenke';

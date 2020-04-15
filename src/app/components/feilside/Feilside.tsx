@@ -4,7 +4,7 @@ import Lenke from 'nav-frontend-lenker';
 import LanguageToggle from '../../intl/LanguageToggle';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
-import { VeilederProps } from 'components/veileder/Veileder';
+import { VeilederProps } from 'components/ikoner/flags/veileder/Veileder';
 import { Language } from 'intl/IntlProvider';
 
 export interface Props {

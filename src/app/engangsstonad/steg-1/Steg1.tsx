@@ -9,7 +9,7 @@ import RadioPanelGruppeResponsiveWrapper from 'components/form/radio-panel-grupp
 import DatovelgerElement from 'components/form/date-input/DateInput';
 import { Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import AttachmentUploader from 'components/form/attachment-uploader/AttachmentUploader';
-import Veileder from 'components/veileder/Veileder';
+import Veileder from 'components/ikoner/flags/veileder/Veileder';
 
 import { Questions } from './questions';
 import StegProps from '../StegProps';
