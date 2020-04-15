@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface State {
-    visibleComponents: { [testst: string]: boolean };
+    visibleComponents: { [question: string]: boolean };
 }
 
 export const VisibilityContext = React.createContext({ visibleComponents: {}, updateVisibility: (props?: any) => {} });

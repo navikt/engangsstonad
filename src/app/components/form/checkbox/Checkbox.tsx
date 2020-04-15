@@ -12,22 +12,19 @@ const Checkbox: React.StatelessComponent<FormComponentProps> = ({ name }) => {
     const visibilityContext = React.useContext(VisibilityContext);
     visibilityHook(visibilityContext.updateVisibility, name);
     return (
-        <Field
-            name={name}
-            render={({ field, form }: FieldProps) => {
-                return (
-                    <NavCheckbox
-                        label={<FormattedMessage id={intlPrefix(name)} />}
-                        onChange={(e) => {
-                            form.setFieldValue(field.name, e.target.checked);
-                            form.setFieldTouched(field.name, true, false);
-                        }}
-                        checked={field.value || false}
-                        feil={getErrorMessage(form, name)}
-                    />
-                );
-            }}
-        />
+        <Field name={name}>
+            {({ form, field }: FieldProps) => (
+                <NavCheckbox
+                    label={<FormattedMessage id={intlPrefix(name)} />}
+                    onChange={(e) => {
+                        form.setFieldValue(field.name, e.target.checked);
+                        form.setFieldTouched(field.name, true, false);
+                    }}
+                    checked={field.value || false}
+                    feil={getErrorMessage(form, name)}
+                />
+            )}
+        </Field>
     );
 };
 export default withGradualVisibility(Checkbox);

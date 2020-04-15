@@ -10,7 +10,6 @@ const store = createStore(
 );
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {
-    console.log(rootreducer);
     module.hot.accept('./reducers', () => store.replaceReducer(rootreducer))
   }
 

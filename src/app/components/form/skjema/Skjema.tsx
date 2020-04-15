@@ -15,7 +15,7 @@ import SkjemaHeader from 'components/skjema-header/SkjemaHeader';
 import CancelButton from 'components/cancel-button/CancelButton';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
 import ValidationErrorSummaryBase, {
-    ValidationSummaryError
+    ValidationSummaryError,
 } from 'components/validation-error-summary/ValidationErrorSummaryBase';
 import { Language } from 'intl/IntlProvider';
 import VisibilityContextProvider from '../visibility-context/VisibilityContext';
@@ -35,7 +35,7 @@ const Skjema: React.FunctionComponent<Props> = ({
     sessionHasExpired,
     language,
     stegConfig,
-    sendSøknad
+    sendSøknad,
 }) => {
     const intl = useIntl();
     const [activeStepIndex, setActiveStepIndex] = React.useState(0);
@@ -57,7 +57,7 @@ const Skjema: React.FunctionComponent<Props> = ({
     const getErrorMessages = (formikProps: FormikProps<Partial<FormProps>>): ValidationSummaryError[] => {
         return Object.entries(formikProps.errors).map((error) => ({
             name: error[0],
-            message: error[1] as string
+            message: error[1] as string,
         }));
     };
 
@@ -77,7 +77,7 @@ const Skjema: React.FunctionComponent<Props> = ({
             <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
             <DocumentTitle
                 title={getMessage(intl, 'dokument.tittel.steg', {
-                    steg: getMessage(intl, stegConfig[activeStepIndex].stegIndikatorLabel)
+                    steg: getMessage(intl, stegConfig[activeStepIndex].stegIndikatorLabel),
                 })}
             />
             <VisibilityContextProvider>
@@ -85,13 +85,14 @@ const Skjema: React.FunctionComponent<Props> = ({
                     initialValues={{
                         terminberkreftelse: [],
                         oppholdNeste12Mnd: [],
-                        oppholdSiste12Mnd: []
+                        oppholdSiste12Mnd: [],
                     }}
                     validateOnMount={true}
                     initialStatus={{}}
                     validationSchema={ActiveStep.validationSchema}
                     onSubmit={onSubmit}
-                    render={(formikProps: FormikProps<Partial<FormProps>>) => {
+                >
+                    {(formikProps: FormikProps<Partial<FormProps>>) => {
                         return (
                             <div className="responsiveContainer">
                                 <SkjemaHeader
@@ -126,7 +127,7 @@ const Skjema: React.FunctionComponent<Props> = ({
                             </div>
                         );
                     }}
-                />
+                </Formik>
             </VisibilityContextProvider>
             <Prompt message={getMessage(intl, 'søknadContainer.prompt')} />
             <UtløptSesjonModal erÅpen={sessionHasExpired} />

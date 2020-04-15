@@ -21,27 +21,27 @@ export const getStepConfig = (intl: IntlShape, person: Person): StepConfig[] => 
         fortsettKnappLabel: getMessage(intl, 'standard.button.neste'),
         stegIndikatorLabel: getMessage(intl, 'relasjonBarn.sectionheading'),
         component: (props: StegProps) => <Steg1 {...props} />,
-        validationSchema: Steg1ValidationSchema
+        validationSchema: Steg1ValidationSchema,
     },
-    ...(søkerinfo.ikkeNordiskEøsLand
+    ...(person.ikkeNordiskEøsLand
         ? [
               {
                   fortsettKnappLabel: getMessage(intl, 'standard.button.neste'),
                   stegIndikatorLabel: getMessage(intl, 'annenForelder.sectionheading'),
                   component: (props: StegProps) => <Steg2 {...props} />,
-                  validationSchema: Steg2ValidationSchema
-              }
+                  validationSchema: Steg2ValidationSchema,
+              },
           ]
         : []),
     {
         fortsettKnappLabel: getMessage(intl, 'standard.button.neste'),
         stegIndikatorLabel: getMessage(intl, 'medlemmskap.sectionheading'),
         component: (props: StegProps) => <Steg3 {...props} />,
-        validationSchema: Steg3ValidationSchema
+        validationSchema: Steg3ValidationSchema,
     },
     {
         fortsettKnappLabel: getMessage(intl, 'standard.sectionheading'),
         stegIndikatorLabel: getMessage(intl, 'oppsummering.sectionheading'),
-        component: (props: StegProps) => <Steg4 {...props} />
-    }
+        component: (props: StegProps) => <Steg4 {...props} />,
+    },
 ];

@@ -7,15 +7,14 @@ import { withGradualVisibility, FormComponentProps } from '../visibility-hoc/wit
 import { VisibilityContext } from '../visibility-context/VisibilityContext';
 import { visibilityHook } from '../hooks/hooks';
 
-type Props = FormComponentProps & Omit<InputProps, 'label' | 'onChange' | 'value'>
+type Props = FormComponentProps & Omit<InputProps, 'label' | 'onChange' | 'value'>;
 
 const Input: React.StatelessComponent<Props> = ({ name, parent = 'NO_PARENT', ...rest }) => {
     const visibilityContext = React.useContext(VisibilityContext);
     visibilityHook(visibilityContext.updateVisibility, name);
     return (
-        <Field
-            name={name}
-            render={({ field, form }: FieldProps) => {
+        <Field name={name}>
+            {({ form, field }: FieldProps) => {
                 return (
                     <NavInput
                         id={name}
@@ -30,7 +29,7 @@ const Input: React.StatelessComponent<Props> = ({ name, parent = 'NO_PARENT', ..
                     />
                 );
             }}
-        />
+        </Field>
     );
 };
 export default withGradualVisibility(Input);

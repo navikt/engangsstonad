@@ -23,9 +23,8 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) =
     const visibilityContext = React.useContext(VisibilityContext);
     visibilityHook(visibilityContext.updateVisibility, name);
     return (
-        <Field
-            name={name}
-            render={({ field, form }: FieldProps) => {
+        <Field name={name}>
+            {({ form, field }: FieldProps) => {
                 const feilmelding = form.status?.hasSubmitted ? form.errors[name]?.toString() : undefined;
                 return (
                     <SkjemaInputElement
@@ -40,7 +39,7 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) =
                                 onChange: (inputValue) => {
                                     form.setFieldValue(field.name, inputValue !== '' ? inputValue : undefined);
                                 },
-                                placeholder: 'dd.mm.yyyy'
+                                placeholder: 'dd.mm.yyyy',
                             }}
                             onChange={(value) => {
                                 if (value !== 'Invalid date') {
@@ -53,7 +52,7 @@ const DatovelgerElement: React.StatelessComponent<Props> = ({ name, ...rest }) =
                     </SkjemaInputElement>
                 );
             }}
-        />
+        </Field>
     );
 };
 export default withGradualVisibility<Props>(DatovelgerElement);

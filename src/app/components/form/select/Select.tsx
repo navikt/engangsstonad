@@ -20,32 +20,29 @@ const Select: React.FunctionComponent<Props> = ({ name, options }) => {
     const visibilityContext = React.useContext(VisibilityContext);
     visibilityHook(visibilityContext.updateVisibility, name);
     return (
-        <Field
-            name={name}
-            render={({ field, form }: FieldProps) => {
-                return (
-                    <NavSelect
-                        bredde="fullbredde"
-                        label={<FormattedMessage id={intlPrefix(name)} />}
-                        onChange={(e) => {
-                            form.setFieldValue(field.name, e.target.value);
-                            form.setFieldTouched(field.name, true, false);
-                        }}
-                        value={field.value}
-                        feil={getErrorMessage(form, name)}
-                    >
-                        <option key={guid()} value={''} />
-                        {options.map((option) => {
-                            return (
-                                <option key={guid()} value={option.value}>
-                                    {option.label}
-                                </option>
-                            );
-                        })}
-                    </NavSelect>
-                );
-            }}
-        />
+        <Field name={name}>
+            {({ form, field }: FieldProps) => (
+                <NavSelect
+                    bredde="fullbredde"
+                    label={<FormattedMessage id={intlPrefix(name)} />}
+                    onChange={(e) => {
+                        form.setFieldValue(field.name, e.target.value);
+                        form.setFieldTouched(field.name, true, false);
+                    }}
+                    value={field.value}
+                    feil={getErrorMessage(form, name)}
+                >
+                    <option key={guid()} value={''} />
+                    {options.map((option) => {
+                        return (
+                            <option key={guid()} value={option.value}>
+                                {option.label}
+                            </option>
+                        );
+                    })}
+                </NavSelect>
+            )}
+        </Field>
     );
 };
 export default withGradualVisibility<Props>(Select);

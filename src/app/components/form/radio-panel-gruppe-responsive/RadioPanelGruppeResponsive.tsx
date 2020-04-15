@@ -5,7 +5,7 @@ import { RadioPanelGruppeResponsive } from 'components/radio-panel-gruppe-respon
 
 import { parseNavFrontend, getCheckedRadioValue } from './utils/utils';
 import { intlPrefix, getErrorMessage } from '../utils';
-import { FormComponentProps, withGradualVisibility as withGradualVisibility } from '../visibility-hoc/withVisibility';
+import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
 import { VisibilityContext } from '../visibility-context/VisibilityContext';
 import { visibilityHook } from '../hooks/hooks';
 
@@ -18,7 +18,7 @@ interface Props extends FormComponentProps {
 
 const RadioPanelGruppeResponsiveWrapper: React.FunctionComponent<Props> = ({
     name,
-    parent = "NO_PARENT",
+    parent = 'NO_PARENT',
     radioValues,
     twoColumns,
     ...rest
@@ -26,29 +26,26 @@ const RadioPanelGruppeResponsiveWrapper: React.FunctionComponent<Props> = ({
     const visibilityContext = React.useContext(VisibilityContext);
     visibilityHook(visibilityContext.updateVisibility, name);
     return (
-        <Field
-            name={name}
-            render={({ field, form }: FieldProps) => {
-                return (
-                    <RadioPanelGruppeResponsive
-                        name={field.name}
-                        legend={<FormattedMessage id={intlPrefix(name)} />}
-                        radios={radioValues.map((radioValue) => ({
-                            label: <FormattedMessage id={intlPrefix(`${field.name}.${radioValue}`)} />,
-                            value: radioValue.toString()
-                        }))}
-                        onChange={(_, value: string) => {
-                            form.setFieldValue(field.name, parseNavFrontend(value));
-                            form.setFieldTouched(field.name, true, false);
-                        }}
-                        checked={getCheckedRadioValue(field.value)}
-                        twoColumns={twoColumns}
-                        feil={getErrorMessage(form, name)}
-                        {...rest}
-                    />
-                );
-            }}
-        />
+        <Field name={name}>
+            {({ form, field }: FieldProps) => (
+                <RadioPanelGruppeResponsive
+                    name={field.name}
+                    legend={<FormattedMessage id={intlPrefix(name)} />}
+                    radios={radioValues.map((radioValue) => ({
+                        label: <FormattedMessage id={intlPrefix(`${field.name}.${radioValue}`)} />,
+                        value: radioValue.toString(),
+                    }))}
+                    onChange={(_, value: string) => {
+                        form.setFieldValue(field.name, parseNavFrontend(value));
+                        form.setFieldTouched(field.name, true, false);
+                    }}
+                    checked={getCheckedRadioValue(field.value)}
+                    twoColumns={twoColumns}
+                    feil={getErrorMessage(form, name)}
+                    {...rest}
+                />
+            )}
+        </Field>
     );
 };
 export default withGradualVisibility<Props>(RadioPanelGruppeResponsiveWrapper);

@@ -16,16 +16,15 @@ const CheckboksPanelGruppe: React.StatelessComponent<Props> = ({ name, checkboxe
     const visibilityContext = React.useContext(VisibilityContext);
     visibilityHook(visibilityContext.updateVisibility, name);
     return (
-        <Field
-            name={name}
-            render={({ field, form }: FieldProps) => {
+        <Field name={name}>
+            {({ form, field }: FieldProps) => {
                 const values: string[] = field.value || [];
                 return (
                     <NavCheckboksPanelGruppe
                         legend={<FormattedMessage id={intlPrefix(name)} />}
                         checkboxes={checkboxes.map((c) => ({
                             ...c,
-                            checked: !c.disabled && values.includes(c.value as any)
+                            checked: !c.disabled && values.includes(c.value as any),
                         }))}
                         onChange={(_, value) => {
                             if (values.includes(value)) {
@@ -41,7 +40,7 @@ const CheckboksPanelGruppe: React.StatelessComponent<Props> = ({ name, checkboxe
                     />
                 );
             }}
-        />
+        </Field>
     );
 };
 export default withGradualVisibility(CheckboksPanelGruppe);
