@@ -18,7 +18,7 @@ import ValidationErrorSummaryBase, {
     ValidationSummaryError,
 } from 'components/validation-error-summary/ValidationErrorSummaryBase';
 import { Language } from 'intl/IntlProvider';
-import VisibilityContextProvider from '../visibility-context/VisibilityContext';
+import VisibilityContextProvider from '../visibility/VisibilityContext';
 
 import './skjema.less';
 

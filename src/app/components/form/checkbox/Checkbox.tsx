@@ -3,10 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { FieldProps, Field } from 'formik';
 import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 
-import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
+import { FormComponentProps, withGradualVisibility } from '../visibility/withVisibility';
 import { intlPrefix, getErrorMessage } from '../utils';
 import { visibilityHook } from '../hooks/hooks';
-import { VisibilityContext } from '../visibility-context/VisibilityContext';
+import { VisibilityContext } from '../visibility/VisibilityContext';
 
 const Checkbox: React.StatelessComponent<FormComponentProps> = ({ name }) => {
     const visibilityContext = React.useContext(VisibilityContext);

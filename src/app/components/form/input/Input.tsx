@@ -3,8 +3,8 @@ import { FormattedMessage } from 'react-intl';
 import { FieldProps, Field } from 'formik';
 import { Input as NavInput, InputProps } from 'nav-frontend-skjema';
 import { getErrorMessage, intlPrefix } from '../utils';
-import { withGradualVisibility, FormComponentProps } from '../visibility-hoc/withVisibility';
-import { VisibilityContext } from '../visibility-context/VisibilityContext';
+import { withGradualVisibility, FormComponentProps } from '../visibility/withVisibility';
+import { VisibilityContext } from '../visibility/VisibilityContext';
 import { visibilityHook } from '../hooks/hooks';
 
 type Props = FormComponentProps & Omit<InputProps, 'label' | 'onChange' | 'value'>;

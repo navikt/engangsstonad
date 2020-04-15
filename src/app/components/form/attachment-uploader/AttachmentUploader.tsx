@@ -3,9 +3,9 @@ import { FieldProps, Field } from 'formik';
 
 import { Skjemanummer, AttachmentType, Attachment } from 'common/storage/attachment/types/Attachment';
 import AttachmentsUploader from 'common/storage/attachment/components/AttachmentUploader';
-import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
+import { FormComponentProps, withGradualVisibility } from '../visibility/withVisibility';
 import { visibilityHook } from '../hooks/hooks';
-import { VisibilityContext } from '../visibility-context/VisibilityContext';
+import { VisibilityContext } from '../visibility/VisibilityContext';
 
 interface Props extends FormComponentProps {
     skjemanummer: Skjemanummer;

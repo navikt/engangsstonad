@@ -8,9 +8,9 @@ import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputEleme
 import getMessage from 'common/util/i18nUtils';
 
 import { intlPrefix } from '../utils';
-import { withGradualVisibility } from '../visibility-hoc/withVisibility';
+import { withGradualVisibility } from '../visibility/withVisibility';
 import { DatovelgerProps } from 'nav-datovelger';
-import { VisibilityContext } from '../visibility-context/VisibilityContext';
+import { VisibilityContext } from '../visibility/VisibilityContext';
 import { visibilityHook } from '../hooks/hooks';
 
 interface Props extends Partial<DatovelgerProps> {

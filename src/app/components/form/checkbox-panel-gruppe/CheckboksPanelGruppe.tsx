@@ -4,8 +4,8 @@ import { CheckboksPanelGruppe as NavCheckboksPanelGruppe, CheckboksPanelProps } 
 import { FieldProps, Field } from 'formik';
 
 import { getErrorMessage, intlPrefix } from '../utils';
-import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
-import { VisibilityContext } from '../visibility-context/VisibilityContext';
+import { FormComponentProps, withGradualVisibility } from '../visibility/withVisibility';
+import { VisibilityContext } from '../visibility/VisibilityContext';
 import { visibilityHook } from '../hooks/hooks';
 
 interface Props extends FormComponentProps {

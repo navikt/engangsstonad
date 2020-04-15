@@ -19,10 +19,3 @@ export const getErrorMessage = (form: FormikProps<Partial<FormProps>>, name: str
         undefined
     );
 };
-
-export const shouldRender = (visibleComponents: object, values: Partial<FormProps> , parent: string): boolean => {
-    if (parent === 'NO_PARENT') {
-        return true;
-    }
-    return values[parent] !== undefined && visibleComponents[parent] === true;
-};

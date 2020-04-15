@@ -1,8 +1,8 @@
 import { RadioValues } from "../RadioPanelGruppeResponsive";
 import { JaNeiSpørsmål } from "./JaNeiSpørsmål";
 
-export const isNumber = (string: string) => {
-    return /^\d+$/.test(string);
+export const isNumber = (tekst: string) => {
+    return /^\d+$/.test(tekst);
 }
 
 export const isJaNeiSpørsmål = (value: string) => {

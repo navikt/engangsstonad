@@ -5,8 +5,8 @@ import { Select as NavSelect, SelectProps } from 'nav-frontend-skjema';
 import { guid } from 'nav-frontend-js-utils';
 
 import { getErrorMessage, intlPrefix } from '../utils';
-import { FormComponentProps, withGradualVisibility } from '../visibility-hoc/withVisibility';
-import { VisibilityContext } from '../visibility-context/VisibilityContext';
+import { FormComponentProps, withGradualVisibility } from '../visibility/withVisibility';
+import { VisibilityContext } from '../visibility/VisibilityContext';
 import { visibilityHook } from '../hooks/hooks';
 
 interface Props extends FormComponentProps, Omit<SelectProps, 'name' | 'children'> {
