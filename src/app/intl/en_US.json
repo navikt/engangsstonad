@@ -218,13 +218,28 @@
     "vedlegg.virus.flereFeil": "{filename} - The attachment did not pass our virus scan",
     "vedlegg.virus": "The attachment did not pass our virus scan",
 
-
-    "kvittering.text.hvorFinnerJegStatus": "Hvor finner jeg status på min søknad?",
-    "sesjonUtløpt.avslutt": "Nei, jeg vil avslutte",
-    "sesjonUtløpt.fortsett": "Ja, jeg vil fortsette",
+    "kvittering.text.hvorFinnerJegStatus": "Where do I find the status of my application?",
+    "sesjonUtløpt.avslutt": "No, I would like to exit",
+    "sesjonUtløpt.fortsett": "Yes, I would like to continue",
     "sesjonUtløpt.ingress": "Du må logge inn på nytt for å fortsette med søknaden.</br>Ønsker du å fortsette?",
     "sesjonUtløpt.tittel": "Du er logget ut",
     "oppsummering.text.informasjonOmBarnet": "Informasjon om { antallBarn }",
     "søknadContainer.prompt": "Hvis du går ut av siden vil du miste all informasjonen som du har fylt ut i søknaden. Ønsker du å fortsette?",
-    "validForm.summaryTitle": "Du må rette opp i følgende feil:"
+    "validForm.summaryTitle": "Du må rette opp i følgende feil:",
+    "utvidetInformasjon.lukkTekst": "Lukk informasjon",
+    "psg.åpneLabel": "Les mer om å ta et bra bilde av vedlegg",
+    "psg.innholdstittel": "Ta bilde av vedlegget og last opp",
+    "psg.section1.tittel": "Slik tar du et godt bilde:",
+    "psg.section1.liste": "<li>Hold mobilen eller kameraet direkte over dokumentet.</li><li>Vedlegget skal fylle hele bildet. Bildet skal ikke <i>ikke</i> inneholde annen dokumentasjon eller gjenstander.</li><li>Bildet må inneholde all tekst i vedlegget. Hvis vedlegget er skrevet på mer enn én side, bør du last opp flere bilder.</li>",
+    "psg.section2.tittel": "Etter at du har tatt bildet, sjekk følgende før du laster opp:",
+    "psg.section2.liste": "<li>Vedlegget har riktig retning.</li><li>Teksten til vedlegget er godt leselig.</li><li>Bildet er godt opplyst, uten skygger.</li>",
+    "psg.icon.heading": "Bra og dårlige eksempler på bilder av legeerklæring",
+    "psg.good": "Bra",
+    "psg.bad": "Dårlig",
+    "psg.icon.label.good": "Vedlegget fyller hele bildet",
+    "psg.icon.label.keystone": "Bildet er ikke tatt ovenfra",
+    "psg.icon.label.horizontal": "Bildet har ikke riktig retning",
+    "psg.icon.label.shadow": "Bildet har skygge på vedlegget",
+    "psg.lenkepanel.url": "https://www.nav.no/no/nav-og-samfunn/kontakt-nav/relatert-informasjon/ta-bilde-av-vedleggene-med-mobilen",
+    "psg.lenkepanel.text": "Mer hjelp til å laste opp vedlegg (åpnes i et nytt vindu)."
 }

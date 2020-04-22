@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Attachment, AttachmentType, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import AttachmentOverview from 'common/storage/attachment/components/AttachmentOverview';
+import UtvidetInformasjon from 'components/utvidet-informasjon/UtvidetInformasjon';
+import PictureScanningGuide from 'components/picture-scanning-guide/PictureScanningGuide';
+import { FormattedMessage } from 'react-intl';
 
 export interface AttachmentsUploaderProps {
     attachments: Attachment[];
@@ -10,9 +13,7 @@ export interface AttachmentsUploaderProps {
     onFileDelete: (attachment: Attachment) => void;
 }
 
-export default class AttachmentsUploaderPure extends React.Component<
-    AttachmentsUploaderProps
-> {
+export default class AttachmentsUploaderPure extends React.Component<AttachmentsUploaderProps> {
     constructor(props: AttachmentsUploaderProps) {
         super(props);
         this.onFileDelete = this.onFileDelete.bind(this);
@@ -28,19 +29,24 @@ export default class AttachmentsUploaderPure extends React.Component<
         const { onFileDelete } = this.props;
         files.forEach((file) => {
             onFileDelete(file);
-        })
+        });
     }
 
     render() {
         const { attachments, attachmentType, skjemanummer } = this.props;
         return (
-            <AttachmentOverview
-                attachments={attachments}
-                attachmentType={attachmentType}
-                skjemanummer={skjemanummer}
-                onFilesSelect={this.onFilesSelect}
-                onFileDelete={this.onFileDelete}
-            />
+            <>
+                <AttachmentOverview
+                    attachments={attachments}
+                    attachmentType={attachmentType}
+                    skjemanummer={skjemanummer}
+                    onFilesSelect={this.onFilesSelect}
+                    onFileDelete={this.onFileDelete}
+                />
+                <UtvidetInformasjon apneLabel={<FormattedMessage id="psg.åpneLabel" />}>
+                    <PictureScanningGuide />
+                </UtvidetInformasjon>
+            </>
         );
     }
 }
