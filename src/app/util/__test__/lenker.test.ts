@@ -10,7 +10,7 @@ const testLenke = (href: string): Promise<any> => {
 };
 
 describe('eksterne lenker', () => {
-    it('alle lenker skal returnere 200', () => {
+    xit('alle lenker skal returnere 200', () => {
         return Promise.all(Object.values(lenker).map(testLenke)).then((results) => {
             results.forEach((result) => expect(result).toEqual(200));
         });
