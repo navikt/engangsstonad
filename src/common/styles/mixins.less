@@ -1,3 +1,5 @@
+@import './variables.less';
+
 .buttonFocus() {
     outline: none;
     box-shadow: 0 0 0 3px @orangeFocus;
@@ -12,6 +14,17 @@
     &:hover {
         border-color: @c-buttonBlue;
     }
+    &:focus {
+        .buttonFocus();
+    }
+}
+
+.knappeLenke() {
+    position: relative;
+    border: none !important;
+    background: transparent;
+    padding: 0;
+    display: inline-block;
     &:focus {
         .buttonFocus();
     }
