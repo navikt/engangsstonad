@@ -10,12 +10,12 @@ class VisibilityContextProvider extends React.Component<{}, State> {
     constructor(props: {}) {
         super(props);
         this.state = {
-            visibleComponents: {}
+            visibleComponents: {},
         };
     }
 
     updateVisibility = (visibility: any) => {
-        this.setState((prevState: State) => ({ visibleComponents: { ...this.state.visibleComponents, ...visibility } }));
+        this.setState((prevState: State) => ({ visibleComponents: { ...prevState.visibleComponents, ...visibility } }));
     };
 
     render() {
