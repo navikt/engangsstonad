@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { FieldProps, Field } from 'formik';
+import { FieldProps, FastField } from 'formik';
 import { Input as NavInput, InputProps } from 'nav-frontend-skjema';
 import { getErrorMessage, intlPrefix } from '../utils';
 import { withGradualVisibility, FormComponentProps } from '../visibility/withVisibility';
 import { VisibilityContext } from '../visibility/VisibilityContext';
 import { visibilityHook } from '../hooks/hooks';
+import _ from 'lodash';
 
 type Props = FormComponentProps & Omit<InputProps, 'label' | 'onChange' | 'value'>;
 
@@ -13,7 +14,7 @@ const Input: React.StatelessComponent<Props> = ({ name, parent = 'NO_PARENT', ..
     const visibilityContext = React.useContext(VisibilityContext);
     visibilityHook(visibilityContext.updateVisibility, name);
     return (
-        <Field name={name}>
+        <FastField name={name}>
             {({ form, field }: FieldProps) => {
                 return (
                     <NavInput
@@ -29,7 +30,7 @@ const Input: React.StatelessComponent<Props> = ({ name, parent = 'NO_PARENT', ..
                     />
                 );
             }}
-        </Field>
+        </FastField>
     );
 };
 export default withGradualVisibility(Input);
