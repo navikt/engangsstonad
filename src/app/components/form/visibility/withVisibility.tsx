@@ -9,13 +9,12 @@ export interface FormComponentProps {
     parent?: string;
 }
 
-const shouldRender = (visibleComponents: object, values: Partial<FormProps> , parent: string): boolean => {
+const shouldRender = (visibleComponents: object, values: Partial<FormProps>, parent: string): boolean => {
     if (parent === 'NO_PARENT') {
         return true;
     }
     return values[parent] !== undefined && visibleComponents[parent] === true;
 };
-
 
 export function withGradualVisibility<T>(WrappedComponent: React.ComponentType<T & FormComponentProps>) {
     const VisibilityHoc: React.FunctionComponent<T & FormComponentProps> = ({
@@ -31,3 +30,7 @@ export function withGradualVisibility<T>(WrappedComponent: React.ComponentType<T
     };
     return VisibilityHoc;
 }
+
+export const isVisible = (question: string, visibleComponents: object): boolean => {
+    return visibleComponents[question];
+};

@@ -15,7 +15,5 @@ export const getPlaceholder = (value: string): string => {
 export const getErrorMessage = (form: FormikProps<Partial<FormProps>>, name: string) => {
     return form.status?.hasSubmitted && form.errors[name] ? (
         <FormattedMessage id={form.errors[name]?.toString()} />
-    ) : (
-        undefined
-    );
+    ) : undefined;
 };

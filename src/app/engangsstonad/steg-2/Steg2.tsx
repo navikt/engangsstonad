@@ -22,7 +22,7 @@ export const getForignCountries = (language: Language) => {
         .filter((countryOptionValue) => countryOptionValue[isoCodeIndex] !== 'NO')
         .map((countryOptionValue: string[]) => ({
             label: countryOptionValue[countryNameIndex],
-            value: countryOptionValue[isoCodeIndex]
+            value: countryOptionValue[isoCodeIndex],
         }));
 };
 
@@ -36,21 +36,20 @@ const Steg2: React.FunctionComponent<StegProps> = ({ formikProps, language, intl
                 disabled={values[Questions.kanIkkeOppgis]}
             />
             <Checkbox name={Questions.kanIkkeOppgis} />
-            {values[Questions.navn] && !values[Questions.kanIkkeOppgis] && (
+            {!values[Questions.kanIkkeOppgis] && (
                 <>
                     <Input
                         name={Questions.fodselsnummer}
+                        parent={Questions.navn}
                         placeholder={getMessage(intl, intlPlaceholderPrefix(Questions.fodselsnummer))}
                     />
-                    <Checkbox name={Questions.utenlandskFodselsnummer} />
+                    <Checkbox name={Questions.utenlandskFodselsnummer} parent={Questions.navn} />
 
-                    {values[Questions.utenlandskFodselsnummer] && (
-                        <Select
-                            name={Questions.bostedsland}
-                            parent={Questions.utenlandskFodselsnummer}
-                            options={getForignCountries(language)}
-                        />
-                    )}
+                    <Select
+                        name={Questions.bostedsland}
+                        parent={Questions.utenlandskFodselsnummer}
+                        options={getForignCountries(language)}
+                    />
                 </>
             )}
         </>

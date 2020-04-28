@@ -3,6 +3,8 @@ import { FormattedMessage } from 'react-intl';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import * as moment from 'moment';
 
+import { isVisible } from 'components/form/visibility/withVisibility';
+import { VisibilityContext } from 'components/form/visibility/VisibilityContext';
 import Select from 'components/form/select/Select';
 import { JaNeiSpørsmål } from 'components/form/radio-panel-gruppe-responsive/utils/JaNeiSpørsmål';
 import RadioPanelGruppeResponsiveWrapper from 'components/form/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
@@ -18,6 +20,9 @@ import './steg1.less';
 
 const Steg1: React.StatelessComponent<StegProps> = ({ formikProps }) => {
     const { values } = formikProps;
+    const visibilityContext = React.useContext(VisibilityContext);
+    const dagensDato = moment().format(moment.HTML5_FMT.DATE);
+
     return (
         <div className="steg1">
             <RadioPanelGruppeResponsiveWrapper
@@ -37,7 +42,7 @@ const Steg1: React.StatelessComponent<StegProps> = ({ formikProps }) => {
                     parent={Questions.erFødt}
                     options={[3, 4, 5, 6, 7, 8, 9].map((value) => ({
                         label: String(value),
-                        value
+                        value,
                     }))}
                 />
             )}
@@ -46,15 +51,19 @@ const Steg1: React.StatelessComponent<StegProps> = ({ formikProps }) => {
                 <DatovelgerElement
                     name={Questions.fødselsdato}
                     parent={Questions.antallBarn}
-                    avgrensninger={{ maksDato: moment().format(moment.HTML5_FMT.DATE) }}
+                    avgrensninger={{ maksDato: dagensDato }}
                 />
             )}
 
             {values[Questions.erFødt] === false && (
                 <>
-                    <DatovelgerElement name={Questions.termindato} parent={Questions.antallBarn} />
+                    <DatovelgerElement
+                        name={Questions.termindato}
+                        parent={Questions.antallBarn}
+                        avgrensninger={{ minDato: dagensDato }}
+                    />
 
-                    {status[Questions.termindato]?.visible && (
+                    {isVisible(Questions.terminberkreftelse, visibilityContext.visibleComponents) && (
                         <Veilederpanel kompakt={true} svg={<Veileder />}>
                             <FormattedMessage id="terminbekreftelsen.text.terminbekreftelsen" />
                         </Veilederpanel>
@@ -70,6 +79,7 @@ const Steg1: React.StatelessComponent<StegProps> = ({ formikProps }) => {
                         <DatovelgerElement
                             name={Questions.terminbekreftelseDato}
                             parent={Questions.terminberkreftelse}
+                            avgrensninger={{ maksDato: dagensDato }}
                         />
                     )}
                 </>
