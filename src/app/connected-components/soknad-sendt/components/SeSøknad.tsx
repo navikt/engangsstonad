@@ -1,12 +1,19 @@
 import React from 'react';
+import moment from 'moment';
 import PaperclipIkon from 'assets/PaperclipIkon';
 import Lenke from 'nav-frontend-lenker';
 
 import './seSøknad.less';
 import BEMHelper from 'common/util/bem';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { FormattedMessage } from 'react-intl';
 
-const SeSøknad = () => {
+interface Props {
+    mottattDato: string;
+    saksNr: string;
+}
+
+const SeSøknad: React.FunctionComponent<Props> = ({ mottattDato, saksNr }) => {
     const bem = BEMHelper('seSøknad');
     return (
         <div className={bem.className}>
@@ -19,12 +26,25 @@ const SeSøknad = () => {
                         e.preventDefault();
                     }}
                 >
-                    Se og last ned søknaden din
+                    <FormattedMessage id="søknadSendt.oversikt.link" />
                 </Lenke>
             </div>
             <div className={bem.element('datoWrapper')}>
-                <Element>SENDT INN:</Element>
-                <Normaltekst>&nbsp; 25. Mai 2020, kl. 12:00</Normaltekst>
+                <Element>
+                    <FormattedMessage id="søknadSendt.oversikt.sendtinn" />
+                </Element>
+                <Normaltekst>
+                    &nbsp;
+                    <FormattedMessage
+                        id="kvittering.text.soknadMottatt"
+                        values={{
+                            klokkeslett: moment(mottattDato).format('HH:mm'),
+                            dato: moment(mottattDato).format('LL'),
+                            harSaksnummer: saksNr !== undefined,
+                            saksNr: saksNr,
+                        }}
+                    />
+                </Normaltekst>
             </div>
         </div>
     );
