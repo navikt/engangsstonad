@@ -52,7 +52,7 @@
     "kvittering.text.kontonummer": "If your application is approved, the lump-sum grant will be paid to account number {kontonummer}. You can change the account number at {dinProfilLink}.",
     "kvittering.text.soknadMottatt.avsluttText": "Exit",
     "kvittering.text.soknadMottatt.dinProfilLink": "Your profile",
-    "kvittering.text.soknadMottatt": "We received your application {harSaksnummer, select, true {with id {saksNr}} false {}} on {dato} at {klokkeslett}.",
+    "kvittering.text.soknadMottatt": "on {dato} at {klokkeslett}.",
     "kvittering.text.takk": "Thank you for the application",
     "label_med_hjelpetekst.label": "Help text",
     "languageToggle.bokmål": "Bokmål - Norsk",

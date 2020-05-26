@@ -52,7 +52,7 @@
     "kvittering.text.kontonummer": " Hvis søknaden din blir innvilga, blir eingongsstønaden utbetalt til kontonummer {kontonummer}. Du kan endre kontonummeret på {dinProfilLink}.",
     "kvittering.text.soknadMottatt.avsluttText": "Avslutt",
     "kvittering.text.soknadMottatt.dinProfilLink": "Din profil",
-    "kvittering.text.soknadMottatt": "Vi fekk søknaden {harSaksnummer, select, true {med saksnummer {saksNr}} false {}} den {dato} kl. {klokkeslett}.",
+    "kvittering.text.soknadMottatt": "den {dato} kl. {klokkeslett}.",
     "kvittering.text.takk": "Takk for søknaden",
     "label_med_hjelpetekst.label": "Hjelpetekst",
     "languageToggle.bokmål": "Bokmål - Norsk",
