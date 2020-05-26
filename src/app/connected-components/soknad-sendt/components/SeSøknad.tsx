@@ -7,13 +7,15 @@ import './seSøknad.less';
 import BEMHelper from 'common/util/bem';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
+import { openPdfPreview } from 'util/pdfUtils';
 
 interface Props {
     mottattDato: string;
     saksNr: string;
+    pdf: string;
 }
 
-const SeSøknad: React.FunctionComponent<Props> = ({ mottattDato, saksNr }) => {
+const SeSøknad: React.FunctionComponent<Props> = ({ mottattDato, saksNr, pdf }) => {
     const bem = BEMHelper('seSøknad');
     return (
         <div className={bem.className}>
@@ -24,6 +26,7 @@ const SeSøknad: React.FunctionComponent<Props> = ({ mottattDato, saksNr }) => {
                     href="#"
                     onClick={(e) => {
                         e.preventDefault();
+                        openPdfPreview(pdf);
                     }}
                 >
                     <FormattedMessage id="søknadSendt.oversikt.link" />
@@ -41,7 +44,7 @@ const SeSøknad: React.FunctionComponent<Props> = ({ mottattDato, saksNr }) => {
                             klokkeslett: moment(mottattDato).format('HH:mm'),
                             dato: moment(mottattDato).format('LL'),
                             harSaksnummer: saksNr !== undefined,
-                            saksNr: saksNr,
+                            saksNr,
                         }}
                     />
                 </Normaltekst>

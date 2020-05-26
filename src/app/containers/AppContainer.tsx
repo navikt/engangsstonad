@@ -63,7 +63,7 @@ class AppContainer extends React.Component<Props> {
         }
         return this.renderContent(
             <Switch>
-                {kvittering || true ? (
+                {kvittering ? (
                     <Route path="/engangsstonad" component={SøknadSendt} exact={true} />
                 ) : (
                     <Route

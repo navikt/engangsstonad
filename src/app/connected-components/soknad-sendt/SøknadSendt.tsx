@@ -56,7 +56,7 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
                         <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
 
-                    <SeSøknad mottattDato={kvittering.mottattDato} saksNr={kvittering.saksNr} />
+                    <SeSøknad mottattDato={kvittering.mottattDato} saksNr={kvittering.saksNr} pdf={kvittering.pdf} />
                     <KvitteringStatus />
                     <Oversikt saksNr={kvittering.saksNr} />
                 </div>
@@ -66,13 +66,7 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
 }
 const mapStateToProps = (state: AppState) => ({
     person: state.apiReducer.person!,
-    kvittering: {
-        journalId: '1',
-        leveranseStatus: 'ok',
-        mottattDato: '2020-05-25T13:40:45.115',
-        referanseId: '1',
-        saksNr: '1234',
-    },
+    kvittering: state.apiReducer.kvittering!,
 });
 
 export default connect<StateProps>(mapStateToProps)(injectIntl(SøknadSendt));
