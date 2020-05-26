@@ -1,28 +1,26 @@
 import * as React from 'react';
 import 'moment/locale/nb';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, InjectedIntlProps } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Innholdstittel, Ingress, Undertittel } from 'nav-frontend-typografi';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import * as moment from 'moment';
 import DocumentTitle from 'react-document-title';
-import Lenke from 'nav-frontend-lenker';
 import CustomSVG from 'common/components/custom-svg/CustomSVG';
 import Kvittering from 'app/types/services/Kvittering';
 import Person from '../../types/domain/Person';
 import Søknadstittel from 'components/søknadstittel/Søknadstittel';
 import { Language } from 'intl/IntlProvider';
-
 import 'nav-frontend-lenker-style';
 
 const SpotlightLetter = require('assets/svg/spotlight_letter.svg').default;
 
-import { lenker } from 'util/lenker';
-import { redirect } from 'util/login';
 import { AppState } from 'reducers/reducers';
 import getMessage from 'common/util/i18nUtils';
 
 import '../../styles/engangsstonad.less';
+import KvitteringStatus from './components/KvitteringStatus';
+import SeSøknad from './components/SeSøknad';
+import Oversikt from './components/Oversikt';
 
 interface StateProps {
     person: Person;
@@ -57,63 +55,18 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
                         {getMessage(intl, 'kvittering.text.takk')}
                         <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
-                    <Ingress className="blokk-xs">
-                        <FormattedMessage
-                            id="kvittering.text.soknadMottatt"
-                            values={{
-                                klokkeslett: moment(kvittering.mottattDato).format('HH:mm'),
-                                dato: moment(kvittering.mottattDato).format('LL'),
-                                harSaksnummer: kvittering.saksNr !== undefined,
-                                saksNr: kvittering.saksNr
-                            }}
-                        />
-                    </Ingress>
-                    <Undertittel className="blokk-xs">
-                        {getMessage(intl, 'kvittering.text.hvorFinnerJegStatus')}
-                    </Undertittel>
-                    <Ingress className="blokk-xs">
-                        <FormattedMessage
-                            id="kvittering.text.dittNav"
-                            values={{
-                                dittNavLink: (
-                                    <Lenke href={lenker.foreldrepenger}>
-                                        <FormattedMessage id="kvittering.text.dittNavLink" />
-                                    </Lenke>
-                                )
-                            }}
-                        />
-                    </Ingress>
 
-                    {person.bankkonto && person.bankkonto.kontonummer && (
-                        <Ingress className="blokk-s">
-                            <FormattedMessage
-                                id="kvittering.text.kontonummer"
-                                values={{
-                                    kontonummer: person.bankkonto.kontonummer,
-                                    dinProfilLink: (
-                                        <Lenke href={lenker.brukerprofil}>
-                                            <FormattedMessage id="kvittering.text.soknadMottatt.dinProfilLink" />
-                                        </Lenke>
-                                    )
-                                }}
-                            />
-                        </Ingress>
-                    )}
-                    <Hovedknapp
-                        className="responsiveButton responsiveButton--søknadSendt"
-                        onClick={() => redirect(lenker.dittNav)}
-                    >
-                        {getMessage(intl, 'kvittering.text.soknadMottatt.avsluttText')}
-                    </Hovedknapp>
+                    <SeSøknad mottattDato={kvittering.mottattDato} saksNr={kvittering.saksNr} pdf={kvittering.pdf} />
+                    <KvitteringStatus />
+                    <Oversikt saksNr={kvittering.saksNr} />
                 </div>
             </>
         );
     }
 }
-
 const mapStateToProps = (state: AppState) => ({
     person: state.apiReducer.person!,
-    kvittering: state.apiReducer.kvittering!
+    kvittering: state.apiReducer.kvittering!,
 });
 
 export default connect<StateProps>(mapStateToProps)(injectIntl(SøknadSendt));
