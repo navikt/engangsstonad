@@ -1,4 +1,4 @@
-# Selvbetjeningsløsning for søknad om engangsstønad
+# Selvbetjeningsløsning for søknad om engangsstønad.  
 
 Kildekoden til frontend-appen for ny selvbetjeningsløsning for
 [Engangsstønad](https://www.nav.no/no/Person/Familie/Venter+du+barn/engangsst%C3%B8nad-ved-f%C3%B8dsel-og-adopsjon).
