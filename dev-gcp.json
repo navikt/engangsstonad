@@ -4,7 +4,7 @@
     "appres": "www-q1.nav.no",
     "env": {
         "APPRES_CMS_URL": "https://www-q1.nav.no/dekoratoren",
-        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.dev-nav.no/rest",
+        "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api-q.nav.no/rest",
         "LOGINSERVICE_URL": "https://loginservice.dev-nav.no/login"
     }
 }
