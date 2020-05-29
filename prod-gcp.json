@@ -1,5 +1,5 @@
 {
-    "ingress": "https://engangsstonad.nav.no",
+    "ingresses":  ["https://engangsstonad.nav.no"],
     "namespace": "teamforeldrepenger",
     "appres": "appres.nav.no",
     "env": {
