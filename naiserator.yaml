@@ -32,7 +32,7 @@ spec:
       min: 2
       max: 2
       cpuThresholdPercentage: 50
-  ingresses
+  ingresses:
 {{#each ingresses as |url|}}
     - {{url}}
 {{/each}} 
