@@ -1,7 +1,6 @@
 {
     "ingresses": ["https://engangsstonad.dev-nav.no"],
     "namespace": "teamforeldrepenger",
-    "appres": "www-q1.nav.no",
     "env": {
         "APPRES_CMS_URL": "https://www-q1.nav.no/dekoratoren",
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api.dev-nav.no/rest",
