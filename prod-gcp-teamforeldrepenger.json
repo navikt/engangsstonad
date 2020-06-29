@@ -1,4 +1,5 @@
 {
+    "gcp" : "true",
     "ingresses":  ["https://engangsstonad.nav.no"],
     "namespace": "teamforeldrepenger",
     "env": {
