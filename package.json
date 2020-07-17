@@ -151,7 +151,7 @@
         "tslint-config-prettier": "^1.17.0",
         "tslint-loader": "^3.5.4",
         "tslint-react": "4.1.0",
-        "typescript": "3.6.3",
+        "typescript": "3.9.7",
         "uglifyjs-webpack-plugin": "^2.2.0",
         "wait-on": "2.1.0",
         "webpack": "^4.40.2",
