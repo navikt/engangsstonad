@@ -154,7 +154,7 @@
         "typescript": "3.6.3",
         "uglifyjs-webpack-plugin": "^2.2.0",
         "wait-on": "2.1.0",
-        "webpack": "^4.40.2",
+        "webpack": "^4.44.1",
         "webpack-cli": "^3.3.9",
         "webpack-dev-server": "^3.8.1"
     }
