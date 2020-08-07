@@ -1,5 +1,4 @@
 {
-    "namespace" : "teamforeldrepenger",
     "ingresses":  ["https://engangsstonad.nav.no"],
     "env": {
         "APPRES_CMS_URL": "https://www.nav.no/dekoratoren",
