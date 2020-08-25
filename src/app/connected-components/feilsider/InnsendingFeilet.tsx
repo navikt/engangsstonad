@@ -16,7 +16,7 @@ interface StateProps {
 
 interface InnsendingFeiletProps {
     error?: any;
-};
+}
 
 type Props = InnsendingFeiletProps & StateProps & InjectedIntlProps;
 const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
@@ -39,7 +39,7 @@ const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
                                 <Lenke href={lenker.brukerstøtte}>
                                     {getMessage(intl, 'intro.innsendingFeilet.ingress.lenketekst')}
                                 </Lenke>
-                            )
+                            ),
                         }}
                     />
                 )
@@ -48,15 +48,15 @@ const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
                 tittel: getMessage(intl, 'intro.innsendingFeilet.bobletittel'),
                 tekst: getMessage(intl, 'intro.innsendingFeilet.bobletekst'),
                 veileder: {
-                    ansikt: 'skeptisk'
-                }
+                    ansikt: 'skeptisk',
+                },
             }}
         />
     );
 };
 
 const mapStateToProps = (state: { commonReducer: CommonState }) => ({
-    language: state.commonReducer.language
+    language: state.commonReducer.language,
 });
 
 export default connect(mapStateToProps)(injectIntl(InnsendingFeilet));

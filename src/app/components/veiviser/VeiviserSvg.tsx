@@ -1,18 +1,13 @@
 import * as React from 'react';
 
 const Veiviser: React.StatelessComponent<any> = (props: any) => (
-    <svg width={80} height={80} viewBox="0 0 64 64"  {...props}>
+    <svg width={80} height={80} viewBox="0 0 64 64" {...props}>
         <title>{'Illustration'}</title>
         <g transform="translate(-1)" fill="none" fillRule="evenodd">
             <circle fill="#C1B5D0" cx={33} cy={32} r={32} />
             <g transform="translate(.5)">
                 <circle fill="#C1B5D0" cx={32.5} cy={32} r={32} />
-                <path
-                    d="M30.944 8.604v54.754h3.112V8.604h-3.112z"
-                    stroke="#7F756C"
-                    strokeWidth={1.035}
-                    fill="#FFF"
-                />
+                <path d="M30.944 8.604v54.754h3.112V8.604h-3.112z" stroke="#7F756C" strokeWidth={1.035} fill="#FFF" />
                 <path
                     stroke="#7F756C"
                     strokeWidth={1.082}

@@ -17,7 +17,7 @@ interface Props {
 export const enum Language {
     BOKMÅL = 'nb',
     NYNORSK = 'nn',
-    ENGELSK = 'en'
+    ENGELSK = 'en',
 }
 
 const getLanguageMessages = (language: Language) => {
@@ -47,7 +47,7 @@ class IntlProvider extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    language: state.commonReducer.language
+    language: state.commonReducer.language,
 });
 
 export default connect(mapStateToProps)(IntlProvider);

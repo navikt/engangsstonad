@@ -17,7 +17,7 @@ const Step: React.StatelessComponent<Props> = ({ step, activeStep, title }) => {
             aria-label={title}
             className={classnames('stegindikator__steg', {
                 'stegindikator__steg--inaktiv': step > activeStep,
-                'stegindikator__steg--aktiv': step === activeStep
+                'stegindikator__steg--aktiv': step === activeStep,
             })}
         >
             {passed ? <Ikon kind="ok-sirkel-fyll" /> : <span>{step}</span>}

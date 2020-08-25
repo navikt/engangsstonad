@@ -10,7 +10,7 @@ export enum ApiActionKeys {
     'SEND_SOKNAD' = 'sendSoknad',
     'SEND_SOKNAD_SUCCESS' = 'sendSoknadSuccess',
     'SEND_SOKNAD_FAILED' = 'sendSoknadFailed',
-    'SESSION_EXPIRED' = 'sessionExpired'
+    'SESSION_EXPIRED' = 'sessionExpired',
 }
 
 interface SessionExpired {

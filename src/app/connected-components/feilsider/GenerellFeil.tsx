@@ -26,7 +26,11 @@ const GenerellFeil: React.StatelessComponent<Props> = (props: Props) => {
                 <FormattedMessage
                     id="intro.generellFeil.ingress"
                     values={{
-                        lenke: <Lenke href={lenker.brukerstøtte}>{getMessage(intl, 'intro.innsendingFeilet.ingress.lenketekst')}</Lenke>
+                        lenke: (
+                            <Lenke href={lenker.brukerstøtte}>
+                                {getMessage(intl, 'intro.innsendingFeilet.ingress.lenketekst')}
+                            </Lenke>
+                        ),
                     }}
                 />
             }
@@ -34,15 +38,15 @@ const GenerellFeil: React.StatelessComponent<Props> = (props: Props) => {
                 tittel: getMessage(intl, 'intro.innsendingFeilet.bobletittel'),
                 tekst: getMessage(intl, 'intro.innsendingFeilet.bobletekst'),
                 veileder: {
-                    ansikt: 'skeptisk'
-                }
+                    ansikt: 'skeptisk',
+                },
             }}
         />
     );
 };
 
 const mapStateToProps = (state: { commonReducer: CommonState }) => ({
-    language: state.commonReducer.language
+    language: state.commonReducer.language,
 });
 
 export default connect(mapStateToProps)(injectIntl(GenerellFeil));

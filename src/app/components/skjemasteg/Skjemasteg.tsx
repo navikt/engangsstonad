@@ -9,7 +9,7 @@ export interface Props {
 
 const EngangsstønadSteg: React.StatelessComponent<Props & InjectedIntlProps> = ({ tittel, children, intl }) => {
     let dokumenttittel = intl.formatMessage({
-        id: 'intro.standard.dokumenttittel'
+        id: 'intro.standard.dokumenttittel',
     });
     if (tittel) {
         dokumenttittel = `${dokumenttittel} - ${tittel}`;

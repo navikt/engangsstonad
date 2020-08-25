@@ -23,9 +23,15 @@ class StepIndicator extends React.Component<Props> {
     render() {
         const { activeStep, stepTitles } = this.props;
         return (
-            <div className="stepindicator" role="progressbar" aria-valuenow={activeStep} aria-valuemin={1} aria-valuemax={stepTitles.length}>
+            <div
+                className="stepindicator"
+                role="progressbar"
+                aria-valuenow={activeStep}
+                aria-valuemin={1}
+                aria-valuemax={stepTitles.length}
+            >
                 <h1 className="typo-systemtittel stepindicator__title">
-                    <span className="m_no-focusOutline" ref={c => (this.title = c)} tabIndex={-1}>
+                    <span className="m_no-focusOutline" ref={(c) => (this.title = c)} tabIndex={-1}>
                         {stepTitles[activeStep - 1]}
                     </span>
                 </h1>
@@ -34,9 +40,9 @@ class StepIndicator extends React.Component<Props> {
                     kompakt={true}
                     autoResponsiv={true}
                     aktivtSteg={activeStep - 1}
-                    steg={stepTitles.map((s, i) => ({
+                    steg={stepTitles.map((_s, i) => ({
                         index: i + 1,
-                        label: stepTitles[i]
+                        label: stepTitles[i],
                     }))}
                 />
             </div>

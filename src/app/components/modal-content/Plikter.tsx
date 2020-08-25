@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
 const { Undertittel, Normaltekst } = require('nav-frontend-typografi');
 import getMessage from 'common/util/i18nUtils';
 import Lenke from 'nav-frontend-lenker';
@@ -27,7 +27,7 @@ const Plikter: React.StatelessComponent<Props> = ({ intl }) => (
                                 <Lenke href={lenker.plikter} target="_blank">
                                     <FormattedMessage id="rettigheter.text.lestOgForstått.link" />
                                 </Lenke>
-                            )
+                            ),
                         }}
                     />
                 </Normaltekst>

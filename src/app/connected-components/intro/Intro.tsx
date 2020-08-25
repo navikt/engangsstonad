@@ -15,7 +15,7 @@ import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 import {
     commonActionCreators as common,
     soknadActionCreators as soknad,
-    stepActionCreators as step
+    stepActionCreators as step,
 } from '../../redux/actions';
 import { getDefaultState } from 'reducers/stepReducer';
 import LanguageToggle from '../../intl/LanguageToggle';
@@ -52,7 +52,7 @@ class Intro extends React.Component<Props, State> {
         this.state = {
             isPersonopplysningerModalOpen: false,
             isPlikterModalOpen: false,
-            godkjentVilkår: false
+            godkjentVilkår: false,
         };
         this.bekreftetVilkarChange = this.bekreftetVilkarChange.bind(this);
         this.startNySøknad = this.startNySøknad.bind(this);
@@ -108,7 +108,7 @@ class Intro extends React.Component<Props, State> {
                         <a className="lenke" href="#" onClick={(e) => this.openPlikterModal(e)}>
                             <FormattedMessage id="intro.text.samtykke.link" />
                         </a>
-                    )
+                    ),
                 }}
             />
         );
@@ -119,8 +119,8 @@ class Intro extends React.Component<Props, State> {
         return [
             {
                 test: () => this.state.godkjentVilkår === true,
-                failText: getMessage(intl, 'valideringsfeil.godkjentVilkar')
-            }
+                failText: getMessage(intl, 'valideringsfeil.godkjentVilkar'),
+            },
         ];
     }
 
@@ -138,9 +138,9 @@ class Intro extends React.Component<Props, State> {
                         <SimpleIllustration
                             dialog={{
                                 title: getMessage(intl, 'intro.standard.bobletittel', {
-                                    name: person.fornavn.toLowerCase()
+                                    name: person.fornavn.toLowerCase(),
                                 }),
-                                text: getMessage(intl, 'intro.standard.bobletekst')
+                                text: getMessage(intl, 'intro.standard.bobletekst'),
                             }}
                         />
                         <div className="responsiveContainer">
@@ -164,7 +164,7 @@ class Intro extends React.Component<Props, State> {
                                     <ValidGroup validators={this.getGodkjentVilkarValidators()}>
                                         <BekreftCheckboksPanel
                                             inputProps={{
-                                                name: 'egenerklaring'
+                                                name: 'egenerklaring',
                                             }}
                                             label={getMessage(intl, 'intro.text.samtykke')}
                                             onChange={this.bekreftetVilkarChange}
@@ -215,6 +215,6 @@ class Intro extends React.Component<Props, State> {
 const mapStateToProps = (state: AppState) => ({
     person: state.apiReducer.person!,
     godkjentVilkar: state.commonReducer.godkjentVilkar,
-    language: state.commonReducer.language
+    language: state.commonReducer.language,
 });
 export default connect<StateProps>(mapStateToProps)(injectIntl(Intro));

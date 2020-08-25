@@ -31,7 +31,7 @@ interface Field {
     value: any;
     feil?: Feil;
     visFeil?: boolean;
-};
+}
 
 interface PeriodeForm {
     fom?: Field;
@@ -52,8 +52,8 @@ const getValidPeriode = (formData: PeriodeForm): Utenlandsopphold | undefined =>
             land: land.value,
             tidsperiode: {
                 fom: fom.value,
-                tom: tom.value
-            }
+                tom: tom.value,
+            },
         };
     }
     return undefined;
@@ -73,7 +73,7 @@ const getRegistrertePerioder = (
     const arr = gjeldendeOpphold ? alleOpphold.filter((o) => o !== gjeldendeOpphold) : alleOpphold;
     return arr.map((opphold) => ({
         startdato: new Date(opphold.tidsperiode.fom),
-        sluttdato: new Date(opphold.tidsperiode.tom)
+        sluttdato: new Date(opphold.tidsperiode.tom),
     }));
 };
 
@@ -83,21 +83,21 @@ const getDefaultState = (utenlandsopphold?: Utenlandsopphold): State => {
             erEndring: true,
             formData: {
                 land: {
-                    value: utenlandsopphold.land
+                    value: utenlandsopphold.land,
                 },
                 fom: {
-                    value: utenlandsopphold.tidsperiode.fom
+                    value: utenlandsopphold.tidsperiode.fom,
                 },
                 tom: {
-                    value: utenlandsopphold.tidsperiode.tom
-                }
-            }
+                    value: utenlandsopphold.tidsperiode.tom,
+                },
+            },
         };
     }
     return {
         erEndring: false,
         hasSubmitted: false,
-        formData: {}
+        formData: {},
     };
 };
 class CountryModal extends React.Component<Props, State> {
@@ -130,7 +130,7 @@ class CountryModal extends React.Component<Props, State> {
 
         this.updateFormState({
             formData: this.state.formData,
-            hasSubmitted: true
+            hasSubmitted: true,
         });
     }
 
@@ -150,20 +150,20 @@ class CountryModal extends React.Component<Props, State> {
                 land: {
                     value: land,
                     feil: landFeil,
-                    visFeil: landFeil && (hasSubmitted || this.state.hasSubmitted)
+                    visFeil: landFeil && (hasSubmitted || this.state.hasSubmitted),
                 },
                 fom: {
                     value: fom,
                     feil: fomFeil,
-                    visFeil: fomFeil && (hasSubmitted || this.state.hasSubmitted)
+                    visFeil: fomFeil && (hasSubmitted || this.state.hasSubmitted),
                 },
                 tom: {
                     value: tom,
                     feil: tomFeil,
-                    visFeil: tomFeil && (hasSubmitted || this.state.hasSubmitted)
-                }
+                    visFeil: tomFeil && (hasSubmitted || this.state.hasSubmitted),
+                },
             },
-            hasSubmitted: hasSubmitted || this.state.hasSubmitted
+            hasSubmitted: hasSubmitted || this.state.hasSubmitted,
         });
     }
 
@@ -190,14 +190,14 @@ class CountryModal extends React.Component<Props, State> {
             fomAvgrensning = {
                 minDato: fomMinDato,
                 maksDato: fomMaksDato,
-                ugyldigeTidsperioder: registrertePerioder
+                ugyldigeTidsperioder: registrertePerioder,
             };
         }
         if (tomMinDato || tomMaksDato) {
             tomAvgrensning = {
                 minDato: tomMinDato,
                 maksDato: tomMaksDato,
-                ugyldigeTidsperioder: registrertePerioder
+                ugyldigeTidsperioder: registrertePerioder,
             };
         }
 
@@ -223,7 +223,8 @@ class CountryModal extends React.Component<Props, State> {
                 closeButton={true}
                 onRequestClose={() => {
                     this.props.closeModal();
-                }}>
+                }}
+            >
                 <form onSubmit={this.onSubmit}>
                     <Undertittel className="countryModal__title">
                         <FormattedMessage id="medlemmskap.modal.overskrift" />
@@ -234,7 +235,7 @@ class CountryModal extends React.Component<Props, State> {
                             feil={landFeil}
                             onChange={(land) =>
                                 this.updateFormState({
-                                    formData: { ...formData, land: { value: land } }
+                                    formData: { ...formData, land: { value: land } },
                                 })
                             }
                             language={language}
@@ -251,8 +252,8 @@ class CountryModal extends React.Component<Props, State> {
                                 this.updateFormState({
                                     formData: {
                                         ...formData,
-                                        fom: { value: dato ? dato.toISOString() : undefined }
-                                    }
+                                        fom: { value: dato ? dato.toISOString() : undefined },
+                                    },
                                 })
                             }
                             avgrensninger={fomAvgrensning}
@@ -269,8 +270,8 @@ class CountryModal extends React.Component<Props, State> {
                                 this.updateFormState({
                                     formData: {
                                         ...formData,
-                                        tom: { value: dato ? dato.toISOString() : undefined }
-                                    }
+                                        tom: { value: dato ? dato.toISOString() : undefined },
+                                    },
                                 })
                             }
                             avgrensninger={tomAvgrensning}

@@ -38,8 +38,8 @@ class Steg4 extends React.Component<Props> {
                             validators={[
                                 {
                                     test: () => bekreftetInformasjon === true,
-                                    failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger')
-                                }
+                                    failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger'),
+                                },
                             ]}
                             name="bekreftOpplysninger"
                         >
@@ -58,7 +58,7 @@ class Steg4 extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    bekreftetInformasjon: state.commonReducer.bekreftetInformasjon
+    bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
 });
 
 export default connect<StateProps>(mapStateToProps)(injectIntl(Steg4));

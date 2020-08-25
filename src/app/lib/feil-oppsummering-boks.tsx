@@ -12,10 +12,10 @@ interface Props {
 
 const cls = (show: boolean, className?: string) =>
     classNames('feil-oppsummering-boks', className, {
-        'feil-oppsummering-boks--visible': show
+        'feil-oppsummering-boks--visible': show,
     });
 
-class FeilOppsummeringBoks extends React.Component<Props, {}> {
+class FeilOppsummeringBoks extends React.Component<Props> {
     element: HTMLElement | null;
     componentDidMount() {
         if (this.element) {
@@ -25,7 +25,7 @@ class FeilOppsummeringBoks extends React.Component<Props, {}> {
     render() {
         const { className, show, errors, title, ...other } = this.props;
 
-        const listItems = errors.map(error => {
+        const listItems = errors.map((error) => {
             const link = '#' + error.name;
             return (
                 <li key={error.name}>
@@ -38,7 +38,7 @@ class FeilOppsummeringBoks extends React.Component<Props, {}> {
 
         return (
             <article
-                ref={node => {
+                ref={(node) => {
                     this.element = node;
                 }}
                 tabIndex={-1}

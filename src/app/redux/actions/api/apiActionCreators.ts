@@ -7,14 +7,14 @@ import Kvittering from 'app/types/services/Kvittering';
 export function getPerson(person?: PersonRequest): ApiActionTypes {
     return {
         type: ApiActionKeys.GET_PERSON,
-        params: person
+        params: person,
     };
 }
 
 export function getPersonSuccess(person: Person): ApiActionTypes {
     return {
         type: ApiActionKeys.GET_PERSON_SUCCESS,
-        person
+        person,
     };
 }
 
@@ -22,7 +22,7 @@ export function getPersonSuccess(person: Person): ApiActionTypes {
 export function getPersonFailed(error: any): ApiActionTypes {
     return {
         type: ApiActionKeys.GET_PERSON_FAILED,
-        error
+        error,
     };
 }
 
@@ -30,14 +30,14 @@ export function sendSoknad(soknad: EngangsstonadSoknad, språkkode: string): Api
     return {
         type: ApiActionKeys.SEND_SOKNAD,
         soknad,
-        språkkode
+        språkkode,
     };
 }
 
 export function sendSoknadSuccess(kvittering: Kvittering): ApiActionTypes {
     return {
         type: ApiActionKeys.SEND_SOKNAD_SUCCESS,
-        kvittering
+        kvittering,
     };
 }
 
@@ -45,13 +45,13 @@ export function sendSoknadSuccess(kvittering: Kvittering): ApiActionTypes {
 export function sendSoknadFailed(error: any): ApiActionTypes {
     return {
         type: ApiActionKeys.SEND_SOKNAD_FAILED,
-        error
+        error,
     };
 }
 
 export function sessionExpired(): ApiActionTypes {
     return {
-        type: ApiActionKeys.SESSION_EXPIRED
+        type: ApiActionKeys.SESSION_EXPIRED,
     };
 }
 
@@ -62,5 +62,5 @@ export default {
     sendSoknad,
     sendSoknadSuccess,
     sendSoknadFailed,
-    sessionExpired
+    sessionExpired,
 };

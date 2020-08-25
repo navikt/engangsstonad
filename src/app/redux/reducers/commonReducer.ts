@@ -4,7 +4,7 @@ import { Language } from 'intl/IntlProvider';
 const initialState = (): CommonState => ({
     language: Language.BOKMÅL,
     godkjentVilkar: false,
-    bekreftetInformasjon: false
+    bekreftetInformasjon: false,
 });
 
 export interface CommonState {
@@ -18,7 +18,7 @@ const commonReducer = (state = initialState(), action: CommonActionTypes) => {
         case CommonActionKeys.SET_BEKREFTET_INFORMASJON:
             return {
                 ...state,
-                bekreftetInformasjon: action.bekreftetInformasjon
+                bekreftetInformasjon: action.bekreftetInformasjon,
             };
         case CommonActionKeys.SET_LANGUAGE:
             return { ...state, language: action.language };

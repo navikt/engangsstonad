@@ -5,7 +5,7 @@ export interface StepState {
 }
 
 export const getDefaultState = (): StepState => ({
-    activeStep: 1
+    activeStep: 1,
 });
 
 const stepReducer = (state = getDefaultState(), action: StepActionTypes): StepState => {

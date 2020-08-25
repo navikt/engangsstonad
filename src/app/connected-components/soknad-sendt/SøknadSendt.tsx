@@ -56,7 +56,7 @@ class SøknadSendt extends React.Component<StateProps & InjectedIntlProps> {
                         <span className="capitalizeName"> {person.fornavn.toLowerCase()}!</span>
                     </Innholdstittel>
 
-                    <SeSøknad mottattDato={kvittering.mottattDato} saksNr={kvittering.saksNr} pdf={kvittering.pdf} />
+                    <SeSøknad mottattDato={kvittering.mottattDato} pdf={kvittering.pdf} />
                     <KvitteringStatus />
                     <Oversikt saksNr={kvittering.saksNr} />
                 </div>

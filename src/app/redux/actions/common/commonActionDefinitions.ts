@@ -1,9 +1,9 @@
-import { Language } from "intl/IntlProvider";
+import { Language } from 'intl/IntlProvider';
 
 export enum CommonActionKeys {
     'SET_BEKREFTET_INFORMASJON' = 'setBekreftetInformasjon',
     'SET_GODKJENT_VILKAR' = 'setGodkjentVilkar',
-    'SET_LANGUAGE' = 'setLanguage'
+    'SET_LANGUAGE' = 'setLanguage',
 }
 
 interface SetBekreftetInformasjon {
@@ -21,7 +21,4 @@ interface SetLanguage {
     language: Language;
 }
 
-export type CommonActionTypes =
-    | SetBekreftetInformasjon
-    | SetGodkjentVilkar
-    | SetLanguage;
+export type CommonActionTypes = SetBekreftetInformasjon | SetGodkjentVilkar | SetLanguage;

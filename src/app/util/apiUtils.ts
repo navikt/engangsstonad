@@ -3,14 +3,14 @@ import EngangsstonadSoknad, { EngangssoknadSoknadDto } from '../types/domain/Eng
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 
-const isArrayOfAttachments = (object: object) => {
+const isArrayOfAttachments = (object: any) => {
     return Array.isArray(object) && object.some((element) => element.filename);
 };
 
 const removeAttachmentsWithUploadError = (attachments: Attachment[]) =>
     attachments.filter((a: Attachment) => !isAttachmentWithError(a));
 
-export const mapAttachments = (object: object): Attachment[] => {
+export const mapAttachments = (object: any): Attachment[] => {
     const foundAttachments = [] as Attachment[];
     Object.keys(object).forEach((key: string) => {
         if (typeof object[key] === 'object') {
@@ -42,7 +42,7 @@ export default {
 
         return {
             ...søknad,
-            søker: { språkkode }
+            søker: { språkkode },
         };
-    }   
+    },
 };

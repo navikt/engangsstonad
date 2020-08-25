@@ -34,13 +34,13 @@ const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
                 ingress={getMessage(intl, 'intro.standard.ingress')}
                 illustrasjon={{
                     tittel: getMessage(intl, 'intro.standard.bobletittel', {
-                        name: person.fornavn.toLowerCase()
+                        name: person.fornavn.toLowerCase(),
                     }),
                     tekst: getMessage(intl, 'intro.under18.bobletekst'),
                     lenke: {
                         url: lenker.papirsøknad,
-                        tekst: getMessage(intl, 'intro.under18.boblelenketekst')
-                    }
+                        tekst: getMessage(intl, 'intro.under18.boblelenketekst'),
+                    },
                 }}
                 language={props.language}
                 setLanguage={(language: Language) => props.dispatch(setLanguage(language))}
@@ -52,7 +52,7 @@ const IkkeMyndig: React.StatelessComponent<Props> = (props: Props) => {
 
 const mapStateToProps = (state: { apiReducer: ApiState; commonReducer: CommonState }) => ({
     person: state.apiReducer.person,
-    language: state.commonReducer.language
+    language: state.commonReducer.language,
 });
 
 export default connect(mapStateToProps)(injectIntl(IkkeMyndig));

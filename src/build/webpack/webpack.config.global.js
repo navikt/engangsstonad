@@ -8,7 +8,7 @@ const webpackConfig = {
     output: {
         path: path.resolve(__dirname, './../../../dist'),
         filename: 'js/bundle.js',
-        publicPath: '/engangsstonad/dist'
+        publicPath: '/engangsstonad/dist',
     },
     devtool: 'source-map',
     resolve: {
@@ -21,33 +21,37 @@ const webpackConfig = {
             styles: path.resolve(__dirname, './../../app/styles/'),
             util: path.resolve(__dirname, './../../app/util/'),
             common: path.resolve(__dirname, './../../common/'),
-            storage: path.resolve(__dirname, './../../storage/')
+            storage: path.resolve(__dirname, './../../storage/'),
         },
-        extensions: ['.ts', '.tsx', '.js', '.json', '.jsx']
+        extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
     },
     module: {
         rules: [
             {
-                test: /\.(ts|tsx)$/,
-                loader: require.resolve('tslint-loader'),
-                enforce: 'pre'
+                enforce: 'pre',
+                test: /\.(js|ts|tsx)$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                options: {
+                    cache: true,
+                },
             },
             {
                 test: /\.(ts|tsx)$/,
                 include: [path.resolve(__dirname, './../..')],
-                loader: require.resolve('ts-loader')
+                loader: require.resolve('ts-loader'),
             },
 
             {
                 test: /\.js$/,
                 use: [{ loader: 'babel-loader' }],
-                exclude: /node_modules/
+                exclude: /node_modules/,
             },
             {
                 test: /\.less$/,
                 use: [
                     {
-                        loader: MiniCssExtractPlugin.loader
+                        loader: MiniCssExtractPlugin.loader,
                     },
                     'css-loader',
                     'postcss-loader',
@@ -56,31 +60,31 @@ const webpackConfig = {
                         options: {
                             globalVars: {
                                 coreModulePath: '"~"',
-                                nodeModulesPath: '"~"'
-                            }
-                        }
-                    }
-                ]
+                                nodeModulesPath: '"~"',
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.svg$/,
-                use: 'svg-sprite-loader'
-            }
-        ]
+                use: 'svg-sprite-loader',
+            },
+        ],
     },
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]',
             disable: false,
-            allChunks: true
+            allChunks: true,
         }),
         new SpriteLoaderPlugin({
-            plainSprite: true
+            plainSprite: true,
         }),
         new webpack.DefinePlugin({
-            __ENV__: JSON.stringify(process.env.NODE_ENV)
-        })
-    ]
+            __ENV__: JSON.stringify(process.env.NODE_ENV),
+        }),
+    ],
 };
 
 module.exports = webpackConfig;

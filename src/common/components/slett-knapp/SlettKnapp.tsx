@@ -1,18 +1,15 @@
 import * as React from 'react';
-import { KnappProps } from 'nav-frontend-knapper/lib/knapp';
 
 import './slettKnapp.less';
 import TrashcanIkon from '../ikoner/TrashcanIkon';
+import { KnappBaseProps } from 'nav-frontend-knapper';
 
-export interface SlettKnappProps extends KnappProps {
+export interface SlettKnappProps extends KnappBaseProps {
     ariaLabel: string;
     onClick: () => void;
 }
 
-const SlettKnapp: React.StatelessComponent<SlettKnappProps> = ({
-    onClick,
-    ariaLabel
-}) => (
+const SlettKnapp: React.StatelessComponent<SlettKnappProps> = ({ onClick, ariaLabel }) => (
     <button
         type="button"
         className="slettKnapp"

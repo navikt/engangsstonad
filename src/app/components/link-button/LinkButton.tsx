@@ -7,7 +7,7 @@ export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 import './linkButton.less';
 
-const LinkButton: React.StatelessComponent<Props> = props => {
+const LinkButton: React.StatelessComponent<Props> = (props) => {
     const { className, ...rest } = props;
     return <button type="button" className={classNames('linkButton', className)} {...rest} />;
 };

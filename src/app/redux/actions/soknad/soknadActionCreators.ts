@@ -3,7 +3,7 @@ import {
     SoknadActionKeys,
     SoknadActionTypes,
     UploadAttachmentFailed,
-    UploadAttachmentSuccess
+    UploadAttachmentSuccess,
 } from './soknadActionDefinitions';
 
 import { Utenlandsopphold } from '../../../types/domain/InformasjonOmUtenlandsopphold';
@@ -12,7 +12,7 @@ import { Attachment } from 'common/storage/attachment/types/Attachment';
 export function addTidligereUtenlandsoppholdPeriode(periode: Utenlandsopphold): SoknadActionTypes {
     return {
         type: SoknadActionKeys.ADD_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE,
-        periode
+        periode,
     };
 }
 
@@ -20,21 +20,21 @@ export function editTidligereUtenlandsoppholdPeriode(periode: Utenlandsopphold, 
     return {
         type: SoknadActionKeys.EDIT_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE,
         periode,
-        index
+        index,
     };
 }
 
 export function deleteTidligereUtenlandsoppholdPeriode(periode: Utenlandsopphold): SoknadActionTypes {
     return {
         type: SoknadActionKeys.DELETE_TIDLIGERE_UTENLANDSOPPHOLD_PERIODE,
-        periode
+        periode,
     };
 }
 
 export function addSenereUtenlandsoppholdPeriode(periode: Utenlandsopphold): SoknadActionTypes {
     return {
         type: SoknadActionKeys.ADD_SENERE_UTENLANDSOPPHOLD_PERIODE,
-        periode
+        periode,
     };
 }
 
@@ -42,149 +42,143 @@ export function editSenereUtenlandsoppholdPeriode(periode: Utenlandsopphold, ind
     return {
         type: SoknadActionKeys.EDIT_SENERE_UTENLANDSOPPHOLD_PERIODE,
         periode,
-        index
+        index,
     };
 }
 
 export function deleteSenereUtenlandsoppholdPeriode(periode: Utenlandsopphold): SoknadActionTypes {
     return {
         type: SoknadActionKeys.DELETE_SENERE_UTENLANDSOPPHOLD_PERIODE,
-        periode
+        periode,
     };
 }
 
 export function setErBarnetFødt(erBarnetFødt?: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_ER_BARNET_FODT,
-        erBarnetFødt: erBarnetFødt === undefined ? erBarnetFødt : erBarnetFødt === 'before'
+        erBarnetFødt: erBarnetFødt === undefined ? erBarnetFødt : erBarnetFødt === 'before',
     };
 }
 
 export function setAntallBarn(antallBarn: number): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_ANTALL_BARN,
-        antallBarn
+        antallBarn,
     };
 }
 
 export function setFødselsdato(fødselsdato: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_FØDSELSDATO,
-        fødselsdato
+        fødselsdato,
     };
 }
 
 export function setTermindato(termindato: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_TERMINDATO,
-        termindato
+        termindato,
     };
 }
 
 export function setTerminbekreftelseDato(terminbekreftelseDato: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_TERMINBEKREFTELSE_DATO,
-        terminbekreftelseDato
+        terminbekreftelseDato,
     };
 }
 
 export function setJobbetINorgeSiste12Mnd(jobbetINorgeSiste12Mnd: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_JOBBET_I_NORGE_SISTE_12_MND,
-        jobbetINorgeSiste12Mnd: jobbetINorgeSiste12Mnd === undefined ? jobbetINorgeSiste12Mnd : jobbetINorgeSiste12Mnd === ''
+        jobbetINorgeSiste12Mnd:
+            jobbetINorgeSiste12Mnd === undefined ? jobbetINorgeSiste12Mnd : jobbetINorgeSiste12Mnd === '',
     };
 }
 
 export function setFødselINorge(fødselINorge: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_FODSEL_I_NORGE,
-        fødselINorge: fødselINorge === undefined ? fødselINorge : fødselINorge === 'norway'
+        fødselINorge: fødselINorge === undefined ? fødselINorge : fødselINorge === 'norway',
     };
 }
 
 export function setINorgeSiste12Mnd(iNorgeSiste12Mnd: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_I_NORGE_SISTE_12_MND,
-        iNorgeSiste12Mnd: iNorgeSiste12Mnd === undefined ? iNorgeSiste12Mnd : iNorgeSiste12Mnd === 'norway'
+        iNorgeSiste12Mnd: iNorgeSiste12Mnd === undefined ? iNorgeSiste12Mnd : iNorgeSiste12Mnd === 'norway',
     };
 }
 
 export function setINorgeNeste12Mnd(iNorgeNeste12Mnd: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_I_NORGE_NESTE_12_MND,
-        iNorgeNeste12Mnd: iNorgeNeste12Mnd === undefined ? iNorgeNeste12Mnd : iNorgeNeste12Mnd === 'norway'
+        iNorgeNeste12Mnd: iNorgeNeste12Mnd === undefined ? iNorgeNeste12Mnd : iNorgeNeste12Mnd === 'norway',
     };
 }
 
 export function setAnnenForelderNavn(navn: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_ANNEN_FORELDER_NAVN,
-        navn
+        navn,
     };
 }
 
 export function setAnnenForelderFnr(fnr: string): SoknadActionTypes {
     return {
         type: SoknadActionKeys.SET_ANNEN_FORELDER_FNR,
-        fnr
+        fnr,
     };
 }
 
 export function setAnnenForelderUtenlandskFnr(utenlandskFnr: boolean) {
     return {
         type: SoknadActionKeys.SET_ANNEN_FORELDER_UTENLANDSK_FNR,
-        utenlandskFnr
+        utenlandskFnr,
     };
 }
 
 export function setAnnenForelderBostedsland(bostedsland: string) {
     return {
         type: SoknadActionKeys.SET_ANNEN_FORELDER_BOSTEDSLAND,
-        bostedsland
+        bostedsland,
     };
 }
 
 export function setAnnenForelderKanIkkeOppgis(kanIkkeOppgis: boolean) {
     return {
         type: SoknadActionKeys.SET_ANNEN_FORELDER_KAN_IKKE_OPPGIS,
-        kanIkkeOppgis
+        kanIkkeOppgis,
     };
 }
 
 export function resetSøknad() {
     return {
-        type: SoknadActionKeys.RESET_SØKNAD
+        type: SoknadActionKeys.RESET_SØKNAD,
     };
 }
 
 const uploadAttachment = (payload: Attachment) => ({
     type: SoknadActionKeys.UPLOAD_ATTACHMENT,
-    payload
+    payload,
 });
 
-const uploadAttachmentSuccess = (
-    attachment: Attachment,
-    url: string,
-    uuid: string
-): UploadAttachmentSuccess => ({
+const uploadAttachmentSuccess = (attachment: Attachment, url: string, uuid: string): UploadAttachmentSuccess => ({
     type: SoknadActionKeys.UPLOAD_ATTACHMENT_SUCCESS,
     attachment,
     url,
-    uuid
+    uuid,
 });
 
-const uploadAttachmentFailed = (
-    error: string,
-    attachment: Attachment
-): UploadAttachmentFailed => ({
+const uploadAttachmentFailed = (error: string, attachment: Attachment): UploadAttachmentFailed => ({
     type: SoknadActionKeys.UPLOAD_ATTACHMENT_FAILED,
     error,
-    attachment
+    attachment,
 });
 
 const deleteAttachment = (attachment: Attachment): DeleteAttachment => ({
     type: SoknadActionKeys.DELETE_ATTACHMENT,
-    attachment
+    attachment,
 });
 
 export default {
@@ -207,5 +201,5 @@ export default {
     uploadAttachment,
     uploadAttachmentSuccess,
     uploadAttachmentFailed,
-    deleteAttachment
+    deleteAttachment,
 };

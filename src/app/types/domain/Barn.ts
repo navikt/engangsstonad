@@ -11,7 +11,7 @@ export class FodtBarn extends Barn {
 
 export class UfodtBarn extends Barn {
     termindato?: string | undefined;
-    terminbekreftelse: Attachment[]
+    terminbekreftelse: Attachment[];
     terminbekreftelseDato?: string | undefined;
 }
 

@@ -16,15 +16,8 @@ export interface Props {
 
 import './formblock.less';
 
-const FormBlock: React.StatelessComponent<Props> = ({
-    visible = true,
-    animated = true,
-    margin = 'm',
-    children
-}) => {
-    const getContent = () => (
-        <div className={classnames('formblock', `formblock--${margin}`)}>{children}</div>
-    );
+const FormBlock: React.StatelessComponent<Props> = ({ visible = true, animated = true, margin = 'm', children }) => {
+    const getContent = () => <div className={classnames('formblock', `formblock--${margin}`)}>{children}</div>;
 
     if (animated === true && margin === 'm') {
         return (

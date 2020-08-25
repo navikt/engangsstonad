@@ -1,5 +1,5 @@
 export enum StepActionKeys {
-    'SET_ACTIVE_STEP' = 'setActiveStep'
+    'SET_ACTIVE_STEP' = 'setActiveStep',
 }
 
 interface SetActiveStep {

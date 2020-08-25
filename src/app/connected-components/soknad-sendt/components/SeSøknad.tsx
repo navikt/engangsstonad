@@ -11,11 +11,10 @@ import { openPdfPreview } from 'util/pdfUtils';
 
 interface Props {
     mottattDato: string;
-    saksNr: string;
     pdf: string;
 }
 
-const SeSøknad: React.FunctionComponent<Props> = ({ mottattDato, saksNr, pdf }) => {
+const SeSøknad: React.FunctionComponent<Props> = ({ mottattDato, pdf }) => {
     const bem = BEMHelper('seSøknad');
     return (
         <div className={bem.className}>

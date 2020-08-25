@@ -14,9 +14,7 @@ export const erIUke22Pluss3 = (dato: string) => {
 
 export const erMindreEnn3UkerSiden = (dato: string) => {
     const terminDato = moment(dato);
-    const datoFor3UkerSiden = moment()
-        .startOf('day')
-        .subtract(21, 'days');
+    const datoFor3UkerSiden = moment().startOf('day').subtract(21, 'days');
     return moment.max(terminDato, datoFor3UkerSiden) === terminDato;
 };
 
@@ -29,9 +27,7 @@ export const utstedtDatoErIUke22 = (utstedtDatoString: string, terminDatoString:
 
 export const idagEllerTidligere = (dato: string) => {
     const utstedtDato = moment(dato).startOf('day');
-    const tomorrow = moment()
-        .add(1, 'day')
-        .startOf('day');
+    const tomorrow = moment().add(1, 'day').startOf('day');
     return moment.max(utstedtDato, tomorrow) === tomorrow;
 };
 
@@ -43,11 +39,7 @@ export const erMyndig = (person: Person) => {
 
 export const erMann = (person: Person) => person.kjønn === 'M';
 
-export const getFørsteMuligeTermindato = () =>
-    moment()
-        .subtract(21, 'days')
-        .startOf('day')
-        .toDate();
+export const getFørsteMuligeTermindato = () => moment().subtract(21, 'days').startOf('day').toDate();
 
 /**
  * Siste mulige termindato ut fra dagens dato
@@ -64,13 +56,8 @@ export const getForsteMuligeTerminbekreftesesdato = (termindato?: Date | string)
         ? moment(termindato)
               .subtract(dagerForTerminbekreftelse - 1, 'days')
               .toDate()
-        : moment()
-              .subtract(1, 'years')
-              .startOf('day')
-              .toDate();
+        : moment().subtract(1, 'years').startOf('day').toDate();
 };
 
-export const getSisteMuligeTerminbekreftesesdato = (termindato?: Date | string) =>
-    moment(new Date())
-        .endOf('day')
-        .toDate();
+export const getSisteMuligeTerminbekreftesesdato = (_termindato?: Date | string) =>
+    moment(new Date()).endOf('day').toDate();

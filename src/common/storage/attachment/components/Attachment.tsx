@@ -21,15 +21,10 @@ interface OwnProps {
 
 type Props = OwnProps & InjectedIntlProps;
 
-const Attachment: React.StatelessComponent<Props> = ({
-    attachment,
-    showFileSize,
-    onDelete,
-    intl
-}) => {
+const Attachment: React.StatelessComponent<Props> = ({ attachment, showFileSize, onDelete, intl }) => {
     const BEM = BEMHelper('attachment');
     const cls = classnames(BEM.className, {
-        [BEM.modifier('pending')]: attachment.pending
+        [BEM.modifier('pending')]: attachment.pending,
     });
 
     return (
@@ -42,23 +37,22 @@ const Attachment: React.StatelessComponent<Props> = ({
             <VedleggIkon className={BEM.element('icon')} width={20} height={20} />
             <div className={BEM.element('filename')}>
                 {attachment.url ? (
-                    <Lenke href={attachment.url} target="_blank">{attachment.filename}</Lenke>
+                    <Lenke href={attachment.url} target="_blank">
+                        {attachment.filename}
+                    </Lenke>
                 ) : (
                     <span>{attachment.filename}</span>
                 )}
                 {showFileSize && <div>{bytesString(attachment.filesize)}</div>}
             </div>
             {onDelete && (
-                    <span className={BEM.element('deleteButton')}>
-                        <SlettKnapp
-                            onClick={() => onDelete(attachment)}
-                            ariaLabel={intl.formatMessage(
-                                { id: 'vedlegg.arialabel.slett' },
-                                { navn: attachment.filename }
-                            )}
-                        />
-                    </span>
-                )}
+                <span className={BEM.element('deleteButton')}>
+                    <SlettKnapp
+                        onClick={() => onDelete(attachment)}
+                        ariaLabel={intl.formatMessage({ id: 'vedlegg.arialabel.slett' }, { navn: attachment.filename })}
+                    />
+                </span>
+            )}
         </div>
     );
 };

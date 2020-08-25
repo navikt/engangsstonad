@@ -37,7 +37,7 @@ class CountryPicker extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         const state: State = {
-            isOpen: false
+            isOpen: false,
         };
         this.state = { ...state };
         this.openModal = this.openModal.bind(this);

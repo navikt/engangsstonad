@@ -20,7 +20,7 @@ interface OwnProps {
 
 type Props = OwnProps & InjectedIntlProps;
 
-const CountryListSummaryElement: React.StatelessComponent<Props> = props => {
+const CountryListSummaryElement: React.StatelessComponent<Props> = (props) => {
     const { tidsperiode, land } = props.utenlandsopphold;
     const { onDeleteClick, onEditClick } = props;
     const onEditClickHandler = () => {
@@ -32,7 +32,7 @@ const CountryListSummaryElement: React.StatelessComponent<Props> = props => {
     return (
         <li
             className={classnames('countryListElement', {
-                countryListElement__editable: onEditClick !== undefined
+                countryListElement__editable: onEditClick !== undefined,
             })}
         >
             <div className="countryListElement__stay">
@@ -42,7 +42,7 @@ const CountryListSummaryElement: React.StatelessComponent<Props> = props => {
                         <div className="countryListElement__date">
                             {getMessage(props.intl, 'standard.text.fromTo', {
                                 from: ISODateToMaskedInput(tidsperiode.fom),
-                                to: ISODateToMaskedInput(tidsperiode.tom)
+                                to: ISODateToMaskedInput(tidsperiode.tom),
                             })}
                         </div>
                     </div>
@@ -50,7 +50,10 @@ const CountryListSummaryElement: React.StatelessComponent<Props> = props => {
             </div>
             {onDeleteClick && (
                 <span className="countryListElement__delete">
-                    <SlettKnapp ariaLabel="Slett utenlandsopphold" onClick={() => onDeleteClick(props.utenlandsopphold)} />
+                    <SlettKnapp
+                        ariaLabel="Slett utenlandsopphold"
+                        onClick={() => onDeleteClick(props.utenlandsopphold)}
+                    />
                 </span>
             )}
         </li>

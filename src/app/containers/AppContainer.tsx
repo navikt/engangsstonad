@@ -30,7 +30,7 @@ interface StateProps {
 
 type Props = StateProps & DispatchProps;
 class AppContainer extends React.Component<Props> {
-    componentWillMount() {
+    componentDidMount() {
         if (!this.props.person) {
             this.props.dispatch(api.getPerson());
         }
@@ -92,4 +92,4 @@ const mapStateToProps = (state: AppState) => ({
     language: state.commonReducer.language,
 });
 
-export default connect<StateProps, {}, {}>(mapStateToProps)(AppContainer);
+export default connect<StateProps>(mapStateToProps)(AppContainer);

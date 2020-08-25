@@ -10,7 +10,7 @@ const initialState = (): ApiState => ({
     kvittering: undefined,
     person: undefined,
     sessionHasExpired: false,
-    error: undefined
+    error: undefined,
 });
 
 export interface ApiState {
@@ -33,32 +33,32 @@ const apiReducer = (state = initialState(), action: ApiActionTypes) => {
             return {
                 ...state,
                 error: action.error.response,
-                isLoadingPerson: false
+                isLoadingPerson: false,
             };
         case ApiActionKeys.SEND_SOKNAD:
             return {
                 ...state,
                 soknad: action.soknad,
-                søknadSendingInProgress: true
+                søknadSendingInProgress: true,
             };
         case ApiActionKeys.SEND_SOKNAD_SUCCESS:
             return {
                 ...state,
                 kvittering: action.kvittering,
                 søknadSendt: true,
-                søknadSendingInProgress: false
+                søknadSendingInProgress: false,
             };
         case ApiActionKeys.SEND_SOKNAD_FAILED:
             return {
                 ...state,
                 error: action.error.response,
                 søknadSendt: true,
-                søknadSendingInProgress: false
+                søknadSendingInProgress: false,
             };
         case ApiActionKeys.SESSION_EXPIRED:
             return {
                 ...state,
-                sessionHasExpired: true
+                sessionHasExpired: true,
             };
         default:
             return state;

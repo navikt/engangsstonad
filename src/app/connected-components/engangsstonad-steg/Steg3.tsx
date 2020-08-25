@@ -25,7 +25,7 @@ interface StateProps {
 type Props = StateProps & InjectedIntlProps & DispatchProps;
 
 class Steg3 extends React.Component<Props> {
-    componentWillMount() {
+    componentDidMount() {
         this.overlapsWithOtherUtenlandsopphold = this.overlapsWithOtherUtenlandsopphold.bind(this);
         this.validateFomDatoSiste12Mnd = this.validateFomDatoSiste12Mnd.bind(this);
         this.validateTomDatoSiste12Mnd = this.validateTomDatoSiste12Mnd.bind(this);
@@ -52,7 +52,7 @@ class Steg3 extends React.Component<Props> {
                     momentFom.isBetween(varighetFom.subtract(1, 'seconds'), varighetTom.add(1, 'seconds')) ||
                     momentTom.isBetween(varighetFom.subtract(1, 'seconds'), varighetTom.add(1, 'seconds')) ||
                     varighetFom.isBetween(momentFom.subtract(1, 'seconds'), momentTom.add(1, 'seconds')) ||
-                        varighetTom.isBetween(momentFom.subtract(1, 'seconds'), momentTom.add(1, 'seconds'))
+                    varighetTom.isBetween(momentFom.subtract(1, 'seconds'), momentTom.add(1, 'seconds'))
                 );
             }
         });
@@ -66,21 +66,21 @@ class Steg3 extends React.Component<Props> {
             const momentTom = moment(tom);
             if (momentFom.isAfter(momentTom)) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato'),
                 };
             } else if (momentFom.isBefore(moment().subtract(1, 'years'))) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12'),
                 };
             } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper'),
                 };
             }
             return;
         }
         return {
-            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12')
+            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12'),
         };
     }
 
@@ -91,25 +91,25 @@ class Steg3 extends React.Component<Props> {
             const momentTom = moment(tom);
             if (momentTom.isBefore(momentFom)) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato'),
                 };
             } else if (momentTom.isBefore(moment().subtract(1, 'years'))) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12'),
                 };
             } else if (momentTom.isSameOrAfter(moment().add(1, 'days'))) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12'),
                 };
             } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper'),
                 };
             }
             return;
         }
         return {
-            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12')
+            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforSiste12'),
         };
     }
 
@@ -120,25 +120,25 @@ class Steg3 extends React.Component<Props> {
             const momentTom = moment(tom);
             if (momentFom.isAfter(momentTom)) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.førTilDato'),
                 };
             } else if (momentFom.isBefore(moment().startOf('day'))) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12'),
                 };
             } else if (momentFom.startOf('day').isAfter(moment().add(1, 'years'))) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12'),
                 };
             } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper'),
                 };
             }
             return;
         }
         return {
-            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12')
+            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12'),
         };
     }
 
@@ -149,25 +149,25 @@ class Steg3 extends React.Component<Props> {
             const momentTom = moment(tom);
             if (momentTom.isBefore(momentFom)) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.etterFraDato'),
                 };
             } else if (momentTom.startOf('day').isAfter(moment().add(1, 'years'))) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12'),
                 };
             } else if (momentTom.isBefore(moment().startOf('day'))) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.dagensEllerSenere')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.dagensEllerSenere'),
                 };
             } else if (this.overlapsWithOtherUtenlandsopphold(momentFom, momentTom, utenlandsoppholdInEditMode)) {
                 return {
-                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper')
+                    feilmelding: getMessage(intl, 'medlemsskap.modal.feil.overlapper'),
                 };
             }
             return;
         }
         return {
-            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12')
+            feilmelding: getMessage(intl, 'medlemsskap.modal.feil.innenforNeste12'),
         };
     }
 
@@ -198,23 +198,13 @@ class Steg3 extends React.Component<Props> {
         const { iNorgeSiste12Mnd, iNorgeNeste12Mnd, tidligereOpphold, senereOpphold } = informasjonOmUtenlandsopphold;
 
         const tidsperiodeForegående: Tidsperiode = {
-            startdato: moment()
-                .add(-1, 'years')
-                .startOf('day')
-                .toDate(),
-            sluttdato: moment()
-                .endOf('day')
-                .toDate()
+            startdato: moment().add(-1, 'years').startOf('day').toDate(),
+            sluttdato: moment().endOf('day').toDate(),
         };
 
         const tidsperiodeKommende: Tidsperiode = {
-            startdato: moment()
-                .startOf('day')
-                .toDate(),
-            sluttdato: moment()
-                .add(1, 'years')
-                .endOf('day')
-                .toDate()
+            startdato: moment().startOf('day').toDate(),
+            sluttdato: moment().add(1, 'years').endOf('day').toDate(),
         };
 
         return (
@@ -223,19 +213,19 @@ class Steg3 extends React.Component<Props> {
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.siste12mnd')}
                         name="iNorgeSiste12"
-                        onChange={(event: any, value: string) => dispatch(soknad.setINorgeSiste12Mnd(value))}
+                        onChange={(_event: any, value: string) => dispatch(soknad.setINorgeSiste12Mnd(value))}
                         checked={this.getINorgeSiste12SelectedValue()}
                         radios={[
                             {
-                                inputProps: { id: 'js-iNorgeSiste12' },
+                                name: 'js-iNorgeSiste12',
                                 label: getMessage(intl, 'medlemmskap.radiobutton.boddNorge'),
-                                value: 'norway'
+                                value: 'norway',
                             },
                             {
-                                inputProps: { id: 'js-iUtlandetSiste12' },
+                                name: 'js-iUtlandetSiste12',
                                 label: getMessage(intl, 'medlemmskap.radiobutton.utlandet'),
-                                value: 'abroad'
-                            }
+                                value: 'abroad',
+                            },
                         ]}
                         twoColumns={true}
                     />
@@ -259,7 +249,7 @@ class Steg3 extends React.Component<Props> {
                         validators={{
                             validateLand: this.validateLand,
                             validateFom: this.validateFomDatoSiste12Mnd,
-                            validateTom: this.validateTomDatoSiste12Mnd
+                            validateTom: this.validateTomDatoSiste12Mnd,
                         }}
                     />
                 </FormBlock>
@@ -267,19 +257,19 @@ class Steg3 extends React.Component<Props> {
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'medlemmskap.text.neste12mnd')}
                         name="iNorgeNeste12"
-                        onChange={(event: any, value: string) => dispatch(soknad.setINorgeNeste12Mnd(value))}
+                        onChange={(_event: any, value: string) => dispatch(soknad.setINorgeNeste12Mnd(value))}
                         checked={this.getINorgeNeste12SelectedValue()}
                         radios={[
                             {
-                                inputProps: { id: 'js-iNorgeNeste12' },
+                                name: 'js-iNorgeNeste12',
                                 label: getMessage(intl, 'medlemmskap.radiobutton.boNorge'),
-                                value: 'norway'
+                                value: 'norway',
                             },
                             {
-                                inputProps: { id: 'js-iUtlandetNeste12' },
+                                name: 'js-iUtlandetNeste12',
                                 label: getMessage(intl, 'medlemmskap.radiobutton.boUtlandet'),
-                                value: 'abroad'
-                            }
+                                value: 'abroad',
+                            },
                         ]}
                         twoColumns={true}
                     />
@@ -307,7 +297,7 @@ class Steg3 extends React.Component<Props> {
                         validators={{
                             validateLand: this.validateLand,
                             validateFom: this.validateFomDatoNeste12Mnd,
-                            validateTom: this.validateTomDatoNeste12Mnd
+                            validateTom: this.validateTomDatoNeste12Mnd,
                         }}
                     />
                 </FormBlock>
@@ -319,7 +309,7 @@ class Steg3 extends React.Component<Props> {
 const mapStateToProps = (state: AppState) => ({
     informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold,
     barn: state.soknadReducer.barn,
-    language: state.commonReducer.language
+    language: state.commonReducer.language,
 });
 
-export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg3));
+export default connect<StateProps>(mapStateToProps)(injectIntl(Steg3));

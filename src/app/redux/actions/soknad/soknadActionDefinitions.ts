@@ -35,7 +35,7 @@ export enum SoknadActionKeys {
     'UPLOAD_ATTACHMENT' = 'uploadAttachment',
     'UPLOAD_ATTACHMENT_SUCCESS' = 'uploadAttachmentSuccess',
     'UPLOAD_ATTACHMENT_FAILED' = 'uploadAttachmentFailed',
-    'DELETE_ATTACHMENT' = 'deleteAttachment'
+    'DELETE_ATTACHMENT' = 'deleteAttachment',
 }
 
 // Barn
@@ -196,4 +196,4 @@ export type SoknadActionTypes =
     | UploadAttachment
     | UploadAttachmentSuccess
     | UploadAttachmentFailed
-    | DeleteAttachment
+    | DeleteAttachment;

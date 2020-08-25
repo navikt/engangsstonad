@@ -8,7 +8,7 @@ const CancelButton: React.StatelessComponent = () => {
     return (
         <div className="cancelButtonWrapper">
             <Link className="cancelButton" to="/engangsstonad/soknad/cancel">
-                <FormattedMessage id="standard.avbrytSøknad"/>
+                <FormattedMessage id="standard.avbrytSøknad" />
             </Link>
         </div>
     );

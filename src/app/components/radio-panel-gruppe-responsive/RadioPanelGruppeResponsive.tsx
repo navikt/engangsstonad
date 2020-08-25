@@ -1,47 +1,37 @@
-import * as React from 'react';
-import * as classnames from 'classnames';
-const { SkjemaGruppe, Fieldset, RadioPanel } = require('nav-frontend-skjema');
-import { RadioPanelGruppeProps } from 'nav-frontend-skjema';
+import React from 'react';
+import classnames from 'classnames';
+import { RadioPanelGruppeProps, SkjemaGruppe, RadioPanel } from 'nav-frontend-skjema';
+
 import './radioPanelGruppeResponsive.less';
-import 'nav-frontend-skjema-style';
+import Fieldset from 'components/fieldset/Fieldset';
 
 interface Props extends RadioPanelGruppeProps {
     twoColumns?: boolean;
-};
+}
 
 export default class RadioPanelGruppeResponsive extends React.Component<Props> {
     render() {
-        const {
-            feil,
-            twoColumns = false,
-            legend,
-            checked,
-            name,
-            radios,
-            onChange
-        } = this.props;
+        const { feil, twoColumns = false, legend, checked, name, radios, onChange } = this.props;
 
         const cls = classnames('radioPanelWrapper', {
-            'radioPanelWrapper--twoColumns': twoColumns === true
+            'radioPanelWrapper--twoColumns': twoColumns === true,
         });
         return (
             <div className="radioPanelGruppe">
                 <Fieldset legend={legend}>
                     <SkjemaGruppe className="radioPanelGruppe--responsive" feil={feil}>
-                            {
-                                radios.map((radio) => {
-                                    return (
-                                        <div className={cls} key={radio.value}>
-                                            <RadioPanel
-                                                checked={checked === radio.value}
-                                                name={name}
-                                                onChange={(event: any) => onChange(event, radio.value)}
-                                                {...radio}
-                                            />
-                                        </div>
-                                    );
-                                })
-                            }
+                        {radios.map((radio) => {
+                            return (
+                                <div className={cls} key={radio.value as string}>
+                                    <RadioPanel
+                                        checked={checked === radio.value}
+                                        name={name}
+                                        onChange={(event: any) => onChange(event, radio.value)}
+                                        {...radio}
+                                    />
+                                </div>
+                            );
+                        })}
                     </SkjemaGruppe>
                 </Fieldset>
             </div>

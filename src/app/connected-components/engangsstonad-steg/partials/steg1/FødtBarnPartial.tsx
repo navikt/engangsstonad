@@ -31,37 +31,25 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
         return [
             {
                 test: () => barn.fødselsdatoer[index],
-                failText: getMessage(
-                    intl,
-                    'valideringsfeil.fodselsdato.duMåOppgi'
-                )
+                failText: getMessage(intl, 'valideringsfeil.fodselsdato.duMåOppgi'),
             },
             {
                 test: () => barn.fødselsdatoer[index] !== '',
-                failText: getMessage(
-                    intl,
-                    'valideringsfeil.fodselsdato.duMåOppgi'
-                )
+                failText: getMessage(intl, 'valideringsfeil.fodselsdato.duMåOppgi'),
+            },
+            {
+                test: () => new Date(barn.fødselsdatoer[index]) <= moment(new Date()).endOf('day').toDate(),
+                failText: getMessage(intl, 'valideringsfeil.fodselsdato.måVæreIdagEllerTidligere'),
             },
             {
                 test: () =>
-                    new Date(barn.fødselsdatoer[index]) <=
-                    moment(new Date())
-                        .endOf('day')
-                        .toDate(),
-                failText: getMessage(
-                    intl,
-                    'valideringsfeil.fodselsdato.måVæreIdagEllerTidligere'
-                )
+                    moment(barn.fødselsdatoer[index]).isSameOrAfter(moment().subtract(3, 'years').startOf('day')),
+                failText: getMessage(intl, 'valideringsfeil.fodselsdato.ikkeMerEnn3ÅrTilbake'),
             },
-            {
-                test: () => moment(barn.fødselsdatoer[index]).isSameOrAfter(moment().subtract(3, 'years').startOf('day')),
-                failText: getMessage(intl, 'valideringsfeil.fodselsdato.ikkeMerEnn3ÅrTilbake')
-            }
         ];
     }
 
-    onFødselsdatoInputChange(fødselsdato: Date | string, index: number) {
+    onFødselsdatoInputChange(fødselsdato: Date | string) {
         if (fødselsdato) {
             const { dispatch } = this.props;
             dispatch(
@@ -79,17 +67,12 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
             return null;
         }
 
-        const sisteGyldigeFødselsdato = moment()
-            .endOf('day')
-            .toDate();
-        const førsteGyldigeFødselsdato = moment()
-            .subtract(3, 'years')
-            .startOf('day')
-            .toDate();
+        const sisteGyldigeFødselsdato = moment().endOf('day').toDate();
+        const førsteGyldigeFødselsdato = moment().subtract(3, 'years').startOf('day').toDate();
 
         const datoavgrensning = {
             minDato: førsteGyldigeFødselsdato,
-            maksDato: sisteGyldigeFødselsdato
+            maksDato: sisteGyldigeFødselsdato,
         };
 
         return (
@@ -99,8 +82,8 @@ export default class FødtBarnPartial extends React.Component<Props, OwnProps> {
                         id="fødselsdato"
                         label={<LabelText>{getMessage(intl, 'relasjonBarn.text.fodselsdato')}</LabelText>}
                         dato={buildDateObject(barn.fødselsdatoer[0])}
-                        onChange={(dato: Date) => this.onFødselsdatoInputChange(dato, 0)}
-                        onInputChange={(dato: string) => this.onFødselsdatoInputChange(dato, 0)}
+                        onChange={(dato: Date) => this.onFødselsdatoInputChange(dato)}
+                        onInputChange={(dato: string) => this.onFødselsdatoInputChange(dato)}
                         name="fødselsdato"
                         avgrensninger={datoavgrensning}
                         validators={this.getFødselsdatoValidators(0)}

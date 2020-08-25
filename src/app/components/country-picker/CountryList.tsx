@@ -8,7 +8,7 @@ interface CountryListProps {
     utenlandsoppholdListe: Utenlandsopphold[];
 }
 
-export const CountrySummaryList: React.StatelessComponent<CountryListProps> = props => (
+export const CountrySummaryList: React.StatelessComponent<CountryListProps> = (props) => (
     <ul className="countryList countryList--summary">
         {props.utenlandsoppholdListe.map((periode: Utenlandsopphold, index: number) => (
             <CountryListElement key={index} utenlandsopphold={periode} />
@@ -21,7 +21,7 @@ interface EditableCountryListProps extends CountryListProps {
     onDeleteClick: (periode: Utenlandsopphold) => void;
 }
 
-export const CountryList: React.StatelessComponent<EditableCountryListProps> = props =>
+export const CountryList: React.StatelessComponent<EditableCountryListProps> = (props) =>
     props.utenlandsoppholdListe.length === 0 ? null : (
         <ul className="countryList">
             {props.utenlandsoppholdListe.map((utenlandsopphold, index) => (

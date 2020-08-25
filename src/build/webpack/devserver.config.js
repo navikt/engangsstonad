@@ -12,7 +12,7 @@ const configureDevServer = (decoratorFragments) => ({
                 Object.assign(
                     {
                         REST_API_URL: process.env.FORELDREPENGESOKNAD_API_URL,
-                        LOGIN_URL: process.env.LOGINSERVICE_URL
+                        LOGIN_URL: process.env.LOGINSERVICE_URL,
                     },
                     decoratorFragments
                 )
@@ -29,9 +29,9 @@ const configureDevServer = (decoratorFragments) => ({
         hash: false,
         timings: false,
         chunks: false,
-        chunkModules: false
+        chunkModules: false,
     },
-    publicPath: '/engangsstonad/dist'
+    publicPath: '/engangsstonad/dist',
 });
 
 module.exports = configureDevServer;

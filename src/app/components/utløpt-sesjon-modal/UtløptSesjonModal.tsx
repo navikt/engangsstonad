@@ -27,7 +27,8 @@ const UtløptSesjonModal = ({ erÅpen, intl }: Props) => {
             contentLabel={getMessage(intl, 'sesjonUtløpt.tittel')}
             closeButton={false}
             isOpen={erÅpen}
-            onRequestClose={() => undefined}>
+            onRequestClose={() => undefined}
+        >
             <AdvarselIkon />
             <Systemtittel className="blokk-m">
                 <FormattedMessage id="sesjonUtløpt.tittel" />

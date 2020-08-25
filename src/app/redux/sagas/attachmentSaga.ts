@@ -13,14 +13,12 @@ function* uploadAttachment(action: UploadAttachment) {
         const uuid: string = response.data;
         yield put(soknadActionCreators.uploadAttachmentSuccess(attachment, uri, uuid));
     } catch (error) {
-        (error.response.status === 401 || error.response.status === 403) ? yield put(apiActionCreators.sessionExpired())
-            :
-        yield put(soknadActionCreators.uploadAttachmentFailed(error, attachment));
+        error.response.status === 401 || error.response.status === 403
+            ? yield put(apiActionCreators.sessionExpired())
+            : yield put(soknadActionCreators.uploadAttachmentFailed(error, attachment));
     }
 }
 
 export default function* attachmentSaga() {
-    yield all([
-        takeEvery(SoknadActionKeys.UPLOAD_ATTACHMENT, uploadAttachment)
-    ]);
+    yield all([takeEvery(SoknadActionKeys.UPLOAD_ATTACHMENT, uploadAttachment)]);
 }

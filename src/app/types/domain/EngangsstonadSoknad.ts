@@ -10,7 +10,7 @@ interface EngangsstonadSoknad {
     barn: FodtBarn | UfodtBarn;
     annenForelder: AnnenForelder;
     vedlegg?: Attachment[];
-};
+}
 
 export interface EngangssoknadSoknadDto {
     type: string;
@@ -22,7 +22,6 @@ export interface EngangssoknadSoknadDto {
     søker: {
         språkkode: string;
     };
-};
-
+}
 
 export default EngangsstonadSoknad;

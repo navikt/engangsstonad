@@ -3,9 +3,6 @@ import { ValidComponentProps } from './types';
 
 export type ValidateInputProps = ValidComponentProps & DatovelgerProps;
 
-const ValidDateInput: new (props: Props) => React.Component<
-    ValidDateInputProps,
-    any
->;
+const ValidDateInput: new (props: Props) => React.Component<ValidDateInputProps, any>;
 
 export default ValidDateInput;

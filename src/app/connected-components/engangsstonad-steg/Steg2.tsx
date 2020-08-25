@@ -13,7 +13,7 @@ import {
     setAnnenForelderFnr,
     setAnnenForelderKanIkkeOppgis,
     setAnnenForelderNavn,
-    setAnnenForelderUtenlandskFnr
+    setAnnenForelderUtenlandskFnr,
 } from 'actions/soknad/soknadActionCreators';
 import CountrySelect from 'components/country-select/CountrySelect';
 import FormBlock from 'components/form-block/FormBlock';
@@ -62,12 +62,12 @@ class Steg2 extends React.Component<Props> {
                     annenForelder.utenlandskFnr
                         ? 'annenForelder.ugyldigFødselsnummer.utenlandsk'
                         : 'annenForelder.ugyldigFødselsnummer'
-                )
+                ),
             },
             {
                 test: () => person.fnr !== annenForelder.fnr,
-                failText: getMessage(intl, 'annenForelder.ugyldigEgetFødselsnummer')
-            }
+                failText: getMessage(intl, 'annenForelder.ugyldigEgetFødselsnummer'),
+            },
         ];
     }
 
@@ -83,8 +83,8 @@ class Steg2 extends React.Component<Props> {
                         annenForelder.navn.length <= MAKS_NAVN_LENGTH
                     );
                 },
-                failText: getMessage(intl, 'annenForelder.ugyldigNavn')
-            }
+                failText: getMessage(intl, 'annenForelder.ugyldigNavn'),
+            },
         ];
     }
 
@@ -95,8 +95,8 @@ class Steg2 extends React.Component<Props> {
                 test: () => {
                     return annenForelder && annenForelder.bostedsland;
                 },
-                failText: getMessage(intl, 'annenForelder.ugyldigBostedsland')
-            }
+                failText: getMessage(intl, 'annenForelder.ugyldigBostedsland'),
+            },
         ];
     }
 
@@ -168,7 +168,7 @@ class Steg2 extends React.Component<Props> {
 const mapStateToProps = (state: AppState) => ({
     annenForelder: state.soknadReducer.annenForelder,
     language: state.commonReducer.language,
-    person: state.apiReducer.person!
+    person: state.apiReducer.person!,
 });
 
-export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg2));
+export default connect<StateProps>(mapStateToProps)(injectIntl(Steg2));

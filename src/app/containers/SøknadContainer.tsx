@@ -116,6 +116,6 @@ const mapStateToProps = (state: AppState) => ({
     activeStep: state.stepReducer.activeStep,
     søknadSendt: state.apiReducer.søknadSendt,
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
-    sessionHasExpired: state.apiReducer.sessionHasExpired
+    sessionHasExpired: state.apiReducer.sessionHasExpired,
 });
 export default connect<OwnProps>(mapStateToProps)(injectIntl(SøknadContainer));

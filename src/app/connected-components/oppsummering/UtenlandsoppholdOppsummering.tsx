@@ -3,7 +3,10 @@ import { CountrySummaryList } from 'components/country-picker/CountryList';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import DisplayTextWithLabel from 'components/display-text-with-label/DisplayTextWithLabel';
-import InformasjonOmUtenlandsopphold, { Tidsperiode, Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
+import InformasjonOmUtenlandsopphold, {
+    Tidsperiode,
+    Utenlandsopphold,
+} from '../../types/domain/InformasjonOmUtenlandsopphold';
 import * as moment from 'moment';
 import Barn, { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 import getMessage from 'common/util/i18nUtils';
@@ -37,12 +40,7 @@ const erFamiliehendelsedatoIEnUtenlandsoppholdPeriode = (
 
 const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
     const { intl, barn, informasjonOmUtenlandsopphold } = props;
-    const {
-        iNorgeNeste12Mnd,
-        iNorgeSiste12Mnd,
-        tidligereOpphold,
-        senereOpphold
-    } = informasjonOmUtenlandsopphold;
+    const { iNorgeNeste12Mnd, iNorgeSiste12Mnd, tidligereOpphold, senereOpphold } = informasjonOmUtenlandsopphold;
 
     return (
         <div className="blokk-m">
@@ -73,7 +71,10 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.ogKommerPåFødselstidspunktet')}
                     text={
-                        erFamiliehendelsedatoIEnUtenlandsoppholdPeriode((barn as UfodtBarn).termindato!, informasjonOmUtenlandsopphold)
+                        erFamiliehendelsedatoIEnUtenlandsoppholdPeriode(
+                            (barn as UfodtBarn).termindato!,
+                            informasjonOmUtenlandsopphold
+                        )
                             ? getMessage(intl, 'medlemmskap.radiobutton.vareUtlandet')
                             : getMessage(intl, 'medlemmskap.radiobutton.vareNorge')
                     }
@@ -83,7 +84,10 @@ const UtenlandsoppholdOppsummering: React.StatelessComponent<Props & InjectedInt
                 <DisplayTextWithLabel
                     label={getMessage(intl, 'oppsummering.text.varPåFødselstidspunktet')}
                     text={
-                        erFamiliehendelsedatoIEnUtenlandsoppholdPeriode((barn as FodtBarn).fødselsdatoer[0]!, informasjonOmUtenlandsopphold)
+                        erFamiliehendelsedatoIEnUtenlandsoppholdPeriode(
+                            (barn as FodtBarn).fødselsdatoer[0]!,
+                            informasjonOmUtenlandsopphold
+                        )
                             ? getMessage(intl, 'medlemmskap.radiobutton.iUtlandet')
                             : getMessage(intl, 'medlemmskap.radiobutton.iNorge')
                     }

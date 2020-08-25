@@ -102,7 +102,7 @@ const Personopplysninger: React.StatelessComponent<Props> = (props: Props) => {
                                 <Lenke href={lenker.personvernerklæring} target="_blank">
                                     <FormattedMessage id="personopplysninger.text.personvernerklering.link" />
                                 </Lenke>
-                            )
+                            ),
                         }}
                     />
                 </Normaltekst>

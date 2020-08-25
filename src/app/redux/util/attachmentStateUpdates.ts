@@ -38,6 +38,6 @@ const stateWithUpdatedBarnAttachments = (
     const updatedAttachments = updateAttachmentList(attachments, attachment, operation);
     return {
         ...state,
-        barn: { ...state.barn, [attachment.type]: updatedAttachments }
+        barn: { ...state.barn, [attachment.type]: updatedAttachments },
     };
 };

@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 
 class SkjemaelementFeilmelding extends Component {
-
     renderFeil() {
-        return (<div className="skjemaelement__feilmelding">{this.props.feil.feilmelding}</div>);
+        return <div className="skjemaelement__feilmelding">{this.props.feil.feilmelding}</div>;
     }
 
     render() {
@@ -20,19 +19,19 @@ class SkjemaelementFeilmelding extends Component {
 export const skjemaelementFeilmeldingShape = PT.shape({
     feilmelding: PT.oneOfType([
         PT.string,
-        PT.node // For å slippe igjennom FormattedMessage fra react-intl
-    ]).isRequired
+        PT.node, // For å slippe igjennom FormattedMessage fra react-intl
+    ]).isRequired,
 });
 
 SkjemaelementFeilmelding.propTypes = {
-  /**
+    /**
      * Hvis skjemaet har feil sender man inn et objekt med en feilmelding
      */
-    feil: skjemaelementFeilmeldingShape
+    feil: skjemaelementFeilmeldingShape,
 };
 
 SkjemaelementFeilmelding.defaultProps = {
-    feil: undefined
+    feil: undefined,
 };
 
 export default SkjemaelementFeilmelding;

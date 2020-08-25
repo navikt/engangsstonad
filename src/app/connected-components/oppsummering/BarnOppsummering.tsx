@@ -22,7 +22,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (p
         fødselsdatoer,
         terminbekreftelse,
         termindato,
-        terminbekreftelseDato
+        terminbekreftelseDato,
     } = props.barn;
 
     let antallBarnSummaryText;
@@ -32,7 +32,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (p
         antallBarnSummaryText = getMessage(intl, 'relasjonBarn.radiobutton.tvillinger');
     } else {
         antallBarnSummaryText = getMessage(intl, 'oppsummering.text.flereAntallBarn', {
-            antall: antallBarn
+            antall: antallBarn,
         });
     }
 

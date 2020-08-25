@@ -13,9 +13,9 @@ export interface Attachment {
 }
 
 export enum AttachmentType {
-    TERMINBEKREFTELSE = 'terminbekreftelse'
+    TERMINBEKREFTELSE = 'terminbekreftelse',
 }
 
 export enum Skjemanummer {
-    TERMINBEKREFTELSE = 'I000062'
+    TERMINBEKREFTELSE = 'I000062',
 }

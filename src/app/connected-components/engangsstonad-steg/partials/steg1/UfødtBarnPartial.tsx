@@ -13,7 +13,7 @@ import {
     getForsteMuligeTerminbekreftesesdato,
     getSisteMuligeTerminbekreftesesdato,
     erIUke22Pluss3,
-    utstedtDatoErIUke22
+    utstedtDatoErIUke22,
 } from 'util/validation/validationUtils';
 const Modal = require('nav-frontend-modal').default;
 import LabelText from 'common/components/labeltekst/Labeltekst';
@@ -37,8 +37,12 @@ interface State {
 }
 
 export default class UfødtBarnPartial extends React.Component<Props, State> {
-    componentWillMount() {
-        this.setState({ ...this.state, isModalOpen: false });
+    constructor(props: Props) {
+        super(props);
+
+        this.state = {
+            isModalOpen: false,
+        };
     }
 
     closeTerminbekreftelseModal() {
@@ -51,20 +55,20 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
         return [
             {
                 test: () => barn.termindato,
-                failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi')
+                failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi'),
             },
             {
                 test: () => barn.termindato !== '',
-                failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi')
+                failText: getMessage(intl, 'valideringsfeil.termindato.duMåOppgi'),
             },
             {
                 test: () => erIUke22Pluss3(barn.termindato),
-                failText: getMessage(intl, 'valideringsfeil.termindato.duMåVæreIUke22')
+                failText: getMessage(intl, 'valideringsfeil.termindato.duMåVæreIUke22'),
             },
             {
                 test: () => erMindreEnn3UkerSiden(barn.termindato),
-                failText: getMessage(intl, 'valideringsfeil.termindato.termindatoKanIkkeVære3UkerFraIdag')
-            }
+                failText: getMessage(intl, 'valideringsfeil.termindato.termindatoKanIkkeVære3UkerFraIdag'),
+            },
         ];
     }
 
@@ -74,20 +78,20 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
         return [
             {
                 test: () => barn.terminbekreftelseDato,
-                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåOppgi')
+                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåOppgi'),
             },
             {
                 test: () => barn.terminbekreftelseDato !== '',
-                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåOppgi')
+                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåOppgi'),
             },
             {
                 test: () => idagEllerTidligere(barn.terminbekreftelseDato),
-                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere')
+                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.måVæreIdagEllerTidligere'),
             },
             {
                 test: () => utstedtDatoErIUke22(barn.terminbekreftelseDato, barn.termindato),
-                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåVæreIUke22')
-            }
+                failText: getMessage(intl, 'valideringsfeil.terminbekreftelseDato.duMåVæreIUke22'),
+            },
         ];
     }
 
@@ -99,12 +103,12 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
 
         const datoavgrensningTermindato = {
             minDato: getFørsteMuligeTermindato(),
-            maksDato: getSisteMuligeTermindato()
+            maksDato: getSisteMuligeTermindato(),
         };
 
         const datoavgrensningTerminbekreftelse = {
             minDato: getForsteMuligeTerminbekreftesesdato(barn.termindato),
-            maksDato: getSisteMuligeTerminbekreftesesdato(barn.termindato)
+            maksDato: getSisteMuligeTerminbekreftesesdato(barn.termindato),
         };
 
         return (
@@ -152,7 +156,8 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                         barn.terminbekreftelse !== undefined &&
                         barn.terminbekreftelse.filter((a: Attachment) => !isAttachmentWithError(a)).length > 0 &&
                         barn.termindato !== undefined
-                    }>
+                    }
+                >
                     <div key="dateInputTerminBekreftelse">
                         <ValidDateInput
                             id="terminbekreftelse"
@@ -172,7 +177,8 @@ export default class UfødtBarnPartial extends React.Component<Props, State> {
                     isOpen={this.state.isModalOpen}
                     closeButton={true}
                     onRequestClose={() => this.closeTerminbekreftelseModal()}
-                    contentLabel="Om terminbekreftelsen">
+                    contentLabel="Om terminbekreftelsen"
+                >
                     <OmTerminbekreftelsen />
                 </Modal>
             </div>

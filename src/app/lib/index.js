@@ -11,13 +11,13 @@ class ValidBase extends Component {
             tests: [],
             valid: true,
             hasBlurred: false,
-            optional: this.props.optional
+            optional: this.props.optional,
         };
         this.onChange = this.onChange.bind(this);
         this.onBlur = this.onBlur.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         if (this.context.validForm) {
             this.context.validForm.register(this);
         }
@@ -46,7 +46,7 @@ class ValidBase extends Component {
 
     onBlur(e) {
         this.setState({
-            hasBlurred: true
+            hasBlurred: true,
         });
 
         if (this.context.validForm) {
@@ -64,7 +64,7 @@ class ValidBase extends Component {
     }
 
     getFirstFailedVerdict() {
-        return this.state.tests.find(test => !test.verdict);
+        return this.state.tests.find((test) => !test.verdict);
     }
 
     validate() {
@@ -81,10 +81,10 @@ class ValidBase extends Component {
         if (!this.props.validators || !this.props.validators.length) return;
 
         let valid = true;
-        const testsCopy = this.props.validators.map(validator => {
+        const testsCopy = this.props.validators.map((validator) => {
             let validatorResult = {
                 verdict: validator.test(this.element),
-                failText: validator.failText
+                failText: validator.failText,
             };
 
             if (!validatorResult.verdict) {
@@ -95,13 +95,13 @@ class ValidBase extends Component {
 
         this.setState({
             tests: testsCopy.slice(),
-            valid
+            valid,
         });
 
         return {
             name: this.props.name,
             tests: testsCopy.slice(),
-            valid
+            valid,
         };
     }
 
@@ -118,29 +118,27 @@ class ValidBase extends Component {
             validators,
             ...other
         } = this.props;
-        const failedVerdict = !this.state.valid
-            ? { feilmelding: this.getFirstFailedVerdict().failText }
-            : undefined;
+        const failedVerdict = !this.state.valid ? { feilmelding: this.getFirstFailedVerdict().failText } : undefined;
 
         const elementRef = {};
         switch (component) {
             case Input:
-                elementRef.inputRef = node => {
+                elementRef.inputRef = (node) => {
                     this.element = node;
                 };
                 break;
             case Select:
-                elementRef.selectRef = node => {
+                elementRef.selectRef = (node) => {
                     this.element = node;
                 };
                 break;
             case Textarea:
-                elementRef.textareaRef = node => {
+                elementRef.textareaRef = (node) => {
                     this.element = node;
                 };
                 break;
             case DateInput:
-                elementRef.ref = node => {
+                elementRef.ref = (node) => {
                     this.element = node;
                 };
                 break;
@@ -150,7 +148,7 @@ class ValidBase extends Component {
             <this.props.component
                 onChange={this.onChange}
                 onBlur={this.onBlur}
-                feil={feil || failedVerdict}
+                feil={feil || (failedVerdict || {}).feilmelding}
                 {...other}
             />
         );
@@ -158,12 +156,11 @@ class ValidBase extends Component {
 }
 
 ValidBase.contextTypes = {
-    validForm: PT.object.isRequired
+    validForm: PT.object.isRequired,
 };
 
 ValidBase.propTypes = {
-    component: PT.oneOf([Input, Textarea, Select, DateInput, SkjemaGruppe])
-        .isRequired,
+    component: PT.oneOf([Input, Textarea, Select, DateInput, SkjemaGruppe]).isRequired,
     name: PT.string,
     onChange: PT.func,
     onBlur: PT.func,
@@ -175,10 +172,10 @@ ValidBase.propTypes = {
     validators: PT.arrayOf(
         PT.shape({
             test: PT.func.isRequired,
-            failText: PT.string.isRequired
+            failText: PT.string.isRequired,
         })
     ).isRequired,
-    optional: PT.bool
+    optional: PT.bool,
 };
 
 ValidBase.defaultProps = {
@@ -189,7 +186,7 @@ ValidBase.defaultProps = {
     validateOnChange: false,
     validateOnBlur: true,
     feil: undefined,
-    optional: false
+    optional: false,
 };
 
 export default ValidBase;

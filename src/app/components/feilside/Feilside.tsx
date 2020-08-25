@@ -32,17 +32,12 @@ const Feilside: React.StatelessComponent<Props> = ({
     tittel,
     ingress,
     language,
-    setLanguage
+    setLanguage,
 }) => {
     return (
         <div id={containerId}>
             <DocumentTitle title={dokumenttittel} />
-            {setLanguage && language && (
-                <LanguageToggle
-                    language={language}
-                    toggleLanguage={setLanguage}
-                />
-            )}
+            {setLanguage && language && <LanguageToggle language={language} toggleLanguage={setLanguage} />}
             {illustrasjon && (
                 <SimpleIllustration
                     veileder={illustrasjon.veileder}
@@ -52,15 +47,12 @@ const Feilside: React.StatelessComponent<Props> = ({
                             <div>
                                 <div>{illustrasjon.tekst}</div>
                                 {illustrasjon.lenke && (
-                                    <Lenke
-                                        className="intro-snakkelenke"
-                                        href={illustrasjon.lenke.url}
-                                    >
+                                    <Lenke className="intro-snakkelenke" href={illustrasjon.lenke.url}>
                                         {illustrasjon.lenke.tekst}
                                     </Lenke>
                                 )}
                             </div>
-                        )
+                        ),
                     }}
                 />
             )}

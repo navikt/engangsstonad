@@ -84,24 +84,47 @@ class Steg1 extends React.Component<Props, State> {
                     <RadioPanelGruppeResponsive
                         legend={getMessage(intl, 'relasjonBarn.text.fodselTidspunkt')}
                         name="fodselsTidspunkt"
-                        onChange={(event: any, value: string) => dispatch(soknad.setErBarnetFødt(value))}
+                        onChange={(_event: any, value: string) => dispatch(soknad.setErBarnetFødt(value))}
                         checked={this.getFodselsTidspunktSelectedValue()}
                         radios={[
-                            { inputProps: { id: 'js-fodselFremtid' }, label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'), value: 'ahead' },
-                            { inputProps: { id: 'js-fodselFortid' }, label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'), value: 'before' }
+                            {
+                                name: 'js-fodselFremtid',
+                                label: getMessage(intl, 'relasjonBarn.radiobutton.fremtid'),
+                                value: 'ahead',
+                            },
+                            {
+                                name: 'js-fodselFortid',
+                                label: getMessage(intl, 'relasjonBarn.radiobutton.fortid'),
+                                value: 'before',
+                            },
                         ]}
                     />
                 </FormBlock>
                 <FormBlock visible={barn.erBarnetFødt !== undefined}>
                     <RadioPanelGruppeResponsive
-                        legend={getMessage(intl, `relasjonBarn.text.antallBarn${barn.erBarnetFødt ? 'Født' : 'Ventet'}`)}
+                        legend={getMessage(
+                            intl,
+                            `relasjonBarn.text.antallBarn${barn.erBarnetFødt ? 'Født' : 'Ventet'}`
+                        )}
                         name="antallBarn"
-                        onChange={(event: any, value: string) => this.handleAntallBarnSelected(value)}
+                        onChange={(_event: any, value: string) => this.handleAntallBarnSelected(value)}
                         checked={this.getAntallBarnSelectedValue()}
                         radios={[
-                            { inputProps: { id: 'js-ettBarn' }, label: getMessage(intl, 'relasjonBarn.radiobutton.ettbarn'), value: 'ett' },
-                            { inputProps: { id: 'js-tvillinger' }, label: getMessage(intl, 'relasjonBarn.radiobutton.tvillinger'), value: 'tvillinger' },
-                            { inputProps: { id: 'js-flereBarn' }, label: getMessage(intl, 'relasjonBarn.radiobutton.flere'), value: 'flere' }
+                            {
+                                name: 'js-ettBarn',
+                                label: getMessage(intl, 'relasjonBarn.radiobutton.ettbarn'),
+                                value: 'ett',
+                            },
+                            {
+                                name: 'js-tvillinger',
+                                label: getMessage(intl, 'relasjonBarn.radiobutton.tvillinger'),
+                                value: 'tvillinger',
+                            },
+                            {
+                                name: 'js-flereBarn',
+                                label: getMessage(intl, 'relasjonBarn.radiobutton.flere'),
+                                value: 'flere',
+                            },
                         ]}
                     />
                 </FormBlock>
@@ -128,7 +151,7 @@ class Steg1 extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    barn: state.soknadReducer.barn
+    barn: state.soknadReducer.barn,
 });
 
-export default connect<StateProps, {}, {}>(mapStateToProps)(injectIntl(Steg1));
+export default connect<StateProps>(mapStateToProps)(injectIntl(Steg1));

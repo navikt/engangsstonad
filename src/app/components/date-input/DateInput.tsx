@@ -15,23 +15,19 @@ interface StateProps {
     language: Language;
 }
 
-class DateInput extends React.Component<Props & StateProps, {}> {
+class DateInput extends React.Component<Props & StateProps> {
     render() {
         const { label, feil, language, ...rest } = this.props;
         return (
             <SkjemaInputElement id={this.props.id} feil={feil} label={label}>
-                <Datovelger
-                    {...rest}
-                    locale={language}
-                    inputProps={{ placeholder: 'dd.mm.åååå' }}
-                />
+                <Datovelger {...rest} locale={language} inputProps={{ placeholder: 'dd.mm.åååå' }} />
             </SkjemaInputElement>
         );
     }
 }
 
 const mapStateToProps = (state: AppState) => ({
-    language: state.commonReducer.language
+    language: state.commonReducer.language,
 });
 
 export default connect(mapStateToProps)(DateInput);
