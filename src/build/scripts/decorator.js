@@ -23,8 +23,8 @@ const getDecorator = () =>
                 };
                 resolve(data);
             } else {
-                console.log(error);
-                reject(new Error(error));
+                console.log('Failed to get decorator. Exiting node.');
+                process.exit(1);
             }
         };
 
