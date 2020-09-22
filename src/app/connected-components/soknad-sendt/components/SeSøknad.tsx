@@ -43,8 +43,6 @@ const SeSøknad: React.FunctionComponent<Props> = ({ mottattDato, saksNr, pdf })
                         values={{
                             klokkeslett: moment(mottattDato).format('HH:mm'),
                             dato: moment(mottattDato).format('LL'),
-                            harSaksnummer: saksNr !== undefined,
-                            saksNr,
                         }}
                     />
                 </Normaltekst>

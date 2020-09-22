@@ -1,7 +1,8 @@
 {
-    "ingress": "https://engangsstonad-q.nav.no",
-    "appres": "appres-q1.nav.no",
-    "env": {
+   "ingresses":  ["https://engangsstonad-q.nav.no"],
+   "dekoratoren" : "www-q1.nav.no",
+   "nav" : "www.nav.no",
+   "env": {
         "APPRES_CMS_URL": "https://www-q1.nav.no/dekoratoren",
         "FORELDREPENGESOKNAD_API_URL": "https://foreldrepengesoknad-api-q.nav.no/rest",
         "LOGINSERVICE_URL": "https://loginservice-q.nav.no/login"

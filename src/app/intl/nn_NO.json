@@ -52,7 +52,7 @@
     "kvittering.text.kontonummer": " Hvis søknaden din blir innvilga, blir eingongsstønaden utbetalt til kontonummer {kontonummer}. Du kan endre kontonummeret på {dinProfilLink}.",
     "kvittering.text.soknadMottatt.avsluttText": "Avslutt",
     "kvittering.text.soknadMottatt.dinProfilLink": "Din profil",
-    "kvittering.text.soknadMottatt": "Vi fekk søknaden {harSaksnummer, select, true {med saksnummer {saksNr}} false {}} den {dato} kl. {klokkeslett}.",
+    "kvittering.text.soknadMottatt": "den {dato} kl. {klokkeslett}.",
     "kvittering.text.takk": "Takk for søknaden",
     "label_med_hjelpetekst.label": "Hjelpetekst",
     "languageToggle.bokmål": "Bokmål - Norsk",
@@ -242,11 +242,11 @@
     "psg.lenkepanel.url": "https://www.nav.no/no/nav-og-samfunn/kontakt-nav/relatert-informasjon/ta-bilde-av-vedleggene-med-mobilen",
     "psg.lenkepanel.text": "Meir hjelp til opplasting av vedlegg (vert åpna i nytt vindauge).",
     "søknadSendt.kvitteringStatus.tittel": "Nå er resten vårt ansvar",
-    "søknadSendt.kvitteringStatus.innhold": "Vi har mottatt søknaden din, og du trenger ikke gjøre noe mer. Vi tar kontakt med deg hvis det er noe vi lurer på eller hvis vi trenger noe mer fra deg.",
+    "søknadSendt.kvitteringStatus.innhold": "Vi har motteke søknaden din, og du treng ikkje gjera noko meir. Vi tek kontakt med deg viss det er noko vi lurer på eller viss vi treng litt meir frå deg",
     "søknadSendt.status.tittel": "Følg med på saka di",
     "søknadSendt.status.undertittel": "Sak om eingongsstønad",
     "søknadSendt.status.status": "Under behandling",
     "søknadSendt.status.saksnummer": "Saksnummer",
-    "søknadSendt.oversikt.link": "Se og last ned søknaden din",
+    "søknadSendt.oversikt.link": "Sjå og last ned søknaden din",
     "søknadSendt.oversikt.sendtinn": "SENDT INN:"
 }
