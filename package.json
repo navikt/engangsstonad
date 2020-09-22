@@ -115,7 +115,7 @@
         "@types/react-scroll": "^1.5.4",
         "@types/react-transition-group": "^2.0.14",
         "autoprefixer": "^9.7.3",
-        "babel-eslint": "8.0.2",
+        "babel-eslint": "9.0.0",
         "babel-loader": "^8.0.6",
         "babel-plugin-transform-object-rest-spread": "6.26.0",
         "babel-plugin-webpack-alias": "2.1.2",
