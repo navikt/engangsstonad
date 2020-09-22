@@ -93,7 +93,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.6.0",
-        "@babel/preset-env": "^7.6.0",
+        "@babel/preset-env": "^7.11.5",
         "@babel/preset-react": "^7.0.0",
         "@types/bytes": "3.0.0",
         "@types/classnames": "2.2.3",
