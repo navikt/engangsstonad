@@ -96,7 +96,7 @@
         "@babel/preset-env": "^7.11.5",
         "@babel/preset-react": "^7.0.0",
         "@types/bytes": "3.1.0",
-        "@types/classnames": "2.2.3",
+        "@types/classnames": "2.2.10",
         "@types/date-fns": "^2.6.0",
         "@types/detect-browser": "4.0.0",
         "@types/enzyme": "3.10.4",
