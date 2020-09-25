@@ -12,6 +12,7 @@ const getDecorator = () =>
     new Promise((resolve, reject) => {
         const callback = (error, response, body) => {
             if (!error && response.statusCode >= 200 && response.statusCode < 400) {
+                console.log('Extracting decorator fragments');
                 const { document } = new JSDOM(body).window;
                 const prop = 'innerHTML';
 
