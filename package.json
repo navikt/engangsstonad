@@ -142,7 +142,7 @@
         "promise": "8.1.0",
         "sinon": "9.0.3",
         "source-map-loader": "^1.1.0",
-        "style-loader": "^1.0.0",
+        "style-loader": "^1.3.0",
         "svg-sprite-loader": "^4.1.6",
         "terser-webpack-plugin": "^4.2.2",
         "ts-jest": "^24.3.0",
