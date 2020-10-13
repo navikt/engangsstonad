@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import { commonActionCreators as common } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { DispatchProps } from 'common/redux/types';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import getMessage from 'common/util/i18nUtils';
 import Oppsummering from '../oppsummering/Oppsummering';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
@@ -18,47 +18,44 @@ interface StateProps {
     bekreftetInformasjon: boolean;
 }
 
-type Props = StateProps & InjectedIntlProps & DispatchProps;
+type Props = StateProps & DispatchProps;
 
-class Steg4 extends React.Component<Props> {
-    render() {
-        const { intl, dispatch, bekreftetInformasjon } = this.props;
-
-        return (
-            <Skjemasteg tittel={getMessage(intl, 'oppsummering.sectionheading')}>
-                <div className="blokk-m">
-                    <Veilederpanel kompakt={true} svg={<Veileder />}>
-                        {getMessage(intl, 'oppsummering.text.lesNoye')}
-                    </Veilederpanel>
+const Steg4: React.FunctionComponent<Props> = ({ dispatch, bekreftetInformasjon }) => {
+    const intl = useIntl();
+    return (
+        <Skjemasteg tittel={getMessage(intl, 'oppsummering.sectionheading')}>
+            <div className="blokk-m">
+                <Veilederpanel kompakt={true} svg={<Veileder />}>
+                    {getMessage(intl, 'oppsummering.text.lesNoye')}
+                </Veilederpanel>
+            </div>
+            <Oppsummering />
+            <div className="blokk-m">
+                <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
+                    <ValidGroup
+                        validators={[
+                            {
+                                test: () => bekreftetInformasjon === true,
+                                failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger'),
+                            },
+                        ]}
+                        name="bekreftOpplysninger"
+                    >
+                        <BekreftCheckboksPanel
+                            inputProps={{ name: 'bekreftOpplysninger' }}
+                            checked={bekreftetInformasjon}
+                            onChange={() => dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))}
+                            label={getMessage(intl, 'oppsummering.text.samtykke')}
+                        />
+                    </ValidGroup>
                 </div>
-                <Oppsummering />
-                <div className="blokk-m">
-                    <div className="es-skjema__feilomrade--ingenBakgrunnsfarge">
-                        <ValidGroup
-                            validators={[
-                                {
-                                    test: () => bekreftetInformasjon === true,
-                                    failText: getMessage(intl, 'valideringsfeil.bekreftOpplysninger')
-                                }
-                            ]}
-                            name="bekreftOpplysninger"
-                        >
-                            <BekreftCheckboksPanel
-                                inputProps={{ name: 'bekreftOpplysninger' }}
-                                checked={bekreftetInformasjon}
-                                onChange={() => dispatch(common.setBekreftetInformasjon(!bekreftetInformasjon))}
-                                label={getMessage(intl, 'oppsummering.text.samtykke')}
-                            />
-                        </ValidGroup>
-                    </div>
-                </div>
-            </Skjemasteg>
-        );
-    }
-}
+            </div>
+        </Skjemasteg>
+    );
+};
 
 const mapStateToProps = (state: AppState) => ({
-    bekreftetInformasjon: state.commonReducer.bekreftetInformasjon
+    bekreftetInformasjon: state.commonReducer.bekreftetInformasjon,
 });
 
-export default connect<StateProps>(mapStateToProps)(injectIntl(Steg4));
+export default connect<StateProps>(mapStateToProps)(Steg4);

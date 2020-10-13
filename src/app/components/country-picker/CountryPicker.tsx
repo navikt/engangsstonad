@@ -7,7 +7,7 @@ import LabelText from 'common/components/labeltekst/Labeltekst';
 import { Tidsperiode } from 'nav-datovelger';
 import { Feil } from 'components/skjema-input-element/types';
 import { FormattedMessage } from 'react-intl';
-import { Language } from 'intl/IntlProvider';
+import { Språkkode } from 'intl/types';
 
 import './countryPicker.less';
 
@@ -19,7 +19,7 @@ interface Validators {
 
 interface Props {
     label: string;
-    language: Language;
+    språkkode: Språkkode;
     utenlandsoppholdListe: Utenlandsopphold[];
     tidsperiode?: Tidsperiode;
     addVisit: (periode: Utenlandsopphold) => void;
@@ -37,7 +37,7 @@ class CountryPicker extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         const state: State = {
-            isOpen: false
+            isOpen: false,
         };
         this.state = { ...state };
         this.openModal = this.openModal.bind(this);
@@ -99,7 +99,7 @@ class CountryPicker extends React.Component<Props, State> {
                         utenlandsopphold={this.state.editVisit}
                         onSubmit={(periode: Utenlandsopphold) => this.onModalSubmit(periode)}
                         closeModal={() => this.closeModal()}
-                        language={this.props.language}
+                        språkkode={this.props.språkkode}
                         label={this.props.label}
                         tidsperiode={this.props.tidsperiode}
                         alleUtenlandsopphold={utenlandsoppholdListe}

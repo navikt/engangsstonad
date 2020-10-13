@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import React, { useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
@@ -9,12 +9,12 @@ import { Tidsperiode, Avgrensninger } from 'nav-datovelger';
 import LabelText from 'common/components/labeltekst/Labeltekst';
 import FormBlock from 'components/form-block/FormBlock';
 import { Feil } from 'components/skjema-input-element/types';
-import { Language } from 'intl/IntlProvider';
+import { Språkkode } from 'intl/types';
 
 const Modal = require('nav-frontend-modal').default;
 
-interface OwnProps {
-    language: Language;
+interface Props {
+    språkkode: Språkkode;
     utenlandsopphold?: Utenlandsopphold;
     alleUtenlandsopphold?: Utenlandsopphold[];
     label: string;
@@ -25,13 +25,12 @@ interface OwnProps {
     validateFom?: (data: any) => Feil | undefined;
     validateTom?: (data: any) => Feil | undefined;
 }
-type Props = OwnProps & InjectedIntlProps;
 
 interface Field {
     value: any;
     feil?: Feil;
     visFeil?: boolean;
-};
+}
 
 interface PeriodeForm {
     fom?: Field;
@@ -52,8 +51,8 @@ const getValidPeriode = (formData: PeriodeForm): Utenlandsopphold | undefined =>
             land: land.value,
             tidsperiode: {
                 fom: fom.value,
-                tom: tom.value
-            }
+                tom: tom.value,
+            },
         };
     }
     return undefined;
@@ -73,7 +72,7 @@ const getRegistrertePerioder = (
     const arr = gjeldendeOpphold ? alleOpphold.filter((o) => o !== gjeldendeOpphold) : alleOpphold;
     return arr.map((opphold) => ({
         startdato: new Date(opphold.tidsperiode.fom),
-        sluttdato: new Date(opphold.tidsperiode.tom)
+        sluttdato: new Date(opphold.tidsperiode.tom),
     }));
 };
 
@@ -83,23 +82,255 @@ const getDefaultState = (utenlandsopphold?: Utenlandsopphold): State => {
             erEndring: true,
             formData: {
                 land: {
-                    value: utenlandsopphold.land
+                    value: utenlandsopphold.land,
                 },
                 fom: {
-                    value: utenlandsopphold.tidsperiode.fom
+                    value: utenlandsopphold.tidsperiode.fom,
                 },
                 tom: {
-                    value: utenlandsopphold.tidsperiode.tom
-                }
-            }
+                    value: utenlandsopphold.tidsperiode.tom,
+                },
+            },
         };
     }
     return {
         erEndring: false,
         hasSubmitted: false,
-        formData: {}
+        formData: {},
     };
 };
+
+const CountryModal: React.FunctionComponent<Props> = ({
+    språkkode,
+    tidsperiode,
+    alleUtenlandsopphold,
+    label,
+    utenlandsopphold,
+    onSubmit,
+    closeModal,
+    validateLand,
+    validateFom,
+    validateTom,
+}) => {
+    const intl = useIntl();
+    const [hasSubmitted, setHasSubmitted] = useState<boolean>();
+    const [formData, setFormData] = useState<PeriodeForm>();
+    //formData: PeriodeForm;
+
+    //const [erEndring, isErEndring] = useState<boolean>();
+    //erEndring?: boolean;
+    //hasSubmitted?: boolean;
+    //formData: PeriodeForm;
+    //onSubmit = onSubmit.bind(this);
+    //updateFormState = updateFormState.bind(this);
+    getDefaultState(utenlandsopphold);
+    //const { formData, erEndring } = this.state;
+
+    const fomDato = getDateFromString(formData && formData.fom && formData.fom.value);
+    const tomDato = getDateFromString(formData && formData.tom && formData.tom.value);
+
+    const lagreKnappTekstId = erEndring ? 'medlemmskap.modal.lagreEndringer' : 'medlemmskap.knapp.leggTilLand';
+
+    const fomMinDato = tidsperiode ? tidsperiode.startdato : undefined;
+    const fomMaksDato = tomDato || (tidsperiode ? tidsperiode.sluttdato : undefined);
+    const tomMinDato = fomDato || (tidsperiode ? tidsperiode.startdato : undefined);
+    const tomMaksDato = tidsperiode ? tidsperiode.sluttdato : undefined;
+
+    let fomAvgrensning: Avgrensninger = {};
+    let tomAvgrensning: Avgrensninger = {};
+    const registrertePerioder = alleUtenlandsopphold
+        ? getRegistrertePerioder(alleUtenlandsopphold, utenlandsopphold)
+        : undefined;
+    if (fomMinDato || fomMaksDato) {
+        fomAvgrensning = {
+            minDato: fomMinDato,
+            maksDato: fomMaksDato,
+            ugyldigeTidsperioder: registrertePerioder,
+        };
+    }
+    if (tomMinDato || tomMaksDato) {
+        tomAvgrensning = {
+            minDato: tomMinDato,
+            maksDato: tomMaksDato,
+            ugyldigeTidsperioder: registrertePerioder,
+        };
+    }
+
+    let landFeil;
+    let fomFeil;
+    let tomFeil;
+
+    if (formData && formData.land && formData.land.visFeil === true) {
+        landFeil = formData.land.feil;
+    }
+    if (formData && formData.fom && formData.fom.visFeil === true) {
+        fomFeil = formData.fom.feil;
+    }
+    if (formData && formData.tom && formData.tom.visFeil === true) {
+        tomFeil = formData.tom.feil;
+    }
+
+    const formStateHasErrors = () => {
+        //const { formData } = this.state;
+        const landFeil = formData.land && formData.land.feil;
+        const fomFeil = formData.fom && formData.fom.feil;
+        const tomFeil = formData.tom && formData.tom.feil;
+        return landFeil || fomFeil || tomFeil;
+    };
+
+    const handleOnSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (formData && !formStateHasErrors()) {
+            const validPeriode = getValidPeriode(formData);
+            if (validPeriode) {
+                onSubmit(validPeriode);
+            }
+        }
+
+        updateFormState({
+            formData: formData,
+            hasSubmitted: true,
+        });
+    };
+
+    const updateFormState = ({
+        formData,
+        hasSubmitted,
+    }: /* validateLand,
+        validateFom,
+        validateTom,
+        utenlandsopphold, */
+    State) => {
+        const land = formData.land && formData.land.value;
+        const fom = formData.fom && formData.fom.value;
+        const tom = formData.tom && formData.tom.value;
+
+        const landFeil = validateLand && validateLand({ land: formData.land && formData.land.value });
+        const fomFeil = validateFom && validateFom({ fom, tom, utenlandsoppholdInEditMode: utenlandsopphold });
+        const tomFeil = validateTom && validateTom({ tom, fom, utenlandsoppholdInEditMode: utenlandsopphold });
+
+        setFormData({
+            land: {
+                value: land,
+                feil: landFeil,
+                visFeil: landFeil && (hasSubmitted || hasSubmitted),
+            },
+            fom: {
+                value: fom,
+                feil: fomFeil,
+                visFeil: fomFeil && (hasSubmitted || hasSubmitted),
+            },
+            tom: {
+                value: tom,
+                feil: tomFeil,
+                visFeil: tomFeil && (hasSubmitted || hasSubmitted),
+            },
+        });
+        setHasSubmitted(hasSubmitted);
+
+        setState({
+            formData: {
+                land: {
+                    value: land,
+                    feil: landFeil,
+                    visFeil: landFeil && (hasSubmitted || hasSubmitted),
+                },
+                fom: {
+                    value: fom,
+                    feil: fomFeil,
+                    visFeil: fomFeil && (hasSubmitted || hasSubmitted),
+                },
+                tom: {
+                    value: tom,
+                    feil: tomFeil,
+                    visFeil: tomFeil && (hasSubmitted || hasSubmitted),
+                },
+            },
+            hasSubmitted: hasSubmitted || hasSubmitted,
+        });
+    };
+
+    return (
+        <Modal
+            className="countryModal"
+            isOpen={true}
+            contentLabel="landvelger"
+            closeButton={true}
+            onRequestClose={() => {
+                closeModal();
+            }}
+        >
+            <form onSubmit={handleOnSubmit}>
+                <Undertittel className="countryModal__title">
+                    <FormattedMessage id="medlemmskap.modal.overskrift" />
+                </Undertittel>
+                <FormBlock margin="xs">
+                    <CountrySelect
+                        label={<LabelText>{label}</LabelText>}
+                        feil={landFeil}
+                        onChange={(land) =>
+                            updateFormState({
+                                formData: { ...formData, land: { value: land } },
+                            })
+                        }
+                        språkkode={språkkode}
+                        defaultValue={formData && formData.land && formData.land.value}
+                    />
+                </FormBlock>
+                <FormBlock margin="xs">
+                    <DateInput
+                        id="boddFraDato"
+                        label={<LabelText intlId="standard.text.fra" />}
+                        dato={fomDato}
+                        feil={fomFeil}
+                        onChange={(dato) =>
+                            updateFormState({
+                                formData: {
+                                    ...formData,
+                                    fom: { value: dato ? dato.toISOString() : undefined },
+                                },
+                            })
+                        }
+                        avgrensninger={fomAvgrensning}
+                        kalenderplassering="fullskjerm"
+                    />
+                </FormBlock>
+                <FormBlock margin="m">
+                    <DateInput
+                        id="boddTilDato"
+                        label={<LabelText intlId="standard.text.til" />}
+                        dato={tomDato}
+                        feil={tomFeil}
+                        onChange={(dato) =>
+                            updateFormState({
+                                formData: {
+                                    ...formData,
+                                    tom: { value: dato ? dato.toISOString() : undefined },
+                                },
+                            })
+                        }
+                        avgrensninger={tomAvgrensning}
+                        kalenderplassering="fullskjerm"
+                    />
+                </FormBlock>
+                <FormBlock margin="xxs">
+                    <div className="countryModal__buttonBar">
+                        <Knapp onClick={() => closeModal()} htmlType="button">
+                            <FormattedMessage id="medlemmskap.modal.avbryt" />
+                        </Knapp>
+                        <Hovedknapp>
+                            <FormattedMessage id={lagreKnappTekstId} />
+                        </Hovedknapp>
+                    </div>
+                </FormBlock>
+            </form>
+        </Modal>
+    );
+};
+export default CountryModal;
+/*
 class CountryModal extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
@@ -293,3 +524,4 @@ class CountryModal extends React.Component<Props, State> {
     }
 }
 export default injectIntl(CountryModal);
+*/

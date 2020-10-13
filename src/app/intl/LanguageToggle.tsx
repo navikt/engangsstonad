@@ -1,47 +1,45 @@
 import * as React from 'react';
-import { injectIntl, InjectedIntlProps, InjectedIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Wrapper, Button, Menu, MenuItem } from 'react-aria-menubutton';
 const { NedChevron } = require('nav-frontend-chevron');
 import 'nav-frontend-lenker-style';
-
 import NorwayFlagSVG from 'components/flags/NorwayFlagSVG';
 import UKFlagSVG from 'components/flags/UKFlagSVG';
 import getMessage from 'common/util/i18nUtils';
-import { Language } from './IntlProvider';
-
+import { Språkkode } from './types';
 import './languageToggle.less';
 
 interface Props {
-    toggleLanguage: (language: Language) => void;
-    language: Language;
+    toggleLanguage: (language: Språkkode) => void;
+    språkkode: Språkkode;
 }
 
 const getLanguageCodeFromValue = (value: string) => {
     if (value === 'Bokmål - Norsk') {
-        return Language.BOKMÅL;
+        return 'nb';
     } else if (value === 'Nynorsk - Norsk') {
-        return Language.NYNORSK;
+        return 'nn';
     } else {
-        return Language.ENGELSK;
+        return 'en';
     }
 };
 
-const getLanguageTextFromCode = (intl: InjectedIntl, code: string) => {
-    if (code === Language.BOKMÅL) {
+const getLanguageTextFromCode = (intl: any, code: string) => {
+    if (code === 'nb') {
         return getMessage(intl, 'languageToggle.bokmål');
-    } else if (code === Language.NYNORSK) {
+    } else if (code === 'nn') {
         return getMessage(intl, 'languageToggle.nynorsk');
     } else {
         return getMessage(intl, 'languageToggle.english');
     }
 };
 
-const renderMenuItem = (intl: InjectedIntl, languageCode: string) => {
+const renderMenuItem = (intl: any, languageCode: string) => {
     return (
         <li key={languageCode}>
             <MenuItem className="languageToggle__menu__item">
                 <div className="languageToggle__button__flag">
-                    {languageCode === Language.ENGELSK ? <UKFlagSVG /> : <NorwayFlagSVG />}
+                    {languageCode === 'en' ? <UKFlagSVG /> : <NorwayFlagSVG />}
                 </div>
                 <div className="languageToggle__button__language">{getLanguageTextFromCode(intl, languageCode)}</div>
             </MenuItem>
@@ -53,8 +51,9 @@ const handleSelection = (value: JSX.Element[], e: any, toggleLanguage: any) => {
     toggleLanguage(getLanguageCodeFromValue(value[1].props.children));
 };
 
-const LanguageToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({ intl, language, toggleLanguage }) => {
-    const menuLanguages = [Language.BOKMÅL, Language.NYNORSK, Language.ENGELSK].filter((code) => code !== language);
+const LanguageToggle: React.FunctionComponent<Props> = ({ språkkode, toggleLanguage }) => {
+    const intl = useIntl();
+    const menuLanguages = ['nb', 'nn', 'en'].filter((code) => code !== språkkode);
 
     return (
         <div className="languageToggle">
@@ -64,9 +63,9 @@ const LanguageToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({ i
             >
                 <Button className="languageToggle__button">
                     <div className="languageToggle__button__flag">
-                        {language === Language.ENGELSK ? <UKFlagSVG /> : <NorwayFlagSVG />}
+                        {språkkode === 'en' ? <UKFlagSVG /> : <NorwayFlagSVG />}
                     </div>
-                    <div className="languageToggle__button__language">{getLanguageTextFromCode(intl, language)}</div>
+                    <div className="languageToggle__button__language">{getLanguageTextFromCode(intl, språkkode)}</div>
                     <div>
                         <NedChevron />
                     </div>
@@ -78,4 +77,4 @@ const LanguageToggle: React.StatelessComponent<Props & InjectedIntlProps> = ({ i
         </div>
     );
 };
-export default injectIntl(LanguageToggle);
+export default LanguageToggle;

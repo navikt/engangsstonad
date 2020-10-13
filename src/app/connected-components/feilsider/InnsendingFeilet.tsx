@@ -1,26 +1,26 @@
-import * as React from 'react';
+import React from 'react';
 import Lenke from 'nav-frontend-lenker';
 import Feilside from 'components/feilside/Feilside';
 import { connect } from 'react-redux';
-import { injectIntl, InjectedIntlProps, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { CommonState } from 'reducers/commonReducer';
 import { lenker } from 'util/lenker';
-import { Language } from 'intl/IntlProvider';
+import { Språkkode } from 'intl/types';
 import getMessage from 'common/util/i18nUtils';
 
 import '../../styles/engangsstonad.less';
 
 interface StateProps {
-    language: Language;
+    språkkode: Språkkode;
 }
 
 interface InnsendingFeiletProps {
     error?: any;
-};
+}
 
-type Props = InnsendingFeiletProps & StateProps & InjectedIntlProps;
-const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
-    const { error, intl } = props;
+type Props = InnsendingFeiletProps & StateProps;
+const InnsendingFeilet: React.FunctionComponent<Props> = ({ error }) => {
+    const intl = useIntl();
     const errorMessage =
         error && error.status === 413 && error.data && error.data.messages ? error.data.messages : undefined;
 
@@ -39,7 +39,7 @@ const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
                                 <Lenke href={lenker.brukerstøtte}>
                                     {getMessage(intl, 'intro.innsendingFeilet.ingress.lenketekst')}
                                 </Lenke>
-                            )
+                            ),
                         }}
                     />
                 )
@@ -48,15 +48,15 @@ const InnsendingFeilet: React.StatelessComponent<Props> = (props: Props) => {
                 tittel: getMessage(intl, 'intro.innsendingFeilet.bobletittel'),
                 tekst: getMessage(intl, 'intro.innsendingFeilet.bobletekst'),
                 veileder: {
-                    ansikt: 'skeptisk'
-                }
+                    ansikt: 'skeptisk',
+                },
             }}
         />
     );
 };
 
 const mapStateToProps = (state: { commonReducer: CommonState }) => ({
-    language: state.commonReducer.language
+    språkkode: state.commonReducer.språkkode,
 });
 
-export default connect(mapStateToProps)(injectIntl(InnsendingFeilet));
+export default connect(mapStateToProps)(InnsendingFeilet);

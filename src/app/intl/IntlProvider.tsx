@@ -1,53 +1,39 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { addLocaleData, IntlProvider as Provider } from 'react-intl';
-import * as nb from 'react-intl/locale-data/nb';
-import * as nn from 'react-intl/locale-data/nn';
-import * as en from 'react-intl/locale-data/en';
-
+import { IntlProvider as Provider } from 'react-intl';
+import moment from 'moment';
+import { Språkkode } from './types';
 import nnMessages from './nn_NO.json';
 import nbMessages from './nb_NO.json';
 import enMessages from './en_US.json';
 import { AppState } from 'reducers/reducers';
 
 interface Props {
-    language: Language;
+    språkkode: Språkkode;
+    children: React.ReactNode;
 }
 
-export const enum Language {
-    BOKMÅL = 'nb',
-    NYNORSK = 'nn',
-    ENGELSK = 'en'
-}
+moment.locale('nb');
 
-const getLanguageMessages = (language: Language) => {
-    if (language === Language.BOKMÅL) {
+const getLanguageMessages = (språkkode: Språkkode) => {
+    if (språkkode === 'nb') {
         return nbMessages;
-    } else if (language === Language.NYNORSK) {
+    } else if (språkkode === 'nn') {
         return nnMessages;
     } else {
         return enMessages;
     }
 };
 
-class IntlProvider extends React.Component<Props> {
-    constructor(props: Props) {
-        super(props);
-        addLocaleData([...nb, ...nn, ...en]);
-    }
-
-    render() {
-        const messages = getLanguageMessages(this.props.language);
-        return (
-            <Provider locale={Language.BOKMÅL} messages={messages || {}}>
-                {this.props.children}
-            </Provider>
-        );
-    }
-}
-
 const mapStateToProps = (state: AppState) => ({
-    language: state.commonReducer.language
+    språkkode: state.commonReducer.språkkode,
 });
 
+const IntlProvider: React.FunctionComponent<Props> = ({ språkkode, children }) => {
+    return (
+        <Provider locale={språkkode} messages={getLanguageMessages(språkkode) || {}}>
+            {children}
+        </Provider>
+    );
+};
 export default connect(mapStateToProps)(IntlProvider);

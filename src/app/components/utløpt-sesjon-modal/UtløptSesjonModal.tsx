@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage, FormattedHTMLMessage, injectIntl, InjectedIntlProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import AdvarselIkon from '../advarsel-ikon/AdvarselIkon';
@@ -14,26 +14,26 @@ import './utløptSesjonModal.less';
 
 const cls = BEMHelper('utløptSesjonModal');
 
-interface OwnProps {
+interface Props {
     erÅpen: boolean;
 }
 
-type Props = OwnProps & InjectedIntlProps;
-
-const UtløptSesjonModal = ({ erÅpen, intl }: Props) => {
+const UtløptSesjonModal = ({ erÅpen }: Props) => {
+    const intl = useIntl();
     return (
         <Modal
             className={cls.className}
             contentLabel={getMessage(intl, 'sesjonUtløpt.tittel')}
             closeButton={false}
             isOpen={erÅpen}
-            onRequestClose={() => undefined}>
+            onRequestClose={() => undefined}
+        >
             <AdvarselIkon />
             <Systemtittel className="blokk-m">
                 <FormattedMessage id="sesjonUtløpt.tittel" />
             </Systemtittel>
             <Normaltekst className="blokk-m">
-                <FormattedHTMLMessage id="sesjonUtløpt.ingress" />
+                <FormattedMessage id="sesjonUtløpt.ingress" />
             </Normaltekst>
             <div className={cls.element('valg')}>
                 <Knappelenke href={lenker.nav}>
@@ -47,4 +47,4 @@ const UtløptSesjonModal = ({ erÅpen, intl }: Props) => {
     );
 };
 
-export default injectIntl(UtløptSesjonModal);
+export default UtløptSesjonModal;

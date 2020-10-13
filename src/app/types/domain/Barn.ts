@@ -11,8 +11,16 @@ export class FodtBarn extends Barn {
 
 export class UfodtBarn extends Barn {
     termindato?: string | undefined;
-    terminbekreftelse: Attachment[]
+    terminbekreftelse: Attachment[];
     terminbekreftelseDato?: string | undefined;
 }
+
+export const isUfødtBarn = (barn: Barn): barn is UfodtBarn => {
+    return (barn as UfodtBarn).termindato !== undefined;
+};
+
+export const isFødtBarn = (barn: Barn): barn is FodtBarn => {
+    return (barn as FodtBarn).fødselsdatoer !== undefined;
+};
 
 export default Barn;

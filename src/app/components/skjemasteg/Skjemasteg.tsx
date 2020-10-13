@@ -1,15 +1,16 @@
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 export interface Props {
     tittel?: string;
     children: React.ReactNode;
 }
 
-const EngangsstønadSteg: React.StatelessComponent<Props & InjectedIntlProps> = ({ tittel, children, intl }) => {
+const EngangsstønadSteg: React.FunctionComponent<Props> = ({ tittel, children }) => {
+    const intl = useIntl();
     let dokumenttittel = intl.formatMessage({
-        id: 'intro.standard.dokumenttittel'
+        id: 'intro.standard.dokumenttittel',
     });
     if (tittel) {
         dokumenttittel = `${dokumenttittel} - ${tittel}`;
@@ -23,4 +24,4 @@ const EngangsstønadSteg: React.StatelessComponent<Props & InjectedIntlProps> = 
     );
 };
 
-export default injectIntl(EngangsstønadSteg);
+export default EngangsstønadSteg;

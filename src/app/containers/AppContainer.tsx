@@ -89,7 +89,7 @@ const mapStateToProps = (state: AppState) => ({
     godkjentVilkar: state.commonReducer.godkjentVilkar,
     kvittering: state.apiReducer.kvittering,
     søknadSendt: state.apiReducer.søknadSendt,
-    language: state.commonReducer.language,
+    språkkode: state.commonReducer.språkkode,
 });
 
 export default connect<StateProps, {}, {}>(mapStateToProps)(AppContainer);

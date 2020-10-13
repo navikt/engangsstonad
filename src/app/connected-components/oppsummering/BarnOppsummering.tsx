@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Attachment } from 'common/storage/attachment/types/Attachment';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import { FodtBarn, UfodtBarn } from '../../types/domain/Barn';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { isAttachmentWithError } from 'common/storage/attachment/components/util';
 import { ISODateToMaskedInput } from 'util/date/dateUtils';
 import AttachmentList from 'common/storage/attachment/components/AttachmentList';
@@ -14,15 +14,15 @@ interface Props {
     barn: FodtBarn & UfodtBarn;
 }
 
-const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (props) => {
-    const { intl } = props;
+const BarnOppsummering: React.FunctionComponent<Props> = (props) => {
+    const intl = useIntl();
     const {
         antallBarn,
         erBarnetFødt,
         fødselsdatoer,
         terminbekreftelse,
         termindato,
-        terminbekreftelseDato
+        terminbekreftelseDato,
     } = props.barn;
 
     let antallBarnSummaryText;
@@ -32,7 +32,7 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (p
         antallBarnSummaryText = getMessage(intl, 'relasjonBarn.radiobutton.tvillinger');
     } else {
         antallBarnSummaryText = getMessage(intl, 'oppsummering.text.flereAntallBarn', {
-            antall: antallBarn
+            antall: antallBarn,
         });
     }
 
@@ -71,4 +71,4 @@ const BarnOppsummering: React.StatelessComponent<Props & InjectedIntlProps> = (p
         </div>
     );
 };
-export default injectIntl(BarnOppsummering);
+export default BarnOppsummering;

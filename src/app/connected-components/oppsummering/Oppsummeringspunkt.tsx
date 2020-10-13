@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { injectIntl } from 'react-intl';
+//import { useIntl } from 'react-intl';
 import { ReactNode } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
@@ -8,12 +8,14 @@ interface Props {
     children: ReactNode;
 }
 
-const Oppsummeringspunkt = ({ tittel, children }: Props) => (
-    <div className="blokk-m">
-        <Ekspanderbartpanel apen={false} tittel={tittel} tittelProps="undertittel">
-            {children}
-        </Ekspanderbartpanel>
-    </div>
-);
+const Oppsummeringspunkt = ({ tittel, children }: Props) => {
+    return (
+        <div className="blokk-m">
+            <Ekspanderbartpanel apen={false} tittel={tittel} tittelProps="undertittel">
+                {children}
+            </Ekspanderbartpanel>
+        </div>
+    );
+};
 
-export default injectIntl(Oppsummeringspunkt);
+export default Oppsummeringspunkt;

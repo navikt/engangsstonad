@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
 
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import SlettKnapp from '../../../components/slett-knapp/SlettKnapp';
 
 import NavFrontendSpinner from 'nav-frontend-spinner';
@@ -19,17 +19,13 @@ interface OwnProps {
     onDelete?: (file: Attachment) => void;
 }
 
-type Props = OwnProps & InjectedIntlProps;
+type Props = OwnProps;
 
-const Attachment: React.StatelessComponent<Props> = ({
-    attachment,
-    showFileSize,
-    onDelete,
-    intl
-}) => {
+const Attachment: React.FunctionComponent<Props> = ({ attachment, showFileSize, onDelete }) => {
+    const intl = useIntl();
     const BEM = BEMHelper('attachment');
     const cls = classnames(BEM.className, {
-        [BEM.modifier('pending')]: attachment.pending
+        [BEM.modifier('pending')]: attachment.pending,
     });
 
     return (
@@ -42,25 +38,24 @@ const Attachment: React.StatelessComponent<Props> = ({
             <VedleggIkon className={BEM.element('icon')} width={20} height={20} />
             <div className={BEM.element('filename')}>
                 {attachment.url ? (
-                    <Lenke href={attachment.url} target="_blank">{attachment.filename}</Lenke>
+                    <Lenke href={attachment.url} target="_blank">
+                        {attachment.filename}
+                    </Lenke>
                 ) : (
                     <span>{attachment.filename}</span>
                 )}
                 {showFileSize && <div>{bytesString(attachment.filesize)}</div>}
             </div>
             {onDelete && (
-                    <span className={BEM.element('deleteButton')}>
-                        <SlettKnapp
-                            onClick={() => onDelete(attachment)}
-                            ariaLabel={intl.formatMessage(
-                                { id: 'vedlegg.arialabel.slett' },
-                                { navn: attachment.filename }
-                            )}
-                        />
-                    </span>
-                )}
+                <span className={BEM.element('deleteButton')}>
+                    <SlettKnapp
+                        onClick={() => onDelete(attachment)}
+                        ariaLabel={intl.formatMessage({ id: 'vedlegg.arialabel.slett' }, { navn: attachment.filename })}
+                    />
+                </span>
+            )}
         </div>
     );
 };
 
-export default injectIntl(Attachment);
+export default Attachment;

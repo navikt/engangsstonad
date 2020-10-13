@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import DocumentTitle from 'react-document-title';
 import Lenke from 'nav-frontend-lenker';
 import LanguageToggle from '../../intl/LanguageToggle';
 import SimpleIllustration from 'components/simple-illustration/SimpleIllustration';
 import { Innholdstittel, Ingress } from 'nav-frontend-typografi';
 import { VeilederProps } from 'components/veileder/Veileder';
-import { Language } from 'intl/IntlProvider';
+import { Språkkode } from 'intl/types';
 
 export interface Props {
     containerId?: string;
@@ -21,28 +21,23 @@ export interface Props {
     };
     tittel: React.ReactNode;
     ingress: React.ReactNode;
-    language?: Language;
+    språkkode?: Språkkode;
     setLanguage?: (languageCode: string) => void;
 }
 
-const Feilside: React.StatelessComponent<Props> = ({
+const Feilside: React.FunctionComponent<Props> = ({
     containerId,
     dokumenttittel,
     illustrasjon,
     tittel,
     ingress,
-    language,
-    setLanguage
+    språkkode,
+    setLanguage,
 }) => {
     return (
         <div id={containerId}>
             <DocumentTitle title={dokumenttittel} />
-            {setLanguage && language && (
-                <LanguageToggle
-                    language={language}
-                    toggleLanguage={setLanguage}
-                />
-            )}
+            {setLanguage && språkkode && <LanguageToggle språkkode={språkkode} toggleLanguage={setLanguage} />}
             {illustrasjon && (
                 <SimpleIllustration
                     veileder={illustrasjon.veileder}
@@ -52,15 +47,12 @@ const Feilside: React.StatelessComponent<Props> = ({
                             <div>
                                 <div>{illustrasjon.tekst}</div>
                                 {illustrasjon.lenke && (
-                                    <Lenke
-                                        className="intro-snakkelenke"
-                                        href={illustrasjon.lenke.url}
-                                    >
+                                    <Lenke className="intro-snakkelenke" href={illustrasjon.lenke.url}>
                                         {illustrasjon.lenke.tekst}
                                     </Lenke>
                                 )}
                             </div>
-                        )
+                        ),
                     }}
                 />
             )}

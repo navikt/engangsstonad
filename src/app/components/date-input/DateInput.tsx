@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import SkjemaInputElement from 'components/skjema-input-element/SkjemaInputElement';
 import { Feil } from 'components/skjema-input-element/types';
 import Datovelger, { Props as DatovelgerProps } from 'nav-datovelger';
 import { connect } from 'react-redux';
-import { Language } from 'intl/IntlProvider';
+import { Språkkode } from 'intl/types';
 import { AppState } from 'reducers/reducers';
 
 export interface Props extends DatovelgerProps {
@@ -12,26 +12,19 @@ export interface Props extends DatovelgerProps {
 }
 
 interface StateProps {
-    language: Language;
+    språkkode: Språkkode;
 }
 
-class DateInput extends React.Component<Props & StateProps, {}> {
-    render() {
-        const { label, feil, language, ...rest } = this.props;
-        return (
-            <SkjemaInputElement id={this.props.id} feil={feil} label={label}>
-                <Datovelger
-                    {...rest}
-                    locale={language}
-                    inputProps={{ placeholder: 'dd.mm.åååå' }}
-                />
-            </SkjemaInputElement>
-        );
-    }
-}
+const DateInput: React.FunctionComponent<Props & StateProps> = ({ label, feil, språkkode, ...rest }) => {
+    return (
+        <SkjemaInputElement feil={feil} label={label}>
+            <Datovelger {...rest} locale={språkkode} inputProps={{ placeholder: 'dd.mm.åååå' }} />
+        </SkjemaInputElement>
+    );
+};
 
 const mapStateToProps = (state: AppState) => ({
-    language: state.commonReducer.language
+    språkkode: state.commonReducer.språkkode,
 });
 
 export default connect(mapStateToProps)(DateInput);

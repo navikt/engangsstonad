@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { FodtBarn, UfodtBarn } from 'app/types/domain/Barn';
 import { fullNameFormat } from 'util/formats/formatUtils';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import AndreForeldrenOppsummering from './AndreForeldrenOppsummering';
 import AnnenForelder from 'app/types/domain/AnnenForelder';
 import getMessage from 'common/util/i18nUtils';
@@ -16,15 +16,21 @@ import { AppState } from 'reducers/reducers';
 
 import './oppsummering.less';
 
-interface StateProps {
+interface Props {
     annenForelder: AnnenForelder;
     barn: FodtBarn & UfodtBarn;
     informasjonOmUtenlandsopphold: InformasjonOmUtenlandsopphold;
     person?: Person;
 }
 
-type Props = StateProps & InjectedIntlProps;
-const Oppsummering: React.StatelessComponent<Props> = ({ annenForelder, barn, informasjonOmUtenlandsopphold, person, intl }) => {
+const Oppsummering: React.FunctionComponent<Props> = ({
+    annenForelder,
+    barn,
+    informasjonOmUtenlandsopphold,
+    person,
+}) => {
+    const intl = useIntl();
+
     if (!person) {
         return null;
     }
@@ -33,7 +39,7 @@ const Oppsummering: React.StatelessComponent<Props> = ({ annenForelder, barn, in
         antallBarn:
             barn.antallBarn && barn.antallBarn > 1
                 ? getMessage(intl, 'medlemmskap.text.barnFlertall')
-                : getMessage(intl, 'medlemmskap.text.barnEntall')
+                : getMessage(intl, 'medlemmskap.text.barnEntall'),
     });
 
     return (
@@ -69,7 +75,7 @@ const mapStateToProps = (state: AppState) => ({
     person: state.apiReducer.person,
     annenForelder: state.soknadReducer.annenForelder,
     barn: state.soknadReducer.barn as FodtBarn & UfodtBarn,
-    informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold
+    informasjonOmUtenlandsopphold: state.soknadReducer.informasjonOmUtenlandsopphold,
 });
 
-export default connect<StateProps>(mapStateToProps)(injectIntl(Oppsummering));
+export default connect<Props>(mapStateToProps)(Oppsummering);
