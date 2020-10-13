@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Attachment, AttachmentType, Skjemanummer } from 'common/storage/attachment/types/Attachment';
 import AttachmentOverview from 'common/storage/attachment/components/AttachmentOverview';
 import UtvidetInformasjon from 'components/utvidet-informasjon/UtvidetInformasjon';
@@ -13,40 +13,36 @@ export interface AttachmentsUploaderProps {
     onFileDelete: (attachment: Attachment) => void;
 }
 
-export default class AttachmentsUploaderPure extends React.Component<AttachmentsUploaderProps> {
-    constructor(props: AttachmentsUploaderProps) {
-        super(props);
-        this.onFileDelete = this.onFileDelete.bind(this);
-        this.onFilesSelect = this.onFilesSelect.bind(this);
-    }
-
-    onFilesSelect(files: Attachment[]) {
-        const { onFilesSelect } = this.props;
+const AttachmentsUploaderPure: React.FunctionComponent<AttachmentsUploaderProps> = ({
+    attachments,
+    attachmentType,
+    skjemanummer,
+    onFilesSelect,
+    onFileDelete,
+}) => {
+    const handleOnFilesSelect = (files: Attachment[]) => {
         onFilesSelect(files);
-    }
+    };
 
-    onFileDelete(files: Attachment[]) {
-        const { onFileDelete } = this.props;
+    const handleOnFileDelete = (files: Attachment[]) => {
         files.forEach((file) => {
             onFileDelete(file);
         });
-    }
+    };
 
-    render() {
-        const { attachments, attachmentType, skjemanummer } = this.props;
-        return (
-            <>
-                <AttachmentOverview
-                    attachments={attachments}
-                    attachmentType={attachmentType}
-                    skjemanummer={skjemanummer}
-                    onFilesSelect={this.onFilesSelect}
-                    onFileDelete={this.onFileDelete}
-                />
-                <UtvidetInformasjon apneLabel={<FormattedMessage id="psg.åpneLabel" />}>
-                    <PictureScanningGuide />
-                </UtvidetInformasjon>
-            </>
-        );
-    }
-}
+    return (
+        <>
+            <AttachmentOverview
+                attachments={attachments}
+                attachmentType={attachmentType}
+                skjemanummer={skjemanummer}
+                onFilesSelect={handleOnFilesSelect}
+                onFileDelete={handleOnFileDelete}
+            />
+            <UtvidetInformasjon apneLabel={<FormattedMessage id="psg.åpneLabel" />}>
+                <PictureScanningGuide />
+            </UtvidetInformasjon>
+        </>
+    );
+};
+export default AttachmentsUploaderPure;
