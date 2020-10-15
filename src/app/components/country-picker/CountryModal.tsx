@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { Utenlandsopphold } from '../../types/domain/InformasjonOmUtenlandsopphold';
@@ -39,7 +39,7 @@ interface PeriodeForm {
 }
 
 interface State {
-    erEndring?: boolean;
+    erEndring: boolean;
     hasSubmitted?: boolean;
     formData: PeriodeForm;
 }
@@ -101,31 +101,65 @@ const getDefaultState = (utenlandsopphold?: Utenlandsopphold): State => {
 };
 
 const CountryModal: React.FunctionComponent<Props> = ({
-    språkkode,
-    tidsperiode,
-    alleUtenlandsopphold,
-    label,
-    utenlandsopphold,
-    onSubmit,
-    closeModal,
     validateLand,
     validateFom,
     validateTom,
+    closeModal,
+    onSubmit,
+    label,
+    utenlandsopphold,
+    språkkode,
+    tidsperiode,
+    alleUtenlandsopphold,
 }) => {
-    const intl = useIntl();
-    const [hasSubmitted, setHasSubmitted] = useState<boolean>();
-    const [formData, setFormData] = useState<PeriodeForm>();
-    //formData: PeriodeForm;
-
-    //const [erEndring, isErEndring] = useState<boolean>();
-    //erEndring?: boolean;
-    //hasSubmitted?: boolean;
-    //formData: PeriodeForm;
-    //onSubmit = onSubmit.bind(this);
-    //updateFormState = updateFormState.bind(this);
-    getDefaultState(utenlandsopphold);
-    //const { formData, erEndring } = this.state;
-
+    const erEndring = getDefaultState(utenlandsopphold).erEndring;
+    const [formData, setFormData] = useState<PeriodeForm>(getDefaultState(utenlandsopphold).formData);
+    const [hasSubmitted, setHasSubmitted] = useState<boolean | undefined>(
+        getDefaultState(utenlandsopphold).hasSubmitted
+    );
+    const formStateHasErrors = () => {
+        const landFeil = formData.land && formData.land.feil;
+        const fomFeil = formData.fom && formData.fom.feil;
+        const tomFeil = formData.tom && formData.tom.feil;
+        return landFeil || fomFeil || tomFeil;
+    };
+    const handleOnSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (formData && !formStateHasErrors()) {
+            const validPeriode = getValidPeriode(formData);
+            if (validPeriode) {
+                onSubmit(validPeriode);
+            }
+        }
+        setFormData(formData);
+        setHasSubmitted(true);
+    };
+    const updateFormState = (formData: PeriodeForm) => {
+        const land = formData.land && formData.land.value;
+        const fom = formData.fom && formData.fom.value;
+        const tom = formData.tom && formData.tom.value;
+        const landFeil = validateLand && validateLand({ land: formData.land && formData.land.value });
+        const fomFeil = validateFom && validateFom({ fom, tom, utenlandsoppholdInEditMode: utenlandsopphold });
+        const tomFeil = validateTom && validateTom({ tom, fom, utenlandsoppholdInEditMode: utenlandsopphold });
+        setFormData({
+            land: {
+                value: land,
+                feil: landFeil,
+                visFeil: landFeil && hasSubmitted,
+            },
+            fom: {
+                value: fom,
+                feil: fomFeil,
+                visFeil: fomFeil && hasSubmitted,
+            },
+            tom: {
+                value: tom,
+                feil: tomFeil,
+                visFeil: tomFeil && hasSubmitted,
+            },
+        });
+    };
     const fomDato = getDateFromString(formData && formData.fom && formData.fom.value);
     const tomDato = getDateFromString(formData && formData.tom && formData.tom.value);
 
@@ -170,67 +204,6 @@ const CountryModal: React.FunctionComponent<Props> = ({
         tomFeil = formData.tom.feil;
     }
 
-    const formStateHasErrors = () => {
-        //const { formData } = this.state;
-        const landFeil = formData.land && formData.land.feil;
-        const fomFeil = formData.fom && formData.fom.feil;
-        const tomFeil = formData.tom && formData.tom.feil;
-        return landFeil || fomFeil || tomFeil;
-    };
-
-    const handleOnSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (formData && !formStateHasErrors()) {
-            const validPeriode = getValidPeriode(formData);
-            if (validPeriode) {
-                onSubmit(validPeriode);
-            }
-        }
-
-        updateFormState({
-            formData: formData,
-            hasSubmitted: true,
-        });
-    };
-
-    const updateFormState = ({
-        formData,
-        hasSubmitted,
-    }: /* validateLand,
-        validateFom,
-        validateTom,
-        utenlandsopphold, */
-    State) => {
-        const land = formData.land && formData.land.value;
-        const fom = formData.fom && formData.fom.value;
-        const tom = formData.tom && formData.tom.value;
-
-        const landFeil = validateLand && validateLand({ land: formData.land && formData.land.value });
-        const fomFeil = validateFom && validateFom({ fom, tom, utenlandsoppholdInEditMode: utenlandsopphold });
-        const tomFeil = validateTom && validateTom({ tom, fom, utenlandsoppholdInEditMode: utenlandsopphold });
-
-        setFormData({
-            land: {
-                value: land,
-                feil: landFeil,
-                visFeil: landFeil && (hasSubmitted || hasSubmitted),
-            },
-            fom: {
-                value: fom,
-                feil: fomFeil,
-                visFeil: fomFeil && (hasSubmitted || hasSubmitted),
-            },
-            tom: {
-                value: tom,
-                feil: tomFeil,
-                visFeil: tomFeil && (hasSubmitted || hasSubmitted),
-            },
-        });
-        setHasSubmitted(hasSubmitted);
-    };
-
     return (
         <Modal
             className="countryModal"
@@ -249,11 +222,7 @@ const CountryModal: React.FunctionComponent<Props> = ({
                     <CountrySelect
                         label={<LabelText>{label}</LabelText>}
                         feil={landFeil}
-                        onChange={(land) =>
-                            updateFormState({
-                                formData: { ...formData, land: { value: land } },
-                            })
-                        }
+                        onChange={(land) => updateFormState({ ...formData, land: { value: land } })}
                         språkkode={språkkode}
                         defaultValue={formData && formData.land && formData.land.value}
                     />
@@ -266,10 +235,8 @@ const CountryModal: React.FunctionComponent<Props> = ({
                         feil={fomFeil}
                         onChange={(dato) =>
                             updateFormState({
-                                formData: {
-                                    ...formData,
-                                    fom: { value: dato ? dato.toISOString() : undefined },
-                                },
+                                ...formData,
+                                fom: { value: dato ? dato.toISOString() : undefined },
                             })
                         }
                         avgrensninger={fomAvgrensning}
@@ -284,10 +251,8 @@ const CountryModal: React.FunctionComponent<Props> = ({
                         feil={tomFeil}
                         onChange={(dato) =>
                             updateFormState({
-                                formData: {
-                                    ...formData,
-                                    tom: { value: dato ? dato.toISOString() : undefined },
-                                },
+                                ...formData,
+                                tom: { value: dato ? dato.toISOString() : undefined },
                             })
                         }
                         avgrensninger={tomAvgrensning}

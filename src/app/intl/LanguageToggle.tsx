@@ -10,7 +10,7 @@ import { Språkkode } from './types';
 import './languageToggle.less';
 
 interface Props {
-    toggleLanguage: (language: Språkkode) => void;
+    toggleLanguage: (språkkode: Språkkode) => void;
     språkkode: Språkkode;
 }
 

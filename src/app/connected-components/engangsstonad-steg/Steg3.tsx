@@ -66,7 +66,6 @@ const Steg3: React.FunctionComponent<Props> = ({ dispatch, informasjonOmUtenland
     };
 
     const validateFomDatoSiste12Mnd = ({ fom, tom, utenlandsoppholdInEditMode }: any): Feil | undefined => {
-        const intl = useIntl();
         if (fom) {
             const momentFom = moment(fom);
             const momentTom = moment(tom);

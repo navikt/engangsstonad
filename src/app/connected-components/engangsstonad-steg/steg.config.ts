@@ -1,5 +1,5 @@
 import getMessage from 'common/util/i18nUtils';
-import { useIntl } from 'react-intl';
+import { IntlShape } from 'react-intl';
 import Steg1 from './Steg1';
 import Steg2 from './Steg2';
 import Steg3 from './Steg3';
@@ -49,8 +49,7 @@ const stepConfigs = [
     },
 ];
 
-export const stepConfig = (person: Person): StepConfig[] => {
-    const intl = useIntl();
+const stepConfig = (intl: IntlShape, person: Person): StepConfig[] => {
     return stepConfigs
         .filter((step: any, index: number) => {
             if (index === 1) {
@@ -66,21 +65,4 @@ export const stepConfig = (person: Person): StepConfig[] => {
             component: step.component,
         }));
 };
-
-/*
-export default (intl: InjectedIntl, person: Person): StepConfig[] =>
-    stepConfig
-        .filter((step: any, index: number) => {
-            if (index === 1) {
-                return person.ikkeNordiskEøsLand;
-            } else {
-                return true;
-            }
-        })
-        .map((step: any) => ({
-            ...step,
-            fortsettKnappLabel: getMessage(intl, step.fortsettKnappLabelIntlId),
-            stegIndikatorLabel: getMessage(intl, step.stegIndikatorLabelIntlId),
-            component: step.component,
-        }));
-*/
+export default stepConfig;

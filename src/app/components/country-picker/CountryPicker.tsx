@@ -27,12 +27,7 @@ interface Props {
     editVisit: (periode: Utenlandsopphold, index: number) => void;
     validators?: Validators;
 }
-/*
-interface State {
-    isOpen: boolean;
-    editVisit?: Utenlandsopphold;
-}
-*/
+
 const CountryPicker: React.FunctionComponent<Props> = ({
     label,
     språkkode,
@@ -40,11 +35,11 @@ const CountryPicker: React.FunctionComponent<Props> = ({
     tidsperiode,
     addVisit,
     deleteVisit,
-    //editVisit,
+    editVisit,
     validators,
 }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [editVisit, setEditVisit] = useState<Utenlandsopphold>();
+    const [selectedVisit, setselectedVisit] = useState<Utenlandsopphold | undefined>();
 
     const openModal = () => {
         setIsOpen(true);
@@ -52,7 +47,7 @@ const CountryPicker: React.FunctionComponent<Props> = ({
 
     const closeModal = () => {
         setIsOpen(false);
-        setEditVisit(undefined);
+        setselectedVisit(undefined);
     };
 
     const handleAddVisit = (periode: Utenlandsopphold) => {
@@ -61,7 +56,7 @@ const CountryPicker: React.FunctionComponent<Props> = ({
     };
 
     const onEditClick = (periode: Utenlandsopphold) => {
-        setEditVisit(periode);
+        setselectedVisit(periode);
         setIsOpen(true);
     };
 
@@ -70,14 +65,14 @@ const CountryPicker: React.FunctionComponent<Props> = ({
     };
 
     const onModalSubmit = (periode: Utenlandsopphold) => {
-        if (editVisit === undefined) {
+        if (selectedVisit === undefined) {
             handleAddVisit(periode);
         } else {
-            const updatedVisitIndex = utenlandsoppholdListe.indexOf(editVisit);
-            setEditVisit(periode, updatedVisitIndex);
+            const updatedVisitIndex = utenlandsoppholdListe.indexOf(selectedVisit);
+            editVisit(periode, updatedVisitIndex);
         }
         setIsOpen(false);
-        setEditVisit(undefined);
+        setselectedVisit(undefined);
     };
 
     return (
@@ -94,7 +89,7 @@ const CountryPicker: React.FunctionComponent<Props> = ({
             )}
             {isOpen && (
                 <CountryModal
-                    utenlandsopphold={editVisit}
+                    utenlandsopphold={selectedVisit}
                     onSubmit={(periode: Utenlandsopphold) => onModalSubmit(periode)}
                     closeModal={() => closeModal()}
                     språkkode={språkkode}

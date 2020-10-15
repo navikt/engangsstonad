@@ -42,7 +42,7 @@
     "intro.text.samtykkeIntro": "For å gå videre med søknaden må du bekrefte at du har lest og forstått { link }.",
     "intro.text.startNySøknad": "starte en ny søknad",
     "intro.text.startNySøknadPrompt": "Er du sikkert på at du vil starte en ny søknad? Din påbegynte søknad vil bli slettet.",
-    "intro.text.veiviser.lenke": "<a href=\"https://familie.nav.no/veiviser\"  class=\"lenke\" rel=\"noopener\">Bruk veiviseren og finn ut hva du kan få</a>",
+    "intro.text.veiviser.lenke": "<a>Bruk veiviseren og finn ut hva du kan få</a>",
     "intro.text.veiviser": "Hvis du har hatt inntekt, utbetalinger fra NAV eller vært i militæret kan du få foreldrepenger istedenfor engangsstønad. Velger du likevel å søke om engangsstønad, kan du ikke senere ombestemme deg.",
     "intro.under18.boblelenketekst": "Her kan du laste ned papirsøknaden",
     "intro.under18.bobletekst": "Fordi du er under 18 år, må en av foreldrene dine eller en foresatt skrive under på søknaden sammen med deg. Du må derfor fylle ut søknaden på papir og sende den i posten. ",

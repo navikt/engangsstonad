@@ -22,7 +22,7 @@ const commonReducer = (state = initialState(), action: CommonActionTypes) => {
                 bekreftetInformasjon: action.bekreftetInformasjon,
             };
         case CommonActionKeys.SET_LANGUAGE:
-            return { ...state, language: action.språkkode };
+            return { ...state, språkkode: action.språkkode };
         case CommonActionKeys.SET_GODKJENT_VILKAR:
             return { ...state, godkjentVilkar: action.godkjentVilkar };
         default:

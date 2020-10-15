@@ -32,12 +32,7 @@ import { AppState } from 'reducers/reducers';
 import { Språkkode } from 'intl/types';
 
 import '../../styles/engangsstonad.less';
-
-interface State {
-    isPersonopplysningerModalOpen: boolean;
-    isPlikterModalOpen: boolean;
-    godkjentVilkår: boolean;
-}
+import { useState } from 'react';
 
 interface StateProps {
     person: Person;
@@ -45,27 +40,13 @@ interface StateProps {
     språkkode: Språkkode;
 }
 
-type Props = StateProps & DispatchProps & RouteComponentProps & State;
+type Props = StateProps & DispatchProps & RouteComponentProps;
 
-const Intro: React.FunctionComponent<Props> = ({
-    isPersonopplysningerModalOpen,
-    isPlikterModalOpen,
-    godkjentVilkår,
-    person,
-    //godkjentVilkar,
-    språkkode,
-    dispatch,
-}) => {
+const Intro: React.FunctionComponent<Props> = ({ dispatch, person, språkkode, history }) => {
     const intl = useIntl();
-
-    /*
-            state = {
-                isPersonopplysningerModalOpen: false,
-                isPlikterModalOpen: false,
-                godkjentVilkår: false
-            };*/
-    //const bekreftetVilkarChange = bekreftetVilkarChange.bind(this);
-    //        startNySøknad = startNySøknad.bind(this);
+    const [isPlikterModalOpen, setIsPlikterModalOpen] = useState<boolean>(false);
+    const [isPersonopplysningerModalOpen, setIsPersonopplysningerModalOpen] = useState<boolean>(false);
+    const [godkjentVilkår, setGodkjentVilkår] = useState<boolean>(false);
     /*
     const resetAppState = () => {
         dispatch(step.setActiveStep(getDefaultState().activeStep));
@@ -76,35 +57,35 @@ const Intro: React.FunctionComponent<Props> = ({
 */
     const openPlikterModal = (e: React.SyntheticEvent<HTMLElement>) => {
         e.preventDefault();
-        ({ isPlikterModalOpen: true });
+        setIsPlikterModalOpen(true);
     };
 
     const openPersonopplysningerModal = (e: React.SyntheticEvent<HTMLElement>) => {
         e.preventDefault();
-        ({ isPersonopplysningerModalOpen: true });
+        setIsPersonopplysningerModalOpen(true);
     };
 
     const closePersonopplysningerModal = () => {
-        ({ isPersonopplysningerModalOpen: false });
+        setIsPersonopplysningerModalOpen(false);
     };
 
     const closePlikterModal = () => {
-        ({ isPlikterModalOpen: false });
+        setIsPlikterModalOpen(false);
     };
 
     const bekreftetVilkarChange = () => {
-        ({ godkjentVilkår: !godkjentVilkår });
+        setGodkjentVilkår(!godkjentVilkår);
     };
 
     const startNySøknad = () => {
         if (godkjentVilkår) {
             dispatch(common.setGodkjentVilkar(true));
-            //history.push('/engangsstonad/soknad');
+            history.push('/engangsstonad/soknad');
         }
     };
 
-    const toggleLanguage = (language: Språkkode) => {
-        dispatch(common.setLanguage(language));
+    const toggleLanguage = (språkkode: Språkkode) => {
+        dispatch(common.setLanguage(språkkode));
     };
 
     const confirmBoxLabelHeaderText = () => {

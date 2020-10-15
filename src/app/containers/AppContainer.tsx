@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect, RouteComponentProps } from 'react-router-dom';
 import Spinner from 'nav-frontend-spinner';
@@ -29,18 +29,27 @@ interface StateProps {
 }
 
 type Props = StateProps & DispatchProps;
-class AppContainer extends React.Component<Props> {
-    componentWillMount() {
-        if (!this.props.person) {
-            this.props.dispatch(api.getPerson());
+
+const AppContainer: React.FunctionComponent<Props> = ({
+    godkjentVilkar,
+    kvittering,
+    error,
+    isLoadingPerson,
+    søknadSendt,
+    person,
+    dispatch,
+}) => {
+    useEffect(() => {
+        if (!person) {
+            dispatch(api.getPerson());
         }
-    }
+    });
 
-    renderContent(children: React.ReactNode) {
+    const renderContent = (children: React.ReactNode) => {
         return <div className="engangsstonad">{children}</div>;
-    }
+    };
 
-    getIntroComponent(person: Person, routeProps: RouteComponentProps): React.ReactNode {
+    const getIntroComponent = (person: Person, routeProps: RouteComponentProps): React.ReactNode => {
         if (erMann(person)) {
             return <ErMann />;
         }
@@ -48,39 +57,36 @@ class AppContainer extends React.Component<Props> {
             return <IkkeMyndig />;
         }
         return <Intro {...routeProps} />;
+    };
+
+    if (isLoadingPerson || (error && (error as AxiosResponse).status === 401)) {
+        return renderContent(<Spinner type="XXL" />);
+    }
+    if (søknadSendt && error && (error as AxiosResponse).status > 401) {
+        return renderContent(<InnsendingFeilet error={error} />);
+    }
+    if (error || !person) {
+        return renderContent(<GenerellFeil />);
     }
 
-    render() {
-        const { godkjentVilkar, kvittering, error, isLoadingPerson, søknadSendt, person } = this.props;
-        if (isLoadingPerson || (error && (error as AxiosResponse).status === 401)) {
-            return this.renderContent(<Spinner type="XXL" />);
-        }
-        if (søknadSendt && error && (error as AxiosResponse).status > 401) {
-            return this.renderContent(<InnsendingFeilet error={error} />);
-        }
-        if (error || !person) {
-            return this.renderContent(<GenerellFeil />);
-        }
-        return this.renderContent(
-            <Switch>
-                {kvittering ? (
-                    <Route path="/engangsstonad" component={SøknadSendt} exact={true} />
-                ) : (
-                    <Route
-                        path="/engangsstonad"
-                        render={(routeProps) => this.getIntroComponent(person!, routeProps)}
-                        exact={true}
-                    />
-                )}
-                {godkjentVilkar && !søknadSendt && (
-                    <Route path={'/engangsstonad/soknad'} exact={true} strict={true} component={Skjema} />
-                )}
-                <Redirect to="/engangsstonad" />
-            </Switch>
-        );
-    }
-}
-
+    return renderContent(
+        <Switch>
+            {kvittering ? (
+                <Route path="/engangsstonad" component={SøknadSendt} exact={true} />
+            ) : (
+                <Route
+                    path="/engangsstonad"
+                    render={(routeProps) => getIntroComponent(person!, routeProps)}
+                    exact={true}
+                />
+            )}
+            {godkjentVilkar && !søknadSendt && (
+                <Route path={'/engangsstonad/soknad'} exact={true} strict={true} component={Skjema} />
+            )}
+            <Redirect to="/engangsstonad" />
+        </Switch>
+    );
+};
 const mapStateToProps = (state: AppState) => ({
     error: state.apiReducer.error,
     person: state.apiReducer.person,
