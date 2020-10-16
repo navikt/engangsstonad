@@ -1,7 +1,6 @@
-import * as React from 'react';
+import React, { useState }  from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
-
 const { ValidGroup, ValidForm } = require('../../lib') as any;
 const { Ingress } = require('nav-frontend-typografi');
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -14,10 +13,8 @@ import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
 import {
     commonActionCreators as common,
-    //soknadActionCreators as soknad,
-    //stepActionCreators as step,
+ 
 } from '../../redux/actions';
-//import { getDefaultState } from 'reducers/stepReducer';
 import LanguageToggle from '../../intl/LanguageToggle';
 import getMessage from 'common/util/i18nUtils';
 import Person from '../../types/domain/Person';
@@ -27,12 +24,11 @@ import { Innholdstittel } from 'nav-frontend-typografi';
 import { DispatchProps } from 'common/redux/types';
 import Veilederpanel from 'nav-frontend-veilederpanel';
 import Veiviser from 'components/veiviser/VeiviserSvg';
-
 import { AppState } from 'reducers/reducers';
 import { Språkkode } from 'intl/types';
 
 import '../../styles/engangsstonad.less';
-import { useState } from 'react';
+
 
 interface StateProps {
     person: Person;
@@ -47,14 +43,7 @@ const Intro: React.FunctionComponent<Props> = ({ dispatch, person, språkkode, h
     const [isPlikterModalOpen, setIsPlikterModalOpen] = useState<boolean>(false);
     const [isPersonopplysningerModalOpen, setIsPersonopplysningerModalOpen] = useState<boolean>(false);
     const [godkjentVilkår, setGodkjentVilkår] = useState<boolean>(false);
-    /*
-    const resetAppState = () => {
-        dispatch(step.setActiveStep(getDefaultState().activeStep));
-        dispatch(soknad.resetSøknad());
-        dispatch(common.setBekreftetInformasjon(false));
-        dispatch(common.setGodkjentVilkar(false));
-    };
-*/
+
     const openPlikterModal = (e: React.SyntheticEvent<HTMLElement>) => {
         e.preventDefault();
         setIsPlikterModalOpen(true);

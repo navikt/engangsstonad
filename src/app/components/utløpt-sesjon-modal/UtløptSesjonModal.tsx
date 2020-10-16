@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
@@ -18,7 +18,7 @@ interface Props {
     erÅpen: boolean;
 }
 
-const UtløptSesjonModal = ({ erÅpen }: Props) => {
+const UtløptSesjonModal: React.FunctionComponent<Props> = ({ erÅpen }) => {
     const intl = useIntl();
     return (
         <Modal

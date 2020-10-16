@@ -36,7 +36,7 @@ const SøknadSendt: React.FunctionComponent<Props> = ({ person, kvittering }) =>
                 (window as any).hj('trigger', 'es_kvittering_feedback');
             }
         }, 5000);
-    });
+    }, []);
 
     return (
         <>

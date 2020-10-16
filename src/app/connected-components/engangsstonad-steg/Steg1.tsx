@@ -5,7 +5,6 @@ const { Select } = require('nav-frontend-skjema');
 import RadioPanelGruppeResponsive from './../../components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { soknadActionCreators as soknad } from '../../redux/actions';
 import { default as Barn, isFødtBarn, isUfødtBarn } from '../../types/domain/Barn';
-//import InjectedIntlProps = ReactIntl.InjectedIntlProps;
 import { DispatchProps } from 'common/redux/types';
 import getMessage from 'common/util/i18nUtils';
 import '../../styles/engangsstonad.less';
@@ -20,20 +19,12 @@ interface StateProps {
 }
 
 type Props = StateProps & DispatchProps;
-/*
-interface State {
-    isModalOpen: boolean;
-}
-*/
+
 const Steg1: React.FunctionComponent<Props> = ({ barn, dispatch }) => {
     const intl = useIntl();
-    console.log('test', barn);
-    //const [isModalOpen, setIsModalOpen] = useState<Boolean>(false)
     const getFodselsTidspunktSelectedValue = () => {
         if (barn) {
-            console.log('barn', barn);
             const { erBarnetFødt } = barn;
-            console.log('erBarnetFødt', erBarnetFødt);
             if (erBarnetFødt === true) {
                 return 'before';
             } else if (erBarnetFødt === false) {
@@ -58,7 +49,6 @@ const Steg1: React.FunctionComponent<Props> = ({ barn, dispatch }) => {
     };
 
     const renderPartial = () => {
-        //const { barn, intl, dispatch } = this.props;
         if (barn.erBarnetFødt === true && isFødtBarn(barn)) {
             return <steg1Partials.FødtBarnPartial barn={barn} dispatch={dispatch} />;
         } else if (barn.erBarnetFødt === false && isUfødtBarn(barn)) {

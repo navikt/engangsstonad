@@ -6,16 +6,13 @@ import { connect } from 'react-redux';
 import { Språkkode } from 'intl/types';
 import { AppState } from 'reducers/reducers';
 
-export interface Props extends DatovelgerProps {
+interface Props extends DatovelgerProps {
     label: string | React.ReactNode;
     feil?: Feil;
-}
-
-interface StateProps {
     språkkode: Språkkode;
 }
 
-const DateInput: React.FunctionComponent<Props & StateProps> = ({ label, feil, språkkode, ...rest }) => {
+const DateInput: React.FunctionComponent<Props> = ({ label, feil, språkkode, ...rest }) => {
     return (
         <SkjemaInputElement feil={feil} label={label}>
             <Datovelger {...rest} locale={språkkode} inputProps={{ placeholder: 'dd.mm.åååå' }} />

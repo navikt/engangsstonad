@@ -47,7 +47,6 @@ const Steg3: React.FunctionComponent<Props> = ({ dispatch, informasjonOmUtenland
     };
 
     const overlapsWithOtherUtenlandsopphold = (momentFom: any, momentTom: any, utenlandsoppholdInEditMode: any) => {
-        const { tidligereOpphold, senereOpphold } = informasjonOmUtenlandsopphold;
         const perioder = [...tidligereOpphold, ...senereOpphold];
         const overlappendePeriode = perioder.find((periode) => {
             if (periode !== utenlandsoppholdInEditMode) {
@@ -174,7 +173,6 @@ const Steg3: React.FunctionComponent<Props> = ({ dispatch, informasjonOmUtenland
     };
 
     const getINorgeSiste12SelectedValue = () => {
-        const { iNorgeSiste12Mnd } = informasjonOmUtenlandsopphold;
         if (iNorgeSiste12Mnd === true) {
             return 'norway';
         } else if (iNorgeSiste12Mnd === false) {
@@ -185,7 +183,6 @@ const Steg3: React.FunctionComponent<Props> = ({ dispatch, informasjonOmUtenland
     };
 
     const getINorgeNeste12SelectedValue = () => {
-        const { iNorgeNeste12Mnd } = informasjonOmUtenlandsopphold;
         if (iNorgeNeste12Mnd === true) {
             return 'norway';
         } else if (iNorgeNeste12Mnd === false) {
@@ -235,7 +232,7 @@ const Steg3: React.FunctionComponent<Props> = ({ dispatch, informasjonOmUtenland
                     }
                     tidsperiode={tidsperiodeForegående}
                     validators={{
-                        validateLand: validateLand,
+                        validateLand,
                         validateFom: validateFomDatoSiste12Mnd,
                         validateTom: validateTomDatoSiste12Mnd,
                     }}
@@ -281,7 +278,7 @@ const Steg3: React.FunctionComponent<Props> = ({ dispatch, informasjonOmUtenland
                     }
                     tidsperiode={tidsperiodeKommende}
                     validators={{
-                        validateLand: validateLand,
+                        validateLand,
                         validateFom: validateFomDatoNeste12Mnd,
                         validateTom: validateTomDatoNeste12Mnd,
                     }}

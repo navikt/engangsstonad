@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import * as classnames from 'classnames';
 const { SkjemaGruppe, Fieldset, RadioPanel } = require('nav-frontend-skjema');
 import { RadioPanelGruppeProps } from 'nav-frontend-skjema';

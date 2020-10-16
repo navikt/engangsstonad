@@ -90,7 +90,6 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
                         spinner={søknadSendingInProgress}
                     >
                         {fortsettKnappLabel}
-                        dødfkgødfkgd
                     </Hovedknapp>
                 )}
                 <CancelButton />

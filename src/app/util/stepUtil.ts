@@ -8,7 +8,6 @@ import { isAttachmentWithError } from 'common/storage/attachment/components/util
 export const shouldDisplayNextButtonOnStep1 = (barn: Barn) => {
     if (!barn.erBarnetFødt) {
         const ufodtBarn = barn as UfodtBarn;
-        console.log('shouldDisplayNextButtonOnStep1');
         return (
             ufodtBarn.termindato &&
             ufodtBarn.terminbekreftelseDato &&

@@ -17,7 +17,7 @@ interface Props {
 const UtvidetInformasjon: React.FunctionComponent<Props> = ({ children, erApen, apneLabel }) => {
     const intl = useIntl();
     const innholdId = guid();
-    const [apen, setApen] = useState<boolean>(false);
+    const [apen, setApen] = useState<boolean>(erApen || false);
     const lukkLabel = getMessage(intl, 'utvidetInformasjon.lukkTekst');
     return (
         <div className="utvidetInformasjon">
@@ -34,5 +34,4 @@ const UtvidetInformasjon: React.FunctionComponent<Props> = ({ children, erApen, 
         </div>
     );
 };
-
 export default UtvidetInformasjon;

@@ -1,5 +1,4 @@
 import * as React from 'react';
-//import { useIntl } from 'react-intl';
 import { ReactNode } from 'react-redux';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 

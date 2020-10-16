@@ -118,10 +118,10 @@ const CountryModal: React.FunctionComponent<Props> = ({
         getDefaultState(utenlandsopphold).hasSubmitted
     );
     const formStateHasErrors = () => {
-        const landFeil = formData.land && formData.land.feil;
-        const fomFeil = formData.fom && formData.fom.feil;
-        const tomFeil = formData.tom && formData.tom.feil;
-        return landFeil || fomFeil || tomFeil;
+        const formDataLandFeil = formData.land && formData.land.feil;
+        const fromDataFomFeil = formData.fom && formData.fom.feil;
+        const fromDataTomFeil = formData.tom && formData.tom.feil;
+        return formDataLandFeil || fromDataFomFeil || fromDataTomFeil;
     };
     const handleOnSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -135,28 +135,28 @@ const CountryModal: React.FunctionComponent<Props> = ({
         setFormData(formData);
         setHasSubmitted(true);
     };
-    const updateFormState = (formData: PeriodeForm) => {
-        const land = formData.land && formData.land.value;
-        const fom = formData.fom && formData.fom.value;
-        const tom = formData.tom && formData.tom.value;
-        const landFeil = validateLand && validateLand({ land: formData.land && formData.land.value });
-        const fomFeil = validateFom && validateFom({ fom, tom, utenlandsoppholdInEditMode: utenlandsopphold });
-        const tomFeil = validateTom && validateTom({ tom, fom, utenlandsoppholdInEditMode: utenlandsopphold });
+    const updateFormState = (PeriodeFormData: PeriodeForm) => {
+        const land = PeriodeFormData.land && PeriodeFormData.land.value;
+        const fom = PeriodeFormData.fom && PeriodeFormData.fom.value;
+        const tom = PeriodeFormData.tom && PeriodeFormData.tom.value;
+        const validatedLandFeil = validateLand && validateLand({ land: PeriodeFormData.land && PeriodeFormData.land.value });
+        const validatedFomFeil = validateFom && validateFom({ fom, tom, utenlandsoppholdInEditMode: utenlandsopphold });
+        const validatedtomFeil = validateTom && validateTom({ tom, fom, utenlandsoppholdInEditMode: utenlandsopphold });
         setFormData({
             land: {
                 value: land,
-                feil: landFeil,
-                visFeil: landFeil && hasSubmitted,
+                feil: validatedLandFeil,
+                visFeil: validatedLandFeil && hasSubmitted,
             },
             fom: {
                 value: fom,
-                feil: fomFeil,
-                visFeil: fomFeil && hasSubmitted,
+                feil: validatedFomFeil,
+                visFeil: validatedFomFeil && hasSubmitted,
             },
             tom: {
                 value: tom,
-                feil: tomFeil,
-                visFeil: tomFeil && hasSubmitted,
+                feil: validatedtomFeil,
+                visFeil: validatedtomFeil && hasSubmitted,
             },
         });
     };

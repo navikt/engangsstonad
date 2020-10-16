@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import * as countries from 'i18n-iso-countries';
 import classnames from 'classnames';
 import { useIntl } from 'react-intl';
@@ -15,13 +15,16 @@ interface Props {
     onEditClick?: (periode: Utenlandsopphold) => void;
 }
 
-const CountryListSummaryElement: React.FunctionComponent<Props> = (props) => {
+const CountryListSummaryElement: React.FunctionComponent<Props> = ({
+    utenlandsopphold,
+    onDeleteClick,
+    onEditClick,
+}) => {
     const intl = useIntl();
-    const { tidsperiode, land } = props.utenlandsopphold;
-    const { onDeleteClick, onEditClick } = props;
+    const { tidsperiode, land } = utenlandsopphold;
     const onEditClickHandler = () => {
         if (onEditClick !== undefined) {
-            onEditClick(props.utenlandsopphold);
+            onEditClick(utenlandsopphold);
         }
     };
 
@@ -46,10 +49,7 @@ const CountryListSummaryElement: React.FunctionComponent<Props> = (props) => {
             </div>
             {onDeleteClick && (
                 <span className="countryListElement__delete">
-                    <SlettKnapp
-                        ariaLabel="Slett utenlandsopphold"
-                        onClick={() => onDeleteClick(props.utenlandsopphold)}
-                    />
+                    <SlettKnapp ariaLabel="Slett utenlandsopphold" onClick={() => onDeleteClick(utenlandsopphold)} />
                 </span>
             )}
         </li>

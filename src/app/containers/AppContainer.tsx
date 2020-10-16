@@ -43,7 +43,7 @@ const AppContainer: React.FunctionComponent<Props> = ({
         if (!person) {
             dispatch(api.getPerson());
         }
-    });
+    },[]);
 
     const renderContent = (children: React.ReactNode) => {
         return <div className="engangsstonad">{children}</div>;

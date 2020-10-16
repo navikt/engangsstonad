@@ -12,7 +12,7 @@ import { Attachment, AttachmentType, Skjemanummer } from 'common/storage/attachm
 import AlertstripeWithCloseButton from 'common/components/alertstripe-content/AlertstripeWithCloseButton';
 import FormBlock from 'components/form-block/FormBlock';
 
-export interface Props {
+interface Props {
     attachments: Attachment[];
     attachmentType: AttachmentType;
     skjemanummer: Skjemanummer;

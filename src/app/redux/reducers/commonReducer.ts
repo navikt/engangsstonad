@@ -1,5 +1,4 @@
 import { CommonActionKeys, CommonActionTypes } from '../actions/common/commonActionDefinitions';
-//import { Language } from 'intl/IntlProvider';
 import { Språkkode } from '../../intl/types';
 
 const initialState = (): CommonState => ({
