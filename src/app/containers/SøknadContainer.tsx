@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { RouteComponentProps, Prompt } from 'react-router';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import getMessage from 'common/util/i18nUtils';
@@ -15,13 +15,13 @@ import { DispatchProps } from 'common/redux/types';
 import UtløptSesjonModal from 'components/utløpt-sesjon-modal/UtløptSesjonModal';
 const { ValidForm } = require('./../lib') as any;
 import { AppState } from 'reducers/reducers';
-import { Language } from 'intl/IntlProvider';
+import { Språkkode } from 'intl/types';
 
 import '../styles/engangsstonad.less';
 
 interface OwnProps {
     søknad: EngangsstonadSoknad;
-    language: Language;
+    språkkode: Språkkode;
     person: Person;
     activeStep: number;
     søknadSendt: boolean;
@@ -29,93 +29,83 @@ interface OwnProps {
     sessionHasExpired: boolean;
 }
 
-type Props = OwnProps & DispatchProps & InjectedIntlProps & RouteComponentProps;
+type Props = OwnProps & DispatchProps & RouteComponentProps;
 
-class SøknadContainer extends React.Component<Props> {
-    constructor(props: Props) {
-        super(props);
-        this.handleNextClicked = this.handleNextClicked.bind(this);
-        this.handleBackClicked = this.handleBackClicked.bind(this);
-    }
+const SøknadContainer: React.FunctionComponent<Props> = ({
+    søknad,
+    språkkode,
+    person,
+    activeStep,
+    søknadSendingInProgress,
+    sessionHasExpired,
+    dispatch,
+}) => {
+    const intl = useIntl();
+    const stepsConfig = getStepConfig(intl, person);
+    const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
+    const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
+    const ActiveStep = stepsConfig[activeStep - 1].component;
 
-    hasToWaitForResponse() {
-        const { activeStep, intl, person } = this.props;
+    const hasToWaitForResponse = () => {
         const stepsConfig = getStepConfig(intl, person);
         return activeStep === stepsConfig.length;
-    }
+    };
 
-    handleNextClicked() {
-        const { dispatch, søknad, language } = this.props;
-        if (this.hasToWaitForResponse()) {
-            return dispatch(api.sendSoknad(søknad, language));
+    const handleNextClicked = () => {
+        if (hasToWaitForResponse()) {
+            return dispatch(api.sendSoknad(søknad, språkkode));
         }
-        const { activeStep } = this.props;
         dispatch(stepActions.setActiveStep(activeStep + 1));
-    }
+    };
 
-    handleBackClicked() {
-        const { dispatch, activeStep } = this.props;
+    const handleBackClicked = () => {
         if (activeStep > 1) {
             dispatch(stepActions.setActiveStep(activeStep - 1));
         }
-    }
+    };
 
-    shouldRenderFortsettKnapp(): boolean {
-        const { activeStep, person, intl, søknad } = this.props;
+    const shouldRenderFortsettKnapp = (): boolean => {
         const stepConfig = getStepConfig(intl, person);
         return stepConfig[activeStep - 1].nextStepCondition({ ...søknad });
-    }
+    };
 
-    render() {
-        const { intl, activeStep, søknadSendingInProgress, person, sessionHasExpired } = this.props;
-        const stepsConfig = getStepConfig(intl, person);
-        const titles = stepsConfig.map((stepConf) => stepConf.stegIndikatorLabel);
-        const fortsettKnappLabel = stepsConfig[activeStep - 1].fortsettKnappLabel;
+    return (
+        <>
+            <Prompt message={() => getMessage(intl, 'søknadContainer.prompt')} />
+            <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
+            <ValidForm
+                summaryTitle={getMessage(intl, 'validForm.summaryTitle')}
+                noSummary={activeStep === stepsConfig.length - 1}
+                onSubmit={handleNextClicked}
+                className="responsiveContainer"
+            >
+                <SkjemaHeader onPrevious={() => handleBackClicked()} activeStep={activeStep} stepTitles={titles} />
 
-        const ActiveStep = stepsConfig[activeStep - 1].component;
+                <ActiveStep />
 
-        return (
-            <>
-                <Prompt message={() => getMessage(intl, 'søknadContainer.prompt')} />
-                <Søknadstittel tittel={getMessage(intl, 'søknad.pageheading')} />
-                <ValidForm
-                    summaryTitle={getMessage(intl, 'validForm.summaryTitle')}
-                    noSummary={activeStep === stepsConfig.length - 1}
-                    onSubmit={this.handleNextClicked}
-                    className="responsiveContainer"
-                >
-                    <SkjemaHeader
-                        onPrevious={() => this.handleBackClicked()}
-                        activeStep={activeStep}
-                        stepTitles={titles}
-                    />
-
-                    <ActiveStep />
-
-                    {this.shouldRenderFortsettKnapp() && (
-                        <Hovedknapp
-                            className="responsiveButton"
-                            disabled={søknadSendingInProgress}
-                            spinner={søknadSendingInProgress}
-                        >
-                            {fortsettKnappLabel}
-                        </Hovedknapp>
-                    )}
-                    <CancelButton />
-                </ValidForm>
-                <UtløptSesjonModal erÅpen={sessionHasExpired} />
-            </>
-        );
-    }
-}
+                {shouldRenderFortsettKnapp() && (
+                    <Hovedknapp
+                        className="responsiveButton"
+                        disabled={søknadSendingInProgress}
+                        spinner={søknadSendingInProgress}
+                    >
+                        {fortsettKnappLabel}
+                    </Hovedknapp>
+                )}
+                <CancelButton />
+            </ValidForm>
+            <UtløptSesjonModal erÅpen={sessionHasExpired} />
+        </>
+    );
+};
 
 const mapStateToProps = (state: AppState) => ({
     søknad: state.soknadReducer,
-    language: state.commonReducer.language,
+    språkkode: state.commonReducer.språkkode,
     person: state.apiReducer.person!,
     activeStep: state.stepReducer.activeStep,
     søknadSendt: state.apiReducer.søknadSendt,
     søknadSendingInProgress: state.apiReducer.søknadSendingInProgress,
-    sessionHasExpired: state.apiReducer.sessionHasExpired
+    sessionHasExpired: state.apiReducer.sessionHasExpired,
 });
-export default connect<OwnProps>(mapStateToProps)(injectIntl(SøknadContainer));
+export default connect<OwnProps>(mapStateToProps)(SøknadContainer);

@@ -17,16 +17,11 @@ export const shouldDisplayNextButtonOnStep1 = (barn: Barn) => {
         );
     }
     const fodtBarn = barn as FodtBarn;
-    return (fodtBarn.antallBarn !== undefined && dateFormatsAreValid(fodtBarn.fødselsdatoer));
+    return fodtBarn.antallBarn !== undefined && dateFormatsAreValid(fodtBarn.fødselsdatoer);
 };
 
-export const shouldDisplayNextButtonOnStep2 = (
-    annenForelder: AnnenForelder
-) => {
-    if (
-        annenForelder.kanIkkeOppgis === true ||
-        annenForelder.fnr !== undefined
-    ) {
+export const shouldDisplayNextButtonOnStep2 = (annenForelder: AnnenForelder) => {
+    if (annenForelder.kanIkkeOppgis === true || annenForelder.fnr !== undefined) {
         return true;
     } else {
         return (
@@ -45,16 +40,18 @@ export const iNorgeNeste12MndIsValid = (u: InformasjonOmUtenlandsopphold) => {
     return u.iNorgeNeste12Mnd === true || (u.iNorgeNeste12Mnd === false && u.senereOpphold.length > 0);
 };
 
-export const shouldDisplayNextButtonOnStep3 = (
-    barn: Barn,
-    utenlandsopphold: InformasjonOmUtenlandsopphold
-) => {
+export const shouldDisplayNextButtonOnStep3 = (barn: Barn, utenlandsopphold: InformasjonOmUtenlandsopphold) => {
     if (utenlandsopphold.iNorgeNeste12Mnd === false) {
-        return dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) &&
-            iNorgeNeste12MndIsValid(utenlandsopphold) && iNorgeSiste12MndIsValid(utenlandsopphold);
+        return (
+            dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) &&
+            iNorgeNeste12MndIsValid(utenlandsopphold) &&
+            iNorgeSiste12MndIsValid(utenlandsopphold)
+        );
     } else {
-        return ((dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) &&
-                utenlandsopphold.iNorgeNeste12Mnd !== undefined) && iNorgeNeste12MndIsValid(utenlandsopphold) &&
+        return (
+            dateFormatsAreValid((barn as FodtBarn).fødselsdatoer) &&
+            utenlandsopphold.iNorgeNeste12Mnd !== undefined &&
+            iNorgeNeste12MndIsValid(utenlandsopphold) &&
             iNorgeSiste12MndIsValid(utenlandsopphold)
         );
     }

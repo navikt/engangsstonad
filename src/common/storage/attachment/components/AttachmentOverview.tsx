@@ -12,7 +12,7 @@ import { Attachment, AttachmentType, Skjemanummer } from 'common/storage/attachm
 import AlertstripeWithCloseButton from 'common/components/alertstripe-content/AlertstripeWithCloseButton';
 import FormBlock from 'components/form-block/FormBlock';
 
-export interface AttachmentOverviewProps {
+interface Props {
     attachments: Attachment[];
     attachmentType: AttachmentType;
     skjemanummer: Skjemanummer;
@@ -22,18 +22,20 @@ export interface AttachmentOverviewProps {
     onFileDelete: (file: Attachment[]) => void;
 }
 
-interface State {
-    showErrorMessage: boolean;
-}
+const AttachmentOverview: React.FunctionComponent<Props> = ({
+    inputId = guid(),
+    attachments,
+    attachmentType,
+    skjemanummer,
+    showFileSize,
+    onFileDelete,
+    onFilesSelect,
+}) => {
+    const showErrorMessage: boolean = attachments.some(isAttachmentWithError);
+    const attachmentsToRender = attachments.filter((a: Attachment) => !isAttachmentWithError(a));
+    const showAttachments = attachmentsToRender.length > 0;
 
-type Props = AttachmentOverviewProps;
-class AttachmentOverview extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.deleteFailedAttachments = this.deleteFailedAttachments.bind(this);
-    }
-
-    createErrorMessagesForFailedAttachments(attachments: Attachment[]) {
+    const createErrorMessagesForFailedAttachments = (attachments: Attachment[]) => {
         const errorMessages: React.ReactNode[] = [];
         const attachmentsWithError = attachments.filter(isAttachmentWithError);
         const multipleErrors = attachmentsWithError.length > 1;
@@ -78,81 +80,66 @@ class AttachmentOverview extends React.Component<Props, State> {
             }
         });
         return errorMessages;
-    }
+    };
 
-    deleteFailedAttachments(): void {
-        this.props.onFileDelete(this.props.attachments.filter(isAttachmentWithError));
-    }
+    const deleteFailedAttachments = (): void => {
+        onFileDelete(attachments.filter(isAttachmentWithError));
+    };
 
-    render() {
-        const {
-            inputId = guid(),
-            attachments,
-            attachmentType,
-            skjemanummer,
-            showFileSize,
-            onFileDelete,
-            onFilesSelect
-        } = this.props;
-
-        const showErrorMessage: boolean = this.props.attachments.some(isAttachmentWithError);
-        const attachmentsToRender = attachments.filter((a: Attachment) => !isAttachmentWithError(a));
-        const showAttachments = attachmentsToRender.length > 0;
-
-        return (
-            <React.Fragment>
-                <FormBlock margin={showAttachments || showErrorMessage ? 'xs' : undefined}>
-                    <VedleggInput
-                        id={inputId}
-                        onFilesSelect={(files: File[]) => {
-                            onFilesSelect(files.map((f) => mapFileToAttachment(f, attachmentType, skjemanummer)));
-                        }}
-                        onClick={this.deleteFailedAttachments}
-                    />
-                </FormBlock>
-                <CSSTransition
-                    classNames="transitionFade"
-                    timeout={150}
-                    in={showAttachments || showErrorMessage}
-                    unmountOnExit={true}>
-                    <>
-                        {(showAttachments || showErrorMessage) && (
-                            <>
-                                <FormBlock margin="xs" visible={showErrorMessage} animated={true}>
-                                    <AlertstripeWithCloseButton
-                                        lukknappProps={{
-                                            hvit: false,
-                                            type: 'button'
-                                        }}
-                                        errorMessages={this.createErrorMessagesForFailedAttachments(
-                                            this.props.attachments.filter(isAttachmentWithError)
-                                        )}
-                                        onClose={this.deleteFailedAttachments}
-                                    />
-                                </FormBlock>
-                                <FormBlock margin="xs">
-                                    <LabelText>
-                                        <FormattedMessage
-                                            id="vedlegg.liste.tittel"
-                                            values={{
-                                                størrelse: bytesString(
-                                                    getTotalFileSize(attachmentsToRender.map((a: Attachment) => a.file))
-                                                )
-                                            }}
-                                        />
-                                    </LabelText>
-                                </FormBlock>
-                                <AttachmentList
-                                    attachments={attachmentsToRender}
-                                    showFileSize={showFileSize}
-                                    onDelete={(file: Attachment) => onFileDelete([file])}
+    return (
+        <React.Fragment>
+            <FormBlock margin={showAttachments || showErrorMessage ? 'xs' : undefined}>
+                <VedleggInput
+                    id={inputId}
+                    onFilesSelect={(files: File[]) => {
+                        onFilesSelect(files.map((f) => mapFileToAttachment(f, attachmentType, skjemanummer)));
+                    }}
+                    onClick={deleteFailedAttachments}
+                />
+            </FormBlock>
+            <CSSTransition
+                classNames="transitionFade"
+                timeout={150}
+                in={showAttachments || showErrorMessage}
+                unmountOnExit={true}
+            >
+                <>
+                    {(showAttachments || showErrorMessage) && (
+                        <>
+                            <FormBlock margin="xs" visible={showErrorMessage} animated={true}>
+                                <AlertstripeWithCloseButton
+                                    lukknappProps={{
+                                        hvit: false,
+                                        type: 'button',
+                                    }}
+                                    errorMessages={createErrorMessagesForFailedAttachments(
+                                        attachments.filter(isAttachmentWithError)
+                                    )}
+                                    onClose={deleteFailedAttachments}
                                 />
-                            </>
-                        )}
-                    </>
-                </CSSTransition>
-            </React.Fragment>
-        );
-    }
-}
+                            </FormBlock>
+                            <FormBlock margin="xs">
+                                <LabelText>
+                                    <FormattedMessage
+                                        id="vedlegg.liste.tittel"
+                                        values={{
+                                            størrelse: bytesString(
+                                                getTotalFileSize(attachmentsToRender.map((a: Attachment) => a.file))
+                                            ),
+                                        }}
+                                    />
+                                </LabelText>
+                            </FormBlock>
+                            <AttachmentList
+                                attachments={attachmentsToRender}
+                                showFileSize={showFileSize}
+                                onDelete={(file: Attachment) => onFileDelete([file])}
+                            />
+                        </>
+                    )}
+                </>
+            </CSSTransition>
+        </React.Fragment>
+    );
+};
 export default AttachmentOverview;

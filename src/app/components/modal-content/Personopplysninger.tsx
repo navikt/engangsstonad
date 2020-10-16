@@ -1,15 +1,12 @@
 import React from 'react';
-import { InjectedIntlProps } from 'react-intl';
-const { FormattedMessage, injectIntl } = require('react-intl');
+import { FormattedMessage, useIntl } from 'react-intl';
 const { Undertittel, Normaltekst, Element } = require('nav-frontend-typografi');
 import Lenke from 'nav-frontend-lenker';
 import { lenker } from 'util/lenker';
 import getMessage from 'common/util/i18nUtils';
 
-type Props = InjectedIntlProps;
-
-const Personopplysninger: React.StatelessComponent<Props> = (props: Props) => {
-    const { intl } = props;
+const Personopplysninger = () => {
+    const intl = useIntl();
     return (
         <div className="modalContent">
             <Undertittel className="modalContent__header">
@@ -102,7 +99,7 @@ const Personopplysninger: React.StatelessComponent<Props> = (props: Props) => {
                                 <Lenke href={lenker.personvernerklæring} target="_blank">
                                     <FormattedMessage id="personopplysninger.text.personvernerklering.link" />
                                 </Lenke>
-                            )
+                            ),
                         }}
                     />
                 </Normaltekst>
@@ -110,4 +107,4 @@ const Personopplysninger: React.StatelessComponent<Props> = (props: Props) => {
         </div>
     );
 };
-export default injectIntl(Personopplysninger);
+export default Personopplysninger;
