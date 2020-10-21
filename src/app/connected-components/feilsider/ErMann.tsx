@@ -1,10 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useIntl } from 'react-intl';
-<<<<<<< HEAD
-=======
-//import InjectedIntlProps = ReactIntl.InjectedIntlProps;
->>>>>>> master
 import getMessage from 'common/util/i18nUtils';
 import Person from '../../types/domain/Person';
 import { DispatchProps } from 'common/redux/types';
