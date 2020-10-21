@@ -8,7 +8,6 @@ import { SoknadActionKeys } from 'actions/soknad/soknadActionDefinitions';
 
 function* sendSøknad(action: any) {
     try {
-        console.log("send søknad", action.språkkode);
         const response = yield call(Api.sendSoknad, apiUtils.cleanupSøknad(JSON.parse(JSON.stringify(action.soknad)), action.språkkode));
         const kvittering: Kvittering = response.data;
         yield put({ type: ApiActionKeys.SEND_SOKNAD_SUCCESS, kvittering });
