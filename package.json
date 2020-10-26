@@ -28,7 +28,7 @@
         "classnames": "^2.2.6",
         "compression": "^1.7.3",
         "date-holidays": "1.6.2",
-        "detect-browser": "4.8.0",
+        "detect-browser": "5.2.0",
         "dotenv": "8.2.0",
         "express": "4.17.1",
         "history": "5.0.0",
