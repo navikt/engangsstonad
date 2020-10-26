@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 const { ValidGroup, ValidForm } = require('../../lib') as any;
@@ -11,10 +11,7 @@ import Plikter from 'components/modal-content/Plikter';
 import Personopplysninger from 'components/modal-content/Personopplysninger';
 import Skjemasteg from 'components/skjemasteg/Skjemasteg';
 
-import {
-    commonActionCreators as common,
- 
-} from '../../redux/actions';
+import { commonActionCreators as common } from '../../redux/actions';
 import LanguageToggle from '../../intl/LanguageToggle';
 import getMessage from 'common/util/i18nUtils';
 import Person from '../../types/domain/Person';
@@ -28,7 +25,6 @@ import { AppState } from 'reducers/reducers';
 import { Språkkode } from 'intl/types';
 
 import '../../styles/engangsstonad.less';
-
 
 interface StateProps {
     person: Person;
