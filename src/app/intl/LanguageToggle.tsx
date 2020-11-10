@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useIntl } from 'react-intl';
+import { IntlShape, useIntl } from 'react-intl';
 import { Wrapper, Button, Menu, MenuItem } from 'react-aria-menubutton';
 const { NedChevron } = require('nav-frontend-chevron');
 import 'nav-frontend-lenker-style';
@@ -24,7 +24,7 @@ const getLanguageCodeFromValue = (value: string) => {
     }
 };
 
-const getLanguageTextFromCode = (intl: any, code: string) => {
+const getLanguageTextFromCode = (intl: IntlShape, code: string) => {
     if (code === 'nb') {
         return getMessage(intl, 'languageToggle.bokmål');
     } else if (code === 'nn') {
@@ -34,7 +34,7 @@ const getLanguageTextFromCode = (intl: any, code: string) => {
     }
 };
 
-const renderMenuItem = (intl: any, languageCode: string) => {
+const renderMenuItem = (intl: IntlShape, languageCode: string) => {
     return (
         <li key={languageCode}>
             <MenuItem className="languageToggle__menu__item">
@@ -54,7 +54,6 @@ const handleSelection = (value: JSX.Element[], e: any, toggleLanguage: any) => {
 const LanguageToggle: React.FunctionComponent<Props> = ({ språkkode, toggleLanguage }) => {
     const intl = useIntl();
     const menuLanguages = ['nb', 'nn', 'en'].filter((code) => code !== språkkode);
-
     return (
         <div className="languageToggle">
             <Wrapper
