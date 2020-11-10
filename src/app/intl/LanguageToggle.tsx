@@ -54,6 +54,7 @@ const handleSelection = (value: JSX.Element[], e: any, toggleLanguage: any) => {
 const LanguageToggle: React.FunctionComponent<Props> = ({ språkkode, toggleLanguage }) => {
     const intl = useIntl();
     const menuLanguages = ['nb', 'nn', 'en'].filter((code) => code !== språkkode);
+
     return (
         <div className="languageToggle">
             <Wrapper
