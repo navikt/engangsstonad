@@ -43,17 +43,17 @@ const AppContainer: React.FunctionComponent<Props> = ({
         if (!person) {
             dispatch(api.getPerson());
         }
-    },[]);
+    }, []);
 
     const renderContent = (children: React.ReactNode) => {
         return <div className="engangsstonad">{children}</div>;
     };
 
-    const getIntroComponent = (person: Person, routeProps: RouteComponentProps): React.ReactNode => {
-        if (erMann(person)) {
+    const getIntroComponent = (p: Person, routeProps: RouteComponentProps): React.ReactNode => {
+        if (erMann(p)) {
             return <ErMann />;
         }
-        if (!erMyndig(person)) {
+        if (!erMyndig(p)) {
             return <IkkeMyndig />;
         }
         return <Intro {...routeProps} />;

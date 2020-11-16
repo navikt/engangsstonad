@@ -35,9 +35,9 @@ const AttachmentOverview: React.FunctionComponent<Props> = ({
     const attachmentsToRender = attachments.filter((a: Attachment) => !isAttachmentWithError(a));
     const showAttachments = attachmentsToRender.length > 0;
 
-    const createErrorMessagesForFailedAttachments = (attachments: Attachment[]) => {
+    const createErrorMessagesForFailedAttachments = (atts: Attachment[]) => {
         const errorMessages: React.ReactNode[] = [];
-        const attachmentsWithError = attachments.filter(isAttachmentWithError);
+        const attachmentsWithError = atts.filter(isAttachmentWithError);
         const multipleErrors = attachmentsWithError.length > 1;
 
         attachmentsWithError.forEach((a: Attachment) => {

@@ -47,8 +47,8 @@ const SøknadContainer: React.FunctionComponent<Props> = ({
     const ActiveStep = stepsConfig[activeStep - 1].component;
 
     const hasToWaitForResponse = () => {
-        const stepsConfig = getStepConfig(intl, person);
-        return activeStep === stepsConfig.length;
+        const config = getStepConfig(intl, person);
+        return activeStep === config.length;
     };
 
     const handleNextClicked = () => {

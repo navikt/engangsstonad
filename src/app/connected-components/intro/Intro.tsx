@@ -69,8 +69,8 @@ const Intro: React.FunctionComponent<Props> = ({ dispatch, person, språkkode, h
         }
     };
 
-    const toggleLanguage = (språkkode: Språkkode) => {
-        dispatch(common.setLanguage(språkkode));
+    const toggleLanguage = (språkkodeValue: Språkkode) => {
+        dispatch(common.setLanguage(språkkodeValue));
     };
 
     const confirmBoxLabelHeaderText = () => {
@@ -103,7 +103,7 @@ const Intro: React.FunctionComponent<Props> = ({ dispatch, person, språkkode, h
                 <ValidForm noSummary={true} onSubmit={startNySøknad}>
                     <LanguageToggle
                         språkkode={språkkode}
-                        toggleLanguage={(språkkode: Språkkode) => toggleLanguage(språkkode)}
+                        toggleLanguage={(språkkodeValue: Språkkode) => toggleLanguage(språkkodeValue)}
                     />
                     <SimpleIllustration
                         dialog={{

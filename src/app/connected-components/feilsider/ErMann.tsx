@@ -41,7 +41,7 @@ const ErMann: React.FunctionComponent<Props> = ({ person, språkkode, dispatch }
                     },
                 }}
                 språkkode={språkkode}
-                setLanguage={(språkkode: Språkkode) => dispatch(setLanguage(språkkode))}
+                setLanguage={(språkkodeValue: Språkkode) => dispatch(setLanguage(språkkodeValue))}
             />
         );
     }

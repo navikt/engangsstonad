@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 const { Select } = require('nav-frontend-skjema');
 import RadioPanelGruppeResponsive from './../../components/radio-panel-gruppe-responsive/RadioPanelGruppeResponsive';
 import { soknadActionCreators as soknad } from '../../redux/actions';
-import { default as Barn, isFødtBarn, isUfødtBarn } from '../../types/domain/Barn';
+import { default as Barn, FodtBarn, UfodtBarn } from '../../types/domain/Barn';
 import { DispatchProps } from 'common/redux/types';
 import getMessage from 'common/util/i18nUtils';
 import '../../styles/engangsstonad.less';
@@ -49,10 +49,10 @@ const Steg1: React.FunctionComponent<Props> = ({ barn, dispatch }) => {
     };
 
     const renderPartial = () => {
-        if (barn.erBarnetFødt === true && isFødtBarn(barn)) {
-            return <steg1Partials.FødtBarnPartial barn={barn} dispatch={dispatch} />;
-        } else if (barn.erBarnetFødt === false && isUfødtBarn(barn)) {
-            return <steg1Partials.UfødtBarnPartial barn={barn} dispatch={dispatch} />;
+        if (barn.erBarnetFødt === true) {
+            return <steg1Partials.FødtBarnPartial barn={barn as FodtBarn} dispatch={dispatch} />;
+        } else if (barn.erBarnetFødt === false) {
+            return <steg1Partials.UfødtBarnPartial barn={barn as UfodtBarn} dispatch={dispatch} />;
         }
         return null;
     };

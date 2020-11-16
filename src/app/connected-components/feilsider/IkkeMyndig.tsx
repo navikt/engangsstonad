@@ -41,7 +41,7 @@ const IkkeMyndig: React.FunctionComponent<Props> = ({ person, språkkode, dispat
                     },
                 }}
                 språkkode={språkkode}
-                setLanguage={(språkkode: Språkkode) => dispatch(setLanguage(språkkode))}
+                setLanguage={(språkkodeValue: Språkkode) => dispatch(setLanguage(språkkodeValue))}
             />
         );
     }
