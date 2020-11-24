@@ -8,12 +8,18 @@ import { SoknadActionKeys } from 'actions/soknad/soknadActionDefinitions';
 
 function* sendSøknad(action: any) {
     try {
-        const response = yield call(Api.sendSoknad, apiUtils.cleanupSøknad(JSON.parse(JSON.stringify(action.soknad)), action.språkkode));
+        const response = yield call(
+            Api.sendSoknad,
+            apiUtils.cleanupSøknad(JSON.parse(JSON.stringify(action.soknad)), action.språkkode.toUpperCase())
+        );
         const kvittering: Kvittering = response.data;
         yield put({ type: ApiActionKeys.SEND_SOKNAD_SUCCESS, kvittering });
+        console.log('kvittering', kvittering);
+        console.log('søknad', response);
     } catch (error) {
-        error.response && (error.response.status === 401 || error.response.status === 403) ? yield put(apiActionCreators.sessionExpired()) :
-        yield put({ type: SoknadActionKeys.RESET_SØKNAD });
+        error.response && (error.response.status === 401 || error.response.status === 403)
+            ? yield put(apiActionCreators.sessionExpired())
+            : yield put({ type: SoknadActionKeys.RESET_SØKNAD });
         yield put({ type: ApiActionKeys.SEND_SOKNAD_FAILED, error });
     }
 }
