@@ -100,7 +100,7 @@
         "@types/date-fns": "^2.6.0",
         "@types/detect-browser": "4.0.0",
         "@types/enzyme": "3.10.7",
-        "@types/jest": "26.0.14",
+        "@types/jest": "26.0.16",
         "@types/lodash": "^4.14.162",
         "@types/prop-types": "15.7.3",
         "@types/query-string": "6.3.0",
