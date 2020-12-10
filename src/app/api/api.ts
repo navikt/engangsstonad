@@ -4,7 +4,7 @@ import { redirectToLogin } from 'util/login';
 
 const foreldrepengersoknadApi = axios.create({
     baseURL: (window as any).REST_API_URL,
-    withCredentials: true
+    withCredentials: true,
 });
 
 foreldrepengersoknadApi.interceptors.request.use(
@@ -28,6 +28,9 @@ foreldrepengersoknadApi.interceptors.response.use(
         ) {
             redirectToLogin();
         }
+        if (error.response && error.response.status === 403) {
+            redirectToLogin();
+        }
         return Promise.reject(error);
     }
 );
@@ -39,8 +42,8 @@ const getPerson = () => {
 const sendSoknad = (soknad: EngangsstonadSoknad) => {
     return foreldrepengersoknadApi.post('/soknad', soknad, {
         headers: {
-            'content-type': 'application/json;'
-        }
+            'content-type': 'application/json;',
+        },
     });
 };
 
