@@ -2,7 +2,7 @@
    "ingresses":  ["https://engangsstonad-q.nav.no"],
    "dekoratoren" : "www-q1.nav.no",
    "nav" : "www.nav.no",
-   "loginservice" : loginservice-q.nav.no",
+   "loginservice" : "loginservice-q.nav.no",
    "api" : foreldrepengesoknad-api-q.nav.no",
    "env": {
         "APPRES_CMS_URL": "https://www-q1.nav.no/dekoratoren",
