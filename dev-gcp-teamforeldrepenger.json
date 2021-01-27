@@ -1,6 +1,6 @@
 {
     "gcp" : "true",
-    ingresses": ["https://engangsstonad.dev.nav.no"],
+    "ingresses": ["https://engangsstonad.dev.nav.no"],
     "dekoratoren" : "dekoratoren.dev.nav.no",
     "nav" : "www.nav.no",
     "loginservice" : "loginservice.dev.nav.no",
