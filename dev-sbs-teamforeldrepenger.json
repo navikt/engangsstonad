@@ -1,5 +1,5 @@
 {
-   "ingresses":  ["https://engangsstonad-q.nav.no"],
+   "ingresses":  ["https://engangsstonadny-q.nav.no"],
    "dekoratoren" : "www-q1.nav.no",
    "nav" : "www.nav.no",
    "env": {
