@@ -2,7 +2,7 @@
     "gcp" : "true",
     "ingresses": ["https://engangsstonad.dev.nav.no"],
     "dekoratoren" : "dekoratoren.dev.nav.no",
-    "nav" : "www.nav.no",
+    "nav" : "www.dev.nav.no",
     "loginservice" : "loginservice.dev.nav.no",
     "api" : "foreldrepengesoknad-api.dev.nav.no",
     "env": {
