@@ -22,7 +22,7 @@
     "dependencies": {
         "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
         "@sentry/browser": "^5.27.1",
-        "axios": "0.20.0",
+        "axios": "0.21.1",
         "babel-polyfill": "6.26.0",
         "bytes": "3.1.0",
         "classnames": "^2.2.6",
