@@ -34,7 +34,7 @@ jobs:
           ref: ${{ env.TAG }}
     
       - name: Promoter til cluster
-        uses: nais/deploy/actions/deploy@v1
+        uses: nais/deploy/actions/deploy@v2
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: ${{ env.CLUSTER }}
