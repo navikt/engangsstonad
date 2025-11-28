@@ -144,7 +144,7 @@
         "source-map-loader": "^1.1.1",
         "style-loader": "^2.0.0",
         "svg-sprite-loader": "^4.1.6",
-        "terser-webpack-plugin": "^4.2.2",
+        "terser-webpack-plugin": "^4.2.3",
         "ts-jest": "^24.3.0",
         "ts-loader": "8.0.7",
         "tslint": "5.20.0",
